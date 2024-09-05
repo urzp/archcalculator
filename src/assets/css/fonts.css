@@ -1,0 +1,69 @@
+* {
+    -webkit-font-feature-settings: "lnum";
+    -moz-font-feature-settings: "lnum";
+    font-feature-settings: "lnum";
+}
+
+/* ----------------------------------- Raleway ----------------------------------- */
+
+@font-face {
+    font-family: 'Raleway-ExtraLight';
+    src: local('Raleway-ExtraLight'),
+    url(../fonts/Raleway/Raleway-ExtraLight.ttf);
+}    
+
+@font-face {
+    font-family: 'Raleway-Light';
+    src: local('Raleway-Light'),
+    url(../fonts/Raleway/Raleway-Light.ttf);
+}  
+
+@font-face {
+    font-family: 'Raleway-Regular';
+    src: local('Raleway-Regular'),
+    url(../fonts/Raleway/Raleway-Regular.ttf);
+} 
+
+@font-face {
+    font-family: 'Raleway-Medium';
+    src: local('Raleway-Medium'),
+    url(../fonts/Raleway/Raleway-Medium.ttf);
+} 
+
+@font-face {
+    font-family: 'Raleway-Bold';
+    src: local('Raleway-Bold'),
+    url(../fonts/Raleway/Raleway-Bold.ttf);
+} 
+
+/* ----------------------------------- Comfortaa ----------------------------------------- */
+
+@font-face {
+    font-family: 'Comfortaa-Light';
+    src: local('Comfortaa-Light'),
+    url(../fonts/Comfortaa/Comfortaa-Light.ttf);
+}    
+
+@font-face {
+    font-family: 'Comfortaa-Regular';
+    src: local('Comfortaa-Regular'),
+    url(../fonts/Comfortaa/Comfortaa-Regular.ttf);
+}  
+
+@font-face {
+    font-family: 'Comfortaa-Medium';
+    src: local('Comfortaa-Medium'),
+    url(../fonts/Comfortaa/Comfortaa-Medium.ttf);
+} 
+
+@font-face {
+    font-family: 'Comfortaa-SemiBold';
+    src: local('Comfortaa-SemiBold'),
+    url(../fonts/Comfortaa/Comfortaa-SemiBold.ttf);
+} 
+
+@font-face {
+    font-family: 'Comfortaa-Bold';
+    src: local('Comfortaa-Bold'),
+    url(../fonts/Comfortaa/Comfortaa-Bold.ttf);
+} 
