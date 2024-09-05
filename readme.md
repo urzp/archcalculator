@@ -1,77 +1,77 @@
 # archcalculator
 
-### Установка на сервер:
+### Installation on the server:
 
-Файлы prodaction находятся в папке dist.
-все файлы необходимо загрузить в корневую папку сайта на сервере (publiс_html)
+The production files are located in the dist folder.
+All files need to be uploaded to the root folder of the site on the server (public_html)
 
 
-### Выходная часть проекта Папка dist :
+### Output part of the project Folder dist:
 
-Папка dist - это выход всего проекта который "ребилдиться" при внесении изменения в проект.
-Папка с бекендом php. Исходная папка для бекенда-php находится в public.
-В нее можно вносить изменения который будут обновлятся на выходе dist при ребилдинге проекта (npm run build)
-Также в папку publiс можно добовлять необходимые паки котроые будут  на выходе.
+The dist folder is the output of the entire project that is "rebuilt" when changes are made to the project.
+A folder with the backend php. The original folder for the backend-php is located in public.
+Changes can be made to it that will be updated in the output dist when rebuilding the project (npm run build)
+Also, you can add necessary packages to the publiс folder that will be in the outpu
 
-### Фронтенд проекта.
+### Frontend project.
 
-Фронтенд проекта находится в папке scr.
-Для инсталяции и запуска на локальном сервере
-Необходим пакет node js и git   
+The frontend project is located in the src folder.
+For installation and running on a local server
+Requires Node.js and Git package  
 
-### Установка Node.js
+### Installing Node.js
 
-Node.js — это среда выполнения JavaScript. Установить Node.js можно, скачав установщик с официального сайта, или с помощью менеджера пакетов. Требуется версия 16 или 18 LTS.
+Node.js is a JavaScript runtime environment. Node.js can be installed by downloading the installer from the official website, or using a package manager. Version 16 or 18 LTS is required.
 
 Windows:
-Установщик: https://nodejs.org/ru/download/
+Installer: https://nodejs.org/en/download/
 winget: winget install OpenJS.NodeJS.LTS
 Chocolatey: choco install nodejs-lts
 Mac:
-Установщик: https://nodejs.org/ru/download/
+Installer: https://nodejs.org/en/download/
 brew: brew install node@18
-Linux: https://nodejs.org/ru/download/package-manager/
+Linux: https://nodejs.org/en/download/package-manager/
 
-### Установка Git
+### Installing Git
 
-Git – это распределенная система контроля версий, инструмент, инструмент, без которого сложно представить современную разработку.
+Git is a distributed version control system, a tool without which modern development is difficult to imagine.
 
-Установить git
+Install git
 https://git-scm.com/book/ru/v2/Введение-Установка-Git-Git
 
-### Устанока для работы с фронтенд частью на vue 
+### Installation for working with the frontend part in vue
 
-Для инсталяции и запуска на локальном сервере
-Необходим пакет node js и git
+For installation and running on a local server
+Requires Node.js and Git package
 
-Можно скачать: 
+You can download:
 ```
 git clone https://github.com/urzp/MediaNodes.git
 ```
 
-Войти в папку проекта: 
+Enter the project folder:
 ```
 cd media_node
 ```
 
-Установка зависимостей: 
+Install dependencies:
 ```
 npm ci
 ```
 
-Запуск на локальном сервере: 
+Run on a local server:
 ```
 npm run serve
 ```
 
-Генерация выхоных файлов: 
+Generating output files:
 ```
 npm run build
 ```
 
 
 
-## Также другие команды от npm:
+## Other npm commands:
 
 ## Project setup
 ```
