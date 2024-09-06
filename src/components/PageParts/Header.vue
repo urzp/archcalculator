@@ -8,7 +8,6 @@
             <div class="item_menu">How to use</div>
         </div>
         <div class="btn_menu">
-            <!-- <img src="@/assets/icons/menu_gamburger.svg" alt=""> -->
         </div>
     </div>
 </template>
