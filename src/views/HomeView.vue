@@ -1,6 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
+    <Calculator></Calculator>
     <Footer></Footer>
   </div>
 </template>
