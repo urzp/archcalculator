@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap-main">
+    <div class="header-wrap">
         <div class="logo">
             <img src="@/assets/imgs/logo.svg" alt="">
         </div>
@@ -21,7 +21,7 @@ export default{
 
 
 <style scoped>
-    .wrap-main{
+    .header-wrap{
         height: 110px;
         display: flex;
         align-items: center;
@@ -29,6 +29,7 @@ export default{
     }
     .menu{
         width: 100%;
+        margin-right: 70px;
         display: flex;
         align-items: center;
         justify-content: center;
