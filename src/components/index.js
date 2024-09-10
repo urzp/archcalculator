@@ -6,6 +6,7 @@ import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/ObjectCalc.vue'
 import TotalCalc from './Calculator/TotalCalc.vue'
 import Title_level_1 from './Calculator/UI/title_level_1.vue'
+import Total_level_1 from './Calculator/UI/total_level_1.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -22,4 +23,5 @@ export default [
     ToggleButton,
     CloseButton,
     Title_level_1,
+    Total_level_1,
 ]

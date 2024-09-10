@@ -7,6 +7,7 @@
             <CloseButton class="align-left"/>
         </div>
         <Title_level_1 name="Basis"/>
+        <Total_level_1/>
         <Title_level_1 name="Base services"/>
         <div class="item basis"></div>
         <div class="item base-services"></div>
