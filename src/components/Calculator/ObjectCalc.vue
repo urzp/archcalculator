@@ -4,8 +4,12 @@
         <div class="title-object">
             <ToggleButton/>
             <div class="name">Object A</div>
+            <CloseButton class="align-left"/>
         </div>
+        <Title_level_1 name="Basis"/>
+        <Title_level_1 name="Base services"/>
         <div class="item basis"></div>
+        <div class="item base-services"></div>
         <div class="item base-services"></div>
         <div class="item special-services"></div>
         <div class="total"></div>
@@ -35,5 +39,8 @@ export default{
     }
     .item{
         min-height: 100px;
+    }
+    .align-left{
+        margin-left: auto;
     }
 </style>

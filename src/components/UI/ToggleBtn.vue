@@ -17,5 +17,8 @@ export default{
         background-position: center;
         cursor: pointer;
     }
+    .toggle_btn.closed{
+        background-image: url('@/assets/icons/toggle_btn/closed.svg');
+    }
 </style>
 
