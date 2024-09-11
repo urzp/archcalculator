@@ -1,6 +1,6 @@
 <template>
     <div class="toggle">
-        <div class="wrap-slot">
+        <div class="wrap-slot" :class="{collapse:collapse}">
             <slot/>
         </div>
     </div>
@@ -9,6 +9,9 @@
 <script>
 export default{
     name: 'Toggle',
+    props:{
+        collapse: Boolean,
+    },
 }
 </script>
 

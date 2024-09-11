@@ -6,7 +6,7 @@
             <div class="name">Object A</div>
             <CloseButton class="align-left"/>
         </div>
-        <Toggle :collapse="false">
+        <Toggle :collapse="collapse">
         <SubObject name="Basis"/>
         <SubObject name="Base services"/>
         </Toggle>
