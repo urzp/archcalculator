@@ -15,6 +15,7 @@ export default{
 <style scoped>
     .toggle{
         border-left: solid 1px  #E4E4E4;
+        padding-bottom: 25px;
     }
 
     .toggle:before{
@@ -26,11 +27,17 @@ export default{
         background-color: #C0C0C0;
         content: " ";
         left: -6px;
+        top: -28px;
     }
 
     .wrap-slot{
         margin-top: -25px;
         margin-left: 30px;
+    }
+
+    .collapse{
+        height: 0;
+        display: none;
     }
 
 </style>

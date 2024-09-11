@@ -1,6 +1,6 @@
 <template>
     <div class="title-level-1">
-        <ToggleButton/>
+        <ToggleButton @switch_tg="(val)=>{$emit('open_close', val)}"/>
         <div class="title">{{ name }}</div>
     </div>
     <div class="line"></div>
@@ -9,10 +9,11 @@
 
 <script>
 export default{
-    name: 'Title_level_1',
+    name: 'SubObjectTitle',
     props:{
         name:String,
     },
+    emits: ['open_close'],
 }
 </script>
 

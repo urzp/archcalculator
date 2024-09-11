@@ -1,10 +1,23 @@
 <template>
-    <div class="toggle_btn"></div>
+    <div class="toggle_btn" :class="{closed:!this.open}" @click="switch_tg()"></div>
 </template>
 
 <script>
 export default{
     name: 'ToggleButton',
+    data(){
+        return{
+            open: true,
+        }
+    },
+    methods:{
+        switch_tg(){
+            this.open = !this.open
+            this.$emit('switch_tg', this.open)
+        }
+    },
+    emits: ['switch_tg'],
+
 }
 </script>
 
