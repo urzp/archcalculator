@@ -1,16 +1,16 @@
 <template>
-    <SubObjectTitle :name="name" @open_close="(val)=>{collapse=!val}"/>
+    <SubObjectTitle name="Base services" @open_close="(val)=>{collapse=!val}"/>
     <div class="SubObjectList" :class="{collapse}">
-        <ItemSubObj title="HOAI version"/>
-        <ItemSubObj title="Planning object"/>
-        <ItemSubObj title="Fee zone"/>
+        <ItemSubObj title="Basic research"/>
+        <ItemSubObj title="Design planning"/>
+        <ItemSubObj title="Pre-planning"/>
     </div>
     <SubObjectTotal :collapse = 'collapse'/>    
 </template>
 
 <script>
 export default{
-    name: 'SubObject',
+    name: 'BaseServis',
     data(){
         return{
             collapse:false

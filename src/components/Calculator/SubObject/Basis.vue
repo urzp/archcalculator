@@ -1,5 +1,5 @@
 <template>
-    <SubObjectTitle :name="name" @open_close="(val)=>{collapse=!val}"/>
+    <SubObjectTitle name="Basis" @open_close="(val)=>{collapse=!val}"/>
     <div class="SubObjectList" :class="{collapse}">
         <ItemSubObj title="HOAI version"/>
         <ItemSubObj title="Planning object"/>
@@ -10,7 +10,7 @@
 
 <script>
 export default{
-    name: 'SubObject',
+    name: 'Basis',
     data(){
         return{
             collapse:false

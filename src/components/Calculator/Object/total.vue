@@ -5,7 +5,7 @@
             <div class="data-total">
                 <div class="label">Total</div>
                 <div class="procent">100%</div>
-                <Price value = '1240200.54' font_size_unit="24px" font_size_cent="18px"/>
+                <Price class="price" value = '1240200.54' font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
             </div>
         </div>
     </div>  
@@ -14,8 +14,18 @@
 <script>
 export default{
     name: 'ObjectTotal',
+    data(){
+        return{
+            font_family:'Comfortaa-Regular',
+        }
+    },
     props:{
         collapse:Boolean,
+    },
+    watch: {
+        collapse(newVal, oldVal){
+            this.font_family = newVal?'Comfortaa-Light':'Comfortaa-Regular'
+        }
     }
 }
 </script>
@@ -44,6 +54,14 @@ export default{
         border-top: solid 1px var(--color-akcent);
     }
 
+    .title-total, .data-total .label{
+        font-family: 'Raleway-Regular';
+    }
+
+    .data-total .procent{
+        font-family: 'Comfortaa-Medium';
+    }
+
     /* ------------------ collapse ------------------- */
 
     .total.collapse{
@@ -61,6 +79,20 @@ export default{
     }
 
     .collapse .data-total{
+        
         border: none;
+    }
+
+    .collapse .data-total .label{
+        font-family: 'Raleway-Light';
+    }
+
+    .collapse .data-total .procent{
+        font-family: 'Comfortaa-Light';
+        color:#000000;
+    }
+
+    .collapse .price{
+        color:#000000;
     }
 </style>

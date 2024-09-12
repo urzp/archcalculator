@@ -20,6 +20,10 @@ export default{
             type:String,
             default: '16px',            
         },
+        font_family:{
+            type:String,
+            default: 'Comfortaa-Regular',         
+        },
     },
     computed: {
         price(){
@@ -44,7 +48,7 @@ export default{
     .price{
         display: flex;
         align-items: baseline;
-        font-family: 'Comfortaa-Regular';
+        font-family: v-bind(font_family);
         font-size: v-bind(font_size_unit);
     }
     .cents{

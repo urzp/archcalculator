@@ -2,8 +2,8 @@
     <div class="object-calc">
         <ObjectTitile @switch_tg="(val)=>{collapse =  !val}"/>
         <Toggle :collapse="collapse">
-        <SubObject name="Basis"/>
-        <SubObject name="Base services"/>
+        <Basis/>
+        <BaseServis/>
         </Toggle>
         <ObjectTotal :collapse="collapse"/>
     </div> 
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default{
     name: 'ObjectCalc',
     data(){
