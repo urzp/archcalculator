@@ -1,6 +1,6 @@
 <template>
-    <div class="toggle">
-        <div class="wrap-slot" :class="{collapse:collapse}">
+    <div class="toggle" :class="{collapse}">
+        <div class="wrap-slot" :class="{collapse}">
             <slot/>
         </div>
     </div>
@@ -38,7 +38,11 @@ export default{
         margin-left: 30px;
     }
 
-    .collapse{
+    .toggle.collapse{
+        border:none;
+    }
+
+    .wrap-slot.collapse{
         height: 0;
         display: none;
     }

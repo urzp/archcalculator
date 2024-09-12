@@ -5,6 +5,9 @@ import Footer from './PageParts/Footer.vue'
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/ObjectCalc.vue'
 import TotalCalc from './Calculator/TotalCalc.vue'
+//----------------------------Object--------------------------------
+import ObjectTitile from './Calculator/Object/title.vue'
+import ObjectTotal from './Calculator/Object/total.vue'
 //----------------------------SubObject-----------------------------
 import SubObject from './Calculator/SubObject/SubObject.vue'
 import SubObjectTitle from './Calculator/SubObject/title.vue'
@@ -18,14 +21,20 @@ import Price from './UI/Price.vue'
 export default [
     Header,
     Footer,
+
     Calculator,
     ObjectCalc,
     TotalCalc,
-    Toggle,
-    ToggleButton,
-    CloseButton,
+
+    ObjectTitile,
+    ObjectTotal,
+
     SubObject,
     SubObjectTitle,
     SubObjectTotal,
+    
+    Toggle,
+    ToggleButton,
+    CloseButton,
     Price,
 ]

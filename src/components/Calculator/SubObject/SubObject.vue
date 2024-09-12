@@ -1,10 +1,10 @@
 <template>
     <SubObjectTitle :name="name" @open_close="(val)=>{collapse=!val}"/>
-        <div class="SubObjectList" :class="{collapse}">
-            <div class="item">HOAI version</div>
-            <div class="item">Planning object</div>
-            <div class="item">Fee zone</div>
-        </div>
+    <div class="SubObjectList" :class="{collapse}">
+        <div class="item">HOAI version</div>
+        <div class="item">Planning object</div>
+        <div class="item">Fee zone</div>
+    </div>
     <SubObjectTotal :collapse = 'collapse'/>    
 </template>
 
