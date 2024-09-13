@@ -8,14 +8,13 @@ import TotalCalc from './Calculator/TotalCalc.vue'
 //----------------------------Object--------------------------------
 import ObjectTitile from './Calculator/Object/title.vue'
 import ObjectTotal from './Calculator/Object/total.vue'
-//----------------------------SubObject-----------------------------
-import SubObject from './Calculator/SubObject/SubObject.vue'
-import SubObjectTitle from './Calculator/SubObject/title.vue'
-import SubObjectTotal from './Calculator/SubObject/total.vue'
-import Basis from './Calculator/SubObject/Basis.vue'
-import BaseServis from './Calculator/SubObject/BaseServis.vue'
-//----------------------------SubObject-----------------------------
-import ItemSubObj from './Calculator/SubObject/Items/ItemSubObj.vue'
+//----------------------------PartsObject-----------------------------
+import PartObjectTitle from './Calculator/Object/Parts/title.vue'
+import PartObjectTotal from './Calculator/Object/Parts/total.vue'
+import Basis from './Calculator/Object/Parts/Basis.vue'
+import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
+//----------------------------ItemPartsObject-----------------------------
+import ItemSubObj from './Calculator/Object/Parts/Item/ItemSubObj.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -33,9 +32,9 @@ export default [
     ObjectTitile,
     ObjectTotal,
 
-    SubObject,
-    SubObjectTitle,
-    SubObjectTotal,
+
+    PartObjectTitle,
+    PartObjectTotal,
     Basis,
     BaseServis,
 

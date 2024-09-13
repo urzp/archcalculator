@@ -9,7 +9,7 @@
 
 <script>
 export default{
-    name: 'SubObjectTitle',
+    name: 'PartObjectTitle',
     props:{
         name:String,
     },

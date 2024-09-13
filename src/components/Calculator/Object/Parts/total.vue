@@ -12,7 +12,7 @@
 import Price from '@/components/UI/Price.vue';
 
 export default{
-    name: 'SubObjectTotal',
+    name: 'PartObjectTotal',
     props:{
         name:String,
         collapse: Boolean,

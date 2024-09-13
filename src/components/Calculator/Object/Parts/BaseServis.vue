@@ -1,11 +1,11 @@
 <template>
-    <SubObjectTitle name="Base services" @open_close="(val)=>{collapse=!val}"/>
+    <PartObjectTitle name="Base services" @open_close="(val)=>{collapse=!val}"/>
     <div class="SubObjectList" :class="{collapse}">
         <ItemSubObj title="Basic research"/>
         <ItemSubObj title="Design planning"/>
         <ItemSubObj title="Pre-planning"/>
     </div>
-    <SubObjectTotal :collapse = 'collapse'/>    
+    <PartObjectTotal :collapse = 'collapse'/>    
 </template>
 
 <script>
