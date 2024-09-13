@@ -1,10 +1,10 @@
 <template>
     <PartObjectTitle name="Basis" @open_close="(val)=>{collapse=!val}"/>
-    <div class="SubObjectList" :class="{collapse}">
-        <ItemSubObj title="HOAI version"/>
-        <ItemSubObj title="Planning object"/>
-        <ItemSubObj title="Fee zone"/>
-    </div>
+    <PartObjectContent>
+        <ItemPartObj title="HOAI version"/>
+        <ItemPartObj title="Planning object"/>
+        <ItemPartObj title="Fee zone"/>
+    </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse'/>    
 </template>
 
@@ -23,8 +23,5 @@ export default{
 </script>
 
 <style scoped>
-    .collapse{
-        height: 0;
-        display: none;
-    }
+
 </style>

@@ -10,11 +10,12 @@ import ObjectTitile from './Calculator/Object/title.vue'
 import ObjectTotal from './Calculator/Object/total.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
+import PartObjectContent from './Calculator/Object/Parts/content.vue'
 import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import Basis from './Calculator/Object/Parts/Basis.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------ItemPartsObject-----------------------------
-import ItemSubObj from './Calculator/Object/Parts/Item/ItemSubObj.vue'
+import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -34,11 +35,12 @@ export default [
 
 
     PartObjectTitle,
+    PartObjectContent,
     PartObjectTotal,
     Basis,
     BaseServis,
 
-    ItemSubObj,
+    ItemPartObj,
     
     Toggle,
     ToggleButton,
