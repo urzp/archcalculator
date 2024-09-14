@@ -1,6 +1,6 @@
 <template>
     <PartObjectTitle name="Base services" @open_close="(val)=>{collapse=!val}"/>
-    <PartObjectContent>
+    <PartObjectContent :collapse = 'collapse'>
         <ItemPartObj title="Basic research"/>
         <ItemPartObj title="Design planning"/>
         <ItemPartObj title="Pre-planning"/>

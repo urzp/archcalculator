@@ -7,6 +7,7 @@
         </ul> 
     </div>
     </div>
+    <div v-if="open" @click="close()" class="bg_for_close_list"></div>
 </template>
 
 <script>
@@ -43,20 +44,21 @@ export default{
 .list-HOAT-version{
     position: relative;
     top: 9px;
-    right: 78px;
+    right:  calc(100% + 10px);
     padding: 10px 0px;
     background-color: #fff;
     background-color: #ffffff;
     border: solid 1px #D9D9D9;
     border-radius: 10px;
+    z-index: 100;
 }
 ul{
-    width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center; 
 }
 li{
+    padding: 0 20px;
     cursor: pointer;
     width: 100%;
     text-align: center;
@@ -67,5 +69,15 @@ li{
 li:hover{
     background-color: var(--color-akcent);
     color: #fff;
+}
+
+.bg_for_close_list{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 10;
 }
 </style>

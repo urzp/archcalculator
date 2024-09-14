@@ -1,6 +1,6 @@
 <template>
     <PartObjectTitle name="Basis" @open_close="(val)=>{collapse=!val}"/>
-    <PartObjectContent>
+    <PartObjectContent :collapse = 'collapse'>
         <ItemPartObj title="HOAI version" :data="data" ><SelList_HOAT_Ver/></ItemPartObj>
         <ItemPartObj title="Planning object" :data="data"></ItemPartObj>
         <ItemPartObj title="Fee zone" :data="data"></ItemPartObj>

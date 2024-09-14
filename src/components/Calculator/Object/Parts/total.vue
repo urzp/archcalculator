@@ -1,5 +1,5 @@
 <template>
-    <div class="total-part-obj">
+    <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
             <div class="title">Total</div>
             <div class="value-percent">100%</div>
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import Price from '@/components/UI/Price.vue';
 
 export default{
     name: 'PartObjectTotal',
@@ -38,5 +37,9 @@ export default{
 }
 .wrap.line{
     border-top: solid 1px var(--color-akcent);
+}
+
+.total-part-obj.collapse{
+    margin-top: 0px;
 }
 </style>
