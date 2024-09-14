@@ -1,9 +1,10 @@
 <template>
     <PartObjectTitle name="Basis" @open_close="(val)=>{collapse=!val}"/>
     <PartObjectContent>
-        <ItemPartObj title="HOAI version"/>
-        <ItemPartObj title="Planning object"/>
-        <ItemPartObj title="Fee zone"/>
+        <ItemPartObj title="HOAI version" :data="data" ><SelList_HOAT_Ver/></ItemPartObj>
+        <ItemPartObj title="Planning object" :data="data"></ItemPartObj>
+        <ItemPartObj title="Fee zone" :data="data"></ItemPartObj>
+        <ItemPartObj title="Fee rate" :data="data"></ItemPartObj>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse'/>    
 </template>
@@ -13,7 +14,13 @@ export default{
     name: 'Basis',
     data(){
         return{
-            collapse:false
+            collapse:false,
+            data:{
+                "HOAI version": 2021,
+                "Planning object":'§34G Buildings',
+                "Fee zone":'III',
+                "Fee rate":'Middle set',
+            }
         }
     },
     props:{

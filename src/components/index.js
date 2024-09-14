@@ -16,9 +16,12 @@ import Basis from './Calculator/Object/Parts/Basis.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
+//----------------------------SelectLists-ItemPartsObject-----------------------------
+import SelList_HOAT_Ver from './Calculator/Object/Parts/SelectLists_of_Items/HOAI_ver_List.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
+import ToggleListButton from './UI/ToggleListBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
 import Price from './UI/Price.vue'
 
@@ -41,9 +44,12 @@ export default [
     BaseServis,
 
     ItemPartObj,
+
+    SelList_HOAT_Ver,
     
     Toggle,
     ToggleButton,
+    ToggleListButton,
     CloseButton,
     Price,
 ]

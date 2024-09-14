@@ -19,7 +19,7 @@ export default{
         height: 0;
         display: none;
     }
-    /* > div:nth-child(2n-1) */
+
     :slotted( div:nth-child(2n-1) ) {
         background-color: #F5F5F5;
     }

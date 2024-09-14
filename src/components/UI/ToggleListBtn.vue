@@ -1,20 +1,17 @@
 <template>
-    <div class="toggle_btn" :class="{closed:!this.open}" @click="switch_tg()"></div>
+    <div class="toggle_list_btn" :class="{closed:!this.open}" @click="switch_tg()"></div>
 </template>
 
 <script>
 export default{
-    name: 'ToggleButton',
-    mounted() {
-        this.open = !this.closed
-    },
+    name: 'ToggleListButton',
     data(){
         return{
-            open: true,
+            open:false,
         }
     },
     props:{
-        closed:Boolean,
+        close:Boolean,
     },
     methods:{
         switch_tg(){
@@ -22,13 +19,17 @@ export default{
             this.$emit('switch_tg', this.open)
         }
     },
+    watch:{
+        close(){
+            this.open = !this.close
+        }
+    },
     emits: ['switch_tg'],
-
 }
 </script>
 
 <style scoped>
-    .toggle_btn{
+    .toggle_list_btn{
         width: 12px;
         height: 10px;
         background-image: url('@/assets/icons/toggle_btn/opend.svg');
@@ -36,8 +37,9 @@ export default{
         background-position: center;
         cursor: pointer;
     }
-    .toggle_btn.closed{
+    .toggle_list_btn.closed{
         background-image: url('@/assets/icons/toggle_btn/closed.svg');
     }
 </style>
+
 

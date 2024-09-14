@@ -1,5 +1,5 @@
 <template>
-    <div class="total-level-1">
+    <div class="total-part-obj">
         <div class="wrap" :class="{line:!collapse}">
             <div class="title">Total</div>
             <div class="value-percent">100%</div>
@@ -21,13 +21,14 @@ export default{
 </script>
     
 <style scoped>
-.total-level-1{
+.total-part-obj{
     display: flex;
     justify-content: flex-end;
+    margin-top: 30px;
     margin-right: 40px;
 }
 
-.total-level-1 .wrap{
+.total-part-obj .wrap{
     display: flex;
     justify-content: flex-end;
     column-gap: 15px;
