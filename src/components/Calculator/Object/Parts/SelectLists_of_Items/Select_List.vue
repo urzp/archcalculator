@@ -1,7 +1,7 @@
 <template>
     <ToggleListButton :close="!open" @switch_tg="(val)=>{open=val}"/>
     <div v-if="open" class="wrap">
-    <div class="list-HOAT-version">
+    <div class="select-list">
         <ul>
             <li v-for="item in list" :key="item.id" @click="select_data(item.val)">{{ item.val }}</li>
         </ul> 
@@ -13,21 +13,19 @@
 <script>
 export default{
     
-    name: 'SelList_HOAT_Ver',
+    name: 'Select_List',
     data(){
         return{
             open: false,
-            list:[
-                {id:1,val:2002},
-                {id:1,val:2009},
-                {id:1,val:2013},
-                {id:1,val:2021},
-            ]
         }
     },
+    props:{
+        list: Array,
+    },
+    emits:['selected'],
     methods:{
-        select_data(tar){
-            console.log(tar)
+        select_data(val){
+            this.$emit('selected',val)
             this.close()
         },
         close(){
@@ -41,7 +39,7 @@ export default{
 .wrap{
     position: absolute;
 }
-.list-HOAT-version{
+.select-list{
     position: relative;
     top: 9px;
     right:  calc(100% + 10px);
@@ -61,7 +59,7 @@ li{
     padding: 0 20px;
     cursor: pointer;
     width: 100%;
-    text-align: center;
+    text-align: left;
     font-family: 'Raleway-Light';
     color: #464646;
 

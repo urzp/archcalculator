@@ -1,8 +1,10 @@
 <template>
     <div class="item-Part-obj">
-        <div class="title" @click="console.log(this.$slots._)">{{ title }}</div>
-        <div class="value">{{ select_value() }}</div>
-        <div class="select-list" v-if="this.$slots._">
+        <div class="title">{{ title }}</div>
+        <div class="value">{{ getProperty('value') }}</div>
+        <div class="select-list"> 
+            <Select_List :list="getProperty('list')"/>
+            <!-- v-if="this.$slots._" -->
             <slot/>
         </div>
     </div>
@@ -21,13 +23,15 @@ export  default{
         data:String
     },
     methods:{
-        select_value(){
+        getProperty(type){
             let val = ''
             let t = this.title
             let d = this.data
-            if(!!t&&!!d) val = d[t]
+            if(!(!!t&&!!d&&!!d[t])) return ''
+            val = d[t]
+            val = val[type]
             return val
-        }
+        },
     }
 }
 </script>
