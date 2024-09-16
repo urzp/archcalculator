@@ -26,19 +26,28 @@ let lists = {
     Fee_Zone:[
         {id:1,val:'I'},
         {id:2,val:'II'},
-        {id:1,val:'III'},
-        {id:1,val:'IV'},
-        {id:1,val:'V'},
+        {id:3,val:'III'},
+        {id:4,val:'IV'},
+        {id:5,val:'V'},
+    ],
+    Middle_set:[
+        {id:1,val:'Basissatz'},
+        {id:2,val:'Viertelsatz'},
+        {id:3,val:'Mittelsatz'},
+        {id:4,val:'Dreiviertelsatz'},
+        {id:5,val:'Höchstsatz'},
+        {id:5,val:'Prozent eingeben'},
     ],
 }
 
 let data = {
 
     Basis:{
-        "HOAI version": {value: 2021, list:lists.HOAT_v},
-        "Planning object":{value: '§34G Gebäude', list:lists.Planing_Object},
-        "Fee zone":{value: 'III', list:lists.Fee_Zone},
-        "Fee rate":{value: 'Middle set', list:[]},
+        "HOAI version": {type: 'text', value: 2021, list:lists.HOAT_v},
+        "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object},
+        "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone},
+        "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
+        "Eligible costs":{type: 'price', value:0}
     },
     lists,
 }

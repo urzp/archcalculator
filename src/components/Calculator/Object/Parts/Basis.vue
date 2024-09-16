@@ -1,22 +1,17 @@
 <template>
     <PartObjectTitle name="Basis" @open_close="(val)=>{collapse=!val}"/>
     <PartObjectContent :collapse = 'collapse'>
-        <ItemPartObj title="HOAI version" :data="Basis" >
-            <!-- <Select_List :list="List_HOAT_v" @selected="(val)=>{selectItem('HOAI version',val)}" /> -->
-        </ItemPartObj>
-        <!-- <ItemPartObj title="Planning object" :data="Basis">
-            <Select_List :list="List_Planing_Object"/>
-        </ItemPartObj>
-        <ItemPartObj title="Fee zone" :data="Basis">
-            <Select_List :list="List_Fee_Zone"/>
-        </ItemPartObj>
-        <ItemPartObj title="Fee rate" :data="Basis">
-        </ItemPartObj> -->
+        <ItemPartObj title="HOAI version" :data="Basis"></ItemPartObj>
+        <ItemPartObj title="Planning object" :data="Basis"></ItemPartObj>
+        <ItemPartObj title="Fee zone" :data="Basis"></ItemPartObj>
+        <ItemPartObj title="Fee rate" :data="Basis"></ItemPartObj>
+        <ItemPartObj title="Eligible costs" :data="Basis"></ItemPartObj>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse'/>    
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { getData } from '@/servis/getData.js'
 export default{
     name: 'Basis',
@@ -26,6 +21,8 @@ export default{
         this.List_HOAT_v = data.Basis["HOAI version"].list
         this.List_Planing_Object = data.Basis["Planning object"].list
         this.List_Fee_Zone = data.Basis["Fee zone"].list
+
+        EventBus.on('SelectList:selected', (data)=>{this.selectItem(data.name_list, data.value)})
     },
     data(){
         return{

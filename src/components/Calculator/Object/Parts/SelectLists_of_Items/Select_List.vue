@@ -3,7 +3,7 @@
     <div v-if="open" class="wrap">
     <div class="select-list">
         <ul>
-            <li v-for="item in list" :key="item.id" @click="select_data(item.val)">{{ item.val }}</li>
+            <li v-for="item in list" :key="item.id" @click="select_data(item.val)" :class="{'active':item.val==sected_val}">{{ item.val }}</li>
         </ul> 
     </div>
     </div>
@@ -11,21 +11,27 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 export default{
-    
     name: 'Select_List',
+    mounted(){
+        EventBus.on('pageTable:maxPage', (val)=>{this.maxPage=val; this.page=1})
+    },
     data(){
         return{
             open: false,
         }
     },
     props:{
+        name_list: String,
         list: Array,
+        sected_val: String,
     },
     emits:['selected'],
     methods:{
         select_data(val){
             this.$emit('selected',val)
+            EventBus.emit('SelectList:selected', {name_list:this.name_list, value:val})
             this.close()
         },
         close(){
@@ -64,6 +70,12 @@ li{
     color: #464646;
 
 }
+
+li.active{
+    color: var(--color-akcent);
+    font-family: 'Raleway-Medium';   
+}
+
 li:hover{
     background-color: var(--color-akcent);
     color: #fff;
@@ -78,4 +90,5 @@ li:hover{
     background-color: transparent;
     z-index: 10;
 }
+
 </style>

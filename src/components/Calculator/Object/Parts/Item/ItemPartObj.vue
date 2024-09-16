@@ -1,11 +1,11 @@
 <template>
     <div class="item-Part-obj">
         <div class="title">{{ title }}</div>
-        <div class="value">{{ getProperty('value') }}</div>
-        <div class="select-list"> 
-            <Select_List :list="getProperty('list')"/>
-            <!-- v-if="this.$slots._" -->
-            <slot/>
+        <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
+        <div class="pice" v-if="typeOf('price')" ><Price :value ="getProperty('value')"/></div>
+        <div v-if="haveSelList()" class="select-list" > 
+            <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
+            <slot/><!-- v-if="this.$slots._" -->
         </div>
     </div>
 </template>
@@ -23,6 +23,22 @@ export  default{
         data:String
     },
     methods:{
+        typeOf(type){
+            let result = false
+            let t = this.title
+            let d = this.data
+            if(!(!!t&&!!d&&!!d[t])) return result
+            if( d[t].type == type ) result = true
+            return result
+        },
+        haveSelList(){
+            let result = false
+            let t = this.title
+            let d = this.data
+            if(!(!!t&&!!d&&!!d[t])) return result   
+            result =  !!d[t].list        
+            return result
+        },
         getProperty(type){
             let val = ''
             let t = this.title
@@ -30,6 +46,7 @@ export  default{
             if(!(!!t&&!!d&&!!d[t])) return ''
             val = d[t]
             val = val[type]
+            if (!val||val.length == 0) return ''
             return val
         },
     }
@@ -57,5 +74,9 @@ export  default{
         font-size: 18px;
         color:#464646;
         margin-left: auto;
+    }
+    .price{
+        color:#838383;
+        padding-right: 9px;
     }
 </style>
