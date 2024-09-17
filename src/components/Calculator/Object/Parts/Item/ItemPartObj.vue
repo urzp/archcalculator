@@ -2,7 +2,7 @@
     <div class="item-Part-obj">
         <div class="title">{{ title }}</div>
         <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-        <div class="pice" v-if="typeOf('price')" ><Price :value ="getProperty('value')"/></div>
+        <div class="pice" v-if="typeOf('price')" ><Price input_type :value ="getProperty('value')"  @edit_price="(val)=>{updateValue(val)}"/></div>
         <div v-if="haveSelList()" class="select-list" > 
             <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
             <slot/><!-- v-if="this.$slots._" -->
@@ -49,7 +49,11 @@ export  default{
             if (!val||val.length == 0) return ''
             return val
         },
-    }
+        updateValue(val){
+            this.$emit('edit_price', val)
+        }
+    },
+    emits:['edit_price'],
 }
 </script>
 
@@ -79,4 +83,5 @@ export  default{
         color:#838383;
         padding-right: 9px;
     }
+
 </style>

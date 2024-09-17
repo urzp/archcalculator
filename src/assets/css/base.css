@@ -103,6 +103,11 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+input{
+  border: none;
+  background-color: transparent;
+}
+
 ul{
   padding: 0px;
 }
