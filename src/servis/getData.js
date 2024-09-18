@@ -47,7 +47,9 @@ let data = {
         "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object},
         "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone},
         "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
-        "Eligible costs":{type: 'price', value:0}
+        "Eligible costs":{type: 'price', value:0},
+        "Fee according to fee table":{type: 'price', value:1000},
+        "Surcharge":{type:'count_percent', value: 10.5}
     },
     lists,
 }

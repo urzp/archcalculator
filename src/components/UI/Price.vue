@@ -17,6 +17,9 @@
 <script>
 export default{
     name: 'Price',
+    mounted(){
+        this.count_price()
+    },
     data(){
         return{
             price:{
@@ -106,10 +109,14 @@ export default{
     .cents{
         font-size: v-bind(font_size_cent);
         text-align: right;
-        width: 21px;
+        width: 23px;
         font-size: 16px;
     }
     .currency-sign{
         margin-left: 15px;
+    }
+    input{
+        font-family:inherit;
+        color: inherit;
     }
 </style>

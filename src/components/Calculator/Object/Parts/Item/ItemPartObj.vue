@@ -2,10 +2,14 @@
     <div class="item-Part-obj">
         <div class="title">{{ title }}</div>
         <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-        <div class="pice" v-if="typeOf('price')" ><Price input_type :value ="getProperty('value')"  @edit_price="(val)=>{updateValue(val)}"/></div>
+        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')"  @edit_price="val=>updateValue(val,'edit_price')"/></div>
         <div v-if="haveSelList()" class="select-list" > 
             <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
             <slot/><!-- v-if="this.$slots._" -->
+        </div>
+        <div class="count_percent" v-if="typeOf('count_percent')">
+            <Percent :input_type="input_type" :value = "getProperty('value')" @edit_value="val=>updateValue(val,'edit_percent')"/>
+            <Price :value ='0'/> 
         </div>
     </div>
 </template>
@@ -20,7 +24,11 @@ export  default{
     },
     props:{
         title:String,
-        data:String
+        data:String,
+        input_type:{
+            type:Boolean,
+            default: false,
+        }
     },
     methods:{
         typeOf(type){
@@ -49,11 +57,11 @@ export  default{
             if (!val||val.length == 0) return ''
             return val
         },
-        updateValue(val){
-            this.$emit('edit_price', val)
+        updateValue(val, name_emint){
+            this.$emit(name_emint, val)
         }
     },
-    emits:['edit_price'],
+    emits:['edit_price', 'edit_percent'],
 }
 </script>
 
@@ -79,9 +87,17 @@ export  default{
         color:#464646;
         margin-left: auto;
     }
-    .price{
+    .price, .price .unit-price{
         color:#838383;
         padding-right: 9px;
+    }
+
+    .count_percent{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color:#838383;
     }
 
 </style>

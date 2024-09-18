@@ -24,6 +24,7 @@ import ToggleButton from './UI/ToggleBtn.vue'
 import ToggleListButton from './UI/ToggleListBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
 import Price from './UI/Price.vue'
+import Percent from './UI/Percent.vue'
 
 export default [
     Header,
@@ -52,4 +53,5 @@ export default [
     ToggleListButton,
     CloseButton,
     Price,
+    Percent,
 ]

@@ -5,7 +5,9 @@
         <ItemPartObj title="Planning object" :data="Basis"></ItemPartObj>
         <ItemPartObj title="Fee zone" :data="Basis"></ItemPartObj>
         <ItemPartObj title="Fee rate" :data="Basis"></ItemPartObj>
-        <ItemPartObj title="Eligible costs" :data="Basis" @edit_price="(val)=>{updateData(val, 'Eligible costs')}"></ItemPartObj>
+        <ItemPartObj title="Eligible costs" :data="Basis" input_type @edit_price="val=>updateData(val, 'Eligible costs')"></ItemPartObj>
+        <ItemPartObj title="Fee according to fee table" :data="Basis" ></ItemPartObj>
+        <ItemPartObj title="Surcharge" :data="Basis" input_type @edit_percent="val=>updateData(val, 'Surcharge')"></ItemPartObj>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse'/>    
 </template>
