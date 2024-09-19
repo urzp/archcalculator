@@ -2,7 +2,7 @@
     <div class="item-Part-obj">
         <div class="title">{{ title }}</div>
         <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')"  @edit_price="val=>updateValue(val,'edit_price')"/></div>
+        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title" @edit_price="val=>updateValue(val,'edit_price')"/></div>
         <div v-if="haveSelList()" class="select-list" > 
             <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
             <slot/><!-- v-if="this.$slots._" -->

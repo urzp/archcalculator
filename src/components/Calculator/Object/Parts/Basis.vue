@@ -21,6 +21,7 @@ export default{
         let data = getData()
         this.Basis = data.Basis
         EventBus.on('SelectList:selected', (data)=>{this.selectItem(data.name_list, data.value)})
+        EventBus.on('edit:price', (data)=>{updateData(val, item_name)})
     },
     data(){
         return{
