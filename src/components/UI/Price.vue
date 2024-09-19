@@ -79,8 +79,7 @@ export default{
             if( cent.length > 2 ) cent = cent.slice(0,-1)
             let newPrice = Number(unit) + 0.01 * Number(cent)
             this.$emit('edit_price', newPrice)
-            console.log(newPrice)
-            EventBus.emit('edit:price',{ name_value: this.name_value , value:newPrice})
+            EventBus.emit('edit:input',{ name_value: this.name_value , value:newPrice})
             this.count_price()
         },
         count_price(){

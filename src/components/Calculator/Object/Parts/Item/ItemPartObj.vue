@@ -2,15 +2,15 @@
     <div class="item-Part-obj">
         <div class="title">{{ title }}</div>
         <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title" @edit_price="val=>updateValue(val,'edit_price')"/></div>
+        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title"/></div>
         <div v-if="haveSelList()" class="select-list" > 
             <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
-            <slot/><!-- v-if="this.$slots._" -->
         </div>
         <div class="count_percent" v-if="typeOf('count_percent')">
-            <Percent :input_type="input_type" :value = "getProperty('value')" @edit_value="val=>updateValue(val,'edit_percent')"/>
-            <Price :value ='0'/> 
+            <Percent :input_type="input_type" :value = "getProperty('value')" :name_value="title"/>
+            <Price :value ="getProperty('price')"/> 
         </div>
+        <slot/><!-- v-if="this.$slots._" -->
     </div>
 </template>
 

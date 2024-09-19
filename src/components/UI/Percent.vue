@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 export  default{
     name: 'Percent',
     mounted(){
@@ -14,6 +15,7 @@ export  default{
     },  
     props:{
         value: Number,
+        name_value: String,
         input_type:{ 
             type: Boolean,
             default: false,
@@ -60,6 +62,7 @@ export  default{
             if(!val) val = '0'
             event.target.value = val.toLocaleString('DE-de')
             this.$emit('edit_value', val)
+            EventBus.emit('edit:input',{ name_value: this.name_value , value:val})
             this.adjast_input_width()
         }
     }

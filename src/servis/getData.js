@@ -49,7 +49,7 @@ let data = {
         "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
         "Eligible costs":{type: 'price', value:0},
         "Fee according to fee table":{type: 'price', value:1000},
-        "Surcharge":{type:'count_percent', value: 10.5}
+        "Surcharge":{type:'count_percent', value: 10.5, price: 0}
     },
     lists,
 }
