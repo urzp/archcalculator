@@ -40,12 +40,82 @@ let lists = {
     ],
 }
 
+let Parts_items_detail_input = {
+    Fee_Zone: { 
+        type_input: 'list_points',
+        list: [
+                {
+                    id:'1',
+                    name_item: 'environment',
+                    title:'Requirements for integration into the environment',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 6,
+                    min_value:0,
+                },
+                {
+                    id:'2',
+                    name_item: 'functional_area',
+                    title:'Number of functional areas',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 9,
+                    min_value:0,           
+                },
+                {
+                    id:'3',
+                    name_item: 'design_requirements',
+                    title:'Design requirements',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 9,
+                    min_value:0,           
+                },
+                {
+                    id:'4',
+                    name_item: 'constructive',
+                    title:'Constructive requirements',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 6,
+                    min_value:0,           
+                },
+                {
+                    id:'5',
+                    name_item: 'technical_equipment',
+                    title:'Technical equipment',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 6,
+                    min_value:0,           
+                },
+                {
+                    id:'6',
+                    name_item: 'Expansion',
+                    title:'Expansion',
+                    user_comment: '',
+                    def_value: 3,
+                    max_value: 6,
+                    min_value:0,           
+                },
+
+            ],
+        total:{
+            title:'Summe der Punkte',
+            value: 10,
+            titele_equ: 'entspricht Honorarzone',
+            equivalent: '|||',
+        }
+
+    }
+}
+
 let data = {
 
     Basis:{
         "HOAI version": {type: 'text', value: 2021, list:lists.HOAT_v},
-        "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object},
-        "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone},
+        "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object },
+        "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone, detail_input: Parts_items_detail_input.Fee_Zone},
         "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
         "Eligible costs":{type: 'price', value:0},
         "Fee according to fee table":{type: 'price', value:1000},

@@ -105,21 +105,19 @@ export default{
         display: flex;
         align-items: baseline;
         font-family: v-bind(font_family);
-        font-size: v-bind(font_size_unit);
-        
     }
     .unit-price{
         text-align: right;
-        font-size: 18px;
+        font-size: v-bind(font_size_unit);
     }
     .cents{
         font-size: v-bind(font_size_cent);
         text-align: right;
         width: 23px;
-        font-size: 16px;
     }
     .currency-sign{
-        margin-left: 15px;
+        margin-left: 18px;
+        margin-right: 10px;
     }
     input{
         font-family:inherit;

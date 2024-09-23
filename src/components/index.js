@@ -14,6 +14,8 @@ import PartObjectContent from './Calculator/Object/Parts/content.vue'
 import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import Basis from './Calculator/Object/Parts/Basis.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
+//----------------------------Detals_of_items-----------------------------
+import DetalsList from './Calculator/Object/Parts/Detals_of_item/DetalsList.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
@@ -37,12 +39,13 @@ export default [
     ObjectTitile,
     ObjectTotal,
 
-
     PartObjectTitle,
     PartObjectContent,
     PartObjectTotal,
     Basis,
     BaseServis,
+
+    DetalsList,
 
     ItemPartObj,
 

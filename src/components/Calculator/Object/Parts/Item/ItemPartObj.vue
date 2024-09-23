@@ -1,14 +1,22 @@
 <template>
     <div class="item-Part-obj">
-        <div class="title">{{ title }}</div>
-        <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-        <div class="pice" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title"/></div>
-        <div v-if="haveSelList()" class="select-list" > 
-            <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
+        <div v-if="haveDetals()" class="detals" @click="collapse_detals=!collapse_detals">
+            <div class="icon"></div>
         </div>
-        <div class="count_percent" v-if="typeOf('count_percent')">
-            <Percent :input_type="input_type" :value = "getProperty('value')" :name_value="title"/>
-            <Price :value ="getProperty('price')"/> 
+        <div class="main_row">
+            <div class="title">{{ title }}</div>
+            <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
+            <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title"/></div>
+            <div v-if="haveSelList()" class="select-list" > 
+                <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
+            </div>
+            <div class="count_percent" v-if="typeOf('count_percent')">
+                <Percent :input_type="input_type" :value = "getProperty('value')" :name_value="title"/>
+                <Price :value ="getProperty('price')"/> 
+            </div>
+        </div>
+        <div v-if="haveDetals()&&!collapse_detals" class="detal-list">
+            <DetalsList :data="getDetals()"/>
         </div>
         <slot/><!-- v-if="this.$slots._" -->
     </div>
@@ -19,7 +27,7 @@ export  default{
     name: 'ItemPartObj',
     data(){
         return{
-            collapse:true
+            collapse_detals:true,
         }
     },
     props:{
@@ -31,6 +39,22 @@ export  default{
         }
     },
     methods:{
+        haveDetals(){
+            let result = false
+            let t = this.title
+            let d = this.data
+            if(!(!!t&&!!d&&!!d[t])) return result
+            if(!!d[t].detail_input) result = true
+            return result
+        },
+        getDetals(){
+            let result = {}
+            let t = this.title
+            let d = this.data
+            if(!(!!t&&!!d&&!!d[t])) return result
+            if(!!d[t].detail_input) result = d[t].detail_input
+            return result
+        },
         typeOf(type){
             let result = false
             let t = this.title
@@ -62,15 +86,41 @@ export  default{
         }
     },
     emits:['edit_price', 'edit_percent'],
+    computed:{
+        
+    }
 }
 </script>
 
 <style scoped>
     .item-Part-obj{
         display: flex;
+        flex-direction: column;
+    }
+    .item-Part-obj .main_row{
+        display: flex;
         height: 35px;
         align-items: center;
         justify-content: space-between;
+    }
+    .detals{
+        position: relative;
+    }
+    .detals .icon{
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        height: 8px;
+        width: 8px;
+        background-color: #C0C0C0;
+        content: " ";
+        left: 25px;
+        top: 13px;
+        cursor: pointer;
+    }
+
+    .detal-list {
+        background-color: #fff;
     }
     .title{
         margin-left: 55px;
@@ -87,9 +137,13 @@ export  default{
         color:#464646;
         margin-left: auto;
     }
-    .price, .price .unit-price{
+
+    .price{
         color:#838383;
-        padding-right: 9px;
+    }
+    .unit-price{
+        color:#838383;
+        
     }
 
     .count_percent{
