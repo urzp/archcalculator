@@ -42,7 +42,9 @@ let lists = {
 
 let Parts_items_detail_input = {
     Fee_Zone: { 
+        name:'Fee zone',
         type_input: 'list_points',
+        use: false,
         list: [
                 {
                     id:'1',
@@ -50,6 +52,7 @@ let Parts_items_detail_input = {
                     title:'Requirements for integration into the environment',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 6,
                     min_value:0,
                 },
@@ -59,6 +62,7 @@ let Parts_items_detail_input = {
                     title:'Number of functional areas',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 9,
                     min_value:0,           
                 },
@@ -68,6 +72,7 @@ let Parts_items_detail_input = {
                     title:'Design requirements',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 9,
                     min_value:0,           
                 },
@@ -77,6 +82,7 @@ let Parts_items_detail_input = {
                     title:'Constructive requirements',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 6,
                     min_value:0,           
                 },
@@ -86,6 +92,7 @@ let Parts_items_detail_input = {
                     title:'Technical equipment',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 6,
                     min_value:0,           
                 },
@@ -95,11 +102,19 @@ let Parts_items_detail_input = {
                     title:'Expansion',
                     user_comment: '',
                     def_value: 3,
+                    value:'',
                     max_value: 6,
                     min_value:0,           
                 },
 
             ],
+        equivalents:[
+            { name:"I", value: 10 },
+            { name:"II", value: 19 },
+            { name:"III", value: 26 },
+            { name:"IV", value: 35 },
+            { name:"V", value: 100 },
+        ], 
         total:{
             title:'Summe der Punkte',
             value: 10,
