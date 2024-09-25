@@ -87,7 +87,7 @@ export default{
             let name_val = this.Basis["Fee rate"].value
             let list = this.Basis["Fee rate"].list
             let fee_rate_procent = list.find(item => item.val == name_val).percent
-            let fee_value = min + ((max-min)/4) * fee_rate_procent/100
+            let fee_value = min + (max-min) * (fee_rate_procent/100)
             this.Basis["Fee according to fee table"].value = fee_value
         },
     }
