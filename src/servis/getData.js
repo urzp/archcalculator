@@ -31,12 +31,12 @@ let lists = {
         {id:5,val:'V'},
     ],
     Middle_set:[
-        {id:1,val:'Basissatz'},
-        {id:2,val:'Viertelsatz'},
-        {id:3,val:'Mittelsatz'},
-        {id:4,val:'Dreiviertelsatz'},
-        {id:5,val:'Höchstsatz'},
-        {id:5,val:'Prozent eingeben'},
+        {id:1,val:'Basissatz', percent:0},
+        {id:2,val:'Viertelsatz', percent:25},
+        {id:3,val:'Mittelsatz', percent:50},
+        {id:4,val:'Dreiviertelsatz', percent:75},
+        {id:5,val:'Höchstsatz', percent:100},
+        {id:6,val:'Prozent eingeben', percent:0},
     ],
 }
 
@@ -167,7 +167,25 @@ let Parts_items_detail_input = {
             title:'Total eligible costs, "other"',
             value: 10000,
         },
-    }
+    },
+    Fee_Table:{
+        name:'Fee according to fee table',
+        low:{
+            funding: 300000.00,
+            min_fee: 39981.00 ,
+            max_fee: 49864.00 
+        },
+        current:{
+            funding: 450000.00,
+            min_fee: 57170.25,
+            max_fee: 71302.75 
+        },
+        up:{
+            funding: 500000.00,
+            min_fee: 62900.00,
+            max_fee: 78449.00 
+        }
+    },
 }
 
 let data = {
@@ -176,9 +194,9 @@ let data = {
         "HOAI version": {type: 'text', value: 2021, list:lists.HOAT_v},
         "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object },
         "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone, detail_input: Parts_items_detail_input.Fee_Zone},
-        "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
+        "Fee rate":{type: 'text', value: 'Mittelsatz', list:lists.Middle_set},
         "Eligible costs":{type: 'price', value:450000, detail_input: Parts_items_detail_input.Eligible_Costs},
-        "Fee according to fee table":{type: 'price', value: 64236.50},
+        "Fee according to fee table":{type: 'price', value: 64236.50, detail_input: Parts_items_detail_input.Fee_Table},
         "Surcharge":{type:'count_percent', value: 1, price: 0},
         "Total":{value:0, percent:100}
     },

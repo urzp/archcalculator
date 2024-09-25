@@ -17,6 +17,7 @@ import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
 import FeeZoneDetal from './Calculator/Object/Parts/Detals_of_item/FeeZoneDetal.vue'
 import EligibleCostsDetal from './Calculator/Object/Parts/Detals_of_item/EligibleCostsDetal.vue'
+import FeeTableDetal from './Calculator/Object/Parts/Detals_of_item/FeeTableDetal.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
@@ -48,6 +49,7 @@ export default [
 
     FeeZoneDetal,
     EligibleCostsDetal,
+    FeeTableDetal,
 
     ItemPartObj,
 

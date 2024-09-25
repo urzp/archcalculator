@@ -59,6 +59,7 @@ export default{
            Surcharge.price = Surcharge.value * 0.01 * this.Basis["Fee according to fee table"].value
            this.calculate_detals("Fee zone")
            this.calculate_detals("Eligible costs")
+           this.calculate_fee_table_value()
            this.Basis['Total'].value = this.Basis["Fee according to fee table"].value + this.Basis["Surcharge"].price
         },
         calculate_detals(item_name){
@@ -78,6 +79,16 @@ export default{
             if(item_name=="Eligible costs"){
                 if(detals.use) this.Basis[item_name].value = detals.total.value
             }
+        },
+        calculate_fee_table_value(){
+            let Fee_Table = this.Basis["Fee according to fee table"].detail_input
+            let min = Fee_Table.current.min_fee
+            let max = Fee_Table.current.max_fee
+            let name_val = this.Basis["Fee rate"].value
+            let list = this.Basis["Fee rate"].list
+            let fee_rate_procent = list.find(item => item.val == name_val).percent
+            let fee_value = min + ((max-min)/4) * fee_rate_procent/100
+            this.Basis["Fee according to fee table"].value = fee_value
         },
     }
 }
