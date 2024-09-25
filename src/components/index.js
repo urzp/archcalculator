@@ -15,7 +15,8 @@ import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import Basis from './Calculator/Object/Parts/Basis.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
-import DetalsList from './Calculator/Object/Parts/Detals_of_item/DetalsList.vue'
+import FeeZoneDetal from './Calculator/Object/Parts/Detals_of_item/FeeZoneDetal.vue'
+import EligibleCostsDetal from './Calculator/Object/Parts/Detals_of_item/EligibleCostsDetal.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
@@ -45,7 +46,8 @@ export default [
     Basis,
     BaseServis,
 
-    DetalsList,
+    FeeZoneDetal,
+    EligibleCostsDetal,
 
     ItemPartObj,
 

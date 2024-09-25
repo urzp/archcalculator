@@ -2,7 +2,7 @@
     <div class="wrap" >
         <div class="list">
             <div class="detal-item" v-for="item in data.list" :key="item.id">
-                <div class="title">{{ item.title }}</div>
+                <input class="title" :placeholder="item.title" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
                 <div class="value-wrap">
                     <div class="value">{{getValue( item.id )}}</div>
                     <div class="value-label">points</div>
@@ -28,7 +28,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 export  default{
-    name: 'DetalsList',
+    name: 'FeeZoneDetal',
     data(){
         return{
             collapse:true,
@@ -42,6 +42,9 @@ export  default{
         },
         updateValue(value, id_item){
             EventBus.emit('edit:input_detals',{ name_value:this.data.name, id_item, value:value })
+        },
+        updateUserTitle(value, id_item){
+            EventBus.emit('edit:update_user_title',{ name_value:this.data.name, id_item, value:value })
         }
     },
     props:{
@@ -70,17 +73,25 @@ export  default{
     width: 100%;
 }
 .detal-item{
+    height: 30px;
     display: flex;
     justify-content: space-between;
     color: #8E8E8E;
     font-family:'Raleway-Light';
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .value-wrap{
     display: flex;
     column-gap: 30px;
     font-size: 18px;
+}
+
+.title{
+    color: #8E8E8E;
+    width: 100%;
+    font-family:'Raleway-Light';
+    font-size: 18px;   
 }
 
 .slider {
@@ -116,8 +127,10 @@ export  default{
     border-top: solid 1px #C7C7C7;
     color: #8E8E8E;
     font-family:'Raleway-Light';
-    font-size: 20px;
+    font-size: 18px;
 }
+
+
 
 .total_points, .equivalent{
     display: flex;

@@ -16,7 +16,8 @@
             </div>
         </div>
         <div v-if="haveDetals()&&!collapse_detals" class="detal-list">
-            <DetalsList :data="getDetals()"/>
+            <FeeZoneDetal v-if="title=='Fee zone'" :data="getDetals()"/>
+            <EligibleCostsDetal v-if="title=='Eligible costs'" :data="getDetals()"/>
         </div>
         <slot/><!-- v-if="this.$slots._" -->
     </div>

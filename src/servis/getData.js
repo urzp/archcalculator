@@ -50,7 +50,7 @@ let Parts_items_detail_input = {
                     id:'1',
                     name_item: 'environment',
                     title:'Requirements for integration into the environment',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 6,
@@ -60,7 +60,7 @@ let Parts_items_detail_input = {
                     id:'2',
                     name_item: 'functional_area',
                     title:'Number of functional areas',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 9,
@@ -70,7 +70,7 @@ let Parts_items_detail_input = {
                     id:'3',
                     name_item: 'design_requirements',
                     title:'Design requirements',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 9,
@@ -80,7 +80,7 @@ let Parts_items_detail_input = {
                     id:'4',
                     name_item: 'constructive',
                     title:'Constructive requirements',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 6,
@@ -90,7 +90,7 @@ let Parts_items_detail_input = {
                     id:'5',
                     name_item: 'technical_equipment',
                     title:'Technical equipment',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 6,
@@ -100,7 +100,7 @@ let Parts_items_detail_input = {
                     id:'6',
                     name_item: 'Expansion',
                     title:'Expansion',
-                    user_comment: '',
+                    user_title: '',
                     def_value: 3,
                     value:'',
                     max_value: 6,
@@ -122,6 +122,51 @@ let Parts_items_detail_input = {
             equivalent: '|||',
         }
 
+    },
+    Eligible_Costs:{
+        name:'Eligible costs',
+        use: false,
+        list: [
+            {
+                id:'1',
+                title:'KG200 Preparatory measures',
+                user_title: '',
+                def_value: 0,
+                value:'',
+            },
+            {
+                id:'2',
+                title:'KG300 Building - Building construction',
+                user_title: '',
+                def_value: 0,
+                value:'',
+            },
+            {
+                id:'3',
+                title:'KG400 Building - Technical facilities',
+                user_title: '',
+                def_value: 0,
+                value:'',
+            },
+            {
+                id:'4',
+                title:'KG500 Outdoor facilities and open spaces',
+                user_title: '',
+                def_value: 0,
+                value:'',
+            },
+            {
+                id:'5',
+                title:'KG600 Equipment and artwork',
+                user_title: '',
+                def_value: 0,
+                value:'',
+            },
+        ],
+        total:{
+            title:'Total eligible costs, "other"',
+            value: 10000,
+        },
     }
 }
 
@@ -132,9 +177,10 @@ let data = {
         "Planning object":{type: 'text', value: '§34G Gebäude', list:lists.Planing_Object },
         "Fee zone":{type: 'text', value: 'III', list:lists.Fee_Zone, detail_input: Parts_items_detail_input.Fee_Zone},
         "Fee rate":{type: 'text', value: 'Middle set', list:lists.Middle_set},
-        "Eligible costs":{type: 'price', value:0},
-        "Fee according to fee table":{type: 'price', value:1000},
-        "Surcharge":{type:'count_percent', value: 10.5, price: 0}
+        "Eligible costs":{type: 'price', value:450000, detail_input: Parts_items_detail_input.Eligible_Costs},
+        "Fee according to fee table":{type: 'price', value: 64236.50},
+        "Surcharge":{type:'count_percent', value: 1, price: 0},
+        "Total":{value:0, percent:100}
     },
     lists,
 }

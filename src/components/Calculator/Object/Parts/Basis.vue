@@ -9,7 +9,7 @@
         <ItemPartObj title="Fee according to fee table" :data="Basis" ></ItemPartObj>
         <ItemPartObj title="Surcharge" :data="Basis" input_type @edit_percent="val=>updateData(val, 'Surcharge')"></ItemPartObj>
     </PartObjectContent>
-    <PartObjectTotal :collapse = 'collapse'/>    
+    <PartObjectTotal :collapse = 'collapse' :data="Basis['Total']"/>    
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default{
         EventBus.on('SelectList:selected', (data)=>{this.selectItem(data.name_list, data.value)})
         EventBus.on('edit:input', (data)=>{this.updateData( data.value, data.name_value)})
         EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value )})
+        EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value, 'user_title' )})
         this.calculate()
     },
     data(){
@@ -43,32 +44,41 @@ export default{
         updateData(val, item_name){
             if(!val||!item_name) return false
             this.Basis[item_name].value = val
+            if(!!this.Basis[item_name].detail_input) this.Basis[item_name].detail_input.use = false
             this.calculate()
         },
-        updateDataDetals( item_name, id_item, val ){
+        updateDataDetals( item_name, id_item, val, name_value = 'value' ){
             let detals = this.Basis[item_name].detail_input
             detals.use = true
             let el = detals.list.find(item => item.id == id_item);
-            el.value = val
+            el[name_value] = val
             this.calculate()
         },
         calculate(){
            let Surcharge = this.Basis['Surcharge']
            Surcharge.price = Surcharge.value * 0.01 * this.Basis["Fee according to fee table"].value
-           this.calculate_free_zone()
+           this.calculate_detals("Fee zone")
+           this.calculate_detals("Eligible costs")
+           this.Basis['Total'].value = this.Basis["Fee according to fee table"].value + this.Basis["Surcharge"].price
         },
-        calculate_free_zone(){
-            let detals = this.Basis["Fee zone"].detail_input 
+        calculate_detals(item_name){
+            if (!item_name) return false
+            let detals = this.Basis[item_name].detail_input 
             let total = 0
             detals.list.forEach(element => {
                 let val = element.value==''?element.def_value:element.value
                 total = total + Number(val)
             });
             detals.total.value = total
-            let equivalent = detals.equivalents.find(item => total < item.value);
-            detals.total.equivalent = equivalent.name
-            if(detals.use) this.Basis["Fee zone"].value = equivalent.name
-        }
+            if(item_name=="Fee zone"){
+                let equivalent = detals.equivalents.find(item => total < item.value);
+                detals.total.equivalent = equivalent.name
+                if(detals.use) this.Basis[item_name].value = equivalent.name
+            }
+            if(item_name=="Eligible costs"){
+                if(detals.use) this.Basis[item_name].value = detals.total.value
+            }
+        },
     }
 }
 </script>

@@ -2,8 +2,8 @@
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
             <div class="title">Total</div>
-            <div class="value-percent">100%</div>
-            <Price value = '1700200.54'/>
+            <div class="value-percent">{{ data.percent }} %</div>
+            <Price :value = 'data.value'/>
         </div>
     </div>
 </template>
@@ -15,6 +15,10 @@ export default{
     props:{
         name:String,
         collapse: Boolean,
+        data: {
+            type:Object,
+            default: {value: 0, percent: 0},
+        },
     },
 }
 </script>
