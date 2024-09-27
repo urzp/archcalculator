@@ -2,8 +2,8 @@
     <div class="object-calc">
         <ObjectTitile @switch_tg="(val)=>{collapse =  !val}"/>
         <Toggle :collapse="collapse">
-        <Basis :Basis="Basis"/>
-        <BaseServis/>
+        <Basis :data="basis"/>
+        <!-- <BaseServis/> -->
         </Toggle>
         <ObjectTotal :collapse="collapse"/>
     </div> 
@@ -17,7 +17,8 @@ export default{
     name: 'ObjectCalc',
     async mounted(){
         let data = getData()
-        this.Basis = data.Basis
+        console.log('getData',data )
+        this.basis = data.Basis
         EventBus.on('SelectList:selected', (data)=>{this.selectItem(data.name_list, data.value)})
         EventBus.on('edit:input', (data)=>{this.updateData( data.value, data.name_value)})
         EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value )})
@@ -27,39 +28,44 @@ export default{
     data(){
         return{
             collapse: false,
-            Basis:{}
+            basis:{}
         }
     },
     methods:{
-        selectItem(item, value){
-            this.Basis[item].value = value
-            if(item == "Fee zone") this.Basis["Fee zone"].detail_input.use = false
+        selectItem(item_name, value){
+            let el = this.basis.list.find(el=>el.name == item_name)
+            el.value = value
+            el.use_select = true
             this.calculate()
         },
         updateData(val, item_name){
             if(!val||!item_name) return false
-            this.Basis[item_name].value = val
-            if(!!this.Basis[item_name].detail_input) this.Basis[item_name].detail_input.use = false
+            let el = this.basis.list.find(el=>el.name == item_name)
+            el.value = val
+            el.use_select = true
             this.calculate()
         },
         updateDataDetals( item_name, id_item, val, name_value = 'value' ){
-            let detals = this.Basis[item_name].detail_input
-            detals.use = true
+            let element = this.basis.list.find(el=>el.name == item_name)
+            let detals = element.detail_input
+            element.use_select = false
             let el = detals.list.find(item => item.id == id_item);
             el[name_value] = val
             this.calculate()
         },
         calculate(){
-           let Surcharge = this.Basis['Surcharge']
-           Surcharge.price = Surcharge.value * 0.01 * this.Basis["Fee according to fee table"].value
-           this.calculate_detals("Fee zone")
-           this.calculate_detals("Eligible costs")
-           this.calculate_fee_table_value()
-           this.Basis['Total'].value = this.Basis["Fee according to fee table"].value + this.Basis["Surcharge"].price
+            let Surcharge = this.basis.list.find(el=>el.name == 'Surcharge')
+            let Fee_table = this.basis.list.find(el=>el.name == 'Fee according to fee table')
+            Surcharge.price = Surcharge.value * 0.01 * Fee_table.value
+            this.calculate_detals("Fee zone")
+            this.calculate_detals("Eligible costs")
+            this.calculate_fee_table_value()
+            this.basis.Total.value = Fee_table.value + Surcharge.price
         },
         calculate_detals(item_name){
             if (!item_name) return false
-            let detals = this.Basis[item_name].detail_input 
+            let element = this.basis.list.find(el=>el.name == item_name)
+            let detals = element.detail_input 
             let total = 0
             detals.list.forEach(element => {
                 let val = element.value==''?element.def_value:element.value
@@ -69,21 +75,23 @@ export default{
             if(item_name=="Fee zone"){
                 let equivalent = detals.equivalents.find(item => total < item.value);
                 detals.total.equivalent = equivalent.name
-                if(detals.use) this.Basis[item_name].value = equivalent.name
+                if(!element.use_select) element.value = equivalent.name
             }
             if(item_name=="Eligible costs"){
-                if(detals.use) this.Basis[item_name].value = detals.total.value
+                if(!element.use_select) element.value = detals.total.value
             }
         },
         calculate_fee_table_value(){
-            let Fee_Table = this.Basis["Fee according to fee table"].detail_input
+            let element = this.basis.list.find(el=>el.name == "Fee according to fee table")
+            let Fee_Table = element.detail_input
             let min = Fee_Table.current.min_fee
             let max = Fee_Table.current.max_fee
-            let name_val = this.Basis["Fee rate"].value
-            let list = this.Basis["Fee rate"].list
+            let el_free_rate = this.basis.list.find(el=>el.name == "Fee rate")
+            let name_val = el_free_rate.value
+            let list = el_free_rate.list
             let fee_rate_procent = list.find(item => item.val == name_val).percent
             let fee_value = min + (max-min) * (fee_rate_procent/100)
-            this.Basis["Fee according to fee table"].value = fee_value
+            element.value = fee_value
         },
     }
 }

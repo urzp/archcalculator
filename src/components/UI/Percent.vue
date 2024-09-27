@@ -54,6 +54,7 @@ export  default{
         },
         adjast_input_width(){
             let input = this.$refs.imput_pecent
+            if(!input) return false
             input.style.width = ((input.value.length-1) * 10 + 15) + 'px'
         },
         edit_value(event){

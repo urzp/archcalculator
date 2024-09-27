@@ -5,20 +5,20 @@
         </div>
         <div class="main_row">
             <div class="title">{{ title }}</div>
-            <div class="value" v-if="typeOf('text')" >{{ getProperty('value') }}</div>
-            <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="getProperty('value')" :name_value="title"/></div>
+            <div class="value" v-if="typeOf('text')" >{{ value }}</div>
             <div v-if="haveSelList()" class="select-list" > 
-                <Select_List :list="getProperty('list')" :name_list="title" :sected_val="getProperty('value')"/>
+                <Select_List :list="list" :name_list="title" :sected_val="value"/>
             </div>
+            <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="value" :name_value="title"/></div>
             <div class="count_percent" v-if="typeOf('count_percent')">
-                <Percent :input_type="input_type" :value = "getProperty('value')" :name_value="title"/>
-                <Price :value ="getProperty('price')"/> 
+                <Percent :input_type="input_type" :value = "value" :name_value="title"/>
+                <Price :value ="price"/> 
             </div>
         </div>
         <div v-if="haveDetals()&&!collapse_detals" class="detal-list">
-            <FeeZoneDetal v-if="title=='Fee zone'" :data="getDetals()"/>
-            <EligibleCostsDetal v-if="title=='Eligible costs'" :data="getDetals()"/>
-            <FeeTableDetal v-if="title=='Fee according to fee table'" :data="getDetals()"/>
+            <FeeZoneDetal v-if="title=='Fee zone'" :data="detals"/>
+            <EligibleCostsDetal v-if="title=='Eligible costs'" :data="detals"/>
+            <FeeTableDetal v-if="title=='Fee according to fee table'" :data="detals"/>
         </div>
         <slot/><!-- v-if="this.$slots._" -->
     </div>
@@ -27,69 +27,62 @@
 <script>
 export  default{
     name: 'ItemPartObj',
+    mounted(){
+        this.updateData()
+    },
     data(){
         return{
+            title:'',
+            value:'',
+            price: 0,
+            list:[],
+            detals:{},
+            input_type: false,
             collapse_detals:true,
         }
     },
     props:{
-        title:String,
-        data:String,
-        input_type:{
-            type:Boolean,
-            default: false,
-        }
+        data:Object,
     },
+    watch:{
+        data: {
+        handler() {
+            this.updateData()
+        },
+        deep: true
+        }
+    }
+    ,
     methods:{
         haveDetals(){
             let result = false
-            let t = this.title
             let d = this.data
-            if(!(!!t&&!!d&&!!d[t])) return result
-            if(!!d[t].detail_input) result = true
-            return result
-        },
-        getDetals(){
-            let result = {}
-            let t = this.title
-            let d = this.data
-            if(!(!!t&&!!d&&!!d[t])) return result
-            if(!!d[t].detail_input) result = d[t].detail_input
+            if(!d) return result
+            if(!!d.detail_input) result = true
             return result
         },
         typeOf(type){
             let result = false
-            let t = this.title
             let d = this.data
-            if(!(!!t&&!!d&&!!d[t])) return result
-            if( d[t].type == type ) result = true
+            if(!d) return result
+            if( d.type == type ) result = true
             return result
         },
         haveSelList(){
             let result = false
-            let t = this.title
             let d = this.data
-            if(!(!!t&&!!d&&!!d[t])) return result   
-            result =  !!d[t].list        
+            if(!d) return result   
+            result =  !!d.list        
             return result
         },
-        getProperty(type){
-            let val = ''
-            let t = this.title
-            let d = this.data
-            if(!(!!t&&!!d&&!!d[t])) return ''
-            val = d[t]
-            val = val[type]
-            if (!val||val.length == 0) return ''
-            return val
-        },
-        updateValue(val, name_emint){
-            this.$emit(name_emint, val)
+        updateData(){
+            this.title = this.data.name
+            this.value = this.data.value
+            this.list = !!this.data.list?this.data.list:[]
+            this.input_type = !!this.data.input_type?this.data.input_type:false
+            this.price = !!this.data.price?this.data.price:0
+            this.detals = !!this.data.detail_input?this.data.detail_input:{}   
         }
-    },
-    emits:['edit_price', 'edit_percent'],
-    computed:{
-        
     }
 }
 </script>
