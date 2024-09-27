@@ -7,7 +7,7 @@
         <ItemPartObj title="Fee rate" :data="Basis"></ItemPartObj>
         <ItemPartObj title="Eligible costs" :data="Basis" input_type></ItemPartObj>
         <ItemPartObj title="Fee according to fee table" :data="Basis" ></ItemPartObj>
-        <ItemPartObj title="Surcharge" :data="Basis" input_type @edit_percent="val=>updateData(val, 'Surcharge')"></ItemPartObj>
+        <ItemPartObj title="Surcharge" :data="Basis" input_type ></ItemPartObj>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse' :data="Basis['Total']"/>    
 </template>
