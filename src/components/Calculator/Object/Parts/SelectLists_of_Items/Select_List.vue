@@ -15,23 +15,35 @@ import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Select_List',
     mounted(){
-        EventBus.on('pageTable:maxPage', (val)=>{this.maxPage=val; this.page=1})
+        this.updateData()
     },
     data(){
         return{
             open: false,
+            list: [],
+            sected_val:'',
         }
     },
     props:{
-        name_list: String,
-        list: Array,
-        sected_val: String,
+        data: Object,
+    },
+    watch:{
+        data: {
+        handler() {
+            this.updateData()
+        },
+        deep: true
+        }
     },
     emits:['selected'],
     methods:{
+        updateData(){
+            this.list = this.data.list
+            this.sected_val = this.data.value
+        },
         select_data(val){
             this.$emit('selected',val)
-            EventBus.emit('SelectList:selected', {name_list:this.name_list, value:val})
+            EventBus.emit('SelectList', {parent_item:this.data.id_parent, id_item:this.data.id, value:val})
             this.close()
         },
         close(){

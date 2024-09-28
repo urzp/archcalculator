@@ -7,10 +7,15 @@
             <div class="title">{{ title }}</div>
             <div class="value" v-if="typeOf('text')" >{{ value }}</div>
             <div v-if="haveSelList()" class="select-list" > 
-                <Select_List :list="list" :name_list="title" :sected_val="value"/>
+                <Select_List :data="data"/>
             </div>
             <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="value" :name_value="title"/></div>
             <div class="count_percent" v-if="typeOf('count_percent')">
+                <Percent :input_type="input_type" :value = "value" :name_value="title"/>
+                <Price :value ="price"/> 
+            </div>
+            <div class="count_percent" v-if="typeOf('count_percent_default')">
+                <Percent :value = "value" />
                 <Percent :input_type="input_type" :value = "value" :name_value="title"/>
                 <Price :value ="price"/> 
             </div>

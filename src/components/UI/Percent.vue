@@ -85,7 +85,7 @@ export  default{
     }
     input{
         width: 30px;
-        text-align: left;
+        text-align: right;
         font-family:inherit;
         color: inherit;
     }

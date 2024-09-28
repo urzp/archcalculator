@@ -3,7 +3,7 @@
         <ObjectTitile @switch_tg="(val)=>{collapse =  !val}"/>
         <Toggle :collapse="collapse">
         <Basis :data="basis"/>
-        <!-- <BaseServis/> -->
+        <BaseServis :data="baseServis"/>
         </Toggle>
         <ObjectTotal :collapse="collapse"/>
     </div> 
@@ -16,10 +16,9 @@ import { getData } from '@/servis/getData.js'
 export default{
     name: 'ObjectCalc',
     async mounted(){
-        let data = getData()
-        console.log('getData',data )
-        this.basis = data.Basis
-        EventBus.on('SelectList:selected', (data)=>{this.selectItem(data.name_list, data.value)})
+        this.data = getData()
+        this.initData(this.data)
+        EventBus.on('SelectList', (data)=>{this.selectItem(data)})
         EventBus.on('edit:input', (data)=>{this.updateData( data.value, data.name_value)})
         EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value )})
         EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value, 'user_title' )})
@@ -28,12 +27,23 @@ export default{
     data(){
         return{
             collapse: false,
-            basis:{}
+            data:{},
+            basis:{},
+            baseServis:{}
         }
     },
     methods:{
-        selectItem(item_name, value){
-            let el = this.basis.list.find(el=>el.name == item_name)
+        initData(data){
+            data.forEach(item=>item.list.forEach(list_item=>list_item.id_parent = item.id))
+            this.basis = data.find(item=>item.name == 'Basis')
+            this.baseServis = data.find(item=>item.name == 'BaseServis')
+        },
+        selectItem(data){
+            let value = data.value
+            let id_item = data.id_item
+            let parent_item = data.parent_item
+            let parent = this.data.find(el=>el.id == parent_item)
+            let el = parent.list.find(el=>el.id == id_item)
             el.value = value
             el.use_select = true
             this.calculate()

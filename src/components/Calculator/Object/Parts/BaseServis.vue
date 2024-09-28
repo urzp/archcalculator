@@ -1,9 +1,7 @@
 <template>
     <PartObjectTitle name="Base services" @open_close="(val)=>{collapse=!val}"/>
     <PartObjectContent :collapse = 'collapse'>
-        <ItemPartObj title="Basic research"/>
-        <ItemPartObj title="Design planning"/>
-        <ItemPartObj title="Pre-planning"/>
+        <ItemPartObj v-for="item in data.list" :key="item.name" :data="item"></ItemPartObj>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse'/>    
 </template>
@@ -17,7 +15,7 @@ export default{
         }
     },
     props:{
-        name:String,
+        data: Object,
     },
 }
 </script>
