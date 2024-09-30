@@ -15,11 +15,14 @@ export  default{
     },  
     props:{
         value: Number,
-        name_value: String,
         input_type:{ 
             type: Boolean,
             default: false,
         },
+        search_data:{
+            typeof:Object,
+            default:{id_parent:'0', id:'0'}
+        }
     }, 
     emits:['edit_value'],
     methods:{
@@ -63,7 +66,7 @@ export  default{
             if(!val) val = '0'
             event.target.value = val.toLocaleString('DE-de')
             this.$emit('edit_value', val)
-            EventBus.emit('edit:input',{ name_value: this.name_value , value:val})
+            EventBus.emit('edit:input',{ parent_item:this.search_data.id_parent , id_item: this.search_data.id , value:val})
             this.adjast_input_width()
         }
     }

@@ -51,6 +51,10 @@ export default{
             type:String,
             default:'',
         },
+        search_data:{
+            typeof:Object,
+            default:{id_parent:'0', id:'0'}
+        }
     },    
     watch: {
         value(){
@@ -79,7 +83,7 @@ export default{
             if( cent.length > 2 ) cent = cent.slice(0,-1)
             let newPrice = Number(unit) + 0.01 * Number(cent)
             this.$emit('edit_price', newPrice)
-            EventBus.emit('edit:input',{ name_value: this.name_value , value:newPrice})
+            EventBus.emit('edit:input',{ parent_item:this.search_data.id_parent , id_item: this.search_data.id , value:newPrice})
             this.count_price()
         },
         count_price(){

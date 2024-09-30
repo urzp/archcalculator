@@ -4,7 +4,7 @@
             <div class="detal-item" v-for="item in data.list" :key="item.id">
                 <input class="title" :placeholder="item.title" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
                 <div class="value-wrap">
-                    <Price input_type font_size_unit="18px" :value="getValue( item.id )" @edit_price="val=>updatePrice(item.id, val)"/>
+                    <Price input_type font_size_unit="18px" :value="getValue( item.id )" @edit_price="val=>updatePrice(item.id, val)" :search_data="search_data"/>
                 </div>
             </div>
             <div class="total">
@@ -33,11 +33,17 @@ export  default{
            return result
         },
         updatePrice(id_item, value){
-            EventBus.emit('edit:input_detals',{ name_value:this.data.name, id_item, value })
+            let parent_item = this.search_data.id_parent
+            let name_value = this.data.name
+            EventBus.emit('edit:input_detals',{parent_item, name_value, id_item, value })
         }
     },
     props:{
         data: Object,
+        search_data:{
+            typeof:Object,
+            default:{id_parent:'0', id:'0'}
+        }
     }
 }
 

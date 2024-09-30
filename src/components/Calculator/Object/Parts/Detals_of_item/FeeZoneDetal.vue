@@ -41,14 +41,22 @@ export  default{
            return result
         },
         updateValue(value, id_item){
-            EventBus.emit('edit:input_detals',{ name_value:this.data.name, id_item, value:value })
+            let parent_item = this.search_data.id_parent
+            let name_value = this.data.name
+            EventBus.emit('edit:input_detals',{parent_item, name_value, id_item, value })
         },
         updateUserTitle(value, id_item){
-            EventBus.emit('edit:update_user_title',{ name_value:this.data.name, id_item, value:value })
+            let parent_item = this.search_data.id_parent
+            let name_value = this.data.name
+            EventBus.emit('edit:update_user_title',{ parent_item, name_value, id_item, value:value })
         }
     },
     props:{
         data: Object,
+        search_data:{
+            typeof:Object,
+            default:{id_parent:'0', id:'0'}
+        }
     }
 }
 </script>

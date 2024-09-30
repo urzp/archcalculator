@@ -19,9 +19,9 @@ export default{
         this.data = getData()
         this.initData(this.data)
         EventBus.on('SelectList', (data)=>{this.selectItem(data)})
-        EventBus.on('edit:input', (data)=>{this.updateData( data.value, data.name_value)})
-        EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value )})
-        EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data.name_value, data.id_item, data.value, 'user_title' )})
+        EventBus.on('edit:input', (data)=>{this.updateData(data)})
+        EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data )})
+        EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data, 'user_title' )})
         this.calculate()
     },
     data(){
@@ -48,19 +48,25 @@ export default{
             el.use_select = true
             this.calculate()
         },
-        updateData(val, item_name){
-            if(!val||!item_name) return false
-            let el = this.basis.list.find(el=>el.name == item_name)
-            el.value = val
+        updateData(data){
+            let value = data.value
+            let id_item = data.id_item
+            let parent_item = data.parent_item
+            let parent = this.data.find(el=>el.id == parent_item)
+            let el = parent.list.find(el=>el.id == id_item)
+            el.value = value
             el.use_select = true
             this.calculate()
         },
-        updateDataDetals( item_name, id_item, val, name_value = 'value' ){
-            let element = this.basis.list.find(el=>el.name == item_name)
+        updateDataDetals( data, name_value = 'value' ){
+            console.log(data)
+            let parent = this.data.find(el=>el.id == data.parent_item)
+            console.log(parent)
+            let element =  parent.list.find(el=>el.name == data.name_value)
             let detals = element.detail_input
             element.use_select = false
-            let el = detals.list.find(item => item.id == id_item);
-            el[name_value] = val
+            let el = detals.list.find(item => item.id == data.id_item);
+            el[name_value] = data.value
             this.calculate()
         },
         calculate(){

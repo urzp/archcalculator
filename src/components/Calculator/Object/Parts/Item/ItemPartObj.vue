@@ -9,20 +9,20 @@
             <div v-if="haveSelList()" class="select-list" > 
                 <Select_List :data="data"/>
             </div>
-            <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="value" :name_value="title"/></div>
+            <div class="price" v-if="typeOf('price')" ><Price :input_type="input_type" :value ="value" :search_data="data"/></div>
             <div class="count_percent" v-if="typeOf('count_percent')">
-                <Percent :input_type="input_type" :value = "value" :name_value="title"/>
+                <Percent :input_type="input_type" :value = "value" :search_data="data"/>
                 <Price :value ="price"/> 
             </div>
             <div class="count_percent" v-if="typeOf('count_percent_default')">
                 <Percent :value = "value" />
-                <Percent :input_type="input_type" :value = "value" :name_value="title"/>
+                <Percent :input_type="input_type" :value = "value" :search_data="data"/>
                 <Price :value ="price"/> 
             </div>
         </div>
         <div v-if="haveDetals()&&!collapse_detals" class="detal-list">
-            <FeeZoneDetal v-if="title=='Fee zone'" :data="detals"/>
-            <EligibleCostsDetal v-if="title=='Eligible costs'" :data="detals"/>
+            <FeeZoneDetal v-if="title=='Fee zone'" :data="detals" :search_data="data"/>
+            <EligibleCostsDetal v-if="title=='Eligible costs'" :data="detals"  :search_data="data"/>
             <FeeTableDetal v-if="title=='Fee according to fee table'" :data="detals"/>
         </div>
         <slot/><!-- v-if="this.$slots._" -->
