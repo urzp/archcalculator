@@ -43,7 +43,7 @@ export default{
         },
         select_data(val){
             this.$emit('selected',val)
-            EventBus.emit('SelectList', {parent_item:this.data.id_parent, id_item:this.data.id, value:val})
+            EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:this.data.id, value:val})
             this.close()
         },
         close(){
