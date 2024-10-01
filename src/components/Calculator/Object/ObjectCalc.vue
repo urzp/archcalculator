@@ -13,6 +13,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { getData } from '@/servis/getData.js'
+import { calculate } from '@/servis/calculate.js'
 export default{
     name: 'ObjectCalc',
     async mounted(){
@@ -45,58 +46,16 @@ export default{
             let el = parent.list.find(el=>el.id == id_item)
             el.value = value
             el.use_select = true
-            this.calculate()
+            calculate(this.data)
         },
         updateDataDetals( data, name_value = 'value' ){
-            console.log(data)
             let parent = this.data.find(el=>el.id == data.parent_item)
-            console.log(parent)
             let element =  parent.list.find(el=>el.name == data.name_value)
             let detals = element.detail_input
             element.use_select = false
             let el = detals.list.find(item => item.id == data.id_item);
             el[name_value] = data.value
-            this.calculate()
-        },
-        calculate(){
-            let Surcharge = this.basis.list.find(el=>el.name == 'Surcharge')
-            let Fee_table = this.basis.list.find(el=>el.name == 'Fee according to fee table')
-            Surcharge.price = Surcharge.value * 0.01 * Fee_table.value
-            this.calculate_detals("Fee zone")
-            this.calculate_detals("Eligible costs")
-            this.calculate_fee_table_value()
-            this.basis.Total.value = Fee_table.value + Surcharge.price
-        },
-        calculate_detals(item_name){
-            if (!item_name) return false
-            let element = this.basis.list.find(el=>el.name == item_name)
-            let detals = element.detail_input 
-            let total = 0
-            detals.list.forEach(element => {
-                let val = element.value==''?element.def_value:element.value
-                total = total + Number(val)
-            });
-            detals.total.value = total
-            if(item_name=="Fee zone"){
-                let equivalent = detals.equivalents.find(item => total < item.value);
-                detals.total.equivalent = equivalent.name
-                if(!element.use_select) element.value = equivalent.name
-            }
-            if(item_name=="Eligible costs"){
-                if(!element.use_select) element.value = detals.total.value
-            }
-        },
-        calculate_fee_table_value(){
-            let element = this.basis.list.find(el=>el.name == "Fee according to fee table")
-            let Fee_Table = element.detail_input
-            let min = Fee_Table.current.min_fee
-            let max = Fee_Table.current.max_fee
-            let el_free_rate = this.basis.list.find(el=>el.name == "Fee rate")
-            let name_val = el_free_rate.value
-            let list = el_free_rate.list
-            let fee_rate_procent = list.find(item => item.val == name_val).percent
-            let fee_value = min + (max-min) * (fee_rate_procent/100)
-            element.value = fee_value
+            calculate(this.data)
         },
     }
 }
