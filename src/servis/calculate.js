@@ -1,6 +1,11 @@
 export function calculate(data){
     let basis = data.find(item=>item.name == 'Basis')
     let baseServis = data.find(item=>item.name == 'BaseServis')
+    calculate_basis(basis)
+
+}
+
+function calculate_basis(basis){
     let Surcharge = basis.list.find(el=>el.name == 'Surcharge')
     let Fee_table = basis.list.find(el=>el.name == 'Fee according to fee table')
     Surcharge.price = Surcharge.value * 0.01 * Fee_table.value
