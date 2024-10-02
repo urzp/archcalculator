@@ -1,7 +1,7 @@
 <template>
     <ToggleListButton :close="!open" @switch_tg="(val)=>{open=val}"/>
     <div v-if="open" class="wrap">
-    <div class="select-list">
+    <div class="select-list" :class="{align_right:right}">
         <ul>
             <li v-for="item in list" :key="item.id" @click="select_data(item.val)" :class="{'active':item.val==sected_val}">{{ item.val }}</li>
         </ul> 
@@ -26,6 +26,10 @@ export default{
     },
     props:{
         data: Object,
+        right:{
+            type:Boolean,
+            default: false
+        }
     },
     watch:{
         data: {
@@ -67,6 +71,10 @@ export default{
     border: solid 1px #D9D9D9;
     border-radius: 10px;
     z-index: 100;
+}
+.select-list.align_right{
+    top: 29px;
+    right: calc(100% + -216px);   
 }
 ul{
     display: flex;

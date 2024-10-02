@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import LawEditView from '../views/LawEditView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/law-edit-data',
+    name: 'law_edit_data',
+    component: LawEditView
   },
   {
     path: '/about',

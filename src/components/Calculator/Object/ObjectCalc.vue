@@ -22,7 +22,7 @@ export default{
         EventBus.on('edit:input', (data)=>{this.updateData(data)})
         EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data )})
         EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data, 'user_title' )})
-        this.calculate()
+        calculate(this.data)
     },
     data(){
         return{

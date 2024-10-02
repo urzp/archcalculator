@@ -22,13 +22,18 @@ import FeeTableDetal from './Calculator/Object/Parts/Detals_of_item/FeeTableDeta
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
 import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
+//----------------------------EditCalculator-----------------------------
+import EditCalculator from './EditCalculator/EditCalc.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
 import ToggleListButton from './UI/ToggleListBtn.vue'
+import NewButton from './UI/NewBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
+import DeleteButton from './UI/DeleteBtn.vue'
 import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
+import InputYear from './UI/InputYear.vue'
 
 export default [
     Header,
@@ -55,10 +60,15 @@ export default [
 
     Select_List,
     
+    EditCalculator,
+    
     Toggle,
     ToggleButton,
     ToggleListButton,
+    NewButton,
     CloseButton,
+    DeleteButton,
     Price,
     Percent,
+    InputYear,
 ]
