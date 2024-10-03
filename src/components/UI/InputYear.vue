@@ -1,5 +1,7 @@
 <template>
-    <input ref="thisinput" type="text" class="year">
+    <input ref="thisinput" type="text"  maxlength="4" 
+    @input="event =>validate(event)" 
+    @change="event => submit_event(event)">
 </template>
 
 <script>
@@ -8,12 +10,27 @@ export default{
     props:{
         focus:Boolean,
     },
+    emits:['submit_event'],
     watch:{
-        focus(n_val,o_val){
+        focus(n_val, o_val){
             if(n_val){
-                console.log(this.$refs.thisinput)
-                this.$refs.thisinput.focus();
+                setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
             }
+        }
+    },
+    methods:{
+        validate(event){
+            let val = event.target.value
+            let position = event.target.selectionStart - 1
+            if(/[^0-9]/g.test(val)){
+                event.target.value = val.toString().replace(/[^0-9]/g, '');
+                event.target.setSelectionRange(position, position)
+            }
+        },
+        submit_event(event){
+            let val = event.target.value
+            this.$refs.thisinput.value = ''
+            this.$emit('submit_event', val)
         }
     }
 }

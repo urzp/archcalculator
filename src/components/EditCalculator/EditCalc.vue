@@ -6,7 +6,9 @@
                 <div class="new_version_panel">
                     <NewButton @click="set_new_HOAI=true"/>
                     <div v-show="set_new_HOAI" class="wrap_input">
-                        <InputYear :focus="set_new_HOAI"/>
+                        <InputYear :focus="set_new_HOAI" @submit_event="value=>new_HOAI(value)"/>
+                        <NewButton/>
+                        <CloseButton @click="resetNewSet()"/>
                     </div>
                 </div>
                 <div class="wrap-center">
@@ -41,6 +43,14 @@ export default{
     methods:{
         Select(val){
             this.data.value = val
+            this.resetNewSet()
+        },
+        resetNewSet(){
+            this.set_new_HOAI = false
+        },
+        new_HOAI(value){
+            this.resetNewSet()
+            console.log(value)
         }
     }
 
@@ -85,8 +95,10 @@ export default{
         margin-left: auto;
     }
     .wrap_input{
-        position: relative;
-        width: 0px;
+        position: absolute;
+        width: 290px;
+        display: flex;
+        column-gap: 15px;
     }
 
 </style>
