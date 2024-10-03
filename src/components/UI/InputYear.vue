@@ -1,5 +1,6 @@
 <template>
     <input ref="thisinput" type="text"  maxlength="4" 
+    :value="value"
     @input="event =>validate(event)" 
     @change="event => submit_event(event)">
 </template>
@@ -9,6 +10,10 @@ export default{
     name: 'InputYear',
     props:{
         focus:Boolean,
+        value:{
+            type:String,
+            default:''
+        }
     },
     emits:['submit_event'],
     watch:{

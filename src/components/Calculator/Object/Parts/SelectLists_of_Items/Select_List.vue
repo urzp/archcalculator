@@ -3,7 +3,7 @@
     <div v-if="open" class="wrap">
     <div class="select-list" :class="{align_right:right}">
         <ul>
-            <li v-for="item in list" :key="item.id" @click="select_data(item.val)" :class="{'active':item.val==sected_val}">{{ item.val }}</li>
+            <li v-for="item in list" :key="item.id" @click="select_data(item)" :class="{'active':item.value==sected_val}">{{ item.value }}</li>
         </ul> 
     </div>
     </div>
@@ -45,9 +45,11 @@ export default{
             this.list = this.data.list
             this.sected_val = this.data.value
         },
-        select_data(val){
-            this.$emit('selected',val)
-            EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:this.data.id, value:val})
+        select_data(item){
+            let val = item.value
+            let id = item.id
+            this.$emit('selected', {id_item:id, value:val})
+            EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
             this.close()
         },
         close(){

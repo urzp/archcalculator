@@ -43,7 +43,7 @@ function calculate_fee_table_value(data){
     let el_free_rate = data.list.find(el=>el.name == "Fee rate")
     let name_val = el_free_rate.value
     let list = el_free_rate.list
-    let fee_rate_procent = list.find(item => item.val == name_val).percent
+    let fee_rate_procent = list.find(item => item.value == name_val).percent
     let fee_value = min + (max-min) * (fee_rate_procent/100)
     element.value = fee_value
 }

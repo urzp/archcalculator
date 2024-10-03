@@ -24,11 +24,14 @@ import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
 //----------------------------EditCalculator-----------------------------
 import EditCalculator from './EditCalculator/EditCalc.vue'
+import HOAIVersion from './EditCalculator/HOAIVersion.vue'
+import SectionHOAI from './EditCalculator/SectionHOAI.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
 import ToggleListButton from './UI/ToggleListBtn.vue'
 import NewButton from './UI/NewBtn.vue'
+import UpdateBtn from './UI/UpdateBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
 import DeleteButton from './UI/DeleteBtn.vue'
 import Price from './UI/Price.vue'
@@ -61,11 +64,14 @@ export default [
     Select_List,
     
     EditCalculator,
+    HOAIVersion,
+    SectionHOAI,
     
     Toggle,
     ToggleButton,
     ToggleListButton,
     NewButton,
+    UpdateBtn,
     CloseButton,
     DeleteButton,
     Price,
