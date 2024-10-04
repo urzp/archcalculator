@@ -3,7 +3,13 @@
     <div v-if="open" class="wrap">
     <div class="select-list" :class="{align_right:right}">
         <ul>
-            <li v-for="item in list" :key="item.id" @click="select_data(item)" :class="{'active':item.value==sected_val}">{{ item.value }}</li>
+            <li v-for="item in list" :key="item.id" 
+                @click="select_data(item)" 
+                :class="{'active':item.value==sected_val}">
+                <template v-if="!!item.value">{{ item.value }}</template> 
+                <template v-if="!!item.name">{{ item.name }}</template> 
+                <template v-if="!!item.title">{{ item.title }}</template> 
+            </li>
         </ul> 
     </div>
     </div>
@@ -13,7 +19,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 export default{
-    name: 'Select_List',
+    name: 'SelectEdit_List',
     mounted(){
         this.updateData()
     },
@@ -60,13 +66,11 @@ export default{
 </script>
 
 <style scoped>
-.wrap{
-    position: absolute;
-}
+
 .select-list{
     position: relative;
     top: 9px;
-    right:  calc(100% + 10px);
+    right:  calc(100% + 35px);
     padding: 10px 0px;
     background-color: #fff;
     background-color: #ffffff;
@@ -89,6 +93,7 @@ li{
     width: 100%;
     text-align: left;
     font-family: 'Raleway-Light';
+    font-size: 18px;
     color: #464646;
 
 }

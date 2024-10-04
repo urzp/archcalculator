@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
         <HOAIVersion @selected="data=>update(data)"/>
-        <SectionHOAI />
+        <ParagraphHOAI />
     </div>
 </template>
 

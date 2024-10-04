@@ -25,7 +25,7 @@ import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_L
 //----------------------------EditCalculator-----------------------------
 import EditCalculator from './EditCalculator/EditCalc.vue'
 import HOAIVersion from './EditCalculator/HOAIVersion.vue'
-import SectionHOAI from './EditCalculator/SectionHOAI.vue'
+import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -37,6 +37,7 @@ import DeleteButton from './UI/DeleteBtn.vue'
 import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
 import InputYear from './UI/InputYear.vue'
+import SelectEdit_List from './UI/SelectEdit_List.vue'
 
 export default [
     Header,
@@ -65,7 +66,7 @@ export default [
     
     EditCalculator,
     HOAIVersion,
-    SectionHOAI,
+    ParagraphHOAI,
     
     Toggle,
     ToggleButton,
@@ -77,4 +78,5 @@ export default [
     Price,
     Percent,
     InputYear,
+    SelectEdit_List,
 ]
