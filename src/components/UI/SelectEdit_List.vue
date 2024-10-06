@@ -5,11 +5,13 @@
         <ul>
             <li v-for="item in list" :key="item.id" 
                 @click="select_data(item)" 
-                :class="{'active':item.value==sected_val}">
+                :class="{'active':item.id==data.id}">
                 <template v-if="!!item.value">{{ item.value }}</template> 
                 <template v-if="!!item.name">{{ item.name }}</template> 
                 <template v-if="!!item.title">{{ item.title }}</template> 
+                <DeleteButton class="deletButton"  @click.stop="delete_data(item)" width="35px" heigth="30px"/>
             </li>
+            <li @click="newElement()">Add NEW</li>
         </ul> 
     </div>
     </div>
@@ -45,7 +47,7 @@ export default{
         deep: true
         }
     },
-    emits:['selected'],
+    emits:['selected', 'newElementt','deleteElement'],
     methods:{
         updateData(){
             this.list = this.data.list
@@ -58,15 +60,25 @@ export default{
             EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
             this.close()
         },
+        newElement(){
+            this.$emit('newElement')
+            this.close()
+        },
         close(){
             this.open = false;
+        },
+        delete_data(item){
+            this.$emit('deleteElement', item)
+            console.log(item)
         }
     }
 }
 </script>
 
 <style scoped>
-
+.wrap{
+    height: 0px;
+}
 .select-list{
     position: relative;
     top: 9px;
@@ -89,7 +101,11 @@ ul{
 }
 li{
     padding: 0 20px;
+    margin-bottom: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 15px;
     width: 100%;
     text-align: left;
     font-family: 'Raleway-Light';
@@ -116,6 +132,14 @@ li:hover{
     height: 100%;
     background-color: transparent;
     z-index: 10;
+}
+
+.deletButton{
+    visibility: hidden;
+}
+
+li:hover .deletButton{
+    visibility: visible;
 }
 
 </style>

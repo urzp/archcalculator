@@ -37,6 +37,7 @@ import DeleteButton from './UI/DeleteBtn.vue'
 import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
 import InputYear from './UI/InputYear.vue'
+import InputText from './UI/InputText.vue'
 import SelectEdit_List from './UI/SelectEdit_List.vue'
 
 export default [
@@ -78,5 +79,6 @@ export default [
     Price,
     Percent,
     InputYear,
+    InputText,
     SelectEdit_List,
 ]

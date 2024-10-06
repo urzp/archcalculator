@@ -7,13 +7,25 @@
 <script>
 export default{
     name: 'CloseButton',
+    props:{
+        width:{
+            type:String,
+            default: '55px',
+        },
+        heigth:{
+            type:String,
+            default: '45px',
+        }
+    }
 }
 </script>
 
 <style scoped>
     .close-btn{
-        width: 55px;
-        height: 45px;
+        min-width: v-bind(width);
+        min-height: v-bind(heigth);
+        padding-left: 15px;
+        padding-right: 15px;
         display: flex;
         align-items: center;
         justify-content: center;

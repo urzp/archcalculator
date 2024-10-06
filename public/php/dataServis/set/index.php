@@ -1,6 +1,15 @@
 <?php
 
 switch ($typeData) {
+    case 'deleteParagraph':
+        include 'deleteParagraph.php';
+        break;
+    case 'newParagraph':
+        include 'newParagraph.php';
+        break;
+    case 'updateParagraph':
+        include 'updateParagraph.php';
+        break;
     case 'updateHOAI':
         include 'updateHOAI.php';
         break;

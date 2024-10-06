@@ -1,5 +1,7 @@
 <?php
 
+include 'config.php';
+
 function crud_read($table, $collums="*" , $selector="" ){
     global $mysql;
     if($collums=='') $collums="*";
@@ -38,6 +40,7 @@ function crud_update($table, $data, $selector=""){
     $sql = "UPDATE `$table` SET $sql_data WHERE $selector";
     //echo $sql.'<br/>';
     $mysql -> query($sql);
+    return $sql;
 }
 
 function crud_delete($table, $selector=""){
