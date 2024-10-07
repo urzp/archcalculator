@@ -1,7 +1,10 @@
 <template>
     <div class="wrap">
         <HOAIVersion @selected="data=>update(data)"/>
-        <ParagraphHOAI :id_HOAI="selected_id" />
+        <template v-if="!!selected_id">
+            <ParagraphHOAI :id_HOAI="selected_id" />
+            <FeeTable/>
+        </template>
     </div>
 </template>
 

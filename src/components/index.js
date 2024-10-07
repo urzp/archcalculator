@@ -26,6 +26,7 @@ import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_L
 import EditCalculator from './EditCalculator/EditCalc.vue'
 import HOAIVersion from './EditCalculator/HOAIVersion.vue'
 import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
+import FeeTable from './EditCalculator/FeeTable.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -68,6 +69,7 @@ export default [
     EditCalculator,
     HOAIVersion,
     ParagraphHOAI,
+    FeeTable,
     
     Toggle,
     ToggleButton,

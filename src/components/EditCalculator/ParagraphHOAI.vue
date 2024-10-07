@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!!id_HOAI" class="wrap">
+    <div class="wrap">
         
         <div class="title">
             <NewButton  @click="newElement()" width="35px" heigth="30px"><template v-if="!(!!data&&!!data.id)">New Paragraph</template></NewButton>

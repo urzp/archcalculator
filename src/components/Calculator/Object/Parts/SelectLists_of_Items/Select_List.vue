@@ -76,7 +76,7 @@ export default{
 }
 .select-list.align_right{
     top: 29px;
-    right: calc(100% + -216px);   
+    left: calc(100% / 2 + 10px);   
 }
 ul{
     display: flex;
