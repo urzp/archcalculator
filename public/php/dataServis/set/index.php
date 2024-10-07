@@ -1,6 +1,21 @@
 <?php
 
 switch ($typeData) {
+    case 'deleteFeeTableHonorarZone':
+        include 'deleteFeeTableHonorarZone.php';
+        break;
+    case 'newFeeTableHonorarZone':
+        include 'newFeeTableHonorarZone.php';
+        break;
+    case 'deleteFeeTableRate':
+        include 'deleteTableRate.php';
+        break;
+    case 'updateFeeTableRate':
+        include 'updateFeeTableRate.php';
+        break;
+    case 'newFeeTableRate':
+        include 'newFeeTableRate.php';
+        break;
     case 'deleteParagraph':
         include 'deleteParagraph.php';
         break;

@@ -10,17 +10,26 @@
                         <Select_List :data="project_type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
-                <div class="row-rate-value">200 000</div>
-                <div class="row-rate-value">275 000</div>
-                <NewButton style="margin-top: 10px;" width="35px" heigth="30px"/>
+                <div class="row-rate-value" v-for="item in rate_values" :key="item.id">
+                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )"/>
+                    <DeleteButton class="deletButton"  @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
+                </div>
+                <NewButton style="margin-top: 10px;" width="35px" heigth="30px" @click="newRateValue()"/>
             </div>
-            <div class="header honorar-zones">
-                <div class="honorar-zone">Honorarzone I</div>
-                <div class="honorar-zone">Honorarzone II</div>
-                <div class="honorar-zone">Honorarzone III</div>
-                <div class="honorar-zone">Honorarzone IV</div>
-                <div class="honorar-zone">Honorarzone V</div>
-                <NewButton style="margin-left: 10px;" width="35px" heigth="30px"/>
+            <div class="colum-honorar-zones">
+                <div class="header honorar-zones">
+                    <div class="honorar-zone" v-for="item, index in honorarZones" :key="item.id"  v-show="index>0">{{ item.name }}</div>
+                    <div class="edit-panel">
+                        <DeleteButton v-if="honorarZones.length > 1" style="margin-left: 10px;" width="35px" heigth="30px" @click="deleteHonorarZone()"/>
+                        <NewButton style="margin-left: 10px;" width="35px" heigth="30px" @click="newHonorarZone()"/>
+                    </div>
+                </div>
+                <div class="header row-zone-value">
+                    <div class="zone" :class="`zone-${index}`" v-for="(item, index) in honorarZones" :key="item.id">{{ zoneSubTitle(index) }}</div>
+                </div>
+                <div class="row-zone-value" v-for="item in rate_values" :key="item.id">
+                    <div class="zone" :class="`zone-${index}`" v-for="item_zone, index in item.zones" :key="item_zone.id">{{ item_zone.value }}</div>
+                </div>
             </div>
         </div>
 
@@ -29,8 +38,12 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { lastNumber, convertToRoman } from '@/servis/functions.js'
 export default{
     name: 'FeeTable',
+    mounted(){
+        this.getData()
+    },
     data(){
         return{
             project_type_value:{
@@ -39,13 +52,62 @@ export default{
                     {id:1,value:"Eur"},
                     {id:1,value:"Hektar"},
                 ]
-            }
+            },
+            rate_values:[
+            ],
+            honorarZones:[
+            ],
+        }
+    },
+    props:{
+        id_paragraph:String    
+    },
+    watch:{
+        id_paragraph(){
+            this.getData()
         }
     },
     methods:{
+        async getData(){
+            let result = await apiData({typeData:'FeeTable', id: this.id_paragraph})
+            this.rate_values = result.data.rate_values
+            this.honorarZones = result.data.honorarZones
+        },
         selectTypeValue(data){
             this.project_type_value.value = data.value
+        },
+        async newRateValue(){
+            let number = lastNumber(this.rate_values) + 1
+            await apiData({typeData:'newFeeTableRate', data:{id_paragraph: this.id_paragraph, number}})
+            this.getData()
+        },
+        async newHonorarZone(){
+            if(this.honorarZones.length==0) await apiData({typeData:'newFeeTableHonorarZone', data:{id_paragraph: this.id_paragraph, number:0, name:''}})
+            let number = lastNumber(this.honorarZones)
+            number++
+            let name = "Honorarzone " + convertToRoman(number)
+            await apiData({typeData:'newFeeTableHonorarZone', data:{id_paragraph: this.id_paragraph, number, name}})
+            this.getData()
+        },
+        async updateRate(value, id){
+            await apiData({typeData:'updateFeeTableRate', data:{id, value}})
+            this.getData()
+        },
+        async deleteRate(id){
+            await apiData({typeData:'deleteFeeTableRate', data:id})
+            this.getData()       
+        },
+        async deleteHonorarZone(){
+            let id = this.honorarZones[this.honorarZones.length - 1].id
+            await apiData({typeData:'deleteFeeTableHonorarZone', data:id})
+            this.getData()  
+        },
+        zoneSubTitle(index){
+            if(index==0) return 'von'
+            if(index==this.honorarZones.length - 1) return 'bis'
+            return 'bis | von'
         }
+
     }
 
 }
@@ -71,10 +133,15 @@ export default{
     }
 
     .header{
-        height: 30px;
+
         display: flex;
         column-gap: 10px;
-        align-items: center;
+        align-items: flex-start;
+    }
+
+    .colum-project-size-value .header{
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .type-value{
@@ -88,14 +155,70 @@ export default{
         column-gap: 30px;
     }
 
+    .honorar-zone{
+        width: 130px;
+        text-align: center;
+    }
+
     .colum-project-size-value{
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: stretch;
     }
 
     .row-rate-value{
-        margin-top: 5px
+        margin-top: 5px;
+        display: flex;
+        column-gap: 5px;
+        justify-content: space-between;
+    }
+
+    .colum-honorar-zones{
+        display: flex;
+        flex-direction: column;
+    }
+    .edit-panel{
+        display: flex;
+    }
+    
+    /* ajst table */
+
+    .row-zone-value{
+        display: flex;
+        column-gap: 15px;
+    }
+
+    .honorar-zones:nth-child(1){
+        margin-left: 20px;
+    }
+
+    .header.honorar-zones{
+        margin-bottom: -7px;
+    }
+    .zone{
+        margin-top:5px ;
+    }
+
+    .row-zone-value .zone{
+        width: 146px;
+    }
+
+    .zone-0{
+        width: 100px!important;
+        margin-left: -25px;
+        margin-right: 3px;
+    }
+
+    .zone{
+        text-align: center;
+    }
+
+    .deletButton{
+        visibility: hidden;
+    }
+
+    .row-rate-value:hover .deletButton{
+        visibility: visible;
     }
 
 </style>

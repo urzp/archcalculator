@@ -39,6 +39,7 @@ import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
 import InputYear from './UI/InputYear.vue'
 import InputText from './UI/InputText.vue'
+import InputPrice from './UI/InputPrice.vue'
 import SelectEdit_List from './UI/SelectEdit_List.vue'
 
 export default [
@@ -82,5 +83,6 @@ export default [
     Percent,
     InputYear,
     InputText,
+    InputPrice,
     SelectEdit_List,
 ]

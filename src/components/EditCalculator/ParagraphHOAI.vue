@@ -38,6 +38,7 @@
                 <InputText :value="data.link_fee" @submit_event="value=>update(value, 'link_fee')" width="600px"/>
             </div>
         </div>
+        <FeeTable :id_paragraph="data.id"/>
         </template>
     </div>
     
@@ -131,7 +132,6 @@ export default{
 </script>
 <style scoped>
     .wrap{
-        min-height: 75px;
         margin-top: 30px;
     }
     .title, .row{

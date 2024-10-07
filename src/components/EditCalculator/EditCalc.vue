@@ -3,7 +3,6 @@
         <HOAIVersion @selected="data=>update(data)"/>
         <template v-if="!!selected_id">
             <ParagraphHOAI :id_HOAI="selected_id" />
-            <FeeTable/>
         </template>
     </div>
 </template>
