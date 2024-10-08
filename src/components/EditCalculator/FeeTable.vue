@@ -10,10 +10,9 @@
                         <Select_List :data="type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
-                <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id">
-                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )"/>
+                <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event, index)">
+                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" />
                     <div class="hover-panel">
-                        <PastColumButton @click.stop="rateFillBufer(index)" width="35px" heigth="30px"/>    
                         <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
                     </div>
                 </div>
@@ -32,12 +31,9 @@
                 <div class="header row-zone-value">
                     <div class="zone" :class="`zone-${index}`" v-for="(item, index) in honorarZones" :key="item.id">{{ zoneSubTitle(index) }}</div>
                 </div>
-                <div class="row-zone-value" v-for="item in rate_values" :key="item.id">
-                    <div class="zone" :class="`zone-${index}`" v-for="item_zone, index in item.zones" :key="item_zone.id">
+                <div class="row-zone-value" v-for="item, index_rate in rate_values" :key="item.id">
+                    <div class="zone" :class="`zone-${index_zone}`" v-for="item_zone, index_zone in item.zones" :key="item_zone.id" @contextmenu="contectMenuShow_($event, index_rate, index_zone)">
                         <InputPrice width="100px" :value="item_zone.value" @submit_event="value=>updateRateZone(value, item_zone.id )"/>
-                        <div class="hover-panel">
-                            <PastColumButton width="35px" heigth="30px"/>    
-                        </div>
                     </div>
                 </div>
             </div>
@@ -123,13 +119,22 @@ export default{
             if(index==this.honorarZones.length - 1) return 'bis'
             return 'bis | von'
         },
+        contectMenuShow(e,i){
+            e.preventDefault();
+            this.rateFillBufer(i)
+        },
+        contectMenuShow_(e,id,index){
+            e.preventDefault();
+            console.log(id,index)
+        },
         async rateFillBufer(index){
             let data = await getClipboard()
             let newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
             await apiData({typeData:'updateListFeeTableRate', data: newData})
             console.log(newData)
             this.getData() 
-        }
+        },
+
 
     }
 
