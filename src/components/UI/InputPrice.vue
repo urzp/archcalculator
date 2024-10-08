@@ -3,8 +3,9 @@
     <template v-if="edit">
         <input  ref="thisinput" type="text"  
         :value="value"
-        @change="event => submit_event(event)">
-        <CloseButton width="35px" heigth="35px" @click="edit=false"/>
+        @change="event => submit_event(event)"
+        @keyup.ctrl.v="console.log('copy-past')">
+        <CloseButton width="35px" heigth="35px" @click="edit=false" />
     </template>
 </template>
 
