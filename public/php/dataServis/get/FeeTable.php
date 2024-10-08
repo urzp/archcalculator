@@ -1,5 +1,14 @@
 <?php
 $id = $rq_data -> id;
+$selector = "`id_paragraph` = '$id'";
+$data['typetype_value'] = crud_read('feeTableTypeValue',"*", $selector);
+if( empty( $data['typetype_value'] ) ){
+    $newNote['id_paragraph'] = $id;
+    crud_create('feeTableTypeValue', $newNote);
+}else{
+    $data['typetype_value'] = crud_read('feeTableTypeValue',"*", $selector);
+}
+
 $selector = "`id_paragraph` = '$id' ORDER BY `number` ASC";
 $data['rate_values'] = crud_read('feeTableRateValue',"*", $selector);
 $data['honorarZones'] = crud_read('feeTableHonorarZones',"*", $selector);

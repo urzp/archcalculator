@@ -6,8 +6,8 @@
                 <div class="header">
                     Anrechenbare Kosten
                     <div class="type-value">
-                        <div>{{ project_type_value.value }}</div>
-                        <Select_List :data="project_type_value" right @selected="data=>selectTypeValue(data)"/>
+                        <div>{{ type_value.value }}</div>
+                        <Select_List :data="type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
                 <div class="row-rate-value" v-for="item in rate_values" :key="item.id">
@@ -46,11 +46,11 @@ export default{
     },
     data(){
         return{
-            project_type_value:{
+            type_value:{
                 value:'Eur',
                 list:[
-                    {id:1,value:"Eur"},
-                    {id:1,value:"Hektar"},
+                    {value:"Eur"},
+                    {value:"Hektar"},
                 ]
             },
             rate_values:[
@@ -72,9 +72,13 @@ export default{
             let result = await apiData({typeData:'FeeTable', id: this.id_paragraph})
             this.rate_values = result.data.rate_values
             this.honorarZones = result.data.honorarZones
+            let type_value = result.data.typetype_value.value
+            this.type_value.value = !type_value?this.type_value.value:type_value
         },
-        selectTypeValue(data){
-            this.project_type_value.value = data.value
+        async selectTypeValue(data){
+            let value = data.value
+            this.type_value.value = value
+            await apiData({typeData:'updateFeeTableTypeValue', data:{id_paragraph: this.id_paragraph, value}})
         },
         async newRateValue(){
             let number = lastNumber(this.rate_values) + 1
