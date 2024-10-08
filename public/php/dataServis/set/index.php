@@ -1,6 +1,9 @@
 <?php
 
 switch ($typeData) {
+    case 'updateFeeTableHonorarZonesRateValue':
+        include 'updateFeeTableHonorarZonesRateValue.php';
+        break;
     case 'updateFeeTableTypeValue':
         include 'updateFeeTableTypeValue.php';
         break;

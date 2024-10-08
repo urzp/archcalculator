@@ -18,7 +18,9 @@
             </div>
             <div class="colum-honorar-zones">
                 <div class="header honorar-zones">
-                    <div class="honorar-zone" v-for="item, index in honorarZones" :key="item.id"  v-show="index>0">{{ item.name }}</div>
+                    <div class="honorar-zone" v-for="item, index in honorarZones" :key="item.id"  v-show="index>0">
+                        {{ item.name }}
+                    </div>
                     <div class="edit-panel">
                         <DeleteButton v-if="honorarZones.length > 1" style="margin-left: 10px;" width="35px" heigth="30px" @click="deleteHonorarZone()"/>
                         <NewButton style="margin-left: 10px;" width="35px" heigth="30px" @click="newHonorarZone()"/>
@@ -28,7 +30,9 @@
                     <div class="zone" :class="`zone-${index}`" v-for="(item, index) in honorarZones" :key="item.id">{{ zoneSubTitle(index) }}</div>
                 </div>
                 <div class="row-zone-value" v-for="item in rate_values" :key="item.id">
-                    <div class="zone" :class="`zone-${index}`" v-for="item_zone, index in item.zones" :key="item_zone.id">{{ item_zone.value }}</div>
+                    <div class="zone" :class="`zone-${index}`" v-for="item_zone, index in item.zones" :key="item_zone.id">
+                        <InputPrice width="100px" :value="item_zone.value" @submit_event="value=>updateRateZone(value, item_zone.id )"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,10 +57,8 @@ export default{
                     {value:"Hektar"},
                 ]
             },
-            rate_values:[
-            ],
-            honorarZones:[
-            ],
+            rate_values:[],
+            honorarZones:[],
         }
     },
     props:{
@@ -95,6 +97,10 @@ export default{
         },
         async updateRate(value, id){
             await apiData({typeData:'updateFeeTableRate', data:{id, value}})
+            this.getData()
+        },
+        async updateRateZone(value, id){
+            await apiData({typeData:'updateFeeTableHonorarZonesRateValue', data:{id, value}})
             this.getData()
         },
         async deleteRate(id){
@@ -201,6 +207,8 @@ export default{
     }
     .zone{
         margin-top:5px ;
+        display: flex;
+        column-gap: 5px;
     }
 
     .row-zone-value .zone{
@@ -210,7 +218,7 @@ export default{
     .zone-0{
         width: 100px!important;
         margin-left: -25px;
-        margin-right: 3px;
+        margin-right: 41px;
     }
 
     .zone{
