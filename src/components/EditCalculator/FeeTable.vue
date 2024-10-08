@@ -10,9 +10,12 @@
                         <Select_List :data="type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
-                <div class="row-rate-value" v-for="item in rate_values" :key="item.id">
+                <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id">
                     <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )"/>
-                    <DeleteButton class="deletButton"  @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
+                    <div class="hover-panel">
+                        <PastColumButton @click.stop="rateFillBufer(index)" width="35px" heigth="30px"/>    
+                        <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
+                    </div>
                 </div>
                 <NewButton style="margin-top: 10px;" width="35px" heigth="30px" @click="newRateValue()"/>
             </div>
@@ -32,6 +35,9 @@
                 <div class="row-zone-value" v-for="item in rate_values" :key="item.id">
                     <div class="zone" :class="`zone-${index}`" v-for="item_zone, index in item.zones" :key="item_zone.id">
                         <InputPrice width="100px" :value="item_zone.value" @submit_event="value=>updateRateZone(value, item_zone.id )"/>
+                        <div class="hover-panel">
+                            <PastColumButton width="35px" heigth="30px"/>    
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,7 +48,7 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
-import { lastNumber, convertToRoman } from '@/servis/functions.js'
+import { lastNumber, convertToRoman, getClipboard, rateFillData } from '@/servis/functions.js'
 export default{
     name: 'FeeTable',
     mounted(){
@@ -116,6 +122,13 @@ export default{
             if(index==0) return 'von'
             if(index==this.honorarZones.length - 1) return 'bis'
             return 'bis | von'
+        },
+        async rateFillBufer(index){
+            let data = await getClipboard()
+            let newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
+            await apiData({typeData:'updateListFeeTableRate', data: newData})
+            console.log(newData)
+            this.getData() 
         }
 
     }
@@ -135,7 +148,7 @@ export default{
 
     .table{
         margin-top: 20px;
-        height: 50px;
+        margin-bottom: 50px;
         display: flex;
         column-gap: 30px;
         font-family: 'Raleway-Regular' ;
@@ -225,11 +238,17 @@ export default{
         text-align: center;
     }
 
-    .deletButton{
+    .hover-panel{
+        display: flex;
+        column-gap: 5px;
         visibility: hidden;
     }
 
-    .row-rate-value:hover .deletButton{
+    .row-rate-value:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .zone:hover .hover-panel{
         visibility: visible;
     }
 

@@ -27,3 +27,37 @@ export function convertToRoman(number) {
         return result;
     }, '');
 }
+
+export async function getClipboard() {
+    let data = await navigator.clipboard.readText()
+    data = data.replaceAll(' ', '')
+    data = data.split(/\r?\n/)
+    data = data.filter(function(item){return !!item});
+    if( !!data.find(function(item){return !Number(item)})) return []
+    return data
+}
+
+export async function rateFillData(id_paragraph, index, rate_values, data) {
+    let lastIndex = rate_values.length - 1
+    let number = 1
+    let newData = []
+    rate_values.forEach(item=>{
+        newData.push(item)
+    })
+    data.forEach(item=>{
+        if(index <= lastIndex){
+            newData[index].value = item
+            number = Number(rate_values[index].number)
+        }else{
+            newData.push({
+                id:'new',
+                id_paragraph,
+                number,
+                value:item,
+            })
+        }
+        number++
+        index++
+    })
+    return newData
+}

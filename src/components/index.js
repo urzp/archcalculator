@@ -35,6 +35,7 @@ import NewButton from './UI/NewBtn.vue'
 import UpdateBtn from './UI/UpdateBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
 import DeleteButton from './UI/DeleteBtn.vue'
+import PastColumButton from './UI/PastColumBtn.vue'
 import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
 import InputYear from './UI/InputYear.vue'
@@ -79,6 +80,7 @@ export default [
     UpdateBtn,
     CloseButton,
     DeleteButton,
+    PastColumButton,
     Price,
     Percent,
     InputYear,

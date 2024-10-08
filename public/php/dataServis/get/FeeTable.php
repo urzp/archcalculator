@@ -9,7 +9,7 @@ if( empty( $data['typetype_value'] ) ){
     $data['typetype_value'] = crud_read('feeTableTypeValue',"*", $selector);
 }
 
-$selector = "`id_paragraph` = '$id' ORDER BY `number` ASC";
+$selector = "`id_paragraph` = '$id' ORDER BY  cast(`number` as unsigned)  ASC";
 $data['rate_values'] = crud_read('feeTableRateValue',"*", $selector);
 $data['honorarZones'] = crud_read('feeTableHonorarZones',"*", $selector);
 
