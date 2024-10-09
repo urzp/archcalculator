@@ -37,17 +37,17 @@ export async function getClipboard() {
     return data
 }
 
-export async function rateFillData(id_paragraph, index, rate_values, data) {
-    let lastIndex = rate_values.length - 1
+export async function rateFillData(id_paragraph, index, source, data) {
+    let lastIndex = source.length - 1
     let number = 1
     let newData = []
-    rate_values.forEach(item=>{
+    source.forEach(item=>{
         newData.push(item)
     })
     data.forEach(item=>{
         if(index <= lastIndex){
             newData[index].value = item
-            number = Number(rate_values[index].number)
+            number = Number(source[index].number)
         }else{
             newData.push({
                 id:'new',
@@ -58,6 +58,19 @@ export async function rateFillData(id_paragraph, index, rate_values, data) {
         }
         number++
         index++
+    })
+    return newData
+}
+
+export async function rateZoneFillData(index_rate, index_zone, source, data){
+    let newData = []
+    source.forEach( (item, index) =>{
+        let id_rate_zone, value
+        if( index >= index_rate){
+            id_rate_zone = item.zones[index_zone].id
+            value = data[index - index_rate]
+            newData.push({id:id_rate_zone,value})
+        }
     })
     return newData
 }

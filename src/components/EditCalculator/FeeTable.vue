@@ -44,7 +44,7 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
-import { lastNumber, convertToRoman, getClipboard, rateFillData } from '@/servis/functions.js'
+import { lastNumber, convertToRoman, getClipboard, rateFillData, rateZoneFillData } from '@/servis/functions.js'
 export default{
     name: 'FeeTable',
     mounted(){
@@ -123,9 +123,11 @@ export default{
             e.preventDefault();
             this.rateFillBufer(i)
         },
-        contectMenuShow_(e,id,index){
+        contectMenuShow_(e,index_rate, index_zone){
             e.preventDefault();
-            console.log(id,index)
+            console.log(index_rate, index_zone)
+            console.log(this.rate_values)
+            this.rateZoneFillBufer(index_rate, index_zone)
         },
         async rateFillBufer(index){
             let data = await getClipboard()
@@ -134,6 +136,13 @@ export default{
             console.log(newData)
             this.getData() 
         },
+        async rateZoneFillBufer(index_rate, index_zone){
+            let data = await getClipboard()
+            let newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
+            console.log(newData)
+            await apiData({typeData:'updateListRateZoneFeeTable', data: newData})
+            this.getData() 
+        }
 
 
     }
@@ -224,7 +233,7 @@ export default{
         margin-bottom: -7px;
     }
     .zone{
-        margin-top:5px ;
+        margin-top:6px ;
         display: flex;
         column-gap: 5px;
     }
