@@ -42,6 +42,7 @@ import InputYear from './UI/InputYear.vue'
 import InputText from './UI/InputText.vue'
 import InputPrice from './UI/InputPrice.vue'
 import SelectEdit_List from './UI/SelectEdit_List.vue'
+import ContextMenu from './UI/ContextMenu.vue'
 
 export default [
     Header,
@@ -87,4 +88,5 @@ export default [
     InputText,
     InputPrice,
     SelectEdit_List,
+    ContextMenu,
 ]

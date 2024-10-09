@@ -1,4 +1,5 @@
 <template>
+    <ContextMenu :data ="contextMenu" />
     <div class="wrap">
         <div class="title">Honorar Table</div>
         <div class="table">
@@ -61,6 +62,10 @@ export default{
             },
             rate_values:[],
             honorarZones:[],
+            contextMenu:{
+                positon:{x:50,y:200},
+                items:[{id:1, label: 'Paste Сolumn'}]
+            }
         }
     },
     props:{
@@ -121,7 +126,9 @@ export default{
         },
         contectMenuShow(e,i){
             e.preventDefault();
-            this.rateFillBufer(i)
+            this.contextMenu.positon.x = e.pageX + 20
+            this.contextMenu.positon.y = e.pageY - 20
+            //this.rateFillBufer(i)
         },
         contectMenuShow_(e,index_rate, index_zone){
             e.preventDefault();
