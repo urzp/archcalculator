@@ -11,7 +11,7 @@
                         <Select_List :data="type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
-                <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event, index)">
+                <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event); preparationListData(index)">
                     <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" />
                     <div class="hover-panel">
                         <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
@@ -33,7 +33,7 @@
                     <div class="zone" :class="`zone-${index}`" v-for="(item, index) in honorarZones" :key="item.id">{{ zoneSubTitle(index) }}</div>
                 </div>
                 <div class="row-zone-value" v-for="item, index_rate in rate_values" :key="item.id">
-                    <div class="zone" :class="`zone-${index_zone}`" v-for="item_zone, index_zone in item.zones" :key="item_zone.id" @contextmenu="contectMenuShow_($event, index_rate, index_zone)">
+                    <div class="zone" :class="`zone-${index_zone}`" v-for="item_zone, index_zone in item.zones" :key="item_zone.id" @contextmenu="contectMenuShow_($event); preparationListData( index_rate, index_zone )">
                         <InputPrice width="100px" :value="item_zone.value" @submit_event="value=>updateRateZone(value, item_zone.id )"/>
                     </div>
                 </div>
@@ -66,8 +66,12 @@ export default{
                 positon:{x:50,y:200},
                 items:[{id:1, label: 'Paste Сolumn'}]
             },
-            updateListTypeData:'',
-            newData:[],
+            pripareListData:{
+                index_rate:'',
+                index_zone:''
+            },
+            
+            
         }
     },
     props:{
@@ -126,34 +130,29 @@ export default{
             if(index==this.honorarZones.length - 1) return 'bis'
             return 'bis | von'
         },
-        contectMenuShow(e,i){
+        contectMenuShow(e){
             e.preventDefault();
             this.contextMenu.positon.x = e.pageX + 20
             this.contextMenu.positon.y = e.pageY - 20
-            this.rateFillBufer(i)
         },
-        contectMenuShow_(e,index_rate, index_zone){
-            e.preventDefault();
-            this.contextMenu.positon.x = e.pageX + 20
-            this.contextMenu.positon.y = e.pageY - 20
-            this.rateZoneFillBufer(index_rate, index_zone)
-        },
-        async rateFillBufer(index){
-            let data = await getClipboard()
-            this.updateListTypeData = 'updateListFeeTableRate'
-            this.newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
-            console.log(this.newData)
-        },
-        async rateZoneFillBufer(index_rate, index_zone){
-            let data = await getClipboard()
-            this.updateListTypeData = 'updateListRateZoneFeeTable'
-            lthis.newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
-            console.log(nthis.newData)
+        preparationListData(index_rate, index_zone=''){
+            this.pripareListData.index_rate = index_rate
+            this.pripareListData.index_zone = index_zone
         },
         async updateListData(){
-            let typeData = this.updateListTypeData
-            let data = this.newData
-            await apiData({typeData, data})
+            let typeData
+            let data = await getClipboard()
+            let index_rate = this.pripareListData.index_rate
+            let index_zone = this.pripareListData.index_zone
+            let newData = []
+            if(index_zone==''){
+                typeData = 'updateListFeeTableRate'
+                newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
+            }else{
+                typeData = 'updateListRateZoneFeeTable'
+                newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
+            }
+            await apiData({typeData, data: newData})
             this.getData() 
         }
     }
