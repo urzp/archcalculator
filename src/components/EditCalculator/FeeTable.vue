@@ -33,7 +33,7 @@
                     <div class="zone" :class="`zone-${index}`" v-for="(item, index) in honorarZones" :key="item.id">{{ zoneSubTitle(index) }}</div>
                 </div>
                 <div class="row-zone-value" v-for="item, index_rate in rate_values" :key="item.id">
-                    <div class="zone" :class="`zone-${index_zone}`" v-for="item_zone, index_zone in item.zones" :key="item_zone.id" @contextmenu="contectMenuShow_($event); preparationListData( index_rate, index_zone )">
+                    <div class="zone" :class="`zone-${index_zone}`" v-for="item_zone, index_zone in item.zones" :key="item_zone.id" @contextmenu="contectMenuShow($event); preparationListData( index_rate, index_zone )">
                         <InputPrice width="100px" :value="item_zone.value" @submit_event="value=>updateRateZone(value, item_zone.id )"/>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ export default{
             let newData = []
             if(index_zone==''){
                 typeData = 'updateListFeeTableRate'
-                newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
+                newData = await  rateFillData(this.id_paragraph, index_rate, this.rate_values, data)
             }else{
                 typeData = 'updateListRateZoneFeeTable'
                 newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)

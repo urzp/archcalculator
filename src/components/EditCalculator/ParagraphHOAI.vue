@@ -71,17 +71,17 @@ export default{
     },
     watch:{
         id_HOAI(){
+            this.clearData()
             this.getData()
         }
     },
     methods:{
         async getData(){
             let result = await apiData({typeData:'Paragraphs', id_HOAI: this.id_HOAI})
-            this.clearData()
             this.data.list = result.data
             if(!this.data.list[0]) return false
             let ferst = this.data.list[0].id
-            if(!this.id) this.select(ferst)
+            if(!this.data.id) this.select(ferst)
         },
         select(id){
             let selected_el = this.data.list.find(el=>el.id==id)
@@ -91,7 +91,7 @@ export default{
                 this.data[key] = selected_el[key]
             }
         },
-        clearData(){
+        async clearData(){
             for (var key in this.data){
                 this.data[key]=""
             }     
@@ -123,6 +123,7 @@ export default{
         async deleteElement(id=''){
             if (!id) id = this.data.id
             await apiData({typeData:'deleteParagraph', data: id})
+            this.clearData()
             await this.getData()
         }
 
