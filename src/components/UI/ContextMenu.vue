@@ -1,6 +1,6 @@
 <template>
     <div v-if="show" class="contect-menu" :style="`left: ${data.positon.x}px; top: ${data.positon.y}px;`" >
-        <div class="item" v-for="item in data.items" :key="item.id">
+        <div class="item" v-for="item in data.items" :key="item.id" @click ="$emit('pasteАccept');close()">
             {{ item.label }}
         </div>
     </div>
@@ -26,6 +26,7 @@ export default{
             default: '45px',
         }
     },
+    emits:['pasteАccept'],
     watch:{
         data:{
             handler(){

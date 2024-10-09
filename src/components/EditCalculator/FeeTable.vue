@@ -1,5 +1,5 @@
 <template>
-    <ContextMenu :data ="contextMenu" />
+    <ContextMenu :data ="contextMenu" @pasteАccept="updateListData()"/>
     <div class="wrap">
         <div class="title">Honorar Table</div>
         <div class="table">
@@ -65,7 +65,9 @@ export default{
             contextMenu:{
                 positon:{x:50,y:200},
                 items:[{id:1, label: 'Paste Сolumn'}]
-            }
+            },
+            updateListTypeData:'',
+            newData:[],
         }
     },
     props:{
@@ -128,30 +130,32 @@ export default{
             e.preventDefault();
             this.contextMenu.positon.x = e.pageX + 20
             this.contextMenu.positon.y = e.pageY - 20
-            //this.rateFillBufer(i)
+            this.rateFillBufer(i)
         },
         contectMenuShow_(e,index_rate, index_zone){
             e.preventDefault();
-            console.log(index_rate, index_zone)
-            console.log(this.rate_values)
+            this.contextMenu.positon.x = e.pageX + 20
+            this.contextMenu.positon.y = e.pageY - 20
             this.rateZoneFillBufer(index_rate, index_zone)
         },
         async rateFillBufer(index){
             let data = await getClipboard()
-            let newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
-            await apiData({typeData:'updateListFeeTableRate', data: newData})
-            console.log(newData)
-            this.getData() 
+            this.updateListTypeData = 'updateListFeeTableRate'
+            this.newData = await  rateFillData(this.id_paragraph, index, this.rate_values, data)
+            console.log(this.newData)
         },
         async rateZoneFillBufer(index_rate, index_zone){
             let data = await getClipboard()
-            let newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
-            console.log(newData)
-            await apiData({typeData:'updateListRateZoneFeeTable', data: newData})
+            this.updateListTypeData = 'updateListRateZoneFeeTable'
+            lthis.newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
+            console.log(nthis.newData)
+        },
+        async updateListData(){
+            let typeData = this.updateListTypeData
+            let data = this.newData
+            await apiData({typeData, data})
             this.getData() 
         }
-
-
     }
 
 }
