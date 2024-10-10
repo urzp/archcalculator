@@ -35,6 +35,8 @@ import NewButton from './UI/NewBtn.vue'
 import UpdateBtn from './UI/UpdateBtn.vue'
 import CloseButton from './UI/CloseBtn.vue'
 import DeleteButton from './UI/DeleteBtn.vue'
+import UpButton from './UI/UpBtn.vue'
+import DownButton from './UI/DownBtn.vue'
 import PastColumButton from './UI/PastColumBtn.vue'
 import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
@@ -81,6 +83,8 @@ export default [
     UpdateBtn,
     CloseButton,
     DeleteButton,
+    UpButton,
+    DownButton,
     PastColumButton,
     Price,
     Percent,

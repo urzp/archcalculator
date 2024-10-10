@@ -6,10 +6,14 @@
             <DeleteButton v-if="!!data&&!!data.id" @click="deleteElement()"  width="35px" heigth="30px"/>
             <div class="paragraph-name" >{{ data.name }}</div>
             <div class="paragraph-title" >{{ data.title }}</div>
-            <SelectEdit_List  :data='data' 
+            <SelectEdit_List 
+                right 
+                :data='data' 
                 @selected="data=>select(data.id_item)" 
                 @newElement="newElement()" 
-                @deleteElement = "item=>deleteElement(item.id)" />
+                @deleteElement = "item=>deleteElement(item.id)" 
+                @moveElement = "data=>moveElement(data.id, data.derect)"
+                />
         </div>
         <template v-if="!!data&&!!data.id">
         <div class="form_pargraph_data">
@@ -125,6 +129,10 @@ export default{
             await apiData({typeData:'deleteParagraph', data: id})
             this.clearData()
             await this.getData()
+        },
+        async moveElement(id, derect){
+            let element = this.data.list.find(el=>el.id == id)
+            console.log(derect, id, element)
         }
 
     }

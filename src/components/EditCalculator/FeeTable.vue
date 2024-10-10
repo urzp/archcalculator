@@ -12,10 +12,10 @@
                     </div>
                 </div>
                 <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event); preparationListData(index)">
-                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" />
                     <div class="hover-panel">
                         <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
                     </div>
+                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" />
                 </div>
                 <NewButton style="margin-top: 10px;" width="35px" heigth="30px" @click="newRateValue()"/>
             </div>
@@ -243,7 +243,7 @@ export default{
         margin-bottom: -7px;
     }
     .zone{
-        margin-top:6px ;
+        margin-top: 5px ;
         display: flex;
         column-gap: 5px;
     }
@@ -262,7 +262,16 @@ export default{
         text-align: center;
     }
 
+/* hover button */
+
+    .row-rate-value{
+        margin-left: -50px;
+        padding-left: 50px;
+    }
+
     .hover-panel{
+        position: absolute;
+        transform: translateX(-60px);
         display: flex;
         column-gap: 5px;
         visibility: hidden;

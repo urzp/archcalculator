@@ -9,7 +9,12 @@
                 <template v-if="!!item.value">{{ item.value }}</template> 
                 <template v-if="!!item.name">{{ item.name }}</template> 
                 <template v-if="!!item.title">{{ item.title }}</template> 
-                <DeleteButton class="deletButton"  @click.stop="delete_data(item)" width="35px" heigth="30px"/>
+                <div class="button_panel">
+                    <UpButton @click.stop="moveItem(item.id, 'up')"  width="35px" heigth="30px"/>
+                    <DownButton @click.stop="moveItem(item.id, 'down')"  width="35px" heigth="30px"/>
+                    <DeleteButton   @click.stop="delete_data(item)" width="35px" heigth="30px"/>
+                </div>
+
             </li>
             <li @click="newElement()">Add NEW</li>
         </ul> 
@@ -47,7 +52,7 @@ export default{
         deep: true
         }
     },
-    emits:['selected', 'newElementt','deleteElement'],
+    emits:['selected', 'newElementt','deleteElement','moveElement'],
     methods:{
         updateData(){
             this.list = this.data.list
@@ -69,7 +74,11 @@ export default{
         },
         delete_data(item){
             this.$emit('deleteElement', item)
-            console.log(item)
+        },
+        moveItem(id, derect){
+            console.log(id)
+            this.$emit('moveElement', {id, derect})
+            
         }
     }
 }
@@ -91,8 +100,8 @@ export default{
     z-index: 100;
 }
 .select-list.align_right{
-    top: 29px;
-    right: calc(100% + -216px);   
+    top: -10px;
+    right: 0px; 
 }
 ul{
     display: flex;
@@ -134,11 +143,17 @@ li:hover{
     z-index: 10;
 }
 
-.deletButton{
+.button_panel{
+    display: flex;
+    column-gap: 5px;
     visibility: hidden;
 }
 
-li:hover .deletButton{
+li:hover .button_panel{
+    visibility: visible;
+}
+
+.button_panel:hover{
     visibility: visible;
 }
 
