@@ -19,11 +19,11 @@
                         <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="28px"/>
                     </div>
                     <div class="number">{{ index + 1 }}</div>
-                    <InputText width="800px" :value="item.name" @submit_event="value=>update(value, 'name')"/>
+                    <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                 </div>
                 <div class="part right-part">
-                    <InputText width="55px" :value="item.minPoint" @submit_event="value=>update(value, 'minPoint')"/>
-                    <InputText width="40px" :value="item.maxPoint" @submit_event="value=>update(value, 'maxPoint')"/>
+                    <InputText width="55px" :value="item.minPoint" @submit_event="value=>update(index, value, 'minPoint')"/>
+                    <InputText width="40px" :value="item.maxPoint" @submit_event="value=>update(index, value, 'maxPoint')"/>
                 </div>
             </div>
         </div>
@@ -56,8 +56,10 @@ export default{
             let result = await apiData({typeData:'RequirementsPoints', id: this.id_paragraph})
             this.list = result.data
         },
-        update(value, val_name){
-
+        update(index, value, val_name){
+            console.log(index, value, val_name)
+            let element = this.list[index] 
+            element[val_name] = value
         }
     }
 
