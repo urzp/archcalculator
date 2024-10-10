@@ -12,8 +12,8 @@
                 @selected="data=>select(data.id_item)" 
                 @newElement="newElement()" 
                 @deleteElement = "item=>deleteElement(item.id)" 
-                @moveElement = "data=>moveElement(data.id, data.derect)"
-                />
+                @moveElement = "getData()"
+            />
         </div>
         <template v-if="!!data&&!!data.id">
         <div class="form_pargraph_data">
@@ -129,22 +129,7 @@ export default{
             await apiData({typeData:'deleteParagraph', data: id})
             this.clearData()
             await this.getData()
-        },
-        async moveElement(id, derect){
-            let element = this.data.list.find(el=>el.id == id)
-            let sequence = Number( element.sequence )
-            let nextSequence
-            if (derect=='up') nextSequence = sequence - 1
-            if (derect=='down') nextSequence = sequence + 1
-            let nextElement = this.data.list.find(el=>el.sequence == nextSequence)
-            if(!nextElement) return false
-            element.sequence = nextSequence
-            nextElement.sequence = sequence
-            await apiData({typeData:'updateParagraph', data:element})
-            await apiData({typeData:'updateParagraph', data:nextElement})
-            await this.getData()
         }
-
     }
 
 }

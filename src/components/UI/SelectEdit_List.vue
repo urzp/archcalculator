@@ -1,17 +1,18 @@
 <template>
     <ToggleListButton v-if="list.length > 0" :close="!open" @switch_tg="(val)=>{open=val}"/>
     <div v-if="open" class="wrap">
+    
     <div class="select-list" :class="{align_right:right}">
         <ul>
-            <li v-for="item in list" :key="item.id" 
+            <li v-for="item, index in list" :key="item.id" 
                 @click="select_data(item)" 
                 :class="{'active':item.id==data.id}">
                 <template v-if="!!item.value">{{ item.value }}</template> 
                 <template v-if="!!item.name">{{ item.name }}</template> 
                 <template v-if="!!item.title">{{ item.title }}</template> 
                 <div class="button_panel">
-                    <UpButton @click.stop="moveItem(item.id, 'up')"  width="35px" heigth="30px"/>
-                    <DownButton @click.stop="moveItem(item.id, 'down')"  width="35px" heigth="30px"/>
+                    <UpButton @click.stop="moveItem(index, 'up')"  width="35px" heigth="30px"/>
+                    <DownButton @click.stop="moveItem(index, 'down')"  width="35px" heigth="30px"/>
                     <DeleteButton   @click.stop="delete_data(item)" width="35px" heigth="30px"/>
                 </div>
 
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'SelectEdit_List',
@@ -75,10 +77,25 @@ export default{
         delete_data(item){
             this.$emit('deleteElement', item)
         },
-        moveItem(id, derect){
-            console.log(id)
-            this.$emit('moveElement', {id, derect})
+        async moveItem(index, derect){
+            if( index==0 && derect=='up' ) return false
+            if( index==this.list.length - 1 && derect=='down' ) return false
+
+            let element = this.list[index]
+            let sequence = index + 1
+            let nextSequence
+
+
+            if (derect=='up') nextSequence = sequence - 1
+            if (derect=='down') nextSequence = sequence + 1
+            let nextElement = this.list[nextSequence - 1]
+
+            element.sequence = nextSequence
+            nextElement.sequence = sequence
             
+            await apiData({typeData:'updateParagraph', data:element})
+            await apiData({typeData:'updateParagraph', data:nextElement})
+            this.$emit('moveElement')
         }
     }
 }
@@ -92,12 +109,17 @@ export default{
     position: relative;
     top: 9px;
     right:  calc(100% + 35px);
-    padding: 10px 0px;
+    padding: 20px 0px;
     background-color: #fff;
     background-color: #ffffff;
     border: solid 1px #D9D9D9;
     border-radius: 10px;
     z-index: 100;
+}
+
+.select-list ul{
+    overflow-y: auto;
+    max-height: 450px;
 }
 .select-list.align_right{
     top: -10px;

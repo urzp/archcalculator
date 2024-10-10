@@ -145,7 +145,7 @@ export default{
             let index_rate = this.pripareListData.index_rate
             let index_zone = this.pripareListData.index_zone
             let newData = []
-            if(index_zone==''){
+            if(index_zone===''){
                 typeData = 'updateListFeeTableRate'
                 newData = await  rateFillData(this.id_paragraph, index_rate, this.rate_values, data)
             }else{
