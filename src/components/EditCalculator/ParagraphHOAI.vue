@@ -132,7 +132,17 @@ export default{
         },
         async moveElement(id, derect){
             let element = this.data.list.find(el=>el.id == id)
-            console.log(derect, id, element)
+            let sequence = Number( element.sequence )
+            let nextSequence
+            if (derect=='up') nextSequence = sequence - 1
+            if (derect=='down') nextSequence = sequence + 1
+            let nextElement = this.data.list.find(el=>el.sequence == nextSequence)
+            if(!nextElement) return false
+            element.sequence = nextSequence
+            nextElement.sequence = sequence
+            await apiData({typeData:'updateParagraph', data:element})
+            await apiData({typeData:'updateParagraph', data:nextElement})
+            await this.getData()
         }
 
     }
