@@ -27,6 +27,7 @@ import EditCalculator from './EditCalculator/EditCalc.vue'
 import HOAIVersion from './EditCalculator/HOAIVersion.vue'
 import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
 import FeeTable from './EditCalculator/FeeTable.vue'
+import RequirementsPoints from './EditCalculator/RequirementsPoints.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -66,6 +67,7 @@ export default [
     FeeZoneDetal,
     EligibleCostsDetal,
     FeeTableDetal,
+    RequirementsPoints,
 
     ItemPartObj,
 

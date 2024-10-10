@@ -1,11 +1,13 @@
 <template>
     <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
-    <template v-if="edit">
+    <div class="wrap-edit" v-if="edit">
         <input  ref="thisinput" type="text"  
         :value="value"
         @change="event => submit_event(event)">
-        <CloseButton width="35px" heigth="35px" @click="edit=false"/>
-    </template>
+        <div class="panel">
+            <CloseButton class="button" width="35px" heigth="28px" @click="edit=false"/>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -52,10 +54,18 @@ export default{
 
 <style scoped>
     .value{
+        height: 30px;
+        min-width: 50px;
+        font-family: 'Raleway-Light';
         font-size: 18px;
+
+    }
+    .wrap-edit{
+        display: flex;
+        column-gap: 10px;
     }
     input{
-        height: 35px;
+        height: 28px;
         width: v-bind(width);
         border-radius: 5px;
         background-color: #ebebeb;
@@ -64,4 +74,12 @@ export default{
         font-family: 'Raleway-Light';
         color: #464646;
     }
+
+    .panel{
+        position: relative;
+    }
+    .button{
+        position: absolute;
+    }
+
 </style>

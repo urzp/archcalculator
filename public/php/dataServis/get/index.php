@@ -1,6 +1,9 @@
 <?php
 
 switch ($typeData) {
+    case 'RequirementsPoints':
+        include 'RequirementsPoints.php';
+        break;
     case 'FeeTable':
         include 'FeeTable.php';
         break;

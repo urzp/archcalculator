@@ -13,11 +13,11 @@
                 </div>
                 <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event); preparationListData(index)">
                     <div class="hover-panel">
-                        <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="30px"/>
+                        <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="28px"/>
                     </div>
-                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" />
+                    <InputPrice :value="item.value" @submit_event="value=>updateRate(value, item.id )" width="120px"/>
                 </div>
-                <NewButton style="margin-top: 10px;" width="35px" heigth="30px" @click="newRateValue()"/>
+                <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="newRateValue()"/>
             </div>
             <div class="colum-honorar-zones">
                 <div class="header honorar-zones">
@@ -25,8 +25,8 @@
                         {{ item.name }}
                     </div>
                     <div class="edit-panel">
-                        <DeleteButton v-if="honorarZones.length > 1" style="margin-left: 10px;" width="35px" heigth="30px" @click="deleteHonorarZone()"/>
-                        <NewButton style="margin-left: 10px;" width="35px" heigth="30px" @click="newHonorarZone()"/>
+                        <DeleteButton v-if="honorarZones.length > 1" style="margin-left: 10px;" width="45px" heigth="28px" @click="deleteHonorarZone()"/>
+                        <NewButton style="margin-left: 10px;" width="45px" heigth="28px" @click="newHonorarZone()"/>
                     </div>
                 </div>
                 <div class="header row-zone-value">

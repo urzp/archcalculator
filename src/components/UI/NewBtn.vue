@@ -24,8 +24,8 @@ export default{
 
 <style scoped>
     .new-btn{
-        min-width: v-bind(width);
-        min-height: v-bind(heigth);
+        width: v-bind(width);
+        height: v-bind(heigth);
         padding-left: 15px;
         padding-right: 15px;
         display: flex;

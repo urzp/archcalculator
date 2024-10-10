@@ -30,6 +30,7 @@ export default{
         align-items: center;
         justify-content: center;
         border: solid 1px #9A9A9A ;
+        background-color: #fff;
         border-radius: 5px;
         cursor: pointer;
     }

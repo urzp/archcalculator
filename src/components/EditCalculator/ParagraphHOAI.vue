@@ -2,7 +2,8 @@
     <div class="wrap">
         
         <div class="title">
-            <NewButton  @click="newElement()" width="35px" heigth="30px"><template v-if="!(!!data&&!!data.id)">New Paragraph</template></NewButton>
+            <NewButton v-if="!(!!data&&!!data.id)"  @click="newElement()" width="210px" heigth="45px">New Paragraph</NewButton>
+            <NewButton v-else  @click="newElement()" width="45px" heigth="30px"></NewButton>
             <DeleteButton v-if="!!data&&!!data.id" @click="deleteElement()"  width="35px" heigth="30px"/>
             <div class="paragraph-name" >{{ data.name }}</div>
             <div class="paragraph-title" >{{ data.title }}</div>
@@ -31,7 +32,7 @@
             </div>
             <div class="row">
                 <div class="label">Title:</div>
-                <InputText :value="data.title" @submit_event="value=>update(value, 'title')"/>
+                <InputText :value="data.title" @submit_event="value=>update(value, 'title')" width="300px"/>
             </div>
             <div class="row">
                 <div class="label"><a :href="data.link_basis" target="_blank">Link:</a></div>
@@ -43,6 +44,7 @@
             </div>
         </div>
         <FeeTable :id_paragraph="data.id"/>
+        <RequirementsPoints :id_paragraph="data.id"/>
         </template>
     </div>
     
