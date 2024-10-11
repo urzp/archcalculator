@@ -16,7 +16,7 @@
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="part left-part">
                     <div class="hover-panel">
-                        <DeleteButton @click.stop="deleteRate(item.id)" width="35px" heigth="28px"/>
+                        <DeleteButton @click.stop="deleteElement(item.id)" width="35px" heigth="28px"/>
                     </div>
                     <div class="number">{{ index + 1 }}</div>
                     <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="console.log()"/>
+        <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="newElement()"/>
     </div>
 </template>
 
@@ -56,15 +56,28 @@ export default{
             let result = await apiData({typeData:'RequirementsPoints', id: this.id_paragraph})
             this.list = result.data
         },
-        update(index, value, val_name){
-            console.log(index, value, val_name)
+        async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
+            await apiData({typeData:'updateRequirementsPoints', data: element})
+            this.getData()
+        },
+        async newElement(){
+            let data = {
+                id_paragraph:this.id_paragraph, 
+                sequence: this.list.length,
+                name: '----',
+                minPoint: 0,
+                maxPoint: 0,
+            }
+            await apiData({typeData:'newRequirementsPoints', data})
+            this.getData()    
+        },
+        async deleteElement(id){
+            await apiData({typeData:'deleteRequirementsPoints', data: id})
+            this.getData()    
         }
     }
-
-
-
 }
 
 </script>

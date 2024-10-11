@@ -1,6 +1,15 @@
 <?php
 
 switch ($typeData) {
+    case 'deleteRequirementsPoints':
+        include 'deleteRequirementsPoints.php';
+        break;        
+    case 'newRequirementsPoints':
+        include 'newRequirementsPoints.php';
+        break;         
+    case 'updateRequirementsPoints':
+        include 'updateRequirementsPoints.php';
+        break;  
     case 'updateListRateZoneFeeTable':
         include 'updateListRateZoneFeeTable.php';
         break;      
