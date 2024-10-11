@@ -29,6 +29,7 @@ import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
 import FeeTable from './EditCalculator/FeeTable.vue'
 import RequirementsPoints from './EditCalculator/RequirementsPoints.vue'
 import HonorarZone from './EditCalculator/HonorarZone.vue'
+import Stages from './EditCalculator/Stages.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -79,6 +80,7 @@ export default [
     ParagraphHOAI,
     FeeTable,
     HonorarZone,
+    Stages,
     
     Toggle,
     ToggleButton,

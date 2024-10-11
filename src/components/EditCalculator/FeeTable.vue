@@ -116,11 +116,11 @@ export default{
         },
         async deleteRate(id){
             await apiData({typeData:'deleteFeeTableRate', data:id})
-            EventBus.emit('reloadHonorarZone')     
+            this.getData()       
         },
         async deleteHonorarZone(){
             await apiData({typeData:'deleteHonorarZone', data: this.id_paragraph})
-            this.getData()  
+            EventBus.emit('reloadHonorarZone')
         },
         zoneSubTitle(index){
             if(index==0) return 'von'
