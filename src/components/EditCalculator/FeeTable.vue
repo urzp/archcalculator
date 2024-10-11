@@ -45,11 +45,13 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
 import { lastNumber, convertToRoman, getClipboard, rateFillData, rateZoneFillData } from '@/servis/functions.js'
 export default{
     name: 'FeeTable',
     mounted(){
         this.getData()
+        EventBus.on('reloadHonorarZone', this.getData)
     },
     data(){
         return{
@@ -101,12 +103,8 @@ export default{
             this.getData()
         },
         async newHonorarZone(){
-            if(this.honorarZones.length==0) await apiData({typeData:'newFeeTableHonorarZone', data:{id_paragraph: this.id_paragraph, number:0, name:''}})
-            let number = lastNumber(this.honorarZones)
-            number++
-            let name = "Honorarzone " + convertToRoman(number)
-            await apiData({typeData:'newFeeTableHonorarZone', data:{id_paragraph: this.id_paragraph, number, name}})
-            this.getData()
+            await apiData({typeData:'newHonorarZone', data: this.id_paragraph})
+            EventBus.emit('reloadHonorarZone')
         },
         async updateRate(value, id){
             await apiData({typeData:'updateFeeTableRate', data:{id, value}})
@@ -118,11 +116,10 @@ export default{
         },
         async deleteRate(id){
             await apiData({typeData:'deleteFeeTableRate', data:id})
-            this.getData()       
+            EventBus.emit('reloadHonorarZone')     
         },
         async deleteHonorarZone(){
-            let id = this.honorarZones[this.honorarZones.length - 1].id
-            await apiData({typeData:'deleteFeeTableHonorarZone', data:id})
+            await apiData({typeData:'deleteHonorarZone', data: this.id_paragraph})
             this.getData()  
         },
         zoneSubTitle(index){

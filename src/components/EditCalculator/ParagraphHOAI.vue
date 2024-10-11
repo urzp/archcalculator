@@ -45,6 +45,7 @@
         </div>
         <FeeTable :id_paragraph="data.id"/>
         <RequirementsPoints :id_paragraph="data.id"/>
+        <HonorarZone :id_paragraph="data.id"/>
         </template>
     </div>
     

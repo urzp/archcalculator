@@ -1,6 +1,15 @@
 <?php
 
 switch ($typeData) {
+    case 'deleteHonorarZone':
+        include 'deleteHonorarZone.php';
+        break;         
+    case 'newHonorarZone':
+        include 'newHonorarZone.php';
+        break;   
+    case 'updateHonorarZone':
+        include 'updateHonorarZone.php';
+        break;           
     case 'deleteRequirementsPoints':
         include 'deleteRequirementsPoints.php';
         break;        
