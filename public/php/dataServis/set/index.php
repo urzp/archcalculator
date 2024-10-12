@@ -1,6 +1,12 @@
 <?php
 
 switch ($typeData) {
+    case 'updateStages':
+        include 'updateStages.php';
+        break; 
+    case 'deleteStages':
+        include 'deleteStages.php';
+        break; 
     case 'newStage':
         include 'newStage.php';
         break;      

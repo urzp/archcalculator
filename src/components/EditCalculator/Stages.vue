@@ -13,14 +13,14 @@
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="part left-part">
-                    <!-- <div class="hover-panel">
+                    <div class="hover-panel">
                         <DeleteButton @click.stop="deleteElement(item.id)" width="35px" heigth="28px"/>
-                    </div> -->
+                    </div>
                     <div class="number">{{ index + 1 }}</div>
                     <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                 </div>
                 <div class="part right-part">
-                    <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'minPoint')"/>
+                    <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                 </div>
             </div>
         </div>
@@ -63,6 +63,16 @@ export default {
             await apiData({typeData:'newStage', data})
             this.getData()    
         },
+        async update(index, value, val_name){
+            let element = this.list[index] 
+            element[val_name] = value
+            await apiData({typeData:'updateStages', data: element})
+            this.getData()
+        },
+        async deleteElement(id){
+            await apiData({typeData:'deleteStages', data: id})
+            this.getData()    
+        }
     }
 }
 
@@ -111,6 +121,25 @@ export default {
 
     .value{
         width: 105px;
+    }
+
+    /* hover button */
+
+    .part{
+        margin-left: -50px;
+        padding-left: 50px;
+    }
+
+    .hover-panel{
+        position: absolute;
+        transform: translateX(-60px);
+        display: flex;
+        column-gap: 5px;
+        visibility: hidden;
+    }
+
+    .part:hover .hover-panel{
+        visibility: visible;
     }
 
 </style>
