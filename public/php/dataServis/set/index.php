@@ -1,6 +1,15 @@
 <?php
 
 switch ($typeData) {
+    case 'updateSubStage':
+        include 'updateSubStage.php';
+        break; 
+    case 'deleteSubStages':
+        include 'deleteSubStage.php';
+        break; 
+    case 'newSubStage':
+        include 'newSubStage.php';
+        break;   
     case 'updateStages':
         include 'updateStages.php';
         break; 

@@ -1,11 +1,12 @@
 <template>
     <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
     <div class="wrap-edit" v-if="edit">
-        <input  
+        <textarea  
             ref="thisinput" 
+            rows="3"
             type="text"  
             :value="value"
-            @change="event => submit_event(event)">
+            @change="event => submit_event(event)"></textarea>
         <div class="panel">
             <CloseButton class="button" width="35px" heigth="28px" @click="edit=false"/>
         </div>
@@ -15,7 +16,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 export default{
-    name: 'InputText',
+    name: 'ImputTextMLine',
     mounted(){
         this.id = this.$.uid
         EventBus.on('fucus:input', value =>{ if(this.id!=value) this.edit = false })
@@ -56,7 +57,6 @@ export default{
 
 <style scoped>
     .value{
-        height: 30px;
         /* width: v-bind(width); */
         min-width: 50px;
         font-family: 'Raleway-Light';
@@ -67,14 +67,16 @@ export default{
         display: flex;
         column-gap: 10px;
     }
-    input{
-        height: 28px;
+    textarea{
         width: v-bind(width);
         border-radius: 5px;
         background-color: #ebebeb;
         padding-left: 15px;
+        border: none;
+        resize: none;
         font-size: 18px;
         font-family: 'Raleway-Light';
+        line-height: 26px;
         color: #464646;
     }
 

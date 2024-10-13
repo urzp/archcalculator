@@ -1,6 +1,9 @@
 <?php
 
 switch ($typeData) {
+    case 'SubStage':
+        include 'SubStages.php';
+        break;
     case 'Stages':
         include 'Stages.php';
         break;

@@ -74,3 +74,11 @@ export async function rateZoneFillData(index_rate, index_zone, source, data){
     })
     return newData
 }
+
+export function toLetters(num) {
+    "use strict";
+    var mod = num % 26,
+        pow = num / 26 | 0,
+        out = mod ? String.fromCharCode(96 + mod) : (--pow, 'Z');
+    return pow ? toLetters(pow) + out : out;
+}

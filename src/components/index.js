@@ -30,6 +30,7 @@ import FeeTable from './EditCalculator/FeeTable.vue'
 import RequirementsPoints from './EditCalculator/RequirementsPoints.vue'
 import HonorarZone from './EditCalculator/HonorarZone.vue'
 import Stages from './EditCalculator/Stages.vue'
+import SubStage from './EditCalculator/SubStage.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -45,6 +46,7 @@ import Price from './UI/Price.vue'
 import Percent from './UI/Percent.vue'
 import InputYear from './UI/InputYear.vue'
 import InputText from './UI/InputText.vue'
+import ImputTextMLine from './UI/ImputTextMLine.vue'
 import InputPrice from './UI/InputPrice.vue'
 import SelectEdit_List from './UI/SelectEdit_List.vue'
 import ContextMenu from './UI/ContextMenu.vue'
@@ -81,6 +83,7 @@ export default [
     FeeTable,
     HonorarZone,
     Stages,
+    SubStage,
     
     Toggle,
     ToggleButton,
@@ -96,6 +99,7 @@ export default [
     Percent,
     InputYear,
     InputText,
+    ImputTextMLine,
     InputPrice,
     SelectEdit_List,
     ContextMenu,

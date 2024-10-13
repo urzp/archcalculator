@@ -1,54 +1,41 @@
 <template>
     <div class="wrap">
-        <div class="title">Leistungsphasen</div>
-        <div class="header">
-            <div class="part left-part">
-                <div class="number">#</div>
-                <div class="name">Name</div>
-            </div>
-            <div class="part left-right">
-            <div class="value">Prozent %</div>
-            </div>
-        </div>
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="wrap_item">
                     <div class="part left-part">
                         <div class="hover-panel">
-                            <DeleteButton @click.stop="deleteElement(item.id)" width="35px" heigth="28px"/>
+                            <DeleteButton @click.stop="deleteElement(item.id)" width="29px" heigth="20px"/>
                         </div>
-                        <div class="number">{{ index + 1 }}</div>
-                        <ToggleButton closed @switch_tg="value=>showSub(value, index)"/>
-                        <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
+                        <div class="number">{{ toLetters(index + 1) }}</div>
+                        <ImputTextMLine width="1000px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                     </div>
                     <div class="part right-part">
                         <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                     </div>
                 </div>
-                <div class="subStage" v-show="subShowList[index]">
-                    <SubStage :id_stage="item.id"/>
-                </div>
             </div>
         </div>
-        <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="newElement()"/>
+        <NewButton style="margin-top: 10px;" width="100px" heigth="24px" @click="newElement()"/>
     </div>
 </template>
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { toLetters } from '@/servis/functions'
 export default {
-    name:'Stages',
+    name:'SubStage',
     mounted(){
         this.getData()
     },
     data(){
         return{
             list:[],
-            subShowList:[],
+            toLetters: toLetters,
         }
     },
     props:{
-        id_paragraph:String,
+        id_stage:String,
     },
     watch:{
         id_paragraph(){
@@ -57,31 +44,28 @@ export default {
     },
     methods:{
         async getData(){
-            let result = await apiData({typeData:'Stages', id: this.id_paragraph})
+            let result = await apiData({typeData:'SubStage', id: this.id_stage})
             this.list = result.data
         },
         async newElement(){
             let data = {
-                id_paragraph:this.id_paragraph, 
+                id_stage:this.id_stage, 
                 number: this.list.length,
                 name: '----',
-                percent: 0,
+                percent: null,
             }
-            await apiData({typeData:'newStage', data})
+            await apiData({typeData:'newSubStage', data})
             this.getData()    
         },
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateStages', data: element})
+            await apiData({typeData:'updateSubStage', data: element})
             this.getData()
         },
         async deleteElement(id){
-            await apiData({typeData:'deleteStages', data: id})
+            await apiData({typeData:'deleteSubStages', data: id})
             this.getData()    
-        },
-        showSub(value, index){
-            this.subShowList[index] = value
         }
     }
 }
@@ -91,7 +75,8 @@ export default {
 
 <style scoped>
     .wrap{
-        margin-top: 30px;
+        margin-top: 0px;
+        margin-bottom: 30px;
     }
 
     .title{
@@ -126,13 +111,14 @@ export default {
     }
 
     .number{
+        width: 15px;
         font-family: 'Raleway-Light' ;
         font-size: 18px;      
     }
 
     .part{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 20px;
     }
     .right-part{
@@ -151,6 +137,7 @@ export default {
     }
 
     .hover-panel{
+        margin-top: 5px;
         position: absolute;
         transform: translateX(-60px);
         display: flex;
