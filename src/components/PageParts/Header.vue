@@ -5,6 +5,7 @@
             <div class="menu">
                 <div class="item_menu">About project</div>
                 <div class="item_menu">How to use</div>
+                <div class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
             <div class="btn_menu"></div>
         </div>
