@@ -7,9 +7,11 @@
             <li v-for="item, index in list" :key="item.id" 
                 @click="select_data(item)" 
                 :class="{'active':item.id==data.id}">
-                <template v-if="!!item.value">{{ item.value }}</template> 
-                <template v-if="!!item.name">{{ item.name }}</template> 
-                <template v-if="!!item.title">{{ item.title }}</template> 
+                <div class="left-part">
+                    <div v-if="!!item.value">{{ item.value }}</div> 
+                    <div v-if="!!item.name">{{ item.name }}</div> 
+                    <div v-if="!!item.title">{{ item.title }}</div> 
+                </div>
                 <div class="button_panel">
                     <UpButton @click.stop="moveItem(index, 'up')"  width="35px" heigth="30px"/>
                     <DownButton @click.stop="moveItem(index, 'down')"  width="35px" heigth="30px"/>
@@ -143,6 +145,11 @@ li{
     font-size: 18px;
     color: #464646;
 
+}
+
+.left-part{
+    display: flex;
+    column-gap: 5px;
 }
 
 li.active{
