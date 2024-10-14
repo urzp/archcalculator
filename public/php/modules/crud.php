@@ -49,6 +49,7 @@ function crud_delete($table, $selector=""){
     $sql = "DELETE FROM `$table` WHERE $selector";
     //echo $sql.'<br/>';
     $mysql -> query($sql);
+    return $sql;
 }
 
 //$users = crud_read('users');

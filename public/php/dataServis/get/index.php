@@ -2,7 +2,7 @@
 
 switch ($typeData) {
     case 'SubStage':
-        include 'SubStages.php';
+        include 'SubStage.php';
         break;
     case 'Stages':
         include 'Stages.php';
