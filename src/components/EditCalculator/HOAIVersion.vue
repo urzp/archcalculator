@@ -19,7 +19,12 @@
                     </div>
                     <div class="active-version" @click="set_editHOAI=true">{{ data.value }}</div>
                     <div class="label">Select</div>
-                    <Select_List  right :data='data' @selected='val=>Select(val)'/>
+                    <SelectEdit_List   
+                    noDelete
+                    :data='data' 
+                    @selected='val=>Select(val)'
+                    @newElement="set_new_HOAI=true"
+                    @moveElement = "data=>moveElemnt(data)"/>
                 </div>
                 <div class="delete_panel">
                     <DeleteButton @click="deleteHOAI()" />
@@ -67,17 +72,31 @@ export default{
         },
         async new_HOAI(value){
             this.resetNewSet()
-            await apiData({typeData:'newHOAI', data: value })
+            let newElement = {
+                value,
+            }
+            await apiData({typeData:'newHOAI', data: newElement })
             await  this.getData()
             let last_item = this.data.list[this.data.list.length - 1]
             this.data.value = last_item.value
             this.data.id = last_item.id_item
         },
         async update_HOAI(value){
-            await apiData({typeData:'updateHOAI', id: this.data.id, value:value })
+            let element = {
+                value,
+                id: this.data.id,
+            }
+            await apiData({typeData:'updateHOAI', data: element })
             this.resetUpdate()
             await  this.getData()
             this.data.value = value
+        },
+        async moveElemnt(data){
+            let element = data[0]
+            let nextElement = data[1]
+            await apiData({typeData:'updateHOAI', data: element })
+            await apiData({typeData:'updateHOAI', data: nextElement })
+            this.getData()
         },
         async deleteHOAI(){
             await apiData({typeData:'deleteHOAI', data: this.data.id })
@@ -105,8 +124,13 @@ export default{
     .wrap-center{
         display: flex;
         align-items: center;
-        column-gap: 15px;
     }
+
+    .label{
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
     .select-law-year{
         font-size: 20px;
         font-family: 'Raleway-Light';

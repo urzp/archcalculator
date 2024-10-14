@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div v-if="!loading" class="wrap">
         
         <div class="title">
             <NewButton v-if="!(!!data&&!!data.id)"  @click="newElement()" width="210px" heigth="45px">New Paragraph</NewButton>
@@ -8,12 +8,12 @@
             <div class="paragraph-name" >{{ data.name }}</div>
             <div class="paragraph-title" >{{ data.title }}</div>
             <SelectEdit_List 
-                right 
                 :data='data' 
+                width_name="55px" width_title="200px"
                 @selected="data=>select(data.id_item)" 
                 @newElement="newElement()" 
                 @deleteElement = "item=>deleteElement(item.id)" 
-                @moveElement = "getData()"
+                @moveElement = "data=>moveElemnt(data)"
             />
         </div>
         <template v-if="!!data&&!!data.id">
@@ -39,16 +39,28 @@
                 <InputText :value="data.link_basis" @submit_event="value=>update(value, 'link_basis')" width="600px"/>
             </div>
             <div class="row">
-                <div class="label"><a :href="data.link_basis" target="_blank">Link:</a></div>
+                <div class="label"><a :href="data.link_fee" target="_blank">Link:</a></div>
                 <InputText :value="data.link_fee" @submit_event="value=>update(value, 'link_fee')" width="600px"/>
             </div>
         </div>
         <FeeTable :id_paragraph="data.id"/>
         <RequirementsPoints :id_paragraph="data.id"/>
         <HonorarZone :id_paragraph="data.id"/>
+        <div class="form_pargraph_data">
+            <div class="title">Anlage</div>
+            <div class="row">
+                <div class="label"><a :href="data.link_basic_services" target="_blank">Link:</a></div>
+                <InputText :value="data.link_basic_services" @submit_event="value=>update(value, 'link_basic_services')" width="600px"/>
+            </div>
+            <div class="row">
+                <div class="label"><a :href="data.link_special_services" target="_blank">Link:</a></div>
+                <InputText :value="data.link_special_services" @submit_event="value=>update(value, 'link_special_services')" width="600px"/>
+            </div>
+        </div>
         <Stages :id_paragraph="data.id"/>
         </template>
     </div>
+    <div v-else class="load">Loading . . . </div>
     
 </template>
 
@@ -61,6 +73,7 @@ export default{
     },
     data(){
         return{
+            loading:false,
             data:{
                 id:'',
                 sequence:'',
@@ -85,11 +98,14 @@ export default{
     },
     methods:{
         async getData(){
+            this.loading = true
             let result = await apiData({typeData:'Paragraphs', id_HOAI: this.id_HOAI})
             this.data.list = result.data
+            this.loading = false
             if(!this.data.list[0]) return false
             let ferst = this.data.list[0].id
             if(!this.data.id) this.select(ferst)
+            
         },
         select(id){
             let selected_el = this.data.list.find(el=>el.id==id)
@@ -128,6 +144,13 @@ export default{
             last = this.data.list[last].id
             this.select(last)
         },
+        async moveElemnt(data){
+            let element = data[0]
+            let nextElement = data[1]
+            await apiData({typeData:'updateParagraph',  data: element })
+            await apiData({typeData:'updateParagraph', data: nextElement })
+            this.getData()
+        },
         async deleteElement(id=''){
             if (!id) id = this.data.id
             await apiData({typeData:'deleteParagraph', data: id})
@@ -141,6 +164,14 @@ export default{
 <style scoped>
     .wrap{
         margin-top: 30px;
+    }
+    .load{
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-family: 'Raleway-ExtraLight';
     }
     .title, .row{
         display: flex;

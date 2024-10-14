@@ -1,27 +1,27 @@
 <template>
     <ToggleListButton v-if="list.length > 0" :close="!open" @switch_tg="(val)=>{open=val}"/>
     <div v-if="open" class="wrap">
-    
-    <div class="select-list" :class="{align_right:right}">
-        <ul>
-            <li v-for="item, index in list" :key="item.id" 
-                @click="select_data(item)" 
-                :class="{'active':item.id==data.id}">
-                <div class="left-part">
-                    <div v-if="!!item.value">{{ item.value }}</div> 
-                    <div v-if="!!item.name">{{ item.name }}</div> 
-                    <div v-if="!!item.title">{{ item.title }}</div> 
-                </div>
-                <div class="button_panel">
-                    <UpButton @click.stop="moveItem(index, 'up')"  width="35px" heigth="30px"/>
-                    <DownButton @click.stop="moveItem(index, 'down')"  width="35px" heigth="30px"/>
-                    <DeleteButton   @click.stop="delete_data(item)" width="35px" heigth="30px"/>
-                </div>
-
-            </li>
-            <li @click="newElement()">Add NEW</li>
-        </ul> 
-    </div>
+        <div class="select-list">
+            <ul>
+                <li v-for="item, index in list" :key="item.id" 
+                    @click="select_data(item)" 
+                    :class="{'active':item.id==data.id}">
+                    <div class="left-part">
+                        <div class="colum-value" v-if="!!item.value">{{ item.value }}</div> 
+                        <div class="colum-name" v-if="!!item.name">{{ item.name }}</div> 
+                        <div class="colum-title" v-if="!!item.title">{{ item.title }}</div> 
+                    </div>
+                    <div class="button_panel_wrap">
+                    <div class="button_panel">
+                        <UpButton @click.stop="moveItem(index, 'up')"  width="35px" heigth="30px"/>
+                        <DownButton @click.stop="moveItem(index, 'down')"  width="35px" heigth="30px"/>
+                        <DeleteButton v-if="!noDelete"  @click.stop="delete_data(item)" width="35px" heigth="30px"/>
+                    </div>
+                    </div>
+                </li>
+                <li @click="newElement()">Add NEW</li>
+            </ul> 
+        </div>
     </div>
     <div v-if="open" @click="close()" class="bg_for_close_list"></div>
 </template>
@@ -43,9 +43,25 @@ export default{
     },
     props:{
         data: Object,
+        noDelete: {
+            type:Boolean,
+            default: false
+        },
         right:{
             type:Boolean,
             default: false
+        },
+        width_value:{
+            typeof:String,
+            default:'50px',
+        },
+        width_name:{
+            typeof:String,
+            default:'50px',
+        },
+        width_title:{
+            typeof:String,
+            default:'150px',
         }
     },
     watch:{
@@ -94,10 +110,7 @@ export default{
 
             element.sequence = nextSequence
             nextElement.sequence = sequence
-            
-            await apiData({typeData:'updateParagraph', data:element})
-            await apiData({typeData:'updateParagraph', data:nextElement})
-            this.$emit('moveElement')
+            this.$emit('moveElement',[element, nextElement])
         }
     }
 }
@@ -105,15 +118,15 @@ export default{
 
 <style scoped>
 .wrap{
+    position: relative;
     height: 0px;
 }
 .select-list{
-    position: relative;
-    top: 9px;
-    right:  calc(100% + 35px);
+    position: absolute;
+    top: -10px;
+    left: 15px;
     padding: 20px 0px;
     background-color: #fff;
-    background-color: #ffffff;
     border: solid 1px #D9D9D9;
     border-radius: 10px;
     z-index: 100;
@@ -123,10 +136,7 @@ export default{
     overflow-y: auto;
     max-height: 450px;
 }
-.select-list.align_right{
-    top: -10px;
-    right: 0px; 
-}
+
 ul{
     display: flex;
     flex-direction: column;
@@ -150,6 +160,18 @@ li{
 .left-part{
     display: flex;
     column-gap: 5px;
+}
+.colum-value{
+    width: v-bind(width_value);
+}
+.colum-name{
+    width: v-bind(width_name);
+}
+.colum-title{
+    width: v-bind(width_title);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 li.active{

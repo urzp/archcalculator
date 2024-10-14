@@ -1,15 +1,15 @@
 <?php
 
-$id = $rq_data -> id;
-$value = $rq_data -> value;
+$input_data = $rq_data -> data;
+$id = $input_data -> id;
 
-$data['value']=$value;
+foreach ($input_data as $key => $value){$newdata[$key] = $value;}
 $selector = "`id` = '$id'";
-crud_update('HOAI_versions', $data, $selector);
+crud_update('HOAI_versions', $input_data, $selector);
 
 $result = (object) [
     'success' => true,
-    'data' => $data,
+    'data' => '',
 ];
 
 ?>
