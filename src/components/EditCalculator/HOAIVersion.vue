@@ -146,6 +146,11 @@ export default{
         column-gap: 15px;
         margin-right: auto;
     }
+
+    ul{
+        align-items: flex-start;
+    }
+
     .delete_panel{
         margin-left: auto;
     }

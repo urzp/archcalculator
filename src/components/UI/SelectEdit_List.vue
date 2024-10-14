@@ -19,7 +19,7 @@
                     </div>
                     </div>
                 </li>
-                <li @click="newElement()">Add NEW</li>
+                <li class="colum-title" @click="newElement()">Add NEW</li>
             </ul> 
         </div>
     </div>
@@ -82,7 +82,7 @@ export default{
             let val = item.value
             let id = item.id
             this.$emit('selected', {id_item:id, value:val})
-            EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
+            //EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
             this.close()
         },
         newElement(){
@@ -140,7 +140,7 @@ export default{
 ul{
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: flex-start; 
 }
 li{
     padding: 0 20px;
@@ -162,13 +162,15 @@ li{
     column-gap: 5px;
 }
 .colum-value{
-    width: v-bind(width_value);
+    white-space: nowrap;
+    /* width: v-bind(width_value); */
 }
 .colum-name{
-    width: v-bind(width_name);
+    white-space: nowrap;
+    /* width: v-bind(width_name); */
 }
 .colum-title{
-    width: v-bind(width_title);
+    /* width: v-bind(width_title); */
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

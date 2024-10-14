@@ -9,7 +9,6 @@
             <div class="paragraph-title" >{{ data.title }}</div>
             <SelectEdit_List 
                 :data='data' 
-                width_name="55px" width_title="200px"
                 @selected="data=>select(data.id_item)" 
                 @newElement="newElement()" 
                 @deleteElement = "item=>deleteElement(item.id)" 
