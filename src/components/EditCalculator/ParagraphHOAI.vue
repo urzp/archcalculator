@@ -1,6 +1,6 @@
 <template>
     <div v-if="!loading" class="wrap">
-        
+        <TopFixMenu :data_HOAI="data_HOAI" :paragraph="data"/>
         <div class="title">
             <NewButton v-if="!(!!data&&!!data.id)"  @click="newElement()" width="210px" heigth="45px">New Paragraph</NewButton>
             <NewButton v-else  @click="newElement()" width="45px" heigth="30px"></NewButton>
@@ -46,13 +46,13 @@
         <RequirementsPoints :id_paragraph="data.id"/>
         <HonorarZone :id_paragraph="data.id"/>
         <div class="form_pargraph_data">
-            <div class="title">Anlage</div>
+            <div class="title">leistungen</div>
             <div class="row">
-                <div class="label"><a :href="data.link_basic_services" target="_blank">Link:</a></div>
+                <div class="label"><a :href="data.link_basic_services" target="_blank">Grundleistungen</a></div>
                 <InputText :value="data.link_basic_services" @submit_event="value=>update(value, 'link_basic_services')" width="600px"/>
             </div>
             <div class="row">
-                <div class="label"><a :href="data.link_special_services" target="_blank">Link:</a></div>
+                <div class="label"><a :href="data.link_special_services" target="_blank">Besondere Leistungen</a></div>
                 <InputText :value="data.link_special_services" @submit_event="value=>update(value, 'link_special_services')" width="600px"/>
             </div>
         </div>
@@ -87,7 +87,8 @@ export default{
         }
     },
     props:{
-        id_HOAI:String
+        id_HOAI:String,
+        data_HOAI:Object,
     },
     watch:{
         id_HOAI(){

@@ -2,7 +2,7 @@
     <div class="wrap">
         <HOAIVersion @selected="data=>update(data)"/>
         <template v-if="!!selected_id">
-            <ParagraphHOAI :id_HOAI="selected_id" />
+            <ParagraphHOAI :id_HOAI="selected_id" :data_HOAI="data_HOAI"/>
         </template>
     </div>
 </template>
@@ -16,15 +16,15 @@ export default{
     },
     data(){
         return{
-            data:{},
+            data_HOAI:{},
             selected_id:''
         }
     },
     methods:{
-        update(data){
+        async update(data){
             this.selected_id = data.id_item
-            let result  = apiData({typeData:'getHOAI', data: data.id_item})
-            this.data = result
+            let result  = await apiData({typeData:'getHOAI', data: data.id_item})
+            this.data_HOAI = result.data.find(item=>item.id==this.selected_id)
         }
     }
 

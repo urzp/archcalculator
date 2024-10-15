@@ -23,6 +23,7 @@ import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
 import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
 //----------------------------EditCalculator-----------------------------
+import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/EditCalc.vue'
 import HOAIVersion from './EditCalculator/HOAIVersion.vue'
 import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
@@ -77,6 +78,7 @@ export default [
 
     Select_List,
     
+    TopFixMenu,
     EditCalculator,
     HOAIVersion,
     ParagraphHOAI,
