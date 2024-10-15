@@ -74,6 +74,7 @@ export default{
         color: #494949;
         padding: 5px 15px;
         border-bottom: 1px solid #d6d6d6;
+        cursor: default;
     }
     .item{
         margin: 5px 0;

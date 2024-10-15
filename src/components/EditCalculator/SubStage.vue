@@ -1,6 +1,6 @@
 <template>
     <ContextMenu :data ="contextMenu" @action="data=>actionContextMenu(data)"/>
-    <div class="wrap" @contextmenu="contectMenuShow($event)">
+    <div class="wrap" @contextmenu.stop="contectMenuShow($event)">
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="wrap_item">

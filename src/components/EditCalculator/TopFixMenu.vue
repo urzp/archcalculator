@@ -1,13 +1,17 @@
 <template>
-    <div v-show="show" class="wrap-fix-menu">
-        <div class="main-title">
-            <div class="title">Edit HOAI version</div>
-            <div class="HOAI-version">{{ data_HOAI.value }}</div>
+    <div v-show="show" class="wrap-fix">
+        <div class="wrap-menu">
+            <div class="main-title">
+                <div class="title">Edit HOAI version</div>
+                <div class="HOAI-version">{{ data_HOAI.value }}</div>
+            </div>
+            <div class="sub-title">
+                <div class="paragraph-val">{{ paragraph.name }} </div>
+                <div class="paragraph-val">{{ paragraph.title }} </div>
+            </div>
         </div>
-        <div class="sub-title">
-            <div class="paragraph-val">{{ paragraph.name }} </div>
-            <div class="paragraph-val">{{ paragraph.title }} </div>
-        </div>
+        <div class="bottom_1"></div>
+        <div class="bottom_2"></div>
     </div>
 </template>
 
@@ -41,17 +45,18 @@ export default {
 </script>
 
 <style scoped>
-    .wrap-fix-menu{
-        margin: 0;
-        padding: 30px 0px;
+    .wrap-fix{
         position: fixed;
         top: 0; 
         width: 1156px;
+        margin: 0;
+    }
+    .wrap-menu{
+        padding: 30px 0px;
         background-color: #fff;
         border-bottom: 1px solid #ddd;
         display: flex;
         flex-direction: column;
-        
     }
 
     .main-title, .sub-title{
@@ -69,5 +74,16 @@ export default {
     .title, .sub-title{
         font-family: 'Raleway-Light';
         color: #2c3e50;
+    }
+    .bottom_1{
+        height: 10px;
+        width: 100%;
+        background-color: #fff;
+    }
+    .bottom_2{
+        height: 30px;
+        width: 100%;
+        background-color: #fff;
+        opacity: 0.8;
     }
 </style>
