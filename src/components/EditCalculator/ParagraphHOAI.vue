@@ -17,10 +17,10 @@
         </div>
         <template v-if="!!data&&!!data.id">
         <div class="form_pargraph_data">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="label">Sequence #:</div>
                 <InputText :value="data.sequence" @submit_event="value=>update(value, 'sequence')"/>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="label">Paragraph:</div>
                 <InputText :value="data.paragraph" @submit_event="value=>update(value, 'paragraph')"/>
@@ -134,7 +134,7 @@ export default{
             }
             let data = {
                 id_HOAI: this.id_HOAI,
-                name:'New §',
+                name:'§ New',
                 sequence,
             }
             await apiData({typeData:'newParagraph', data})

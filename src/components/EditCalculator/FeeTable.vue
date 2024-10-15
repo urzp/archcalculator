@@ -8,7 +8,7 @@
                     Anrechenbare Kosten
                     <div class="type-value">
                         <div>{{ type_value.value }}</div>
-                        <Select_List :data="type_value" right @selected="data=>selectTypeValue(data)"/>
+                        <Select_List stopEventBus :data="type_value" right @selected="data=>selectTypeValue(data)"/>
                     </div>
                 </div>
                 <div class="row-rate-value" v-for="item, index in rate_values" :key="item.id" @contextmenu="contectMenuShow($event); preparationListData(index)">

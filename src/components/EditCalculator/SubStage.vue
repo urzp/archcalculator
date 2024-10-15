@@ -10,7 +10,7 @@
                         <div class="number">{{ toLetters(index + 1) }}</div>
                         <ImputTextMLine width="1000px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                     </div>
-                    <div class="part right-part">
+                    <div v-if="!!list.length"  class="part right-part">
                         <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                     </div>
                 </div>
@@ -51,8 +51,8 @@ export default {
             let data = {
                 id_stage:this.id_stage, 
                 number: this.list.length,
-                name: '----',
-                percent: null,
+                name: '',
+                percent: '',
             }
             await apiData({typeData:'newSubStage', data})
             this.getData()    

@@ -26,6 +26,10 @@ export default{
     },
     props:{
         data: Object,
+        stopEventBus:{
+            type:Boolean,
+            default:false,
+        },
         right:{
             type:Boolean,
             default: false
@@ -49,7 +53,7 @@ export default{
             let val = item.value
             let id = item.id
             this.$emit('selected', {id_item:id, value:val})
-            EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
+            if(!this.stopEventBus) EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:id, value:val})
             this.close()
         },
         close(){

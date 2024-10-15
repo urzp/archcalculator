@@ -33,6 +33,7 @@ export async function getClipboard() {
     data = data.replaceAll(' ', '')
     data = data.split(/\r?\n/)
     data = data.filter(function(item){return !!item});
+    data = data.map(item=>item.replace(/,/, '.'))
     if( !!data.find(function(item){return !Number(item)})) return []
     return data
 }

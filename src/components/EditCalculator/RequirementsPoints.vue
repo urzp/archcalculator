@@ -6,7 +6,7 @@
                 <div class="number">#</div>
                 <div class="name">Name</div>
             </div>
-            <div class="part left-right">
+            <div v-if="!!list.length" class="part left-right">
             <div>Anforderungen:</div>
             <div class="min">geringe </div>
             <div class="max">hohe</div>
@@ -66,9 +66,9 @@ export default{
             let data = {
                 id_paragraph:this.id_paragraph, 
                 sequence: this.list.length,
-                name: '----',
-                minPoint: 0,
-                maxPoint: 0,
+                name: '',
+                minPoint: '',
+                maxPoint: '',
             }
             await apiData({typeData:'newRequirementsPoints', data})
             this.getData()    

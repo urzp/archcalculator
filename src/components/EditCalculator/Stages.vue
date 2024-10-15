@@ -6,7 +6,7 @@
                 <div class="number">#</div>
                 <div class="name">Name</div>
             </div>
-            <div class="part left-right">
+            <div v-if="!!list.length" class="part left-right">
             <div class="value">Prozent %</div>
             </div>
         </div>
@@ -64,8 +64,8 @@ export default {
             let data = {
                 id_paragraph:this.id_paragraph, 
                 number: this.list.length,
-                name: '----',
-                percent: 0,
+                name: '',
+                percent: '',
             }
             await apiData({typeData:'newStage', data})
             this.getData()    
