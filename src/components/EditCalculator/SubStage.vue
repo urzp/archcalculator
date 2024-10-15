@@ -1,5 +1,6 @@
 <template>
-    <div class="wrap">
+    <ContextMenu :data ="contextMenu" @action="data=>actionContextMenu(data)"/>
+    <div class="wrap" @contextmenu="contectMenuShow($event)">
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="wrap_item">
@@ -32,13 +33,21 @@ export default {
         return{
             list:[],
             toLetters: toLetters,
+            contextMenu:{
+                positon:{x:50,y:200},
+                title: 'Leistungsphasen Unterabschnitt',
+                items:[
+                    {id:1, label: 'Copy list', action: this.copySubStage},
+                    {id:2, label: 'Paste list', action: this.pasteSubStage},
+                ]
+            },
         }
     },
     props:{
         id_stage:String,
     },
     watch:{
-        id_paragraph(){
+        id_stage(){
             this.getData()
         }
     },
@@ -66,6 +75,23 @@ export default {
         async deleteElement(id){
             await apiData({typeData:'deleteSubStages', data: id})
             this.getData()    
+        },
+        contectMenuShow(e){
+            e.preventDefault();
+            this.contextMenu.positon.x = e.pageX + 20
+            this.contextMenu.positon.y = e.pageY - 20
+        },
+        actionContextMenu(index){
+            this.contextMenu.items[index].action()
+        },
+        copySubStage(){
+            localStorage.setItem('buffer_subStage_id', this.id_stage)
+        },
+        async pasteSubStage(){
+            let id_stage_copy = localStorage.getItem('buffer_subStage_id', this.id_stage)
+            let id_stage_paste = this.id_stage
+            await apiData({typeData:'copySubStage', data: {id_stage_copy, id_stage_paste}})
+            this.getData()
         }
     }
 }

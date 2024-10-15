@@ -1,5 +1,5 @@
 <template>
-    <ContextMenu :data ="contextMenu" @pasteАccept="updateListData()"/>
+    <ContextMenu :data ="contextMenu" @action="updateListData()"/>
     <div class="wrap">
         <div class="title">Honorar Table</div>
         <div class="table">
@@ -66,6 +66,7 @@ export default{
             honorarZones:[],
             contextMenu:{
                 positon:{x:50,y:200},
+                title:'Honorar Table',
                 items:[{id:1, label: 'Paste Сolumn'}]
             },
             pripareListData:{

@@ -1,6 +1,7 @@
 <template>
     <div v-if="show" class="contect-menu" :style="`left: ${data.positon.x}px; top: ${data.positon.y}px;`" >
-        <div class="item" v-for="item in data.items" :key="item.id" @click ="$emit('pasteАccept');close()">
+        <div class="title">{{ data.title }}</div>
+        <div class="item" v-for="item, index in data.items" :key="item.id" @click ="$emit('action', index);close()">
             {{ item.label }}
         </div>
     </div>
@@ -26,7 +27,7 @@ export default{
             default: '45px',
         }
     },
-    emits:['pasteАccept'],
+    emits:['action'],
     watch:{
         data:{
             handler(){
@@ -54,8 +55,9 @@ export default{
         position: absolute;
         left:100px;
         top: 100px;
-        padding: 5px 15px;
+        padding: 5px 0px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: #fff;
@@ -66,8 +68,24 @@ export default{
         box-shadow: 5px 5px 10px #979797;
         z-index: 100;
     }
+    .title{
+        font-family: 'Raleway-Regular';
+        font-size: 16px;
+        color: #494949;
+        padding: 5px 15px;
+        border-bottom: 1px solid #d6d6d6;
+    }
     .item{
+        margin: 5px 0;
         cursor: pointer;
+        padding: 0 15px;
+        width: 100%;
+        font-family: 'Raleway-Regular';
+        font-size: 14px;
+    }
+    .item:hover{
+        color: #fff;
+        background-color: var(--color-akcent);
     }
     .bg_for_close_list{
         position: fixed;
