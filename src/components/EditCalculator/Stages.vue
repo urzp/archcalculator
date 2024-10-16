@@ -68,6 +68,8 @@ export default {
     },
     methods:{
         async getData(){
+            this.list = []
+            this.subShowList = []
             let result = await apiData({typeData:'Stages', id: this.id_paragraph})
             this.list = result.data
         },

@@ -7,9 +7,12 @@ $data['name'] = $input_data -> name;
 $data['sequence'] = $input_data -> sequence;
 crud_create('paragraphs', $data);
 
+$id = end(crud_read('paragraphs'))['id'];
+
+
 $result = (object) [
     'success' => true,
-    'data' => $data,
+    'id' => $id,
 ];
 
 ?>

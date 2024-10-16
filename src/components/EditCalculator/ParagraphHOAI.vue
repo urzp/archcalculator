@@ -91,7 +91,7 @@ export default{
         data_HOAI:Object,
     },
     watch:{
-        id_HOAI(){
+         id_HOAI(){
             this.clearData()
             this.getData()
         }
@@ -138,11 +138,10 @@ export default{
                 name:'§ New',
                 sequence,
             }
-            await apiData({typeData:'newParagraph', data})
+            let result = await apiData({typeData:'newParagraph', data})
+            this.data.id = result.id
             await this.getData()
-            last = this.data.list.length - 1
-            last = this.data.list[last].id
-            this.select(last)
+            this.select(result.id)
         },
         async moveElemnt(data){
             let element = data[0]

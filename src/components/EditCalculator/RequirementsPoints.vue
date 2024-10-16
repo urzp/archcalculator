@@ -53,6 +53,7 @@ export default{
     },
     methods:{
         async getData(){
+            this.list = []
             let result = await apiData({typeData:'RequirementsPoints', id: this.id_paragraph})
             this.list = result.data
         },

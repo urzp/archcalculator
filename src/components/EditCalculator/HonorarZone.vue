@@ -44,6 +44,7 @@ export default{
     },
     methods:{
         async getData(){
+            this.list = []
             let result = await apiData({typeData:'HonorarZone', id: this.id_paragraph})
             this.list = result.data
         },

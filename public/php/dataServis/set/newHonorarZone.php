@@ -1,5 +1,4 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/php/modules/functions.php';
 
 $id_paragraph = $rq_data -> data;
 

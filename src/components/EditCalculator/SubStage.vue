@@ -53,6 +53,7 @@ export default {
     },
     methods:{
         async getData(){
+            this.list = []
             let result = await apiData({typeData:'SubStage', id: this.id_stage})
             this.list = result.data
         },
