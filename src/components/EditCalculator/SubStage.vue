@@ -85,10 +85,10 @@ export default {
             this.contextMenu.items[index].action()
         },
         copySubStage(){
-            localStorage.setItem('buffer_subStage_id', this.id_stage)
+            localStorage.setItem('copy_subStage_id', this.id_stage)
         },
         async pasteSubStage(){
-            let id_stage_copy = localStorage.getItem('buffer_subStage_id', this.id_stage)
+            let id_stage_copy = localStorage.getItem('copy_subStage_id', this.id_stage)
             let id_stage_paste = this.id_stage
             await apiData({typeData:'copySubStage', data: {id_stage_copy, id_stage_paste}})
             this.getData()

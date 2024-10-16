@@ -1,5 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/php/config.php';
+include $_SERVER['DOCUMENT_ROOT'].'/php/modules/functions.php';
 header('Access-Control-Allow-Origin: *');
 $post = file_get_contents("php://input");
 $post = json_decode($post);

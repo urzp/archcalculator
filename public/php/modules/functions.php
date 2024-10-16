@@ -10,4 +10,19 @@ function int2roman($n) {
 }
 
 
+function newOrder($newOrderData, $tableName, $selector){
+    $newOrderData = crud_read($tableName,"*", $selector);
+    foreach($newOrderData as $index=>$item){
+        foreach ($item as $key => $value){
+            if($key!='id'){
+                $update_data[$key] = $value;
+            }else{
+                $selector = "`id` = '$value'";
+            }
+            $update_data['number']=$index;
+        }
+        crud_update($tableName, $update_data, $selector);
+    }
+}
+
 ?>

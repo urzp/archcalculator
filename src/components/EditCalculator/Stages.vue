@@ -1,6 +1,5 @@
 <template>
     <ContextMenu :data ="contextMenu" @action="data=>actionContextMenu(data)"/>
-    <ContextMenu :data ="contextMenuItem" @action="data=>actionContextMenuItem(data)"/>  
     <div class="wrap" @contextmenu.stop="contectMenuShow($event)">
         <div class="title">Leistungsphasen</div>
         <div class="header">
@@ -13,7 +12,8 @@
             </div>
         </div>
         <div class="list">
-            <div class="item" v-for="item, index in list" :key="item.id" @contextmenu.stop="contectMenuItemShow($event,index)">
+            <div class="item" 
+            v-for="item, index in list" :key="item.id" >
                 <div class="wrap_item">
                     <div class="part left-part">
                         <div class="hover-panel">
@@ -53,15 +53,7 @@ export default {
                 items:[
                     {id:1, label: 'Copy', action: this.copyStage},
                     {id:2, label: 'Paste', action: this.pasteStage},
-                ]
-            },
-            contextMenuItem:{
-                positon:{x:50,y:200},
-                title: 'Leistungsphasen Punkt',
-                indexSelectItem:'',
-                items:[
-                    {id:1, label: 'Copy Punkt', action: this.copyItemStage},
-                    {id:2, label: 'Paste Punkt', action: this.pasteItemStage},
+                    {id:3, label: 'Paste mit Unterabsätzen', action: this.pasteStageDeep},
                 ]
             },
         }
@@ -107,24 +99,18 @@ export default {
             this.contextMenu.positon.x = e.pageX + 20
             this.contextMenu.positon.y = e.pageY - 20
         },
-        contectMenuItemShow(e, index){
-            this.contextMenuItem.indexSelectItem = index
-            e.preventDefault();
-            this.contextMenuItem.positon.x = e.pageX + 20
-            this.contextMenuItem.positon.y = e.pageY - 20
-        },
         actionContextMenu(index){
             this.contextMenu.items[index].action()
         },
-        actionContextMenuItem(index){
-            this.contextMenuItem.items[index].action()
-        },
         copyStage(){
-            localStorage.setItem('buffer_stage_id_paragraph', this.id_paragraph)
+            localStorage.setItem('copy_stage_paragraph_id', this.id_paragraph)
         },
-        copyItemStage(){
-            let id = this.list[this.contextMenuItem.indexSelectItem].id
-            localStorage.setItem('buffer_id_stage', id)
+        pasteStageDeep(){ this.pasteStage(true) },
+        async pasteStage(deep=''){
+            let id_paragraph_stage_copy = localStorage.getItem('copy_stage_paragraph_id')
+            let id_paragraph_stage_paste = this.id_paragraph
+            await apiData({typeData:'copyStage', data: {id_paragraph_stage_copy, id_paragraph_stage_paste, deep}})
+            this.getData()
         }
     }
 }

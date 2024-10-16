@@ -16,6 +16,8 @@ foreach($copy_data as $copy_element){
     crud_create('subStage', $data_element);
 }
 
+$selector = "`id_stage` = '$id_stage_paste' ORDER BY `id` ASC, cast(`number` as unsigned)  ASC";
+newOrder($newOrderData, 'subStage', $selector);
 
 $result = (object) [
     'success' => true,
