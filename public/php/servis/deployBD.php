@@ -1,7 +1,7 @@
 <?php
 
 //$mysql = new mysqli('localhost','ermak8nk_deploy','k%MC0FPpWkhI','ermak8nk_deploy');
-$mysql = new mysqli('localhost','ermak8nk_arcalc','HR&oAEWI&3co','ermak8nk_arcalc');
+$mysql = new mysqli('10.35.233.88:3306','k152370_HOAI','E44rf&7k4','k152370_HOAI');
 
 $data['HOAI_versions'] = "CREATE TABLE HOAI_versions
 (
@@ -46,6 +46,7 @@ $data['feeTableRateValue'] = "CREATE TABLE feeTableRateValue
 (
     id int(50) PRIMARY KEY AUTO_INCREMENT,
     id_paragraph int(50),
+    number varchar(5),
     value varchar(100)
 )";
 

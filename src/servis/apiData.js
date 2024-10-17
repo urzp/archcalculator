@@ -1,4 +1,5 @@
 export  async function apiData(rq_data = {}){
+    //let baseUrl = 'https://hosting209012.ae957.netcup.net/php/dataServis/index.php'
     let baseUrl = 'https://arcalc.ru/php/dataServis/index.php';
     let url = baseUrl
     // let storageUser = sessionStorage.getItem('user')
