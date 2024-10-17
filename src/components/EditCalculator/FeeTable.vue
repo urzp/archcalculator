@@ -46,6 +46,7 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
+import { contectMenuShow } from '@/servis/contextMenu.js'
 import { lastNumber, convertToRoman, getClipboard, rateFillData, rateZoneFillData } from '@/servis/functions.js'
 export default{
     name: 'FeeTable',
@@ -129,9 +130,7 @@ export default{
             return 'bis | von'
         },
         contectMenuShow(e){
-            e.preventDefault();
-            this.contextMenu.positon.x = e.pageX + 20
-            this.contextMenu.positon.y = e.pageY - 20
+            contectMenuShow(e,this.contextMenu)
         },
         preparationListData(index_rate, index_zone=''){
             this.pripareListData.index_rate = index_rate

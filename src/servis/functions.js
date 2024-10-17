@@ -28,13 +28,13 @@ export function convertToRoman(number) {
     }, '');
 }
 
-export async function getClipboard() {
+export async function getClipboard(type='number') {
     let data = await navigator.clipboard.readText()
-    data = data.replaceAll(' ', '')
+    if(type=='number') data = data.replaceAll(' ', '')
     data = data.split(/\r?\n/)
     data = data.filter(function(item){return !!item});
-    data = data.map(item=>item.replace(/,/, '.'))
-    if( !!data.find(function(item){return !Number(item)})) return []
+    if(type=='number') data = data.map(item=>item.replace(/,/, '.'))
+    if(type=='number') if( !!data.find(function(item){return !Number(item)})) return []
     return data
 }
 

@@ -1,4 +1,5 @@
 <template>
+    <ContextMenu :data ="contextMenu" @action="updateListData()"/>
     <div class="wrap">
         <div class="title">Bewertungsmerkmale</div>
         <div class="header">
@@ -13,17 +14,23 @@
             </div>
         </div>
         <div class="list">
-            <div class="item" v-for="item, index in list" :key="item.id">
+            <div class="item" v-for="item, index in list" :key="item.id" >
                 <div class="part left-part">
                     <div class="hover-panel">
                         <DeleteButton @click.stop="deleteElement(item.id)" width="35px" heigth="28px"/>
                     </div>
                     <div class="number">{{ index + 1 }}</div>
-                    <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
+                    <div @contextmenu="contectMenuShow($event); contextMenu.index=index; contextMenu.colum='name'" >
+                        <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
+                    </div>
                 </div>
                 <div class="part right-part">
-                    <InputText width="55px" :value="item.minPoint" @submit_event="value=>update(index, value, 'minPoint')"/>
-                    <InputText width="40px" :value="item.maxPoint" @submit_event="value=>update(index, value, 'maxPoint')"/>
+                    <div @contextmenu="contectMenuShow($event); contextMenu.index=index; contextMenu.colum='minPoint'" >
+                        <InputText width="55px" :value="item.minPoint" @submit_event="value=>update(index, value, 'minPoint')"/>
+                    </div>
+                    <div @contextmenu="contectMenuShow($event); contextMenu.index=index; contextMenu.colum='maxPoint'" >
+                        <InputText width="40px" :value="item.maxPoint" @submit_event="value=>update(index, value, 'maxPoint')"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,6 +40,8 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { contectMenuShow } from '@/servis/contextMenu.js'
+import { getClipboard } from '@/servis/functions.js'
 export default{
     name: 'RequirementsPoints',
     mounted(){
@@ -40,7 +49,14 @@ export default{
     },
     data(){
         return{
-            list:[]
+            list:[],
+            contextMenu:{
+                colum:'',
+                index:0,
+                positon:{x:50,y:200},
+                title:'Bewertungsmerkmale',
+                items:[{id:1, label: 'Paste Сolumn'}]
+            },
         }
     },
     props:{
@@ -77,6 +93,33 @@ export default{
         async deleteElement(id){
             await apiData({typeData:'deleteRequirementsPoints', data: id})
             this.getData()    
+        },
+        contectMenuShow(e){
+            contectMenuShow(e,this.contextMenu)
+        },
+        async updateListData(){
+            console.log(this.contextMenu.index, this.contextMenu.colum)
+            let typeData = 'number'
+            if(this.contextMenu.colum=='name') typeData = "string"
+            let data = await getClipboard(typeData)
+            if (!data||data.length==0) return false 
+            let table = 'requirementsPoints'
+            let parent_name = 'id_paragraph'
+            let parent_id = this.id_paragraph
+            let index_from = this.contextMenu.index
+            let colum = this.contextMenu.colum
+            await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data}})
+
+            
+            // if(index_zone===''){
+            //     typeData = 'updateListFeeTableRate'
+            //     newData = await  rateFillData(this.id_paragraph, index_rate, this.rate_values, data)
+            // }else{
+            //     typeData = 'updateListRateZoneFeeTable'
+            //     newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
+            // }
+            // await apiData({typeData, data: newData})
+            // this.getData() 
         }
     }
 }
