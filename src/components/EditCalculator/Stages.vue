@@ -17,7 +17,7 @@
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id" >
                 <div class="wrap_item">
-                    <div class="part left-part">
+                    <div class="part left-part" @contextmenu="contextMenu.index=index; contextMenu.colum='name'">
                         <div class="hover-panel">
                             <DeleteButton  width="35px" heigth="28px" @click.stop="deleteElement(item.id)"/>
                         </div>
@@ -25,7 +25,7 @@
                         <ToggleButton closed @switch_tg="value=>showSub(value, index)"/>
                         <InputText width="800px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                     </div>
-                    <div class="part right-part">
+                    <div class="part right-part" @contextmenu="contextMenu.index=index;  contextMenu.colum='percent'">
                         <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                     </div>
                 </div>
@@ -43,6 +43,7 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 import { contectMenuShow } from '@/servis/contextMenu.js'
+import { getClipboard } from '@/servis/functions.js'
 export default {
     name:'Stages',
     mounted(){
@@ -53,12 +54,15 @@ export default {
             list:[],
             subShowList:[],
             contextMenu:{
+                index:0,
+                colum:'',
                 positon:{x:50,y:200},
                 title: 'Leistungsphasen',
                 items:[
                     {id:1, label: 'Copy', action: this.copyStage},
                     {id:2, label: 'Paste', action: this.pasteStage},
                     {id:3, label: 'Paste mit Unterabsätzen', action: this.pasteStageDeep},
+                    {id:4, label: 'Paste Сolumn', action: this.updateListData}
                 ]
             },
         }
@@ -73,8 +77,6 @@ export default {
     },
     methods:{
         async getData(){
-            this.list = []
-            this.subShowList = []
             let result = await apiData({typeData:'Stages', id: this.id_paragraph})
             this.list = result.data
         },
@@ -116,7 +118,21 @@ export default {
             let id_paragraph_stage_paste = this.id_paragraph
             await apiData({typeData:'copyStage', data: {id_paragraph_stage_copy, id_paragraph_stage_paste, deep}})
             this.getData()
+        },
+        async updateListData(){
+            let typeData = 'number'
+            if(this.contextMenu.colum=='name') typeData = "string"
+            let data = await getClipboard(typeData)
+            if (!data||data.length==0) return false 
+            let table = 'Stages'
+            let parent_name = 'id_paragraph'
+            let parent_id = this.id_paragraph
+            let index_from = this.contextMenu.index
+            let colum = this.contextMenu.colum
+            await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data}})
+            this.getData() 
         }
+
     }
 }
 

@@ -39,8 +39,7 @@ foreach ($list as  $i =>  $item){
 
 $selector = "`$parent_name` = '$parent_id' ORDER BY `id` ASC, cast(`number` as unsigned)  ASC";
 
-newOrder($newOrderData, $table, $selector);
-
+newOrder('', $table, $selector);
 
 
 $result = (object) [

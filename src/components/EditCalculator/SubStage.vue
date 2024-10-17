@@ -6,14 +6,14 @@
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
                 <div class="wrap_item">
-                    <div class="part left-part">
+                    <div class="part left-part" @contextmenu="contextMenu.index=index; contextMenu.colum='name'">
                         <div class="hover-panel">
                             <DeleteButton @click.stop="deleteElement(item.id)" width="29px" heigth="20px"/>
                         </div>
                         <div class="number">{{ toLetters(index + 1) }}</div>
                         <ImputTextMLine width="1000px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                     </div>
-                    <div v-if="!!list.length"  class="part right-part">
+                    <div v-if="!!list.length"  class="part right-part" @contextmenu="contextMenu.index=index;  contextMenu.colum='percent'">
                         <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                     </div>
                 </div>
@@ -28,6 +28,7 @@
 import { apiData } from '@/servis/apiData.js'
 import { toLetters } from '@/servis/functions'
 import { contectMenuShow } from '@/servis/contextMenu.js'
+import { getClipboard } from '@/servis/functions.js'
 export default {
     name:'SubStage',
     mounted(){
@@ -43,6 +44,7 @@ export default {
                 items:[
                     {id:1, label: 'Copy list', action: this.copySubStage},
                     {id:2, label: 'Paste list', action: this.pasteSubStage},
+                    {id:3, label: 'Paste Сolumn', action: this.updateListData},
                 ]
             },
         }
@@ -95,6 +97,19 @@ export default {
             let id_stage_paste = this.id_stage
             await apiData({typeData:'copySubStage', data: {id_stage_copy, id_stage_paste}})
             this.getData()
+        },
+        async updateListData(){
+            let typeData = 'number'
+            if(this.contextMenu.colum=='name') typeData = "string"
+            let data = await getClipboard(typeData)
+            if (!data||data.length==0) return false 
+            let table = 'subStage'
+            let parent_name = 'id_stage'
+            let parent_id = this.id_stage
+            let index_from = this.contextMenu.index
+            let colum = this.contextMenu.colum
+            await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data}})
+            this.getData() 
         }
     }
 }

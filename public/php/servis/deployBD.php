@@ -62,7 +62,7 @@ $data['requirementsPoints'] = "CREATE TABLE requirementsPoints
 (
     id int(50) PRIMARY KEY AUTO_INCREMENT,
     id_paragraph int(50),
-    sequence varchar(5),
+    number varchar(5),,
     name varchar(250),
     minPoint varchar(10),
     maxPoint varchar(10),

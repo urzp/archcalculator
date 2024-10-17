@@ -69,7 +69,6 @@ export default{
     },
     methods:{
         async getData(){
-            this.list = []
             let result = await apiData({typeData:'RequirementsPoints', id: this.id_paragraph})
             this.list = result.data
         },
@@ -82,7 +81,7 @@ export default{
         async newElement(){
             let data = {
                 id_paragraph:this.id_paragraph, 
-                sequence: this.list.length,
+                number: this.list.length,
                 name: '',
                 minPoint: '',
                 maxPoint: '',
@@ -98,7 +97,6 @@ export default{
             contectMenuShow(e,this.contextMenu)
         },
         async updateListData(){
-            console.log(this.contextMenu.index, this.contextMenu.colum)
             let typeData = 'number'
             if(this.contextMenu.colum=='name') typeData = "string"
             let data = await getClipboard(typeData)
@@ -109,17 +107,7 @@ export default{
             let index_from = this.contextMenu.index
             let colum = this.contextMenu.colum
             await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data}})
-
-            
-            // if(index_zone===''){
-            //     typeData = 'updateListFeeTableRate'
-            //     newData = await  rateFillData(this.id_paragraph, index_rate, this.rate_values, data)
-            // }else{
-            //     typeData = 'updateListRateZoneFeeTable'
-            //     newData = await  rateZoneFillData( index_rate, index_zone, this.rate_values, data)
-            // }
-            // await apiData({typeData, data: newData})
-            // this.getData() 
+            this.getData() 
         }
     }
 }
