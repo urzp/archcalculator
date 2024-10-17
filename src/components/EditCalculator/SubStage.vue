@@ -1,5 +1,7 @@
 <template>
+
     <ContextMenu :data ="contextMenu" @action="data=>actionContextMenu(data)"/>
+
     <div class="wrap" @contextmenu.stop="contectMenuShow($event)">
         <div class="list">
             <div class="item" v-for="item, index in list" :key="item.id">
@@ -19,11 +21,13 @@
         </div>
         <NewButton style="margin-top: 10px;" width="100px" heigth="24px" @click="newElement()"/>
     </div>
+
 </template>
 
 <script>
 import { apiData } from '@/servis/apiData.js'
 import { toLetters } from '@/servis/functions'
+import { contectMenuShow } from '@/servis/contextMenu.js'
 export default {
     name:'SubStage',
     mounted(){
@@ -78,9 +82,7 @@ export default {
             this.getData()    
         },
         contectMenuShow(e){
-            e.preventDefault();
-            this.contextMenu.positon.x = e.pageX + 20
-            this.contextMenu.positon.y = e.pageY - 20
+            contectMenuShow(e,this.contextMenu)
         },
         actionContextMenu(index){
             this.contextMenu.items[index].action()

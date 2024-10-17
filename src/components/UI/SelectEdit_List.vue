@@ -72,7 +72,7 @@ export default{
         deep: true
         }
     },
-    emits:['selected', 'newElementt','deleteElement','moveElement'],
+    emits:['selected', 'newElement','deleteElement','moveElement'],
     methods:{
         updateData(){
             this.list = this.data.list

@@ -1,5 +1,7 @@
 <template>
+
     <ContextMenu :data ="contextMenu" @action="data=>actionContextMenu(data)"/>
+
     <div class="wrap" @contextmenu.stop="contectMenuShow($event)">
         <div class="title">Leistungsphasen</div>
         <div class="header">
@@ -11,13 +13,13 @@
             <div class="value">Prozent %</div>
             </div>
         </div>
+
         <div class="list">
-            <div class="item" 
-            v-for="item, index in list" :key="item.id" >
+            <div class="item" v-for="item, index in list" :key="item.id" >
                 <div class="wrap_item">
                     <div class="part left-part">
                         <div class="hover-panel">
-                            <DeleteButton @click.stop="deleteElement(item.id)" width="35px" heigth="28px"/>
+                            <DeleteButton  width="35px" heigth="28px" @click.stop="deleteElement(item.id)"/>
                         </div>
                         <div class="number">{{ index + 1 }}</div>
                         <ToggleButton closed @switch_tg="value=>showSub(value, index)"/>
@@ -32,12 +34,15 @@
                 </div>
             </div>
         </div>
+
         <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="newElement()"/>
+
     </div>
 </template>
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { contectMenuShow } from '@/servis/contextMenu.js'
 export default {
     name:'Stages',
     mounted(){
@@ -97,9 +102,7 @@ export default {
             this.subShowList[index] = value
         },
         contectMenuShow(e){
-            e.preventDefault();
-            this.contextMenu.positon.x = e.pageX + 20
-            this.contextMenu.positon.y = e.pageY - 20
+            contectMenuShow(e,this.contextMenu)
         },
         actionContextMenu(index){
             this.contextMenu.items[index].action()
