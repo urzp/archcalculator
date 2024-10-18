@@ -1,6 +1,15 @@
 <?php
 
 switch ($typeData) {
+    case 'deleteAllowableCosts':
+        include 'deleteAllowableCosts.php';
+        break; 
+    case 'updateAllowableCosts':
+        include 'updateAllowableCosts.php';
+        break;   
+    case 'newAllowableCosts':
+        include 'newAllowableCosts.php';
+        break;   
     case 'updateList':
         include 'updateList.php';
         break;
