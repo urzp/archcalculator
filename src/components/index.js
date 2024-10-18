@@ -24,14 +24,15 @@ import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
-import EditCalculator from './EditCalculator/EditCalc.vue'
-import HOAIVersion from './EditCalculator/HOAIVersion.vue'
-import ParagraphHOAI from './EditCalculator/ParagraphHOAI.vue'
-import FeeTable from './EditCalculator/FeeTable.vue'
-import RequirementsPoints from './EditCalculator/RequirementsPoints.vue'
-import HonorarZone from './EditCalculator/HonorarZone.vue'
-import Stages from './EditCalculator/Stages.vue'
-import SubStage from './EditCalculator/SubStage.vue'
+import EditCalculator from './EditCalculator/01_EditCalc.vue'
+import HOAIVersion from './EditCalculator/02_HOAIVersion.vue'
+import ParagraphHOAI from './EditCalculator/03_ParagraphHOAI.vue'
+import AllowableCosts from './EditCalculator/04_AllowableCosts.vue'
+import FeeTable from './EditCalculator/05_FeeTable.vue'
+import RequirementsPoints from './EditCalculator/06_RequirementsPoints.vue'
+import HonorarZone from './EditCalculator/07_HonorarZone.vue'
+import Stages from './EditCalculator/08_Stages.vue'
+import SubStage from './EditCalculator/09_SubStage.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -82,6 +83,7 @@ export default [
     EditCalculator,
     HOAIVersion,
     ParagraphHOAI,
+    AllowableCosts,
     FeeTable,
     HonorarZone,
     Stages,

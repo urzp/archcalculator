@@ -25,6 +25,14 @@ $data['paragraphs'] = "CREATE TABLE paragraphs
     link_special_services varchar(500)
 )";
 
+$data['allowableCosts'] = "CREATE TABLE allowableCosts
+(
+    id int(50) PRIMARY KEY AUTO_INCREMENT,
+    id_paragraph int(50),
+    number varchar(5),
+    name varchar(100),
+)";
+
 $data['feeTableHonorarZones'] = "CREATE TABLE feeTableHonorarZones
 (
     id int(50) PRIMARY KEY AUTO_INCREMENT,

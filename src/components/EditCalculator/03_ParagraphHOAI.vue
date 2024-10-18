@@ -42,6 +42,7 @@
                 <InputText :value="data.link_fee" @submit_event="value=>update(value, 'link_fee')" width="600px"/>
             </div>
         </div>
+        <AllowableCosts/>
         <FeeTable :id_paragraph="data.id"/>
         <RequirementsPoints :id_paragraph="data.id"/>
         <HonorarZone :id_paragraph="data.id"/>

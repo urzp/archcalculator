@@ -11,6 +11,8 @@ $colum = $update_data -> colum;
 
 $list = $update_data -> data;
 
+$stop_new = $update_data -> stop_new;
+
 $selector = "`$parent_name` = '$parent_id'";
 $allItems = crud_read($table,"*", $selector);
 
@@ -27,11 +29,13 @@ foreach ($allItems as $i => $item){
     }
 }
 
-foreach ($list as  $i =>  $item){
-    if( $i >= $data_index){
-        $value[$colum] = $item;
-        $value[$parent_name] = $parent_id;
-        crud_create($table, $value);
+if(!$stop_new){
+    foreach ($list as  $i =>  $item){
+        if( $i >= $data_index){
+            $value[$colum] = $item;
+            $value[$parent_name] = $parent_id;
+            crud_create($table, $value);
+        }
     }
 }
 

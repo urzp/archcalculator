@@ -1,4 +1,7 @@
 <template>
+
+    <ContextMenu :data ="contextMenu" @action="updateListData()"/>
+    
     <div class="wrap">
         <div class="title">Honorarzone</div>
         <div class="header">
@@ -10,7 +13,9 @@
             <div class="item" v-for="item, index in list" :key="item.id" v-show="index>0">
                 <div class="number">{{ index }}</div>
                 <div class="name">{{ item.name }}</div>
-                <InputText width="50px" :value="item.maxPoint" @submit_event="value=>update(index, value, 'maxPoint')"/>
+                <div @contextmenu="contectMenuShow($event); contextMenu.index=index; contextMenu.colum='maxPoint'" >
+                    <InputText width="50px" :value="item.maxPoint" @submit_event="value=>update(index, value, 'maxPoint')"/>
+                </div>
             </div>
         </div>
         <div class="panel">
@@ -23,6 +28,8 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
+import { contectMenuShow } from '@/servis/contextMenu.js'
+import { getClipboard } from '@/servis/functions.js'
 export default{
     name:'HonorarZone',
     mounted(){
@@ -32,6 +39,13 @@ export default{
     data(){
         return{
             list:[],
+            contextMenu:{
+                colum:'',
+                index:0,
+                positon:{x:50,y:200},
+                title:'Bewertungsmerkmale',
+                items:[{id:1, label: 'Paste Сolumn'}]
+            },
         }
     },
     props:{
@@ -61,6 +75,23 @@ export default{
         async deleteElement(){
             await apiData({typeData:'deleteHonorarZone', data: this.id_paragraph})
             EventBus.emit('reloadHonorarZone')           
+        },
+        contectMenuShow(e){
+            contectMenuShow(e,this.contextMenu)
+        },
+        async updateListData(){
+            let typeData = 'number'
+            if(this.contextMenu.colum=='name') typeData = "string"
+            let data = await getClipboard(typeData)
+            if (!data||data.length==0) return false 
+            let table = 'feeTableHonorarZones'
+            let parent_name = 'id_paragraph'
+            let parent_id = this.id_paragraph
+            let index_from = this.contextMenu.index 
+            let colum = this.contextMenu.colum
+            let stop_new = true
+            await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data, stop_new}})
+            this.getData() 
         }
     }
 
