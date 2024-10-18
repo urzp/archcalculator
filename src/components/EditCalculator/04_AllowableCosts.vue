@@ -56,7 +56,12 @@ export default{
     },
     methods:{
         async getData(){
-            let result = await apiData({typeData:'allowableCosts', id: this.id_paragraph})
+            let data = { 
+                table :'allowableCosts',
+                selector_name : 'id_paragraph',
+                selector : this.id_paragraph,
+            }
+            let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async update(index, value, val_name){
