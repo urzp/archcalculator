@@ -1,105 +1,48 @@
 <?php
 
 switch ($typeData) {
-    case 'deleteAllowableCosts':
-        include 'deleteAllowableCosts.php';
-        break; 
-    case 'updateAllowableCosts':
-        include 'updateAllowableCosts.php';
-        break;   
-    case 'newAllowableCosts':
-        include 'newAllowableCosts.php';
-        break;   
-    case 'updateList':
-        include 'updateList.php';
-        break;
-    case 'copyStage':
-        include 'copyStage.php';
-        break;
-    case 'copySubStage':
-        include 'copySubStage.php';
-        break; 
-    case 'updateSubStage':
-        include 'updateSubStage.php';
-        break; 
-    case 'deleteSubStages':
-        include 'deleteSubStage.php';
-        break; 
-    case 'newSubStage':
-        include 'newSubStage.php';
-        break;   
-    case 'updateStages':
-        include 'updateStages.php';
-        break; 
-    case 'deleteStages':
-        include 'deleteStages.php';
-        break; 
-    case 'newStage':
-        include 'newStage.php';
-        break;      
-    case 'deleteHonorarZone':
-        include 'deleteHonorarZone.php';
-        break;         
-    case 'newHonorarZone':
-        include 'newHonorarZone.php';
-        break;   
-    case 'updateHonorarZone':
-        include 'updateHonorarZone.php';
-        break;           
-    case 'deleteRequirementsPoints':
-        include 'deleteRequirementsPoints.php';
-        break;        
-    case 'newRequirementsPoints':
-        include 'newRequirementsPoints.php';
-        break;         
-    case 'updateRequirementsPoints':
-        include 'updateRequirementsPoints.php';
-        break;  
-    case 'updateListRateZoneFeeTable':
-        include 'updateListRateZoneFeeTable.php';
-        break;      
-    case 'updateListFeeTableRate':
-        include 'updateListFeeTableRate.php';
-        break;
-    case 'updateFeeTableHonorarZonesRateValue':
-        include 'updateFeeTableHonorarZonesRateValue.php';
-        break;
-    case 'updateFeeTableTypeValue':
-        include 'updateFeeTableTypeValue.php';
-        break;
-    case 'deleteFeeTableHonorarZone':
-        include 'deleteFeeTableHonorarZone.php';
-        break;
-    case 'newFeeTableHonorarZone':
-        include 'newFeeTableHonorarZone.php';
-        break;
-    case 'deleteFeeTableRate':
-        include 'deleteTableRate.php';
-        break;
-    case 'updateFeeTableRate':
-        include 'updateFeeTableRate.php';
-        break;
-    case 'newFeeTableRate':
-        include 'newFeeTableRate.php';
-        break;
-    case 'deleteParagraph':
-        include 'deleteParagraph.php';
-        break;
-    case 'newParagraph':
-        include 'newParagraph.php';
-        break;
-    case 'updateParagraph':
-        include 'updateParagraph.php';
-        break;
-    case 'updateHOAI':
-        include 'updateHOAI.php';
-        break;
-    case 'deleteHOAI':
-        include 'deleteHOAI.php';
-        break;
-    case 'newHOAI':
-        include 'newHOAI.php';
-        break;
+    case 'copyStage': include 'copy/Stage.php'; break;
+    case 'copySubStage': include 'copy/SubStage.php'; break; 
+}
+
+switch ($typeData) {
+    case 'deleteAllowableCosts': include 'delete/AllowableCosts.php';break; 
+    case 'deleteSubStages': include 'delete/SubStage.php';break; 
+    case 'deleteStages': include 'delete/Stages.php';break; 
+    case 'deleteHonorarZone': include 'delete/HonorarZone.php'; break;
+    case 'deleteRequirementsPoints': include 'delete/RequirementsPoints.php'; break;
+    case 'deleteFeeTableHonorarZone': include 'delete/FeeTableHonorarZone.php'; break;
+    case 'deleteFeeTableRate':  include 'delete/TableRate.php'; break;
+    case 'deleteParagraph': include 'delete/Paragraph.php'; break;
+    case 'deleteHOAI':  include 'delete/HOAI.php'; break;
+}
+
+switch ($typeData) {
+    case 'updateAllowableCosts': include 'update/AllowableCosts.php'; break;  
+    case 'updateList': include 'update/List.php'; break;
+    case 'updateSubStage': include 'update/SubStage.php'; break; 
+    case 'updateStages': include 'update/Stages.php'; break; 
+    case 'updateHonorarZone':   include 'update/HonorarZone.php'; break; 
+    case 'updateRequirementsPoints':    include 'update/RequirementsPoints.php'; break;
+    case 'updateListRateZoneFeeTable':  include 'update/ListRateZoneFeeTable.php'; break;      
+    case 'updateListFeeTableRate':  include 'update/ListFeeTableRate.php'; break;
+    case 'updateFeeTableHonorarZonesRateValue': include 'update/FeeTableHonorarZonesRateValue.php'; break;
+    case 'updateFeeTableTypeValue': include 'update/FeeTableTypeValue.php'; break;
+    case 'updateParagraph': include 'update/Paragraph.php'; break;
+    case 'updateHOAI':  include 'update/HOAI.php'; break;
+    case 'updateFeeTableRate':  include 'update/FeeTableRate.php'; break;
+}
+
+switch ($typeData) {
+    case 'newAllowableCosts': include 'new/AllowableCosts.php';break;   
+    case 'newSubStage': include 'new/SubStage.php'; break;   
+    case 'newStage':    include 'new/Stage.php'; break;      
+    case 'newHonorarZone':  include 'new/HonorarZone.php'; break;         
+    case 'newRequirementsPoints':   include 'new/RequirementsPoints.php'; break;         
+    case 'newFeeTableHonorarZone':  include 'new/FeeTableHonorarZone.php'; break;
+    case 'newFeeTableRate': include 'new/FeeTableRate.php'; break;
+    case 'newParagraph':    include 'new/Paragraph.php'; break;
+    case 'newHOAI': include 'new/HOAI.php'; break;
 }
 
 ?>
