@@ -37,6 +37,7 @@ export default{
     data(){
         return{
             list:[],
+            table:'allowableCosts',
             contextMenu:{
                 colum:'',
                 index:0,
@@ -57,7 +58,7 @@ export default{
     methods:{
         async getData(){
             let data = { 
-                table :'allowableCosts',
+                table :this.table,
                 selector_name : 'id_paragraph',
                 selector : this.id_paragraph,
             }
@@ -67,7 +68,8 @@ export default{
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateAllowableCosts', data: element})
+            let table = this.table
+            await apiData({typeData:'update', data: element, table})
             this.getData()
         },
         async newElement(){
@@ -76,11 +78,13 @@ export default{
                 number: this.list.length,
                 name: '',
             }
-            await apiData({typeData:'newAllowableCosts', data})
+            let table = this.table
+            await apiData({typeData:'new', data, table})
             this.getData()    
         },
         async deleteElement(id){
-            await apiData({typeData:'deleteAllowableCosts', data: id})
+            let table = this.table
+            await apiData({typeData:'delete', data:id, table})
             this.getData()    
         },
         contectMenuShow(e){

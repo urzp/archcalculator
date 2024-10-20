@@ -38,6 +38,7 @@ export default {
         return{
             list:[],
             toLetters: toLetters,
+            table :'subStage',
             contextMenu:{
                 positon:{x:50,y:200},
                 title: 'Leistungsphasen Unterabschnitt',
@@ -59,8 +60,12 @@ export default {
     },
     methods:{
         async getData(){
-            this.list = []
-            let result = await apiData({typeData:'SubStage', id: this.id_stage})
+            let data = { 
+                table : this.table,
+                selector_name : 'id_stage',
+                selector : this.id_stage,
+            }
+            let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async newElement(){
@@ -70,17 +75,20 @@ export default {
                 name: '',
                 percent: '',
             }
-            await apiData({typeData:'newSubStage', data})
+            let table = this.table
+            await apiData({typeData:'new', data, table})
             this.getData()    
         },
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateSubStage', data: element})
+            let table = this.table
+            await apiData({typeData:'update', data: element, table})
             this.getData()
         },
         async deleteElement(id){
-            await apiData({typeData:'deleteSubStages', data: id})
+            let table = this.table
+            await apiData({typeData:'delete', data:id, table})
             this.getData()    
         },
         contectMenuShow(e){

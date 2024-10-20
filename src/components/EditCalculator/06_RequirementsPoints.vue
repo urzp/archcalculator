@@ -50,6 +50,7 @@ export default{
     data(){
         return{
             list:[],
+            table:'requirementsPoints',
             contextMenu:{
                 colum:'',
                 index:0,
@@ -69,13 +70,19 @@ export default{
     },
     methods:{
         async getData(){
-            let result = await apiData({typeData:'RequirementsPoints', id: this.id_paragraph})
+            let data = { 
+                table : this.table,
+                selector_name : 'id_paragraph',
+                selector : this.id_paragraph,
+            }
+            let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateRequirementsPoints', data: element})
+            let table = this.table
+            await apiData({typeData:'update', data: element, table})
             this.getData()
         },
         async newElement(){
@@ -86,11 +93,13 @@ export default{
                 minPoint: '',
                 maxPoint: '',
             }
-            await apiData({typeData:'newRequirementsPoints', data})
+            let table = this.table
+            await apiData({typeData:'new', data, table})
             this.getData()    
         },
         async deleteElement(id){
-            await apiData({typeData:'deleteRequirementsPoints', data: id})
+            let table = this.table
+            await apiData({typeData:'delete', data:id, table})
             this.getData()    
         },
         contectMenuShow(e){

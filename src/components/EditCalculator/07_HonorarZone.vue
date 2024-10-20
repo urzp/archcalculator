@@ -29,7 +29,7 @@
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
 import { contectMenuShow } from '@/servis/contextMenu.js'
-import { getClipboard } from '@/servis/functions.js'
+import { getClipboard, lastElement } from '@/servis/functions.js'
 export default{
     name:'HonorarZone',
     mounted(){
@@ -39,6 +39,7 @@ export default{
     data(){
         return{
             list:[],
+            table :'feeTableHonorarZones',
             contextMenu:{
                 colum:'',
                 index:0,
@@ -58,14 +59,19 @@ export default{
     },
     methods:{
         async getData(){
-            this.list = []
-            let result = await apiData({typeData:'HonorarZone', id: this.id_paragraph})
+            let data = { 
+                table : this.table,
+                selector_name : 'id_paragraph',
+                selector : this.id_paragraph,
+            }
+            let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateHonorarZone', data: element})
+            let table = this.table
+            await apiData({typeData:'update', data: element, table})
             this.getData()
         },
         async newElement(){
@@ -73,7 +79,9 @@ export default{
             EventBus.emit('reloadHonorarZone')
         },
         async deleteElement(){
-            await apiData({typeData:'deleteHonorarZone', data: this.id_paragraph})
+            let table = this.table
+            let id = lastElement(this.list).id
+            await apiData({typeData:'delete', data:id, table})
             EventBus.emit('reloadHonorarZone')           
         },
         contectMenuShow(e){

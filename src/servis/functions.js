@@ -4,6 +4,11 @@ export function lastNumber(list, number='number'){
     return Number(last[number])
 }
 
+export function lastElement(list){
+    if (!list||!list.length) return false
+    return list[list.length - 1]
+}
+
 export function convertToRoman(number) {
     return [
         { value: 1000, char: 'M' },

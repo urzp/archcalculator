@@ -53,6 +53,7 @@ export default {
         return{
             list:[],
             subShowList:[],
+            table:'Stages',
             contextMenu:{
                 index:0,
                 colum:'',
@@ -77,7 +78,12 @@ export default {
     },
     methods:{
         async getData(){
-            let result = await apiData({typeData:'Stages', id: this.id_paragraph})
+            let data = { 
+                table: this.table,
+                selector_name : 'id_paragraph',
+                selector : this.id_paragraph,
+            }
+            let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async newElement(){
@@ -87,17 +93,20 @@ export default {
                 name: '',
                 percent: '',
             }
-            await apiData({typeData:'newStage', data})
+            let table = this.table
+            await apiData({typeData:'new', data, table})
             this.getData()    
         },
         async update(index, value, val_name){
             let element = this.list[index] 
             element[val_name] = value
-            await apiData({typeData:'updateStages', data: element})
+            let table = this.table
+            await apiData({typeData:'update', data: element, table})
             this.getData()
         },
         async deleteElement(id){
-            await apiData({typeData:'deleteStages', data: id})
+            let table = this.table
+            await apiData({typeData:'delete', data:id, table})
             this.getData()    
         },
         showSub(value, index){
