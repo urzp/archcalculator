@@ -41,11 +41,9 @@ export default {
             table :'subStage_l1',
             contextMenu:{
                 positon:{x:50,y:200},
-                title: 'Leistungsphasen Unterabschnitt',
+                title: 'Unterabschnitt Level 1',
                 items:[
-                    {id:1, label: 'Copy list', action: this.copySubStage},
-                    {id:2, label: 'Paste list', action: this.pasteSubStage},
-                    {id:3, label: 'Paste Сolumn', action: this.updateListData},
+                    {id:1, label: 'Paste Сolumn', action: this.updateListData},
                 ]
             },
         }
@@ -111,7 +109,7 @@ export default {
             if(this.contextMenu.colum=='name') typeData = "string"
             let data = await getClipboard(typeData)
             if (!data||data.length==0) return false 
-            let table = 'subStage'
+            let table = 'subStage_l1'
             let parent_name = 'id_subStage'
             let parent_id = this.id_subStage
             let index_from = this.contextMenu.index
