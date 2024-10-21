@@ -1,24 +1,13 @@
-export let lists = {
-    HOAT_v:[
-        {id:1,value:2002},
-        {id:2,value:2009},
-        {id:3,value:2013},
-        {id:4,value:2021},
-    ],
+import { apiData } from '@/servis/apiData.js'
 
-    Planing_Object:[
-        {id:1,value:'§18 Flächennutzungsplan'},
-        {id:2,value:'§19 Bebauungsplan'},
-        {id:3,value:'§23 Landschaftsplan'},
-        {id:4,value:'§24 Grünordnungsplan'},
-        {id:5,value:'§25 Landschaftsrahmenplan'},
-        {id:6,value:'§26 Landschaftspflegerischer Begleitplan'},
-        {id:7,value:'§27 Leistungsbild Pflege- und Entwicklungsplan'},
-        {id:8,value:'§34G Gebäude'},
-        {id:10,value:'§34I Innenräume'},
-        {id:11,value:'§39 Freianlagen'},
-        {id:12,value:'§43 Ingenieurbauwerke'},
-    ],
+let result  = await apiData({typeData:'Paragraphs', id_HOAI: 2})
+let Planing_Object = result.data.map(item=>{return { id:item.id, value: `${item.name} ${item.title}` } })
+
+
+export let lists = {
+
+    Planing_Object,
+
     Fee_Zone:[
         {id:1,value:'I'},
         {id:2,value:'II'},
