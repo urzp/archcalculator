@@ -10,16 +10,12 @@
                         <div class="hover-panel">
                             <DeleteButton @click.stop="deleteElement(item.id)" width="29px" heigth="20px"/>
                         </div>
-                        <div class="number">{{ toLetters(index + 1) }}</div>
-                        <ToggleButton closed @switch_tg="value=>showSub(value, index)"/>
-                        <ImputTextMLine width="970px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
+                        <div class="number">{{ toLetters(index + 1)+toLetters(index + 1) }}</div>
+                        <ImputTextMLine width="950px" :value="item.name" @submit_event="value=>update(index, value, 'name')"/>
                     </div>
                     <div v-if="!!list.length"  class="part right-part" @contextmenu="contextMenu.index=index;  contextMenu.colum='percent'">
                         <InputText width="55px" :value="item.percent" @submit_event="value=>update(index, value, 'percent')"/>
                     </div>
-                </div>
-                <div class="subStage" v-show="subShowList[index]">
-                    <SubStage_L1 :id_subStage="item.id"/>
                 </div>
             </div>
         </div>
@@ -34,16 +30,15 @@ import { toLetters } from '@/servis/functions'
 import { contectMenuShow } from '@/servis/contextMenu.js'
 import { getClipboard } from '@/servis/functions.js'
 export default {
-    name:'SubStage',
+    name:'SubStage_L1',
     mounted(){
         this.getData()
     },
     data(){
         return{
             list:[],
-            subShowList:[],
             toLetters: toLetters,
-            table :'subStage',
+            table :'subStage_l1',
             contextMenu:{
                 positon:{x:50,y:200},
                 title: 'Leistungsphasen Unterabschnitt',
@@ -56,10 +51,10 @@ export default {
         }
     },
     props:{
-        id_stage:String,
+        id_subStage:String,
     },
     watch:{
-        id_stage(){
+        id_subStage(){
             this.getData()
         }
     },
@@ -67,15 +62,15 @@ export default {
         async getData(){
             let data = { 
                 table : this.table,
-                selector_name : 'id_stage',
-                selector : this.id_stage,
+                selector_name : 'id_subStage',
+                selector : this.id_subStage,
             }
             let result = await apiData({typeData:'read', data})
             this.list = result.data
         },
         async newElement(){
             let data = {
-                id_stage:this.id_stage, 
+                id_subStage:this.id_subStage, 
                 number: this.list.length,
                 name: '',
                 percent: '',
@@ -96,9 +91,6 @@ export default {
             await apiData({typeData:'delete', data:id, table})
             this.getData()    
         },
-        showSub(value, index){
-            this.subShowList[index] = value
-        },
         contectMenuShow(e){
             contectMenuShow(e,this.contextMenu)
         },
@@ -106,12 +98,12 @@ export default {
             this.contextMenu.items[index].action()
         },
         copySubStage(){
-            localStorage.setItem('copy_subStage_id', this.id_stage)
+            localStorage.setItem('copy_subStage_id', this.id_subStage)
         },
         async pasteSubStage(){
-            let id_stage_copy = localStorage.getItem('copy_subStage_id', this.id_stage)
-            let id_stage_paste = this.id_stage
-            await apiData({typeData:'copySubStage', data: {id_stage_copy, id_stage_paste}})
+            let id_subStage_copy = localStorage.getItem('copy_subStage_id', this.id_subStage)
+            let id_subStage_paste = this.id_subStage
+            await apiData({typeData:'copySubStage', data: {id_subStage_copy, id_subStage_paste}})
             this.getData()
         },
         async updateListData(){
@@ -120,8 +112,8 @@ export default {
             let data = await getClipboard(typeData)
             if (!data||data.length==0) return false 
             let table = 'subStage'
-            let parent_name = 'id_stage'
-            let parent_id = this.id_stage
+            let parent_name = 'id_subStage'
+            let parent_id = this.id_subStage
             let index_from = this.contextMenu.index
             let colum = this.contextMenu.colum
             await apiData({typeData:'updateList', data: {table, parent_name, parent_id, index_from, colum, data}})
@@ -178,7 +170,7 @@ export default {
 
     .part{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 20px;
     }
     .right-part{

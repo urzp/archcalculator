@@ -57,7 +57,7 @@ export default{
 
 <style scoped>
     .value{
-        /* width: v-bind(width); */
+        width: v-bind(width);
         min-width: 50px;
         font-family: 'Raleway-Light';
         font-size: 18px;

@@ -95,6 +95,15 @@ $data['subStage'] = "CREATE TABLE subStage
     percent varchar(50)
 )";
 
+$data['subStage_l1'] = "CREATE TABLE subStage_l1
+(
+    id int(50) PRIMARY KEY AUTO_INCREMENT,
+    id_subStage int(50),
+    number varchar(5),
+    name varchar(500),
+    percent varchar(50)
+)";
+
 
 
 foreach($data as $item){

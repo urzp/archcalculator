@@ -186,7 +186,8 @@ export default {
 
     .number{
         font-family: 'Raleway-Light' ;
-        font-size: 18px;      
+        font-size: 18px;    
+        width: 15px;  
     }
 
     .part{

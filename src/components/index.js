@@ -33,6 +33,7 @@ import RequirementsPoints from './EditCalculator/06_RequirementsPoints.vue'
 import HonorarZone from './EditCalculator/07_HonorarZone.vue'
 import Stages from './EditCalculator/08_Stages.vue'
 import SubStage from './EditCalculator/09_SubStage.vue'
+import SubStage_L1 from './EditCalculator/10_SubStage_L1.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
@@ -88,6 +89,7 @@ export default [
     HonorarZone,
     Stages,
     SubStage,
+    SubStage_L1,
     
     Toggle,
     ToggleButton,
