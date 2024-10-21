@@ -1,18 +1,19 @@
-import { apiData } from '@/servis/apiData.js'
+import { getHOAIData } from '@/servis/getHOAIData.js'
 import { lists } from '@/servis/selectLists.js'
 import { Parts_items_detail_input } from '@/servis/Parts_items_detail.js'
 export async function getData(selected){
-    let HOAT_v = (await apiData({typeData:'getHOAI'})).data
-    let paragraphs = (await apiData({typeData:'Paragraphs', id_HOAI: selected.id_HOAI_v})).data
-    paragraphs = paragraphs.map(item=>{return { id:item.id, value: `${item.name} ${item.title}` } })
+
+    let HOAIData = await getHOAIData(selected)
+    console.log(HOAIData)
+
     let data = [ 
         {
             id: '1',
             name:'Basis',
             list:[
-                {id: '1', name: "HOAI version" ,type:  'text', value: 2021, list:HOAT_v},
-                {id: '2', name: "Planning object", type: 'text', value: '§34G Gebäude', list:paragraphs },
-                {id: '3', name: "Fee zone", type: 'text', value: 'III', list:lists.Fee_Zone, detail_input: Parts_items_detail_input.Fee_Zone},
+                {id: '1', name: "HOAI version" ,type:  'text', value: 2021, list:HOAIData.HOAT_v},
+                {id: '2', name: "Planning object", type: 'text', value: '§34G Gebäude', list:HOAIData.paragraphs },
+                {id: '3', name: "Fee zone", type: 'text', value: 'III', list: HOAIData.feeZone, detail_input: HOAIData.requirementPoints},
                 {id: '4', name: "Fee rate", type: 'text', value: 'Mittelsatz', list:lists.Middle_set},
                 {id: '5', name: "Eligible costs", type: 'price', input_type: true , use_select: true , value:450000, detail_input: Parts_items_detail_input.Eligible_Costs},
                 {id: '6', name: "Fee according to fee table", type: 'price', value: 64236.50, detail_input: Parts_items_detail_input.Fee_Table},
