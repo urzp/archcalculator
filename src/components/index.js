@@ -3,16 +3,18 @@ import Header from './PageParts/Header.vue'
 import Footer from './PageParts/Footer.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
-import ObjectCalc from './Calculator/Object/ObjectCalc.vue'
+import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
 import TotalCalc from './Calculator/TotalCalc.vue'
 //----------------------------Object--------------------------------
 import ObjectTitile from './Calculator/Object/title.vue'
 import ObjectTotal from './Calculator/Object/total.vue'
+//----------------------------Basis-----------------------------
+import Basis from './Calculator/_Object/Basis/00_Basis.vue'
+import HOAI_version  from './Calculator/_Object/Basis/01_HOAI_version.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
 import PartObjectContent from './Calculator/Object/Parts/content.vue'
 import PartObjectTotal from './Calculator/Object/Parts/total.vue'
-import Basis from './Calculator/Object/Parts/Basis.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
 import FeeZoneDetal from './Calculator/Object/Parts/Detals_of_item/FeeZoneDetal.vue'
@@ -68,7 +70,10 @@ export default [
     PartObjectTitle,
     PartObjectContent,
     PartObjectTotal,
+
     Basis,
+    HOAI_version,
+
     BaseServis,
 
     FeeZoneDetal,
