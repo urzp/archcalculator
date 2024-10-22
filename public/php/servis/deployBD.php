@@ -3,11 +3,21 @@
 //$mysql = new mysqli('localhost','ermak8nk_deploy','k%MC0FPpWkhI','ermak8nk_deploy');
 $mysql = new mysqli('10.35.233.88:3306','k152370_HOAI','E44rf&7k4','k152370_HOAI');
 
+
+$data['settings'] = "CREATE TABLE HOAI_versions
+(
+    id INT(10) PRIMARY KEY AUTO_INCREMENT,
+    name varchar(100),
+    value VARCHAR(100),
+    number varchar(5),
+)";
+
 $data['HOAI_versions'] = "CREATE TABLE HOAI_versions
 (
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
     value VARCHAR(30),
-    sequence VARCHAR(50)
+    sequence VARCHAR(50),
+    publish VARCHAR(30),
 )";
 
 $data['paragraphs'] = "CREATE TABLE paragraphs 
@@ -22,7 +32,9 @@ $data['paragraphs'] = "CREATE TABLE paragraphs
     sequence varchar(50),
     comment varchar(300),
     link_basic_services varchar(500),
-    link_special_services varchar(500)
+    link_special_services varchar(500),
+    default_costs varchar(30),
+    number varchar(5),
 )";
 
 $data['allowableCosts'] = "CREATE TABLE allowableCosts

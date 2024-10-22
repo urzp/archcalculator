@@ -41,6 +41,10 @@
                 <div class="label"><a :href="data.link_fee" target="_blank">Link:</a></div>
                 <InputText :value="data.link_fee" @submit_event="value=>update(value, 'link_fee')" width="600px"/>
             </div>
+            <div class="row">
+                <div class="label">Default Anrechenbare Kosten</div>
+                <InputPrice :value="data.default_costs" @submit_event="value=>update(value, 'default_costs')"/>
+            </div>
         </div>
         <AllowableCosts :id_paragraph="data.id"/>
         <FeeTable :id_paragraph="data.id"/>

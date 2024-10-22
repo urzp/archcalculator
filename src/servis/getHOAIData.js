@@ -2,15 +2,19 @@ import { apiData } from '@/servis/apiData.js'
 import { convertToRoman } from '@/servis/functions.js'
 export async function getHOAIData(selected){
     let HOAIData = {
-        HOAT_v:[],
+        HOAI_value: '',
+        HOAT_list:[],
+        paragraph:{},
         paragraphs:{},
         feeZone:{},
         equivalent:{},
         requirementPoints:{},
     }
 
-    HOAIData.HOAT_v = (await apiData({typeData:'getHOAI'})).data
+    HOAIData.HOAT_list = (await apiData({typeData:'getHOAI'})).data.filter(item=>item.publish!='0')
+    HOAIData.HOAI_value = HOAIData.HOAT_list.find(item=>item.id==selected.id_HOAI_v).value
     HOAIData.paragraphs = await getParagraphs( selected.id_HOAI_v)
+    HOAIData.paragraph = HOAIData.paragraphs.find(item=>item.id==selected.id_paragraph).value
     let zone = await getFeeZones(selected.id_paragraph)
     HOAIData.feeZone = zone.feeZone
     HOAIData.equivalent = zone.equivalent

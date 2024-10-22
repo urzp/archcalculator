@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':Number(value).toLocaleString("de-DE") }}</div>
+    <div  v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':Number(value).toLocaleString("de-DE") }}</div>
     <template v-if="edit">
         <input  ref="thisinput" type="text"  
         :value="value"
@@ -54,6 +54,8 @@ export default{
 <style scoped>
     .value{
         font-size: 18px;
+        font-family: 'Raleway-Light';
+        color: #464646;
     }
     input{
         height: 28px;

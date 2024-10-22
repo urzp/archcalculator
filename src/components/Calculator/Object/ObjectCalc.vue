@@ -20,7 +20,7 @@ export default{
         this.data = await  getData(this.selected)
         console.log(this.data)
         this.initData(this.data)
-        //EventBus.on('edit:input', (data)=>{this.updateData(data)})
+        EventBus.on('edit:input', (data)=>{this.updateData(data)})
         //EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data )})
         //EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data, 'user_title' )})
         //calculate(this.data)
@@ -40,6 +40,7 @@ export default{
     methods:{
         initData(data){
             data.forEach(item=>item.list.forEach(list_item=>list_item.id_parent = item.id))
+            console.log('init', data)
             this.basis = data.find(item=>item.name == 'Basis')
             this.baseServis = data.find(item=>item.name == 'BaseServis')
         },

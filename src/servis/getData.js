@@ -1,26 +1,17 @@
+import { apiData } from '@/servis/apiData.js'
 import { getHOAIData } from '@/servis/getHOAIData.js'
+import { newData } from '@/servis/newData.js'
 import { lists } from '@/servis/selectLists.js'
 import { Parts_items_detail_input } from '@/servis/Parts_items_detail.js'
 export async function getData(selected){
+    selected =''
+    if(!selected){selected = await getDefaulData()}
 
     let HOAIData = await getHOAIData(selected)
-    console.log(HOAIData)
+    let Basis = await  newData(HOAIData)
 
     let data = [ 
-        {
-            id: '1',
-            name:'Basis',
-            list:[
-                {id: '1', name: "HOAI version" ,type:  'text', value: 2021, list:HOAIData.HOAT_v},
-                {id: '2', name: "Planning object", type: 'text', value: '§34G Gebäude', list:HOAIData.paragraphs },
-                {id: '3', name: "Fee zone", type: 'text', value: 'III', list: HOAIData.feeZone, detail_input: HOAIData.requirementPoints},
-                {id: '4', name: "Fee rate", type: 'text', value: 'Mittelsatz', list:lists.Middle_set},
-                {id: '5', name: "Eligible costs", type: 'price', input_type: true , use_select: true , value:450000, detail_input: Parts_items_detail_input.Eligible_Costs},
-                {id: '6', name: "Fee according to fee table", type: 'price', value: 64236.50, detail_input: Parts_items_detail_input.Fee_Table},
-                {id: '7', name: "Surcharge", type:'count_percent', input_type: true , value: 1, price: 0},
-            ],
-            Total:{value:0, percent:100},
-        },
+        Basis,
         {
             id: '2',
             name:'BaseServis',
@@ -34,3 +25,20 @@ export async function getData(selected){
     return data
 }
 
+async function getDefaulData(){
+    let data = { 
+        table : 'settings',
+        selector_name : 'name',
+        selector : 'default_paragraph',
+    }
+    let default_paragraph = (await apiData({typeData:'read', data})).data[0]
+    data = { 
+        table : 'paragraphs',
+        selector_name : 'id',
+        selector : default_paragraph.value,
+    }
+    
+    let paragraph = (await apiData({typeData:'read', data})).data[0]
+    let id_HOAI_v = paragraph.id_HOAI
+    return {id_HOAI_v, id_paragraph: paragraph.id}
+} 
