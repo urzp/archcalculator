@@ -1,6 +1,6 @@
 <template>
-    <div class="main_row">
-        <div class="title">HOAI version</div>
+    <div v-if="!!prop_id" class="main_row">
+        <div class="title">Planungsgegenstand</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -11,10 +11,8 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 export  default{
-    name: 'HOAI_version_calc',
+    name: 'Paragraph_calc',
     async mounted(){
-        await this.getData()
-        this.dataUpdate()
     },
     data(){
         return{
@@ -29,15 +27,21 @@ export  default{
         prop_id:String,
     },
     watch:{
-        prop_id(){
-            this.dataUpdate()
+        async prop_id(value){
+           if(!!value) await this.getData()
         },
     },
     emits:['selected'],
     methods:{
         async getData(){
-            let result = await apiData({typeData:'getHOAI'})
-            this.data.list = result.data
+            let result = await apiData({typeData:'getParagraph_and_list', id_pargraph: this.prop_id })
+            let paragraph = result.data.paragraph
+            this.data.id = paragraph.id
+            this.data.value = `${paragraph.name} ${paragraph.title}`
+
+            let paragraphs = result.data.paragraphs
+            paragraphs = paragraphs.map(item=>{item.value=`${item.name} ${item.title}`; return item})
+            this.data.list = paragraphs
         },
         select(data){
             data.id = data.id_item
@@ -52,6 +56,7 @@ export  default{
         
     }
 }
+
 </script>
 
 <style scoped>

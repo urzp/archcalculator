@@ -10,7 +10,9 @@ import ObjectTitile from './Calculator/Object/title.vue'
 import ObjectTotal from './Calculator/Object/total.vue'
 //----------------------------Basis-----------------------------
 import Basis from './Calculator/_Object/Basis/00_Basis.vue'
-import HOAI_version  from './Calculator/_Object/Basis/01_HOAI_version.vue'
+import HOAI_version_calc  from './Calculator/_Object/Basis/01_HOAI_version.vue'
+import Paragraph_calc  from './Calculator/_Object/Basis/02_Paragraph.vue'
+import HonorarZone_calc  from './Calculator/_Object/Basis/03_HonorarZone.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
 import PartObjectContent from './Calculator/Object/Parts/content.vue'
@@ -72,7 +74,9 @@ export default [
     PartObjectTotal,
 
     Basis,
-    HOAI_version,
+    HOAI_version_calc,
+    Paragraph_calc,
+    HonorarZone_calc,
 
     BaseServis,
 

@@ -17,10 +17,10 @@ import { calculate } from '@/servis/calculate.js'
 export default{
     name: 'ObjectCalc',
     async mounted(){
-        this.data = await  getData(this.selected)
-        console.log(this.data)
-        this.initData(this.data)
-        EventBus.on('edit:input', (data)=>{this.updateData(data)})
+        // this.data = await  getData(this.selected)
+        // console.log(this.data)
+        // this.initData(this.data)
+        // EventBus.on('edit:input', (data)=>{this.updateData(data)})
         //EventBus.on('edit:input_detals', (data)=>{this.updateDataDetals( data )})
         //EventBus.on('edit:update_user_title', (data)=>{this.updateDataDetals( data, 'user_title' )})
         //calculate(this.data)

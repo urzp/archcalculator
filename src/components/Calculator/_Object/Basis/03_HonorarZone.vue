@@ -1,6 +1,6 @@
 <template>
-    <div class="main_row">
-        <div class="title">HOAI version</div>
+    <div v-if="!!prop_id" class="main_row">
+        <div class="title">Honorarzone</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -11,10 +11,8 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 export  default{
-    name: 'HOAI_version_calc',
+    name: 'HonorarZone_calc',
     async mounted(){
-        await this.getData()
-        this.dataUpdate()
     },
     data(){
         return{
@@ -29,15 +27,24 @@ export  default{
         prop_id:String,
     },
     watch:{
-        prop_id(){
-            this.dataUpdate()
+        async prop_id(value){
+           if(!!value) await this.getData()
         },
     },
     emits:['selected'],
     methods:{
         async getData(){
-            let result = await apiData({typeData:'getHOAI'})
-            this.data.list = result.data
+            let data = { 
+                table : 'feeTableHonorarZones',
+                selector_name : 'id_paragraph',
+                selector : this.prop_id,
+            }
+            let result = (await apiData({typeData:'read', data})).data
+            result = result.map(item=>{ item.value = item.name; return item })
+            this.data.list = result
+            let zone_1 = result[1]
+            this.data.id = zone_1.id
+            this.data.value = zone_1.value
         },
         select(data){
             data.id = data.id_item
@@ -49,9 +56,9 @@ export  default{
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }
         },
-        
     }
 }
+
 </script>
 
 <style scoped>
