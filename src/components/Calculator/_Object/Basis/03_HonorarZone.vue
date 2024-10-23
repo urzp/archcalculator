@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!!prop_id" class="main_row">
+    <div v-if="!!id_paragraph" class="main_row">
         <div class="title">Honorarzone</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
@@ -19,17 +19,25 @@ export  default{
             data:{
                 id:'',
                 value: '',
+                listPointsUse:'list',
                 list:[],
             }
         }
     },
     props:{
-        prop_id:String,
+        id_paragraph:String,
+        honorarZone: Object,
     },
     watch:{
-        async prop_id(value){
+        async id_paragraph(value){
            if(!!value) await this.getData()
         },
+        honorarZone:{
+            handler(){
+                this.switchData()
+            },
+            deep: true,
+        }
     },
     emits:['selected'],
     methods:{
@@ -37,7 +45,7 @@ export  default{
             let data = { 
                 table : 'feeTableHonorarZones',
                 selector_name : 'id_paragraph',
-                selector : this.prop_id,
+                selector : this.id_paragraph,
             }
             let result = (await apiData({typeData:'read', data})).data
             result = result.map(item=>{ item.value = item.name; return item })
@@ -46,12 +54,21 @@ export  default{
             this.data.id = zone_1.id
             this.data.value = zone_1.value
         },
+        switchData(){
+            if(this.honorarZone.listPointsUse == 'list'){
+                if(!!this.honorarZone.id){ this.dataUpdate(this.honorarZone.id) }
+            }
+            if(this.honorarZone.listPointsUse == 'point'){
+
+            }
+        },
         select(data){
+            this.listPointsUse = 'list'
             data.id = data.id_item
             this.dataUpdate(data.id)
             this.$emit('selected', data)
         },
-        dataUpdate(id = this.prop_id ){
+        dataUpdate(id = this.id_paragraph ){
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }

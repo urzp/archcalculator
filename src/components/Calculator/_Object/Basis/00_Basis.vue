@@ -3,7 +3,10 @@
     <PartObjectContent :collapse = 'collapse'>
         <HOAI_version_calc :prop_id="HOAI_version" @selected="data=>{data.id = data.id; selectParagraph(data.id)}"/>
         <Paragraph_calc :prop_id="paragraph" @selected="data=>paragraph = data.id"/>
-        <HonorarZone_calc  :prop_id="paragraph"/>
+        <HonorarZone_calc  
+            :id_paragraph="paragraph" 
+            :honorarZone="honorarZone" 
+            @selected="data=>{honorarZone.id = data.id; honorarZone.listPointsUse='list'}"/>
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse' :data="data.Total"/>    
 </template>
@@ -25,6 +28,13 @@ export default{
             },
             HOAI_version:'',
             paragraph:'',
+            honorarZone:{
+                listPointsUse:'list', //list / point
+                id:'',
+                points:[
+                    //{id:'', usercoment:'', value:''},
+                ]
+            },
         }
     },
     watch:{
