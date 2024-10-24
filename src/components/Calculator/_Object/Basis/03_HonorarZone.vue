@@ -1,9 +1,17 @@
-<template>
-    <div v-if="!!id_paragraph" class="main_row">
-        <div class="title">Honorarzone</div>
-        <div class="value">{{ data.value }}</div>
-        <div  class="select-list" >
-            <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
+<template v-if="!!id_paragraph">
+    <div class="item-Part-obj">
+        <div  class="detals" @click="collapse_detals=!collapse_detals">
+            <div class="icon"></div>
+        </div>
+        <div class="main_row">
+            <div class="title">Honorarzone</div>
+            <div class="value">{{ data.value }}</div>
+            <div  class="select-list" >
+                <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
+            </div>
+        </div>
+        <div v-show="!collapse_detals" class="detal-list">
+            <FeeZoneDetal :id_paragraph="id_paragraph" :equivalent="equivalent" @total="value=>setEquivalent(value)"/>
         </div>
     </div>
 </template>
@@ -16,12 +24,13 @@ export  default{
     },
     data(){
         return{
+            collapse_detals:true,
             data:{
                 id:'',
                 value: '',
-                listPointsUse:'list',
                 list:[],
-            }
+            },
+            equivalent:'',
         }
     },
     props:{
@@ -55,12 +64,7 @@ export  default{
             this.data.value = zone_1.value
         },
         switchData(){
-            if(this.honorarZone.listPointsUse == 'list'){
-                if(!!this.honorarZone.id){ this.dataUpdate(this.honorarZone.id) }
-            }
-            if(this.honorarZone.listPointsUse == 'point'){
-
-            }
+            if(!!this.honorarZone.id){ this.dataUpdate(this.honorarZone.id) }
         },
         select(data){
             this.listPointsUse = 'list'
@@ -73,6 +77,11 @@ export  default{
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }
         },
+        setEquivalent(value){
+            let level =  this.data.list.find(item=>item.maxPoint >= value)
+            this.dataUpdate(level.id)
+            this.equivalent = level.value
+        }
     }
 }
 
@@ -100,4 +109,25 @@ export  default{
         margin-left: 20px;
         margin-right: 10px;
     }
+
+    .detals{
+        position: relative;
+    }
+    .detals .icon{
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        height: 8px;
+        width: 8px;
+        background-color: #C0C0C0;
+        content: " ";
+        left: 25px;
+        top: 13px;
+        cursor: pointer;
+    }
+
+    .detal-list {
+        background-color: #fff;
+    }
+    
 </style>

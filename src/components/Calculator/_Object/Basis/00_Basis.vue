@@ -31,9 +31,6 @@ export default{
             honorarZone:{
                 listPointsUse:'list', //list / point
                 id:'',
-                points:[
-                    //{id:'', usercoment:'', value:''},
-                ]
             },
         }
     },

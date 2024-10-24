@@ -19,7 +19,7 @@ import PartObjectContent from './Calculator/Object/Parts/content.vue'
 import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
-import FeeZoneDetal from './Calculator/Object/Parts/Detals_of_item/FeeZoneDetal.vue'
+import FeeZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_FeeZoneDetal.vue'
 import EligibleCostsDetal from './Calculator/Object/Parts/Detals_of_item/EligibleCostsDetal.vue'
 import FeeTableDetal from './Calculator/Object/Parts/Detals_of_item/FeeTableDetal.vue'
 //----------------------------ItemPartsObject-----------------------------
