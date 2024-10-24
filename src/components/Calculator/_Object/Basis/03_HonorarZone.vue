@@ -79,6 +79,7 @@ export  default{
         },
         setEquivalent(value){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
+            if(!level) return false
             this.dataUpdate(level.id)
             this.equivalent = level.value
         }
