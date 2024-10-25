@@ -2,11 +2,12 @@
 
 $input_data = $rq_data -> data;
 $id = $input_data -> id;
+$value = $input_data -> list;
 
-foreach ($input_data as $key => $value){$newdata[$key] = $value;}
-$selector = "`id` = '$id'";
+$newdata['requirementsPoints'] = $value;
+$selector = "`object_id` = '$id'";
 $mysql = $mysql_calc;
-crud_update('objects', $newdata, $selector);
+crud_update('paragraph', $newdata, $selector);
 
 $result = (object) [
     'success' => true,

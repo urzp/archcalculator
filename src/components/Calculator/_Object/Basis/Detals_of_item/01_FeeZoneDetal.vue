@@ -42,6 +42,7 @@ export  default{
     emits:['total', 'usePoint'],
     props:{
         id_paragraph:String,
+        object_id:String,
         equivalent:String,
         usePoints:Boolean,
         points:Array,
@@ -49,6 +50,12 @@ export  default{
     watch:{
         id_paragraph(){
             this.getData()
+        },
+        points:{
+            handler(){
+                this.setVaulues()
+            },
+            deep:true
         }
     },
     computed:{
@@ -69,9 +76,18 @@ export  default{
             result = result.map(item=>{ if(!item.value) item.value = item.minPoint; return item } )
             this.list = result
         },
+        async setVaulues(){
+            if(!this.points||!this.points.length>0) return flase
+            let result =  this.list.map( (item, index) => {
+                item.value = this.points[index]; 
+                return item });
+            this.list = result    
+        },
         updateValue(value, id_item){
             let item = this.list.find(item=>item.id==id_item)
             item.value = value
+            let saveList = this.list.map(item=>item.value)
+            apiData( {typeData:'updateProjectPoints', data:{ id: this.object_id, list: JSON.stringify(saveList)} } )
         },
         updateUserTitle(value, id_item){
             let item = this.list.find(item=>item.id==id_item)

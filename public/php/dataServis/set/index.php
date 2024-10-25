@@ -1,6 +1,7 @@
 <?php
 
 switch ($typeData){
+    case 'updateProjectPoints': include 'set_calc/updateProjectPoints.php'; break;
     case 'updateProjectObject': include 'set_calc/updateProjectObject.php'; break;
 }
 

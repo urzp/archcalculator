@@ -13,6 +13,7 @@
         <div v-show="!collapse_detals" class="detal-list">
             <FeeZoneDetal 
                 :id_paragraph="id_paragraph" 
+                :object_id = "object_id"
                 :equivalent="equivalent" 
                 :usePoints="usePoints"
                 @usePoint="usePoints=true"
@@ -81,7 +82,6 @@ export  default{
             if(!!project.honorarLevel_id){this.dataUpdate(project.honorarLevel_id)}
             if(!!project.usePoints){
                 this.usePoints = true;
-                this.collapse_detals = false
             } 
         },
         select(data){
