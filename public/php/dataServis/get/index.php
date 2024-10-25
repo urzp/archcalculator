@@ -1,6 +1,10 @@
 <?php
 
 switch ($typeData) {
+    case 'getProjectHonorar': include 'read_calc/getProjectHonorar.php'; break;
+    case 'getProjectObject': include 'read_calc/getProjectObject.php'; break;
+    case 'getProject': include 'read_calc/getProject.php'; break;
+
     case 'getSameParagraph': include 'read/getSameParagraph.php'; break;
     case 'getParagraph_and_list': include 'read/getParagraph_and_list.php'; break;
     case 'getDafaultHOAI': include 'read/getDafaultHOAI.php'; break;

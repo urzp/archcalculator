@@ -17,6 +17,7 @@
                 :usePoints="usePoints"
                 @usePoint="usePoints=true"
                 @total="value=>setEquivalent(value)"
+                :points = project.requirementsPoints
             />
         </div>
     </div>
@@ -37,23 +38,18 @@ export  default{
                 value: '',
                 list:[],
             },
+            project:{},
             equivalent:'',
         }
     },
     props:{
         id_paragraph:String,
-        honorarZone: Object,
+        object_id: Object,
     },
     watch:{
         async id_paragraph(value){
            if(!!value) await this.getData()
         },
-        honorarZone:{
-            handler(){
-                this.switchData()
-            },
-            deep: true,
-        }
     },
     emits:['selected'],
     methods:{
@@ -69,9 +65,24 @@ export  default{
             let zone_1 = result[1]
             this.data.id = zone_1.id
             this.data.value = zone_1.value
+            this.getProjectData()
         },
-        switchData(){
-            if(!!this.honorarZone.id){ this.dataUpdate(this.honorarZone.id) }
+        async getProjectData(){
+            if(!this.object_id) return this.switchDefData()
+            let result = (await apiData({typeData:'getProjectHonorar', data:{id:this.object_id}})).data[0]
+            this.project = result
+            let requirementsPoints = this.project.requirementsPoints
+            if(!!requirementsPoints) this.project.requirementsPoints = JSON.parse(requirementsPoints)
+            this.switchProjectData()
+        },
+        switchProjectData(){
+            console.log('switch')
+            let project = this.project
+            if(!!project.honorarLevel_id){this.dataUpdate(project.honorarLevel_id)}
+            if(!!project.usePoints){
+                this.usePoints = true;
+                this.collapse_detals = false
+            } 
         },
         select(data){
             this.listPointsUse = 'list'

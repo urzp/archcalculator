@@ -2,7 +2,7 @@
     <div class="object-calc">
         <ObjectTitile @switch_tg="(val)=>{collapse =  !val}"/>
         <Toggle :collapse="collapse">
-        <Basis :data="basis"/>
+        <Basis :object_id="object_id"/>
         <!-- <BaseServis :data="baseServis"/> -->
         </Toggle>
         <ObjectTotal :collapse="collapse"/>
@@ -36,6 +36,10 @@ export default{
             basis:{},
             baseServis:{}
         }
+    },
+    props:{
+        project_id:String,
+        object_id:String,
     },
     methods:{
         initData(data){

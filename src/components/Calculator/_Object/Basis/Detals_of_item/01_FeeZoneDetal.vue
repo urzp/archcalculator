@@ -44,6 +44,7 @@ export  default{
         id_paragraph:String,
         equivalent:String,
         usePoints:Boolean,
+        points:Array,
     },
     watch:{
         id_paragraph(){

@@ -1,5 +1,9 @@
 <?php
 
+switch ($typeData){
+    case 'updateProjectObject': include 'set_calc/updateProjectObject.php'; break;
+}
+
 switch ($typeData) {
     case 'copyStage': include 'copy/Stage.php'; break;
     case 'copySubStage': include 'copy/SubStage.php'; break; 

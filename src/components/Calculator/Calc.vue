@@ -4,14 +4,31 @@
             <div class="name">Project X</div>
             <div class="date">23.08.2024</div>
         </div>
-        <ObjectCalc/>
+        <div class="objects-calculator" v-for="item in ListObjects" :key="item.id">
+            <ObjectCalc :object_id="item.id" :project_id="project"/>
+        </div>
         <TotalCalc/>
     </div>
 </template>
 
 <script>
+import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'Calculator',
+    mounted(){
+        this.getData()
+    },
+    data(){
+        return{
+            project: '1',
+            ListObjects:[{id:'1'}],
+        }
+    },
+    methods:{
+        async getData(){
+            let result = (await apiData({typeData:'getProject', data:{id:this.project}})).data
+        }
+    }
 }
 </script>
 
