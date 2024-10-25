@@ -11,7 +11,13 @@
             </div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
-            <FeeZoneDetal :id_paragraph="id_paragraph" :equivalent="equivalent" @total="value=>setEquivalent(value)"/>
+            <FeeZoneDetal 
+                :id_paragraph="id_paragraph" 
+                :equivalent="equivalent" 
+                :usePoints="usePoints"
+                @usePoint="usePoints=true"
+                @total="value=>setEquivalent(value)"
+            />
         </div>
     </div>
 </template>
@@ -25,6 +31,7 @@ export  default{
     data(){
         return{
             collapse_detals:true,
+            usePoints:false,
             data:{
                 id:'',
                 value: '',
@@ -69,6 +76,7 @@ export  default{
         select(data){
             this.listPointsUse = 'list'
             data.id = data.id_item
+            this.usePoints=false
             this.dataUpdate(data.id)
             this.$emit('selected', data)
         },

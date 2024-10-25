@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" @click="this.$emit('total', total)">
+    <div class="wrap" :class="{active:usePoints}" @click="this.$emit('total', total); this.$emit('usePoint')">
         <div class="list" v-if="!!list.length">
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
@@ -39,10 +39,11 @@ export  default{
             list:[],
         }
     },
-    emits:['total'],
+    emits:['total', 'usePoint'],
     props:{
         id_paragraph:String,
         equivalent:String,
+        usePoints:Boolean,
     },
     watch:{
         id_paragraph(){
@@ -85,6 +86,10 @@ export  default{
     background-color: #fff;
     margin-left: 55px;
     margin-bottom: 15px;
+    opacity: 0.5;
+}
+.wrap.active{
+    opacity: 1.0;
 }
 .wrap::before{
     position: relative;
