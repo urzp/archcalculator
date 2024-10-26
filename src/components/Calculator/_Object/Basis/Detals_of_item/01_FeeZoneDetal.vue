@@ -77,7 +77,7 @@ export  default{
             this.list = result
         },
         async setVaulues(){
-            if(!this.points||!this.points.length>0) return flase
+            if(!this.points||!this.points.length>0) return false
             let result =  this.list.map( (item, index) => {
                 item.value = this.points[index]; 
                 return item });

@@ -1,7 +1,8 @@
 <?php
 
 switch ($typeData) {
-    case 'getProjectHonorar': include 'read_calc/getProjectHonorar.php'; break;
+    case 'calc:getHonorarZones': include 'read_calc/getHonorarZones.php'; break;
+    case 'getProjectParagraph': include 'read_calc/getProjectParagraph.php'; break;
     case 'getProjectObject': include 'read_calc/getProjectObject.php'; break;
     case 'getProject': include 'read_calc/getProject.php'; break;
 

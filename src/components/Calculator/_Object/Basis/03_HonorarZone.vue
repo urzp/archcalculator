@@ -29,6 +29,7 @@ import { apiData } from '@/servis/apiData.js'
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
+        
     },
     data(){
         return{
@@ -51,37 +52,34 @@ export  default{
         async id_paragraph(value){
            if(!!value) await this.getData()
         },
+        usePoints(){
+            this.updateProjectParagraphData()
+        }
     },
     emits:['selected'],
     methods:{
         async getData(){
-            let data = { 
-                table : 'feeTableHonorarZones',
-                selector_name : 'id_paragraph',
-                selector : this.id_paragraph,
-            }
-            let result = (await apiData({typeData:'read', data})).data
-            result = result.map(item=>{ item.value = item.name; return item })
+            let result = ( await apiData({typeData:'calc:getHonorarZones', id:this.id_paragraph}) ).data
             this.data.list = result
-            let zone_1 = result[1]
-            this.data.id = zone_1.id
-            this.data.value = zone_1.value
+            this.data.id = result[1].id
+            this.data.value = result[1].value
             this.getProjectData()
         },
         async getProjectData(){
-            if(!this.object_id) return this.switchDefData()
-            let result = (await apiData({typeData:'getProjectHonorar', data:{id:this.object_id}})).data[0]
+            let data = { object_id:this.object_id }
+            let result = ( await apiData({typeData:'getProjectParagraph', data}) ).data
+            if(!result) return false
             this.project = result
-            let requirementsPoints = this.project.requirementsPoints
-            if(!!requirementsPoints) this.project.requirementsPoints = JSON.parse(requirementsPoints)
             this.switchProjectData()
         },
+        updateProjectParagraphData(){
+            //apiData({typeData:'updateProjectParagraphData', data:})
+        },
         switchProjectData(){
-            console.log('switch')
-            let project = this.project
-            if(!!project.honorarLevel_id){this.dataUpdate(project.honorarLevel_id)}
-            if(!!project.usePoints){
+            if(!!this.project.usePoints){
                 this.usePoints = true;
+            }else{
+                this.dataUpdate(this.project.honorarLevel_id)
             } 
         },
         select(data){
@@ -91,15 +89,16 @@ export  default{
             this.dataUpdate(data.id)
             this.$emit('selected', data)
         },
-        dataUpdate(id = this.id_paragraph ){
+        dataUpdate(id){
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }
+            this.updateProjectParagraphData()
         },
         setEquivalent(value){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
             if(!level) return false
-            this.dataUpdate(level.id)
+            if(this.usePoints) this.dataUpdate(level.id)
             this.equivalent = level.value
         }
     }

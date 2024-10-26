@@ -32,6 +32,7 @@ $data['paragraph'] = "CREATE TABLE paragraph
     updated datetime DEFAULT_GENERATED ON UPDATE CURRENT_TIMESTAMP,
     user_id INT(10),
     object_id INT(10),
+    paragraph_id INT(10),
     honorarLevel_id INT(10),
     usePoints varchar(10),
     requirementsPoints varchar(100),
