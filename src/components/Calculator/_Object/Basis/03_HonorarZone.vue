@@ -29,7 +29,7 @@ import { apiData } from '@/servis/apiData.js'
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
-        
+
     },
     data(){
         return{
@@ -49,8 +49,13 @@ export  default{
         object_id: Object,
     },
     watch:{
-        async id_paragraph(value){
-           if(!!value) await this.getData()
+        async id_paragraph(value, value_old){
+            console.log('id_paragraph',value, value_old)
+           if(!!value&&!value_old) {
+            console.log('update')
+                await this.getData()
+                this.getProjectData()
+           }
         },
         usePoints(){
             this.updateProjectParagraphData()
@@ -63,7 +68,6 @@ export  default{
             this.data.list = result
             this.data.id = result[1].id
             this.data.value = result[1].value
-            this.getProjectData()
         },
         async getProjectData(){
             let data = { object_id:this.object_id }

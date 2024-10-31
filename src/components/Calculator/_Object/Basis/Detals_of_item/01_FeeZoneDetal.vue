@@ -75,6 +75,7 @@ export  default{
             let result = (await apiData({typeData:'read', data})).data
             result = result.map(item=>{ if(!item.value) item.value = item.minPoint; return item } )
             this.list = result
+            this.setVaulues()
         },
         async setVaulues(){
             if(!this.points||!this.points.length>0) return false
