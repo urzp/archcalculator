@@ -12,21 +12,23 @@
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
+import { LoadProjectData } from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
     mounted(){
-        this.getData()
+        this.getProject()
     },
     data(){
         return{
             project: '1',
-            ListObjects:[{id:'1'}],
+            ListObjects:[],
         }
     },
     methods:{
-        async getData(){
-            let result = (await apiData({typeData:'getProject', data:{id:this.project}})).data
+        async getProject(){
+            let result = await LoadProjectData(this.project)
+            this.ListObjects = result.objects
         }
     }
 }

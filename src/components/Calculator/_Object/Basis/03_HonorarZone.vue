@@ -16,7 +16,7 @@
                 :object_id = "object_id"
                 :equivalent="equivalent" 
                 :usePoints="usePoints"
-                @usePoint="usePoints=true"
+                @usePoint="usePoints=true;updateProjectParagraphData()"
                 @total="value=>setEquivalent(value)"
                 :points = project.requirementsPoints
             />
@@ -26,10 +26,11 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { Project, updateProjectObject } from '@/servis/projectData.js'
+
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
-
     },
     data(){
         return{
@@ -50,16 +51,11 @@ export  default{
     },
     watch:{
         async id_paragraph(value, value_old){
-            console.log('id_paragraph',value, value_old)
            if(!!value&&!value_old) {
-            console.log('update')
                 await this.getData()
                 this.getProjectData()
            }
         },
-        usePoints(){
-            this.updateProjectParagraphData()
-        }
     },
     emits:['selected'],
     methods:{
@@ -70,13 +66,12 @@ export  default{
             this.data.value = result[1].value
         },
         async getProjectData(){
-            let data = { object_id:this.object_id }
-            let result = ( await apiData({typeData:'getProjectParagraph', data}) ).data
-            if(!result) return false
-            this.project = result
+            this.project = Project.objects.find(item=>item.id==this.object_id)
             this.switchProjectData()
         },
         updateProjectParagraphData(){
+            console.log('update')
+            updateProjectObject(this.object_id, this.project)
             //apiData({typeData:'updateProjectParagraphData', data:})
         },
         switchProjectData(){
@@ -91,13 +86,13 @@ export  default{
             data.id = data.id_item
             this.usePoints=false
             this.dataUpdate(data.id)
+            this.updateProjectParagraphData()
             this.$emit('selected', data)
         },
         dataUpdate(id){
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }
-            this.updateProjectParagraphData()
         },
         setEquivalent(value){
             let level =  this.data.list.find(item=>item.maxPoint >= value)

@@ -27,6 +27,7 @@
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+import { updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'FeeZoneDetal',
     mounted(){
@@ -80,7 +81,7 @@ export  default{
         async setVaulues(){
             if(!this.points||!this.points.length>0) return false
             let result =  this.list.map( (item, index) => {
-                item.value = this.points[index]; 
+                if(!!this.points[index]) item.value = this.points[index];
                 return item });
             this.list = result    
         },
@@ -88,7 +89,7 @@ export  default{
             let item = this.list.find(item=>item.id==id_item)
             item.value = value
             let saveList = this.list.map(item=>item.value)
-            apiData( {typeData:'updateProjectPoints', data:{ id: this.object_id, list: JSON.stringify(saveList)} } )
+            updateProjectObject(this.object_id, {requirementsPoints:saveList})
         },
         updateUserTitle(value, id_item){
             let item = this.list.find(item=>item.id==id_item)
