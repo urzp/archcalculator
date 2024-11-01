@@ -4,6 +4,7 @@ switch ($typeData) {
     case 'loadWholeCalcData': include 'read_calc/loadWholeCalcDatat.php'; break;
     case 'loadWholeProject': include 'read_calc/loadWholeProject.php'; break;
     
+    case 'calc:requirementsPoints': include 'read_calc/requirementsPoints.php';break;
     case 'calc:getHonorarZones': include 'read_calc/getHonorarZones.php'; break;
     case 'getProjectParagraph': include 'read_calc/getProjectParagraph.php'; break;
     case 'getProjectObject': include 'read_calc/getProjectObject.php'; break;

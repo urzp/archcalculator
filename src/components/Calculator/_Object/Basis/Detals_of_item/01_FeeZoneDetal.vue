@@ -68,13 +68,7 @@ export  default{
     },
     methods:{
         async getData(){
-            let data = { 
-                table : 'requirementsPoints',
-                selector_name : 'id_paragraph',
-                selector : this.id_paragraph,
-            }
-            let result = (await apiData({typeData:'read', data})).data
-            result = result.map(item=>{ if(!item.value) item.value = item.minPoint; return item } )
+            let result = (await apiData({typeData:'calc:requirementsPoints', id:this.id_paragraph})).data
             this.list = result
             this.setVaulues()
         },
