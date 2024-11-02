@@ -52,7 +52,7 @@ export default{
         select_data(item){
             let val = item.value
             let id = item.id
-            this.$emit('selected', {id_item:id, value:val})
+            this.$emit('selected', {id_item:id, value:val, item})
             if(!this.stopEventBus) EventBus.emit('edit:input', {parent_item:this.data.id_parent, id_item:this.data.id, value:val, value_id:id})
             this.close()
         },

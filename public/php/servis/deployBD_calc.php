@@ -24,24 +24,12 @@ $data['objects'] = "CREATE TABLE objects
     HOAI_version_id: INT(10),
     paragraph_id: INT(10),
     honorarLevel_id INT(10),
+    honorarLevel_value varchar(50),
     usePoints varchar(10),
     requirementsPoints varchar(100),
     requirementsPointsNames varchar(500),
 )";
 
-$data['paragraph'] = "CREATE TABLE paragraph
-(
-    id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    created datetime CURRENT_TIMESTAMP DEFAULT_GENERATED,
-    updated datetime DEFAULT_GENERATED ON UPDATE CURRENT_TIMESTAMP,
-    user_id INT(10),
-    object_id INT(10),
-    paragraph_id INT(10),
-    honorarLevel_id INT(10),
-    usePoints varchar(10),
-    requirementsPoints varchar(100),
-    requirementsPointsNames varchar(500),
-)";
 
 
 

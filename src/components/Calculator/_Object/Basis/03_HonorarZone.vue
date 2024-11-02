@@ -15,8 +15,8 @@
                 :id_paragraph="id_paragraph" 
                 :object_id = "object_id"
                 :equivalent="equivalent" 
-                :usePoints="usePoints"
-                @usePoint="usePoints=true;updateProjectParagraphData()"
+                :usePoints="project.usePoints"
+                @usePoint="project.usePoints=true; updateProjectParagraphData()"
                 @total="value=>setEquivalent(value)"
                 :points = project.requirementsPoints
             />
@@ -27,6 +27,7 @@
 <script>
 import { apiData } from '@/servis/apiData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { lastElement } from '@/servis/functions.js'
 
 export  default{
     name: 'HonorarZone_calc',
@@ -35,9 +36,9 @@ export  default{
     data(){
         return{
             collapse_detals:true,
-            usePoints:false,
             data:{
                 id:'',
+                number:'',
                 value: '',
                 list:[],
             },
@@ -50,54 +51,45 @@ export  default{
         object_id: Object,
     },
     watch:{
-        async id_paragraph(value, value_old){
-           if(!!value&&!value_old) {
-                await this.getData()
-                this.getProjectData()
-           }
-        },
+        async id_paragraph(){
+            await this.getData()
+            this.getProjectData()
+        }
     },
     emits:['selected'],
     methods:{
         async getData(){
             let result = ( await apiData({typeData:'calc:getHonorarZones', id:this.id_paragraph}) ).data
             this.data.list = result
-            this.data.id = result[1].id
-            this.data.value = result[1].value
         },
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
-            this.switchProjectData()
-        },
-        updateProjectParagraphData(){
-            console.log('update')
-            updateProjectObject(this.object_id, this.project)
-            //apiData({typeData:'updateProjectParagraphData', data:})
-        },
-        switchProjectData(){
-            if(!!this.project.usePoints){
-                this.usePoints = true;
-            }else{
-                this.dataUpdate(this.project.honorarLevel_id)
+            if(!this.project.usePoints){
+                this.dataUpdate(this.project.honorarLevel_id, this.project.honorarLevel_number)
             } 
         },
+        updateProjectParagraphData(){
+            updateProjectObject(this.object_id, this.project)
+        },
         select(data){
-            this.listPointsUse = 'list'
             data.id = data.id_item
-            this.usePoints=false
-            this.dataUpdate(data.id)
+            this.project.usePoints=false
+            this.project.honorarLevel_id = data.id
+            this.project.honorarLevel_number = data.item.number
+            this.dataUpdate(data.id, data.item.number)
             this.updateProjectParagraphData()
             this.$emit('selected', data)
         },
-        dataUpdate(id){
+        dataUpdate(id, number){
             this.data.id = id
-            let element = this.data.list.find(item=>item.id==id)
-            if(!!element){ this.data.value = element.value }
+            let element = this.data.list.find(item=>item.number==number)
+            if(!element){ element = lastElement(this.data.list) }
+            this.data.value = element.value
         },
         setEquivalent(value){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
             if(!level) return false
-            if(this.usePoints) this.dataUpdate(level.id)
+            if(this.project.usePoints) this.dataUpdate(level.id, level.number)
             this.equivalent = level.value
         }
     }
