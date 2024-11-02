@@ -23,11 +23,13 @@ $data['objects'] = "CREATE TABLE objects
     name varchar(100),
     HOAI_version_id: INT(10),
     paragraph_id: INT(10),
+    honorarLevel: varchar(300),
     honorarLevel_id INT(10),
-    honorarLevel_value varchar(50),
+    honorarLevel_number varchar(10),
     usePoints varchar(10),
     requirementsPoints varchar(100),
     requirementsPointsNames varchar(500),
+    HonorarRate varchar(300),
 )";
 
 

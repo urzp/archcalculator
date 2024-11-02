@@ -9,7 +9,10 @@ $selector = "`project_id` = '$id'";
 $data['objects'] = crud_read('objects',"*", $selector);
 
 foreach($data['objects'] as $key => $item ){
+    $data['objects'][$key]['honorarLevel'] = json_decode( $item['honorarLevel'] );
     $data['objects'][$key]['requirementsPoints'] = json_decode( $item['requirementsPoints'] );
+    $data['objects'][$key]['requirementsPointsNames'] = json_decode( $item['requirementsPointsNames'] );
+    $data['objects'][$key]['HonorarRate'] = json_decode( $item['HonorarRate'] );
 }
 
 

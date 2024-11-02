@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { LoadProjectData } from '@/servis/projectData.js'
 export default{
     name: 'Calculator',

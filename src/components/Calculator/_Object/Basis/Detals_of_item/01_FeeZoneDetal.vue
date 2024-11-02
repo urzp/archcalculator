@@ -26,18 +26,22 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
-import { updateProjectObject } from '@/servis/projectData.js'
+import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'FeeZoneDetal',
     mounted(){
         this.getData()
+        EventBus.on('updateProjectObject', this.getProjectData() )
     },
     data(){
         return{
             collapse:true,
             total:{},
             list:[],
+            points:[],
+            pointsName:[],
         }
     },
     emits:['total', 'usePoint'],
@@ -46,7 +50,6 @@ export  default{
         object_id:String,
         equivalent:String,
         usePoints:Boolean,
-        points:Array,
     },
     watch:{
         id_paragraph(){
@@ -72,10 +75,16 @@ export  default{
             this.list = result
             this.setVaulues()
         },
+        async getProjectData(){
+            let project_object = Project.objects.find(item=>item.id==this.object_id)
+            this.points = project_object.requirementsPoints
+            this.pointsName = project_object.requirementsPointsNames
+        },
         async setVaulues(){
             if(!this.points||!this.points.length>0) return false
             let result =  this.list.map( (item, index) => {
                 if(!!this.points[index]) item.value = this.points[index];
+                if(!!this.pointsName[index]) item.name = this.pointsName[index];
                 return item });
             this.list = result    
         },
@@ -84,10 +93,15 @@ export  default{
             item.value = value
             let saveList = this.list.map(item=>item.value)
             updateProjectObject(this.object_id, {requirementsPoints:saveList})
+            this.getProjectData()
         },
         updateUserTitle(value, id_item){
             let item = this.list.find(item=>item.id==id_item)
             item.user_title = value
+            let saveList = this.list.map(item=>item.user_title)
+            saveList = saveList.filter(item=>!!item)
+            updateProjectObject(this.object_id, {requirementsPointsNames:saveList})
+            this.getProjectData()
         }
     }
 }

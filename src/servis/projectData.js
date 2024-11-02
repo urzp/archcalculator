@@ -6,7 +6,7 @@ export let Project = {}
 export async function LoadProjectData(id){
     let result
     result = (await apiData({typeData:'loadWholeProject', id})).data
-    Project = result
+    Project =  await result
     EventBus.emit('LoadedProject')
     return result
 }

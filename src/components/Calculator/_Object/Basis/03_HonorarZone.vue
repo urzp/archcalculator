@@ -15,10 +15,9 @@
                 :id_paragraph="id_paragraph" 
                 :object_id = "object_id"
                 :equivalent="equivalent" 
-                :usePoints="project.usePoints"
-                @usePoint="project.usePoints=true; updateProjectParagraphData()"
+                :usePoints="usePoints"
+                @usePoint="usePoints=true; updateProjectParagraphData()"
                 @total="value=>setEquivalent(value)"
-                :points = project.requirementsPoints
             />
         </div>
     </div>
@@ -40,6 +39,7 @@ export  default{
                 id:'',
                 number:'',
                 value: '',
+                usePoints:'',
                 list:[],
             },
             project:{},
@@ -63,17 +63,20 @@ export  default{
             this.data.list = result
         },
         async getProjectData(){
-            this.project = Project.objects.find(item=>item.id==this.object_id)
-            if(!this.project.usePoints){
+            this.project = await Project.objects.find(item=>item.id==this.object_id)
+            if(!this.project.honorarLevel.usePoints){
                 this.dataUpdate(this.project.honorarLevel_id, this.project.honorarLevel_number)
             } 
         },
         updateProjectParagraphData(){
+            if(!this.project.honorarLevel) this.project.honorarLevel = {}
+            this.project.honorarLevel = { ...this.data}
+            delete this.project.honorarLevel.list
             updateProjectObject(this.object_id, this.project)
         },
         select(data){
             data.id = data.id_item
-            this.project.usePoints=false
+            this.usePoints=false
             this.project.honorarLevel_id = data.id
             this.project.honorarLevel_number = data.item.number
             this.dataUpdate(data.id, data.item.number)
@@ -89,7 +92,7 @@ export  default{
         setEquivalent(value){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
             if(!level) return false
-            if(this.project.usePoints) this.dataUpdate(level.id, level.number)
+            if(this.usePoints) this.dataUpdate(level.id, level.number)
             this.equivalent = level.value
         }
     }

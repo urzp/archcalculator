@@ -5,7 +5,7 @@ $id = $input_data -> id;
 
 foreach ($input_data as $key => $value){
     $newdata[$key] = $value;
-    if($key=='requirementsPoints'){
+    if($key=='honorarLevel'||$key=='requirementsPoints'||$key=='requirementsPointsNames'||$key=='HonorarRate'){
         $newdata[$key] = json_encode($value);
     }
 }
