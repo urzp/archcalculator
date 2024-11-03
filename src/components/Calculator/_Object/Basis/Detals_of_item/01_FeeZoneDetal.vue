@@ -32,7 +32,6 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'FeeZoneDetal',
     mounted(){
-        this.getData()
         EventBus.on('updateProjectObject', this.getProjectData() )
     },
     data(){
@@ -65,7 +64,6 @@ export  default{
     computed:{
         total(){
             let result = this.list.reduce((sum, item) => sum + Number(item.value),0)
-            this.$emit('total', result)
             return result
         },
     },
@@ -79,6 +77,7 @@ export  default{
             let project_object = Project.objects.find(item=>item.id==this.object_id)
             this.points = project_object.requirementsPoints
             this.pointsName = project_object.requirementsPointsNames
+            this.getData()
         },
         async setVaulues(){
             if(!this.points||!this.points.length>0) return false
@@ -92,7 +91,7 @@ export  default{
             let item = this.list.find(item=>item.id==id_item)
             item.value = value
             let saveList = this.list.map(item=>item.value)
-            updateProjectObject(this.object_id, {requirementsPoints:saveList})
+            updateProjectObject(this.object_id, {requirementsPoints:saveList},false)
             this.getProjectData()
         },
         updateUserTitle(value, id_item){
@@ -100,7 +99,7 @@ export  default{
             item.user_title = value
             let saveList = this.list.map(item=>item.user_title)
             saveList = saveList.filter(item=>!!item)
-            updateProjectObject(this.object_id, {requirementsPointsNames:saveList})
+            updateProjectObject(this.object_id, {requirementsPointsNames:saveList},false)
             this.getProjectData()
         }
     }

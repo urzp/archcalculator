@@ -11,10 +11,10 @@ export async function LoadProjectData(id){
     return result
 }
 
-export async function updateProjectObject(id, data){
+export async function updateProjectObject(id, data, sendAPI=true){
     let obj = Project.objects.find(item=>item.id==id)
     for (let key in data){
         obj[key] = data[key]
     }
-    await apiData({typeData:'updateProjectObject', data: obj})
+    if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})
 }

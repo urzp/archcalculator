@@ -15,8 +15,8 @@
                 :id_paragraph="id_paragraph" 
                 :object_id = "object_id"
                 :equivalent="equivalent" 
-                :usePoints="usePoints"
-                @usePoint="usePoints=true; updateProjectParagraphData()"
+                :usePoints="data.usePoints"
+                @usePoint=" data.usePoints=true "
                 @total="value=>setEquivalent(value)"
             />
         </div>
@@ -39,7 +39,7 @@ export  default{
                 id:'',
                 number:'',
                 value: '',
-                usePoints:'',
+                usePoints: '',
                 list:[],
             },
             project:{},
@@ -64,9 +64,9 @@ export  default{
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
-            if(!this.project.honorarLevel.usePoints){
-                this.dataUpdate(this.project.honorarLevel_id, this.project.honorarLevel_number)
-            } 
+            this.dataUpdate(this.project.honorarLevel.id, this.project.honorarLevel.number)
+            let total = this.project.requirementsPoints.reduce((sum, item) => sum + Number(item),0)
+            this.setEquivalent (total,false)
         },
         updateProjectParagraphData(){
             if(!this.project.honorarLevel) this.project.honorarLevel = {}
@@ -76,24 +76,24 @@ export  default{
         },
         select(data){
             data.id = data.id_item
-            this.usePoints=false
-            this.project.honorarLevel_id = data.id
-            this.project.honorarLevel_number = data.item.number
+            this.data.usePoints=false
+            this.data.number = data.item.number
             this.dataUpdate(data.id, data.item.number)
             this.updateProjectParagraphData()
             this.$emit('selected', data)
         },
         dataUpdate(id, number){
             this.data.id = id
+            this.data.number = number
             let element = this.data.list.find(item=>item.number==number)
             if(!element){ element = lastElement(this.data.list) }
             this.data.value = element.value
         },
-        setEquivalent(value){
+        setEquivalent(value, send = true){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
-            if(!level) return false
-            if(this.usePoints) this.dataUpdate(level.id, level.number)
             this.equivalent = level.value
+            if(send) this.dataUpdate(level.id, level.number)
+            if(send) this.updateProjectParagraphData()
         }
     }
 }
