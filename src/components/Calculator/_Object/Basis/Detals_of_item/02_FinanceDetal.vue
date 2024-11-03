@@ -1,16 +1,16 @@
 <template>
-    <div class="wrap" >
+    <div class="wrap" :class="{active:useDetals}" @click="this.$emit('useDetals')">
         <div class="list">
-            <div class="detal-item" v-for="item in data.list" :key="item.id">
-                <input class="title" :placeholder="item.title" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
+            <div class="detal-item" v-for="item in list" :key="item.id">
+                <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
                 <div class="value-wrap">
-                    <Price input_type font_size_unit="18px" :value="getValue( item.id )" @edit_price="val=>updatePrice(item.id, val)" :search_data="search_data"/>
+                    <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)"/>
                 </div>
             </div>
             <div class="total">
                 <div class="total_points">
                     <div class="label">Total eligible costs, "other": </div>
-                    <div class="value"> <Price  font_size_unit="18px" :value="data.total.value"/> </div>
+                    <div class="value"> <Price  font_size_unit="18px" :value="total"/> </div>
                 </div>
             </div>
         </div>
@@ -20,30 +20,32 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 export  default{
-    name: 'EligibleCostsDetal',
+    name: 'FinanceDetal',
     data(){
         return{
             collapse:true,
         }
     },
+    emits:['useDetals','edit_price'],
+    computed:{
+        total(){
+            let result = this.list.reduce((sum, item) => sum + Number(item.value),0)
+            return result
+        }
+    },
     methods:{
         getValue(id){
-           let el = this.data.list.find(item => item.id == id);
+           let el = this.list.find(item => item.id == id);
            let result = el.value==''?el.def_value:el.value
            return result
         },
-        updatePrice(id_item, value){
-            let parent_item = this.search_data.id_parent
-            let name_value = this.data.name
-            EventBus.emit('edit:input_detals',{parent_item, name_value, id_item, value })
+        updatePrice(id, value){
+            this.$emit('edit_price',{id, value })
         }
     },
     props:{
-        data: Object,
-        search_data:{
-            typeof:Object,
-            default:{id_parent:'0', id:'0'}
-        }
+        list: Array,
+        useDetals:Boolean,
     }
 }
 
@@ -56,6 +58,7 @@ export  default{
     background-color: #fff;
     margin-left: 55px;
     margin-bottom: 15px;
+    opacity: 0.5;
 }
 .wrap::before{
     position: relative;
@@ -65,6 +68,9 @@ export  default{
     border-left: solid 1px #E4E4E4;
     box-shadow: 0px 30px 0px #000;
     margin-bottom: 35px;
+}
+.wrap.active{
+    opacity: 1.0;
 }
 .list{
     width: 100%;

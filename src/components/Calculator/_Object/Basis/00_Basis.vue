@@ -5,6 +5,7 @@
         <Paragraph_calc :prop_id="paragraph" @selected="data=>{ paragraph = data.id; updateProjectData()}"/>
         <HonorarZone_calc :id_paragraph="paragraph" :object_id="object_id" />
         <HonorarRate_calc  :object_id="object_id"/>
+        <Finance_calc :id_paragraph="paragraph" :object_id="object_id" />
     </PartObjectContent>
     <PartObjectTotal :collapse = 'collapse' :data="data.Total"/>    
 </template>

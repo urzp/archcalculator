@@ -14,6 +14,7 @@ import HOAI_version_calc  from './Calculator/_Object/Basis/01_HOAI_version.vue'
 import Paragraph_calc  from './Calculator/_Object/Basis/02_Paragraph.vue'
 import HonorarZone_calc  from './Calculator/_Object/Basis/03_HonorarZone.vue'
 import HonorarRate_calc  from './Calculator/_Object/Basis/04_HonorarRate.vue'
+import Finance_calc  from './Calculator/_Object/Basis/05_Finance.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
 import PartObjectContent from './Calculator/Object/Parts/content.vue'
@@ -21,7 +22,7 @@ import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
 import FeeZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_FeeZoneDetal.vue'
-import EligibleCostsDetal from './Calculator/Object/Parts/Detals_of_item/EligibleCostsDetal.vue'
+import FinanceDetal from './Calculator/_Object/Basis/Detals_of_item/02_FinanceDetal.vue'
 import FeeTableDetal from './Calculator/Object/Parts/Detals_of_item/FeeTableDetal.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
@@ -79,11 +80,13 @@ export default [
     Paragraph_calc,
     HonorarZone_calc,
     HonorarRate_calc,
+    Finance_calc,
 
     BaseServis,
 
     FeeZoneDetal,
-    EligibleCostsDetal,
+    FinanceDetal,
+
     FeeTableDetal,
     RequirementsPoints,
 
