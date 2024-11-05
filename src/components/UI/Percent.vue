@@ -87,7 +87,7 @@ export  default{
         font-size: 16px;
     }
     input{
-        width: 30px;
+        width: 30px!important;
         text-align: right;
         font-family:inherit;
         color: inherit;

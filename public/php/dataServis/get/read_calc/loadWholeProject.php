@@ -14,6 +14,7 @@ foreach($data['objects'] as $key => $item ){
     $data['objects'][$key]['requirementsPointsNames'] = json_decode( $item['requirementsPointsNames'] );
     $data['objects'][$key]['HonorarRate'] = json_decode( $item['HonorarRate'] );
     $data['objects'][$key]['finance'] = json_decode( $item['finance'] );
+    $data['objects'][$key]['payExtra'] = json_decode( $item['payExtra'] );
 }
 
 

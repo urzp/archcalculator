@@ -7,8 +7,9 @@
         <HonorarRate_calc  :object_id="object_id"/>
         <Finance_calc :id_paragraph="paragraph" :object_id="object_id" />
         <Honorar_calc :id_paragraph="paragraph" :object_id="object_id" />
+        <PayExtra_calc :id_paragraph="paragraph" :object_id="object_id" />
     </PartObjectContent>
-    <PartObjectTotal :collapse = 'collapse' :data="data.Total"/>    
+    <TotalBasis :object_id="object_id"/>    
 </template>
 
 <script>

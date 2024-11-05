@@ -82,6 +82,7 @@ export  default{
             }
         },
         ifRangeInFinfnce(){
+            if(!this.honorarTable.rate_values) return false
             let result
             let finance = {}
             finance.min = Number( this.honorarTable.rate_values[0].value )
@@ -122,7 +123,11 @@ export  default{
             current.max_fee = (up.max_fee - low.max_fee)*rateBetweenfinding + low.max_fee
 
             this.value = (current.max_fee - current.min_fee) * honorarRate/100 + current.min_fee
-        }
+            this.project.honorar_calc = this.value
+        },
+        updateProjectParagraphData(){
+            updateProjectObject(this.object_id, this.project)
+        },
         
     }
 }
