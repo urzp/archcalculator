@@ -4,7 +4,7 @@
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
                 <div class="value-wrap">
-                    <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)"/>
+                    <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)" :typeCurrancy="typeCurrancy"/>
                 </div>
             </div>
             <div class="total">
@@ -44,8 +44,10 @@ export  default{
         }
     },
     props:{
+        typeCurrancy:String,
         list: Array,
         useDetals:Boolean,
+        
     }
 }
 

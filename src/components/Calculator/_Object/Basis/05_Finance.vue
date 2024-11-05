@@ -5,12 +5,15 @@
         </div>
         <div  class="main_row" >
             <div class="title">Anrechenbare Kosten</div>
-            <div class="price" @click="switchDetal(false)"><Price :input_type="true" :value ="value" @edit_price="newValue=>editValue(newValue)"/></div>
+            <div class="message" v-if="finance.outRange_min"> min <Price :value ="finance.min" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="message" v-if="finance.outRange_max"> max <Price :value ="finance.max" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="price" @click="switchDetal(false)"><Price input_type :value ="value_render" @edit_price="newValue=>editValue(newValue)" :typeCurrancy="typeCurrancy"/></div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
             <FinanceDetal 
                 :list="list"
                 :id_paragraph="id_paragraph" 
+                :typeCurrancy="typeCurrancy"
                 :object_id = "object_id"
                 :useDetals="useDetals"
                 @useDetals="switchDetal(true)"
@@ -21,20 +24,25 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
+        EventBus.on('financeLimits', data=>this.finance=data )
     },
     data(){
         return{
             collapse_detals:true,
             value: '4500',
+            typeCurrancy: '€',
+            value_detals:'',
             list:[],
             project:{},
             detals:{},
             useDetals:false,
+            finance:{},
         }
     },
     props:{
@@ -45,15 +53,19 @@ export  default{
         async id_paragraph(){
             await this.getData()
             this.getProjectData()
-        }
+        },
     },
     computed:{
-        
+        value_render(){
+            return this.useDetals?this.value_detals:this.value
+        },
     },
     methods:{
         async getData(){
             let result = (await apiData({typeData:'calc:AllowableCosts', id_paragraph: this.id_paragraph })).data
             this.list = result
+            result = (await apiData({typeData:'calc:feeTableTypeValue', id_paragraph: this.id_paragraph })).data[0]
+            if(!result||!result.value||result.value=='Eur'){this.typeCurrancy = '€'}else{this.typeCurrancy = result.value}
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
@@ -77,12 +89,10 @@ export  default{
         },
         switchDetal(useDetal, update=true){
             this.useDetals=useDetal; 
-            if(useDetal){
-                this.value = this.list.reduce((sum, item) => sum + Number(item.value),0)
-            }else{
-                this.value = this.project.finance.value
-            }
+            this.value_detals = this.list.reduce((sum, item) => sum + Number(item.value),0)
+            this.value = this.project.finance.value
             if(update) this.updateProjectParagraphData()
+            EventBus.emit('switchFinance')
         }
         
     }
@@ -97,11 +107,18 @@ export  default{
         align-items: center;
         justify-content: space-between;
     }   
-    .title{
+    .title, .message{
         margin-left: 55px;
         font-family: 'Raleway-Light';
         font-size: 20px;
     }
+
+    .message{
+        display: flex;
+        column-gap: 15px;
+        color: #464646;
+    }
+
     .value{
         font-family: 'Raleway-Light';
         font-size: 18px;

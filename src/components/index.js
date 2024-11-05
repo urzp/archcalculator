@@ -15,15 +15,16 @@ import Paragraph_calc  from './Calculator/_Object/Basis/02_Paragraph.vue'
 import HonorarZone_calc  from './Calculator/_Object/Basis/03_HonorarZone.vue'
 import HonorarRate_calc  from './Calculator/_Object/Basis/04_HonorarRate.vue'
 import Finance_calc  from './Calculator/_Object/Basis/05_Finance.vue'
+import Honorar_calc from './Calculator/_Object/Basis/06_Honorar.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
 import PartObjectContent from './Calculator/Object/Parts/content.vue'
 import PartObjectTotal from './Calculator/Object/Parts/total.vue'
 import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
 //----------------------------Detals_of_items-----------------------------
-import FeeZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_FeeZoneDetal.vue'
+import HonorarZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_HonorarZoneDetal.vue'
 import FinanceDetal from './Calculator/_Object/Basis/Detals_of_item/02_FinanceDetal.vue'
-import FeeTableDetal from './Calculator/Object/Parts/Detals_of_item/FeeTableDetal.vue'
+import HonorarDetal from './Calculator/_Object/Basis/Detals_of_item/03_HonorarDetal.vue'
 //----------------------------ItemPartsObject-----------------------------
 import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
 //----------------------------SelectLists-ItemPartsObject-----------------------------
@@ -81,13 +82,14 @@ export default [
     HonorarZone_calc,
     HonorarRate_calc,
     Finance_calc,
+    Honorar_calc,
 
     BaseServis,
 
-    FeeZoneDetal,
+    HonorarZoneDetal,
     FinanceDetal,
+    HonorarDetal,
 
-    FeeTableDetal,
     RequirementsPoints,
 
     ItemPartObj,

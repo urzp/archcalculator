@@ -3,7 +3,7 @@
         <div class="title">Honorarsatz</div>
         <div class="value">{{ data.value }}</div>
         <div  v-if="data.id == 6" class="precent">
-            <Percent :input_type="true" :value = "data.percent" @edit_value = "procent=>setProcent(procent)"/>
+            <Percent input_type :value = "data.percent" @edit_value = "procent=>setProcent(procent)"/>
         </div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>

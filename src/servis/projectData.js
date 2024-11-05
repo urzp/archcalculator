@@ -17,4 +17,5 @@ export async function updateProjectObject(id, data, sendAPI=true){
         obj[key] = data[key]
     }
     if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})
+    EventBus.emit('UpdatedProject')
 }

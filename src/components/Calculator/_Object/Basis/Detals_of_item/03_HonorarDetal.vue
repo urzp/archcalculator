@@ -3,24 +3,24 @@
         <div class="list">
             <div class="detal-item">
                 <div class="title">Name</div>
-                <div class="funding">Eligible costs</div>
-                <div class="min_fee">Fee of</div>
-                <div class="max_fee">Fee up to</div>
+                <div class="funding">Anrechenbare Kosten</div>
+                <div class="min_fee">Honorar von</div>
+                <div class="max_fee">Honorar bis</div>
             </div>
-            <div class="detal-item">
-                <div class="title">Table Value Top</div>
+            <div class="detal-item" v-if="!!data.up">
+                <div class="title">Tabellenwert Oben</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.up.funding" /></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.up.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.up.max_fee" /></div>
             </div>
-            <div class="detal-item">
-                <div class="title">Table Value Current</div>
+            <div class="detal-item" v-if="!!data.current">
+                <div class="title">Interpolation</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.current.funding" /></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.current.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.current.max_fee" /></div>
             </div>
-            <div class="detal-item">
-                <div class="title">Table Value Below</div>
+            <div class="detal-item" v-if="!!data.low">
+                <div class="title">Tabellenwert Unten</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.low.funding" /></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.low.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.low.max_fee" /></div>
@@ -33,9 +33,12 @@
 import Price from '@/components/UI/Price.vue';
 import { EventBus } from '@/servis/EventBus'
 export  default{
-    name: 'FeeTableDetal',
+    name: 'HonorarDetal_calc',
     props:{
-        data: Object,
+        data: {
+            type:Object,
+            default:{}
+        }
     }
 }
 </script>

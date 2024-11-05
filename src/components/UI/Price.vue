@@ -1,16 +1,20 @@
 <template>
     <div class="price">
         <template v-if="!input_type">
-        <div class="unit-price">{{ price.unit }}</div>
-        <div class="comma">,</div>
-        <div class="cents">{{ price.cent }}</div>
+            <div class="unit-price">{{ price.unit }}</div>
+            <template v-if="!noCents&&typeCurrancy!='Hektar'">
+                <div class="comma">,</div>
+                <div class="cents">{{ price.cent }}</div>
+            </template>
         </template>
         <template v-if="input_type">
-            <input  type="text" class="unit-price" :value="price.unit" @change="event => edit_price( event.target.value, price.cent )" @input="event => { validate(event) }"/>
+            <input  type="text" class="unit-price" :value="price.unit" @change="event => edit_price( event.target.value, price.cent )" @input="event => { validate(event) }" @focus="event => { validate(event) }"/>
+            <template v-if="!noCents&&typeCurrancy!='Hektar'">
             <div class="comma">,</div>
             <input  type="number" max="99" min="0" class="cents" :value="price.cent"  @change="event => edit_price( price.unit, event.target.value )"  @input="event => { validate(event, true) }"/>      
+            </template>
         </template>
-        <div class="currency-sign">€</div>
+        <div class="currency-sign">{{ typeCurrancy }}</div>
     </div>
 </template>
 
@@ -31,6 +35,14 @@ export default{
     },
     props:{
         value:[String, Number],
+        noCents:{
+            type: Boolean,
+            default:false
+        },
+        typeCurrancy:{
+            type: String,
+            default: '€',
+        },
         input_type:{ 
             type: Boolean,
             default: false,

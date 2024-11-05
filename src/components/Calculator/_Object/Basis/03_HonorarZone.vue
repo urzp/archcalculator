@@ -11,7 +11,7 @@
             </div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
-            <FeeZoneDetal 
+            <HonorarZoneDetal 
                 :id_paragraph="id_paragraph" 
                 :object_id = "object_id"
                 :equivalent="equivalent" 
@@ -91,6 +91,7 @@ export  default{
         },
         setEquivalent(value, send = true){
             let level =  this.data.list.find(item=>item.maxPoint >= value)
+            if(!level) level =  lastElement(this.data.list)
             this.equivalent = level.value
             if(send) this.dataUpdate(level.id, level.number)
             if(send) this.updateProjectParagraphData()

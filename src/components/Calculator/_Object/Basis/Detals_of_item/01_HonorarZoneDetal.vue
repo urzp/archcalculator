@@ -30,7 +30,7 @@ import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
-    name: 'FeeZoneDetal',
+    name: 'HonorarZoneDetal',
     mounted(){
         EventBus.on('updateProjectObject', this.getProjectData() )
     },
