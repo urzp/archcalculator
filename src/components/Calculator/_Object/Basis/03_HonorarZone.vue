@@ -1,5 +1,5 @@
-<template v-if="!!id_paragraph">
-    <div class="item-Part-obj">
+<template>
+    <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="detals" @click="collapse_detals=!collapse_detals">
             <div class="icon"></div>
         </div>

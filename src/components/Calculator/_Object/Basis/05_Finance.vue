@@ -1,5 +1,5 @@
 <template>
-    <div class="item-Part-obj">
+    <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="detals" @click="collapse_detals=!collapse_detals">
             <div class="icon"></div>
         </div>
@@ -25,11 +25,12 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { apiData } from '@/servis/apiData.js'
+import { getAllowableCosts, getTypeValue } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
+        EventBus.on('LoadedCalcData', this.getData())
         EventBus.on('financeLimits', data=>this.finance=data )
     },
     data(){
@@ -62,10 +63,8 @@ export  default{
     },
     methods:{
         async getData(){
-            let result = (await apiData({typeData:'calc:AllowableCosts', id_paragraph: this.id_paragraph })).data
-            this.list = result
-            result = (await apiData({typeData:'calc:feeTableTypeValue', id_paragraph: this.id_paragraph })).data[0]
-            if(!result||!result.value||result.value=='Eur'){this.typeCurrancy = '€'}else{this.typeCurrancy = result.value}
+            this.list = await getAllowableCosts(this.id_paragraph)
+            this.typeCurrancy = await getTypeValue(this.id_paragraph)
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)

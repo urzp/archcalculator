@@ -1,5 +1,5 @@
 <template>
-    <div class="item-Part-obj">
+    <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="main_row" >
             <div class="title">Zuschlag</div>
             <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>

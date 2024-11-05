@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!!prop_id" class="main_row">
+    <div v-if="!!paragraph_id" class="main_row">
         <div class="title">Planungsgegenstand</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
@@ -9,10 +9,12 @@
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
+import { getParagraph, getParagraphs } from '@/servis/calcData.js'
 export  default{
     name: 'Paragraph_calc',
     async mounted(){
+        EventBus.on('LoadedCalcData', this.getData())
     },
     data(){
         return{
@@ -24,22 +26,22 @@ export  default{
         }
     },
     props:{
-        prop_id:String,
+        paragraph_id:String,
     },
     watch:{
-        async prop_id(value){
-           if(!!value) await this.getData()
+        async paragraph_id(){
+           this.getData()
         },
     },
     emits:['selected'],
     methods:{
         async getData(){
-            let result = await apiData({typeData:'getParagraph_and_list', id_pargraph: this.prop_id })
-            let paragraph = result.data.paragraph
+            let paragraph = getParagraph(this.paragraph_id)
+            if(!paragraph) return false
             this.data.id = paragraph.id
             this.data.value = `${paragraph.name} ${paragraph.title}`
 
-            let paragraphs = result.data.paragraphs
+            let paragraphs = getParagraphs(paragraph.id_HOAI)
             paragraphs = paragraphs.map(item=>{item.value=`${item.name} ${item.title}`; return item})
             this.data.list = paragraphs
         },
@@ -48,7 +50,7 @@ export  default{
             this.dataUpdate(data.id)
             this.$emit('selected', data)
         },
-        dataUpdate(id = this.prop_id ){
+        dataUpdate(id = this.paragraph_id ){
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }

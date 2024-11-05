@@ -1,5 +1,5 @@
 <template>
-    <div class="item-Part-obj">
+    <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="detals" @click="collapse_detals=!collapse_detals">
             <div class="icon"></div>
         </div>
@@ -82,7 +82,7 @@ export  default{
             }
         },
         ifRangeInFinfnce(){
-            if(!this.honorarTable.rate_values) return false
+            if(!this.honorarTable.rate_values||!this.honorarTable.rate_values[0]) return false
             let result
             let finance = {}
             finance.min = Number( this.honorarTable.rate_values[0].value )

@@ -1,5 +1,5 @@
 <template>
-    <div  class="main_row">
+    <div class="main_row" v-if="!!id_paragraph">
         <div class="title">Honorarsatz</div>
         <div class="value">{{ data.value }}</div>
         <div  v-if="data.id == 6" class="precent">
@@ -38,6 +38,7 @@ export  default{
         }
     },
     props:{
+        id_paragraph:String,
         object_id: Object,
     },
 

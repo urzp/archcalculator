@@ -12,10 +12,12 @@
 </template>
 
 <script>
+import { LoadCalcData } from '@/servis/calcData.js'
 import { LoadProjectData } from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
     mounted(){
+        this.getCalcData()
         this.getProject()
     },
     data(){
@@ -25,6 +27,9 @@ export default{
         }
     },
     methods:{
+        async getCalcData(){
+            LoadCalcData()
+        },
         async getProject(){
             let result = await LoadProjectData(this.project)
             this.ListObjects = result.objects

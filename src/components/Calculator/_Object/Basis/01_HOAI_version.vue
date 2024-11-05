@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
+import { CalcData } from '@/servis/calcData.js'
 export  default{
     name: 'HOAI_version_calc',
     async mounted(){
-        await this.getData()
-        this.dataUpdate()
+        EventBus.on('LoadedCalcData', this.getData())
     },
     data(){
         return{
@@ -36,8 +36,8 @@ export  default{
     emits:['selected'],
     methods:{
         async getData(){
-            let result = await apiData({typeData:'getHOAI'})
-            this.data.list = result.data
+            this.data.list = CalcData.HOAI_versions
+            this.dataUpdate()
         },
         select(data){
             data.id = data.id_item
@@ -45,6 +45,7 @@ export  default{
             this.$emit('selected', data)
         },
         dataUpdate(id = this.prop_id ){
+            if(!this.data.list)return false
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }

@@ -1,5 +1,5 @@
-export let global={
-
+export let global= {
+   
 }
 
 export function setGlobalValue(name, value){
