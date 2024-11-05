@@ -35,7 +35,7 @@ export  default{
     data(){
         return{
             collapse_detals:true,
-            value: '4500',
+            value: '',
             typeCurrancy: '€',
             value_detals:'',
             list:[],
@@ -89,7 +89,7 @@ export  default{
         },
         switchDetal(useDetal, update=true){
             this.useDetals=useDetal; 
-            this.value_detals = this.list.reduce((sum, item) => sum + Number(item.value),0)
+            this.value_detals = this.list.reduce((sum, item) =>{ if(!item.value) item.value = 0; return sum + Number(item.value) },0)
             this.value = this.project.finance.value
             if(update) this.updateProjectParagraphData()
             EventBus.emit('switchFinance')

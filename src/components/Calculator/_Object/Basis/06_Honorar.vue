@@ -26,7 +26,7 @@ export  default{
     data(){
         return{
             collapse_detals:true,
-            value: '10000',
+            value: '',
             table_render:{
                 low:{},
                 current:{
@@ -94,11 +94,11 @@ export  default{
             return result
         },
         calculateTable(){
-           
+            if(!this.honorarTable) return false
             let finance = this.finance()
-            console.log('calc', finance)
             if( !this.ifRangeInFinfnce() ) return false
             let honorarNumber = this.project.honorarLevel.number
+            let honorarRate = this.project.HonorarRate.percent
             let table_rates = this.honorarTable.rate_values
             let low = this.table_render.low
             let current = this.table_render.current
@@ -120,6 +120,8 @@ export  default{
             let rateBetweenfinding = (current.funding - low.funding)/(up.funding - low.funding)
             current.min_fee = (up.min_fee - low.min_fee)*rateBetweenfinding + low.min_fee
             current.max_fee = (up.max_fee - low.max_fee)*rateBetweenfinding + low.max_fee
+
+            this.value = (current.max_fee - current.min_fee) * honorarRate/100 + current.min_fee
         }
         
     }

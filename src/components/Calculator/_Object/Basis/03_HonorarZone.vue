@@ -66,7 +66,7 @@ export  default{
             this.project = await Project.objects.find(item=>item.id==this.object_id)
             this.dataUpdate(this.project.honorarLevel.id, this.project.honorarLevel.number)
             let total = this.project.requirementsPoints.reduce((sum, item) => sum + Number(item),0)
-            this.setEquivalent (total,false)
+            this.setEquivalent (total)
         },
         updateProjectParagraphData(){
             if(!this.project.honorarLevel) this.project.honorarLevel = {}
