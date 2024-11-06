@@ -12,7 +12,6 @@
 
 <script>
 
-import { getData } from '@/servis/getData.js'
 import { calculate } from '@/servis/calculate.js'
 export default{
     name: 'ObjectCalc',
