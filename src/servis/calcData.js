@@ -1,4 +1,5 @@
 import { apiData } from '@/servis/apiData.js'
+import { lastElement } from '@/servis/functions.js'
 
 export let CalcData = {}
 
@@ -30,6 +31,13 @@ export function getParagraph(id){
     return CalcData.paragraphs.find(item=>item.id == id)
 }
 
+export function getHonorarZones(id_paragraph){
+    if(!CalcData.feeTableHonorarZones) return false
+    let result = CalcData.feeTableHonorarZones.filter(item=>item.id_paragraph==id_paragraph)
+    result.forEach(item=>item.value = item.name)
+    return result
+}
+
 export function getFeeTable(id_paragraph){
     if(!CalcData.feeTableRateValue) return false
     let rate_values = CalcData.feeTableRateValue.filter(item=>item.id_paragraph==id_paragraph)
@@ -42,6 +50,20 @@ export function getFeeTable(id_paragraph){
         })
         rate.zones = zones
     });
-    return {rate_values}
+    return rate_values
 }
 
+export function financeLimits(id_paragraph){
+    if(!CalcData.feeTableRateValue) return false
+    let rate_values = CalcData.feeTableRateValue.filter(item=>item.id_paragraph==id_paragraph)
+    let min = rate_values[0].value
+    let max = lastElement(rate_values).value
+    return {min, max}
+}
+
+export function getRequirementsPoints(id_paragraph){
+    if(!CalcData.requirementsPoints) return false
+    let result = CalcData.requirementsPoints.filter(item=>item.id_paragraph==id_paragraph)
+    result.forEach(item=>item.value = item.minPoint)
+    return result
+}

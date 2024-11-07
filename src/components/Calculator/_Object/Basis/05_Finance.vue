@@ -5,8 +5,8 @@
         </div>
         <div  class="main_row" >
             <div class="title">Anrechenbare Kosten</div>
-            <div class="message" v-if="finance.outRange_min"> min <Price :value ="finance.min" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
-            <div class="message" v-if="finance.outRange_max"> max <Price :value ="finance.max" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="message" v-if="limits.outRange_min"> min <Price :value ="limits.min" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="message" v-if="limits.outRange_max"> max <Price :value ="limits.max" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
             <div class="price" @click="switchDetal(false)"><Price input_type :value ="value_render" @edit_price="newValue=>editValue(newValue)" :typeCurrancy="typeCurrancy"/></div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
@@ -25,18 +25,18 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { getAllowableCosts, getTypeValue } from '@/servis/calcData.js'
+import { getAllowableCosts, getTypeValue, financeLimits } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
         EventBus.on('LoadedCalcData', this.getData())
-        EventBus.on('financeLimits', data=>this.finance=data )
     },
     data(){
         return{
             collapse_detals:true,
             value: '',
+            limits:{},
             typeCurrancy: '€',
             value_detals:'',
             list:[],
@@ -58,13 +58,16 @@ export  default{
     },
     computed:{
         value_render(){
-            return this.useDetals?this.value_detals:this.value
+            let result = this.useDetals?this.value_detals:this.value
+            this.checkLimits(result)
+            return result
         },
     },
     methods:{
         async getData(){
             this.list = await getAllowableCosts(this.id_paragraph)
             this.typeCurrancy = await getTypeValue(this.id_paragraph)
+            this.limits = await financeLimits(this.id_paragraph)
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
@@ -92,6 +95,11 @@ export  default{
             this.value = this.project.finance.value
             if(update) this.updateProjectParagraphData()
             EventBus.emit('switchFinance')
+        },
+        checkLimits(finance){
+            if(!this.limits) return false
+            this.limits.outRange_min = finance < this.limits.min
+            this.limits.outRange_max = finance > this.limits.max
         }
         
     }

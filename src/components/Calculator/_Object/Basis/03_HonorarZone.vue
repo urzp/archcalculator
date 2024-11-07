@@ -24,13 +24,15 @@
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
+import { getHonorarZones } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 import { lastElement } from '@/servis/functions.js'
 
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
+        EventBus.on('LoadedCalcData', this.getData)
     },
     data(){
         return{
@@ -59,8 +61,7 @@ export  default{
     emits:['selected'],
     methods:{
         async getData(){
-            let result = ( await apiData({typeData:'calc:getHonorarZones', id:this.id_paragraph}) ).data
-            this.data.list = result
+            this.data.list =  await getHonorarZones( this.id_paragraph)
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)

@@ -8,7 +8,7 @@
             <div class="price" ><Price :value ="value" /></div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
-            <HonorarDetal_calc :data = "table_render" />
+            <HonorarDetal_calc :data = "table_render" :typeValue="typeValue" />
         </div>
     </div>
 </template>
@@ -28,6 +28,8 @@ export  default{
         return{
             collapse_detals:true,
             value: '',
+            finance_min:'',
+            finance_max:'',
             table_render:{
                 low:{},
                 current:{
@@ -64,7 +66,9 @@ export  default{
     methods:{
         async getData(){
             this.honorarTable = await getFeeTable(this.id_paragraph)
-            console.log('this.honorarTable ', this.honorarTable)
+            if(!this.honorarTable) return false
+            this.finance_min = Number( this.honorarTable[0].value )
+            this.finance_max = Number( lastElement( this.honorarTable ).value )
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
@@ -78,42 +82,40 @@ export  default{
                 return  Number(finance.value)
             }
         },
-        ifRangeInFinfnce(){
-            if(!this.honorarTable.rate_values||!this.honorarTable.rate_values[0]) return false
-            let result
-            let finance = {}
-            finance.min = Number( this.honorarTable.rate_values[0].value )
-            finance.max = Number(  lastElement( this.honorarTable.rate_values ).value )
-            result = this.finance()>=finance.min&&this.finance()<=finance.max
-            
-            finance.outRange_min = this.finance()<finance.min
-            finance.outRange_max = this.finance()>finance.max
-            EventBus.emit('financeLimits',finance)
-            return result
+        checkLimits(){
+            return this.finance()>=this.finance_min&&this.finance()<=this.finance_max
+        },
+        findFinanceGap(finance){
+            this.table_render.low = this.honorarTable.reverse().find(item=>finance >= item.value )
+            this.table_render.up = this.honorarTable.reverse().find(item=>finance < item.value )
+            let length = Number( this.honorarTable.length ) - 1
+            if(!this.table_render.low) { this.table_render.low = this.honorarTable[0]; this.table_render.up  = this.honorarTable[1];}
+            if(!this.table_render.up) { this.table_render.low = this.honorarTable[length - 1];  this.table_render.up  = this.honorarTable[length];  }
         },
         calculateTable(){
             if(!this.honorarTable) return false
+            if( !this.checkLimits() ) return false
+
             let finance = this.finance()
-            if( !this.ifRangeInFinfnce() ) return false
+            this.findFinanceGap(finance)
+
             let honorarNumber = this.project.honorarLevel.number
             let honorarRate = this.project.HonorarRate.percent
-            let table_rates = this.honorarTable.rate_values
+
             let low = this.table_render.low
             let current = this.table_render.current
             let up = this.table_render.up
 
-            let low_item = table_rates.reverse().find(item=>finance >= item.value )
-            let up_item = table_rates.reverse().find(item=>finance < item.value )
-
-            low.funding = Number( low_item.value )
+            low.funding = Number( low.value )
             current.funding = finance
-            up.funding = Number( up_item.value )
+            up.funding = Number( up.value )
 
-            low.min_fee = Number( low_item.zones[honorarNumber - 1].value )
-            low.max_fee = Number(  low_item.zones[honorarNumber].value )
+            if(honorarNumber>low.zones.length - 1) honorarNumber = low.zones.length - 1
+            low.min_fee = Number( low.zones[honorarNumber - 1].value )
+            low.max_fee = Number(  low.zones[honorarNumber].value )
 
-            up.min_fee = Number(  up_item.zones[honorarNumber - 1].value )
-            up.max_fee = Number( up_item.zones[honorarNumber].value )
+            up.min_fee = Number(  up.zones[honorarNumber - 1].value )
+            up.max_fee = Number( up.zones[honorarNumber].value )
 
             let rateBetweenfinding = (current.funding - low.funding)/(up.funding - low.funding)
             current.min_fee = (up.min_fee - low.min_fee)*rateBetweenfinding + low.min_fee

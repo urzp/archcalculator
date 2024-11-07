@@ -10,6 +10,7 @@ $data['feeTableHonorarZones'] = crud_read('feeTableHonorarZones');
 $data['feeTableTypeValue'] = crud_read('feeTableTypeValue');
 $data['feeTableRateValue'] = crud_read('feeTableRateValue');
 $data['feeTableHonorarZonesRateValue'] = crud_read('feeTableHonorarZonesRateValue');
+$data['requirementsPoints'] = crud_read('requirementsPoints');
 
 $result = (object) [
     'success' => true,

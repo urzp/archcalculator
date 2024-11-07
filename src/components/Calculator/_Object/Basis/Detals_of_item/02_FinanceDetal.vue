@@ -10,7 +10,7 @@
             <div class="total">
                 <div class="total_points">
                     <div class="label">Total eligible costs, "other": </div>
-                    <div class="value"> <Price  font_size_unit="18px" :value="total"/> </div>
+                    <div class="value"> <Price  font_size_unit="18px" :value="total"  :typeCurrancy="typeCurrancy"/> </div>
                 </div>
             </div>
         </div>

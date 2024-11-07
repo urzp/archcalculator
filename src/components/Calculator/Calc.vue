@@ -35,6 +35,7 @@ export default{
         async getProject(){
             let result = await LoadProjectData(this.project)
             this.ListObjects = result.objects
+            EventBus.emit('LoadedProject')
         }
     }
 }

@@ -27,11 +27,13 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { getRequirementsPoints } from '@/servis/calcData.js'
 import { apiData } from '@/servis/apiData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'HonorarZoneDetal',
     mounted(){
+        EventBus.on('LoadedCalcData', this.getData)
         EventBus.on('updateProjectObject', this.getProjectData() )
     },
     data(){
@@ -69,8 +71,7 @@ export  default{
     },
     methods:{
         async getData(){
-            let result = (await apiData({typeData:'calc:requirementsPoints', id:this.id_paragraph})).data
-            this.list = result
+            this.list = await getRequirementsPoints(this.id_paragraph)
             this.setVaulues()
         },
         async getProjectData(){
