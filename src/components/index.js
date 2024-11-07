@@ -21,14 +21,12 @@ import TotalBasis from './Calculator/_Object/Basis/08_TotalBasis.vue'
 //----------------------------PartsObject-----------------------------
 import PartObjectTitle from './Calculator/Object/Parts/title.vue'
 import PartObjectContent from './Calculator/Object/Parts/content.vue'
-import PartObjectTotal from './Calculator/Object/Parts/total.vue'
-import BaseServis from './Calculator/Object/Parts/BaseServis.vue'
+
 //----------------------------Detals_of_items-----------------------------
 import HonorarZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_HonorarZoneDetal.vue'
 import FinanceDetal from './Calculator/_Object/Basis/Detals_of_item/02_FinanceDetal.vue'
 import HonorarDetal from './Calculator/_Object/Basis/Detals_of_item/03_HonorarDetal.vue'
-//----------------------------ItemPartsObject-----------------------------
-import ItemPartObj from './Calculator/Object/Parts/Item/ItemPartObj.vue'
+
 //----------------------------SelectLists-ItemPartsObject-----------------------------
 import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
 //----------------------------EditCalculator-----------------------------
@@ -76,7 +74,7 @@ export default [
 
     PartObjectTitle,
     PartObjectContent,
-    PartObjectTotal,
+
 
     Basis,
     HOAI_version_calc,
@@ -88,15 +86,11 @@ export default [
     PayExtra_calc,
     TotalBasis,
 
-    BaseServis,
-
     HonorarZoneDetal,
     FinanceDetal,
     HonorarDetal,
 
     RequirementsPoints,
-
-    ItemPartObj,
 
     Select_List,
     
