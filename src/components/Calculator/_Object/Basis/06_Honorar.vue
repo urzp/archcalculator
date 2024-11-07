@@ -21,7 +21,6 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Honorar_calc',
     async mounted(){
-        EventBus.on('LoadedCalcData', this.getData)
         EventBus.on('switchFinance', this.calculateTable )
     },
     data(){
@@ -42,10 +41,16 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         id_paragraph:String,
         object_id:String,
     },
     watch:{
+        async loaded(){
+            await this.getData()
+            await this.getProjectData()
+            this.calculateTable()          
+        },
         async id_paragraph(){
             await this.getData()
             await this.getProjectData()

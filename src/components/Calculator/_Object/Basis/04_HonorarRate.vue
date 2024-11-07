@@ -17,7 +17,7 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'HonorarRate_calc',
     async mounted(){
-        EventBus.on('updateProjectObject', this.getProjectData() )
+        EventBus.on('updateProjectObject', this.getProjectData )
     },
     data(){
         return{
@@ -38,10 +38,15 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         id_paragraph:String,
-        object_id: Object,
+        object_id:String,
     },
-
+    watch:{
+        loaded(){
+            this.getProjectData()
+        }
+    },
     emits:['selected'],
     methods:{
         async getProjectData(){

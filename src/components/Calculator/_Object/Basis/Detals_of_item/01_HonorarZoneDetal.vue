@@ -28,7 +28,6 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { getRequirementsPoints } from '@/servis/calcData.js'
-import { apiData } from '@/servis/apiData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'HonorarZoneDetal',
@@ -39,7 +38,6 @@ export  default{
     data(){
         return{
             collapse:true,
-            total:{},
             list:[],
             points:[],
             pointsName:[],

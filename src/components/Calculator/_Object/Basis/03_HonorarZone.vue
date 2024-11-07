@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { getHonorarZones } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 import { lastElement } from '@/servis/functions.js'
@@ -32,7 +31,6 @@ import { lastElement } from '@/servis/functions.js'
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
-        EventBus.on('LoadedCalcData', this.getData)
     },
     data(){
         return{
@@ -49,10 +47,15 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         id_paragraph:String,
-        object_id: Object,
+        object_id:String,
     },
     watch:{
+        async loaded(){
+            await this.getData()
+            this.getProjectData()
+        },
         async id_paragraph(){
             await this.getData()
             this.getProjectData()

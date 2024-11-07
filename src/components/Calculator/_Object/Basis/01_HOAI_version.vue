@@ -9,12 +9,11 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { CalcData } from '@/servis/calcData.js'
 export  default{
     name: 'HOAI_version_calc',
     async mounted(){
-        EventBus.on('LoadedCalcData', this.getData())
+
     },
     data(){
         return{
@@ -26,18 +25,22 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         prop_id:String,
     },
     watch:{
-        prop_id(){
+        async loaded(){
+            await this.getData()
             this.dataUpdate()
+        },
+        async prop_id(){
+           this.dataUpdate()
         },
     },
     emits:['selected'],
     methods:{
         async getData(){
             this.data.list = CalcData.HOAI_versions
-            this.dataUpdate()
         },
         select(data){
             data.id = data.id_item

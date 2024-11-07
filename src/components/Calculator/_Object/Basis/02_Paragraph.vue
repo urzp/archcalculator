@@ -9,12 +9,10 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { getParagraph, getParagraphs } from '@/servis/calcData.js'
 export  default{
     name: 'Paragraph_calc',
     async mounted(){
-        EventBus.on('LoadedCalcData', this.getData())
     },
     data(){
         return{
@@ -26,6 +24,7 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         paragraph_id:String,
     },
     watch:{

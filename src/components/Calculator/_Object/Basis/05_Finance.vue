@@ -47,10 +47,15 @@ export  default{
         }
     },
     props:{
+        loaded:Boolean,
         id_paragraph:String,
         object_id:String,
     },
     watch:{
+        async loaded(){
+            await this.getData()
+            this.getProjectData()
+        },
         async id_paragraph(){
             await this.getData()
             this.getProjectData()
@@ -67,7 +72,7 @@ export  default{
         async getData(){
             this.list = await getAllowableCosts(this.id_paragraph)
             this.typeCurrancy = await getTypeValue(this.id_paragraph)
-            this.limits = await financeLimits(this.id_paragraph)
+            this.limits = financeLimits(this.id_paragraph)
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)

@@ -5,14 +5,13 @@
             <div class="date">23.08.2024</div>
         </div>
         <div class="objects-calculator" v-for="item in ListObjects" :key="item.id">
-            <ObjectCalc :object_id="item.id" :project_id="project"/>
+            <ObjectCalc :object_id="item.id" :project_id="project" :loaded="loaded"/>
         </div>
         <TotalCalc/>
     </div>
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { LoadProjectData } from '@/servis/projectData.js'
 export default{
@@ -20,22 +19,22 @@ export default{
     async mounted(){
        await this.getCalcData()
        await this.getProject()
+       this.loaded = true
     },
     data(){
         return{
             project: '1',
+            loaded: false,
             ListObjects:[],
         }
     },
     methods:{
         async getCalcData(){
             await LoadCalcData()
-            EventBus.emit('LoadedCalcData')
         },
         async getProject(){
             let result = await LoadProjectData(this.project)
             this.ListObjects = result.objects
-            EventBus.emit('LoadedProject')
         }
     }
 }

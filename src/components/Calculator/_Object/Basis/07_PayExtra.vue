@@ -19,16 +19,20 @@ export  default{
     data(){
         return{
             value:'',
-            percent:'',
+            percent:0,
             honorar_calc:'',
             project:{},
         }
     },
     props:{
+        loaded:Boolean,
         id_paragraph:String,
         object_id:String,
     },
     watch:{
+        loaded(){
+            this.getProjectData()
+        },
         async id_paragraph(){
             await this.getProjectData()
         },

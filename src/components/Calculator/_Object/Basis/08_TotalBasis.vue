@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+
+import { Project } from '@/servis/projectData.js'
 export default{
     name: 'TotalBasis',
     async mounted(){
-        EventBus.on('LoadedProject', this.getProjectData())
+
     },
     data(){
         return{
@@ -24,9 +24,14 @@ export default{
         }
     },
     props:{
+        loaded:Boolean,
         object_id:String,
+        collapse:Boolean,
     },
     watch:{
+        loaded(){
+            this.getProjectData()
+        },
         async id_paragraph(){
             await this.getProjectData()
         },
