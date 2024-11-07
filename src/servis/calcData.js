@@ -31,6 +31,15 @@ export function getParagraph(id){
     return CalcData.paragraphs.find(item=>item.id == id)
 }
 
+export function getSameParagraph(id_HOAI, id_paragpaph){
+    let paragraphs = getParagraphs(id_HOAI)
+    if(!paragraphs||!paragraphs.length) return false
+    if(!id_paragpaph){  return paragraphs[0].id }
+    let paragraph = getParagraph(id_paragpaph)
+    let result = paragraphs.find(item=>item.paragraph == paragraph.paragraph).id
+    return result
+}
+
 export function getHonorarZones(id_paragraph){
     if(!CalcData.feeTableHonorarZones) return false
     let result = CalcData.feeTableHonorarZones.filter(item=>item.id_paragraph==id_paragraph)

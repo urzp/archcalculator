@@ -9,12 +9,10 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'PayExtra_calc',
     async mounted(){
-        EventBus.on('LoadedProject', this.getProjectData)
     },
     data(){
         return{
@@ -33,7 +31,8 @@ export  default{
         loaded(){
             this.getProjectData()
         },
-        async id_paragraph(){
+        async id_paragraph(id){
+            if(!id) return false
             await this.getProjectData()
         },
         project:{
@@ -54,11 +53,11 @@ export  default{
         calc(){
             this.honorar_calc = this.project.honorar_calc
             this.value = Number(this.honorar_calc) * Number(this.percent)/100
-            this.updateProjectParagraphData()
         },
         updatePercent(value){
             this.percent = value
             this.calc()
+            this.updateProjectParagraphData()
         },   
         updateProjectParagraphData(){
             this.project.payExtra.percent = this.percent

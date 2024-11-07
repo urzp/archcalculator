@@ -51,7 +51,8 @@ export  default{
             await this.getProjectData()
             this.calculateTable()          
         },
-        async id_paragraph(){
+        async id_paragraph(id){
+            if(!id) return false
             await this.getData()
             await this.getProjectData()
             this.calculateTable()

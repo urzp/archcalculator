@@ -1,5 +1,5 @@
 <template>
-    <div class="total-part-obj" :class="{collapse:collapse}">
+    <div v-if="!!paragraph" class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
             <div class="title">Total</div>
             <div class="value-percent">{{ percent }} %</div>
@@ -27,12 +27,14 @@ export default{
         loaded:Boolean,
         object_id:String,
         collapse:Boolean,
+        paragraph:String,
     },
     watch:{
         loaded(){
             this.getProjectData()
         },
-        async id_paragraph(){
+        async id_paragraph(id){
+            if(!id) return false
             await this.getProjectData()
         },
         project:{

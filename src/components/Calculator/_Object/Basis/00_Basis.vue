@@ -9,11 +9,11 @@
         <Honorar_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
         <PayExtra_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
     </PartObjectContent>
-    <TotalBasis :loaded="loaded" :object_id="object_id" :collapse = 'collapse'/>    
+    <TotalBasis :loaded="loaded" :object_id="object_id" :collapse = 'collapse' :paragraph="paragraph"/>    
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
+import { getSameParagraph } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'Basis',
@@ -52,14 +52,11 @@ export default{
 
         },
         async selectParagraph(HOAI_v){
-            let id_HOAI = HOAI_v
-            let id_paragpaph = this.paragraph
-            let result = (await apiData({typeData:'getSameParagraph', data: {id_paragpaph, id_HOAI}})).data
-            if(!result.length){
+            this.paragraph = getSameParagraph( HOAI_v, this.paragraph )
+            if(!this.paragraph){
+                this.paragraph = '';
                 console.log('no any pargraph')
-                this.paragraph = ''
             }else{
-                this.paragraph = result
                 this.updateProjectData()
             }
         }  

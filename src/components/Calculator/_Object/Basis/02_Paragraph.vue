@@ -28,8 +28,9 @@ export  default{
         paragraph_id:String,
     },
     watch:{
-        async paragraph_id(){
-           this.getData()
+        async paragraph_id(id){
+            if(!id) return false
+            this.getData()
         },
     },
     emits:['selected'],

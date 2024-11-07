@@ -54,9 +54,10 @@ export  default{
     watch:{
         async loaded(){
             await this.getData()
-            this.getProjectData()
+            this.getProjectData(false)
         },
-        async id_paragraph(){
+        async id_paragraph(id, old){
+            if(!id||!old) return false
             await this.getData()
             this.getProjectData()
         }
@@ -66,11 +67,11 @@ export  default{
         async getData(){
             this.data.list =  await getHonorarZones( this.id_paragraph)
         },
-        async getProjectData(){
+        async getProjectData(send = true){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
             this.dataUpdate(this.project.honorarLevel.id, this.project.honorarLevel.number)
             let total = this.project.requirementsPoints.reduce((sum, item) => sum + Number(item),0)
-            this.setEquivalent (total)
+            this.setEquivalent (total, send)
         },
         updateProjectParagraphData(){
             if(!this.project.honorarLevel) this.project.honorarLevel = {}

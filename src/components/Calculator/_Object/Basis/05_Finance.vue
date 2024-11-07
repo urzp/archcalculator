@@ -56,7 +56,8 @@ export  default{
             await this.getData()
             this.getProjectData()
         },
-        async id_paragraph(){
+        async id_paragraph(id){
+            if(!id) return false
             await this.getData()
             this.getProjectData()
         },
