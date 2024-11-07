@@ -1,5 +1,4 @@
 import { apiData } from '@/servis/apiData.js'
-import { EventBus } from '@/servis/EventBus'
 
 export let CalcData = {}
 
@@ -7,7 +6,6 @@ export async function LoadCalcData(){
     let result
     result = (await apiData({typeData:'loadWholeCalcData'})).data
     CalcData =  await result
-    EventBus.emit('LoadedCalcData')
     return result
 }
 
@@ -30,5 +28,20 @@ export function getParagraphs(id_HOAI){
 export function getParagraph(id){
     if(!CalcData.feeTableTypeValue)return false
     return CalcData.paragraphs.find(item=>item.id == id)
+}
+
+export function getFeeTable(id_paragraph){
+    if(!CalcData.feeTableRateValue) return false
+    let rate_values = CalcData.feeTableRateValue.filter(item=>item.id_paragraph==id_paragraph)
+    let honorarZones = CalcData.feeTableHonorarZones.filter(item=>item.id_paragraph==id_paragraph)
+    rate_values.forEach(rate => {
+        let zones = []
+        honorarZones.forEach(zone_item=>{
+           let zone = CalcData.feeTableHonorarZonesRateValue.find(item=>rate.id==item.id_feeTableRateValue&&zone_item.id==item.id_feeTableHonorarZones)
+           zones.push(zone)
+        })
+        rate.zones = zones
+    });
+    return {rate_values}
 }
 

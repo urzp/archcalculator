@@ -15,12 +15,13 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { apiData } from '@/servis/apiData.js'
+import { getFeeTable, getTypeValue } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Honorar_calc',
     async mounted(){
+        EventBus.on('LoadedCalcData', this.getData)
         EventBus.on('switchFinance', this.calculateTable )
     },
     data(){
@@ -57,17 +58,13 @@ export  default{
     },
     computed:{
         typeValue(){
-            let honorarTable = this.honorarTable
-            if(!honorarTable||!honorarTable.typetype_value) return {}
-            if(!honorarTable.typetype_value[0].value) return 'Eur'
-            return  honorarTable.typetype_value[0].value
+            return  getTypeValue(this.id_paragraph)
         }
     },
     methods:{
         async getData(){
-            let result = await apiData({typeData:'FeeTable', id: this.id_paragraph})
-            this.honorarTable = result.data
-
+            this.honorarTable = await getFeeTable(this.id_paragraph)
+            console.log('this.honorarTable ', this.honorarTable)
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)

@@ -12,13 +12,14 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { LoadProjectData } from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
-    mounted(){
-        this.getCalcData()
-        this.getProject()
+    async mounted(){
+       await this.getCalcData()
+       await this.getProject()
     },
     data(){
         return{
@@ -28,7 +29,8 @@ export default{
     },
     methods:{
         async getCalcData(){
-            LoadCalcData()
+            await LoadCalcData()
+            EventBus.emit('LoadedCalcData')
         },
         async getProject(){
             let result = await LoadProjectData(this.project)
