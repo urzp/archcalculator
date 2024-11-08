@@ -56,8 +56,8 @@ export default{
             this.getData()
         },
         persent(index){
-            if( !list[index].userPercent ) return list[index].percent
-           return !list[index].userPercent?!list[index].userPercent
+        //     if( !list[index].userPercent ) return list[index].percent
+        //    return !list[index].userPercent?!list[index].userPercent
         },
         newPercent(data){
 
