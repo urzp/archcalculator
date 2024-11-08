@@ -12,6 +12,10 @@ $data['feeTableRateValue'] = crud_read('feeTableRateValue');
 $data['feeTableHonorarZonesRateValue'] = crud_read('feeTableHonorarZonesRateValue');
 $data['requirementsPoints'] = crud_read('requirementsPoints');
 
+$data['Stages'] = crud_read('Stages');
+$data['subStage'] = crud_read('subStage');
+$data['subStage_l1'] = crud_read('subStage_l1');
+
 $result = (object) [
     'success' => true,
     'data' => $data,

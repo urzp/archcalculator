@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Basis" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject name="Honorargrundlagen" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <HOAI_version_calc :loaded="loaded" :prop_id="HOAI_version" @selected="data=>{ data.id = data.id; selectParagraph(data.id) }"/>
         <Paragraph_calc :loaded="loaded" :paragraph_id="paragraph" @selected="data=>{ paragraph = data.id; updateProjectData() }"/>

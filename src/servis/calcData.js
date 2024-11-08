@@ -76,3 +76,17 @@ export function getRequirementsPoints(id_paragraph){
     result.forEach(item=>item.value = item.minPoint)
     return result
 }
+
+export function getStages(id_paragraph){
+    if(!CalcData.requirementsPoints||!id_paragraph) return false
+    let result = CalcData.Stages.filter(item=>item.id_paragraph==id_paragraph)
+    result.forEach(item=>{
+        let subStages = CalcData.subStage.filter(sub_item=>sub_item.id_stage==item.id)
+        subStages.forEach(sub_item=>{
+            let subStage_l1 = CalcData.subStage_l1.filter(subL1_item=>subL1_item.id_subStage == sub_item.id)
+            sub_item.subStage_l1 = subStage_l1
+        })
+        item.subStages = subStages
+    })
+    return result
+}

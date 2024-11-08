@@ -18,6 +18,9 @@ import Finance_calc  from './Calculator/_Object/01_Basis/05_Finance.vue'
 import Honorar_calc from './Calculator/_Object/01_Basis/06_Honorar.vue'
 import PayExtra_calc from './Calculator/_Object/01_Basis/07_PayExtra.vue'
 import TotalBasis from './Calculator/_Object/01_Basis/08_TotalBasis.vue'
+//----------------------------BaseServis-----------------------------
+import BaseServis from './Calculator/_Object/02_BaseServis/00_BaseServis.vue'
+import Stage from './Calculator/_Object/02_BaseServis/01_Stage.vue'
 //----------------------------PartsObject-----------------------------
 import Title_SubObjec from './Calculator/_Object/00_UI/01_Title_SubObject.vue'
 import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject.vue'
@@ -84,6 +87,9 @@ export default [
     Honorar_calc,
     PayExtra_calc,
     TotalBasis,
+
+    BaseServis,
+    Stage,
 
     HonorarZoneDetal,
     FinanceDetal,

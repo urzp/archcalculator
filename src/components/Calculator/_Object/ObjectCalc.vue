@@ -3,7 +3,7 @@
         <Titile_Object @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
         <Basis :object_id="object_id" :loaded="loaded"/>
-        <!-- <BaseServis :data="baseServis"/> -->
+        <BaseServis  :object_id="object_id" :loaded="loaded"/>
         </Toggle>
         <Total_Object :collapse="collapse"/>
     </div> 
