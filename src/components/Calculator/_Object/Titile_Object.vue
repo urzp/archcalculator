@@ -8,7 +8,7 @@
 
 <script>
 export default{
-    name: 'ObjectTitile',
+    name: 'Titile_Object',
     emits: ['switch_tg'],
 }
 </script>

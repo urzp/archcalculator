@@ -6,7 +6,7 @@
 
 <script>
 export default{
-    name: 'PartObjectContent',
+    name: 'Content_PartObject',
     props:{
         collapse:Boolean,
     },

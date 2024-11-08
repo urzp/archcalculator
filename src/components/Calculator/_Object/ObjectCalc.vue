@@ -1,11 +1,11 @@
 <template>
     <div class="object-calc">
-        <ObjectTitile @switch_tg="(val)=>{collapse = !val}"/>
+        <Titile_Object @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
         <Basis :object_id="object_id" :loaded="loaded"/>
         <!-- <BaseServis :data="baseServis"/> -->
         </Toggle>
-        <ObjectTotal :collapse="collapse"/>
+        <Total_Object :collapse="collapse"/>
     </div> 
     
 </template>

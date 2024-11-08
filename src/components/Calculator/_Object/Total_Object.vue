@@ -13,7 +13,7 @@
 
 <script>
 export default{
-    name: 'ObjectTotal',
+    name: 'Total_Object',
     data(){
         return{
             font_family:'Comfortaa-Regular',

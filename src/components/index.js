@@ -6,29 +6,27 @@ import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
 import TotalCalc from './Calculator/TotalCalc.vue'
 //----------------------------Object--------------------------------
-import ObjectTitile from './Calculator/Object/title.vue'
-import ObjectTotal from './Calculator/Object/total.vue'
+import Titile_Object from './Calculator/_Object/Titile_Object.vue'
+import Total_Object from './Calculator/_Object/Total_Object.vue'
 //----------------------------Basis-----------------------------
-import Basis from './Calculator/_Object/Basis/00_Basis.vue'
-import HOAI_version_calc  from './Calculator/_Object/Basis/01_HOAI_version.vue'
-import Paragraph_calc  from './Calculator/_Object/Basis/02_Paragraph.vue'
-import HonorarZone_calc  from './Calculator/_Object/Basis/03_HonorarZone.vue'
-import HonorarRate_calc  from './Calculator/_Object/Basis/04_HonorarRate.vue'
-import Finance_calc  from './Calculator/_Object/Basis/05_Finance.vue'
-import Honorar_calc from './Calculator/_Object/Basis/06_Honorar.vue'
-import PayExtra_calc from './Calculator/_Object/Basis/07_PayExtra.vue'
-import TotalBasis from './Calculator/_Object/Basis/08_TotalBasis.vue'
+import Basis from './Calculator/_Object/01_Basis/00_Basis.vue'
+import HOAI_version_calc  from './Calculator/_Object/01_Basis/01_HOAI_version.vue'
+import Paragraph_calc  from './Calculator/_Object/01_Basis/02_Paragraph.vue'
+import HonorarZone_calc  from './Calculator/_Object/01_Basis/03_HonorarZone.vue'
+import HonorarRate_calc  from './Calculator/_Object/01_Basis/04_HonorarRate.vue'
+import Finance_calc  from './Calculator/_Object/01_Basis/05_Finance.vue'
+import Honorar_calc from './Calculator/_Object/01_Basis/06_Honorar.vue'
+import PayExtra_calc from './Calculator/_Object/01_Basis/07_PayExtra.vue'
+import TotalBasis from './Calculator/_Object/01_Basis/08_TotalBasis.vue'
 //----------------------------PartsObject-----------------------------
-import PartObjectTitle from './Calculator/Object/Parts/title.vue'
-import PartObjectContent from './Calculator/Object/Parts/content.vue'
+import Title_SubObjec from './Calculator/_Object/00_UI/01_Title_SubObject.vue'
+import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject.vue'
 
 //----------------------------Detals_of_items-----------------------------
-import HonorarZoneDetal from './Calculator/_Object/Basis/Detals_of_item/01_HonorarZoneDetal.vue'
-import FinanceDetal from './Calculator/_Object/Basis/Detals_of_item/02_FinanceDetal.vue'
-import HonorarDetal from './Calculator/_Object/Basis/Detals_of_item/03_HonorarDetal.vue'
+import HonorarZoneDetal from './Calculator/_Object/01_Basis/Detals_of_item/01_HonorarZoneDetal.vue'
+import FinanceDetal from './Calculator/_Object/01_Basis/Detals_of_item/02_FinanceDetal.vue'
+import HonorarDetal from './Calculator/_Object/01_Basis/Detals_of_item/03_HonorarDetal.vue'
 
-//----------------------------SelectLists-ItemPartsObject-----------------------------
-import Select_List from './Calculator/Object/Parts/SelectLists_of_Items/Select_List.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -58,6 +56,7 @@ import InputYear from './UI/InputYear.vue'
 import InputText from './UI/InputText.vue'
 import ImputTextMLine from './UI/ImputTextMLine.vue'
 import InputPrice from './UI/InputPrice.vue'
+import Select_List from './UI/Select_List.vue'
 import SelectEdit_List from './UI/SelectEdit_List.vue'
 import ContextMenu from './UI/ContextMenu.vue'
 
@@ -69,11 +68,11 @@ export default [
     ObjectCalc,
     TotalCalc,
 
-    ObjectTitile,
-    ObjectTotal,
+    Titile_Object,
+    Total_Object,
 
-    PartObjectTitle,
-    PartObjectContent,
+    Title_SubObjec,
+    Content_PartObject,
 
 
     Basis,
@@ -91,8 +90,6 @@ export default [
     HonorarDetal,
 
     RequirementsPoints,
-
-    Select_List,
     
     TopFixMenu,
     EditCalculator,
@@ -121,6 +118,7 @@ export default [
     InputText,
     ImputTextMLine,
     InputPrice,
+    Select_List,
     SelectEdit_List,
     ContextMenu,
 ]
