@@ -2,12 +2,12 @@
     <Title_SubObject name="Leistungen" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
             <Stage 
-                v-for="item in list" 
+                v-for="item, index in list" 
                 :key="item.id" 
                 :id = item.id
                 :title="item.name"
                 :percent_def = "Number(item.percent)" 
-                :percent= "Number(item.percent)" 
+                :percent= "persent(index)" 
                 :honorar="honorar"
                 @updatePercent ="data=>newPercent(data)"
                 >
@@ -40,7 +40,7 @@ export default{
     computed:{
         honorar(){
             return this.project.honorar_calc
-        }
+        },
     },
     props:{
         loaded:Boolean,
@@ -55,8 +55,12 @@ export default{
             this.paragraph = this.project.paragraph_id
             this.getData()
         },
+        persent(index){
+            if( !list[index].userPercent ) return list[index].percent
+           return !list[index].userPercent?!list[index].userPercent
+        },
         newPercent(data){
-            
+
         }
 
     }
