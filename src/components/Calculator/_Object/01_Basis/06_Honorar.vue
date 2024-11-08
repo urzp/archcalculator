@@ -99,8 +99,8 @@ export  default{
             if(!this.table_render.up) { this.table_render.low = this.honorarTable[length - 1];  this.table_render.up  = this.honorarTable[length];  }
         },
         calculateTable(){
-            if(!this.honorarTable) return false
-            if( !this.checkLimits() ) return false
+            if(!this.honorarTable) { this.renderNone(); return false }
+            if( !this.checkLimits() ) { this.renderNone(); return false }
 
             let finance = this.finance()
             this.findFinanceGap(finance)
@@ -130,8 +130,13 @@ export  default{
             this.value = (current.max_fee - current.min_fee) * honorarRate/100 + current.min_fee
             this.project.honorar_calc = this.value
         },
-        updateProjectParagraphData(){
-            updateProjectObject(this.object_id, this.project)
+        renderNone(){
+            let noneValue = {funding:'-', min_fee:'-', max_fee:'-'}
+            this.table_render.low = noneValue
+            this.table_render.current = noneValue
+            this.table_render.up = noneValue
+            this.value = 0
+            this.project.honorar_calc = this.value
         },
         
     }
