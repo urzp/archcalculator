@@ -1,5 +1,9 @@
 <template>
+
     <div class="item-Part-obj">
+        <div  class="detals" @click="collapse_detals=!collapse_detals">
+            <div class="icon"></div>
+        </div>
         <div  class="main_row" >
             <div class="title">{{ title }}</div>
             <div class="wrap-numbers">
@@ -10,45 +14,122 @@
                 <div class="price" ><Price :value ="value" /></div>
             </div>
         </div>
-    </div>
+        <div v-show="!collapse_detals" class="detal-list">
+            <div class="wrap">
+                <Stage_calc_L0 
+                    v-for="item, index in list"
+                    :key="item.id"
+                    :id="item.id"
+                    :title="item.name"
+                    :percent_def = "Number(item.percent)" 
+                    :percent= "perсent(index)" 
+                    :honorar="honorar"
+                    @updatePercent="data=>newPercent(data)"
+                >
+                </Stage_calc_L0>
+            </div>
+        </div>
+</div>
 </template>
 
 <script>
+import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
-    name: 'Stage',
+    name: 'Stage_calc',
     async mounted(){
     },
     data(){
         return{
-            value:'',
+            collapse_detals:true,
+            project:{},
+            stages_l0:[],
         }
     },
     props:{
+        loaded:Boolean,
+        object_id: String,
         id:String,
+        index:Number, 
         title:String,
-        honorar:Number,
-        percent:Number,
-        percent_def:Number
+        honorar:[Number, String],
+        percent:[Number, String],
+        percent_def:[Number, String],
+        list:Array,
     },
     emits:['updatePercent'],
     watch:{
 
+    },
+    watch:{
+        loaded(){
+            this.getProjectData()
+        }
     },
     computed:{
         value(){
             return this.honorar * this.percent/100
         }
     },
-    methods:{  
+    methods:{ 
+        getProjectData(){
+            this.project = Project.objects.find(item=>item.id==this.object_id)
+            if(!!this.project.stages_l0[this.index]) this.stages_l0 = this.project.stages_l0[this.index]
+            this.setValue()
+        },
+        setValue(){
+            this.list.forEach((item, index)=>{
+                item.userPercent = ''
+                if(!!this.stages_l0[index]) item.userPercent = this.stages_l0[index]
+            })
+        },
         updatePercent(value){
             this.$emit('updatePercent', {value, id:this.id})
-        }
+        },
+        perсent(index){
+            if(this.list[index].userPercent===0) return 0
+            return Number(!!this.list[index].userPercent?this.list[index].userPercent:this.list[index].percent)
+        },
+        newPercent(data){
+            let element = this.list.find(item=>item.id==data.id)
+            element.userPercent = data.value
+            this.updateProject()
+        },
+        updateProject(){
+            console.log(this.project.stages_l0)
+            this.project.stages_l0[this.index] = []
+            this.list.forEach(index=>{
+                this.project.stages_l0[this.index].push(index.userPercent)
+            })
+            console.log(this.project.stages_l0)
+            updateProjectObject(this.object_id, this.project)
+        } 
     }
 }
 
 </script>
 
 <style scoped>
+    .detal-list{
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        margin-bottom: 15px;
+        margin-left: 0px;
+    } 
+
+    .detal-list::before{
+        position: relative;
+        left: 28px;
+        top: -15px;
+        content: "";
+        border-left: solid 1px #E4E4E4;
+        box-shadow: 0px 30px 0px #000;
+        margin-bottom: 25px;
+    }
+
+    .wrap{
+        margin-top: 10px;
+    }
     .main_row{
         display: flex;
         height: 35px;

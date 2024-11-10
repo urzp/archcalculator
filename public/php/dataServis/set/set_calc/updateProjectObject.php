@@ -3,7 +3,7 @@
 $input_data = $rq_data -> data;
 $id = $input_data -> id;
 
-$json_felds = ['honorarLevel','requirementsPoints','requirementsPointsNames','HonorarRate','finance','payExtra'];
+$json_felds = ['honorarLevel','requirementsPoints','requirementsPointsNames','HonorarRate','finance','payExtra','stages','stages_L0'];
 
 foreach ($input_data as $key => $value){
     $newdata[$key] = $value; 

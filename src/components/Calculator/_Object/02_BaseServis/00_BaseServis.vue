@@ -1,17 +1,21 @@
 <template>
     <Title_SubObject name="Leistungen" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
-            <Stage 
+            <Stage_calc 
                 v-for="item, index in list" 
                 :key="item.id" 
+                :loaded = "ready"
+                :object_id = 'object_id'
                 :id = item.id
+                :index = "index"
                 :title="item.name"
                 :percent_def = "Number(item.percent)" 
-                :percent= "persent(index)" 
+                :percent= "perсent(index)" 
                 :honorar="honorar"
+                :list="item.subStages"
                 @updatePercent ="data=>newPercent(data)"
                 >
-            </Stage>
+            </Stage_calc>
     </Content_PartObject>
     <TotalBasis :loaded="loaded" :object_id="object_id" :collapse = 'collapse' :paragraph="paragraph"/>    
 </template>
@@ -26,6 +30,7 @@ export default{
     },
     data(){
         return{
+            ready:false,
             collapse:false,
             paragraph:'',
             list:[],
@@ -53,15 +58,37 @@ export default{
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
             this.paragraph = this.project.paragraph_id
-            this.getData()
+            await this.getData()
+            this.setValues()
+            this.ready = true
+            
         },
-        persent(index){
-        //     if( !list[index].userPercent ) return list[index].percent
-        //    return !list[index].userPercent?!list[index].userPercent
+        setValues(){
+            if(!this.project.stages) this.project.stages = []
+            if(!!!this.project.stages_l0) this.project.stages_l0 = []
+            let stages = this.project.stages
+            
+            this.list.forEach((item, index)=>{
+                item.userPercent = ''
+                if(!!stages[index]){ item.userPercent = stages[index] }
+            })
+        },
+        perсent(index){
+            if(this.list[index].userPercent===0) return 0
+            return Number( !!this.list[index].userPercent?this.list[index].userPercent:this.list[index].percent )
         },
         newPercent(data){
-
-        }
+            let element = this.list.find(item=>item.id==data.id)
+            element.userPercent = data.value
+            this.updateProject()
+        },
+        updateProject(){
+            this.project.stages = []
+            this.list.forEach(index=>{
+                this.project.stages.push(index.userPercent)
+            })
+            updateProjectObject(this.object_id, this.project)
+        }   
 
     }
 }
