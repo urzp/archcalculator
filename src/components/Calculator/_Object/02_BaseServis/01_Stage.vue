@@ -42,7 +42,7 @@ export  default{
         return{
             collapse_detals:true,
             project:{},
-            stages_l0:[],
+            stages_L0:[],
         }
     },
     props:{
@@ -73,13 +73,13 @@ export  default{
     methods:{ 
         getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
-            if(!!this.project.stages_l0[this.index]) this.stages_l0 = this.project.stages_l0[this.index]
+            if(!!this.project.stages_L0&&!!this.project.stages_L0[this.index]) this.stages_L0 = this.project.stages_L0[this.index]
             this.setValue()
         },
         setValue(){
             this.list.forEach((item, index)=>{
                 item.userPercent = ''
-                if(!!this.stages_l0[index]) item.userPercent = this.stages_l0[index]
+                if(!!this.stages_L0[index]) item.userPercent = this.stages_L0[index]
             })
         },
         updatePercent(value){
@@ -92,15 +92,25 @@ export  default{
         newPercent(data){
             let element = this.list.find(item=>item.id==data.id)
             element.userPercent = data.value
+            this.conutTotal()
             this.updateProject()
         },
-        updateProject(){
-            console.log(this.project.stages_l0)
-            this.project.stages_l0[this.index] = []
-            this.list.forEach(index=>{
-                this.project.stages_l0[this.index].push(index.userPercent)
+        conutTotal(){
+            let result = 0
+            this.list.forEach(item=>{
+                if(!!item.userPercent||item.userPercent===0){
+                    result = result + item.userPercent
+                }else{
+                    result = result + Number(item.percent)
+                }
             })
-            console.log(this.project.stages_l0)
+            this.updatePercent(result)
+        },
+        updateProject(){
+            this.project.stages_L0[this.index] = []
+            this.list.forEach(index=>{
+                this.project.stages_L0[this.index].push(index.userPercent)
+            })
             updateProjectObject(this.object_id, this.project)
         } 
     }

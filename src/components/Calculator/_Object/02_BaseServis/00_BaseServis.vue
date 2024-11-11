@@ -17,7 +17,7 @@
                 >
             </Stage_calc>
     </Content_PartObject>
-    <TotalBasis :loaded="loaded" :object_id="object_id" :collapse = 'collapse' :paragraph="paragraph"/>    
+    <TotalBasisServis :percent="total_percent" :value="total_value" :collapse = 'collapse' />    
 </template>
 
 <script>
@@ -44,8 +44,24 @@ export default{
     },
     computed:{
         honorar(){
-            return this.project.honorar_calc
+            return this.project.honorar_total
         },
+        total_percent(){
+            let result = 0
+            this.list.forEach(item=>{
+                if(!!item.userPercent||item.userPercent===0){
+                    result = result + item.userPercent
+                }else{
+                    result = result + Number(item.percent)
+                }
+            })
+            return result
+        },
+        total_value(){
+            let result = 0
+            result = this.honorar * this.total_percent/100
+            return result
+        }
     },
     props:{
         loaded:Boolean,
@@ -65,7 +81,7 @@ export default{
         },
         setValues(){
             if(!this.project.stages) this.project.stages = []
-            if(!!!this.project.stages_l0) this.project.stages_l0 = []
+            if(!!!this.project.stages_L0) this.project.stages_L0 = []
             let stages = this.project.stages
             
             this.list.forEach((item, index)=>{

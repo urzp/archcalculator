@@ -22,6 +22,7 @@ import TotalBasis from './Calculator/_Object/01_Basis/08_TotalBasis.vue'
 import BaseServis from './Calculator/_Object/02_BaseServis/00_BaseServis.vue'
 import Stage_calc from './Calculator/_Object/02_BaseServis/01_Stage.vue'
 import Stage_calc_L0 from './Calculator/_Object/02_BaseServis/02_Stage_L0.vue'
+import TotalBasisServis from './Calculator/_Object/02_BaseServis/03_TotalBasisServis.vue'
 //----------------------------PartsObject-----------------------------
 import Title_SubObjec from './Calculator/_Object/00_UI/01_Title_SubObject.vue'
 import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject.vue'
@@ -92,6 +93,7 @@ export default [
     BaseServis,
     Stage_calc,
     Stage_calc_L0,
+    TotalBasisServis,
 
     HonorarZoneDetal,
     FinanceDetal,

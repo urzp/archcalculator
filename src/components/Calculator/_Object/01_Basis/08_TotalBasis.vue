@@ -53,6 +53,7 @@ export default{
             let honorar = this.project.honorar_calc
             let payExtra = this.project.payExtra
             this.value = Number( honorar ) + Number( payExtra.value )
+            this.project.honorar_total = this.value
         },
     }
 }
