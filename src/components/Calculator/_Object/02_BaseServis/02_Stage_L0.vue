@@ -68,7 +68,6 @@ export  default{
     methods:{  
         getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
-            console.log(this.project.stages_L1)
             if(!!this.project.stages_L1&&!!this.project.stages_L1[this.indexL1]) this.stages_L1 = this.project.stages_L1[this.indexL1][this.index]
             this.setValue()
         },

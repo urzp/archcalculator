@@ -24,6 +24,9 @@ import Stage_calc from './Calculator/_Object/02_BaseServis/01_Stage.vue'
 import Stage_calc_L0 from './Calculator/_Object/02_BaseServis/02_Stage_L0.vue'
 import Stage_calc_L1 from './Calculator/_Object/02_BaseServis/02_Stage_L1.vue'
 import TotalBasisServis from './Calculator/_Object/02_BaseServis/03_TotalBasisServis.vue'
+//----------------------------BaseServis-----------------------------
+import SpecialServices from './Calculator/_Object/03_SpecialServices/00_SpecialServices.vue'
+import ItemSpetialServis from './Calculator/_Object/03_SpecialServices/01_ItemSpetialServis.vue'
 //----------------------------PartsObject-----------------------------
 import Title_SubObjec from './Calculator/_Object/00_UI/01_Title_SubObject.vue'
 import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject.vue'
@@ -96,6 +99,9 @@ export default [
     Stage_calc_L0,
     Stage_calc_L1,
     TotalBasisServis,
+
+    SpecialServices,
+    ItemSpetialServis,
 
     HonorarZoneDetal,
     FinanceDetal,
