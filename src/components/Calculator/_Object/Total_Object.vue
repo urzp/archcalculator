@@ -4,7 +4,7 @@
             <div class="title-total" :class="{collapse}">Objec A</div>
             <div class="data-total">
                 <div class="label">Total</div>
-                <div class="procent">100%</div>
+                <!-- <div class="procent">100%</div> -->
                 <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
             </div>
         </div>
