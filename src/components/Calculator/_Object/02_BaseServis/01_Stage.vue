@@ -19,12 +19,16 @@
                 <Stage_calc_L0 
                     v-for="item, index in list"
                     :key="item.id"
+                    :object_id = "object_id"
                     :id="item.id"
                     :title="item.name"
+                    :indexL1 = "this.index"
+                    :index = "index"
                     :percent_def = "Number(item.percent)" 
                     :percent= "perсent(index)" 
                     :honorar="honorar"
                     @updatePercent="data=>newPercent(data)"
+                    :list="item.subStage_l1"
                 >
                 </Stage_calc_L0>
             </div>
@@ -37,6 +41,7 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Stage_calc',
     async mounted(){
+        this.getProjectData()
     },
     data(){
         return{
@@ -46,7 +51,6 @@ export  default{
         }
     },
     props:{
-        loaded:Boolean,
         object_id: String,
         id:String,
         index:Number, 
@@ -57,14 +61,6 @@ export  default{
         list:Array,
     },
     emits:['updatePercent'],
-    watch:{
-
-    },
-    watch:{
-        loaded(){
-            this.getProjectData()
-        }
-    },
     computed:{
         value(){
             return this.honorar * this.percent/100
@@ -138,6 +134,7 @@ export  default{
     }
 
     .wrap{
+        width: 100%;
         margin-top: 10px;
     }
     .main_row{

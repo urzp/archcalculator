@@ -5,7 +5,7 @@
         <Basis :object_id="object_id" :loaded="loaded"/>
         <BaseServis  :object_id="object_id" :loaded="loaded"/>
         </Toggle>
-        <Total_Object :collapse="collapse"/>
+        <Total_Object :collapse="collapse" :object_id="object_id" :loaded="loaded"/>
     </div> 
     
 </template>

@@ -5,26 +5,43 @@
             <div class="data-total">
                 <div class="label">Total</div>
                 <div class="procent">100%</div>
-                <Price class="price" value = '1240200.54' font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
+                <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
             </div>
         </div>
     </div>  
 </template>
 
 <script>
+import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Total_Object',
     data(){
         return{
             font_family:'Comfortaa-Regular',
+            project:{},
         }
     },
     props:{
+        object_id:String,
+        loaded:String,
         collapse:Boolean,
     },
     watch: {
-        collapse(newVal, oldVal){
+        collapse(newVal){
             this.font_family = newVal?'Comfortaa-Light':'Comfortaa-Regular'
+        },
+        loaded(){
+            this.getProject()
+        }
+    }, 
+    computed:{
+        value(){
+            return this.project.servis_total
+        }
+    },
+    methods:{
+        getProject(){
+            this.project = Project.objects.find(item=>item.id==this.object_id)
         }
     }
 }

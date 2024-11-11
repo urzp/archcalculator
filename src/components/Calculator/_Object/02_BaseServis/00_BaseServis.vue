@@ -4,8 +4,7 @@
             <Stage_calc 
                 v-for="item, index in list" 
                 :key="item.id" 
-                :loaded = "ready"
-                :object_id = 'object_id'
+                :object_id = "object_id"
                 :id = item.id
                 :index = "index"
                 :title="item.name"
@@ -30,16 +29,24 @@ export default{
     },
     data(){
         return{
-            ready:false,
             collapse:false,
-            paragraph:'',
             list:[],
             project:{},
+            paragraph:'',
         }
     },
     watch:{
         loaded(){
             this.getProjectData()
+        },
+        paragraph(){
+            this.getProjectData()
+        },
+        project:{
+            handler(new_val){
+                this.paragraph = new_val.paragraph_id 
+            },
+            deep:true,
         }
     },
     computed:{
@@ -60,6 +67,7 @@ export default{
         total_value(){
             let result = 0
             result = this.honorar * this.total_percent/100
+            this.project.servis_total = result
             return result
         }
     },
@@ -73,15 +81,13 @@ export default{
         },
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
-            this.paragraph = this.project.paragraph_id
             await this.getData()
-            this.setValues()
-            this.ready = true
-            
+            this.setValues()  
         },
         setValues(){
             if(!this.project.stages) this.project.stages = []
-            if(!!!this.project.stages_L0) this.project.stages_L0 = []
+            if(!this.project.stages_L0) this.project.stages_L0 = []
+            if(!this.project.stages_L1) this.project.stages_L1 = []
             let stages = this.project.stages
             
             this.list.forEach((item, index)=>{
