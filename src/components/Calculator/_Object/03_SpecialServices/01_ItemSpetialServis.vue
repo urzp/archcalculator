@@ -1,16 +1,17 @@
 <template>
     <div class="item-Part-obj" >
         <div  class="main_row" >
-            <div class="delete"><CloseButton :heigth="'32px'" @click="deleteItem()"/></div>
-            <input class="title" :placeholder="'Leistung eingeben'" :value="title" @change="event => updateUserTitle(event.target.value, item.id)"/>
-            <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
-            <div class="price" ><Price :value ="value" /></div>
+            <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
+            <input class="title" :placeholder="'Leistung eingeben'" :value="title" @change="event => updateUserTitle(event.target.value)"/>
+            <div class="wrap_figures">
+                <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
+                <div class="price" ><Price :value ="value" /></div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'ItemSpetialServis',
     async mounted(){
@@ -26,44 +27,19 @@ export  default{
         honorar:Number,
         percent:Number,
     },
-    emits:['deleteItem'],
-    watch:{
-        loaded(){
-            this.getProjectData()
-        },
-        async id_paragraph(id){
-            if(!id) return false
-            await this.getProjectData()
-        },
-        project:{
-            handler(){
-                this.calc()
-            },
-            deep: true,
-        }
-    },
+    emits:['updateItem', 'deleteItem'],
     computed:{
+        value(){
+            return Number(this.honorar) * Number(this.percent)/100
+        },
     },
     methods:{
-        async getProjectData(){
-            this.project = await Project.objects.find(item=>item.id==this.object_id)
-            this.honorar_calc = this.project.honorar_calc
-            this.percent = Number( this.project.payExtra.percent )
-        },
-        calc(){
-            this.honorar_calc = this.project.honorar_calc
-            this.value = Number(this.honorar_calc) * Number(this.percent)/100
+        updateUserTitle(value){
+            this.$emit('updateItem', {value, id:this.id, name:'title'})
         },
         updatePercent(value){
-            this.percent = value
-            this.calc()
-            this.updateProjectParagraphData()
+            this.$emit('updateItem', {value, id:this.id, name:'percent'})
         },   
-        updateProjectParagraphData(){
-            this.project.payExtra.percent = this.percent
-            this.project.payExtra.value = this.value
-            updateProjectObject(this.object_id, this.project)
-        },
         deleteItem(){
             this.$emit('deleteItem',this.id)
         }
@@ -82,8 +58,15 @@ export  default{
     }   
     .title{
         margin-left: 55px;
+        width: 700px;
         font-family: 'Raleway-Light';
         font-size: 20px;
+    }
+    .wrap_figures{
+        width: 300px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
     }
     .value{
         font-family: 'Raleway-Light';

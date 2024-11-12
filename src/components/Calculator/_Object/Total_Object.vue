@@ -36,7 +36,7 @@ export default{
     }, 
     computed:{
         value(){
-            return this.project.servis_total
+            return this.project.servis_total + this.project.spetial_servis_total
         }
     },
     methods:{

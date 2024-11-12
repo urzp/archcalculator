@@ -7,8 +7,9 @@
         :id="item.id"
         :title="item.title"
         :percent="item.percent"
-        :honorar="10000"
+        :honorar="honorar"
         @deleteItem="id=>deleteItem(id)"
+        @updateItem = "data=>updateItem(data)"
         />
         <div class="buttton_wrap">
             <NewButton   @click="newItem()"/>
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-import { getStages }  from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'SpecialServices',
@@ -43,19 +43,13 @@ export default{
         },
         total_percent(){
             let result = 0
-            this.list.forEach(item=>{
-                if(!!item.userPercent||item.userPercent===0){
-                    result = result + item.userPercent
-                }else{
-                    result = result + Number(item.percent)
-                }
-            })
+            this.list.forEach(item=>{ result = result + Number(item.percent)})
             return result
         },
         total_value(){
             let result = 0
             result = this.honorar * this.total_percent/100
-            this.project.servis_total = result
+            this.project.spetial_servis_total = result
             return result
         }
     },
@@ -67,7 +61,7 @@ export default{
 
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
-            if(!this.project.specialServices.InstanceType) this.project.specialServices = []
+            if(!this.project.specialServices) this.project.specialServices = []
             this.setValues()  
         },
         setValues(){
@@ -77,22 +71,20 @@ export default{
             let id = this.list.length + 1
             let item = {id, title:'', percent:0}
             this.list.push(item)
+            this.updateProject()
+        },
+        updateItem(data){
+            console.log(data)
+            let item=this.list.find(item=>item.id==data.id)
+            item[data.name]=data.value
+            this.updateProject()
         },
         deleteItem(id){
             let index=this.list.findIndex(item=>item.id==id)
-            console.log(index)
             delete this.list.splice(index, 1);
-        },
-        setPercent(data){
-            let element = this.list.find(item=>item.id==data.id)
-            element.userPercent = data.value
             this.updateProject()
         },
         updateProject(){
-            this.project.stages = []
-            this.list.forEach(index=>{
-                this.project.stages.push(index.userPercent)
-            })
             updateProjectObject(this.object_id, this.project)
         }   
 
