@@ -36,13 +36,6 @@ export default{
             if(!id) return false
             await this.getProjectData()
         },
-        project:{
-            handler(){
-                this.calc()
-            },
-            deep:true,
-        },
-
     },
     computed:{
         value(){
@@ -57,13 +50,6 @@ export default{
     methods:{
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
-            this.calc()
-        },
-        calc(){
-            // let honorar = this.project.honorar_calc
-            // let payExtra = this.project.payExtra
-            // this.value = Number( honorar ) + Number( payExtra.value )
-            // this.project.honorar_total = this.value
         },
     }
 }
