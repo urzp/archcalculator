@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" :class="{active:usePoints}" @click="this.$emit('total', total); this.$emit('usePoint')">
+    <div class="wrap" :class="{active:usePoints}" @mousedown="this.$emit('usePoint')">
         <div class="list" v-if="!!list.length">
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="equivalent">
                     <div class="label">corresponds to fee zone: </div>
-                    <div class="value">{{ equivalent }}</div>         
+                    <div class="value">{{ equivalent.value }}</div>         
                 </div>
             </div>
         </div>
@@ -29,6 +29,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { getRequirementsPoints } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { lastElement } from '@/servis/functions.js'
 export  default{
     name: 'HonorarZoneDetal',
     mounted(){
@@ -39,32 +40,31 @@ export  default{
         return{
             collapse:true,
             list:[],
-            points:[],
-            pointsName:[],
+            project:{},
         }
     },
-    emits:['total', 'usePoint'],
+    emits:['equivalent', 'usePoint'],
     props:{
         id_paragraph:String,
         object_id:String,
-        equivalent:String,
         usePoints:Boolean,
+        levels:Array,
     },
     watch:{
         id_paragraph(){
             this.getData()
         },
-        points:{
-            handler(){
-                this.setVaulues()
-            },
-            deep:true
-        }
     },
     computed:{
         total(){
             let result = this.list.reduce((sum, item) => sum + Number(item.value),0)
             return result
+        },
+        equivalent(){
+            let level =  this.levels.find(item=>item.maxPoint >= this.total)
+            if(!level) level =  lastElement(this.levels)
+            this.$emit('equivalent', level)
+            return level
         },
     },
     methods:{
@@ -73,34 +73,34 @@ export  default{
             this.setVaulues()
         },
         async getProjectData(){
-            let project_object = Project.objects.find(item=>item.id==this.object_id)
-            this.points = project_object.requirementsPoints
-            this.pointsName = project_object.requirementsPointsNames
+            this.project = Project.objects.find(item=>item.id==this.object_id)
             this.getData()
         },
         async setVaulues(){
-            if(!this.points||!this.points.length>0) return false
-            let result =  this.list.map( (item, index) => {
-                if(!!this.points[index]) item.value = this.points[index];
-                if(!!this.pointsName[index]) item.name = this.pointsName[index];
-                return item });
-            this.list = result    
+            this.list.forEach( (item, index) => {
+                if(!this.project.honorarLevelDetals[index]) return false
+                let itemDetals = this.project.honorarLevelDetals[index]
+                item.value = itemDetals.value;
+                if(!!itemDetals.user_title) item.user_title = itemDetals.user_title;
+            })
         },
         updateValue(value, id_item){
             let item = this.list.find(item=>item.id==id_item)
             item.value = value
-            let saveList = this.list.map(item=>item.value)
-            updateProjectObject(this.object_id, {requirementsPoints:saveList},false)
-            this.getProjectData()
+            this.updateProjectParagraphData()
         },
         updateUserTitle(value, id_item){
             let item = this.list.find(item=>item.id==id_item)
             item.user_title = value
-            let saveList = this.list.map(item=>item.user_title)
-            saveList = saveList.filter(item=>!!item)
-            updateProjectObject(this.object_id, {requirementsPointsNames:saveList},false)
-            this.getProjectData()
+            this.updateProjectParagraphData()
+        },
+        updateProjectParagraphData(){
+            this.project.honorarLevelDetals = this.list.map(item=>{ 
+               return {value:item.value, user_title:item.user_title}
+            })
+            updateProjectObject(this.object_id, this.project)
         }
+
     }
 }
 </script>

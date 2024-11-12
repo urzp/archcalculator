@@ -3,10 +3,10 @@
         <div  class="detals" @click="collapse_detals=!collapse_detals">
             <div class="icon"></div>
         </div>
-        <div class="main_row">
+        <div class="main_row" @mousedown="usePoints=false">
             <div class="title">Honorarzone</div>
             <div class="value">{{ data.value }}</div>
-            <div  class="select-list" >
+            <div class="select-list" >
                 <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
             </div>
         </div>
@@ -14,10 +14,10 @@
             <HonorarZoneDetal 
                 :id_paragraph="id_paragraph" 
                 :object_id = "object_id"
-                :equivalent="equivalent" 
-                :usePoints="data.usePoints"
-                @usePoint=" data.usePoints=true "
-                @total="value=>setEquivalent(value)"
+                :usePoints="usePoints"
+                :levels="data.list"
+                @usePoint=" usePoints=true "
+                @equivalent="level=>setEquivalent(level)"
             />
         </div>
     </div>
@@ -35,11 +35,11 @@ export  default{
     data(){
         return{
             collapse_detals:true,
+            usePoints: '',
             data:{
                 id:'',
                 number:'',
                 value: '',
-                usePoints: '',
                 list:[],
             },
             project:{},
@@ -60,6 +60,9 @@ export  default{
             if(!id||!old) return false
             await this.getData()
             this.getProjectData()
+        },
+        usePoints(){
+            this.updateProjectParagraphData()
         }
     },
     emits:['selected'],
@@ -67,25 +70,29 @@ export  default{
         async getData(){
             this.data.list =  await getHonorarZones( this.id_paragraph)
         },
-        async getProjectData(send = true){
+        async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
+            this.usePoints = this.project.honorarLevel.usePoints
             this.dataUpdate(this.project.honorarLevel.id, this.project.honorarLevel.number)
-            let total = this.project.requirementsPoints.reduce((sum, item) => sum + Number(item),0)
-            this.setEquivalent (total, send)
         },
         updateProjectParagraphData(){
             if(!this.project.honorarLevel) this.project.honorarLevel = {}
             this.project.honorarLevel = { ...this.data}
+            this.project.honorarLevel.usePoints = this.usePoints
             delete this.project.honorarLevel.list
             updateProjectObject(this.object_id, this.project)
         },
         select(data){
             data.id = data.id_item
-            this.data.usePoints=false
+            this.usePoints=false
             this.data.number = data.item.number
             this.dataUpdate(data.id, data.item.number)
             this.updateProjectParagraphData()
             this.$emit('selected', data)
+        },
+        setEquivalent(level){
+            if(!this.usePoints) return false
+            this.dataUpdate(level.id, level.number)
         },
         dataUpdate(id, number){
             this.data.id = id
@@ -94,13 +101,6 @@ export  default{
             if(!element){ element = lastElement(this.data.list) }
             this.data.value = element.value
         },
-        setEquivalent(value, send = true){
-            let level =  this.data.list.find(item=>item.maxPoint >= value)
-            if(!level) level =  lastElement(this.data.list)
-            this.equivalent = level.value
-            if(send) this.dataUpdate(level.id, level.number)
-            if(send) this.updateProjectParagraphData()
-        }
     }
 }
 

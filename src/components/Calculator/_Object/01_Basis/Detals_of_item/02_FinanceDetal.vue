@@ -2,7 +2,7 @@
     <div class="wrap" :class="{active:useDetals}" @click="this.$emit('useDetals')">
         <div class="list">
             <div class="detal-item" v-for="item in list" :key="item.id">
-                <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
+                <input class="title" :placeholder="item.name" :value="item.userTitle" @change="event => updateUserTitle(item.id, event.target.value)"/>
                 <div class="value-wrap">
                     <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)" :typeCurrancy="typeCurrancy"/>
                 </div>
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { EventBus } from '@/servis/EventBus'
 export  default{
     name: 'FinanceDetal',
     data(){
@@ -26,7 +25,7 @@ export  default{
             collapse:true,
         }
     },
-    emits:['useDetals','edit_price'],
+    emits:['useDetals', 'edit_UserTitle' ,'edit_price'],
     computed:{
         total(){
             let result = this.list.reduce((sum, item) => sum + Number(item.value),0)
@@ -41,6 +40,9 @@ export  default{
         },
         updatePrice(id, value){
             this.$emit('edit_price',{id, value })
+        },
+        updateUserTitle(id, value){
+            this.$emit('edit_UserTitle',{id, value })
         }
     },
     props:{

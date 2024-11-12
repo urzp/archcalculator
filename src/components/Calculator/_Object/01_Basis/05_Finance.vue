@@ -18,6 +18,7 @@
                 :useDetals="useDetals"
                 @useDetals="switchDetal(true)"
                 @edit_price=" data=>editDetalValue(data) "
+                @edit_UserTitle=" data=>editUserTitle(data) "
             />
         </div>
     </div>
@@ -77,13 +78,17 @@ export  default{
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
-            this.list.forEach((item,index)=>item.value = this.project.finance.detals[index])
+            this.list.forEach((item,index)=>{
+                item.value = this.project.finance.detals[index]
+                if(!!this.project.finance.userTitle[index]) item.userTitle = this.project.finance.userTitle[index]
+            })
             this.switchDetal( this.project.finance.useDetals, false )
         },
         updateProjectParagraphData(){
             this.project.finance.value = this.value
             this.project.finance.detals = this.list.map(item=>!item.value?0:item.value)
             this.project.finance.useDetals = this.useDetals
+            this.project.finance.userTitle = this.list.map( item=>!item.userTitle?'':item.userTitle )
             updateProjectObject(this.object_id, this.project)
         },
         editValue(newValue){
@@ -91,8 +96,13 @@ export  default{
             this.updateProjectParagraphData()
         },
         editDetalValue(data){
-            let el = this.list.find(item=>item.id == data.id)
-            el.value = data.value
+            let item = this.list.find(item=>item.id == data.id)
+            item.value = data.value
+            this.updateProjectParagraphData()
+        },
+        editUserTitle(data){
+            let item = this.list.find(item=>item.id == data.id)
+            item.userTitle = data.value   
             this.updateProjectParagraphData()
         },
         switchDetal(useDetal, update=true){

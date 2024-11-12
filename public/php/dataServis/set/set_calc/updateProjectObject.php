@@ -5,8 +5,7 @@ $id = $input_data -> id;
 
 $json_felds = [
     'honorarLevel',
-    'requirementsPoints',
-    'requirementsPointsNames',
+    'honorarLevelDetals',
     'HonorarRate',
     'finance',
     'payExtra',
