@@ -77,6 +77,7 @@ export default{
     border: solid 1px #D9D9D9;
     border-radius: 10px;
     z-index: 100;
+    box-shadow: 2px 2px 10px #dadada;
 }
 .select-list.align_right{
     top: 29px;

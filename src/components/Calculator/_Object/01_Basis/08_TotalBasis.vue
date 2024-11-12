@@ -18,7 +18,6 @@ export default{
     },
     data(){
         return{
-            value:'',
             percent:100,
             project:{},
         }
@@ -43,6 +42,17 @@ export default{
             },
             deep:true,
         },
+
+    },
+    computed:{
+        value(){
+            if(!this.project||!this.project.payExtra) return 0
+            let honorar = this.project.honorar_calc
+            let payExtra = this.project.payExtra
+            let value = Number( honorar ) + Number( payExtra.value )
+            this.project.honorar_total = value        
+            return value 
+        }
     },
     methods:{
         async getProjectData(){
@@ -50,10 +60,10 @@ export default{
             this.calc()
         },
         calc(){
-            let honorar = this.project.honorar_calc
-            let payExtra = this.project.payExtra
-            this.value = Number( honorar ) + Number( payExtra.value )
-            this.project.honorar_total = this.value
+            // let honorar = this.project.honorar_calc
+            // let payExtra = this.project.payExtra
+            // this.value = Number( honorar ) + Number( payExtra.value )
+            // this.project.honorar_total = this.value
         },
     }
 }
