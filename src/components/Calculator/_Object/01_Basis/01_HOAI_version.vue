@@ -13,7 +13,8 @@ import { CalcData } from '@/servis/calcData.js'
 export  default{
     name: 'HOAI_version_calc',
     async mounted(){
-
+        await this.getData()
+        this.dataUpdate()
     },
     data(){
         return{
@@ -29,10 +30,6 @@ export  default{
         prop_id:String,
     },
     watch:{
-        async loaded(){
-            await this.getData()
-            this.dataUpdate()
-        },
         async prop_id(){
            this.dataUpdate()
         },

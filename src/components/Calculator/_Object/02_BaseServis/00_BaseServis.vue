@@ -55,6 +55,7 @@ export default{
         },
         total_percent(){
             let result = 0
+            if(!this.list) return 0
             this.list.forEach(item=>{
                 if(!!item.userPercent||item.userPercent===0){
                     result = result + item.userPercent
@@ -77,10 +78,11 @@ export default{
     },
     methods:{
         async getData(){
-           this.list = getStages(this.paragraph)
+           this.list = JSON.parse(JSON.stringify(getStages(this.paragraph))) 
         },
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
+            this.paragraph = this.project.paragraph_id
             await this.getData()
             this.setValues()  
         },

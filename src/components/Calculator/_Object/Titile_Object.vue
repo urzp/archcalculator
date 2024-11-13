@@ -2,12 +2,13 @@
     <div class="title-object">
         <ToggleButton @switch_tg="(val)=>{this.$emit('switch_tg', val) }"/>
         <input  class="title" :value="nameObject" @change="event => updateName(event.target.value)"/>
-        <CloseButton class="align-left"/>
+        <CloseButton class="align-left" @click="deleteObject()"/>
     </div>   
 </template>
 
 <script>
 import { Project, updateProjectObject } from '@/servis/projectData.js'
+import {  deleteProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'Titile_Object',
     async mounted(){
@@ -36,6 +37,9 @@ export default{
             this.project.name = this.nameObject
             updateProjectObject(this.object_id, this.project)
         },  
+        deleteObject(){
+            deleteProjectObject(this.object_id)
+        }
     }
 }
 </script>

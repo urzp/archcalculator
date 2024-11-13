@@ -14,7 +14,7 @@ import { Project } from '@/servis/projectData.js'
 export default{
     name: 'TotalBasis',
     async mounted(){
-
+        this.getProjectData()
     },
     data(){
         return{
@@ -29,9 +29,6 @@ export default{
         paragraph:String,
     },
     watch:{
-        loaded(){
-            this.getProjectData()
-        },
         async id_paragraph(id){
             if(!id) return false
             await this.getProjectData()

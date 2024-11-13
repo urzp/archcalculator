@@ -31,7 +31,8 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
-        EventBus.on('LoadedCalcData', this.getData())
+        await this.getData()
+        this.getProjectData()       
     },
     data(){
         return{
@@ -53,10 +54,6 @@ export  default{
         object_id:String,
     },
     watch:{
-        async loaded(){
-            await this.getData()
-            this.getProjectData()
-        },
         async id_paragraph(id){
             if(!id) return false
             await this.getData()
@@ -78,6 +75,8 @@ export  default{
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
+            if(!this.project.finance.detals) this.project.finance.detals = []
+            if(!this.project.finance.userTitle) this.project.finance.userTitle = []
             this.list.forEach((item,index)=>{
                 item.value = this.project.finance.detals[index]
                 if(!!this.project.finance.userTitle[index]) item.userTitle = this.project.finance.userTitle[index]

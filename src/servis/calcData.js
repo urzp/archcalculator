@@ -41,8 +41,8 @@ export function getSameParagraph(id_HOAI, id_paragpaph){
 }
 
 export function getHonorarZones(id_paragraph){
-    if(!CalcData.feeTableHonorarZones) return false
-    let result = CalcData.feeTableHonorarZones.filter(item=>item.id_paragraph==id_paragraph)
+    if(!CalcData.feeTableHonorarZones){ console.log('!CalcData.feeTableHonorarZones'); return  false}
+    let result = CalcData.feeTableHonorarZones.filter(item=>Number(item.id_paragraph)==Number(id_paragraph))
     result.forEach(item=>item.value = item.name)
     return result
 }
@@ -88,5 +88,6 @@ export function getStages(id_paragraph){
         })
         item.subStages = subStages
     })
+   
     return result
 }

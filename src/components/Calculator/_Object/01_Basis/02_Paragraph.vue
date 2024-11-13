@@ -13,6 +13,7 @@ import { getParagraph, getParagraphs } from '@/servis/calcData.js'
 export  default{
     name: 'Paragraph_calc',
     async mounted(){
+        this.getData()
     },
     data(){
         return{

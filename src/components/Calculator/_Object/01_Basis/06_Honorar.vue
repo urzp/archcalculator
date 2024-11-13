@@ -21,6 +21,9 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'Honorar_calc',
     async mounted(){
+        await this.getData()
+        await this.getProjectData()
+        this.calculateTable()  
         EventBus.on('switchFinance', this.calculateTable )
     },
     data(){
@@ -46,11 +49,6 @@ export  default{
         object_id:String,
     },
     watch:{
-        async loaded(){
-            await this.getData()
-            await this.getProjectData()
-            this.calculateTable()          
-        },
         async id_paragraph(id){
             if(!id) return false
             await this.getData()
@@ -72,7 +70,7 @@ export  default{
     methods:{
         async getData(){
             this.honorarTable = await getFeeTable(this.id_paragraph)
-            if(!this.honorarTable) return false
+            if(!this.honorarTable||!this.honorarTable[0]) return false
             this.finance_min = Number( this.honorarTable[0].value )
             this.finance_max = Number( lastElement( this.honorarTable ).value )
         },

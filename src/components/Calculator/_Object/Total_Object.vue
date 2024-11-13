@@ -15,6 +15,9 @@
 import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Total_Object',
+    mounted(){
+        this.getProject()
+    },
     data(){
         return{
             font_family:'Comfortaa-Regular',
@@ -30,9 +33,6 @@ export default{
         collapse(newVal){
             this.font_family = newVal?'Comfortaa-Light':'Comfortaa-Regular'
         },
-        loaded(){
-            this.getProject()
-        }
     }, 
     computed:{
         value(){
@@ -86,7 +86,8 @@ export default{
 
     .total.collapse{
         position: relative;
-        top: -112px;
+        height: 0px;
+        top: -55px;
         left: -36px;
         background-color: transparent;;
         border: none;

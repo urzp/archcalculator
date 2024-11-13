@@ -13,6 +13,7 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export  default{
     name: 'PayExtra_calc',
     async mounted(){
+        this.getProjectData()
     },
     data(){
         return{
@@ -26,9 +27,6 @@ export  default{
         object_id:String,
     },
     watch:{
-        loaded(){
-            this.getProjectData()
-        },
         async id_paragraph(id){
             if(!id) return false
             await this.getProjectData()
@@ -39,7 +37,7 @@ export  default{
     },
     computed:{
         value(){
-            if(!this.project.payExtra)return 0
+            if(!this.project.payExtra) return 0
             if((!this.project||!this.project.honorar_calc)&&!this.project.honorar_calc===0) return 0
             this.honorar_calc = this.project.honorar_calc
             let value = Number(this.honorar_calc) * Number(this.percent)/100     
@@ -50,6 +48,7 @@ export  default{
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
             this.percent = Number( this.project.payExtra.percent )
+            this.project.payExtra.value = this.value
         },
         updatePercent(value){
             this.percent = value

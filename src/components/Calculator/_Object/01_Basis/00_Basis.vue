@@ -18,7 +18,7 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'Basis',
     async mounted(){
-
+        this.getProjectData()
     },
     data(){
         return{
@@ -26,11 +26,6 @@ export default{
             HOAI_version:'',
             paragraph:'',
             data:{},
-        }
-    },
-    watch:{
-        loaded(){
-            this.getProjectData()
         }
     },
     props:{

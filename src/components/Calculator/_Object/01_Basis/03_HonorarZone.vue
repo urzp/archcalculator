@@ -52,12 +52,7 @@ export  default{
         object_id:String,
     },
     watch:{
-        async loaded(){
-            await this.getData()
-            this.getProjectData(false)
-        },
-        async id_paragraph(id, old){
-            if(!id||!old) return false
+        async id_paragraph(){
             await this.getData()
             this.getProjectData()
         },
@@ -68,7 +63,7 @@ export  default{
     emits:['selected'],
     methods:{
         async getData(){
-            this.data.list =  await getHonorarZones( this.id_paragraph)
+            this.data.list =  await getHonorarZones(this.id_paragraph) 
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
