@@ -1,31 +1,38 @@
 <template>
     <div class="title-objects">
         <ToggleButton @switch_tg="(val)=>{this.$emit('switch_tg', val) }"/>
-        <input  class="title" :value="nameTotalObject" @change="event => updateName(event.target.value)"/>
+        <div  class="name" >Total: {{ nameTotalObject }}</div>
     </div>   
 </template>
 
 <script>
-
+import { Project } from '@/servis/projectData';
 export default{
     name: 'Titile_Objects',
     async mounted(){
-        this.getProjectData()
+
     },
     data(){
         return{
-            nameTotalObject:'Total',
-            project:{},
+
         }
     },
     props:{
         object_id:String,
     },
     emits: ['switch_tg'],
+    computed:{
+        project(){
+            return Project.project
+        },
+        nameTotalObject(){
+            if(!Project.project) return ''
+            return this.project.name
+        }
+    },
     methods:{
         async getProjectData(){
-            this.project = Project.objects.find(item=>item.id==this.object_id)
-            this.nameObject = this.project.name
+
         },
         updateName(value){
             this.nameTotalObject = value
@@ -39,13 +46,13 @@ export default{
 </script>
 
 <style scoped>
-    .title-object{
+    .title-objects{
         display: flex;
         align-items: center;
         column-gap: 15px;
         margin-left: 30px;
     }
-    .title-object .name, input{
+    .title-objects .name{
         width: 100%;
         font-family: 'Raleway-Light';
         font-size: 26px;

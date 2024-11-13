@@ -1,13 +1,13 @@
 <template>
-    <Title_SubObject name="Besondere Leistungen" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject name="Zusätzliche Leistungen" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
-        <ItemSpetialServis 
+        <ItemAdditionalServis 
         v-for="item in list"
         :key="item.id"
         :id="item.id"
         :title="item.title"
-        :percent="item.percent"
-        :honorar="honorar"
+        :hours="item.hours"
+        :price_hours="item.price_hours"
         @deleteItem="id=>deleteItem(id)"
         @updateItem = "data=>updateItem(data)"
         />
@@ -15,15 +15,15 @@
             <NewButton   @click="newItem()"/>
         </div>
     </Content_PartObject>
-    <TotalBasisServis :percent="total_percent" :value="total_value" :collapse = 'collapse' />    
+    <TotalAdditionalServis :hours="total_hours" :value="total_value" :collapse = 'collapse' />    
 </template>
 
 <script>
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 export default{
-    name: 'SpecialServices',
+    name: 'AdditionalServices',
     async mounted(){
-
+        this.getProjectData()
     },
     data(){
         return{
@@ -32,24 +32,15 @@ export default{
             project:{},
         }
     },
-    watch:{
-        loaded(){
-            this.getProjectData()
-        },
-    },
     computed:{
-        honorar(){
-            return this.project.honorar_total
-        },
-        total_percent(){
-            let result = 0
-            this.list.forEach(item=>{ result = result + Number(item.percent)})
+        total_hours(){
+            let result = 0 
+            this.list.forEach(item=>result+= Number(item.hours))
             return result
         },
         total_value(){
-            let result = 0
-            result = this.honorar * this.total_percent/100
-            this.project.spetial_servis_total = result
+            let result = 0 
+            this.list.forEach(item=>result+= item.hours*item.price_hours)
             return result
         }
     },
@@ -60,16 +51,20 @@ export default{
     methods:{
 
         async getProjectData(){
-            this.project = Project.objects.find(item=>item.id==this.object_id)
-            if(!this.project.specialServices) this.project.specialServices = []
-            this.setValues()  
+            let item = {
+                id:1,
+                title: 'myPrice',
+                hours: 5,
+                price_hours: 10,
+            }
+            this.list.push(item)
         },
         setValues(){
-            this.list = this.project.specialServices
+
         },
         newItem(){
             let id = this.list.length + 1
-            let item = {id, title:'', percent:0}
+            let item = {id, title:'', hours:0, price_hours:0}
             this.list.push(item)
             this.updateProject()
         },
@@ -84,7 +79,7 @@ export default{
             this.updateProject()
         },
         updateProject(){
-            updateProjectObject(this.object_id, this.project)
+           
         }   
 
     }

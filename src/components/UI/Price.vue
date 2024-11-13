@@ -66,6 +66,10 @@ export default{
         search_data:{
             typeof:Object,
             default:{id_parent:'0', id:'0'}
+        },
+        input_width:{
+            type:String,
+            default:'120px',         
         }
     },    
     watch: {
@@ -132,10 +136,11 @@ export default{
         width: 23px;
     }
     .currency-sign{
-        margin-left: 18px;
+        margin-left: 5px;
         margin-right: 10px;
     }
     input{
+        width: v-bind(input_width);
         font-family:inherit;
         color: inherit;
     }

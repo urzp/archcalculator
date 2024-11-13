@@ -1,9 +1,11 @@
 <template>
     <div class="total-calc" :class="{collapse}">
-        <!-- <Titile_Objects  @switch_tg="(val)=>{collapse = !val}"/> -->
+        <Titile_Objects  @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
+            <AdditionalServices :project_id="project_id"/>
+            <ExtraCosts :project_id="project_id" />
         </Toggle>
-        <!-- <Total_Objects :collapse="collapse" /> -->
+        <Total_Objects :collapse="collapse" />
     </div> 
 </template>
 

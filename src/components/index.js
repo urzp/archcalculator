@@ -37,6 +37,12 @@ import FinanceDetal from './Calculator/_Object/01_Basis/Detals_of_item/02_Financ
 import HonorarDetal from './Calculator/_Object/01_Basis/Detals_of_item/03_HonorarDetal.vue'
 //----------------------------TotalCalculator-----------------------------
 import Titile_Objects from './Calculator/TotalCalc/Titile_Objects.vue'
+import AdditionalServices from './Calculator/TotalCalc/01_AdditionalServices/00_AdditionalServices.vue'
+import ItemAdditionalServis from './Calculator/TotalCalc/01_AdditionalServices/01_ItemAdditionalServis.vue'
+import Total_Objects from './Calculator/TotalCalc/Total_Objects.vue'
+import TotalAdditionalServis from './Calculator/TotalCalc/01_AdditionalServices/03_TotalAdditionalServis.vue'
+import ExtraCosts from './Calculator/TotalCalc/02_ExtraCosts/00_ExtraCosts.vue' 
+import ItemExtraCost from './Calculator/TotalCalc/02_ExtraCosts/01_ItemExtraCost.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -111,6 +117,12 @@ export default [
     RequirementsPoints,
 
     Titile_Objects,
+    AdditionalServices,
+    ItemAdditionalServis,
+    TotalAdditionalServis,
+    ExtraCosts,
+    ItemExtraCost,
+    Total_Objects,
     
     TopFixMenu,
     EditCalculator,
