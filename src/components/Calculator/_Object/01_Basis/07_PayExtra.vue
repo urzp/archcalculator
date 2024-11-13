@@ -36,9 +36,10 @@ export  default{
     },
     computed:{
         value(){
-            if(!this.project||!this.project.honorar_calc) return 0
-            let value = Number(this.project.honorar_calc) * Number(this.percent)/100    
-            this.project.payExtra.value = value
+            if(!this.project.payExtra)return 0
+            if((!this.project||!this.project.honorar_calc)&&!this.project.honorar_calc===0) return 0
+            this.honorar_calc = this.project.honorar_calc
+            let value = Number(this.honorar_calc) * Number(this.percent)/100     
             return value     
         }
     },
@@ -46,10 +47,10 @@ export  default{
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
             this.percent = Number( this.project.payExtra.percent )
+            this.project.payExtra.value = this.value
         },
         updatePercent(value){
             this.percent = value
-            this.calc()
             this.updateProjectParagraphData()
         },   
         updateProjectParagraphData(){

@@ -1,7 +1,7 @@
 <template>
     <div class="total" :class="{collapse}">
         <div class="wrap">
-            <div class="title-total" :class="{collapse}">Objec A</div>
+            <div class="title-total" :class="{collapse}">{{ nameObject }}</div>
             <div class="data-total">
                 <div class="label">Total</div>
                 <!-- <div class="procent">100%</div> -->
@@ -37,6 +37,9 @@ export default{
     computed:{
         value(){
             return this.project.servis_total + this.project.spetial_servis_total
+        },
+        nameObject(){
+            return this.project.name
         }
     },
     methods:{
