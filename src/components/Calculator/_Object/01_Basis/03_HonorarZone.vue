@@ -35,7 +35,7 @@ export  default{
     data(){
         return{
             collapse_detals:true,
-            usePoints: '',
+            usePoints: false,
             data:{
                 id:'',
                 number:'',

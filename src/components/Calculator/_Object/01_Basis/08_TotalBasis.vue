@@ -36,15 +36,21 @@ export default{
             if(!id) return false
             await this.getProjectData()
         },
+        value(){
+            this.project.honorar_total = this.value
+        }
     },
     computed:{
-        value(){
+        honorar(){
+            if(!this.project||!this.project.honorar_calc) return 0
+            return Number(this.project.honorar_calc)
+        },
+        payExtra(){
             if(!this.project||!this.project.payExtra) return 0
-            let honorar = this.project.honorar_calc
-            let payExtra = this.project.payExtra
-            let value = Number( honorar ) + Number( payExtra.value )
-            this.project.honorar_total = value        
-            return value 
+            return Number(this.project.payExtra.value)
+        },
+        value(){
+            return this.honorar + this.payExtra
         }
     },
     methods:{

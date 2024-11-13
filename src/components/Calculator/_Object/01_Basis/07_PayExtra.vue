@@ -33,6 +33,9 @@ export  default{
             if(!id) return false
             await this.getProjectData()
         },
+        value(){
+            this.project.payExtra.value = this.value
+        }
     },
     computed:{
         value(){
@@ -47,7 +50,6 @@ export  default{
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
             this.percent = Number( this.project.payExtra.percent )
-            this.project.payExtra.value = this.value
         },
         updatePercent(value){
             this.percent = value
