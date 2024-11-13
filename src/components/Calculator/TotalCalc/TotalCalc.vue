@@ -1,19 +1,15 @@
 <template>
-    <div class="object-calc" :class="{collapse}">
-        <Titile_Object :object_id="object_id" @switch_tg="(val)=>{collapse = !val}"/>
+    <div class="total-calc" :class="{collapse}">
+        <!-- <Titile_Objects  @switch_tg="(val)=>{collapse = !val}"/> -->
         <Toggle :collapse="collapse">
-        <Basis :object_id="object_id" :loaded="loaded"/>
-        <BaseServis  :object_id="object_id" :loaded="loaded"/>
-        <SpecialServices  :object_id="object_id" :loaded="loaded"/>
         </Toggle>
-        <Total_Object :collapse="collapse" :object_id="object_id" :loaded="loaded"/>
+        <!-- <Total_Objects :collapse="collapse" /> -->
     </div> 
-    
 </template>
 
 <script>
 export default{
-    name: 'ObjectCalc',
+    name: 'TotalCalc',
     async mounted(){
 
     },
@@ -25,7 +21,6 @@ export default{
     props:{
         loaded:Boolean,
         project_id:String,
-        object_id:String,
     },
     methods:{
     }
@@ -33,7 +28,7 @@ export default{
 </script>
 
 <style scoped>
-    .object-calc{
+    .total-calc{
         margin-top: 50px;
         margin-bottom: 90px;
         

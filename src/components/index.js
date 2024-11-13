@@ -4,7 +4,7 @@ import Footer from './PageParts/Footer.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
-import TotalCalc from './Calculator/TotalCalc.vue'
+import TotalCalc from './Calculator/TotalCalc/TotalCalc.vue'
 //----------------------------Object--------------------------------
 import Titile_Object from './Calculator/_Object/Titile_Object.vue'
 import Total_Object from './Calculator/_Object/Total_Object.vue'
@@ -35,7 +35,8 @@ import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject
 import HonorarZoneDetal from './Calculator/_Object/01_Basis/Detals_of_item/01_HonorarZoneDetal.vue'
 import FinanceDetal from './Calculator/_Object/01_Basis/Detals_of_item/02_FinanceDetal.vue'
 import HonorarDetal from './Calculator/_Object/01_Basis/Detals_of_item/03_HonorarDetal.vue'
-
+//----------------------------TotalCalculator-----------------------------
+import Titile_Objects from './Calculator/TotalCalc/Titile_Objects.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -108,6 +109,8 @@ export default [
     HonorarDetal,
 
     RequirementsPoints,
+
+    Titile_Objects,
     
     TopFixMenu,
     EditCalculator,
