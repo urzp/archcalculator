@@ -4,7 +4,7 @@ import Footer from './PageParts/Footer.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
-import TotalCalc from './Calculator/TotalCalc/TotalCalc.vue'
+import ResultCalc from './Calculator/ResultObjects/2_ResultCalc.vue'
 //----------------------------Object--------------------------------
 import Titile_Object from './Calculator/_Object/Titile_Object.vue'
 import Total_Object from './Calculator/_Object/Total_Object.vue'
@@ -35,14 +35,19 @@ import Content_PartObject from './Calculator/_Object/00_UI/02_Content_PartObject
 import HonorarZoneDetal from './Calculator/_Object/01_Basis/Detals_of_item/01_HonorarZoneDetal.vue'
 import FinanceDetal from './Calculator/_Object/01_Basis/Detals_of_item/02_FinanceDetal.vue'
 import HonorarDetal from './Calculator/_Object/01_Basis/Detals_of_item/03_HonorarDetal.vue'
-//----------------------------TotalCalculator-----------------------------
-import Titile_Objects from './Calculator/TotalCalc/Titile_Objects.vue'
-import AdditionalServices from './Calculator/TotalCalc/01_AdditionalServices/00_AdditionalServices.vue'
-import ItemAdditionalServis from './Calculator/TotalCalc/01_AdditionalServices/01_ItemAdditionalServis.vue'
-import Total_Objects from './Calculator/TotalCalc/Total_Objects.vue'
-import TotalAdditionalServis from './Calculator/TotalCalc/01_AdditionalServices/03_TotalAdditionalServis.vue'
-import ExtraCosts from './Calculator/TotalCalc/02_ExtraCosts/00_ExtraCosts.vue' 
-import ItemExtraCost from './Calculator/TotalCalc/02_ExtraCosts/01_ItemExtraCost.vue'
+//----------------------------ResultObjects-----------------------------
+import Titile_Result from './Calculator/ResultObjects/1_Titile_Result.vue'
+import AdditionalServices from './Calculator/ResultObjects/01_AdditionalServices/00_AdditionalServices.vue'
+import ItemAdditionalServis from './Calculator/ResultObjects/01_AdditionalServices/01_ItemAdditionalServis.vue'
+import Total_Result from './Calculator/ResultObjects/3_Total_Result.vue'
+import TotalAdditionalServis from './Calculator/ResultObjects/01_AdditionalServices/03_TotalAdditionalServis.vue'
+import ExtraCosts from './Calculator/ResultObjects/02_ExtraCosts/00_ExtraCosts.vue' 
+import ItemExtraCost from './Calculator/ResultObjects/02_ExtraCosts/01_ItemExtraCost.vue'
+import TotalExtraCosts from './Calculator/ResultObjects/02_ExtraCosts/03_TotalExtraCosts.vue'
+import Summary from './Calculator/ResultObjects/03_Summary/00_Summary.vue'
+import TotalNet from './Calculator/ResultObjects/03_Summary/01_TotalNet.vue'
+import TotalTax from './Calculator/ResultObjects/03_Summary/02_TotalTax.vue'
+import Total from './Calculator/ResultObjects/03_Summary/03_Total.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -82,7 +87,7 @@ export default [
 
     Calculator,
     ObjectCalc,
-    TotalCalc,
+    ResultCalc,
 
     Titile_Object,
     Total_Object,
@@ -116,13 +121,18 @@ export default [
 
     RequirementsPoints,
 
-    Titile_Objects,
+    Titile_Result,
     AdditionalServices,
     ItemAdditionalServis,
     TotalAdditionalServis,
     ExtraCosts,
     ItemExtraCost,
-    Total_Objects,
+    TotalExtraCosts,
+    Total_Result,
+    Summary,
+    TotalNet,
+    TotalTax,
+    Total,
     
     TopFixMenu,
     EditCalculator,

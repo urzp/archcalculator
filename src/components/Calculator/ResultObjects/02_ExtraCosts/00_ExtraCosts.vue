@@ -15,21 +15,20 @@
             <NewButton   @click="newItem()"/>
         </div>
     </Content_PartObject>
-    <TotalAdditionalServis :rate="total_rate" :value="total_value" :collapse = 'collapse' />    
+    <TotalExtraCosts :value="total_value" :collapse = 'collapse' />    
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, updateProject } from '@/servis/projectData.js'
 export default{
     name: 'ExtraCosts',
     async mounted(){
-        this.getProjectData()
+        this.getProject()
     },
     data(){
         return{
             collapse:false,
             list:[],
-            project:{},
         }
     },
     computed:{
@@ -41,6 +40,7 @@ export default{
         total_value(){
             let result = 0 
             this.list.forEach(item=>result+= item.rate*item.price_rate)
+            Project.project.total_ExtraCosts = result
             return result
         }
     },
@@ -50,17 +50,9 @@ export default{
     },
     methods:{
 
-        async getProjectData(){
-            let item = {
-                id:1,
-                title: 'myPrice',
-                rate: 5,
-                price_rate: 10,
-            }
-            this.list.push(item)
-        },
-        setValues(){
-
+        getProject(){
+            if(!Project.project.ExtraCosts) return Project.project.ExtraCosts = []
+            this.list = Project.project.ExtraCosts
         },
         newItem(){
             let id = this.list.length + 1
@@ -79,7 +71,8 @@ export default{
             this.updateProject()
         },
         updateProject(){
-           
+            Project.project.ExtraCosts = this.list
+            updateProject()        
         }   
 
     }

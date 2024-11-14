@@ -19,48 +19,41 @@
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, updateProject } from '@/servis/projectData.js'
 export default{
     name: 'AdditionalServices',
     async mounted(){
-        this.getProjectData()
+        this.getProject()
     },
     data(){
         return{
             collapse:false,
             list:[],
-            project:{},
         }
     },
     computed:{
         total_hours(){
             let result = 0 
+            if(!this.list) return result
             this.list.forEach(item=>result+= Number(item.hours))
             return result
         },
         total_value(){
             let result = 0 
+            if(!this.list) return result
             this.list.forEach(item=>result+= item.hours*item.price_hours)
+            Project.project.total_AdditionalServices = result
             return result
         }
     },
     props:{
         loaded:Boolean,
-        object_id: String,
+        project_id: String,
     },
     methods:{
-
-        async getProjectData(){
-            let item = {
-                id:1,
-                title: 'myPrice',
-                hours: 5,
-                price_hours: 10,
-            }
-            this.list.push(item)
-        },
-        setValues(){
-
+        getProject(){
+            if(!Project.project.AdditionalServices) return Project.project.AdditionalServices = []
+            this.list = Project.project.AdditionalServices
         },
         newItem(){
             let id = this.list.length + 1
@@ -79,7 +72,8 @@ export default{
             this.updateProject()
         },
         updateProject(){
-           
+            Project.project.AdditionalServices = this.list
+            updateProject()
         }   
 
     }

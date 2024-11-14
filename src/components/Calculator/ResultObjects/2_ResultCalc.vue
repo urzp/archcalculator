@@ -1,17 +1,18 @@
 <template>
     <div class="total-calc" :class="{collapse}">
-        <Titile_Objects  @switch_tg="(val)=>{collapse = !val}"/>
+        <Titile_Result  @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
             <AdditionalServices :project_id="project_id"/>
             <ExtraCosts :project_id="project_id" />
+            <Summary  :project_id="project_id" />
         </Toggle>
-        <Total_Objects :collapse="collapse" />
+        <Total_Result :collapse="collapse" />
     </div> 
 </template>
 
 <script>
 export default{
-    name: 'TotalCalc',
+    name: 'ResultCalc',
     async mounted(){
 
     },

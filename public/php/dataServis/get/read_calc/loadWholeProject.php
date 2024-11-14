@@ -4,6 +4,8 @@ $selector = "`id` = '$id'";
 
 $mysql = $mysql_calc;
 $data['project'] = crud_read('projects',"*", $selector)[0];
+$data['project']['AdditionalServices']=json_decode($data['project']['AdditionalServices']);
+$data['project']['ExtraCosts']=json_decode($data['project']['ExtraCosts']);
 
 $selector = "`project_id` = '$id'";
 $data['objects'] = crud_read('objects',"*", $selector);

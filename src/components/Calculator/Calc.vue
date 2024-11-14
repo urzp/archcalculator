@@ -5,13 +5,13 @@
             <div class="date">23.08.2024</div>
         </div>
         <div class="objects-calculator" v-for="item in ListObjects" :key="item.id">
-            <ObjectCalc :object_id="item.id" :project_id="project" :loaded="loaded"/>
+            <ObjectCalc :object_id="item.id" :project_id="project_id" :loaded="loaded"/>
         </div>
         <div class="panel" >
             <NewButton width="140px" @click="newObject()" >Object</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
-        <TotalCalc/>
+        <ResultCalc v-if="loaded" :project_id="project_id"/>
     </div>
 </template>
 
@@ -31,7 +31,7 @@ export default{
     },
     data(){
         return{
-            project: '1',
+            project_id: '1',
             loaded: false,
             ListObjects:[],
         }
@@ -41,11 +41,11 @@ export default{
             await LoadCalcData()
         },
         async getProject(){
-            let result = await LoadProjectData(this.project)
+            let result = await LoadProjectData(this.project_id)
             this.ListObjects = result.objects
         },
         newObject(){
-            newProjectObject(this.project)
+            newProjectObject(this.project_id)
         },
         deleteObject(){
             let lastobject = lastElement(this.ListObjects)

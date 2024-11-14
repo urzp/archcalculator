@@ -36,7 +36,9 @@ export default{
     }, 
     computed:{
         value(){
-            return this.project.servis_total + this.project.spetial_servis_total
+            let result = Number(this.project.servis_total) + Number(this.project.spetial_servis_total)
+            this.project.total_object = result
+            return result
         },
         nameObject(){
             return this.project.name

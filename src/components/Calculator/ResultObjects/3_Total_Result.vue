@@ -14,7 +14,7 @@
 <script>
 import { Project } from '@/servis/projectData.js'
 export default{
-    name: 'Total_Objects',
+    name: 'Total_Result',
     mounted(){
         this.getProject()
     },

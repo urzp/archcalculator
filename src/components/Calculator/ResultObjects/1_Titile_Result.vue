@@ -8,7 +8,7 @@
 <script>
 import { Project } from '@/servis/projectData';
 export default{
-    name: 'Titile_Objects',
+    name: 'Titile_Result',
     async mounted(){
 
     },
