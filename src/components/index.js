@@ -48,6 +48,7 @@ import Summary from './Calculator/ResultObjects/03_Summary/00_Summary.vue'
 import TotalNet from './Calculator/ResultObjects/03_Summary/01_TotalNet.vue'
 import TotalTax from './Calculator/ResultObjects/03_Summary/02_TotalTax.vue'
 import Total from './Calculator/ResultObjects/03_Summary/03_Total.vue'
+import TotalSummary from './Calculator/ResultObjects/03_Summary/04_TotalSummary.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -133,6 +134,7 @@ export default [
     TotalNet,
     TotalTax,
     Total,
+    TotalSummary,
     
     TopFixMenu,
     EditCalculator,

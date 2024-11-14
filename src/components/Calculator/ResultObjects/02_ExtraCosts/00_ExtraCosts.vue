@@ -29,6 +29,7 @@ export default{
         return{
             collapse:false,
             list:[],
+            project:{},
         }
     },
     computed:{
@@ -40,7 +41,7 @@ export default{
         total_value(){
             let result = 0 
             this.list.forEach(item=>result+= item.rate*item.price_rate)
-            Project.project.total_ExtraCosts = result
+            this.project.total_ExtraCosts = result
             return result
         }
     },
@@ -53,6 +54,7 @@ export default{
         getProject(){
             if(!Project.project.ExtraCosts) return Project.project.ExtraCosts = []
             this.list = Project.project.ExtraCosts
+            this.project = Project.project
         },
         newItem(){
             let id = this.list.length + 1
@@ -81,6 +83,7 @@ export default{
 
 <style scoped>
 .buttton_wrap{
+    position: absolute;
     margin-top: 20px;
     background-color: #fff!important;
 }

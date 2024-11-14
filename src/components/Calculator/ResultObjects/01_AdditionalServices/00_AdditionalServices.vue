@@ -29,6 +29,7 @@ export default{
         return{
             collapse:false,
             list:[],
+            project:{},
         }
     },
     computed:{
@@ -42,7 +43,7 @@ export default{
             let result = 0 
             if(!this.list) return result
             this.list.forEach(item=>result+= item.hours*item.price_hours)
-            Project.project.total_AdditionalServices = result
+            this.project.total_AdditionalServices = result
             return result
         }
     },
@@ -54,6 +55,7 @@ export default{
         getProject(){
             if(!Project.project.AdditionalServices) return Project.project.AdditionalServices = []
             this.list = Project.project.AdditionalServices
+            this.project = Project.project
         },
         newItem(){
             let id = this.list.length + 1
@@ -82,6 +84,7 @@ export default{
 
 <style scoped>
 .buttton_wrap{
+    position: absolute;
     margin-top: 20px;
     background-color: #fff!important;
 }

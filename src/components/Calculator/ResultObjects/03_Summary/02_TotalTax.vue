@@ -4,7 +4,7 @@
             <div class="title">Umsatzsteuer</div>
             <div class="wrap_figures">
                 <div class="wrap_imputs">
-                    <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
+                    <Percent input_type :value = "percent" @edit_value="value=>updateItem(value)"/>
                 </div>
                 <div class="price" ><Price :value ="value" /></div>
             </div>
@@ -23,19 +23,18 @@ export  default{
         }
     },
     props:{
-        percent:Number,
+        finance:String,
+        percent:String,
     },
     computed:{
         value(){
-            return 0
+            return Number(this.finance) * Number(this.percent)/100
         },
     },
+    emits:['updateItem'],
     methods:{
-        updateRate(value){
-            this.$emit('updateItem', {value, id:this.id, name:'rate'})
-        },   
-        updatePriceRate(value){
-            this.$emit('updateItem', {value, id:this.id, name:'price_rate'})
+        updateItem(value){
+            this.$emit('updateItem', value)
         },   
     }
 }

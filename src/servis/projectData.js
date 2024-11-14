@@ -7,6 +7,7 @@ export async function LoadProjectData(id){
     let result
     result = (await apiData({typeData:'loadWholeProject', id})).data
     Project =  await result
+    EventBus.emit('Project:Loadeded')
     return result
 }
 
@@ -35,6 +36,7 @@ export async function newProjectObject(project_id){
         HonorarRate:{id:3,value:"Mittelsatz",percent:50},
         finance:{value: 450000,useDetals: false, detals:[], userTitle:[]},
         payExtra:{percent:0},
+        specialServices:[],
     }
     await apiData({typeData:'newProjectObject', data: newObject})
     EventBus.emit('Project:newObject')

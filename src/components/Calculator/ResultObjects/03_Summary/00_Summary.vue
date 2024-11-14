@@ -2,43 +2,53 @@
     <Title_SubObject name="Zusammenfassung" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <TotalNet :value="total_net"/>
-        <TotalTax :percent="1"/>
-        <Total />
+        <TotalTax :percent="tax" :finance="total_net" @updateItem="value=>updateTax(value)"/>
+        <Total :value="total" />
     </Content_PartObject>
-    <TotalAdditionalServis :hours="total_hours" :value="total_value" :collapse = 'collapse' />    
+    <TotalSummary  :value="total" :collapse = 'collapse' />    
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { Project, updateProject } from '@/servis/projectData.js'
 export default{
     name: 'Summary',
     async mounted(){
+        EventBus.on('Project:Loadeded', this.getProject)
         this.getProject()
     },
     data(){
         return{
             collapse:false,
             project:{},
-            test:0,
-            test2:{},
+            tax:'0',
+        }
+    },
+    watch:{
+        total_net(){
+            this.updateProject() 
+        },
+        total(){
+            this.updateProject() 
         }
     },
     computed:{
-        total_AdditionalServices(){
-            if(!this.test.total_AdditionalServices) return 0
-            return this.test.total_AdditionalServices
-        },
-        total_ExtraCosts(){
-            if(!this.project.project.total_ExtraCosts) return 0
-            return this.project.project.total_ExtraCosts          
-        },
         total_net(){
             let result = 0 
             if(!this.project||!this.project.objects) return result
-            this.project.objects.forEach( item=>{ result+=Number(item.total_object) } )
-            result = result + Number( this.test.total_AdditionalServices )  + Number( this.total_ExtraCosts )
+            let objects = this.project.objects
+            let project = this.project.project
+            objects.forEach( item=>{ result+=Number(item.total_object) } )
+            result = result + Number( project.total_AdditionalServices )  + Number( project.total_ExtraCosts )
+            project.total_net = result
             return result
         },
+        total(){
+            let result = 0 
+            if(!this.project||!this.project.objects) return result
+            result = this.total_net + this.total_net * Number(this.tax)/100
+            return result
+        }
     },
     props:{
         loaded:Boolean,
@@ -47,13 +57,20 @@ export default{
     methods:{
         getProject(){
            this.project = Project
-           this.test = Project.project
-           this.test2 = Project.project.total_AdditionalServices
+           if(!!this.project.project.tax) this.tax = this.project.project.tax 
         },
         updateProject(){
-            Project.project.AdditionalServices = this.list
+            let project = this.project.project
+            project.total_net = this.total_net
+            project.tax = this.tax
+            project.total_tax = this.total_net * Number(this.tax)/100
+            project.total = this.total
+        },  
+        updateTax(value){
+            this.tax = value
+            this.updateProject()
             updateProject()
-        }   
+        }
 
     }
 }

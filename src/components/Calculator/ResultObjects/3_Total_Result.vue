@@ -12,10 +12,12 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Total_Result',
     mounted(){
+        EventBus.on('Project:Loadeded', this.getProject)
         this.getProject()
     },
     data(){
@@ -25,7 +27,6 @@ export default{
         }
     },
     props:{
-        object_id:String,
         loaded:String,
         collapse:Boolean,
     },
@@ -36,15 +37,12 @@ export default{
     }, 
     computed:{
         value(){
-            return 0
+            return this.project.total
         },
-        nameObject(){
-            return ''
-        }
     },
     methods:{
         getProject(){
-           
+            this.project = Project.project
         }
     }
 }

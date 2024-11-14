@@ -93,6 +93,7 @@ export default{
 
 <style scoped>
 .buttton_wrap{
+    position:absolute;
     margin-top: 20px;
     background-color: #fff!important;
 }
