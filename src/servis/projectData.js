@@ -1,23 +1,36 @@
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
-import { newWholeProject } from '@/servis/newDataProjects.js'
+import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
 export let Project = {}
 
 export async function LoadProjectData(id){
     let result
-    result = (await apiData({typeData:'loadWholeProject', id})).data
+    if(id=='local'){ result = loadLocal() }else{ result = (await apiData({typeData:'loadWholeProject', id})).data }
     Project =  await result
     EventBus.emit('Project:Loadeded')
     return result
 }
 
-// export async function newPoject(){
-//     let project = newWholeProject
-// }
+function loadLocal(){
+    let  result = localStorage.getItem('Project')
+    if(!result){result = newPoject()}else{result = JSON.parse(result)} 
+    return result
+}
+
+export async function newPoject(){
+    Project =  newWholeProject
+    EventBus.emit('Project:Loadeded')
+    return Project 
+}
 
 export async function updateProject(){
-    await apiData({typeData:'updateProject', data: Project.project})    
+    if(Project.project.id=='local'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
+}
+
+export async function saveLocalProject(){
+    let projectJSON = JSON.stringify(Project)
+    localStorage.setItem('Project', projectJSON);
 }
 
 export async function updateProjectObject(id, data, sendAPI=true){
@@ -25,29 +38,34 @@ export async function updateProjectObject(id, data, sendAPI=true){
     for (let key in data){
         obj[key] = data[key]
     }
-    if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})
+    if(Project.project.id=='local'){ await saveLocalProject() }else{
+        if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})}
     EventBus.emit('UpdatedProject')
 }
 
 export async function newProjectObject(project_id){
-    let newObject = {
-        user_id:1,
-        project_id,
-        name: 'New Object',
-        HOAI_version_id:2,
-        paragraph_id:8,
-        honorarLevel: {id:30,number:1,value:"Honorarzone I",usePoints:false},
-        honorarLevelDetals:[{value: 5},{value: 7},{value: 6 },{value: 4},{value: 3},{value: 2}],
-        HonorarRate:{id:3,value:"Mittelsatz",percent:50},
-        finance:{value: 450000,useDetals: false, detals:[], userTitle:[]},
-        payExtra:{percent:0},
-        specialServices:[],
-    }
-    await apiData({typeData:'newProjectObject', data: newObject})
+    let newObject = newObjectProject
+    newObject.project_id = project_id
+    if(Project.project.id=='local'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
     EventBus.emit('Project:newObject')
 }
 
-export async function deleteProjectObject(project_id){
-    await apiData({typeData:'deleteProjectObject', data: project_id})
+async function newProjectObjectLoacal(newObject){
+    await Project.objects.push(newObject) 
+    await Project.objects.forEach((item,index)=>item.id=index)
+    await saveLocalProject()
+}
+
+export async function deleteProjectObject(id){
+    if(Project.project.id=='local'){ deleteLocalProjectObject(id) }else{  
+        await apiData({typeData:'deleteProjectObject', data: id})
+    }
     EventBus.emit('Project:deleteObject') 
+}
+
+async function deleteLocalProjectObject(id){
+    let objects = Project.objects
+    let index = objects.findIndex(item=>item.id==id)
+    objects.splice(index, 1);
+    await saveLocalProject()
 }

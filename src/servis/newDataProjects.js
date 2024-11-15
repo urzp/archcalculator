@@ -28,6 +28,7 @@ export let newObjectProject = {
     finance:{value: 450000,useDetals: false, detals:[], userTitle:[]},
     payExtra:{percent:0},
     specialServices:[],
+    spetial_servis_total:0,
 }
 
 export let newWholeProject = {
