@@ -88,3 +88,17 @@ export function toLetters(num) {
         out = mod ? String.fromCharCode(96 + mod) : (--pow, 'Z');
     return pow ? toLetters(pow) + out : out;
 }
+
+export function formatDate(data_time_string){
+    if(!data_time_string) return ''
+    let result
+    let options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      };
+    result = data_time_string.split(' ')[0]
+    result = new Date(result)
+    result = result.toLocaleString("de", options)
+    return result
+}

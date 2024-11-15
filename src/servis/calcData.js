@@ -5,9 +5,42 @@ export let CalcData = {}
 
 export async function LoadCalcData(){
     let result
-    result = (await apiData({typeData:'loadWholeCalcData'})).data
+    result = getLocalHost()
+    if(!result||await checkNewVersion(result)){
+        result = (await apiData({typeData:'loadWholeCalcData'})).data
+        saveLocalHost(result)
+    }
     CalcData =  await result
     return result
+}
+
+async function checkNewVersion(CalcData){
+    let HOAI_versions = (await apiData({typeData:'getHOAI'})).data
+    let HOAI_local = CalcData.HOAI_versions
+    if(HOAI_versions.length!=HOAI_local.length) return true
+    let result = false
+    HOAI_versions.forEach((item, index)=>{
+        let itemLocal = HOAI_local[index]
+        if(item.id!=itemLocal.id) result = true
+        if(item.puplish!=itemLocal.puplish) result = true
+        if(item.sequence!=itemLocal.sequence) result = true
+        if(item.value!=itemLocal.value) result = true
+        if(item.version!=itemLocal.version) result = true
+        if(item.updated!=itemLocal.updated) result = true
+    })
+    
+    return result  
+}
+
+function saveLocalHost(CalcData){
+    let CalcDataJSON = JSON.stringify(CalcData)
+    localStorage.setItem('CalcData', CalcDataJSON);
+}
+
+function getLocalHost(){
+    let CalcDataJSON = localStorage.getItem('CalcData')
+    let CalcData = JSON.parse(CalcDataJSON)
+    return CalcData
 }
 
 export function getAllowableCosts(id_paragraph){

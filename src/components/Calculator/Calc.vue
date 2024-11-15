@@ -3,7 +3,7 @@
         <div class="title-project">
             <!-- <div class="name" >{{ project_name }}</div> -->
              <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
-            <div class="date">23.08.2024</div>
+            <div class="date">{{ created }}</div>
         </div>
         <template v-if="loaded">
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
@@ -22,7 +22,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
-import { lastElement } from '@/servis/functions.js'
+import { lastElement, formatDate } from '@/servis/functions.js'
 import { LoadProjectData, updateProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
@@ -39,6 +39,13 @@ export default{
             loaded: false,
             ListObjects:[],
             project:{},
+        }
+    },
+    computed:{
+        created(){
+            let result = ''
+            if(!!this.project&&!!this.project.created) { result = formatDate(this.project.created)}
+            return result
         }
     },
     methods:{
