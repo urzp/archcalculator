@@ -40,7 +40,6 @@ export  default{
             value: '',
             limits:{},
             typeCurrancy: '€',
-            value_detals:'',
             list:[],
             project:{},
             detals:{},
@@ -60,6 +59,9 @@ export  default{
         },
     },
     computed:{
+        value_detals(){
+            return this.list.reduce((sum, item) => sum + Number(item.value),0)
+        },
         value_render(){
             let result = this.useDetals?this.value_detals:this.value
             this.checkLimits(result)
@@ -105,7 +107,6 @@ export  default{
         },
         switchDetal(useDetal, update=true){
             this.useDetals=useDetal; 
-            this.value_detals = this.list.reduce((sum, item) =>{ if(!item.value) item.value = 0; return sum + Number(item.value) },0)
             this.value = this.project.finance.value
             if(update) this.updateProjectParagraphData()
             EventBus.emit('switchFinance')
