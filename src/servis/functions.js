@@ -102,3 +102,7 @@ export function formatDate(data_time_string){
     result = result.toLocaleString("de", options)
     return result
 }
+
+export function dateToString(d){
+    return d.toISOString().replace('T', ' ').replace('Z', '')
+}

@@ -47,10 +47,6 @@ export default{
             return result
         }
     },
-    props:{
-        loaded:Boolean,
-        project_id: String,
-    },
     methods:{
         getProject(){
             if(!Project.project.AdditionalServices) return Project.project.AdditionalServices = []

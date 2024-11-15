@@ -45,10 +45,6 @@ export default{
             return result
         }
     },
-    props:{
-        loaded:Boolean,
-        object_id: String,
-    },
     methods:{
 
         getProject(){

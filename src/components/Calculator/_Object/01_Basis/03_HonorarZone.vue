@@ -35,7 +35,7 @@ export  default{
     data(){
         return{
             collapse_detals:true,
-            usePoints: false,
+            usePoints: '',
             data:{
                 id:'',
                 number:'',
@@ -56,7 +56,8 @@ export  default{
             await this.getData()
             this.getProjectData()
         },
-        usePoints(){
+        usePoints(newValue, oldValue){
+            if(oldValue==='') return false
             this.updateProjectParagraphData()
         }
     },

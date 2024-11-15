@@ -1,5 +1,6 @@
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
+import { newWholeProject } from '@/servis/newDataProjects.js'
 
 export let Project = {}
 
@@ -10,6 +11,10 @@ export async function LoadProjectData(id){
     EventBus.emit('Project:Loadeded')
     return result
 }
+
+// export async function newPoject(){
+//     let project = newWholeProject
+// }
 
 export async function updateProject(){
     await apiData({typeData:'updateProject', data: Project.project})    

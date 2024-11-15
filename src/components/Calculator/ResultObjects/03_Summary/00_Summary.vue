@@ -50,10 +50,6 @@ export default{
             return result
         }
     },
-    props:{
-        loaded:Boolean,
-        project_id: String,
-    },
     methods:{
         getProject(){
            this.project = Project

@@ -24,7 +24,6 @@ export default{
     },
     props:{
         loaded:Boolean,
-        project_id:String,
         object_id:String,
     },
     methods:{

@@ -26,7 +26,7 @@ export default{
     },
     props:{
         object_id:String,
-        loaded:String,
+        loaded:Boolean,
         collapse:Boolean,
     },
     watch: {

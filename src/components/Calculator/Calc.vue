@@ -7,13 +7,13 @@
         </div>
         <template v-if="loaded">
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
-            <ObjectCalc :object_id="item.id" :project_id="project_id" :loaded="loaded"/>
+            <ObjectCalc :object_id="item.id" :loaded="loaded"/>
         </div>
         <div class="panel" >
             <NewButton width="140px" @click="newObject()" >Object</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
-        <ResultCalc :project_id="project_id"/>
+        <ResultCalc/>
         </template>
         <div v-else class="load">Loading . . . </div>
     </div>
@@ -34,7 +34,7 @@ export default{
     },
     data(){
         return{
-            project_name: 'New Project',
+            project_name: '',
             project_id: '1',
             loaded: false,
             ListObjects:[],

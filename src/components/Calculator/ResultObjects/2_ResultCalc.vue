@@ -2,9 +2,9 @@
     <div class="total-calc" :class="{collapse}">
         <Titile_Result  @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
-            <AdditionalServices :project_id="project_id"/>
-            <ExtraCosts :project_id="project_id" />
-            <Summary  :project_id="project_id" />
+            <AdditionalServices/>
+            <ExtraCosts/>
+            <Summary/>
         </Toggle>
         <Total_Result :collapse="collapse" />
     </div> 
@@ -20,10 +20,6 @@ export default{
         return{
             collapse: false,
         }
-    },
-    props:{
-        loaded:Boolean,
-        project_id:String,
     },
     methods:{
     }
