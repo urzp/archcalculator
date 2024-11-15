@@ -25,8 +25,7 @@ export default{
         }
     },
     props:{
-        object_id:String,
-        loaded:Boolean,
+        object_id:[String,Number],
         collapse:Boolean,
     },
     watch: {

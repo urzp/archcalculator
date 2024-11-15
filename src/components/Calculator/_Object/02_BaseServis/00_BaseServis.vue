@@ -36,9 +36,6 @@ export default{
         }
     },
     watch:{
-        loaded(){
-            this.getProjectData()
-        },
         paragraph(){
             this.getProjectData()
         },
@@ -73,8 +70,7 @@ export default{
         }
     },
     props:{
-        loaded:Boolean,
-        object_id: String,
+        object_id: [String,Number],
     },
     methods:{
         async getData(){

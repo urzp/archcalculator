@@ -25,8 +25,7 @@ export  default{
         }
     },
     props:{
-        loaded:Boolean,
-        paragraph_id:String,
+        paragraph_id:[String, Number],
     },
     watch:{
         async paragraph_id(id){

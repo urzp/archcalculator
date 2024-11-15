@@ -21,7 +21,7 @@ export default{
         }
     },
     props:{
-        object_id:String,
+        object_id:[String,Number],
     },
     emits: ['switch_tg'],
     methods:{

@@ -1,15 +1,15 @@
 <template>
     <Title_SubObject name="Honorargrundlagen" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
-        <HOAI_version_calc :loaded="loaded" :prop_id="HOAI_version" @selected="data=>{ data.id = data.id; selectParagraph(data.id) }"/>
-        <Paragraph_calc :loaded="loaded" :paragraph_id="paragraph" @selected="data=>{ paragraph = data.id; updateProjectData() }"/>
-        <HonorarZone_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
-        <HonorarRate_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id"/>
-        <Finance_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
-        <Honorar_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
-        <PayExtra_calc :loaded="loaded" :id_paragraph="paragraph" :object_id="object_id" />
+        <HOAI_version_calc :prop_id="HOAI_version" @selected="data=>{ data.id = data.id; selectParagraph(data.id) }"/>
+        <Paragraph_calc :paragraph_id="paragraph" @selected="data=>{ paragraph = data.id; updateProjectData() }"/>
+        <HonorarZone_calc :id_paragraph="paragraph" :object_id="object_id" />
+        <HonorarRate_calc :id_paragraph="paragraph" :object_id="object_id"/>
+        <Finance_calc :id_paragraph="paragraph" :object_id="object_id" />
+        <Honorar_calc :id_paragraph="paragraph" :object_id="object_id" />
+        <PayExtra_calc :id_paragraph="paragraph" :object_id="object_id" />
     </Content_PartObject>
-    <TotalBasis :loaded="loaded" :object_id="object_id" :collapse = 'collapse' :paragraph="paragraph"/>    
+    <TotalBasis :object_id="object_id" :collapse = 'collapse' :paragraph="paragraph"/>    
 </template>
 
 <script>
@@ -29,8 +29,7 @@ export default{
         }
     },
     props:{
-        loaded:Boolean,
-        object_id: String,
+        object_id: [String, Number],
     },
     methods:{
         async getProjectData(){

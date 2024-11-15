@@ -51,7 +51,7 @@ export  default{
         }
     },
     props:{
-        object_id: String,
+        object_id: [String,Number],
         id:String,
         index:Number, 
         title:String,

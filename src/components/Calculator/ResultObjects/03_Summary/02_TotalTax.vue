@@ -23,8 +23,8 @@ export  default{
         }
     },
     props:{
-        finance:String,
-        percent:String,
+        finance:[String,Number],
+        percent:[String,Number],
     },
     computed:{
         value(){

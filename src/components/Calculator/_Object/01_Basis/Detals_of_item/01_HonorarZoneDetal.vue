@@ -45,8 +45,8 @@ export  default{
     },
     emits:['equivalent', 'usePoint'],
     props:{
-        id_paragraph:String,
-        object_id:String,
+        id_paragraph:[String,Number],
+        object_id:[String,Number],
         usePoints:Boolean,
         levels:Array,
     },

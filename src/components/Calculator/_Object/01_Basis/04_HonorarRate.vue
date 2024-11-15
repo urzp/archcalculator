@@ -38,14 +38,8 @@ export  default{
         }
     },
     props:{
-        loaded:Boolean,
-        id_paragraph:String,
-        object_id:String,
-    },
-    watch:{
-        loaded(){
-            this.getProjectData()
-        }
+        id_paragraph:[String, Number],
+        object_id:[String,Number],
     },
     emits:['selected'],
     methods:{

@@ -46,8 +46,8 @@ export  default{
         }
     },
     props:{
-        object_id: String,
-        id:String,
+        object_id: [String,Number],
+        id:[String,Number],
         indexL1:Number,
         index:Number,
         title:String,

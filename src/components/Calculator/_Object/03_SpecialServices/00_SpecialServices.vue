@@ -23,7 +23,7 @@ import { Project, updateProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'SpecialServices',
     async mounted(){
-
+        this.getProjectData()
     },
     data(){
         return{
@@ -31,11 +31,6 @@ export default{
             list:[],
             project:{},
         }
-    },
-    watch:{
-        loaded(){
-            this.getProjectData()
-        },
     },
     computed:{
         honorar(){
@@ -54,8 +49,7 @@ export default{
         }
     },
     props:{
-        loaded:Boolean,
-        object_id: String,
+        object_id: [String,Number],
     },
     methods:{
 

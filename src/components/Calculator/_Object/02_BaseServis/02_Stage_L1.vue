@@ -24,7 +24,7 @@ export  default{
         }
     },
     props:{
-        id:String,
+        id:[String,Number],
         title:String,
         honorar:[Number, String],
         percent: [Number, String],

@@ -7,7 +7,7 @@
         </div>
         <template v-if="loaded">
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
-            <ObjectCalc :object_id="item.id" :loaded="loaded"/>
+            <ObjectCalc :object_id="item.id" />
         </div>
         <div class="panel" >
             <NewButton width="140px" @click="newObject()" >Object</NewButton>

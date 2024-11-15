@@ -14,7 +14,7 @@ export  default{
         this.adjast_input_width()
     },  
     props:{
-        value: Number,
+        value: [String,Number],
         input_type:{ 
             type: Boolean,
             default: false,

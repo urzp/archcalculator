@@ -22,9 +22,8 @@ export  default{
         }
     },
     props:{
-        loaded:Boolean,
-        id_paragraph:String,
-        object_id:String,
+        id_paragraph:[String,Number],
+        object_id:[String,Number],
     },
     watch:{
         async id_paragraph(id){

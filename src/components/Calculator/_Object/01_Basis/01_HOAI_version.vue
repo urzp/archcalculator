@@ -26,8 +26,7 @@ export  default{
         }
     },
     props:{
-        loaded:Boolean,
-        prop_id:String,
+        prop_id:[String, Number],
     },
     watch:{
         async prop_id(){

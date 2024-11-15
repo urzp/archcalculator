@@ -39,6 +39,9 @@ export default{
         value(){
             return this.project.total
         },
+        nameObject(){
+            return this.project.name
+        },
     },
     methods:{
         getProject(){

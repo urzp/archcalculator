@@ -2,11 +2,11 @@
     <div class="object-calc" :class="{collapse}">
         <Titile_Object :object_id="object_id" @switch_tg="(val)=>{collapse = !val}"/>
         <Toggle :collapse="collapse">
-        <Basis :object_id="object_id" :loaded="loaded"/>
-        <BaseServis  :object_id="object_id" :loaded="loaded"/>
-        <SpecialServices  :object_id="object_id" :loaded="loaded"/>
+        <Basis :object_id="object_id" />
+        <BaseServis  :object_id="object_id" />
+        <SpecialServices  :object_id="object_id" />
         </Toggle>
-        <Total_Object :collapse="collapse" :object_id="object_id" :loaded="loaded"/>
+        <Total_Object :collapse="collapse" :object_id="object_id" />
     </div> 
     
 </template>
@@ -23,8 +23,7 @@ export default{
         }
     },
     props:{
-        loaded:Boolean,
-        object_id:String,
+        object_id:[String, Number],
     },
     methods:{
     }
