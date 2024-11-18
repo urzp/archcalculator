@@ -2,15 +2,19 @@
      <div v-if="show" class="wrap_pupap">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
-            <div class="list">
+            <div class="form">
                 <div class="item">Email</div>
                 <input type="text" @change="event=>chekEmail(event.target.value)"/>
-                <div class="item">Password</div>
-                <input type="password" />
+                <div v-if="err_email" class="err">error Email</div>
+                <div class="item" >Password</div>
+                <input type="password" @change="event=>chekPassword(event.target.value)" />
+                <div v-if="err_password" class="err">error</div>
                 <div class="submit">
-                    <Button heigth="35px" width="150px">Einreichen</Button>
+                    <div v-if="waightResponce"  class="loading">Loading . . .</div>
+                    <Button heigth="35px" width="150px" @click="submit()">Einreichen</Button>
                 </div>
             </div>
+            
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
@@ -19,6 +23,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { validateEmail } from '@/servis/functions.js'
+import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'Login',
     mounted(){
@@ -27,16 +32,38 @@ export default{
     data(){
         return {
             show:false,
+            err_email:false,
+            err_password:false,
+            email:'',
+            password:'',
+            waightResponce: false,
         }
     },
     methods:{
         close(){
             this.show=false
         },
-        chekEmail(email){
-            console.log(email)
-           console.log( validateEmail(email) )
+        chekEmail(email=this.email){
+            if( !validateEmail(email) ){this.err_email=true; return false} 
+            this.err_email=false
+            this.email = email
+            return true
         },
+        chekPassword(password=this.password){
+            if(!password){this.err_password=true; return false}
+            this.err_password=false
+            this.password = password
+            return true
+        },
+        async submit(){
+            if( !(this.chekEmail()&&this.chekPassword()) ) return false
+            let data = {
+                email: this.email,
+                password: this.password,
+            }
+            this.waightResponce = true
+            let result = (await apiData({typeData:'login', data })).data
+        }
     },
 }
 </script>
@@ -66,7 +93,7 @@ export default{
         cursor: pointer;
     }
 
-    .list{
+    .form{
         margin: 25px 35px;
         display: flex;
         flex-direction: column;
@@ -85,10 +112,21 @@ export default{
         padding: 0 10px;
     }
 
+    .err{
+        color: red;
+    }
+
+    .loading{
+        color: #464646;
+        font-family: 'Raleway-Light';
+        font-size: 20px;
+    }
+
     .submit{
         margin-top: 10px;
         display: flex;
         justify-content: flex-end;
+        column-gap: 30px;
     }
 
 
