@@ -1,6 +1,10 @@
 //----------------------------Page-----------------------------------
 import Header from './PageParts/Header.vue'
 import Footer from './PageParts/Footer.vue'
+import Menu from './PageParts/Menu.vue'
+import Popaps from './PageParts/Pupaps.vue'
+//----------------------------User-----------------------------------
+import Login from './Users/Login.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
@@ -64,6 +68,7 @@ import SubStage_L1 from './EditCalculator/10_SubStage_L1.vue'
 //-----------------------------UI------------------------------------
 import Toggle from './UI/Toggle.vue'
 import ToggleButton from './UI/ToggleBtn.vue'
+import Button from './UI/Button.vue'
 import ToggleListButton from './UI/ToggleListBtn.vue'
 import NewButton from './UI/NewBtn.vue'
 import UpdateBtn from './UI/UpdateBtn.vue'
@@ -85,6 +90,10 @@ import ContextMenu from './UI/ContextMenu.vue'
 export default [
     Header,
     Footer,
+    Menu,
+    Popaps,
+
+    Login,
 
     Calculator,
     ObjectCalc,
@@ -156,6 +165,7 @@ export default [
     DeleteButton,
     UpButton,
     DownButton,
+    Button,
     PastColumButton,
     Price,
     Percent,
