@@ -7,19 +7,26 @@
                 <div class="item_menu">How to use</div>
                 <div class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
-            <div class="btn_menu"></div>
+            <div class="btn_menu" @click="show_menu=!show_menu"></div>
+            <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
         <div class="sub-header">
             <div class="item_subHeader">New Project</div>
             <div class="item_subHeader">Open Project</div>
         </div>
     </div>
+    <Popaps/>
 </template>
 
 
 <script>
 export default{
     name: 'Header',
+    data(){
+        return {
+            show_menu:false,
+        }
+    }
 }
 </script>
 
