@@ -17,7 +17,7 @@
                 <div class="links">
                     <div class="link" @click="openRegistration()">Registrierung</div>
                     <div class="gap">|</div>
-                    <div class="link">Passwort vergessen</div>
+                    <div class="link" @click="openReset()" >Passwort vergessen</div>
                 </div>
             </div>
             
@@ -86,6 +86,10 @@ export default{
         openRegistration(){
             this.close()
             EventBus.emit(`Menu:Registration`)
+        },
+        openReset(){
+            this.close()
+            EventBus.emit('Menu:ResetPassword')
         }
     },
 }

@@ -1,6 +1,7 @@
 <template>
     <Login/>
     <Registration/>
+    <ResetPassword/>
 </template>
 
 
