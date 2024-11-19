@@ -93,7 +93,7 @@ export default{
                 this.stepEmail = false
                 this.stepCode = true 
                 let data = { email: this.email }
-                await apiData({typeData:'resetCode', data })
+                await apiData({typeData:'resetPassword', data })
                 return false
             }
             if(this.stepCode){
@@ -106,7 +106,7 @@ export default{
                 this.stepPassword = false 
                 this.stepEmail = true
                 let data = { email: this.email, code: this.code,  password: this.password }
-                await apiData({typeData:'resetCode', data })
+                await apiData({typeData:'resetPassword', data })
                 return false               
             }
        },
