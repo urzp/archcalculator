@@ -5,6 +5,7 @@ import Menu from './PageParts/Menu.vue'
 import Popaps from './PageParts/Pupaps.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
+import Registration from './Users/Registration.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
@@ -94,6 +95,7 @@ export default [
     Popaps,
 
     Login,
+    Registration,
 
     Calculator,
     ObjectCalc,

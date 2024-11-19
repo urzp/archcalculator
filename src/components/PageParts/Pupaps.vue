@@ -1,6 +1,6 @@
 <template>
     <Login/>
-
+    <Registration/>
 </template>
 
 

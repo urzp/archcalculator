@@ -11,7 +11,13 @@
                 <div v-if="err_password" class="err">error</div>
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                    <Button heigth="35px" width="150px" @click="submit()">Einreichen</Button>
+                    <div v-if="notFind"  class="loading not_find">Nicht gefunden</div>
+                    <Button heigth="35px" width="125px" @click="submit()">Einreichen</Button>
+                </div>
+                <div class="links">
+                    <div class="link" @click="openRegistration()">Registrierung</div>
+                    <div class="gap">|</div>
+                    <div class="link">Passwort vergessen</div>
                 </div>
             </div>
             
@@ -37,6 +43,7 @@ export default{
             email:'',
             password:'',
             waightResponce: false,
+            notFind:false,
         }
     },
     methods:{
@@ -62,7 +69,23 @@ export default{
                 password: this.password,
             }
             this.waightResponce = true
-            let result = (await apiData({typeData:'login', data })).data
+            let result = await apiData({typeData:'login', data })
+            this.waightResponce = false
+            if(!result.success){ 
+                this.notFind=true 
+                setTimeout(()=>{this.notFind=false}, 10000)
+                return false 
+            }
+            localStorage.setItem('user_id', result.data.id);
+            localStorage.setItem('user_email', result.data.email);
+            localStorage.setItem('user_name', result.data.name);
+            localStorage.setItem('user_token', result.data.token);
+            this.close()
+            
+        },
+        openRegistration(){
+            this.close()
+            EventBus.emit(`Menu:Registration`)
         }
     },
 }
@@ -113,7 +136,7 @@ export default{
     }
 
     .err{
-        color: red;
+        color: var(--color-akcent); 
     }
 
     .loading{
@@ -122,11 +145,33 @@ export default{
         font-size: 20px;
     }
 
+    .not_find{
+       color:var(--color-akcent); 
+    }
+
     .submit{
         margin-top: 10px;
         display: flex;
         justify-content: flex-end;
         column-gap: 30px;
+    }
+
+    .links{
+        margin-top: 10px;
+        display: flex;
+        -moz-column-gap: 5px;
+        column-gap: 5px;
+        font-size: 14px;
+        color: #ababab;
+        justify-content: flex-end;
+    }
+
+    .link{
+        cursor:pointer;
+    }
+
+    .link:hover{
+        color:var(--color-akcent); 
     }
 
 

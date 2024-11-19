@@ -3,7 +3,7 @@
         <div class="menu_pupap">
             <div class="list">
                 <div class="item" @click="selectItem('Login')">Login</div>
-                <div class="item">Registrierung</div>
+                <div class="item" @click="selectItem('Registration')">Registrierung</div>
             </div>
         </div>
     </div>
