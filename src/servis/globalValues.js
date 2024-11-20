@@ -5,7 +5,13 @@ export let global= reactive({
    admin:false,
 })
 
-window.global = global
+export let user = reactive({
+    id:localStorage.getItem('user_id'),
+    name:localStorage.getItem('user_name'),
+    email:localStorage.getItem('user_email'),
+})
+
+//window.global = global
 
 
 export function getGlobal(){

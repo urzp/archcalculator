@@ -18,6 +18,8 @@ if($data == null){
     crud_update('users', $new_data, $selector);
 }
 
+unset($data['resetCode']);
+
 $result = (object) [
     'success' => $success,
     'data' => $data,

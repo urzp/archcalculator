@@ -1,11 +1,14 @@
 <template>
     <div class="header">
         <div class="header-row">
-            <div class="logo"><img src="@/assets/imgs/logo.svg" alt=""></div>
+            <div class="logo">
+                <img v-if="!global.login" src="@/assets/imgs/logo.svg" alt="">
+                <div v-else class="userLogo">{{ !user.name?'U':user.name }}</div>
+            </div>
             <div class="menu">
                 <div class="item_menu">About project</div>
                 <div class="item_menu">How to use</div>
-                <div v-show="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
+                <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
             <div class="btn_menu" @click="show_menu=!show_menu"></div>
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
@@ -20,8 +23,7 @@
 
 
 <script>
-import { reactive } from 'vue';
-import { global } from '@/servis/globalValues.js'
+import { global, user } from '@/servis/globalValues.js'
 export default{
     name: 'Header',
     async mounted(){
@@ -31,15 +33,14 @@ export default{
         return {
             isAdmin:false,
             global:{},
+            user:{},
             show_menu:false,
         }
-    },
-    computed:{
-
     },
     methods:{
         getData(){
             this.global = global
+            this.user = user
         },
     },
 }
@@ -63,6 +64,18 @@ export default{
     }
     .logo{
         cursor: pointer;
+    }
+    .userLogo{
+        width: 63px;
+        height: 63px;
+        border-radius: 33px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        font-family: 'Comfortaa-Light';
+        font-size: 35px;
+        color: #5A5A5A;
+        background-color: #EFEFEF;
     }
     .menu .item_menu{
         font-family: 'Raleway-ExtraLight';

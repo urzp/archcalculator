@@ -1,4 +1,4 @@
-import { global } from '@/servis/globalValues.js'
+import { global, user } from '@/servis/globalValues.js'
 
 export function logOut(){
     localStorage.setItem('user_id', '');
@@ -9,12 +9,15 @@ export function logOut(){
     global.admin = false
 }
 
-export function logIn(user){
-    localStorage.setItem('user_id', user.id);
-    localStorage.setItem('user_email', user.email);
-    localStorage.setItem('user_name', user.name);
-    localStorage.setItem('user_token', user.token);
+export function logIn(data){
+    localStorage.setItem('user_id', data.id);
+    localStorage.setItem('user_email', data.email);
+    localStorage.setItem('user_name', data.name);
+    localStorage.setItem('user_token', data.token);
+    for (let key in data) {
+        user[key] = data[key];
+      }
     global.login = true
-    if(user.level == 'admin' ) { global.admin = true }else{ global.admin = false }
+    if(data.level == 'admin' ) { global.admin = true }else{ global.admin = false }
 
 }
