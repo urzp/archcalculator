@@ -7,7 +7,7 @@
                 <input type="text" @change="event=>chekEmail(event.target.value)"/>
                 <div v-if="err_email" class="err">error Email</div>
                 <div class="item" >Password</div>
-                <input type="password" @change="event=>chekPassword(event.target.value)" />
+                <input type="password" @change="event=>chekPassword(event.target.value)" @keyup.enter="submit()" />
                 <div v-if="err_password" class="err">error</div>
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
@@ -30,6 +30,8 @@
 import { EventBus } from '@/servis/EventBus'
 import { validateEmail } from '@/servis/functions.js'
 import { apiData } from '@/servis/apiData.js'
+import { global } from '@/servis/globalValues.js'
+import { logIn } from '@/components/Users/logout.js'
 export default{
     name: 'Login',
     mounted(){
@@ -76,10 +78,7 @@ export default{
                 setTimeout(()=>{this.notFind=false}, 10000)
                 return false 
             }
-            localStorage.setItem('user_id', result.data.id);
-            localStorage.setItem('user_email', result.data.email);
-            localStorage.setItem('user_name', result.data.name);
-            localStorage.setItem('user_token', result.data.token);
+            logIn(result.data)
             this.close()
             
         },

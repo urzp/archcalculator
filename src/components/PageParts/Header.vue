@@ -5,7 +5,7 @@
             <div class="menu">
                 <div class="item_menu">About project</div>
                 <div class="item_menu">How to use</div>
-                <div class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
+                <div v-show="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
             <div class="btn_menu" @click="show_menu=!show_menu"></div>
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
@@ -20,13 +20,32 @@
 
 
 <script>
+
+import { global } from '@/servis/globalValues.js'
 export default{
     name: 'Header',
+    async created(){
+        this.getData()
+    },
     data(){
         return {
+            global:null,
             show_menu:false,
         }
-    }
+    },
+    watch:{
+        global:{
+            handler(){
+                console.log('action')
+            },
+            deep:true,
+        }
+    },
+    methods:{
+        getData(){
+            this.global = global
+        },
+    },
 }
 </script>
 

@@ -8,12 +8,14 @@
                 <div class="item">Email</div>
                 <input type="text" @change="event=>chekEmail(event.target.value)"/>
                 <div v-if="err_email" class="err">error Email</div>
+                <div v-if="notfind_email" class="err">nicht gefunden</div>
                 </template>
 
                 <template v-if="stepCode">
                 <div class="item" >Code aus Email</div>
                 <input type="password" @change="event=>chekCode(event.target.value)" />
                 <div v-if="err_code" class="err">error</div>
+                <div v-if="wrong_code" class="err">Ungültiger Code</div>
                 </template>
 
                 <template v-if="stepPassword">
@@ -53,7 +55,9 @@ export default{
        return {
            show:false,
            err_email:false,
+           notfind_email:false,
            err_code:false,
+           wrong_code:false,
            err_password:false,
            email:'',
            code:'',
@@ -88,12 +92,15 @@ export default{
            return true
        },
        async submit(){
+            let result 
            if( this.stepEmail ){ 
                 if( !this.chekEmail() ) return false
+                let data = { email: this.email }
+                this.notfind_email = false
+                result  = await apiData({typeData:'resetPassword', data })
+                if(!result.success) { this.notfind_email = true; return false }
                 this.stepEmail = false
                 this.stepCode = true 
-                let data = { email: this.email }
-                await apiData({typeData:'resetPassword', data })
                 return false
             }
             if(this.stepCode){
@@ -103,10 +110,18 @@ export default{
                 return false               
             }
             if(this.stepPassword){
+                this.wrong_code = false
+                let data = { email: this.email, code: this.code,  password: this.password }
+                result =  await apiData({typeData:'resetPassword', data })
+                if(!result.success) {
+                    this.wrong_code = true
+                    this.stepCode = true 
+                    this.stepPassword = false
+                    return false 
+                }
                 this.stepPassword = false 
                 this.stepEmail = true
-                let data = { email: this.email, code: this.code,  password: this.password }
-                await apiData({typeData:'resetPassword', data })
+                this.openLogin()
                 return false               
             }
        },

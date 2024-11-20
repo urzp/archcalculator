@@ -8,22 +8,30 @@ $password = md5( $input_data->password );
 $selector = " `email` = '$email'";
 $data = crud_read('users',"*", $selector)[0];
 
+$result = false;
 if($data!=null){
 
     if($code==null){
         $code=GeneratePinCode(5);
         $new_data['resetCode'] = $code;
         crud_update('users', $new_data, $selector);
+        $result = true;
     }else{
-        
-
+        if($code==$data['resetCode']){
+            $new_data['password']=$password;
+            $new_data['resetCode']="";
+            crud_update('users', $new_data, $selector);
+            $result = true;
+        }else{
+            $result = false;
+        }
     }
 
 }
 
 
 $result = (object) [
-    'success' => true,
+    'success' => $result,
 ];
 
 function GeneratePinCode($chars) {

@@ -1,9 +1,13 @@
 <template>
     <div v-if="show" class="wrap_menu">
         <div class="menu_pupap">
-            <div class="list">
+            <div v-if="!global.login" class="list notlogin">
                 <div class="item" @click="selectItem('Login')">Login</div>
                 <div class="item" @click="selectItem('Registration')">Registrierung</div>
+            </div>
+            <div v-if="global.login" class="list login">
+                <div class="item" @click="console.log('profile')">Profile</div>
+                <div class="item" @click="logOut()">Logout</div>
             </div>
         </div>
     </div>
@@ -12,11 +16,16 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { global } from '@/servis/globalValues.js'
+import { logOut } from '@/components/Users/logout.js'
 export default{
     name: 'Menu',
+    async mounted(){
+        this.getData()
+    },
     data(){
         return {
-
+            global:{},
         }
     },
     props:{
@@ -24,12 +33,19 @@ export default{
     },
     emits:['close'],
     methods:{
+        getData(){
+            this.global = global
+        },
         close(){
             this.$emit('close')
         },
         selectItem(name){
             this.close()
             EventBus.emit(`Menu:${name}`)
+        },
+        logOut(){
+            logOut()
+            this.close()
         }
     },
 }

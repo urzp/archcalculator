@@ -1,3 +1,6 @@
+import { global } from '@/servis/globalValues.js'
+import { apiData } from '@/servis/apiData.js'
+
 export function lastNumber(list, number='number'){
     if (!list.length||list.length == 0) return 0
     let last = list[list.length-1]
@@ -114,3 +117,10 @@ export function validateEmail(email){
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+
+export async function isLogget(){
+    let result = await apiData({typeData:'isLogin' })
+    global.login = result.success
+    if(result.success) { global.admin = result.isAdmin }else{global.admin = false}
+    return result.success
+}
