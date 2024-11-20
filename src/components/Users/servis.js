@@ -15,6 +15,6 @@ export function logIn(user){
     localStorage.setItem('user_name', user.name);
     localStorage.setItem('user_token', user.token);
     global.login = true
-    global.admin = true
+    if(user.level == 'admin' ) { global.admin = true }else{ global.admin = false }
 
 }

@@ -31,7 +31,7 @@ import { EventBus } from '@/servis/EventBus'
 import { validateEmail } from '@/servis/functions.js'
 import { apiData } from '@/servis/apiData.js'
 import { global } from '@/servis/globalValues.js'
-import { logIn } from '@/components/Users/logout.js'
+import { logIn } from '@/components/Users/servis.js'
 export default{
     name: 'Login',
     mounted(){

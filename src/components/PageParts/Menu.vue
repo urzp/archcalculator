@@ -15,9 +15,10 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
-import { logOut } from '@/components/Users/logout.js'
+import { logOut } from '@/components/Users/servis.js'
 export default{
     name: 'Menu',
     async mounted(){

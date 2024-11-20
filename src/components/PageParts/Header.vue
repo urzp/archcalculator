@@ -20,26 +20,22 @@
 
 
 <script>
-
+import { reactive } from 'vue';
 import { global } from '@/servis/globalValues.js'
 export default{
     name: 'Header',
-    async created(){
+    async mounted(){
         this.getData()
     },
     data(){
         return {
-            global:null,
+            isAdmin:false,
+            global:{},
             show_menu:false,
         }
     },
-    watch:{
-        global:{
-            handler(){
-                console.log('action')
-            },
-            deep:true,
-        }
+    computed:{
+
     },
     methods:{
         getData(){
