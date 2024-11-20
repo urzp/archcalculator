@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 10.35.233.88:3306
--- Время создания: Окт 21 2024 г., 09:38
+-- Время создания: Окт 25 2024 г., 08:16
 -- Версия сервера: 8.0.39
 -- Версия PHP: 8.3.9
 
@@ -1976,7 +1976,8 @@ INSERT INTO `feeTableTypeValue` (`id`, `id_paragraph`, `number`, `value`) VALUES
 (12, 11, NULL, NULL),
 (13, 12, NULL, NULL),
 (14, 13, NULL, NULL),
-(15, 14, NULL, NULL);
+(15, 14, NULL, NULL),
+(16, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1987,16 +1988,17 @@ INSERT INTO `feeTableTypeValue` (`id`, `id_paragraph`, `number`, `value`) VALUES
 CREATE TABLE `HOAI_versions` (
   `id` int NOT NULL,
   `value` varchar(30) DEFAULT NULL,
-  `sequence` varchar(50) DEFAULT NULL
+  `sequence` varchar(50) DEFAULT NULL,
+  `puplish` varchar(10) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `HOAI_versions`
 --
 
-INSERT INTO `HOAI_versions` (`id`, `value`, `sequence`) VALUES
-(1, '2013', '1'),
-(2, '2021', '2');
+INSERT INTO `HOAI_versions` (`id`, `value`, `sequence`, `puplish`) VALUES
+(1, '2013', '1', '1'),
+(2, '2021', '2', '1');
 
 -- --------------------------------------------------------
 
@@ -2015,28 +2017,30 @@ CREATE TABLE `paragraphs` (
   `sequence` varchar(50) DEFAULT NULL,
   `comment` varchar(300) DEFAULT NULL,
   `link_basic_services` varchar(500) DEFAULT NULL,
-  `link_special_services` varchar(500) DEFAULT NULL
+  `link_special_services` varchar(500) DEFAULT NULL,
+  `default_costs` varchar(30) NOT NULL,
+  `number` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `paragraphs`
 --
 
-INSERT INTO `paragraphs` (`id`, `id_HOAI`, `paragraph`, `name`, `title`, `link_basis`, `link_fee`, `sequence`, `comment`, `link_basic_services`, `link_special_services`) VALUES
-(1, 2, '18', 'Â§ 18', 'FlÃ¤chennutzungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__18.html', 'https://www.gesetze-im-internet.de/hoai_2013/__20.html', '1', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_2.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(2, 2, '19', 'Â§ 19', 'Bebauungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__19.html', 'https://www.gesetze-im-internet.de/hoai_2013/__21.html', '2', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_3.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(3, 2, '23', 'Â§ 23', 'Landschaftsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__23.html', 'https://www.gesetze-im-internet.de/hoai_2013/__28.html', '3', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_4.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(4, 2, '24', 'Â§ 24', 'GrÃ¼nordnungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__24.html', 'https://www.gesetze-im-internet.de/hoai_2013/__29.html', '4', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_5.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(5, 2, '25', 'Â§ 25', 'Landschaftsrahmenplan', 'https://www.gesetze-im-internet.de/hoai_2013/__25.html', 'https://www.gesetze-im-internet.de/hoai_2013/__30.html', '5', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_6.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(6, 2, '26', 'Â§ 26', 'Landschaftspflegerischer Begleitplan', 'https://www.gesetze-im-internet.de/hoai_2013/__26.html', 'https://www.gesetze-im-internet.de/hoai_2013/__31.html', '6', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_7.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(7, 2, '27', 'Â§ 27', 'Pflege- und Entwicklungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__27.html', 'https://www.gesetze-im-internet.de/hoai_2013/__32.html', '7', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_8.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(8, 2, '34', 'Â§ 34', 'GebÃ¤ude', 'https://www.gesetze-im-internet.de/hoai_2013/__34.html', 'https://www.gesetze-im-internet.de/hoai_2013/__35.html', '8', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_10.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(9, 2, '34', 'Â§ 34', 'InnenrÃ¤ume', 'https://www.gesetze-im-internet.de/hoai_2013/__34.html', 'https://www.gesetze-im-internet.de/hoai_2013/__35.html', '9', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_10.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(10, 2, '39', 'Â§ 39', 'Freianlagen', 'https://www.gesetze-im-internet.de/hoai_2013/__39.html', 'https://www.gesetze-im-internet.de/hoai_2013/__40.html', '10', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_11.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html'),
-(11, 2, '43', 'Â§ 43', 'Ingenieurbauwerke', 'https://www.gesetze-im-internet.de/hoai_2013/__43.html', 'https://www.gesetze-im-internet.de/hoai_2013/__44.html', '11', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_12.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_12.html'),
-(12, 2, '47', 'Â§ 47', 'Verkehrsanlagen', 'https://www.gesetze-im-internet.de/hoai_2013/__47.html', 'https://www.gesetze-im-internet.de/hoai_2013/__48.html', '12', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_13.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_13.html'),
-(13, 2, '51', 'Â§ 51', 'Tragwerksplanung', 'https://www.gesetze-im-internet.de/hoai_2013/__51.html', 'https://www.gesetze-im-internet.de/hoai_2013/__52.html', '13', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_14.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_14.html'),
-(14, 2, '55', 'Â§ 55', 'Technische AusrÃ¼stung', 'https://www.gesetze-im-internet.de/hoai_2013/__55.html', 'https://www.gesetze-im-internet.de/hoai_2013/__56.html', '14', '', '', '');
+INSERT INTO `paragraphs` (`id`, `id_HOAI`, `paragraph`, `name`, `title`, `link_basis`, `link_fee`, `sequence`, `comment`, `link_basic_services`, `link_special_services`, `default_costs`, `number`) VALUES
+(1, 2, '18', 'Â§ 18', 'FlÃ¤chennutzungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__18.html', 'https://www.gesetze-im-internet.de/hoai_2013/__20.html', '1', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_2.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '4000', ''),
+(2, 2, '19', 'Â§ 19', 'Bebauungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__19.html', 'https://www.gesetze-im-internet.de/hoai_2013/__21.html', '2', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_3.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(3, 2, '23', 'Â§ 23', 'Landschaftsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__23.html', 'https://www.gesetze-im-internet.de/hoai_2013/__28.html', '3', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_4.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(4, 2, '24', 'Â§ 24', 'GrÃ¼nordnungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__24.html', 'https://www.gesetze-im-internet.de/hoai_2013/__29.html', '4', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_5.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(5, 2, '25', 'Â§ 25', 'Landschaftsrahmenplan', 'https://www.gesetze-im-internet.de/hoai_2013/__25.html', 'https://www.gesetze-im-internet.de/hoai_2013/__30.html', '5', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_6.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(6, 2, '26', 'Â§ 26', 'Landschaftspflegerischer Begleitplan', 'https://www.gesetze-im-internet.de/hoai_2013/__26.html', 'https://www.gesetze-im-internet.de/hoai_2013/__31.html', '6', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_7.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(7, 2, '27', 'Â§ 27', 'Pflege- und Entwicklungsplan', 'https://www.gesetze-im-internet.de/hoai_2013/__27.html', 'https://www.gesetze-im-internet.de/hoai_2013/__32.html', '7', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_8.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(8, 2, '34', 'Â§ 34', 'GebÃ¤ude', 'https://www.gesetze-im-internet.de/hoai_2013/__34.html', 'https://www.gesetze-im-internet.de/hoai_2013/__35.html', '8', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_10.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(9, 2, '34', 'Â§ 34', 'InnenrÃ¤ume', 'https://www.gesetze-im-internet.de/hoai_2013/__34.html', 'https://www.gesetze-im-internet.de/hoai_2013/__35.html', '9', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_10.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(10, 2, '39', 'Â§ 39', 'Freianlagen', 'https://www.gesetze-im-internet.de/hoai_2013/__39.html', 'https://www.gesetze-im-internet.de/hoai_2013/__40.html', '10', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_11.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_9.html', '', ''),
+(11, 2, '43', 'Â§ 43', 'Ingenieurbauwerke', 'https://www.gesetze-im-internet.de/hoai_2013/__43.html', 'https://www.gesetze-im-internet.de/hoai_2013/__44.html', '11', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_12.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_12.html', '', ''),
+(12, 2, '47', 'Â§ 47', 'Verkehrsanlagen', 'https://www.gesetze-im-internet.de/hoai_2013/__47.html', 'https://www.gesetze-im-internet.de/hoai_2013/__48.html', '12', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_13.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_13.html', '', ''),
+(13, 2, '51', 'Â§ 51', 'Tragwerksplanung', 'https://www.gesetze-im-internet.de/hoai_2013/__51.html', 'https://www.gesetze-im-internet.de/hoai_2013/__52.html', '13', '', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_14.html', 'https://www.gesetze-im-internet.de/hoai_2013/anlage_14.html', '', ''),
+(14, 2, '55', 'Â§ 55', 'Technische AusrÃ¼stung', 'https://www.gesetze-im-internet.de/hoai_2013/__55.html', 'https://www.gesetze-im-internet.de/hoai_2013/__56.html', '14', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2137,6 +2141,26 @@ INSERT INTO `requirementsPoints` (`id`, `id_paragraph`, `number`, `name`, `minPo
 (77, 14, '3', 'technische Ausgestaltung', '1', '3', ''),
 (78, 14, '4', 'Anforderungen an die Technik', '1', '3', ''),
 (79, 14, '5', 'konstruktive Anforderungen', '1', '3', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL,
+  `number` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Дамп данных таблицы `settings`
+--
+
+INSERT INTO `settings` (`id`, `name`, `value`, `number`) VALUES
+(1, 'default_paragraph', '8', '');
 
 -- --------------------------------------------------------
 
@@ -2820,6 +2844,29 @@ INSERT INTO `subStage` (`id`, `id_stage`, `number`, `name`, `percent`) VALUES
 (555, 93, '1', 'Objektbegehung zur MÃ¤ngelfeststellung vor Ablauf der VerjÃ¤hrungsfristen fÃ¼r MÃ¤ngelansprÃ¼che gegenÃ¼ber den ausfÃ¼hrenden Unternehmen', ''),
 (556, 93, '2', 'Mitwirken bei der Freigabe von Sicherheitsleistungen', '');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `subStage_l1`
+--
+
+CREATE TABLE `subStage_l1` (
+  `id` int NOT NULL,
+  `id_subStage` int NOT NULL,
+  `number` varchar(5) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `percent` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Дамп данных таблицы `subStage_l1`
+--
+
+INSERT INTO `subStage_l1` (`id`, `id_subStage`, `number`, `name`, `percent`) VALUES
+(1, 86, '0', 'Name', ''),
+(2, 86, '1', 'Name', ''),
+(3, 86, '2', 'Name', '');
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -2873,6 +2920,12 @@ ALTER TABLE `requirementsPoints`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `Stages`
 --
 ALTER TABLE `Stages`
@@ -2882,6 +2935,12 @@ ALTER TABLE `Stages`
 -- Индексы таблицы `subStage`
 --
 ALTER TABLE `subStage`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `subStage_l1`
+--
+ALTER TABLE `subStage_l1`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2916,7 +2975,7 @@ ALTER TABLE `feeTableRateValue`
 -- AUTO_INCREMENT для таблицы `feeTableTypeValue`
 --
 ALTER TABLE `feeTableTypeValue`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `HOAI_versions`
@@ -2937,6 +2996,12 @@ ALTER TABLE `requirementsPoints`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
+-- AUTO_INCREMENT для таблицы `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT для таблицы `Stages`
 --
 ALTER TABLE `Stages`
@@ -2946,7 +3011,13 @@ ALTER TABLE `Stages`
 -- AUTO_INCREMENT для таблицы `subStage`
 --
 ALTER TABLE `subStage`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=557;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=558;
+
+--
+-- AUTO_INCREMENT для таблицы `subStage_l1`
+--
+ALTER TABLE `subStage_l1`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

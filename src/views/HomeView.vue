@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <Calculator></Calculator>
+    <Calculator project_id="local"></Calculator>
     <Footer></Footer>
   </div>
 </template>

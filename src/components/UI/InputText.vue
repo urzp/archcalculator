@@ -34,7 +34,8 @@ export default{
         width:{
             type:String,
             default: '150px',
-        }
+        },
+        
     },
     emits:['submit_event'],
     methods:{

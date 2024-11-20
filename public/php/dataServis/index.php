@@ -6,7 +6,7 @@ $post = file_get_contents("php://input");
 $post = json_decode($post);
 
 $user_id = $post-> user_id;
-$session = $post -> session;
+$token = $post -> token;
 include 'checkAccess.php';
 
 $rq_data = $post -> rq_data;
@@ -21,6 +21,7 @@ $result = (object) [
 
 include 'get/index.php';
 include 'set/index.php';
+include 'users/index.php';
 
 echo json_encode($result);
 

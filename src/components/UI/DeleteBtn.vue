@@ -1,6 +1,7 @@
 <template>
-    <div class="delete-btn">
-        <img src="@/assets/icons/btn_delete/main.svg" alt="">
+    <div class="delete-btn" :class="{whith_border:!no_border}">
+        <img v-if="!icon_cross" src="@/assets/icons/btn_delete/main.svg" alt="">
+        <img v-else src="@/assets/icons/btn_close/main.svg" alt="">
     </div>
 </template>
 
@@ -15,6 +16,14 @@ export default{
         heigth:{
             type:String,
             default: '45px',
+        },
+        icon_cross:{
+            type:Boolean,
+            default: false,
+        },
+        no_border:{
+            type:Boolean,
+            default: false,
         }
     }
 }
@@ -29,9 +38,11 @@ export default{
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+    }
+    .whith_border{
         border: solid 1px #9A9A9A ;
         background-color: #fff;
         border-radius: 5px;
-        cursor: pointer;
     }
 </style>

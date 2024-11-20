@@ -1,3 +1,6 @@
+import { global } from '@/servis/globalValues.js'
+import { apiData } from '@/servis/apiData.js'
+
 export function lastNumber(list, number='number'){
     if (!list.length||list.length == 0) return 0
     let last = list[list.length-1]
@@ -87,4 +90,37 @@ export function toLetters(num) {
         pow = num / 26 | 0,
         out = mod ? String.fromCharCode(96 + mod) : (--pow, 'Z');
     return pow ? toLetters(pow) + out : out;
+}
+
+export function formatDate(data_time_string){
+    if(!data_time_string) return ''
+    let result
+    let options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      };
+    result = data_time_string.split(' ')[0]
+    result = new Date(result)
+    result = result.toLocaleString("de", options)
+    return result
+}
+
+export function dateToString(d){
+    return d.toISOString().replace('T', ' ').replace('Z', '')
+}
+
+export function validateEmail(email){
+    return !!String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+export async function isLogget(){
+    let result = await apiData({typeData:'isLogin' })
+    global.login = result.success
+    if(result.success) { global.admin = result.isAdmin }else{global.admin = false}
+    return result.success
 }

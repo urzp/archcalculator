@@ -2,16 +2,16 @@ export  async function apiData(rq_data = {}){
     let baseUrl = 'https://hosting209012.ae957.netcup.net/php/dataServis/index.php'
     //let baseUrl = 'https://arcalc.ru/php/dataServis/index.php';
     let url = baseUrl
-    // let storageUser = sessionStorage.getItem('user')
-    // let storageSession  = sessionStorage.getItem('session')
+    let user_id = localStorage.getItem('user_id')
+    let token  = localStorage.getItem('user_token')
     // if (notValid(storageUser)||notValid(storageSession)) return false 
     // let user = await JSON.parse(storageUser)
     // let session = storageSession
 
     let data = {
-        //user_id:user.id,
-        //session,
-        rq_data
+        user_id,
+        token,
+        rq_data,
     }
     let response = await fetch(url, {
     method: 'POST',

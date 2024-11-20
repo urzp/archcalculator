@@ -14,7 +14,7 @@ export  default{
         this.adjast_input_width()
     },  
     props:{
-        value: Number,
+        value: [String,Number],
         input_type:{ 
             type: Boolean,
             default: false,
@@ -22,7 +22,15 @@ export  default{
         search_data:{
             typeof:Object,
             default:{id_parent:'0', id:'0'}
-        }
+        },
+        font_size_value:{
+            type:String,
+            default: '18px',            
+        },
+        font_size_sumbol:{
+            type:String,
+            default: '16px',            
+        },
     }, 
     emits:['edit_value'],
     methods:{
@@ -81,13 +89,13 @@ export  default{
         gap: 0px;
     }
     .value{
-        font-size: 18px;
+        font-size: v-bind(font_size_value);
     }
     .sumbol{
-        font-size: 16px;
+        font-size: v-bind(font_size_sumbol);
     }
     input{
-        width: 30px;
+        width: 45px!important;
         text-align: right;
         font-family:inherit;
         color: inherit;
