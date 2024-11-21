@@ -3,6 +3,7 @@
 $mysql = $mysql_calc;
 
 switch ($typeData){
+    case 'updateUser': include 'updateUser.php'; break;
     case 'isUserUpdated': include 'isUserUpdated.php'; break;
     case 'isLogin': include 'isLogin.php'; break;
     case 'resetPassword': include 'resetPassword.php'; break;

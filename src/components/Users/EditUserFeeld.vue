@@ -37,7 +37,10 @@ export default{
             if(this.userKey=="email"&&!(await this.validEmail(value))){return false} 
             if(this.userKey=="phone"&&!(await this.validPhone(value))){ return false} 
             this.error_input = false
-            this.user[this.userKey] = value
+            let key = this.userKey
+            let result = await apiData({typeData:'updateUser', data:{key, value} }) 
+            if(result.success) this.user[this.userKey] = value
+            
         },
         async validEmail(value){
             if(!validateEmail(value)){
