@@ -2,8 +2,8 @@
     <div v-if="!loading" class="wrap">
         <TopFixMenu :data_HOAI="data_HOAI" :paragraph="data"/>
         <div class="title">
-            <NewButton v-if="!(!!data&&!!data.id)"  @click="newElement()" width="210px" heigth="45px">New Paragraph</NewButton>
-            <NewButton v-else  @click="newElement()" width="45px" heigth="30px"></NewButton>
+            <NewButton v-if="!(!!data&&!!data.id)"  @click="newElement()" width="210px" height="45px">New Paragraph</NewButton>
+            <NewButton v-else  @click="newElement()" width="45px" height="30px"></NewButton>
             <DeleteButton v-if="!!data&&!!data.id" @click="deleteElement()"  width="35px" heigth="30px"/>
             <div class="paragraph-name" >{{ data.name }}</div>
             <div class="paragraph-title" >{{ data.title }}</div>

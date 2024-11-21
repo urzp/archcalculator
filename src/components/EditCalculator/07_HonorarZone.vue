@@ -20,7 +20,7 @@
         </div>
         <div class="panel">
             <DeleteButton style="margin-top: 10px;" width="70px" heigth="28px" @click="deleteElement()"/>
-            <NewButton style="margin-top: 10px;" width="70px" heigth="28px" @click="newElement()"/>
+            <NewButton style="margin-top: 10px;" width="70px" height="28px" @click="newElement()"/>
         </div>
     </div>
 </template>

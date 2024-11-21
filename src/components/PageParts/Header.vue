@@ -3,9 +3,10 @@
         <div class="header-row">
             <div class="logo">
                 <img v-if="!global.login" src="@/assets/imgs/logo.svg" alt="">
-                <div v-else class="userLogo">{{ !user.name?'U':user.name }}</div>
+                <div v-else class="userLogo" @click="$router.push({ name: 'profile' })">{{ !user.name?'U':user.name }}</div>
             </div>
             <div class="menu">
+                <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">Calculator</div>
                 <div class="item_menu">About project</div>
                 <div class="item_menu">How to use</div>
                 <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>

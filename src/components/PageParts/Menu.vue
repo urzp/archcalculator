@@ -6,7 +6,8 @@
                 <div class="item" @click="selectItem('Registration')">Registrierung</div>
             </div>
             <div v-if="global.login" class="list login">
-                <div class="item" @click="console.log('profile')">Profile</div>
+                <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">Calculator</div>
+                <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">Profile</div>
                 <div class="item" @click="logOut()">Logout</div>
             </div>
         </div>
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { logOut } from '@/components/Users/servis.js'
@@ -47,6 +48,7 @@ export default{
         logOut(){
             logOut()
             this.close()
+            this.$router.push({ name: 'home' })
         }
     },
 }
@@ -62,11 +64,11 @@ export default{
         position: absolute;
         right: -5px;
         top: 25px;
-        width: 175px;
+        width: 130px;
         min-height: 30px;
         background-color: #fff;
         border: 2px solid #D9D9D9;
-        border-radius: 10px;
+        border-radius: 8px;
         box-shadow: 4px 4px 4px #00000033;
     }
 
@@ -76,7 +78,7 @@ export default{
         flex-direction: column;
         color: #464646;
         font-family: 'Raleway-Light';
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .item{

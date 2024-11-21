@@ -7,7 +7,7 @@
             :value="value"
             @change="event => submit_event(event)">
         <div class="panel">
-            <CloseButton class="button" width="35px" heigth="28px" @click="edit=false"/>
+            <CloseButton class="button" width="35px" height="28px" @click="edit=false"/>
         </div>
     </div>
 </template>

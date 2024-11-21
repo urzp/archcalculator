@@ -5,7 +5,7 @@
         :value="value"
         @change="event => submit_event(event)"
         @keyup.ctrl.v="console.log('copy-past')">
-        <CloseButton width="35px" heigth="28px" @click="edit=false" />
+        <CloseButton width="35px" height="28px" @click="edit=false" />
     </template>
 </template>
 

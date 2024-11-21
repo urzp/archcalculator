@@ -12,7 +12,7 @@ export default{
             type:String,
             default: '55px',
         },
-        heigth:{
+        height:{
             type:String,
             default: '45px',
         }
@@ -23,7 +23,7 @@ export default{
 <style scoped>
     .close-btn{
         min-width: v-bind(width);
-        min-height: v-bind(heigth);
+        min-height: v-bind(height);
         padding-left: 15px;
         padding-right: 15px;
         display: flex;

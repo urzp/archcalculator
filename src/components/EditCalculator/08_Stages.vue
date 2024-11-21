@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <NewButton style="margin-top: 10px;" width="160px" heigth="28px" @click="newElement()"/>
+        <NewButton style="margin-top: 10px;" width="160px" height="28px" @click="newElement()"/>
 
     </div>
 </template>

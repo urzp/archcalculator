@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <NewButton style="margin-top: 10px;" width="100px" heigth="24px" @click="newElement()"/>
+        <NewButton style="margin-top: 10px;" width="100px" height="24px" @click="newElement()"/>
     </div>
 
 </template>
