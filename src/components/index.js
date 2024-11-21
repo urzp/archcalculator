@@ -8,6 +8,7 @@ import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
 import ResetPassword from './Users/ResetPassword.vue'
 import Profile from './Users/Profile.vue'
+import EditUserFeeld from './Users/EditUserFeeld.vue'
 //----------------------------Calculator-----------------------------
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
@@ -100,6 +101,7 @@ export default [
     Registration,
     ResetPassword,
     Profile,
+    EditUserFeeld,
 
     Calculator,
     ObjectCalc,

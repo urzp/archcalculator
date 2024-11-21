@@ -6,19 +6,32 @@
         <template v-if="loaded">
             <div class="main_panel">
                 <div class="prof_part">
-                    <div class="main_icon">U</div>
+                    <div class="icon_hover_wrap">
+                    <div class="main_icon">{{ !user.name?'U':user.name[0] }}</div>
                     <div class="wrap_icon_panel">
                         <div class="icon_panel">
                             <NewButton :width="'45px'" :height="'35px'"/>
+                            <CloseButton width="45px" height="35px"/>
                         </div>
                     </div>
+                    </div>
                     <div class="user-data">
-                        <div class="name-user">Paul</div>
-                        <div class="email-user">ermak80_pass@mail.ru</div>
+                        <div class="name-user">{{ user.name }}</div>
+                        <div class="email-user">{{ user.email }}</div>
                     </div>
                 </div>
                 <div class="button_part">
                     <CloseButton width="95px" height="70px"/>
+                </div>
+            </div>
+            <div class="user_edit_panel">
+                <div class="user_data_edit">
+                    <EditUserFeeld title="name:" :userKey="'name'"/>
+                    <EditUserFeeld title="email:" :userKey="'email'"/>
+                    <EditUserFeeld title="phone:" :userKey="'phone'"/>
+                </div>
+                <div class="new_password">
+
                 </div>
             </div>
         </template>
@@ -28,13 +41,16 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { user } from '@/servis/globalValues.js'
 export default{
     name: 'Profile',
     async mounted(){
+        this.getData()
     },
     data(){
         return{
             loaded: true,
+            user: {},
         }
     },
     props:{
@@ -43,8 +59,8 @@ export default{
     computed:{
     },
     methods:{
-        async getCalcData(){
-
+        async getData(){
+            this.user = user
         },
     }
 }
@@ -68,6 +84,7 @@ export default{
         width: 100%;
     }
     .main_panel{
+        margin-bottom: 80px;
         width: 100%;
         height: 130px;
         display: flex;
@@ -99,12 +116,26 @@ export default{
     }
 
     .icon_panel{
+        visibility:hidden;
+    }
+
+    .icon_hover_wrap:hover .icon_panel{
+        visibility:visible;
+    }
+
+    .icon_panel:hover{
+        visibility:visible;
+    }
+
+    .icon_panel{
         position: relative;
         padding: 4px;
-        width: 110px;
+        width: 105px;
         height: 45px;
-        left: 90px;
-        top: 59px;
+        left: 84px;
+        top: -35px;
+        display: flex;
+        column-gap: 4px;
         background-color: #fff;
         border: 1px solid #D9D9D9;
         border-radius: 8px;
@@ -129,6 +160,12 @@ export default{
 
     .button_part{
         margin: auto;
+    }
+
+    .user_data_edit{
+        width: 50%;
+        padding-left: 50px;
+
     }
 
 

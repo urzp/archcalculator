@@ -1,8 +1,9 @@
+import { global } from '@/servis/globalValues.js'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LawEditView from '../views/LawEditView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import { isLogget, isAdmin } from '../servis/functions.js';
+import { isLogget } from '@/components/Users/servis';
 
 const routes = [
   {
@@ -40,7 +41,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   let logget = await isLogget();
-  let isAdmin = false
+  let isAdmin = global.admin
 
   if( to.meta.requireAdmin&&!(logget&&isAdmin) ) return {path: '/'}
   if( to.meta.requireAuth&&!logget) return {path: '/'}

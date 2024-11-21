@@ -22,8 +22,8 @@ export default{
 
 <style scoped>
     .close-btn{
-        min-width: v-bind(width);
-        min-height: v-bind(height);
+        width: v-bind(width);
+        height: v-bind(height);
         padding-left: 15px;
         padding-right: 15px;
         display: flex;
