@@ -8,6 +8,18 @@ export  async function apiData(rq_data = {}){
     // let user = await JSON.parse(storageUser)
     // let session = storageSession
 
+    if(rq_data.typeData=='avatar'){
+        let data = rq_data.data
+        data.append('SendFile', true)
+        data.append('typeData', rq_data.typeData)
+        data.append('user_id', user_id)
+        data.append('token', token)
+        let response = await fetch(url, {
+            method: 'POST',
+            body: data,
+        })
+        return response
+    }else{
     let data = {
         user_id,
         token,
@@ -15,15 +27,15 @@ export  async function apiData(rq_data = {}){
     }
     let response = await fetch(url, {
     method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
+    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
     body: JSON.stringify(data)
     });
 
     let result = await response.json();
     if(!result.data) result.data = []
     return result
+
+    }
 }
 
 function notValid(value){

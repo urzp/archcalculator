@@ -2,6 +2,8 @@
 include $_SERVER['DOCUMENT_ROOT'].'/php/config.php';
 include $_SERVER['DOCUMENT_ROOT'].'/php/modules/functions.php';
 header('Access-Control-Allow-Origin: *');
+if($_POST['SendFile']){include 'indexFiles.php';exit();}
+
 $post = file_get_contents("php://input");
 $post = json_decode($post);
 

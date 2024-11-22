@@ -32,7 +32,8 @@ export async function updatedProfile(){
     if(!global.login) return false
     let updated = localStorage.getItem('user_updated')
     let result = await apiData({typeData:'isUserUpdated', data:updated })
-    if(result.success){ setNewDataProfile(result.data) }
+    //if(result.success){ setNewDataProfile(result.data) }
+    setNewDataProfile(result.data)
 }
 
 export async function isLogget(){

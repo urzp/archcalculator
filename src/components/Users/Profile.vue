@@ -7,17 +7,21 @@
             <div class="main_panel">
                 <div class="prof_part">
                     <div class="icon_hover_wrap">
-                    <div class="main_icon">{{ !user.name?'U':user.name[0] }}</div>
+                    <div v-if="!user.avatar" class="main_icon">{{ !user.name?'U':user.name[0] }}</div>
+                    <div v-else  class="main_icon"><img :src="url_avatar" alt=""></div>
                     <div class="wrap_icon_panel">
                         <div class="icon_panel">
-                            <NewButton :width="'45px'" :height="'35px'"/>
-                            <CloseButton width="45px" height="35px"/>
+                            <NewButton @click="selectAvatar()" :width="'45px'" :height="'35px'"/>
+                            <CloseButton @click="deleteAvatar()" width="45px" height="35px"/>
                         </div>
                     </div>
                     </div>
                     <div class="user-data">
                         <div class="name-user">{{ user.name }}</div>
                         <div class="email-user">{{ user.email }}</div>
+                        <form class="avatar_form" ref="avatar">
+                            <input ref="avatar_file" type="file" name="avatar" @change="sendAvatar()" accept=".pdf,.jpg,.svg">
+                        </form>
                     </div>
                 </div>
                 <div class="button_part">
@@ -41,7 +45,10 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { user } from '@/servis/globalValues.js'
+import { global, user } from '@/servis/globalValues.js'
+import { apiData } from '@/servis/apiData.js'
+import { updatedProfile } from '@/components/Users/servis'
+
 export default{
     name: 'Profile',
     async mounted(){
@@ -53,15 +60,34 @@ export default{
             user: {},
         }
     },
+    computed:{
+        url_avatar(){
+            let url = `${global.base_url}/users/user_${this.user.id}/avatar/${this.user.avatar}`
+            return url
+        }
+    },
     props:{
         project_id:String,
-    },
-    computed:{
     },
     methods:{
         async getData(){
             this.user = user
         },
+        selectAvatar(){
+            this.$refs.avatar_file.click()
+        },
+        async sendAvatar(){
+            let data = new FormData(this.$refs.avatar)
+            let result = await apiData({typeData:'avatar', data }) 
+            this.$refs.avatar_file.value = ''
+            updatedProfile()
+        },
+        async deleteAvatar(){
+            this.$refs.avatar_file.value = ''
+            let data = new FormData(this.$refs.avatar)
+            let result = await apiData({typeData:'avatar', data }) 
+            updatedProfile()
+        }
     }
 }
 </script>
@@ -111,6 +137,13 @@ export default{
         font-size: 64px;
     }
 
+    .main_icon img{
+        width: 100%;
+        height: 100%; 
+        border-radius: 65px;
+        object-fit: cover;
+    }
+
     .wrap_icon_panel{
         position: absolute;
     }
@@ -140,6 +173,10 @@ export default{
         border: 1px solid #D9D9D9;
         border-radius: 8px;
         box-shadow: 4px 4px 8px #d4d4d4;
+    }
+
+    .avatar_form{
+        display: none;
     }
 
     .user-data{

@@ -16,7 +16,7 @@ $forbiden = [
 
 if(!(in_array($key, $forbiden))){
     $new_data[$key]=$value;
-    crud_update('users', $data, $selector);
+    crud_update('users', $new_data, $selector);
     $result = (object) [
         'success' => true,
     ];

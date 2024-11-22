@@ -3,7 +3,8 @@
         <div class="header-row">
             <div class="logo">
                 <img v-if="!global.login" src="@/assets/imgs/logo.svg" alt="">
-                <div v-else class="userLogo" @click="$router.push({ name: 'profile' })">{{ !user.name?'U':user.name[0] }}</div>
+                <div v-else-if="!user.avatar" class="userLogo" @click="$router.push({ name: 'profile' })">{{ !user.name?'U':user.name[0] }}</div>
+                <div v-else class="userLogo" @click="$router.push({ name: 'profile' })"><img :src="url_avatar" alt=""></div>
             </div>
             <div class="menu">
                 <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">Calculator</div>
@@ -36,6 +37,12 @@ export default{
             global:{},
             user:{},
             show_menu:false,
+        }
+    },
+    computed:{
+        url_avatar(){
+            let url = `${global.base_url}/users/user_${this.user.id}/avatar/${this.user.avatar}`
+            return url
         }
     },
     methods:{
@@ -78,6 +85,14 @@ export default{
         color: #5A5A5A;
         background-color: #EFEFEF;
     }
+
+    .userLogo img{
+        width: 100%;
+        height: 100%; 
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
     .menu .item_menu{
         font-family: 'Raleway-ExtraLight';
         font-size: 16px;
