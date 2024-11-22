@@ -11,16 +11,13 @@ if (!file_exists($target_dir_)) {
     mkdir($target_dir_, 0777, true);
 }
 
-$time = time();
-
-if(basename( $_FILES['avatar']['name'])=='') {$time='';}
-
-$new_name_file = $time.'_'.basename( $_FILES['avatar']['name']);
-
-$target_file = $target_dir_.'/'.$new_name_file;
-move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-
-
+if(basename( $_FILES['avatar']['name'])!=''){
+    $new_name_file = time().'_'.basename( $_FILES['avatar']['name']);
+    $target_file = $target_dir_.'/'.$new_name_file;
+    move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
+}else{
+    $new_name_file = '';
+}
 
 $data['avatar'] = $new_name_file;
 $selector = " `id` = '$user_id' AND `token` = '$token' ";
