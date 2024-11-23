@@ -24,7 +24,7 @@ $result = (object) [
 
 include 'get/index.php';
 include 'set/index.php';
-include 'users/index.php';
+include '04_users/index.php';
 
 echo json_encode($result);
 
