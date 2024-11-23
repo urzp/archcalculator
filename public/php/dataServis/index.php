@@ -9,10 +9,11 @@ $post = json_decode($post);
 
 $user_id = $post-> user_id;
 $token = $post -> token;
-include 'checkAccess.php';
-
 $rq_data = $post -> rq_data;
 $typeData = $rq_data -> typeData;
+
+include 'escapeSQL_injection.php';
+include 'checkAccess.php';
 
 include $_SERVER['DOCUMENT_ROOT'].'/php/modules/crud.php';
 
