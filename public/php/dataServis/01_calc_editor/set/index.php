@@ -1,13 +1,5 @@
 <?php
 
-switch ($typeData){
-    case 'updateProject': include 'set_calc/updateProject.php'; break;
-    case 'deleteProjectObject': include 'set_calc/deleteProjectObject.php'; break;
-    case 'newProjectObject': include 'set_calc/newProjectObject.php'; break;
-    case 'updateProjectPoints': include 'set_calc/updateProjectPoints.php'; break;
-    case 'updateProjectObject': include 'set_calc/updateProjectObject.php'; break;
-}
-
 switch ($typeData) {
     case 'copyStage': include 'copy/Stage.php'; break;
     case 'copySubStage': include 'copy/SubStage.php'; break; 
