@@ -1,0 +1,13 @@
+- test after migrations
+
+- Reactive load whole calc after update HOAI_version
+
+- levels admin user acsess editor projects
+
+- optimace project DB
+
+- safty upload file to server
+
+- sql injections
+
+

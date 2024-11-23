@@ -23,7 +23,6 @@ $result = (object) [
 ];
 
 include '01_calc_editor/index.php';
-include '02_calc/index.php';
 include '02_calc/_index.php';
 include '03_projects/_index.php';
 include '04_users/index.php';
