@@ -6,6 +6,7 @@ export function logOut(){
     localStorage.setItem('user_email', '');
     localStorage.setItem('user_updated', '');
     localStorage.setItem('user_name', '');
+    localStorage.setItem('user_phone', '');
     localStorage.setItem('user_token', '');
     global.login = false
     global.admin = false
@@ -20,6 +21,7 @@ function setNewDataProfile(data){
     localStorage.setItem('user_updated', data.updated);
     localStorage.setItem('user_email', data.email);
     localStorage.setItem('user_name', data.name);
+    localStorage.setItem('user_phone', data.phone);
     localStorage.setItem('user_token', data.token);
     for (let key in data) {
         user[key] = data[key];

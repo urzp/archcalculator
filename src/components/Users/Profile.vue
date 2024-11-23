@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="button_part">
-                    <CloseButton width="95px" height="70px"/>
+                    <CloseButton @click="deleteUser()" width="95px" height="70px"/>
                 </div>
             </div>
             <div class="user_edit_panel">
@@ -35,7 +35,17 @@
                     <EditUserFeeld title="phone:" :userKey="'phone'"/>
                 </div>
                 <div class="new_password">
-
+                    <EditPassword title="old password:" @newValue="value=>setOldPassword(value)"/>
+                    <EditPassword title="new password:" :errNewPasswords="errNewPasswords" @newValue="value=>setNewPassword(value)"/>
+                    <EditPassword title="conform password:" :errNewPasswords="errNewPasswords" @newValue="value=>checkNewPassword(value)"/>
+                    <div class="send_panel">
+                        <div class="result_panel">
+                            <div v-if="sendingPasswords">Load . . .</div>
+                            <div v-if="success_Passwords">Erfolgreich</div>
+                            <div v-if="fall_Passwords">fallen</div>
+                        </div>
+                        <Button v-if="enableSend" width="150px" @click="sendPasswords()">Save</Button>
+                    </div>    
                 </div>
             </div>
         </template>
@@ -47,7 +57,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
-import { updatedProfile } from '@/components/Users/servis'
+import { updatedProfile, logOut } from '@/components/Users/servis'
 
 export default{
     name: 'Profile',
@@ -58,12 +68,22 @@ export default{
         return{
             loaded: true,
             user: {},
+            oldPassword:'',
+            newPassword:'',
+            checkPassword:'',
+            errNewPasswords:false,
+            sendingPasswords:false,
+            success_Passwords:false,
+            fall_Passwords:false,
         }
     },
     computed:{
         url_avatar(){
             let url = `${global.base_url}/users/user_${this.user.id}/avatar/${this.user.avatar}`
             return url
+        },
+        enableSend(){
+            return !!this.oldPassword&&!!this.newPassword&&!!this.checkPassword&&this.newPassword==this.checkPassword
         }
     },
     props:{
@@ -87,6 +107,55 @@ export default{
             let data = new FormData(this.$refs.avatar)
             let result = await apiData({typeData:'avatar', data }) 
             updatedProfile()
+        },
+        async deleteUser(){
+            let result = await apiData({typeData:'deleteUser' }) 
+            if(result.success){
+                logOut() 
+                this.$router.push({ name: 'home' })
+            }
+        },
+        setOldPassword(value){
+            this.oldPassword = value
+            this.comfernPasswords()
+        },
+        setNewPassword(value){
+            this.newPassword = value
+            this.comfernPasswords()
+        },
+        checkNewPassword(value){
+            this.checkPassword = value
+            this.comfernPasswords()
+        },
+        comfernPasswords(){
+            this.errNewPasswords = false
+            if(!this.oldPassword||!this.newPassword||!this.checkPassword)  return false
+            if(this.newPassword!=this.checkPassword){
+                this.errNewPasswords = true
+                return false
+            }
+            return true
+        },
+        async sendPasswords(){
+            if(!this.enableSend) return false
+            this.sendingPasswords = true
+            this.success_Passwords = false
+            this.fall_Passwords = false
+            let data = {
+                oldPassword: this.oldPassword,
+                newPassword: this.newPassword,
+            }
+            let result = await apiData({typeData:'newPassword', data }) 
+            this.sendingPasswords = false
+            if(result.success){
+                this.success_Passwords = true
+            }else{
+                this.fall_Passwords = true
+            }
+            setTimeout(()=>{
+                this.success_Passwords = false
+                this.fall_Passwords = false
+            }, 10000)
         }
     }
 }
@@ -199,10 +268,35 @@ export default{
         margin: auto;
     }
 
+    .user_edit_panel{
+        display: flex;
+        justify-content: space-between;
+    }
+
     .user_data_edit{
-        width: 50%;
+
         padding-left: 50px;
 
+    }
+
+    .new_password{
+        padding-right: 50px;     
+    }
+
+    .send_panel{
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .result_panel{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: 'Raleway-Light';
+        font-size: 20px;
+        color: #5A5A5A;
     }
 
 

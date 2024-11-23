@@ -1,7 +1,7 @@
 <template>
     <div class="wrap_feeld">
         <div class="title">{{ title }}</div>
-        <div class="input"><input type="text" :value="user[userKey]" @change="event=>editValue(event.target.value)"></div>
+        <div class="input"><input type="text" :value="user[userKey]" @change="event=>editValue(event.target.value)" autocomplete="off"></div>
         <div v-if="error_input" class="error">{{ error_msg }}</div>
     </div>
 </template>
@@ -60,7 +60,7 @@ export default{
         },
         async validPhone(value){
             if(!validatePhone(value)){
-                this.error_input = true;
+                if(!!value) this.error_input = true;
                 this.error_msg = 'error phone'
                 return false
             }
