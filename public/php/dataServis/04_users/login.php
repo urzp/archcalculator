@@ -4,6 +4,7 @@ $input_data = $rq_data -> data;
 $email = $input_data -> email;
 $password = md5( $input_data->password );
 
+$email = $mysql->real_escape_string($email);
 $selector = " `email` = '$email' AND `password` = '$password' ";
 $data = crud_read('users',"*", $selector)[0];
 

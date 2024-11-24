@@ -5,6 +5,7 @@ $email = $input_data -> email;
 $code = $input_data -> code;
 $password = md5( $input_data->password );
 
+$email= $mysql->real_escape_string($email);
 $selector = " `email` = '$email'";
 $data = crud_read('users',"*", $selector)[0];
 
