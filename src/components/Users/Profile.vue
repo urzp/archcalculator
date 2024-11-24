@@ -109,11 +109,14 @@ export default{
             updatedProfile()
         },
         async deleteUser(){
-            let result = await apiData({typeData:'deleteUser' }) 
-            if(result.success){
-                logOut() 
-                this.$router.push({ name: 'home' })
-            }
+            let router = this.$router
+            EventBus.emit('Popap:comfirm',async ()=>{
+                let result = await apiData({typeData:'deleteUser' }) 
+                if(result.success){
+                    logOut()
+                    router.push({ name: 'home' })
+                }
+            })
         },
         setOldPassword(value){
             this.oldPassword = value

@@ -13,7 +13,7 @@ export default{
             type:String,
             default: '55px',
         },
-        heigth:{
+        height:{
             type:String,
             default: '45px',
         }
@@ -24,7 +24,7 @@ export default{
 <style scoped>
     .text-btn{
         width: v-bind(width);
-        height: v-bind(heigth);
+        height: v-bind(height);
         padding-left: 15px;
         padding-right: 15px;
         display: flex;

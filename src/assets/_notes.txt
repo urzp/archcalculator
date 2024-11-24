@@ -10,4 +10,6 @@
 
 - sql injections
 
+- conform form for delete
 
+- email reset password

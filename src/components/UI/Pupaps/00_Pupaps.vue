@@ -2,6 +2,7 @@
     <Login/>
     <Registration/>
     <ResetPassword/>
+    <Comfirm/>
 </template>
 
 

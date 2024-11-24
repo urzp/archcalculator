@@ -12,7 +12,7 @@
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
                     <div v-if="notFind"  class="loading not_find">Nicht gefunden</div>
-                    <Button heigth="35px" width="125px" @click="submit()">Einreichen</Button>
+                    <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
                 </div>
                 <div class="links">
                     <div class="link" @click="openRegistration()">Registrierung</div>
