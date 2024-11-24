@@ -13,9 +13,9 @@ $rq_data = $post -> rq_data;
 $typeData = $rq_data -> typeData;
 
 include 'escapeSQL_injection.php';
-include 'checkAccess.php';
 
 include $_SERVER['DOCUMENT_ROOT'].'/php/modules/crud.php';
+include 'checkAccess.php';
 
 $result = (object) [
     'success' => false,
