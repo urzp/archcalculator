@@ -19,6 +19,8 @@ function crud_create($table, $data){
     $fields_name = '';
     $fields_value = '';
     foreach($data as $item => $item_val) {
+        $item = $mysql->real_escape_string($item);
+        $item_val = $mysql->real_escape_string($item_val);
         $fields_name = $fields_name."`".$item."`".', ';
         $fields_value = $fields_value."'".$item_val."'".', ';
     }
@@ -34,6 +36,8 @@ function crud_update($table, $data, $selector=""){
     global $mysql;
     $sql_data = '';
     foreach($data as $item => $item_val) {
+        $item = $mysql->real_escape_string($item);
+        $item_val = $mysql->real_escape_string($item_val);
         $sql_data = $sql_data."`".$item."`='".$item_val."'".', ';
     }
     $sql_data = substr($sql_data, 0, -2);

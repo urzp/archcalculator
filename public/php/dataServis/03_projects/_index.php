@@ -1,5 +1,7 @@
 <?php
 
+if($isLogin){
+
 switch ($typeData) {
     case 'getProject': include 'getProject.php'; break;
     case 'getProjectObject': include 'getProjectObject.php'; break;
@@ -11,6 +13,8 @@ switch ($typeData) {
     case 'newProjectObject': include 'newProjectObject.php'; break;
     case 'updateProjectPoints': include 'updateProjectPoints.php'; break;
     case 'updateProjectObject': include 'updateProjectObject.php'; break;
+}
+
 }
 
 ?>
