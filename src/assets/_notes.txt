@@ -8,8 +8,6 @@
 
 - safty upload file to server
 
-- sql injections
-
-- conform form for delete
+- sql injections projects
 
 - email reset password

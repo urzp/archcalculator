@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'HOAIVersion',
@@ -98,11 +99,14 @@ export default{
             await apiData({typeData:'updateHOAI', data: nextElement })
             this.getData()
         },
-        async deleteHOAI(){
-            await apiData({typeData:'deleteHOAI', data: this.data.id })
-            this.getData()
-            this.data.value = ''
-            this.data.id = ''
+        async deleteHOAI(){     
+            let _this = this
+            EventBus.emit('Popap:comfirm',async ()=>{
+                await apiData({typeData:'deleteHOAI', data: _this.data.id })
+                _this.getData()
+                _this.data.value = ''
+                _this.data.id = ''
+            })
         }
     }
 
