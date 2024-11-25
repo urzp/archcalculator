@@ -78,7 +78,7 @@ export default{
             updateProject()
         },
         newObject(){
-            newProjectObject(this.project_id)
+            newProjectObject(this.project_id, this.ListObjects.length)
         },
         deleteObject(){
             let lastobject = lastElement(this.ListObjects)

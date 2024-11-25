@@ -4,7 +4,7 @@ export let newProjectData = {
     id: 'new',
     created: dateToString(new Date),
     updated: dateToString(new Date),
-    user_id: 1,
+    user_id: localStorage.getItem('user_id'),
     name: 'New Projec',
     AdditionalServices:[],
     ExtraCosts:[],
@@ -17,7 +17,7 @@ export let newProjectData = {
 }
 
 export let newObjectProject = {
-    user_id:1,
+    user_id:localStorage.getItem('user_id'),
     project_id: 'new',
     name: 'New Object',
     HOAI_version_id:2,

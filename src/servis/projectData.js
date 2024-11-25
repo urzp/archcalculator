@@ -40,12 +40,14 @@ export async function updateProjectObject(id, data, sendAPI=true){
         obj[key] = data[key]
     }
     if(Project.project.id=='local'){ await saveLocalProject() }else{
+        console.log(obj)
         if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})}
     EventBus.emit('UpdatedProject')
 }
 
-export async function newProjectObject(project_id){
+export async function newProjectObject(project_id, number=0){
     let newObject = newObjectProject
+    newObject.number = number
     newObject.project_id = project_id
     if(Project.project.id=='local'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
     EventBus.emit('Project:newObject')
