@@ -36,7 +36,7 @@ export  default{
     emits:['selected'],
     methods:{
         async getData(){
-            this.data.list = CalcData.HOAI_versions
+            this.data.list = CalcData.HOAI_versions.filter(item=>item.puplish=='1')
         },
         select(data){
             data.id = data.id_item

@@ -6,7 +6,7 @@ export let CalcData = {}
 export async function LoadCalcData(){
     let result
     result = getLocalHost()
-    if(!result||await checkNewVersion(result)){
+    if(!result||await checkNewVersion()){
         result = (await apiData({typeData:'loadWholeCalcData'})).data
         saveLocalHost(result)
     }
@@ -14,20 +14,12 @@ export async function LoadCalcData(){
     return result
 }
 
-async function checkNewVersion(CalcData){
-    let HOAI_versions = (await apiData({typeData:'getHOAI'})).data
-    let HOAI_local = CalcData.HOAI_versions
-    if(HOAI_versions.length!=HOAI_local.length) return true
+async function checkNewVersion(){
+    let local_HOAI_updated = localStorage.getItem('HOAI_updated')
+    let HOAI_updated = (await apiData({typeData:'calc:getHOAI_updated'})).data.value
+    localStorage.setItem('HOAI_updated', HOAI_updated)
+    if(local_HOAI_updated!=HOAI_updated) return true
     let result = false
-    HOAI_versions.forEach((item, index)=>{
-        let itemLocal = HOAI_local[index]
-        if(item.id!=itemLocal.id) result = true
-        if(item.puplish!=itemLocal.puplish) result = true
-        if(item.sequence!=itemLocal.sequence) result = true
-        if(item.value!=itemLocal.value) result = true
-        if(item.version!=itemLocal.version) result = true
-        if(item.updated!=itemLocal.updated) result = true
-    })
     
     return result  
 }

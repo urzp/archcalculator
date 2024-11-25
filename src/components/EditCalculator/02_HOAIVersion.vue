@@ -30,6 +30,10 @@
                     <DeleteButton @click="deleteHOAI()" />
                 </div>
             </div>
+            <div v-if="!!data.id" class="public">
+                <Button width="125px" @click="switchPuplish()">{{ !puplish? 'Publish':'Unpublish' }}</Button>
+                <div class="label">{{ puplish? 'Published':'Unpublished' }}</div>
+            </div>
         </div>
 
 </template>
@@ -53,6 +57,14 @@ export default{
             set_editHOAI:false,
         }
     },
+    computed:{
+        puplish(){
+            if(!this.data||!this.data.list) return false
+            let element = this.data.list.find(item=>item.id==this.data.id)
+            if(!element) return false
+            return element.puplish=='0'?false:true
+        }
+    },
     emits:['selected'],
     methods:{
         async getData(){
@@ -60,10 +72,11 @@ export default{
             this.data.list = result.data
         },
         Select(data){
-            this.data.value = data.value
-            this.data.id = data.id_item
+            let element = this.data.list.find(item=>item.id==data.id_item)
+            this.data.id = element.id
+            this.data.value = element.value
             this.resetNewSet()
-            this.$emit('selected', {id_item:data.id_item, value:data.value})
+            this.$emit('selected', {id_item:element.id, value:element.value})
         },
         resetNewSet(){
             this.set_new_HOAI = false
@@ -107,6 +120,10 @@ export default{
                 _this.data.value = ''
                 _this.data.id = ''
             })
+        },
+        async switchPuplish(){
+            await apiData({typeData:'switchPuplishHOAI', data: this.data.id})
+            this.getData()
         }
     }
 
@@ -163,6 +180,19 @@ export default{
         width: 290px;
         display: flex;
         column-gap: 15px;
+    }
+
+    .public{
+        margin-top: 20px;
+        font-family: 'Raleway-Light';
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .public .label{
+        width: 137px;
+        text-align: left;
     }
 
 </style>

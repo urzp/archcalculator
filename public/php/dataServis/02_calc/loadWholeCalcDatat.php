@@ -1,6 +1,6 @@
 <?php
 
-
+$data['settings'] = crud_read('settings');
 $data['HOAI_versions'] = crud_read('HOAI_versions');
 $data['paragraphs'] = crud_read('paragraphs');
 $data['allowableCosts'] = crud_read('allowableCosts');
