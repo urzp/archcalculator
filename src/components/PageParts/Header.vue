@@ -16,8 +16,9 @@
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
         <div class="sub-header">
-            <div class="item_subHeader">New Project</div>
-            <div class="item_subHeader">Open Project</div>
+            <div class="item_subHeader" @click="newProject()">New Project</div>
+            <div class="item_subHeader" @click="openProject()">Open Project</div>
+            <div class="item_subHeader" @click="saveProject()">Save Project As</div>
         </div>
     </div>
     <Popaps/>
@@ -25,6 +26,7 @@
 
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 export default{
     name: 'Header',
@@ -50,6 +52,15 @@ export default{
             this.global = global
             this.user = user
         },
+        newProject(){
+            EventBus.emit('MenuProjects:new')
+        },
+        openProject(){
+            EventBus.emit('MenuProjects:open')
+        },
+        saveProject(){
+            EventBus.emit('MenuProjects:save')
+        }
     },
 }
 </script>

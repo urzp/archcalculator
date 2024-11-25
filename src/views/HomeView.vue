@@ -7,12 +7,24 @@
 </template>
 
 <script>
-
+import { EventBus } from '@/servis/EventBus'
 export default {
   name: 'HomeView',
+  mounted(){
+    EventBus.on('MenuProjects:new', this.newProject)
+    EventBus.on('Project:saveAsLocal', this.localProject)
+  },
   data(){
     return {
-      project_id: '1',
+      project_id: 'local',
+    }
+  },
+  methods:{
+    newProject(){
+      this.project_id = 'new'
+    },
+    localProject(){
+      this.project_id = 'local'
     }
   }
   

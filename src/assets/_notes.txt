@@ -1,12 +1,6 @@
-- test after migrations
-
-- levels admin user acsess editor projects
-
-- optimace project DB
 
 - safty upload file(avatars) to server
 
-- sql injections projects
-
 - email reset password
 
+- css Dark

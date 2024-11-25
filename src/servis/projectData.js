@@ -26,12 +26,13 @@ export async function newPoject(){
 }
 
 export async function updateProject(){
-    if(Project.project.id=='local'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
+    if(Project.project.id=='local'||Project.project.id=='new'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
 }
 
 export async function saveLocalProject(){
     let projectJSON = JSON.stringify(Project)
     localStorage.setItem('Project', projectJSON);
+    switchToLocal()
 }
 
 export async function updateProjectObject(id, data, sendAPI=true){
@@ -39,10 +40,16 @@ export async function updateProjectObject(id, data, sendAPI=true){
     for (let key in data){
         obj[key] = data[key]
     }
-    if(Project.project.id=='local'){ await saveLocalProject() }else{
-        console.log(obj)
+    if(Project.project.id=='local'||Project.project.id=='new'){ await saveLocalProject() }else{
         if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})}
+    
+    switchToLocal()
     EventBus.emit('UpdatedProject')
+
+}
+
+function switchToLocal(){
+    if(Project.project.id=='new'){ EventBus.emit('Project:saveAsLocal'); }
 }
 
 export async function newProjectObject(project_id, number=0){
