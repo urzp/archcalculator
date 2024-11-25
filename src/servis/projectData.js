@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'

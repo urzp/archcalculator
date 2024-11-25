@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <Calculator project_id="local"></Calculator>
+    <Calculator :project_id="project_id"></Calculator>
     <Footer></Footer>
   </div>
 </template>
@@ -10,6 +10,12 @@
 
 export default {
   name: 'HomeView',
+  data(){
+    return {
+      project_id: '1',
+    }
+  }
+  
 }
 </script>
 

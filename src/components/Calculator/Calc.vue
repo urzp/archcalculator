@@ -43,6 +43,11 @@ export default{
     props:{
         project_id:String,
     },
+    watch:{
+        project_id(){
+            this.getProject()
+        }
+    },
     computed:{
         created(){
             let result = ''
