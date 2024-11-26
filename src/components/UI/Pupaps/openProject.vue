@@ -13,7 +13,15 @@
                         </div>
                         <dic class="all_projects">
                             <div class="title">All Projects</div>
-                            <div class="list"></div>
+                            <div class="list">
+                                <div class="item_all" v-for="item in list_all" :key="item.id" @click="openProject(item.id)">
+                                    <div class="wrap_name_date">
+                                        <div class="project_name">{{ item.name }}</div>
+                                        <div class="finance_total">{{ `€ ${Math.trunc(item.total).toLocaleString("de-DE")}` }}</div>
+                                    </div>
+                                        <div class="date_created">{{ item.created.split(' ')[0] }}</div>
+                                </div>
+                            </div>
                         </dic>
                     </div>
                     <div class="bills"></div>
@@ -108,6 +116,31 @@ export default{
         height: calc( v-bind(height) - 80px );
     }
 
+    .wrap_name_date{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item_all{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .date_created{
+        font-family: 'Comfortaa-Light';
+        font-size: 14px;
+        color: #9F9F9F;
+    }
+
+    .finance_total{
+        font-family: 'Comfortaa-Light';
+        font-size: 12px;
+        color: #9F9F9F;
+    }
+
     .projects_bills, .show_project{
         width: 50%;
     }
@@ -121,7 +154,11 @@ export default{
     }
 
     .recent_projects, .all_projects{
-        width: 50%;
+        width: 50%; 
+    }
+
+    .all_projects{
+        padding-right: 30px;
     }
 
     .title{
@@ -136,8 +173,8 @@ export default{
 
     .list{
         font-family: 'Raleway-Light';
-        font-size: 18px;
-        color: #5B5B5B;
+        font-size: 16px;
+        color: #464646;
         cursor: pointer;
     }
 
