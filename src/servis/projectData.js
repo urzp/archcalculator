@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
+import { global } from '@/servis/globalValues.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
 export let Project = {}
@@ -21,6 +22,12 @@ function loadLocal(){
 
 export async function newPoject(){
     Project =  newWholeProject
+    if(global.login){
+        let result = await apiData({typeData:'newProject', data: Project})
+        let id = result.data
+        newWholeProject.objects.forEach(item=>item.project_id = id )
+        EventBus.emit('Project:newProjectUser', id)
+    }
     EventBus.emit('Project:Loadeded')
     return Project 
 }
@@ -49,6 +56,7 @@ export async function updateProjectObject(id, data, sendAPI=true){
 }
 
 function switchToLocal(){
+    if(global.login) return false
     if(Project.project.id=='new'){ EventBus.emit('Project:saveAsLocal'); }
 }
 

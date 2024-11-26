@@ -44,7 +44,8 @@ export default{
         project_id:String,
     },
     watch:{
-        project_id(){
+        project_id(new_value, old_value){
+            
             this.getProject()
         }
     },
@@ -84,7 +85,7 @@ export default{
             let lastobject = lastElement(this.ListObjects)
             if(!lastobject) return false
             deleteProjectObject(lastobject.id)
-        }
+        },
     }
 }
 </script>

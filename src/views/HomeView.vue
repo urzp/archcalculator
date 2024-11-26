@@ -13,6 +13,8 @@ export default {
   mounted(){
     EventBus.on('MenuProjects:new', this.newProject)
     EventBus.on('Project:saveAsLocal', this.localProject)
+    EventBus.on('Project:newProjectUser', id => this.project_id = id)
+    EventBus.on('Project:openProject', id => this.project_id = id)
   },
   data(){
     return {

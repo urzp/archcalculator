@@ -4,6 +4,8 @@ if($isLogin){
 $mysql = $mysql_calc;
 
 switch ($typeData) {
+    case 'getProjects': include '01_Project/getProjects.php'; break;
+    case 'newProject': include '01_Project/newProject.php'; break;
     case 'loadWholeProject': include '01_Project/loadWholeProject.php'; break;
     case 'updateProject': include '01_Project/updateProject.php'; break;
 

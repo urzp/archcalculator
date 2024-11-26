@@ -3,6 +3,7 @@
     <Registration/>
     <ResetPassword/>
     <Comfirm/>
+    <openProject/>
 </template>
 
 

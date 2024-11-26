@@ -35,13 +35,13 @@ export default{
     computed:{
         total_hours(){
             let result = 0 
-            if(!this.list) return result
+            if(!this.list||!Array.isArray(this.list)) return result
             this.list.forEach(item=>result+= Number(item.hours))
             return result
         },
         total_value(){
             let result = 0 
-            if(!this.list) return result
+            if(!this.list||!Array.isArray(this.list)) return result
             this.list.forEach(item=>result+= item.hours*item.price_hours)
             this.project.total_AdditionalServices = result
             return result

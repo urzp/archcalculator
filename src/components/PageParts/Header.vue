@@ -18,7 +18,7 @@
         <div class="sub-header">
             <div class="item_subHeader" @click="newProject()">New Project</div>
             <div class="item_subHeader" @click="openProject()">Open Project</div>
-            <div class="item_subHeader" @click="saveProject()">Save Project As</div>
+            <!-- <div class="item_subHeader" @click="saveProject()">Save Project As</div> -->
         </div>
     </div>
     <Popaps/>

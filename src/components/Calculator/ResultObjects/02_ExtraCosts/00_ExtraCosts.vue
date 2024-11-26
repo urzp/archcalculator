@@ -35,11 +35,13 @@ export default{
     computed:{
         total_rate(){
             let result = 0 
+            if(!this.list||!Array.isArray(this.list)) return result
             this.list.forEach(item=>result+= Number(item.rate))
             return result
         },
         total_value(){
             let result = 0 
+            if(!this.list||!Array.isArray(this.list)) return result
             this.list.forEach(item=>result+= item.rate*item.price_rate)
             this.project.total_ExtraCosts = result
             return result

@@ -4,6 +4,7 @@ import Footer from './PageParts/Footer.vue'
 import Menu from './PageParts/Menu.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
+import openProject from './UI/Pupaps/openProject.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -99,6 +100,7 @@ export default [
     Menu,
     Popaps,
     Comfirm,
+    openProject,
 
     Login,
     Registration,
