@@ -2,32 +2,17 @@
     <div v-if="show" class="wrap_pupap">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
-            <div class="wrap_content">
+            <div v-if="!loading" class="wrap_content">
                 <div class="projects_bills">
                     <div class="projects">
-                        <div class="recent_projects">
-                            <div class="title">Resent</div>
-                            <div class="list">
-                                <div class="item" v-for="item in list_resent" :key="item.id" @click="openProject(item.id)">{{ item.name }}</div>
-                            </div>
-                        </div>
-                        <dic class="all_projects">
-                            <div class="title">All Projects</div>
-                            <div class="list">
-                                <div class="item_all" v-for="item in list_all" :key="item.id" @click="openProject(item.id)">
-                                    <div class="wrap_name_date">
-                                        <div class="project_name">{{ item.name }}</div>
-                                        <div class="finance_total">{{ `€ ${Math.trunc(item.total).toLocaleString("de-DE")}` }}</div>
-                                    </div>
-                                        <div class="date_created">{{ item.created.split(' ')[0] }}</div>
-                                </div>
-                            </div>
-                        </dic>
+                        <ListRecentProjects :list="list" @openProject="id=>openProject(id)" @showProject="id=>showProject = id"/>
+                        <ListAllprojects :list="list" @openProject="id=>openProject(id)" @showProject="id=>showProject = id"/>
                     </div>
                     <div class="bills"></div>
                 </div>
-                <div class="show_project"></div>
+                <ShowProject :id_project="showProject"/>
             </div>
+            <div v-else class="loading">Loading . . .</div>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
@@ -48,26 +33,27 @@ export default{
         return {
             show:false,
             width:'1100px',
-            height: '550px',
-            list_resent:[],
-            list_all:[],
+            height: '750px',
+            list:[],
+            loading: false,
+            showProject:'',
         }
     },
     methods:{
         async getData(){
+            this.loading = true
             if(!global.login) return false
             let result = (await apiData({typeData:'getProjects'})).data
+            this.loading = false
             if(!result) return false
-            this.list_all = result
-            this.list_resent = result.sort((a,b)=>{
-                a = new Date(a.updated); b = new Date(b.updated)
-                if (a > b) return -1; if (a == b) return 0; if (a < b) return 1;
-            })
+            this.list = result
         },
         close(){
+            document.documentElement.style.overflow = 'auto'
             this.show=false
         },
         openPopap(){
+            document.documentElement.style.overflow = 'hidden'
             this.getData()
             this.show=true
         }, 
@@ -92,7 +78,7 @@ export default{
         width: v-bind(width);
         min-height: v-bind(height);
         background-color: #fff;
-        border: 2px solid #D9D9D9;
+        border: 2px solid #e2e2e2;
         border-radius: 10px;
         box-shadow: 4px 4px 4px #00000033;
     }
@@ -102,6 +88,15 @@ export default{
         right: 7px;
         top: 7px;
         cursor: pointer;
+    }
+
+    .loading{
+        display: flex;
+        height: v-bind(height);
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        font-family: 'Raleway-ExtraLight';
     }
 
     .wrap_content{
@@ -146,19 +141,27 @@ export default{
     }
 
     .projects_bills{
-        border-right: 1px solid #ADADAD;
+        border-right: 1px solid #e2e2e2;
     }
 
     .projects{
         display: flex;
+        padding-bottom: 20px;
+        margin-right: 40px;
+        border-bottom: 1px solid #e2e2e2;
     }
 
+<<<<<<< HEAD
     .recent_projects, .all_projects{
         width: 50%; 
     }
 
     .all_projects{
         padding-right: 30px;
+=======
+    .recent_projects{
+        width: 50%;
+>>>>>>> 5e0342338e521104b86630bb8fc78a8bf46e5884
     }
 
     .title{
@@ -167,15 +170,26 @@ export default{
         font-size: 20px;
         color: #464646;
         padding-right: 20px;
-        border-bottom: 1px solid #ADADAD;
+        border-bottom: 1px solid #e2e2e2;
         margin-bottom: 10px;
     }
 
     .list{
+        margin-right: 20px;
         font-family: 'Raleway-Light';
         font-size: 16px;
+<<<<<<< HEAD
         color: #464646;
+=======
+        color: #5B5B5B;
+>>>>>>> 5e0342338e521104b86630bb8fc78a8bf46e5884
         cursor: pointer;
+    }
+
+    .item{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .bg_for_close{
