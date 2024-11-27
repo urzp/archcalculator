@@ -1,14 +1,15 @@
 <template>
     <div v-if="!loading" class="show_project">
+    <template v-if="!!id_project">
         <div class="top_panel">
-            <Button width="80px" height="40px">Open</Button>
-            <Button width="80px" height="40px">Delete</Button>
+            <Button width="80px" height="40px" @click="openProject()">Open</Button>
+            <Button width="80px" height="40px" @click="deleteProject()">Delete</Button>
         </div>
         <div class="project_part">
-            <div class="date">23.08.2024</div>
+            <div class="date">{{ formatDate(project.created) }}</div>
             <div class="title_finance">
-                <div class="title">Project X</div>
-                <div class="finance">€ 176.441</div>
+                <div class="title">{{ project.name }}</div>
+                <div class="finance">{{ formatPrice(project.total) }}</div>
             </div>
         </div>
         <div class="part_title">Objects</div>
@@ -33,6 +34,8 @@
             <div class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
             <div class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
         </div>
+    </template>
+    <div v-else class="loading">Select Project</div>
     </div>
     <div v-else class="loading">Loading . . .</div>
 </template>
@@ -46,15 +49,9 @@ export default{
         return{
             timer:'',
             loading: false,
-            list_objects:[
-                {id:1, name:'Object A', total: 155.03},
-                {id:2, name:'Object B', total: 55.03},
-
-            ],
-            list_bils:[
-                {id:1, name:'Bill 1', total: 155.03, created:'10.11.2024'},
-                {id:1, name:'Bill 2', total: 155.03, created:'10.11.2024'},
-            ]
+            project:{},
+            list_objects:[],
+            list_bils:[],
         }
     },
     watch:{
@@ -66,18 +63,35 @@ export default{
             },500)
         }
     },
+    emits:['openProject','deleteProject'],
     props:{
-        id_project:String,
+        id_project:{
+            type:String,
+            default:'',
+        }
     },
     methods:{
         async getData(){
             if(!this.id_project) return false
-            let result = (await apiData({typeData:'getProjectShowData', data:{id:this.id_project}})).data
+            let result = (await apiData({typeData:'getProjectShowData', id:this.id_project})).data
+            this.project = result.project
+            this.list_objects = result.objects
+            this.list_bils = result.bills
             this.loading = false;
         },
         formatPrice(price){
             return `€ ${Math.fround(price).toLocaleString("de-DE")}`
         },
+        formatDate(date){
+            date = new Date(date)
+           return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+        },
+        openProject(){
+            this.$emit('openProject', this.id_project)
+        },
+        deleteProject(){
+            this.$emit('deleteProject', this.id_project)
+        }
     }
 
 }

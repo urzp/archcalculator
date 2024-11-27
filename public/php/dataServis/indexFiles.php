@@ -4,7 +4,7 @@ $mysql = $mysql_calc;
 $typeData = $_POST['typeData'];
 
 switch ($typeData){
-    case 'avatar': include 'users/avatar.php'; break;
+    case 'avatar': include '04_users/avatar.php'; break;
 }
 
 echo json_encode($result);

@@ -31,7 +31,8 @@ import { global, user } from '@/servis/globalValues.js'
 export default{
     name: 'Header',
     async mounted(){
-        this.getData()
+        await this.getData()
+        if(global.newProject) {global.newProject=false; this.newProject()}
     },
     data(){
         return {
@@ -53,6 +54,8 @@ export default{
             this.user = user
         },
         newProject(){
+            if(this.goToCalcPage()) return false
+            console.log('new project')
             EventBus.emit('MenuProjects:new')
         },
         openProject(){
@@ -61,6 +64,14 @@ export default{
         },
         saveProject(){
             EventBus.emit('MenuProjects:save')
+        },
+        goToCalcPage(){
+            if( this.$route.path!='/' ){
+                global.newProject = true
+                this.$router.push({ name: 'home' })
+                return true
+            }
+            return false
         }
     },
 }

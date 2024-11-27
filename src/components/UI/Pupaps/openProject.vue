@@ -10,7 +10,7 @@
                     </div>
                     <div class="bills"></div>
                 </div>
-                <ShowProject :id_project="showProject"/>
+                <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)"/>
             </div>
             <div v-else class="loading">Loading . . .</div>
         </div>
@@ -28,6 +28,7 @@ export default{
     mounted(){
         this.getData()
         EventBus.on('MenuProjects:open',this.openPopap)
+        if(global.openPopapProjects){global.openPopapProjects=false; this.openPopap()}
     },
     data(){
         return {
@@ -53,6 +54,7 @@ export default{
             this.show=false
         },
         openPopap(){
+            if(this.goToCalcPage()) return false
             document.documentElement.style.overflow = 'hidden'
             this.getData()
             this.show=true
@@ -60,6 +62,19 @@ export default{
         openProject(id){
             EventBus.emit('Project:openProject', id)
             this.close()
+        },
+        async deleteProject(id){
+            await apiData({typeData:'deleteProject', id})
+            this.showProject = ''
+            this.getData()
+        },
+        goToCalcPage(){
+            if( this.$route.path!='/' ){
+                global.openPopapProjects = true
+                this.$router.push({ name: 'home' })
+                return true
+            }
+            return false
         }
     }
 

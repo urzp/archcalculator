@@ -3,6 +3,8 @@ import { reactive } from 'vue';
 export let global= reactive({
    login:false,
    admin:false,
+   openPopapProjects:false,
+   newProject:false,
    base_url:'https://hosting209012.ae957.netcup.net',
 })
 
