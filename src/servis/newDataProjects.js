@@ -1,4 +1,5 @@
 import { dateToString } from '@/servis/functions.js'
+import { reactive } from 'vue';
 
 export let newProjectData = {
     id: 'new',
@@ -31,10 +32,10 @@ export let newObjectProject = {
     spetial_servis_total:0,
 }
 
-export let newWholeProject = {
+export let newWholeProject = reactive ( {
     project: newProjectData,
     objects: [
         newObjectProject,
     ]
-}
+} )
 

@@ -17,7 +17,6 @@ import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Total_Result',
     mounted(){
-        EventBus.on('Project:Loadeded', this.getProject)
         this.getProject()
     },
     data(){

@@ -4,12 +4,13 @@ import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
-export let Project = {}
+export let Project = reactive ( {} )
 
 export async function LoadProjectData(id){
     let result
-    if(id=='local'){ result = loadLocal() }else{ result = (await apiData({typeData:'loadWholeProject', id})).data }
-    Project =  await result
+    if(id=='local'){ result = loadLocal() }else{ result =  (await apiData({typeData:'loadWholeProject', id})).data  }
+    Project = {...result} 
+    window.project = Project
     EventBus.emit('Project:Loadeded')
     return result
 }
@@ -21,7 +22,7 @@ function loadLocal(){
 }
 
 export async function newPoject(){
-    Project =  newWholeProject
+    Project = {...newWholeProject} 
     if(global.login){
         let result = await apiData({typeData:'newProject', data: Project})
         let id = result.data

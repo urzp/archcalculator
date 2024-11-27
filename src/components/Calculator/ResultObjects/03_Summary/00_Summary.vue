@@ -14,7 +14,6 @@ import { Project, updateProject } from '@/servis/projectData.js'
 export default{
     name: 'Summary',
     async mounted(){
-        EventBus.on('Project:Loadeded', this.getProject)
         this.getProject()
     },
     data(){

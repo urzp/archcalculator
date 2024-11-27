@@ -13,6 +13,7 @@
 
 <script>
 import { Project } from '@/servis/projectData.js'
+import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Total_Object',
     mounted(){
@@ -45,6 +46,7 @@ export default{
     },
     methods:{
         getProject(){
+            console.log(Project)
             this.project = Project.objects.find(item=>item.id==this.object_id)
         }
     }
