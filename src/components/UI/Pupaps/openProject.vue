@@ -151,17 +151,8 @@ export default{
         border-bottom: 1px solid #e2e2e2;
     }
 
-<<<<<<< HEAD
-    .recent_projects, .all_projects{
-        width: 50%; 
-    }
-
-    .all_projects{
-        padding-right: 30px;
-=======
     .recent_projects{
         width: 50%;
->>>>>>> 5e0342338e521104b86630bb8fc78a8bf46e5884
     }
 
     .title{
@@ -178,11 +169,7 @@ export default{
         margin-right: 20px;
         font-family: 'Raleway-Light';
         font-size: 16px;
-<<<<<<< HEAD
-        color: #464646;
-=======
         color: #5B5B5B;
->>>>>>> 5e0342338e521104b86630bb8fc78a8bf46e5884
         cursor: pointer;
     }
 
