@@ -56,7 +56,8 @@ export default{
             EventBus.emit('MenuProjects:new')
         },
         openProject(){
-            EventBus.emit('MenuProjects:open')
+            if(global.login) EventBus.emit('MenuProjects:open')
+            if(!global.login) EventBus.emit('Menu:Login')
         },
         saveProject(){
             EventBus.emit('MenuProjects:save')

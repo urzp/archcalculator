@@ -5,6 +5,9 @@ import Menu from './PageParts/Menu.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'
+import ListAllprojects from './UI/Pupaps/openProject/ListAllprojects.vue'
+import ListRecentProjects from './UI/Pupaps/openProject/ListRecentProjects.vue'
+import ShowProject from './UI/Pupaps/openProject/ShowProject.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -101,6 +104,9 @@ export default [
     Popaps,
     Comfirm,
     openProject,
+    ListRecentProjects,
+    ListAllprojects,
+    ShowProject,
 
     Login,
     Registration,
