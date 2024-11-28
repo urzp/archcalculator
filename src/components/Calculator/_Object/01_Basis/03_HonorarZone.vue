@@ -67,6 +67,7 @@ export  default{
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
+            if(!this.project) return false
             this.usePoints = this.project.honorarLevel.usePoints
             this.dataUpdate(this.project.honorarLevel.id, this.project.honorarLevel.number)
         },

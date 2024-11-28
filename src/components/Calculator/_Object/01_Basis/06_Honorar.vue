@@ -77,7 +77,7 @@ export  default{
             this.project = await Project.objects.find(item=>item.id==this.object_id)
         },
         finance(){
-            if( !this.project.finance ) return 0 
+            if( !this.project||!this.project.finance ) return 0 
             let finance = this.project.finance 
             if( finance.useDetals ){
                 return finance.detals.reduce((sum, item) => sum + Number(item),0)
@@ -96,6 +96,7 @@ export  default{
             if(!this.table_render.up) { this.table_render.low = this.honorarTable[length - 1];  this.table_render.up  = this.honorarTable[length];  }
         },
         calculateTable(){
+            if(!this.project) return false
             if(!this.honorarTable) { this.renderNone(); return false }
             if( !this.checkLimits() ) { this.renderNone(); return false }
 

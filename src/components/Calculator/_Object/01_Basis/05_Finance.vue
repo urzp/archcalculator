@@ -76,6 +76,7 @@ export  default{
         },
         async getProjectData(){
             this.project = await Project.objects.find(item=>item.id==this.object_id)
+            if(!this.project) return false
             if(!this.project.finance.detals) this.project.finance.detals = []
             if(!this.project.finance.userTitle) this.project.finance.userTitle = []
             this.list.forEach((item,index)=>{

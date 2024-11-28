@@ -11,7 +11,6 @@ import { EventBus } from '@/servis/EventBus'
 export default {
   name: 'HomeView',
   mounted(){
-    EventBus.on('MenuProjects:new', this.newProject)
     EventBus.on('Project:saveAsLocal', this.localProject)
     EventBus.on('Project:newProjectUser', id => this.project_id = id)
     EventBus.on('Project:openProject', id => this.project_id = id)
@@ -22,9 +21,6 @@ export default {
     }
   },
   methods:{
-    newProject(){
-      this.project_id = 'new'
-    },
     localProject(){
       this.project_id = 'local'
     }

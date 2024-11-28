@@ -28,6 +28,11 @@ function loadLocal(){
 }
 
 export async function newPoject(){
+    console.log(Project)
+    delete Project['objects'];
+    delete Project['project'];
+    console.log(Project)
+    
     Object.assign(Project, newWholeProject)
     EventBus.emit('Project:Loadeded')
     return Project 
@@ -57,7 +62,7 @@ export async function updateProjectObject(id, data, sendAPI=true){
 }
 
 function switchToLocal(){
-    if(global.login) return false
+    //if(global.login) return false
     if(Project.project.id=='new'){ EventBus.emit('Project:saveAsLocal'); }
 }
 
@@ -65,7 +70,7 @@ export async function newProjectObject(project_id, number=0){
     let newObject = newObjectProject
     newObject.number = number
     newObject.project_id = project_id
-    if(Project.project.id=='local'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
+    if(Project.project.id=='local'||Project.project.id=='new'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
     EventBus.emit('Project:newObject')
 }
 

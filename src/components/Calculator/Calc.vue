@@ -29,6 +29,7 @@ export default{
     async mounted(){
        await this.getCalcData()
        await this.getProject()
+       EventBus.on('MenuProjects:new', this.newProject)
        EventBus.on('Project:newObject', this.getProject)
        EventBus.on('Project:deleteObject',  this.getProject)
     },
@@ -69,10 +70,20 @@ export default{
             if(this.project_id == 'new') result = await newPoject() 
             if(this.project_id != 'new') result = await LoadProjectData(this.project_id) 
             if(this.project_id == 'local') result.project.id = 'local'
-            this.project = result.project
             this.projectTest = result
-            this.ListObjects = result.objects
-            this.project_name = result.project.name
+            this.project = this.projectTest.project
+            this.ListObjects = this.projectTest.objects
+            this.project_name = this.project.name
+            this.loaded = true
+        },
+        async newProject(){
+            this.loaded = false
+            let result
+            result = await newPoject() 
+            this.projectTest = result
+            this.project = this.projectTest.project
+            this.ListObjects = this.projectTest.objects
+            this.project_name = this.project.name
             this.loaded = true
         },
         newProjectName(value){
