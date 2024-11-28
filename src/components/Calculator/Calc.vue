@@ -23,7 +23,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { lastElement, formatDate } from '@/servis/functions.js'
-import { newPoject, LoadProjectData, updateProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { newPoject, LoadProjectData, saveAllProject, updateProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
     async mounted(){
@@ -38,6 +38,7 @@ export default{
             loaded: false,
             ListObjects:[],
             project:{},
+            projectTest:{},
         }
     },
     props:{
@@ -45,14 +46,14 @@ export default{
     },
     watch:{
         project_id(new_value, old_value){
-            
+            // if(old_value=='new') {  return false }
             this.getProject()
         }
     },
     computed:{
         created(){
             let result = ''
-            if(!!this.project&&!!this.project.created) { result = formatDate(this.project.created)}
+            if(!!this.project&&!!this.project.created){ result = formatDate(this.project.created)}
             return result
         }
     },
@@ -69,6 +70,7 @@ export default{
             if(this.project_id != 'new') result = await LoadProjectData(this.project_id) 
             if(this.project_id == 'local') result.project.id = 'local'
             this.project = result.project
+            this.projectTest = result
             this.ListObjects = result.objects
             this.project_name = result.project.name
             this.loaded = true

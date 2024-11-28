@@ -16,7 +16,7 @@
         <div class="list_objects">
             <div class="item" v-for="item in list_objects" :key="item.id">
                 <div class="name">{{ item.name }}</div>
-                <div class="finance">{{ formatPrice(item.total) }}</div>
+                <div class="finance">{{ formatPrice(item.total_object) }}</div>
             </div>
         </div>
         <div class="part_title">Bils</div>

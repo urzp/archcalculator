@@ -4,15 +4,21 @@ import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
-export let Project = reactive ( {} )
+export let Project = reactive({test:'test'})
 
 export async function LoadProjectData(id){
     let result
     if(id=='local'){ result = loadLocal() }else{ result =  (await apiData({typeData:'loadWholeProject', id})).data  }
-    Project = {...result} 
+    Object.assign(Project, result) 
     window.project = Project
     EventBus.emit('Project:Loadeded')
-    return result
+    return Project
+}
+
+export async function saveNewProject(){
+   let result = (await apiData({typeData:'newProject', data: Project})).data
+   let id_project = result.project
+   EventBus.emit('Project:newProjectUser', id_project)
 }
 
 function loadLocal(){
@@ -22,13 +28,7 @@ function loadLocal(){
 }
 
 export async function newPoject(){
-    Project = {...newWholeProject} 
-    if(global.login){
-        let result = await apiData({typeData:'newProject', data: Project})
-        let id = result.data
-        newWholeProject.objects.forEach(item=>item.project_id = id )
-        EventBus.emit('Project:newProjectUser', id)
-    }
+    Object.assign(Project, newWholeProject)
     EventBus.emit('Project:Loadeded')
     return Project 
 }

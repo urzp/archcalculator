@@ -46,7 +46,6 @@ export default{
     },
     methods:{
         getProject(){
-            console.log(Project)
             this.project = Project.objects.find(item=>item.id==this.object_id)
         }
     }

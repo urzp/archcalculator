@@ -5,6 +5,7 @@ export let global= reactive({
    admin:false,
    openPopapProjects:false,
    newProject:false,
+   saveNewProject:false,
    base_url:'https://hosting209012.ae957.netcup.net',
 })
 
@@ -16,7 +17,7 @@ export let user = reactive({
     token:localStorage.getItem('user_phone'),
 })
 
-//window.global = global
+window.global = global
 
 
 export function getGlobal(){

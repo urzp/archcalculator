@@ -8,7 +8,7 @@ $selector = "`id` = '$id' AND `user_id`='$user_id'";
 $project_feelds = " `id`, `created`, `name`, `total` ";
 $data['project'] = crud_read('projects',$project_feelds , $selector)[0];
 
-$object_feelds = " `name`, `total` ";
+$object_feelds = " `name`, `total_object` ";
 $selector = "`project_id` = '$id' AND `user_id`='$user_id'";
 $data['objects'] = crud_read('project_objects',$object_feelds, $selector);
 
