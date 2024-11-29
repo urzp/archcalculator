@@ -17,8 +17,8 @@
         </div>
         <div class="sub-header">
             <div class="item_subHeader" @click="newProject()">New Project</div>
+            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Save New Project</div>
             <div class="item_subHeader" @click="openProject()">Open Project</div>
-            <div v-if="this.global.saveNewProject" class="item_subHeader" @click="saveProject()">Save Project</div>
         </div>
     </div>
     <Popaps/>
@@ -29,6 +29,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { saveNewProject } from '@/servis/projectData.js'
+import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Header',
     async mounted(){
@@ -47,6 +48,10 @@ export default{
         url_avatar(){
             let url = `${global.base_url}/users/user_${this.user.id}/avatar/${this.user.avatar}`
             return url
+        },
+        unsaved(){
+            if(!Project.project) return false
+            return Project.project.unsaved
         }
     },
     methods:{
@@ -56,7 +61,6 @@ export default{
         },
         newProject(){
             if(this.goToCalcPage()) return false
-            if(global.login) global.saveNewProject = true
             EventBus.emit('MenuProjects:new')
         },
         openProject(){
@@ -64,7 +68,8 @@ export default{
             if(!global.login) EventBus.emit('Menu:Login')
         },
         saveProject(){
-            global.saveNewProject = false
+            if(!global.login){ EventBus.emit('Menu:Login'); return false }
+            Project.project.unsaved = false
             saveNewProject()
         },
         goToCalcPage(){

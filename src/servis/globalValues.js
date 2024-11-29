@@ -5,7 +5,6 @@ export let global= reactive({
    admin:false,
    openPopapProjects:false,
    newProject:false,
-   saveNewProject:false,
    base_url:'https://hosting209012.ae957.netcup.net',
 })
 

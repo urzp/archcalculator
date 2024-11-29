@@ -28,12 +28,10 @@ function loadLocal(){
 }
 
 export async function newPoject(){
-    console.log(Project)
     delete Project['objects'];
     delete Project['project'];
-    console.log(Project)
-    
-    Object.assign(Project, newWholeProject)
+    let newProject = JSON.parse( JSON.stringify(newWholeProject) )
+    Object.assign(Project, newProject)
     EventBus.emit('Project:Loadeded')
     return Project 
 }
@@ -75,7 +73,7 @@ export async function newProjectObject(project_id, number=0){
 }
 
 async function newProjectObjectLoacal(newObject){
-    await Project.objects.push(newObject) 
+    await Project.objects.push({...newObject}) 
     await Project.objects.forEach((item,index)=>item.id=index)
     await saveLocalProject()
 }
