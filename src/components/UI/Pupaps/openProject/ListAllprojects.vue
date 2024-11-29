@@ -57,7 +57,7 @@ export default {
 .title{
     width: 100%;
     font-family: 'Raleway-Light';
-    font-size: 20px;
+    font-size: 18px;
     color: #464646;
     padding-right: 20px;
     border-bottom: 1px solid #e2e2e2;

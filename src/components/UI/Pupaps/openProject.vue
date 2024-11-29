@@ -2,17 +2,21 @@
     <div v-if="show" class="wrap_pupap">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
-            <div v-if="!loading" class="wrap_content">
-                <div class="projects_bills">
+            <div v-if="!loading&&!empty_list" class="wrap_content">
+                <div class="projects_calendar">
                     <div class="projects">
                         <ListRecentProjects :list="list" @openProject="id=>openProject(id)" @showProject="id=>showProject = id"/>
                         <ListAllprojects :list="list" @openProject="id=>openProject(id)" @showProject="id=>showProject = id"/>
                     </div>
-                    <div class="bills"></div>
+                    <div class="calendar_panel">
+                        <ListDayProjects :list="list" :select_day="select_day" @openProject="id=>openProject(id)" @showProject="id=>showProject = id" />
+                        <Calendar @selectDay="day=>select_day=day"/>
+                    </div>
                 </div>
                 <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)"/>
             </div>
-            <div v-else class="loading">Loading . . .</div>
+            <div v-else-if="loading" class="loading">Loading . . .</div>
+            <div v-else class="empty_list_projects">No one any project</div>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
@@ -38,6 +42,12 @@ export default{
             list:[],
             loading: false,
             showProject:'',
+            select_day: new Date(),
+        }
+    },
+    computed:{
+        empty_list(){
+            return this.list.length == 0
         }
     },
     methods:{
@@ -105,7 +115,7 @@ export default{
         cursor: pointer;
     }
 
-    .loading{
+    .loading, .empty_list_projects{
         display: flex;
         height: v-bind(height);
         justify-content: center;
@@ -151,11 +161,11 @@ export default{
         color: #9F9F9F;
     }
 
-    .projects_bills, .show_project{
+    .projects_calendar, .show_project{
         width: 50%;
     }
 
-    .projects_bills{
+    .projects_calendar{
         border-right: 1px solid #e2e2e2;
     }
 
@@ -164,6 +174,7 @@ export default{
         padding-bottom: 20px;
         margin-right: 40px;
         border-bottom: 1px solid #e2e2e2;
+        min-height: 330px;
     }
 
     .recent_projects{
@@ -192,6 +203,14 @@ export default{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+
+    .calendar_panel{
+        margin-top: 40px;
+        margin-right: 40px;
+        display: flex;
+        min-height: 300px;
     }
 
     .bg_for_close{

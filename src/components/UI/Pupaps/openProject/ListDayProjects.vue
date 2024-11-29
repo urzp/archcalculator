@@ -1,6 +1,6 @@
 <template>
     <div class="list_recent_projects">
-        <div class="title">Recent</div>
+        <div class="title">{{ select_day.toLocaleString("de-DE", {day:'numeric',month:'short', year:'numeric'}) }}</div>
         <div class="item" v-for="item in sortRicent" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
             <div class="name">{{ item.name }}</div>
         </div>
@@ -10,7 +10,7 @@
 <script>
 
 export default{
-    name:'ListRecentProjects',
+    name:'ListDayProjects',
     data(){
         return{
 
@@ -20,7 +20,8 @@ export default{
         list: {
             type: Array,
             default: [],
-        }
+        },
+        select_day: Date,
     },
     emits:['openProject','showProject'],
     computed:{

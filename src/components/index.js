@@ -7,7 +7,9 @@ import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'
 import ListAllprojects from './UI/Pupaps/openProject/ListAllprojects.vue'
 import ListRecentProjects from './UI/Pupaps/openProject/ListRecentProjects.vue'
+import ListDayProjects from './UI/Pupaps/openProject/ListDayProjects.vue'
 import ShowProject from './UI/Pupaps/openProject/ShowProject.vue'
+import Calendar from './UI/Pupaps/openProject/Calendar.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -106,7 +108,9 @@ export default [
     openProject,
     ListRecentProjects,
     ListAllprojects,
+    ListDayProjects,
     ShowProject,
+    Calendar,
 
     Login,
     Registration,
