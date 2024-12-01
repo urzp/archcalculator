@@ -4,6 +4,7 @@
     <ResetPassword/>
     <Comfirm/>
     <openProject/>
+    <message/>
 </template>
 
 

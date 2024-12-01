@@ -10,6 +10,7 @@ import ListRecentProjects from './UI/Pupaps/openProject/ListRecentProjects.vue'
 import ListDayProjects from './UI/Pupaps/openProject/ListDayProjects.vue'
 import ShowProject from './UI/Pupaps/openProject/ShowProject.vue'
 import Calendar from './UI/Pupaps/openProject/Calendar.vue'
+import messagePopap from './UI/Pupaps/message.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -78,26 +79,26 @@ import Stages from './EditCalculator/08_Stages.vue'
 import SubStage from './EditCalculator/09_SubStage.vue'
 import SubStage_L1 from './EditCalculator/10_SubStage_L1.vue'
 //-----------------------------UI------------------------------------
-import Toggle from './UI/Toggle.vue'
-import ToggleButton from './UI/ToggleBtn.vue'
-import Button from './UI/Button.vue'
-import ToggleListButton from './UI/ToggleListBtn.vue'
-import NewButton from './UI/NewBtn.vue'
-import UpdateBtn from './UI/UpdateBtn.vue'
-import CloseButton from './UI/CloseBtn.vue'
-import DeleteButton from './UI/DeleteBtn.vue'
-import UpButton from './UI/UpBtn.vue'
-import DownButton from './UI/DownBtn.vue'
-import PastColumButton from './UI/PastColumBtn.vue'
-import Price from './UI/Price.vue'
-import Percent from './UI/Percent.vue'
-import InputYear from './UI/InputYear.vue'
-import InputText from './UI/InputText.vue'
-import ImputTextMLine from './UI/ImputTextMLine.vue'
-import InputPrice from './UI/InputPrice.vue'
-import Select_List from './UI/Select_List.vue'
-import SelectEdit_List from './UI/SelectEdit_List.vue'
-import ContextMenu from './UI/ContextMenu.vue'
+import Toggle from './UI/Simples/Toggle.vue'
+import ToggleButton from './UI/Simples/ToggleBtn.vue'
+import Button from './UI/Simples/Button.vue'
+import ToggleListButton from './UI/Simples/ToggleListBtn.vue'
+import NewButton from './UI/Simples/NewBtn.vue'
+import UpdateBtn from './UI/Simples/UpdateBtn.vue'
+import CloseButton from './UI/Simples/CloseBtn.vue'
+import DeleteButton from './UI/Simples/DeleteBtn.vue'
+import UpButton from './UI/Simples/UpBtn.vue'
+import DownButton from './UI/Simples/DownBtn.vue'
+import PastColumButton from './UI/Simples/PastColumBtn.vue'
+import Price from './UI/Simples/Price.vue'
+import Percent from './UI/Simples/Percent.vue'
+import InputYear from './UI/Simples/InputYear.vue'
+import InputText from './UI/Simples/InputText.vue'
+import ImputTextMLine from './UI/Simples/ImputTextMLine.vue'
+import InputPrice from './UI/Simples/InputPrice.vue'
+import Select_List from './UI/Simples/Select_List.vue'
+import SelectEdit_List from './UI/Simples/SelectEdit_List.vue'
+import ContextMenu from './UI/Simples/ContextMenu.vue'
 
 export default [
     Header,
@@ -111,6 +112,7 @@ export default [
     ListDayProjects,
     ShowProject,
     Calendar,
+    messagePopap,
 
     Login,
     Registration,
