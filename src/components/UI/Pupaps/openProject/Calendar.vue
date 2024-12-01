@@ -21,7 +21,7 @@
                         <div class="item" 
                             :class="{project:item.project, select:item.select, current_month:item.current_month}" 
                             v-for="item in days_month.slice(week_item * 7, (week_item + 1) * 7 )" :key="item.id"
-                            @click="selectDay(item.day)"    
+                            @click="select_Day(item.day)"    
                         >
                             {{ item.day.getDate() }}
                         </div> 
@@ -31,15 +31,20 @@
 </template>
 
 <script>
+import { isSameDate } from '@/servis/functions'
 export default{
     name:'Calendar',
     data(){
         return{
             weekNames:['Su','Mo','Tu','We','Th','Fr', 'Sa'],
-            month:11,
-            year:2024,
-            selectDay: new Date(),
+            month: new Date().getMonth()+1,
+            year: new Date().getFullYear(),
         }
+    },
+    emits:['selectDay'],
+    props:{
+        projects:Array,
+        selectDay: Date,
     },
     computed:{
         settedData(){
@@ -50,19 +55,19 @@ export default{
             let firstSu = this.settedData;
             firstSu.setDate(firstSu.getDate() - (firstSu.getDay() + 7) % 7);
             for(let i=0; i<=34; i++){
+                let i_day = firstSu.addDays(i)
                 let day = {
                     id:i, 
-                    day:(firstSu.addDays(i)), 
-                    project:false, 
-                    select:false,
-                    current_month: firstSu.addDays(i).getMonth() == this.month - 1
+                    day:i_day, 
+                    project:this.projects.find( item=>isSameDate(new Date(item.created), i_day) ),
+                    select: isSameDate(this.selectDay, i_day),
+                    current_month: i_day.getMonth() == this.month - 1
                 }
                 result.push(day)
             }
             return result
         }
     },
-    emits:['selectDay'],
     methods:{
         setMonth(value){
             if(this.month + value > 12){
@@ -80,7 +85,7 @@ export default{
         setYear(value){
             this.year = this.year + value
         },
-        selectDay(day){
+        select_Day(day){
             this.$emit('selectDay',day)
         }
     }
@@ -137,8 +142,18 @@ export default{
     }
 
     .wheek_row .item{
-        width: 20px;
+        width: 24px;
         text-align: center;
         cursor: pointer;
+    }
+
+    .wheek_row .item.project{
+        background-color: #B9B9B9;
+        color: #fff;       
+    }
+
+    .wheek_row .item.select{
+        background-color: #FF9800;
+        color: #fff;
     }
 </style>

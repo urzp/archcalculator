@@ -3,8 +3,6 @@
 
 - email reset password
 
-- css Dark
-
 
 -openProject popap. new delete ?move
 
@@ -14,3 +12,7 @@
 -open openProject after login
 
 -gamburger css
+
+-rename project in open console
+
+-toaster saved

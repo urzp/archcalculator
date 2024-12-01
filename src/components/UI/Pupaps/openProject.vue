@@ -10,7 +10,7 @@
                     </div>
                     <div class="calendar_panel">
                         <ListDayProjects :list="list" :select_day="select_day" @openProject="id=>openProject(id)" @showProject="id=>showProject = id" />
-                        <Calendar @selectDay="day=>select_day=day"/>
+                        <Calendar :selectDay="select_day" :projects="list" @selectDay="day=>select_day=day"/>
                     </div>
                 </div>
                 <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)"/>

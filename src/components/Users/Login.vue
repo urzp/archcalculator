@@ -35,7 +35,7 @@ import { logIn } from '@/components/Users/servis.js'
 export default{
     name: 'Login',
     mounted(){
-        EventBus.on('Menu:Login',()=>this.show=true )
+        EventBus.on('Menu:Login',(nextOpen)=>this.openPopap(nextOpen) )
     },
     data(){
         return {
@@ -46,9 +46,14 @@ export default{
             password:'',
             waightResponce: false,
             notFind:false,
+            nextOpen:()=>{}
         }
     },
     methods:{
+        openPopap(nextOpen=()=>{}){
+            this.nextOpen = nextOpen
+            this.show=true
+        },
         close(){
             this.show=false
         },
@@ -79,6 +84,7 @@ export default{
                 return false 
             }
             logIn(result.data)
+            if(result.data) this.nextOpen()
             this.close()
             
         },

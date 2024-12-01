@@ -8,7 +8,7 @@
 </template>
 
 <script>
-
+import { isSameDate } from '@/servis/functions'
 export default{
     name:'ListDayProjects',
     data(){
@@ -27,10 +27,7 @@ export default{
     computed:{
         sortRicent(){
             let result = this.list.map(a => ({...a}));
-            result = result.sort((a,b)=>{
-                a = new Date(a.updated); b = new Date(b.updated)
-                if (a > b) return -1; if (a == b) return 0; if (a < b) return 1;
-            })
+            result = result.filter(item=>isSameDate(new Date(item.created), this.select_day) )
             return result
         }
     },
@@ -55,9 +52,9 @@ export default{
 
 .title{
     width: 100%;
-    font-family: 'Raleway-Light';
+    font-family: 'Raleway-Medium';
     font-size: 18px;
-    color: #464646;
+    color: #ebaa6c;
     padding-right: 20px;
     border-bottom: 1px solid #e2e2e2;
     margin-bottom: 10px;

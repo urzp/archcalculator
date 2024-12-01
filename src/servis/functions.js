@@ -124,6 +124,10 @@ export function validatePhone(phone){
         )
 }
 
+export function isSameDate(day_1, day_2){
+    return day_1.getDate()==day_2.getDate()&&day_1.getMonth()==day_2.getMonth()&&day_1.getYear()==day_2.getYear()
+}
+
 
 
 

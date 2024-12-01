@@ -65,10 +65,10 @@ export default{
         },
         openProject(){
             if(global.login) EventBus.emit('MenuProjects:open')
-            if(!global.login) EventBus.emit('Menu:Login')
+            if(!global.login) EventBus.emit('Menu:Login', ()=>{EventBus.emit('MenuProjects:open')})
         },
         saveProject(){
-            if(!global.login){ EventBus.emit('Menu:Login'); return false }
+            if(!global.login){ EventBus.emit('Menu:Login', saveNewProject); return false }
             Project.project.unsaved = false
             saveNewProject()
         },
