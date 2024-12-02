@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Project } from '@/servis/projectData.js'
+import { Project, updateProjectObject  } from '@/servis/projectData.js'
 import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Total_Object',
@@ -38,6 +38,7 @@ export default{
         value(){
             let result = Number(this.project.servis_total) + Number(this.project.spetial_servis_total)
             this.project.total_object = result
+            updateProjectObject(this.object_id)
             return result
         },
         nameObject(){

@@ -56,7 +56,7 @@ export  default{
         updateProjectParagraphData(){
             this.project.payExtra.percent = this.percent
             this.project.payExtra.value = this.value
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         },
         
     }

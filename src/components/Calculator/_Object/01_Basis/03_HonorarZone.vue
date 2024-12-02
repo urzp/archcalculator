@@ -76,7 +76,7 @@ export  default{
             this.project.honorarLevel = { ...this.data}
             this.project.honorarLevel.usePoints = this.usePoints
             delete this.project.honorarLevel.list
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         },
         select(data){
             data.id = data.id_item

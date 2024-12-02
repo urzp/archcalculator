@@ -78,7 +78,7 @@ export default{
             this.updateProject()
         },
         updateProject(){
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         }   
 
     }

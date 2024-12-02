@@ -90,7 +90,7 @@ export  default{
             this.project.finance.detals = this.list.map(item=>!item.value?0:item.value)
             this.project.finance.useDetals = this.useDetals
             this.project.finance.userTitle = this.list.map( item=>!item.userTitle?'':item.userTitle )
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         },
         editValue(newValue){
             this.value = newValue

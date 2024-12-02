@@ -49,7 +49,7 @@ export async function saveLocalProject(){
     switchToLocal()
 }
 
-export async function updateProjectObject(id, data, sendAPI=true){
+export async function updateProjectObject(id, data=[], sendAPI=true){
     let obj = Project.objects.find(item=>item.id==id)
     for (let key in data){
         obj[key] = data[key]

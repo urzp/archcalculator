@@ -98,7 +98,7 @@ export  default{
             this.project.honorarLevelDetals = this.list.map(item=>{ 
                return {value:item.value, user_title:item.user_title}
             })
-            updateProjectObject(this.object_id, this.project)
+           // updateProjectObject(this.object_id, this.project)
         }
 
     }

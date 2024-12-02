@@ -69,7 +69,7 @@ export  default{
             this.project.HonorarRate.id = this.data.id
             this.project.HonorarRate.value = this.data.value
             this.project.HonorarRate.percent = this.data.percent
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         },
         
     }

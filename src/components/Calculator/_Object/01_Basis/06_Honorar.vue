@@ -17,7 +17,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { getFeeTable, getTypeValue } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project } from '@/servis/projectData.js'
 export  default{
     name: 'Honorar_calc',
     async mounted(){

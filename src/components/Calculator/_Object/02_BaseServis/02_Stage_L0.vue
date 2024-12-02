@@ -107,7 +107,7 @@ export  default{
             this.list.forEach(index=>{
                 this.project.stages_L1[this.indexL1][this.index].push(index.userPercent)
             })
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         } 
     }
 }

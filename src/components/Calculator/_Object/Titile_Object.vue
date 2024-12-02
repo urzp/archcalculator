@@ -35,7 +35,7 @@ export default{
         },
         updateProject(){
             this.project.name = this.nameObject
-            updateProjectObject(this.object_id, this.project)
+            //updateProjectObject(this.object_id, this.project)
         },  
         deleteObject(){
             deleteProjectObject(this.object_id)

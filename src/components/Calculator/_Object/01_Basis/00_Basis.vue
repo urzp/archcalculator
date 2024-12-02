@@ -26,6 +26,7 @@ export default{
             HOAI_version:'',
             paragraph:'',
             data:{},
+            project:{},
         }
     },
     props:{
@@ -34,15 +35,19 @@ export default{
     methods:{
         async getProjectData(){
             let project_object = Project.objects.find(item=>item.id==this.object_id)
+            this.project = project_object
             this.HOAI_version = project_object.HOAI_version_id
             this.paragraph = project_object.paragraph_id
         },
         updateProjectData(){
-            let data = {
-                HOAI_version_id: this.HOAI_version,
-                paragraph_id: this.paragraph
-            }
-            updateProjectObject(this.object_id, data)
+            this.project.paragraph_id = this.paragraph
+            this.project.HOAI_version_id = this.HOAI_version
+
+            // let data = {
+            //     HOAI_version_id: this.HOAI_version,
+            //     paragraph_id: this.paragraph
+            // }
+            //updateProjectObject(this.object_id, data)
 
         },
         async selectParagraph(HOAI_v){
