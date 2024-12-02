@@ -4,7 +4,7 @@ import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
-export let Project = reactive({test:'test'})
+export let Project = reactive({})
 
 export async function LoadProjectData(id){
     let result
@@ -68,9 +68,10 @@ function switchToLocal(){
 }
 
 export async function newProjectObject(project_id, number=0){
-    let newObject = newObjectProject
+    let newObject = {...newObjectProject}
     newObject.number = number
     newObject.project_id = project_id
+    await Project.objects.push(newObject)
     if(Project.project.id=='local'||Project.project.id=='new'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
     EventBus.emit('Project:newObject')
 }

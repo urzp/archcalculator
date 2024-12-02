@@ -6,11 +6,16 @@ $id = $input_data -> id;
 $id = $mysql->real_escape_string($id);
 $selector = "`id` = '$id' AND `user_id`='$user_id'";
 
-$newdata['project_id'] = $input_data -> project_id;
-$newdata['user_id'] = $user_id;
 $newdata['name'] = $input_data -> name;
 $newdata['number'] = $input_data -> number;
+$newdata['total_object'] = $input_data -> total_object;
 $newdata['data'] = json_encode($input_data);
+
+unset($newdata['id']);
+unset($newdata['created']);
+unset($newdata['updated']);
+unset($newdata['project_id']);
+unset($newdata['user_id']);
 
 crud_update('project_objects', $newdata, $selector);
 

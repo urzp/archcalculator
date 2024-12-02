@@ -16,3 +16,7 @@
 -Finance reorganise save project
 
 -detal parts buttons keys up doun
+
+-open project  objects css margin right scroll
+
+-not show object in open panel if have one object

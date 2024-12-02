@@ -29,6 +29,8 @@ foreach($objects as $item){
     $obj_data['name'] = $item -> name;
     $obj_data['number'] = $item -> number;
     $obj_data['total_object'] = $item -> total_object;
+
+    $item -> project_id = $id_project;
     $obj_data['data'] = json_encode($item);
     crud_create('project_objects', $obj_data);
 
