@@ -13,3 +13,6 @@
 
 -rename project in open console
 
+-Finance reorganise save project
+
+-detal parts buttons keys up doun
