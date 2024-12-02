@@ -60,7 +60,7 @@ export  default{
     },
     computed:{
         value_detals(){
-            return this.list.reduce((sum, item) => sum + Number(item.value),0)
+            return this.list.reduce((sum, item) => sum + Number(!item.value?0:item.value),0)
         },
         value_render(){
             let result = this.useDetals?this.value_detals:this.value
