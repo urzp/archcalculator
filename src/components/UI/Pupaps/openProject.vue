@@ -32,6 +32,7 @@ export default{
     mounted(){
         this.getData()
         EventBus.on('MenuProjects:open',this.openPopap)
+        EventBus.on('MenuProjects:reload',this.getData)
         if(global.openPopapProjects){global.openPopapProjects=false; this.openPopap()}
     },
     data(){
@@ -211,6 +212,7 @@ export default{
         margin-right: 40px;
         display: flex;
         min-height: 300px;
+        justify-content: space-between;
     }
 
     .bg_for_close{

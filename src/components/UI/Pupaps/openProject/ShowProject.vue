@@ -1,14 +1,22 @@
 <template>
-    <div v-if="!loading" class="show_project">
+    <div v-if="!loading" class="show_project" @click="showSelectData=false">
     <template v-if="!!id_project">
         <div class="top_panel">
             <Button width="80px" height="40px" @click="openProject()">Open</Button>
             <Button width="80px" height="40px" @click="deleteProject()">Delete</Button>
         </div>
-        <div class="project_part">
-            <div class="date">{{ formatDate(project.created) }}</div>
+        <div v-if="showSelectData" class="selectData" @click.stop="">
+            <div class="wrap_calendar">
+            <Calendar :selectDay="new Date(project.created)" :projects="[]" @selectDay="day=>setNewDate(day)"/>
+            </div>
+        </div>
+        <div class="project_part" >
+            <div class="date" @click.stop="showSelectData=true">
+                {{ formatDate(project.created) }}
+            </div>
             <div class="title_finance">
-                <div class="title">{{ project.name }}</div>
+                <!-- <div class="title">{{ project.name }}</div> -->
+                <input type="text"  class="title" :value="project.name" @change="event=>newProjectName(event.target.value)"/>
                 <div class="finance">{{ formatPrice(project.total) }}</div>
             </div>
         </div>
@@ -45,6 +53,9 @@ import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
     name:'ShowProject',
+    mounted(){
+        this.getData()
+    },
     data(){
         return{
             timer:'',
@@ -52,15 +63,15 @@ export default{
             project:{},
             list_objects:[],
             list_bils:[],
+            showSelectData:false,
         }
     },
     watch:{
          id_project(){
+            //for not all load
             this.loading = true;
             clearTimeout(this.timer)
-            this.timer = setTimeout(()=>{
-                this.getData()
-            },500)
+            this.timer = setTimeout(()=>{ this.getData() },500)
         }
     },
     emits:['openProject','deleteProject'],
@@ -78,6 +89,18 @@ export default{
             this.list_objects = result.objects
             this.list_bils = result.bills
             this.loading = false;
+        },
+        async newProjectName(name){
+           await apiData({typeData:'newNameProject', data:{id:this.id_project, name}})
+            EventBus.emit('MenuProjects:reload')
+        },
+        async setNewDate(date){
+            this.showSelectData = false
+            console.log(date)
+            date = date.toLocaleString('de-De', {year:'numeric', month: 'numeric',day:'numeric'})
+            console.log(date)
+            await apiData({typeData:'setNewDateProject', data:{id:this.id_project, date}})
+            EventBus.emit('MenuProjects:reload')          
         },
         formatPrice(price){
             return `€ ${Math.fround(price).toLocaleString("de-DE")}`
@@ -122,6 +145,28 @@ export default{
     text-align: right;
     font-size: 16px;
     color: #9F9F9F;
+    cursor: pointer;
+}
+.selectData{
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+.wrap_calendar{
+    position: absolute;
+    left: 144px;
+    top: 30px;
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px #898989d6;
+    background-color: #fff;
+}
+
+.title_finance{
+    display: flex;
+    flex-direction: column;
 }
 .title{
     margin-top: 30px;
@@ -135,6 +180,10 @@ export default{
     font-size: 20px;
     text-align: center;
     color:#9A9A9A;
+}
+
+.selectData{
+    background-color: #fff;
 }
 
 .part_title{
@@ -172,11 +221,12 @@ export default{
 
 .item .data{
     font-size: 12px;
-    color: #9F9F9F;   
+    color: #9F9F9F;  
 }
 
 .item .finance{
     font-size: 18px;
+    margin-right: 10px;
 }
 
 /* Panel */

@@ -3,20 +3,11 @@
 
 - email reset password
 
-
 -openProject popap. new delete ?move
-
-
-- new project (logout) not create after logout
-
--gamburger css
 
 -rename project in open console
 
--Finance reorganise save project
+-hover in  hover out  limit min time
 
--detal parts buttons keys up doun
+php trash
 
--open project  objects css margin right scroll
-
--not show object in open panel if have one object

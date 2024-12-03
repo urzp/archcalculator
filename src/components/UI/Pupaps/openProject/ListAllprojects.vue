@@ -2,7 +2,7 @@
     <div class="list_all_projects">
         <div class="title">All Projects</div>
         <div class="list">
-            <div class="item" v-for="item in list" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
+            <div class="item" v-for="item in listSort" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
                 <div class="name_price">
                     <div class="name">{{ item.name }}</div>
                     <div class="price">{{ formatPrice(item.total) }}</div>
@@ -26,6 +26,16 @@ export default {
         list: {
             type: Array,
             default: [],
+        }
+    },
+    computed:{
+        listSort(){
+            return this.list.sort((a,b)=>{
+                a = a.created; b = b.created
+                if (a > b) return 1;
+                if (a == b) return 0;
+                if (a < b) return -1;
+            })
         }
     },
     emits:['openProject', 'showProject'],

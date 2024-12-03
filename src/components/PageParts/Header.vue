@@ -12,7 +12,11 @@
                 <div class="item_menu">How to use</div>
                 <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
-            <div class="btn_menu" @click="show_menu=!show_menu"></div>
+            <div class="btn_menu" @click="show_menu=!show_menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
         <div class="sub-header">
@@ -134,18 +138,21 @@ export default{
         font-family: 'Raleway-Light';
         transition: var(--transition-hover);
     }
+
     .btn_menu{
         width: 50px;
         height: 30px;
         cursor: pointer;
-        background-image: url('@/assets/icons/btn_menu/main.svg');
-        background-repeat: no-repeat;
-        transition: var(--transition-hover);
     }
 
-    .btn_menu:hover{
-        background-image: url('@/assets/icons/btn_menu/active.svg');
-        transition: var(--transition-hover);
+    .btn_menu .line{
+        height: 10px;
+        width: 100%;
+        border-bottom: 1px solid #999;
+    }
+
+    .btn_menu:hover .line{
+        border-bottom: 2px solid var(--color-akcent);
     }
 
     .sub-header{

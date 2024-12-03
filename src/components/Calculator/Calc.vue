@@ -32,6 +32,7 @@ export default{
        EventBus.on('MenuProjects:new', this.newProject)
        EventBus.on('Project:newObject', this.getProject)
        EventBus.on('Project:deleteObject',  this.getProject)
+       EventBus.on('MenuProjects:reload', this.getProject)
     },
     data(){
         return{

@@ -19,6 +19,7 @@
                 @useDetals="switchDetal(true)"
                 @edit_price=" data=>editDetalValue(data) "
                 @edit_UserTitle=" data=>editUserTitle(data) "
+                @count_total="total=>value_detals=total"
             />
         </div>
     </div>
@@ -44,6 +45,7 @@ export  default{
             project:{},
             detals:{},
             useDetals:false,
+            value_detals:0,
             finance:{},
         }
     },
@@ -59,9 +61,6 @@ export  default{
         },
     },
     computed:{
-        value_detals(){
-            return this.list.reduce((sum, item) => sum + Number(!item.value?0:item.value),0)
-        },
         value_render(){
             let result = this.useDetals?this.value_detals:this.value
             this.checkLimits(result)

@@ -7,7 +7,7 @@
                     <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)" :typeCurrancy="typeCurrancy"/>
                 </div>
             </div>
-            <div v-if="has_400_Bauwerk" class="detal-item">
+            <div v-if="has_400_Bauwerk" class="detal-item">$
                 <div class="title">100-800 Summe</div>
                 <div class="value-wrap">
                     <Price font_size_unit="18px" :value="summ_100_800" />
@@ -77,7 +77,7 @@ export  default{
             collapse:true,
         }
     },
-    emits:['useDetals', 'edit_UserTitle' ,'edit_price'],
+    emits:['useDetals', 'edit_UserTitle' ,'edit_price','count_total'],
     computed:{
         has_400_Bauwerk(){
             let result = !!this.list.find(item=>item.name.includes('400'))
@@ -108,8 +108,9 @@ export  default{
         },
         total(){
             let result = Number( this.list.reduce((sum, item) => sum + Number(!item.value?0:item.value),0) )
-            result = result - this.after_25_per*0.5
-            return Number(result)
+            result = Number(result - this.after_25_per*0.5)
+            this.$emit('count_total', result)
+            return result
         }
     },
     methods:{

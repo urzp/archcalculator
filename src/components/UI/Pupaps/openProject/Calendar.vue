@@ -93,9 +93,6 @@ export default{
 </script>
 
 <style>
-    .calendar{
-        width: 60%;
-    }
 
     .calendar_header{
         display: flex;
