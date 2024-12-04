@@ -15,6 +15,7 @@ export default {
     EventBus.on('Project:saveAsLocal', this.localProject)
     EventBus.on('Project:newProjectUser', id => this.project_id = id)
     EventBus.on('Project:openProject', id => this.project_id = id)
+    EventBus.on('MenuProjects:openLocal', ()=>this.project_id = 'local')
   },
   data(){
     return {

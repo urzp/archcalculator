@@ -22,6 +22,7 @@
         <div class="sub-header">
             <div class="item_subHeader" @click="newProject()">New Project</div>
             <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Save New Project</div>
+            <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Open unsaved Project</div>
             <div class="item_subHeader" @click="openProject()">Open Project</div>
         </div>
     </div>
@@ -39,6 +40,8 @@ export default{
     async mounted(){
         await this.getData()
         if(global.newProject) {global.newProject=false; this.newProject()}
+        this.chekLocalUnsaved()
+        EventBus.on('Project:openProject',this.chekLocalUnsaved)
     },
     data(){
         return {
@@ -46,6 +49,7 @@ export default{
             global:{},
             user:{},
             show_menu:false,
+            hasLocalUnsaved:false,
         }
     },
     computed:{
@@ -56,7 +60,7 @@ export default{
         unsaved(){
             if(!Project.project) return false
             return Project.project.unsaved
-        }
+        },
     },
     methods:{
         getData(){
@@ -84,6 +88,9 @@ export default{
             Project.project.unsaved = false
             saveNewProject()
         },
+        openLocalProject(){
+            EventBus.emit('MenuProjects:openLocal')
+        },
         goToCalcPage(){
             if( this.$route.path!='/' ){
                 global.newProject = true
@@ -91,6 +98,11 @@ export default{
                 return true
             }
             return false
+        },
+        chekLocalUnsaved(){
+            let localProject = JSON.parse( localStorage.getItem('Project') )
+            let id = localProject.project.id
+            this.hasLocalUnsaved = id=='local'
         }
     },
 }

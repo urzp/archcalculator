@@ -10,3 +10,5 @@
 php trash
 
 - save project popap before open other project or create newProj
+
+open projec pupap resent max list
