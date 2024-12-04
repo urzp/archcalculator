@@ -11,6 +11,7 @@ import { EventBus } from '@/servis/EventBus'
 export default {
   name: 'HomeView',
   mounted(){
+    this.init()
     EventBus.on('Project:saveAsLocal', this.localProject)
     EventBus.on('Project:newProjectUser', id => this.project_id = id)
     EventBus.on('Project:openProject', id => this.project_id = id)
@@ -21,6 +22,15 @@ export default {
     }
   },
   methods:{
+    init(){
+      let localProject = localStorage.getItem('Project') 
+      if(!!localProject){
+        let id = JSON.parse(localProject).project.id
+        this.project_id = id
+      }else{
+        this.project_id = 'local'
+      }
+    },
     localProject(){
       this.project_id = 'local'
     }

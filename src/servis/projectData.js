@@ -17,9 +17,10 @@ export async function LoadProjectData(id){
 
 export async function saveNewProject(){
     Project.project.unsaved = false
-    saveLocalProject()
    let result = (await apiData({typeData:'newProject', data: Project})).data
    let id_project = result.project
+   Project.project.id = id_project
+   saveLocalProject()
    EventBus.emit('Project:newProjectUser', id_project)
    EventBus.emit('Menu:Message', 'Saved')
 }
