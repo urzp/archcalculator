@@ -65,6 +65,14 @@ export default{
         },
         newProject(){
             if(this.goToCalcPage()) return false
+            let localProject = localStorage.getItem('Project') 
+            if(!!localProject&&JSON.parse(localProject).project.unsaved ){
+                EventBus.emit('Popap:comfirm',{
+                    title:'Das aktuelle Projekt wurde nicht gespeichert. Weitermachen?',
+                    action: async ()=>{ EventBus.emit('MenuProjects:new') },
+                })
+                return true
+            }
             EventBus.emit('MenuProjects:new')
         },
         openProject(){

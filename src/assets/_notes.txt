@@ -5,9 +5,8 @@
 
 -openProject popap. new delete ?move
 
--rename project in open console
-
 -hover in  hover out  limit min time
 
 php trash
 
+- save project popap before open other project or create newProj

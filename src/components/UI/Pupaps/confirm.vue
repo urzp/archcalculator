@@ -3,7 +3,7 @@
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div class="form">
-                <div class="title">Bestätigen Sie den Löschvorgang</div>
+                <div class="title">{{ title }}</div>
                 <div class="panel">
                     <Button height="35px" @click.stop="comfirm()">Ja</Button>
                     <Button height="35px" @click.stop="close()">Nein</Button>
@@ -19,22 +19,25 @@ import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Comfirm',
     mounted(){
-        EventBus.on('Popap:comfirm',(action)=>{this.openPopap(action)})
+        EventBus.on('Popap:comfirm',(data)=>{this.openPopap(data)})
     },
     data(){
         return {
+            title:'',
             show:false,
             action:()=>{},
         }
     },
     methods:{
         close(){
+            this.title = ''
             this.action = ()=>{}
             this.show=false
         },
-        openPopap(action){
+        openPopap(data){
+            this.title = data.title
             this.show=true
-            this.action = action
+            this.action = data.action
         }, 
         comfirm(){
             this.action()

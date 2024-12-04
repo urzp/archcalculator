@@ -7,7 +7,7 @@
         </div>
         <div v-if="showSelectData" class="selectData" @click.stop="">
             <div class="wrap_calendar">
-            <Calendar :selectDay="new Date(project.created)" :projects="[]" @selectDay="day=>setNewDate(day)"/>
+            <Calendar :openMonth="new Date(project.created)" :selectDay="new Date(project.created)" :projects="[]" @selectDay="day=>setNewDate(day)"/>
             </div>
         </div>
         <div class="project_part" >
@@ -23,7 +23,8 @@
         <div class="part_title">Objects</div>
         <div class="list_objects">
             <div class="item" v-for="item in list_objects" :key="item.id">
-                <div class="name">{{ item.name }}</div>
+                <!-- <div class="name">{{ item.name }}</div> -->
+                <input type="text"  class="name" :value="item.name" @change="event=>newObjecName(event.target.value, item.id)"/>
                 <div class="finance">{{ formatPrice(item.total_object) }}</div>
             </div>
         </div>
@@ -74,7 +75,7 @@ export default{
             this.timer = setTimeout(()=>{ this.getData() },500)
         }
     },
-    emits:['openProject','deleteProject'],
+    emits:['openProject','deleteProject','softReload'],
     props:{
         id_project:{
             type:String,
@@ -93,6 +94,10 @@ export default{
         async newProjectName(name){
            await apiData({typeData:'newNameProject', data:{id:this.id_project, name}})
             EventBus.emit('MenuProjects:reload')
+        },
+        async newObjecName(name, id){
+           await apiData({typeData:'newNameObject', data:{id, name}})
+            this.$emit('softReload')
         },
         async setNewDate(date){
             this.showSelectData = false
@@ -155,6 +160,8 @@ export default{
 
 .wrap_calendar{
     position: absolute;
+    display: flex;
+    justify-content: center;
     left: 144px;
     top: 30px;
     width: 350px;

@@ -114,11 +114,15 @@ export default{
         },
         async deleteHOAI(){     
             let _this = this
-            EventBus.emit('Popap:comfirm',async ()=>{
-                await apiData({typeData:'deleteHOAI', data: _this.data.id })
-                _this.getData()
-                _this.data.value = ''
-                _this.data.id = ''
+            EventBus.emit('Popap:comfirm',{
+                title:'Bestätigen Sie den Löschvorgang',
+                action: async ()=>{
+                    await apiData({typeData:'deleteHOAI', data: _this.data.id })
+                    _this.getData()
+                    _this.data.value = ''
+                    _this.data.id = ''
+                },
+                
             })
         },
         async switchPuplish(){

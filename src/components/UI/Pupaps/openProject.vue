@@ -13,7 +13,7 @@
                         <Calendar :selectDay="select_day" :projects="list" @selectDay="day=>select_day=day"/>
                     </div>
                 </div>
-                <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)"/>
+                <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)" @softReload="softReload=true"/>
             </div>
             <div v-else-if="loading" class="loading">Loading . . .</div>
             <div v-else class="empty_list_projects">No one any project</div>
@@ -44,6 +44,7 @@ export default{
             loading: false,
             showProject:'',
             select_day: new Date(),
+            softReload: false,
         }
     },
     computed:{
@@ -62,6 +63,7 @@ export default{
         },
         close(){
             document.documentElement.style.overflow = 'auto'
+            if(this.softReload){ this.softReload = false; EventBus.emit('MenuProjects:reload') }
             this.show=false
         },
         openPopap(){

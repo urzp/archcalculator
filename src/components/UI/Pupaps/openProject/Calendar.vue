@@ -34,10 +34,14 @@
 import { isSameDate } from '@/servis/functions'
 export default{
     name:'Calendar',
+    mounted(){
+        this.month = this.openMonth.getMonth() + 1,
+        this.year = this.openMonth.getFullYear()
+    },
     data(){
         return{
             weekNames:['Su','Mo','Tu','We','Th','Fr', 'Sa'],
-            month: new Date().getMonth()+1,
+            month: new Date().getMonth() + 1,
             year: new Date().getFullYear(),
         }
     },
@@ -45,6 +49,10 @@ export default{
     props:{
         projects:Array,
         selectDay: Date,
+        openMonth:{
+            type: Date,
+            default: new Date()
+        }
     },
     computed:{
         settedData(){
@@ -93,6 +101,10 @@ export default{
 </script>
 
 <style>
+
+    .calendar{
+        width: 270px;
+    }
 
     .calendar_header{
         display: flex;
