@@ -1,11 +1,11 @@
 <template>
     <div class="calculator">
+        <template v-if="loaded">
         <div class="title-project">
             <!-- <div class="name" >{{ project_name }}</div> -->
              <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
             <div class="date">{{ created }}</div>
         </div>
-        <template v-if="loaded">
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
         </div>
@@ -70,7 +70,6 @@ export default{
             if(!this.project_id) return false
             if(this.project_id == 'new') result = await newPoject() 
             if(this.project_id != 'new') result = await LoadProjectData(this.project_id) 
-            if(this.project_id == 'local') result.project.id = 'local'
             this.projectTest = result
             this.project = this.projectTest.project
             this.ListObjects = this.projectTest.objects

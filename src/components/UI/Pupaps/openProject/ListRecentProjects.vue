@@ -1,7 +1,7 @@
 <template>
     <div class="list_recent_projects">
         <div class="title">Recent</div>
-        <div class="item" v-for="item in sortRicent" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
+        <div class="item" v-for="item in sortRicent.slice(0, 8)" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
             <div class="name">{{ item.name }}</div>
         </div>
     </div>

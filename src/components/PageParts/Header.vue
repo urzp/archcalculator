@@ -87,6 +87,7 @@ export default{
             if(!global.login){ EventBus.emit('Menu:Login', saveNewProject); return false }
             Project.project.unsaved = false
             saveNewProject()
+            this.hasLocalUnsaved = false
         },
         openLocalProject(){
             EventBus.emit('MenuProjects:openLocal')
@@ -101,8 +102,9 @@ export default{
         },
         chekLocalUnsaved(){
             let localProject = JSON.parse( localStorage.getItem('Project') )
+            if(!localProject) return false
             let id = localProject.project.id
-            this.hasLocalUnsaved = id=='local'
+            this.hasLocalUnsaved = (id=='new'||id=='local')&&localProject.project.unsaved
         }
     },
 }

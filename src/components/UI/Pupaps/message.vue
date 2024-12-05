@@ -44,10 +44,10 @@ export default{
     }
     .pupap{
         position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 200px;
+        left: calc(100% / 2 - 200px / 2);
+        top: 15px;
         min-height: 30px;
+        min-width: 200px;
         background-color: #fff;
         border: 2px solid #D9D9D9;
         border-radius: 10px;
@@ -62,7 +62,8 @@ export default{
     }
 
     .content{
-        height: 70px;
+        min-height: 70px;
+        padding: 20px;
         display: flex;
         justify-content: center;
         align-items: center;

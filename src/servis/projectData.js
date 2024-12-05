@@ -8,7 +8,13 @@ export let Project = reactive({})
 
 export async function LoadProjectData(id){
     let result
-    if(id=='local'){ result = loadLocal() }else{ result =  (await apiData({typeData:'loadWholeProject', id})).data  }
+    if(id=='local'){ 
+        result = loadLocal() 
+    }else{ 
+        result =  await apiData({typeData:'loadWholeProject', id})
+        if(!result.success){EventBus.emit('Project:ErrLoadeded')}
+        result = result.data
+    }
     Object.assign(Project, result) 
     window.project = Project
     EventBus.emit('Project:Loadeded')
@@ -20,7 +26,9 @@ export async function saveNewProject(){
    let result = (await apiData({typeData:'newProject', data: Project})).data
    let id_project = result.project
    Project.project.id = id_project
-   saveLocalProject()
+   localStorage.setItem('OpendProject', id_project)
+   localStorage.removeItem('Project')
+   //saveLocalProject()
    EventBus.emit('Project:newProjectUser', id_project)
    EventBus.emit('Menu:Message', 'Saved')
 }
@@ -41,6 +49,8 @@ export async function newPoject(){
 }
 
 export async function updateProject(){
+    Project.project.unsaved = 'true'
+    Project.project.id = 'local'
     if(Project.project.id=='local'||Project.project.id=='new'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
 }
 
@@ -48,6 +58,9 @@ export async function saveLocalProject(){
     let projectJSON = JSON.stringify(Project)
     localStorage.setItem('Project', projectJSON);
     switchToLocal()
+    //console.log('saveNewProject')
+    // Project.project.unsaved = 'true'
+    // Project.project.id = 'local'
 }
 
 export async function updateProjectObject(id, data=[], sendAPI=true){

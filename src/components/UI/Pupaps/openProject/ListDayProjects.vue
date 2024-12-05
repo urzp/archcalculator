@@ -1,8 +1,10 @@
 <template>
     <div class="list_recent_projects">
         <div class="title">{{ select_day.toLocaleString("de-DE", {day:'numeric',month:'short', year:'numeric'}) }}</div>
-        <div class="item" v-for="item in sortRicent" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
-            <div class="name">{{ item.name }}</div>
+        <div class="list">
+            <div class="item" v-for="item in sortRicent" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
+                <div class="name">{{ item.name }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -79,6 +81,13 @@ export default{
     color:#464646;
     font-family: 'Raleway-Light';
     font-size: 16px;
+}
+
+.list{
+    overflow-y: auto;
+    max-height: 250px;
+    scrollbar-color: #7E7E7E #EDEDED;
+    scrollbar-width: thin;
 }
 
 .item:hover{

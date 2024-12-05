@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 
 export let newProjectData = {
     id: 'new',
-    unsaved: true,
+    unsaved: false,
     created: dateToString(new Date),
     updated: dateToString(new Date),
     user_id: localStorage.getItem('user_id'),
