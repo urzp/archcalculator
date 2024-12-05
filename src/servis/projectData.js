@@ -49,8 +49,7 @@ export async function newPoject(){
 }
 
 export async function updateProject(){
-    Project.project.unsaved = 'true'
-    Project.project.id = 'local'
+    setUnSavedStatus()
     if(Project.project.id=='local'||Project.project.id=='new'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
 }
 
@@ -58,9 +57,11 @@ export async function saveLocalProject(){
     let projectJSON = JSON.stringify(Project)
     localStorage.setItem('Project', projectJSON);
     switchToLocal()
-    //console.log('saveNewProject')
-    // Project.project.unsaved = 'true'
-    // Project.project.id = 'local'
+}
+
+export function setUnSavedStatus(){
+    Project.project.unsaved = 'true'
+    Project.project.id = 'local'
 }
 
 export async function updateProjectObject(id, data=[], sendAPI=true){

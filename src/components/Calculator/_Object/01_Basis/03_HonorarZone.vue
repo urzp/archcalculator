@@ -25,7 +25,7 @@
 
 <script>
 import { getHonorarZones } from '@/servis/calcData.js'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 import { lastElement } from '@/servis/functions.js'
 
 export  default{
@@ -76,6 +76,7 @@ export  default{
             this.project.honorarLevel = { ...this.data}
             this.project.honorarLevel.usePoints = this.usePoints
             delete this.project.honorarLevel.list
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         },
         select(data){

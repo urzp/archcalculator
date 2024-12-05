@@ -21,7 +21,7 @@
 
 <script>
 import { getStages }  from '@/servis/calcData.js'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export default{
     name: 'BaseServis',
     async mounted(){
@@ -107,6 +107,7 @@ export default{
             this.list.forEach(index=>{
                 this.project.stages.push(index.userPercent)
             })
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         }   
 

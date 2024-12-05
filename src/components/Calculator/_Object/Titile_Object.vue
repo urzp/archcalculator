@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 import {  deleteProjectObject } from '@/servis/projectData.js'
 export default{
     name: 'Titile_Object',
@@ -35,6 +35,7 @@ export default{
         },
         updateProject(){
             this.project.name = this.nameObject
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         },  
         deleteObject(){

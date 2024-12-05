@@ -28,7 +28,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { getAllowableCosts, getTypeValue, financeLimits } from '@/servis/calcData.js'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
@@ -89,6 +89,7 @@ export  default{
             this.project.finance.detals = this.list.map(item=>!item.value?0:item.value)
             this.project.finance.useDetals = this.useDetals
             this.project.finance.userTitle = this.list.map( item=>!item.userTitle?'':item.userTitle )
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         },
         editValue(newValue){

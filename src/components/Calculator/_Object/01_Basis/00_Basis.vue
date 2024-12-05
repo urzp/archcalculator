@@ -14,7 +14,7 @@
 
 <script>
 import { getSameParagraph } from '@/servis/calcData.js'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export default{
     name: 'Basis',
     async mounted(){
@@ -40,6 +40,7 @@ export default{
             this.paragraph = project_object.paragraph_id
         },
         updateProjectData(){
+            setUnSavedStatus()
             this.project.paragraph_id = this.paragraph
             this.project.HOAI_version_id = this.HOAI_version
 

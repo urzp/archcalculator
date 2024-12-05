@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export default{
     name: 'SpecialServices',
     async mounted(){
@@ -78,6 +78,7 @@ export default{
             this.updateProject()
         },
         updateProject(){
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         }   
 

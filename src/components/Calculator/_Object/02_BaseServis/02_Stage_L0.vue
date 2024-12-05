@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export  default{
     name: 'Stage_calc_L0',
     async mounted(){
@@ -107,6 +107,7 @@ export  default{
             this.list.forEach(index=>{
                 this.project.stages_L1[this.indexL1][this.index].push(index.userPercent)
             })
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         } 
     }

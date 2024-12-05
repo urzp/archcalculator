@@ -13,7 +13,7 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export  default{
     name: 'HonorarRate_calc',
     async mounted(){
@@ -69,6 +69,7 @@ export  default{
             this.project.HonorarRate.id = this.data.id
             this.project.HonorarRate.value = this.data.value
             this.project.HonorarRate.percent = this.data.percent
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         },
         

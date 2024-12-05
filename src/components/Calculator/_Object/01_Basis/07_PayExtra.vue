@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Project, updateProjectObject } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export  default{
     name: 'PayExtra_calc',
     async mounted(){
@@ -56,6 +56,7 @@ export  default{
         updateProjectParagraphData(){
             this.project.payExtra.percent = this.percent
             this.project.payExtra.value = this.value
+            setUnSavedStatus()
             //updateProjectObject(this.object_id, this.project)
         },
         
