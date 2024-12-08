@@ -1,10 +1,8 @@
 
-- safty upload file(avatars) to server
-
 - email reset password
 
 -openProject popap. new delete ?move
 
--hover in  hover out  limit min time
-
 php trash
+
+
