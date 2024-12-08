@@ -2,7 +2,7 @@
     <div class="list_all_projects">
         <div class="title">All Projects</div>
         <div class="list">
-            <div class="item" v-for="item in listSort" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
+            <div class="item" v-for="item in listSort" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)" @mouseleave="cancelShowProject()">
                 <div class="name_price">
                     <div class="name">{{ item.name }}</div>
                     <div class="price">{{ formatPrice(item.total) }}</div>
@@ -19,7 +19,7 @@ export default {
     name:'ListAllprojects',
     data(){
         return {
-
+            timerHover:{},
         }
     },
     props:{
@@ -51,7 +51,13 @@ export default {
             this.$emit('openProject', id)
         },
         showProject(id){
-            this.$emit('showProject', id)
+            clearTimeout(this.timerHover)
+            this.timerHover = setTimeout(()=>{
+                this.$emit('showProject', id)
+            }, 500)
+        },
+        cancelShowProject(){
+            clearTimeout(this.timerHover)
         }
     }
 }
