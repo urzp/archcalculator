@@ -2,9 +2,9 @@
 <div class="footer-wrap">
     <div class="line-wrap"><div class="line"></div></div>
     <div class="list">
-        <div class="item">Copyright © 2024</div>
-        <div class="item">Privacy Policy | Terms of Use</div>
-        <div class="item">arcitect-calculator@inf.com</div>
+        <div class="item">Copyright © 2024 honorar.online</div>
+        <div class="item">Impressum Datenschutz Cookie Einstellungen</div>
+        <div class="item">mail@honorar.online</div>
         <div class="item whatsapp"></div>
     </div>
 </div>

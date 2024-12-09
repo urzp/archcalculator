@@ -16,7 +16,7 @@
                 <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)" @softReload="softReload=true"/>
             </div>
             <div v-else-if="loading" class="loading">Loading . . .</div>
-            <div v-else class="empty_list_projects">No one any project</div>
+            <div v-else class="empty_list_projects">Keine Projekte vorhanden</div>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   

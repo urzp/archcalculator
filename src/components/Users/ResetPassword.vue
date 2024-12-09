@@ -14,14 +14,14 @@
                 <template v-if="stepCode">
                 <div class="item" >Code aus Email</div>
                 <input type="password" @change="event=>chekCode(event.target.value)" />
-                <div v-if="err_code" class="err">error</div>
+                <div v-if="err_code" class="err">Feld ausfüllen</div>
                 <div v-if="wrong_code" class="err">Ungültiger Code</div>
                 </template>
 
                 <template v-if="stepPassword">
                 <div class="item" >Neues Passwort</div>
                 <input type="password" @change="event=>chekPassword(event.target.value)" />
-                <div v-if="err_password" class="err">error</div>
+                <div v-if="err_password" class="err">Feld ausfüllen</div>
                 </template>
 
                <div class="submit">

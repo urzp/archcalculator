@@ -57,7 +57,7 @@ export default{
         position: fixed;
         left: calc(100% / 2 - 375px / 2);
         top: calc(100vh / 2 - 260px / 2);
-        width: 385px;
+        width: 445px;
         min-height: 30px;
         background-color: #fff;
         border: 2px solid #D9D9D9;

@@ -21,7 +21,7 @@
         </div>
         <div class="sub-header">
             <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
-            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Projekt X' speichern</div>
+            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
             <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
             <div class="item_subHeader" @click="openProject()">Projekt öffnen</div>
         </div>
@@ -72,7 +72,7 @@ export default{
             let localProject = localStorage.getItem('Project') 
             if(!!localProject&&JSON.parse(localProject).project.unsaved ){
                 EventBus.emit('Popap:comfirm',{
-                    title:'Das aktuelle Projekt wurde nicht gespeichert. Weitermachen?',
+                    title:'Das aktuelle Projekt wurde nicht gespeichert, dennoch weitermachen?',
                     action: async ()=>{ EventBus.emit('MenuProjects:new') },
                 })
                 return true

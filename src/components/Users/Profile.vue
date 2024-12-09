@@ -110,13 +110,17 @@ export default{
         },
         async deleteUser(){
             let router = this.$router
-            EventBus.emit('Popap:comfirm',async ()=>{
-                let result = await apiData({typeData:'deleteUser' }) 
-                if(result.success){
-                    logOut()
-                    router.push({ name: 'home' })
+            EventBus.emit('Popap:comfirm',{
+                title:'Das Konto wird dauerhaft gelöscht. Möchten Sie es wirklich entfernen?',
+                action: async ()=>{
+                        let result = await apiData({typeData:'deleteUser' }) 
+                        if(result.success){
+                            logOut()
+                            router.push({ name: 'home' })
+                        }
+                    }
                 }
-            })
+            )
         },
         setOldPassword(value){
             this.oldPassword = value
