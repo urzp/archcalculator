@@ -1,6 +1,8 @@
 
 - email reset password
 
+-email confirme
+
 -openProject popap. new delete ?move
 
 php trash

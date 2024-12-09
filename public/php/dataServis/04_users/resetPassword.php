@@ -1,5 +1,7 @@
 <?php
 
+include 'sendEmails.php';
+
 $input_data = $rq_data -> data;
 $email = $input_data -> email;
 $code = $input_data -> code;
@@ -16,6 +18,7 @@ if($data!=null){
         $code=GeneratePinCode(5);
         $new_data['resetCode'] = $code;
         crud_update('users', $new_data, $selector);
+        sendResetPasswordEmail($email, $code );
         $result = true;
     }else{
         if($code==$data['resetCode']){
