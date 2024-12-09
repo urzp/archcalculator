@@ -2,6 +2,7 @@ import { reactive } from 'vue';
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
+import {toLetters} from '@/servis/functions.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
 export let Project = reactive({})
@@ -83,22 +84,23 @@ function switchToLocal(){
 }
 
 export async function newProjectObject(project_id, number=0){
+    console.log(number)
     let newObject = {...newObjectProject}
     newObject.number = number
+    newObject.name = newObject.name.replace("A", toLetters(number + 1).toUpperCase()) 
     newObject.project_id = project_id
     await Project.objects.push(newObject)
-    if(Project.project.id=='local'||Project.project.id=='new'){ await  newProjectObjectLoacal(newObject) }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
+    if(Project.project.id=='local'||Project.project.id=='new'){ await  newProjectObjectLoacal() }else{ await apiData({typeData:'newProjectObject', data: newObject}) }
     EventBus.emit('Project:newObject')
 }
 
-async function newProjectObjectLoacal(newObject){
-    await Project.objects.push({...newObject}) 
+async function newProjectObjectLoacal(){
     await Project.objects.forEach((item,index)=>item.id=index)
     await saveLocalProject()
 }
 
 export async function deleteProjectObject(id){
-    if(Project.project.id=='local'){ deleteLocalProjectObject(id) }else{  
+    if(Project.project.id=='local'||Project.project.id=='new'){ deleteLocalProjectObject(id) }else{  
         await apiData({typeData:'deleteProjectObject', data: id})
     }
     EventBus.emit('Project:deleteObject') 

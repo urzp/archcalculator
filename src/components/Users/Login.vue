@@ -5,13 +5,13 @@
             <div class="form">
                 <div class="item">Email</div>
                 <input type="text" @change="event=>chekEmail(event.target.value)"/>
-                <div v-if="err_email" class="err">error Email</div>
+                <div v-if="err_email" class="err">Keine gültige E-Mail</div>
                 <div class="item" >Password</div>
                 <input type="password" @change="event=>chekPassword(event.target.value)" @keyup.enter="submit()" />
                 <div v-if="err_password" class="err">error</div>
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                    <div v-if="notFind"  class="loading not_find">Nicht gefunden</div>
+                    <div v-if="notFind"  class="loading not_find">nicht gefunden</div>
                     <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
                 </div>
                 <div class="links">

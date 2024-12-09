@@ -5,7 +5,7 @@ export let global= reactive({
    admin:false,
    openPopapProjects:false,
    newProject:false,
-   base_url:'https://hosting209012.ae957.netcup.net',
+   base_url:'https://honorar.online',
 })
 
 export let user = reactive({

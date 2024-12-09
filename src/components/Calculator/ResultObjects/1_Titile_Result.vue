@@ -1,7 +1,7 @@
 <template>
     <div class="title-objects">
         <ToggleButton @switch_tg="(val)=>{this.$emit('switch_tg', val) }"/>
-        <div  class="name" >Total: {{ nameTotalObject }}</div>
+        <div  class="name" >Summe: {{ nameTotalObject }}</div>
     </div>   
 </template>
 

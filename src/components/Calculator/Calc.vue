@@ -10,7 +10,7 @@
             <ObjectCalc :object_id="item.id" />
         </div>
         <div class="panel" >
-            <NewButton width="140px" @click="newObject()" >Object</NewButton>
+            <NewButton width="200px" @click="newObject()" >Honorarobjekt</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
         <ResultCalc/>

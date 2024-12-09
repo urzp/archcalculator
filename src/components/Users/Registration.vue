@@ -19,7 +19,7 @@
                <div class="submit">
                    <div v-if="waightResponce"  class="loading">Loading . . .</div>
                    <div v-if="notFind"  class="loading not_find">Kontaktieren Sie den Support</div>
-                   <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
+                   <Button height="35px" width="125px" @click="submit()">Registrieren</Button>
                </div>
 
                <div class="links">
@@ -62,9 +62,9 @@ export default{
            this.show=false
        },
        async chekEmail(email=this.email){
-           if( !validateEmail(email) ){this.err_email=true; this.err_email_msg = "Falsche Email" ;return false} 
+           if( !validateEmail(email) ){this.err_email=true; this.err_email_msg = "Keine gültige E-Mail" ;return false} 
            let result = await apiData({typeData:'notHasEmail', email }) 
-           if(!result.success){ this.err_email=true; this.err_email_msg = "Beschäftigt Email" ;return false }
+           if(!result.success){ this.err_email=true; this.err_email_msg = "E-Mail vergeben" ;return false }
            this.err_email=false
            this.email = email
            return true
@@ -85,8 +85,8 @@ export default{
             if(!(this.password===this.password_2)){ 
                 this.err_password = true; 
                 this.err_password_2 =true; 
-                this.err_password_msg = "passen nicht zusammen"
-                this.err_password_2_msg = "passen nicht zusammen"
+                this.err_password_msg = "nicht identisch"
+                this.err_password_2_msg = "nicht identisch"
                 return false 
             }
             return true

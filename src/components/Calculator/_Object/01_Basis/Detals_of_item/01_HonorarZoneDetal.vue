@@ -13,7 +13,7 @@
             </div>
             <div class="total">
                 <div class="total_points">
-                    <div class="label">Total points: </div>
+                    <div class="label">Summe: </div>
                     <div class="value">{{ total }}</div>
                 </div>
                 <div class="equivalent">

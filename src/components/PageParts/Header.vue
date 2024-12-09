@@ -8,8 +8,8 @@
             </div>
             <div class="menu">
                 <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">Calculator</div>
-                <div class="item_menu">About project</div>
-                <div class="item_menu">How to use</div>
+                <div class="item_menu">Über honorar.online</div>
+                <div class="item_menu">Anleitung</div>
                 <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
             </div>
             <div class="btn_menu" @click="show_menu=!show_menu">
@@ -20,10 +20,10 @@
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
         <div class="sub-header">
-            <div class="item_subHeader" @click="newProject()">New Project</div>
-            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Save New Project</div>
-            <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Open unsaved Project</div>
-            <div class="item_subHeader" @click="openProject()">Open Project</div>
+            <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
+            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Projekt X' speichern</div>
+            <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
+            <div class="item_subHeader" @click="openProject()">Projekt öffnen</div>
         </div>
     </div>
     <Popaps/>

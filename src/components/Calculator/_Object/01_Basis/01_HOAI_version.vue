@@ -1,6 +1,6 @@
 <template>
     <div class="main_row">
-        <div class="title">HOAI version</div>
+        <div class="title">HOAI Version</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>

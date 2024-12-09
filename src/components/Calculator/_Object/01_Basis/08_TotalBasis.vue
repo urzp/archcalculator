@@ -1,7 +1,7 @@
 <template>
     <div v-if="!!paragraph" class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Total</div>
+            <div class="title">Summe</div>
             <div class="value-percent">{{ percent }} %</div>
             <Price :value = 'value'/>
         </div>
