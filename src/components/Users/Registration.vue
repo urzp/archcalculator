@@ -85,8 +85,8 @@ export default{
             if(!(this.password===this.password_2)){ 
                 this.err_password = true; 
                 this.err_password_2 =true; 
-                this.err_password_msg = "nicht identisch"
-                this.err_password_2_msg = "nicht identisch"
+                this.err_password_msg = "Passwort weicht ab"
+                this.err_password_2_msg = "Passwort weicht ab"
                 return false 
             }
             return true

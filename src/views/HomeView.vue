@@ -9,6 +9,8 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
+import { apiData } from '@/servis/apiData.js'
+
 export default {
   name: 'HomeView',
   mounted(){
@@ -18,6 +20,8 @@ export default {
     EventBus.on('Project:openProject', id => this.openProject(id))
     EventBus.on('MenuProjects:openLocal', ()=>this.project_id = 'local')
     EventBus.on('Project:ErrLoadeded', this.ErrorLoad)
+    this.confirmEmail()
+    
   },
   data(){
     return {
@@ -35,12 +39,23 @@ export default {
       localStorage.setItem('OpendProject',id) 
     },
     ErrorLoad(){
-      EventBus.emit('Menu:Message', 'The project not found')
+      EventBus.emit('Menu:Message', 'Das Projekt wurde nicht gefunden')
       localStorage.removeItem('OpendProject') 
       this.project_id = 'local'
     },
     localProject(){
       this.project_id = 'local'
+    },
+    async confirmEmail(){
+      if(!this.$route.query||!this.$route.query.email||!this.$route.query.code) return false
+      let email = this.$route.query.email
+      let code = this.$route.query.code
+      let result = await apiData({typeData:'comfirmEmail',data:{email, code}})
+      if(!result.success){ EventBus.emit('Menu:Message', 'Falscher Bestätigungs-Email-Link') }
+      if(result.success){ 
+        if(result.data.email_confirmed == '0') EventBus.emit('Menu:Message', 'E-Mail bestätigt') 
+        if(result.data.email_confirmed == '1') EventBus.emit('Menu:Message', 'Bereits E-Mail bestätigt') 
+      }
     }
   }
   

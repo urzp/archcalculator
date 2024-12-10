@@ -11,7 +11,7 @@
                 <div v-if="err_password" class="err">Feld ausfüllen</div>
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                    <div v-if="notFind"  class="loading not_find">nicht gefunden</div>
+                    <div v-if="notFind&&!waightResponce"  class="loading not_find">nicht gefunden</div>
                     <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
                 </div>
                 <div class="links">

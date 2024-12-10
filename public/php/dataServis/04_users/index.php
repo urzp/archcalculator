@@ -3,6 +3,7 @@
 $mysql = $mysql_calc;
 
 switch ($typeData){
+    case 'comfirmEmail': include 'comfirmEmail.php'; break;
     case 'deleteUser': include 'deleteUser.php'; break;
     case 'newPassword': include 'newPassword.php'; break;
     case 'updateUser': include 'updateUser.php'; break;

@@ -43,4 +43,28 @@ function sendResetPasswordEmail($email, $resetpassword){
     }
 
 }
+
+function sendRegistrationEmail($email, $password, $comfirmecode){
+
+    try {
+        global $mail;
+        configMail();
+        $mail->addAddress($email);             
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Herzlich willkommen auf der Website honorar.online!';
+        $mail->Body    = "<h3>Herzlich willkommen auf der Website honorar.online!</h3>
+                            <p>Sie haben sich erfolgreich bei uns registriert. Verwenden Sie die folgenden Daten, um sich in Ihr Konto einzuloggen:</p>
+                            <p><b>Benutzername:</b> $email</p>
+                            <p><b>Passwort:</b> $password</p>
+                            <p>Um Ihre E-Mail zu bestätigen und die Registrierung abzuschließen, klicken Sie bitte auf folgenden Link: <a href='https://honorar.online?email=$email&code=$comfirmecode'>comfirm Email</a></p>
+                            <p>Mit freundlichen Grüßen, das Team von honorar.online.</p>";
+        $mail->send();
+        //echo 'Message has been sent';
+    } catch (Exception $e) {
+        //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+}
+
+
 ?>
