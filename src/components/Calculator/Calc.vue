@@ -106,7 +106,8 @@ export default{
 <style scoped>
     .calculator{
         min-height: 75vh;
-        margin-bottom: 100px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #999999;
     }
 
     .title-project{

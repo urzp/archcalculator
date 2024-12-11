@@ -28,6 +28,7 @@ export default{
         border-bottom: solid 1px #999999;
     }
     .footer-wrap{
+        margin-top: 100px;
         margin-bottom: 0px;
         height: 90px;
     }

@@ -20,10 +20,16 @@
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
         <div class="sub-header">
-            <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
-            <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
-            <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
-            <div class="item_subHeader" @click="openProject()">Projekt öffnen</div>
+            <div class="left_side">
+                <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
+                <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
+                <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
+                <div class="item_subHeader" @click="openProject()">Projekt öffnen</div>
+            </div>
+            <div class="right_side">
+                <div class="item_subHeader" @click="console.log('open bills')">New Project Bill</div>
+                <div class="item_subHeader" @click="console.log('open bills')">Bills</div>
+            </div>
         </div>
     </div>
     <Popaps/>
@@ -180,11 +186,15 @@ export default{
     .sub-header{
         margin-top: 15px;
         display: flex;
-        column-gap: 50px;
-        font-size: 'Raleway-ExtraLight';
+        justify-content: space-between;
         font-size: 16px;
         color: #999999;
         cursor:pointer;
+    }
+
+    .left_side, .right_side{
+        display: flex;      
+        column-gap: 50px; 
     }
 
 </style>

@@ -2,6 +2,7 @@
   <div class="page-wrap">
     <Header></Header>
     <Calculator :project_id="project_id"></Calculator>
+    <Bill></Bill>
     <Footer></Footer>
   </div>
 </template>
