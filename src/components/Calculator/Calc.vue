@@ -3,8 +3,14 @@
         <template v-if="loaded">
         <div class="title-project">
             <!-- <div class="name" >{{ project_name }}</div> -->
-             <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
+            <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
             <div class="date">{{ created }}</div>
+            <div class="discription">
+                <!-- <div class="title_discription">Description:</div> -->
+                <div class="content_discription">
+                    <ImputTextMLine width="1000px" :value="project.discription" @submit_event="value=>newProjectDiscription(value)"/>
+                </div>
+            </div>
         </div>
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
@@ -91,6 +97,10 @@ export default{
             this.project.name = value
             updateProject()
         },
+        newProjectDiscription(value){
+            this.project.discription = value
+            updateProject()
+        },
         newObject(){
             newProjectObject(this.project_id, this.ListObjects.length)
         },
@@ -125,6 +135,31 @@ export default{
         font-size: 16px;
         color:#999999
     }
+
+    .discription{
+        margin-top: 30px;
+        margin-bottom: 100px;
+        column-gap: 15px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .content_discription{
+        font-family: 'Raleway-Light';
+        font-size: 20px;
+        text-align: center;
+        max-width: 1000px;
+        color: #636363;
+    }
+
+    .title_discription{
+        font-family: 'Raleway-Medium';
+        font-size: 20px;
+        color: #464646;
+        text-align: center;
+    }
+
     .panel{
         margin-top: 30px;
         margin-bottom: 30px;

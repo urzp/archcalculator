@@ -8,6 +8,7 @@ export let newProjectData = {
     updated: dateToString(new Date),
     user_id: localStorage.getItem('user_id'),
     name: 'Projekt X',
+    discription: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
     AdditionalServices:[],
     ExtraCosts:[],
     total_AdditionalServices:0,

@@ -50,8 +50,8 @@ export async function newPoject(){
 }
 
 export async function updateProject(){
-    setUnSavedStatus()
-    if(Project.project.id=='local'||Project.project.id=='new'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
+    if (Project.project.id=='new') setUnSavedStatus()
+    if(Project.project.id=='local'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
 }
 
 export async function saveLocalProject(){

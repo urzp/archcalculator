@@ -6,6 +6,7 @@ $objects = $rq_data -> data -> objects;
 
 $data['user_id']=$user_id;
 $data['name'] = $project -> name;
+$data['discription'] = $project -> discription;
 $data['total_AdditionalServices'] = $project -> total_AdditionalServices;
 $data['total_ExtraCosts'] = $project -> total_ExtraCosts;
 $data['tax'] = $project -> tax;
