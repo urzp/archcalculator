@@ -19,6 +19,7 @@ import Profile from './Users/Profile.vue'
 import EditUserFeeld from './Users/EditUserFeeld.vue'
 import EditPassword from './Users/EditPassword.vue'
 //----------------------------Calculator-----------------------------
+import CalcTitle from './Calculator/Calc_title.vue'
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/_Object/ObjectCalc.vue'
 import ResultCalc from './Calculator/ResultObjects/2_ResultCalc.vue'
@@ -123,6 +124,7 @@ export default [
     EditUserFeeld,
     EditPassword,
 
+    CalcTitle,
     Calculator,
     ObjectCalc,
     ResultCalc,

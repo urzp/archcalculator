@@ -1,6 +1,7 @@
 <?php
 
 $json_felds = [
+    'customer',
     'ExtraCosts',
     'AdditionalServices',
     'honorarLevel',

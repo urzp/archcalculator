@@ -13,6 +13,7 @@ if(empty($data['project'])){
         'success' => false,
     ];    
 }else{
+    $data['project']['customer']=json_decode($data['project']['customer']);
     $data['project']['AdditionalServices']=json_decode($data['project']['AdditionalServices']);
     $data['project']['ExtraCosts']=json_decode($data['project']['ExtraCosts']);
 

@@ -1,27 +1,11 @@
 <template>
     <div class="calculator">
         <template v-if="loaded">
-        <div class="title-project">
-            <!-- <div class="name" >{{ project_name }}</div> -->
-            <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
-            <div class="date">{{ created }}</div>
-            <div class="discription">
-                <!-- <div class="title_discription">Description:</div> -->
-                <div class="content_discription">
-                    <ImputTextMLine width="1000px" :value="project.discription" @submit_event="value=>newProjectDiscription(value)"/>
-                </div>
-            </div>
-            <div class="customer">
-                <div class="Customer_company">
-                    <div class="title">Customer Company</div>
-                    <div class="content"></div>
-                </div>
-            </div>
-        </div>
+        <CalcTitle :loaded="loaded"></CalcTitle>
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
         </div>
-        <div class="panel" >
+        <div class="panel">
             <NewButton width="200px" @click="newObject()" >Honorarobjekt</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
@@ -34,8 +18,8 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
-import { lastElement, formatDate } from '@/servis/functions.js'
-import { newPoject, LoadProjectData, saveAllProject, updateProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { lastElement } from '@/servis/functions.js'
+import { newPoject, LoadProjectData, saveAllProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 export default{
     name: 'Calculator',
     async mounted(){
@@ -48,27 +32,17 @@ export default{
     },
     data(){
         return{
-            project_name: '',
             loaded: false,
             ListObjects:[],
             project:{},
-            projectTest:{},
         }
     },
     props:{
         project_id:String,
     },
     watch:{
-        project_id(new_value, old_value){
-            // if(old_value=='new') {  return false }
+        project_id(){
             this.getProject()
-        }
-    },
-    computed:{
-        created(){
-            let result = ''
-            if(!!this.project&&!!this.project.created){ result = formatDate(this.project.created)}
-            return result
         }
     },
     methods:{
@@ -82,30 +56,17 @@ export default{
             if(!this.project_id) return false
             if(this.project_id == 'new') result = await newPoject() 
             if(this.project_id != 'new') result = await LoadProjectData(this.project_id) 
-            this.projectTest = result
-            this.project = this.projectTest.project
-            this.ListObjects = this.projectTest.objects
-            this.project_name = this.project.name
+            this.project = result
+            this.ListObjects = this.project.objects
             this.loaded = true
         },
         async newProject(){
             this.loaded = false
             let result
             result = await newPoject() 
-            this.projectTest = result
-            this.project = this.projectTest.project
-            this.ListObjects = this.projectTest.objects
-            this.project_name = this.project.name
+            this.project = result
+            this.ListObjects = this.project.objects
             this.loaded = true
-        },
-        newProjectName(value){
-            this.project_name = value
-            this.project.name = value
-            updateProject()
-        },
-        newProjectDiscription(value){
-            this.project.discription = value
-            updateProject()
         },
         newObject(){
             newProjectObject(this.project_id, this.ListObjects.length)
@@ -126,45 +87,7 @@ export default{
         border-bottom: 1px solid #999999;
     }
 
-    .title-project{
-        margin-top: 60px;
-        text-align: center;
-    }
-    .title-project .name{
-        font-family: 'Raleway-Light';
-        font-size: 36px;
-        text-align: center;
-        width: 100%;
-    }
-    .title-project .date{
-        font-family: 'Comfortaa-Regular';
-        font-size: 16px;
-        color:#999999
-    }
 
-    .discription{
-        margin-top: 30px;
-        margin-bottom: 100px;
-        column-gap: 15px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .content_discription{
-        font-family: 'Raleway-Light';
-        font-size: 20px;
-        text-align: center;
-        max-width: 1000px;
-        color: #636363;
-    }
-
-    .title_discription{
-        font-family: 'Raleway-Medium';
-        font-size: 20px;
-        color: #464646;
-        text-align: center;
-    }
 
     .panel{
         margin-top: 30px;

@@ -9,6 +9,11 @@ export let newProjectData = {
     user_id: localStorage.getItem('user_id'),
     name: 'Projekt X',
     discription: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
+    customer:{
+        company:'company',
+        name:'name',
+        address:'address',
+    },
     AdditionalServices:[],
     ExtraCosts:[],
     total_AdditionalServices:0,
