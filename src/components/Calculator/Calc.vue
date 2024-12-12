@@ -11,6 +11,12 @@
                     <ImputTextMLine width="1000px" :value="project.discription" @submit_event="value=>newProjectDiscription(value)"/>
                 </div>
             </div>
+            <div class="customer">
+                <div class="Customer_company">
+                    <div class="title">Customer Company</div>
+                    <div class="content"></div>
+                </div>
+            </div>
         </div>
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
