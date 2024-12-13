@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <Calculator :project_id="project_id"></Calculator>
-    <Bill></Bill>
+    <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id"></Calculator>
+    <Bill v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></Bill>
     <Footer></Footer>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
   data(){
     return {
       project_id: 'local',
+      show_bills: false,
     }
   },
   methods:{

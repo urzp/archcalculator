@@ -1,7 +1,7 @@
 <template>
     <div class="calculator">
         <template v-if="loaded">
-        <CalcTitle :loaded="loaded"></CalcTitle>
+        <CalcTitle></CalcTitle>
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
         </div>

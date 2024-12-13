@@ -69,6 +69,9 @@ import Total from './Calculator/ResultObjects/03_Summary/03_Total.vue'
 import TotalSummary from './Calculator/ResultObjects/03_Summary/04_TotalSummary.vue'
 //----------------------------Bills--------------------------------------
 import Bill from './Bill/bill.vue'
+import BillsList from './Bill/BillsList.vue'
+import BillHeader from './Bill/01_BillHeader.vue'
+import BillBasicServices from './Bill/02_BillBasicServices.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -176,6 +179,9 @@ export default [
     TotalSummary,
 
     Bill,
+    BillsList,
+    BillHeader,
+    BillBasicServices,
     
     TopFixMenu,
     EditCalculator,

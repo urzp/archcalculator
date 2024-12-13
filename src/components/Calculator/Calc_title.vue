@@ -1,12 +1,12 @@
 <template>
     <div class="title-project">
         <!-- <div class="name" >{{ project_name }}</div> -->
-        <input type="text"  class="name" :value="project.name" @change="event=>newProjectName(event.target.value)"/>
+        <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
         <div class="date">{{ created }}</div>
         <div class="discription">
             <!-- <div class="title_discription">Description:</div> -->
             <div class="content_discription">
-                <ImputTextMLine width="1000px" :value="project.discription" @submit_event="value=>newProjectDiscription(value)"/>
+                <ImputTextMLine width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)"/>
             </div>
         </div>
         <div class="customer">
@@ -36,10 +36,20 @@ export default{
         }
     },
     computed:{
+        project_name(){
+            let result = ''
+            if(!!this.project&&!!this.project.name){ result = this.project.name }
+            return result
+        },
         created(){
             let result = ''
             if(!!this.project&&!!this.project.created){ result = formatDate(this.project.created)}
             return result
+        },
+        discription(){
+            let result = ''
+            if(!!this.project&&!!this.project.discription){ result = this.project.discription}
+            return result           
         },
         customer_company(){
             let result = 'Company'
