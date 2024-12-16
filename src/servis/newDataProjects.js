@@ -12,7 +12,8 @@ export let newProjectData = {
     customer:{
         company:'company',
         name:'name',
-        address:'address',
+        address_1:'address 1',
+        address_2:'address 2',
     },
     AdditionalServices:[],
     ExtraCosts:[],

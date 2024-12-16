@@ -1,6 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/php/config.php';
 include $_SERVER['DOCUMENT_ROOT'].'/php/modules/functions.php';
+header('content-type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 if($_POST['SendFile']){include 'indexFiles.php';exit();}
 

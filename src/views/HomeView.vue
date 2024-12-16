@@ -20,6 +20,7 @@ export default {
     EventBus.on('Project:newProjectUser', id => this.project_id = id)
     EventBus.on('Project:openProject', id => this.openProject(id))
     EventBus.on('MenuProjects:openLocal', ()=>this.project_id = 'local')
+    EventBus.on('MenuProjects:showBills', (value)=>this.show_bills=value)
     EventBus.on('Project:ErrLoadeded', this.ErrorLoad)
     this.confirmEmail()
     
@@ -27,7 +28,7 @@ export default {
   data(){
     return {
       project_id: 'local',
-      show_bills: true,
+      show_bills: false,
     }
   },
   methods:{

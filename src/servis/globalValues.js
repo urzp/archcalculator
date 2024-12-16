@@ -17,7 +17,7 @@ export let user = reactive({
 })
 
 window.global = global
-
+window.user =  user
 
 export function getGlobal(){
     return global

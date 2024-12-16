@@ -25,4 +25,8 @@ function newOrder($newOrderData, $tableName, $selector){
     }
 }
 
+function fixJsonUTF8($data){
+    return iconv('UTF-8', 'UTF-8//IGNORE', utf8_encode($data) );
+}
+
 ?>

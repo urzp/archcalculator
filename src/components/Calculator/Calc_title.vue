@@ -9,7 +9,7 @@
                 <ImputTextMLine width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)"/>
             </div>
         </div>
-        <div class="customer">
+        <div v-if="!no_full_inf" class="customer">
             <div class="title">Customer:</div>
             <div class="customer_company">
                 <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
@@ -18,7 +18,10 @@
                 <InputText :value="customer_name" width="200px" @submit_event="value=>newProjectCustemer('name', value)"></InputText>
             </div>
             <div class="customer_name">
-                <InputText :value="customer_address" width="200px" @submit_event="value=>newProjectCustemer('address', value)"></InputText>
+                <InputText :value="customer_address_1" width="200px" @submit_event="value=>newProjectCustemer('address_1', value)"></InputText>
+            </div>
+            <div class="customer_name">
+                <InputText :value="customer_address_2" width="200px" @submit_event="value=>newProjectCustemer('address_2', value)"></InputText>
             </div>
         </div>
     </div>
@@ -33,6 +36,12 @@ export default{
     data(){
         return{
             
+        }
+    },
+    props:{
+        no_full_inf:{
+            type:Boolean,
+            default:false,
         }
     },
     computed:{
@@ -61,9 +70,14 @@ export default{
             if(!!this.project&&!!this.project.customer&&!!this.project.customer.name) result = this.project.customer.name
             return result
         },
-        customer_address(){
+        customer_address_1(){
             let result = 'address'
-            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address) result = this.project.customer.address
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address_1) result = this.project.customer.address_1
+            return result
+        },
+        customer_address_2(){
+            let result = 'address'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address_2) result = this.project.customer.address_2
             return result
         },
         project(){
@@ -80,6 +94,7 @@ export default{
             updateProject()
         },
         newProjectCustemer(name_feeld, value){
+            if(!this.project.customer) this.project.customer = {}
             this.project.customer[name_feeld] = value
             updateProject()
         }

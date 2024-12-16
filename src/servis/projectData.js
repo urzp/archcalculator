@@ -84,7 +84,6 @@ function switchToLocal(){
 }
 
 export async function newProjectObject(project_id, number=0){
-    console.log(number)
     let newObject = {...newObjectProject}
     newObject.number = number
     newObject.name = newObject.name.replace("A", toLetters(number + 1).toUpperCase()) 

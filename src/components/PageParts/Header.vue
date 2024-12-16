@@ -21,6 +21,7 @@
         </div>
         <div class="sub-header">
             <div class="left_side">
+                <div v-if="show_bills" class="item_subHeader" @click="showBills(false)">Projects</div>
                 <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
                 <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
                 <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
@@ -28,7 +29,7 @@
             </div>
             <div class="right_side">
                 <div class="item_subHeader" @click="console.log('open bills')">New Project Bill</div>
-                <div class="item_subHeader" @click="console.log('open bills')">Bills</div>
+                <div v-if="!show_bills" class="item_subHeader" @click="showBills(true)">Bills</div>
             </div>
         </div>
     </div>
@@ -56,6 +57,7 @@ export default{
             user:{},
             show_menu:false,
             hasLocalUnsaved:false,
+            show_bills:false,
         }
     },
     computed:{
@@ -97,6 +99,10 @@ export default{
         },
         openLocalProject(){
             EventBus.emit('MenuProjects:openLocal')
+        },
+        showBills(value){
+            if(global.login){ this.show_bills=value; EventBus.emit('MenuProjects:showBills', value) }
+            if(!global.login) EventBus.emit('Menu:Login', ()=>{this.show_bills=value;EventBus.emit('MenuProjects:showBills'), value})            
         },
         goToCalcPage(){
             if( this.$route.path!='/' ){

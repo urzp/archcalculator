@@ -6,11 +6,11 @@
                 <div><img :src="url_avatar" alt=""></div>
             </div>
         </div>
-        <div class="custemer">
+        <div v-if="!!customer" class="custemer">
             <div class="company bold-text">{{ customer.company }}</div>
             <div class="name bold-text">{{ customer.name }}</div>
-            <div class="adresse_1 bold-text">{{ customer.adresse_1 }}</div>
-            <div class="adresse_2 bold-text">{{ customer.adresse_2 }}</div>
+            <div class="adresse_1 bold-text">{{ customer.address_1 }}</div>
+            <div class="adresse_2 bold-text">{{ customer.address_2 }}</div>
         </div>
         <div class="main_data_bill">
             <div class="title_project_bill bold-text">{{ project.title }}</div>
@@ -35,16 +35,17 @@
 
 <script>
 import { global, user } from '@/servis/globalValues.js'
+import { Bills } from '@/servis/projectBill.js'
 export default{
     name: 'BillHeader',
     data(){
         return {
-            name_user: 'Viktor Filimonow Architekt – Adressstreet - 00000 City',
-            customer:{
+            def_name_user: 'Name und Adresse des Architekten',
+            def_customer:{
                 company: 'Customer Company',
                 name: 'Customer Name',
-                adresse_1: 'Street',
-                adresse_2: '80339 München',
+                address_1: 'Street',
+                address_2: 'Post und Stadt',
             },
             project:{
                 title: 'Project X',
@@ -60,6 +61,9 @@ export default{
             greeting_phrase: 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
         }
     },
+    props:{
+        bill_item:[Number, String]
+    },
     computed:{
         useAvatar(){
             let result = false
@@ -72,6 +76,21 @@ export default{
             let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
             return url
         },
+        actualBill(){
+            let result = {}
+            if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
+            return result
+        },
+        name_user(){
+            let result = this.def_name_user
+            if(!!this.actualBill) result = this.actualBill.name_user
+            return result
+        },
+        customer(){
+            let result = this.def_customer
+            if(!!this.actualBill) result = this.actualBill.custemer
+            return result
+        }
     }
 }
 
