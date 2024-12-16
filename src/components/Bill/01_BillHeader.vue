@@ -79,7 +79,7 @@ export default{
 
 <style scoped>
     .bill_header{
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .top_row{

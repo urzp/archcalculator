@@ -27,7 +27,7 @@ export default {
   data(){
     return {
       project_id: 'local',
-      show_bills: false,
+      show_bills: true,
     }
   },
   methods:{

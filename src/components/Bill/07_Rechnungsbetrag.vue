@@ -1,22 +1,31 @@
 <template>
-    <div class="basic_services">
+    <div class="Grundleistungen">
         <div class="header_item">
-            <div class="title bold-text">I.<span>Grundleistungen</span></div>
+            <div class="title bold-text">Rechnungsbetrag</div>
         </div>
-    </div>
+    </div>  
 </template>
 
 <script>
 export default{
-    name: 'BillBasicServices',
+    name: 'Rechnungsbetrag',
 
 
 }
 </script>
 
 <style scoped>
-    .bill_header{
-        font-size: 16px;
+    .Grundleistungen{
+        font-size: 18px;
+    }
+
+    .content{
+        margin-left: 15px;
+    }
+
+    .light-text{
+        font-family: 'Raleway-Light';
+        color: #464646;
     }
 
     .bold-text{
@@ -29,10 +38,10 @@ export default{
         border-bottom: 1px solid #999;
         padding-top: 10px;
         padding-bottom: 10px;
+        margin-bottom: 10px;
     }
 
     .title span{
         margin-left: 10px;
     }
 </style>
-

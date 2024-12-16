@@ -71,7 +71,17 @@ import TotalSummary from './Calculator/ResultObjects/03_Summary/04_TotalSummary.
 import Bill from './Bill/bill.vue'
 import BillsList from './Bill/BillsList.vue'
 import BillHeader from './Bill/01_BillHeader.vue'
-import BillBasicServices from './Bill/02_BillBasicServices.vue'
+import Grundleistungen from './Bill/02_Grundleistungen.vue'
+import BillBasicServices from './Bill/Grundleistugen/01_BillBasicServices.vue'
+import BillLeistungsstand from './Bill/Grundleistugen/02_BillLeistungsstand.vue'
+import BillBesondereLeistungen from './Bill/Grundleistugen/03_BillBesondereLeistungen.vue'
+import BillAdditionalLeistungen from './Bill/03_AdditionalLeistungen.vue'
+import Nebenkosten from './Bill/04_Nebenkosten.vue'
+import Zwischensumme from './Bill/05_Zwischensumme.vue'
+import GesamtRest from './Bill/06_GesamtRest.vue'
+import AdvancePayments from './Bill/GesamtRest.vue/AdvancePayments.vue'
+import Rechnungsbetrag from './Bill/07_Rechnungsbetrag.vue'
+import BillFooter from './Bill/08_Footer.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -181,7 +191,17 @@ export default [
     Bill,
     BillsList,
     BillHeader,
+    Grundleistungen,
     BillBasicServices,
+    BillLeistungsstand,
+    BillBesondereLeistungen,
+    BillAdditionalLeistungen,
+    Nebenkosten,
+    Zwischensumme,
+    GesamtRest,
+    AdvancePayments,
+    Rechnungsbetrag,
+    BillFooter,
     
     TopFixMenu,
     EditCalculator,

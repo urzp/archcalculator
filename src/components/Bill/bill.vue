@@ -7,7 +7,15 @@
             <div class="devide_part"></div>
         </div>
         <BillHeader/>
-        <BillBasicServices/>
+        <Grundleistungen/>
+        <AdditionalLeistungen/>
+        <Nebenkosten/>
+        <Zwischensumme/>
+        <GesamtRest/>
+        <Rechnungsbetrag/>
+        <BillFooter/>
+        <div class="devide_part"></div>
+        <div class="bottum_line"></div>
     </div>
 </template>
 
@@ -22,7 +30,7 @@ export default{
 </script>
 
 <style scoped>
-    .title_bill .name{
+    .title_bill .name, .bottum_line{
         font-family: 'Raleway-Light';
         color: #3d3d3d;
         font-size: 24px;
