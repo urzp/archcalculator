@@ -5,6 +5,8 @@ import { apiData } from '@/servis/apiData.js'
 
 export let Bills = reactive([]);
 
+window.bills = Bills
+
 export async function clearBills(){
     Bills.splice(0, Bills.length)
 } 
@@ -20,6 +22,16 @@ export async function LoadBills(project_id){
     return true
 }
 
+export async function saveBill(id){
+    let element = Bills.find(item=>item.id==id)
+    apiData({typeData:'updateBill', data:element})
+}
+
+export async function deleteBill(id){
+    apiData({typeData:'deleteBill', data:id})
+}
+
+
 export async function newBill(project_id, number){
 
     let custemer = {...Project.project.customer}
@@ -29,7 +41,7 @@ export async function newBill(project_id, number){
 
     let newBill = {
         number,
-        name:'neue Rechnung',
+        name:'Neue Rechnung',
         project_id,
         name_user: `${user_name} ${user_address}`,
         custemer,

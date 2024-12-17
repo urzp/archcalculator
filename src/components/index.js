@@ -110,7 +110,9 @@ import Price from './UI/Simples/Price.vue'
 import Percent from './UI/Simples/Percent.vue'
 import InputYear from './UI/Simples/InputYear.vue'
 import InputText from './UI/Simples/InputText.vue'
+import InputText_Bill from './UI/Simples/ImputText_Bill.vue'
 import ImputTextMLine from './UI/Simples/ImputTextMLine.vue'
+import ImputTextMLine_Bill from './UI/Simples/ImputTextMLine_Bill.vue'
 import InputPrice from './UI/Simples/InputPrice.vue'
 import Select_List from './UI/Simples/Select_List.vue'
 import SelectEdit_List from './UI/Simples/SelectEdit_List.vue'
@@ -229,7 +231,9 @@ export default [
     Percent,
     InputYear,
     InputText,
+    InputText_Bill,
     ImputTextMLine,
+    ImputTextMLine_Bill,
     InputPrice,
     Select_List,
     SelectEdit_List,

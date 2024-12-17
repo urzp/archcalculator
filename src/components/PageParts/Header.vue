@@ -31,9 +31,9 @@
             </div>
             <div class="right_side">
                 <template v-if="show_bills">
-                <div class="item_subHeader" @click="console.log('open bills')">New Project Bill</div>
+                <div class="item_subHeader" @click="newBill()">Neues Rechnung</div>
                 </template>
-                <div v-else class="item_subHeader" @click="showBillsBefore()">Bills</div>
+                <div v-else class="item_subHeader" @click="showBillsBefore()">Rechnung</div>
             </div>
         </div>
     </div>
@@ -109,6 +109,9 @@ export default{
         },
         openLocalProject(){
             EventBus.emit('MenuProjects:openLocal')
+        },
+        newBill(){
+            EventBus.emit('MenuProjects:newBill')
         },
         showBillsBefore(){
             if(global.login){ 

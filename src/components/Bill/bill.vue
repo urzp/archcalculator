@@ -1,9 +1,12 @@
 <template>
     <div v-if="isSelected" class="bills_wrap">
-        <CalcTitle no_full_inf></CalcTitle>
-        <BillsList></BillsList>
+        <!-- <CalcTitle no_full_inf></CalcTitle> -->
+        <BillsList :list="list" @selectBill="(value)=>selectedBill=value"></BillsList>
         <div class="title_bill">
-            <div class="name">Bill:</div>
+            <div class="name">
+                <div class="title">Rechnung:</div>
+                <InputText :value="bill_name" width="300px" @submit_event="value=>update_title(value)"/>
+            </div>
             <div class="devide_part"></div>
         </div>
         <BillHeader :bill_item="selectedBill"/>
@@ -23,12 +26,14 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { newBill, Bills, LoadBills, clearBills } from '@/servis/projectBill.js'
+import { saveBill } from '@/servis/projectBill.js'
 import { global } from '@/servis/globalValues.js'
 export default{
     name: 'Bill',
     mounted(){
         EventBus.on('MenuProjects:showBills', ()=>this.openBills())
         EventBus.on('MenuProjects:new', clearBills) 
+        EventBus.on('MenuProjects:newBill', this.newBill)
     },
     data(){
         return{
@@ -49,6 +54,11 @@ export default{
             let result = false
             if(!!this.project_id&&!!this.selectedBill||this.selectedBill==0) result = true
             return result
+        },
+        bill_name(){
+            let result = ''
+            if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].name
+            return result
         }
     },
     methods:{
@@ -65,7 +75,12 @@ export default{
         async newBill(){
            let bill = await newBill(this.project_id, this.list.length)
            this.list.push(bill)
-        }
+        },
+        async update_title(value){
+            let id = this.list[this.selectedBill].id
+            this.list[this.selectedBill].name = value
+            saveBill(id)
+        },
     }
 
 }
@@ -87,4 +102,13 @@ export default{
         background-color: #F5F5F5;
     }
 
+    .name{
+        display: flex;
+        align-items: baseline;
+        column-gap: 15px;
+    }
+
+    .name .title{
+        font-size: 18px;
+    }
 </style>

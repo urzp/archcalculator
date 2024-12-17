@@ -1,20 +1,48 @@
 <template>
     <div class="bill_header">
         <div class="top_row">
-            <div class="name_user light-text">{{ name_user }}</div>
+            <div class="name_user light-text">
+                <InputText_Bill :value="name_user" width="300px" 
+                @submit_event="value=>update_value(value,'name_user')" 
+                @setDefault="set_defaul('name_user')"/>
+            </div>
             <div v-if="useAvatar" class="logo_bill">
                 <div><img :src="url_avatar" alt=""></div>
             </div>
         </div>
         <div v-if="!!customer" class="custemer">
-            <div class="company bold-text">{{ customer.company }}</div>
-            <div class="name bold-text">{{ customer.name }}</div>
-            <div class="adresse_1 bold-text">{{ customer.address_1 }}</div>
-            <div class="adresse_2 bold-text">{{ customer.address_2 }}</div>
+            <div class="company bold-text">
+                <InputText_Bill :value="customer.company" width="300px" 
+                @submit_event="value=>update_value(value,'customer_company')" 
+                @setDefault="set_defaul('customer_company')"/>
+            </div>
+            <div class="name bold-text">
+                <InputText_Bill :value="customer.name" width="300px" 
+                @submit_event="value=>update_value(value,'customer_name')" 
+                @setDefault="set_defaul('customer_name')"/>                
+            </div>
+            <div class="adresse_1 bold-text">
+                <InputText_Bill :value="customer.address_1" width="300px" 
+                @submit_event="value=>update_value(value,'customer_address_1')" 
+                @setDefault="set_defaul('customer_address_1')"/>                     
+            </div>
+            <div class="adresse_2 bold-text">
+                <InputText_Bill :value="customer.address_2" width="300px" 
+                @submit_event="value=>update_value(value,'customer_address_2')" 
+                @setDefault="set_defaul('customer_address_2')"/>      
+            </div>
         </div>
         <div class="main_data_bill">
-            <div class="title_project_bill bold-text">{{ project_title }}</div>
-            <div class="discription light-text">{{ project_dicription }}</div> 
+            <div class="title_project_bill bold-text">
+                <InputText_Bill :value="project_title" width="300px" 
+                @submit_event="value=>update_value(value,'project_title')" 
+                @setDefault="set_defaul('project_title')"/>  
+            </div>
+            <div class="discription light-text">
+                <ImputTextMLine_Bill :value="project_dicription" width="100%"
+                @submit_event="value=>update_value(value,'project_dicription')"
+                @setDefault="set_defaul('project_dicription')"/>
+            </div> 
             <div class="payment_date light-text">{{ `Leistungszeitraum vom ${payment_date.vom} bis ${payment_date.bis}` }}</div>
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
@@ -35,7 +63,8 @@
 
 <script>
 import { global, user } from '@/servis/globalValues.js'
-import { Bills } from '@/servis/projectBill.js'
+import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Project } from '@/servis/projectData.js'
 export default{
     name: 'BillHeader',
     data(){
@@ -96,6 +125,28 @@ export default{
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.discription
             return result
+        }
+    },
+    methods:{
+        async update_value(value, name_value){
+            if(name_value=='name_user') this.actualBill.name_user = value
+            if(name_value=='customer_company') this.actualBill.custemer.company = value
+            if(name_value=='customer_name') this.actualBill.custemer.name = value
+            if(name_value=='customer_address_1') this.actualBill.custemer.address_1 = value
+            if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = value
+            if(name_value=='project_title') this.actualBill.project.name = value
+            if(name_value=='project_dicription') this.actualBill.project.discription = value
+            saveBill(this.actualBill.id)
+        },
+        set_defaul(name_value){
+            if(name_value=='name_user') this.actualBill.name_user = `${user.name} ${!user.address?' - Adresse':user.address}`
+            if(name_value=='customer_company') this.actualBill.custemer.company = Project.project.customer.company
+            if(name_value=='customer_name') this.actualBill.custemer.company = Project.project.customer.name
+            if(name_value=='customer_address_1') this.actualBill.custemer.address_1 = Project.project.customer.address_1
+            if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = Project.project.customer.address_2
+            if(name_value=='project_title') this.actualBill.project.name = Project.project.name
+            if(name_value=='project_dicription') this.actualBill.project.discription = Project.project.discription
+            saveBill(this.actualBill.id)
         }
     }
 }
