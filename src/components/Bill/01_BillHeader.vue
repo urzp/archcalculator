@@ -13,8 +13,8 @@
             <div class="adresse_2 bold-text">{{ customer.address_2 }}</div>
         </div>
         <div class="main_data_bill">
-            <div class="title_project_bill bold-text">{{ project.title }}</div>
-            <div class="discription light-text">{{ project.dicription }}</div> 
+            <div class="title_project_bill bold-text">{{ project_title }}</div>
+            <div class="discription light-text">{{ project_dicription }}</div> 
             <div class="payment_date light-text">{{ `Leistungszeitraum vom ${payment_date.vom} bis ${payment_date.bis}` }}</div>
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
@@ -46,10 +46,6 @@ export default{
                 name: 'Customer Name',
                 address_1: 'Street',
                 address_2: 'Post und Stadt',
-            },
-            project:{
-                title: 'Project X',
-                dicription: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
             },
             payment_date:{
                 vom: '18.04.23',
@@ -89,6 +85,16 @@ export default{
         customer(){
             let result = this.def_customer
             if(!!this.actualBill) result = this.actualBill.custemer
+            return result
+        },
+        project_title(){
+            let result = '-'
+            if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.name
+            return result
+        },
+        project_dicription(){
+            let result = '-'
+            if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.discription
             return result
         }
     }

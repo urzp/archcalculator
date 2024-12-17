@@ -22,13 +22,13 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { newBill, Bills, clearBills } from '@/servis/projectBill.js'
+import { newBill, Bills, LoadBills, clearBills } from '@/servis/projectBill.js'
 import { global } from '@/servis/globalValues.js'
-import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'Bill',
     mounted(){
         EventBus.on('MenuProjects:showBills', ()=>this.openBills())
+        EventBus.on('MenuProjects:new', clearBills) 
     },
     data(){
         return{
@@ -55,6 +55,7 @@ export default{
         async getData(){
             await clearBills()
             if(!this.project_id) return false
+            await LoadBills(this.project_id)
         },
         async openBills(number='last'){
             if(this.list.length == 0) await this.newBill()

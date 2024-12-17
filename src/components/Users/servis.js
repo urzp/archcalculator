@@ -1,5 +1,6 @@
 import { global, user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
+import { EventBus } from '@/servis/EventBus'
 
 export function logOut(){
     localStorage.setItem('user_id', '');
@@ -10,6 +11,7 @@ export function logOut(){
     localStorage.setItem('user_token', '');
     global.login = false
     global.admin = false
+    EventBus.emit('Menu:logOut')
 }
 
 export function logIn(data){
