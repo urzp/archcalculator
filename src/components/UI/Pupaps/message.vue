@@ -27,7 +27,7 @@ export default{
         openPopap(message){
             this.show=true
             this.message = message
-            setTimeout(this.close, 3000)
+            setTimeout(this.close, 5000)
         },
         close(){
             this.show=false
@@ -44,8 +44,8 @@ export default{
     }
     .pupap{
         position: fixed;
-        left: calc(100% / 2 - 200px / 2);
-        top: 15px;
+        /* left: calc(100% / 2 - 200px / 2); */
+        top: 25px;
         min-height: 30px;
         min-width: 200px;
         background-color: #fff;

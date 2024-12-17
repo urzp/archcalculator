@@ -21,7 +21,7 @@
         </div>
         <div class="sub-header">
             <div class="left_side">
-                <div v-if="show_bills" class="item_subHeader" @click="showBills(false)">Projects</div>
+                <div v-if="show_bills" class="item_subHeader" @click="closeBills()">Projects</div>
                 <template v-else>
                 <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
                 <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
@@ -33,7 +33,7 @@
                 <template v-if="show_bills">
                 <div class="item_subHeader" @click="console.log('open bills')">New Project Bill</div>
                 </template>
-                <div v-else class="item_subHeader" @click="showBills(true)">Bills</div>
+                <div v-else class="item_subHeader" @click="showBillsBefore()">Bills</div>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { saveNewProject } from '@/servis/projectData.js'
-import { Project } from '@/servis/projectData.js'
+import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export default{
     name: 'Header',
     async mounted(){
@@ -53,7 +53,7 @@ export default{
         if(global.newProject) {global.newProject=false; this.newProject()}
         this.chekLocalUnsaved()
         EventBus.on('Project:openProject',this.chekLocalUnsaved)
-        EventBus.on('Menu:logOut',()=>{ this.showBills(false)})
+        EventBus.on('Menu:logOut',()=>{ this.closeBills()})
     },
     data(){
         return {
@@ -74,6 +74,11 @@ export default{
             if(!Project.project) return false
             return Project.project.unsaved
         },
+        project_id(){
+            let result = ''
+            if(!!Project&&!!Project.project) result = Project.project.id
+            return result
+        }
     },
     methods:{
         getData(){
@@ -105,14 +110,26 @@ export default{
         openLocalProject(){
             EventBus.emit('MenuProjects:openLocal')
         },
-        showBills(value){
-            if(value){
-                if(global.login){ this.show_bills=value; EventBus.emit('MenuProjects:showBills') }
-                if(!global.login) EventBus.emit('Menu:Login', ()=>{this.show_bills=true; EventBus.emit('MenuProjects:showBills')})  
-            }else{
-                this.show_bills=value
-                EventBus.emit('MenuProjects:closeBills')
-            }          
+        showBillsBefore(){
+            if(global.login){ 
+                if(this.project_id=='local'||this.project_id=='new'){
+                    setUnSavedStatus()
+                    EventBus.emit('Menu:Message','Sie müssen zunächst das aktuelle Projekt speichern')
+                }else{
+                    this.showBills() 
+                }
+            }
+            if(!global.login) EventBus.emit('Menu:Login', ()=>{
+                EventBus.emit('Menu:Message','Sie müssen zunächst das aktuelle Projekt speichern')
+            }) 
+        },
+        showBills(){
+            this.show_bills=true; 
+            EventBus.emit('MenuProjects:showBills')
+        },
+        closeBills(){
+            this.show_bills=false
+            EventBus.emit('MenuProjects:closeBills')
         },
         goToCalcPage(){
             if( this.$route.path!='/' ){
