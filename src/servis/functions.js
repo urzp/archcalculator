@@ -108,6 +108,10 @@ export function dateToString(d){
     return d.toISOString().replace('T', ' ').replace('Z', '')
 }
 
+export function dateToStringNoTime(d){
+   return formatDate(dateToString(d))
+}
+
 export function validateEmail(email){
     return !!String(email)
       .toLowerCase()

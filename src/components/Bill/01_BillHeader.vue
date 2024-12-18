@@ -43,19 +43,53 @@
                 @submit_event="value=>update_value(value,'project_dicription')"
                 @setDefault="set_defaul('project_dicription')"/>
             </div> 
-            <div class="payment_date light-text">{{ `Leistungszeitraum vom ${payment_date.vom} bis ${payment_date.bis}` }}</div>
+            <div class="payment_date light-text">
+                <div class="">Leistungszeitraum vom</div>
+                <div class="payment_date_volume"  @click.stop="showSelectData=true; SelectDataName='vom'">
+                    {{ formatDate(payment_date.vom) }}
+                </div>  
+                <div class="">bis</div>  
+                <div class="payment_date_volume"  @click.stop="showSelectData=true; SelectDataName='bis'">
+                    {{ formatDate(payment_date.bis) }}
+                </div>
+                <div v-if="showSelectData" class="selectData" @click.stop="" style="margin-left: -5px;">
+                    <div class="wrap_calendar">
+                        <Calendar popap :openMonth="new Date( selectDay )" :selectDay="new Date( selectDay )" :projects="[]" @selectDay="day=>setNewDate(day)" @closeCalendar="showSelectData=false"/>
+                    </div>
+                </div>
+            </div>
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
-                <div class="invoice_number value bold-text">{{ invoice_number }}</div>
+                <div class="invoice_number value bold-text">
+                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate
+                    @submit_event="value=>update_value(value,'invoice_number')" />  
+                </div>
             </div>
             <div class="item_title_value">
                 <div class="datum title bold-text">Datum</div>
-                <div class="datum value bold-text">{{ `${datum.getDay()}.${datum.getMonth() + 1}.${datum.getFullYear()}` }}</div>
+                <div class="datum_value bold-text">
+                    <div class="date_created" @click.stop="showSelectData_2=true; SelectDataName='created'">
+                        {{ formatDate(created) }}
+                    </div>
+                    <div v-if="showSelectData_2" class="selectData" @click.stop="">
+                    <div class="wrap_calendar">
+                        <Calendar popap :openMonth="new Date( created )" :selectDay="new Date( created )" :projects="[]" @selectDay="day=>setNewDate(day)" @closeCalendar="showSelectData_2=false"/>
+                    </div>
+                </div>
+                </div>
             </div>
             <div class="number_bill">
-                <div class="title bold-text">{{ number_bill }}</div>
+                <div class="title bold-text">
+                    <InputText_Bill :value="number_bill" width="300px" 
+                    @submit_event="value=>update_value(value,'number_bill')" 
+                    @setDefault="set_defaul('number_bill')"/>
+                </div>
             </div>
-            <div class="greeting_phrase light-text">{{ greeting_phrase }}</div>
+            <div class="greeting_phrase light-text">
+                <ImputTextMLine_Bill :value="greeting_phrase" width="100%"
+                @submit_event="value=>update_value(value,'greeting_phrase')"
+                @setDefault="set_defaul('greeting_phrase')"/>
+            </div>
         </div>
     </div>   
 </template>
@@ -76,14 +110,9 @@ export default{
                 address_1: 'Street',
                 address_2: 'Post und Stadt',
             },
-            payment_date:{
-                vom: '18.04.23',
-                bis: '26.07.24',
-            },
-            invoice_number: 'RE0011',
-            datum: new Date(),
-            number_bill:'8. Abschlagsrechnung',
-            greeting_phrase: 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
+            showSelectData:false,
+            showSelectData_2:false,
+            SelectDataName:'vom',
         }
     },
     props:{
@@ -125,6 +154,38 @@ export default{
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.discription
             return result
+        },
+        payment_date(){
+            let result = {
+                vom: new Date(),
+                bis: new Date(),
+            }
+            if(!!this.actualBill&&!!this.actualBill.payment_date) result = this.actualBill.payment_date
+            return result
+        },
+        selectDay(){
+            if(this.SelectDataName=='vom') return this.payment_date.vom
+            if(this.SelectDataName=='bis') return this.payment_date.bis
+        },
+        invoice_number(){
+            let result = '-'
+            if(!!this.actualBill&&!!this.actualBill.invoice_number) result = this.actualBill.invoice_number
+            return result
+        },
+        created(){
+            let result = new Date()
+            if(!!this.actualBill&&!!this.actualBill.created) result = this.actualBill.created
+            return result
+        },
+        number_bill(){
+            let result = '-'
+            if(!!this.actualBill&&!!this.actualBill.number_bill) result = this.actualBill.number_bill
+            return result
+        },
+        greeting_phrase(){
+            let result = '-'
+            if(!!this.actualBill&&!!this.actualBill.greeting_phrase) result = this.actualBill.greeting_phrase
+            return result            
         }
     },
     methods:{
@@ -136,6 +197,9 @@ export default{
             if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = value
             if(name_value=='project_title') this.actualBill.project.name = value
             if(name_value=='project_dicription') this.actualBill.project.discription = value
+            if(name_value=='invoice_number') this.actualBill.invoice_number = value
+            if(name_value=='number_bill') this.actualBill.number_bill = value
+            if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = value
             saveBill(this.actualBill.id)
         },
         set_defaul(name_value){
@@ -146,6 +210,20 @@ export default{
             if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = Project.project.customer.address_2
             if(name_value=='project_title') this.actualBill.project.name = Project.project.name
             if(name_value=='project_dicription') this.actualBill.project.discription = Project.project.discription
+            if(name_value=='number_bill') this.actualBill.number_bill = `${Bills.length}. Abschlagsrechnung`
+            if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:'
+            saveBill(this.actualBill.id)
+        },
+        formatDate(date){
+            date = new Date(date)
+           return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+        },
+        setNewDate(date){
+            this.showSelectData=false
+            this.showSelectData_2=false
+            if(this.SelectDataName=='vom') this.actualBill.payment_date.vom = date
+            if(this.SelectDataName=='bis') this.actualBill.payment_date.bis = date
+            if(this.SelectDataName=='created') this.actualBill.created = date
             saveBill(this.actualBill.id)
         }
     }
@@ -189,6 +267,13 @@ export default{
     .payment_date{
         margin-top: -10px;
         text-align: right;
+        display: flex;
+        column-gap: 5px;
+        justify-content: flex-end;
+    }
+
+    .payment_date_volume, .date_created{
+        cursor: pointer;
     }
 
     .item_title_value{
@@ -201,10 +286,31 @@ export default{
         border-bottom: 1px solid #999999 ;
     }
 
+    .datum_value{
+        display: flex;
+    }
+
     .greeting_phrase{
         margin-top: 30px;
         margin-bottom: 30px;
         margin-left: 100px;
     }
 
+    .selectData{
+        position: relative;
+        width: 0;
+        height: 0;
+    }
+    .wrap_calendar{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        right: 5px;
+        top: 30px;
+        width: 350px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px #898989d6;
+        background-color: #fff;
+    }
 </style>

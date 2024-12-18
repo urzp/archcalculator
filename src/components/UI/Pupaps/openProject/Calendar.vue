@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <div v-if="popap" @click.stop="$emit('closeCalendar')" class="bg_for_close"></div>   
 </template>
 
 <script>
@@ -45,10 +46,14 @@ export default{
             year: new Date().getFullYear(),
         }
     },
-    emits:['selectDay'],
+    emits:['selectDay', 'closeCalendar'],
     props:{
         projects:Array,
         selectDay: Date,
+        popap:{
+            type:Boolean,
+            default:false
+        },
         openMonth:{
             type: Date,
             default: new Date()
@@ -104,6 +109,7 @@ export default{
 
     .calendar{
         width: 270px;
+        z-index: 100;
     }
 
     .calendar_header{
@@ -164,5 +170,14 @@ export default{
     .wheek_row .item.select{
         background-color: #FF9800;
         color: #fff;
+    }
+
+    .bg_for_close{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
     }
 </style>

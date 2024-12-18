@@ -19,3 +19,7 @@ chek all fixJsonUTF8
 new Project load effect
 
 problem load  project whel open new paje
+
+proble creeted new bill wihele open bills
+
+afte new bill need open this new  bill
