@@ -75,6 +75,7 @@ export default{
         async newBill(){
            let bill = await newBill(this.project_id, this.list.length)
            this.list.push(bill)
+           this.selectedBill = this.list.length - 1
         },
         async update_title(value){
             let id = this.list[this.selectedBill].id
