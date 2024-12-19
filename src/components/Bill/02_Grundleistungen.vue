@@ -11,13 +11,13 @@
                         <div class="title bold-text">Honorarobjekt</div>
                     </div>
                     <div class="value bold-text">
-                        <InputText_Bill :value="item.name" width="300px" 
+                        <InputText_Bill :value="item.name" width="300px"  alight_edit="center"
                         @submit_event="value=>update_value(value, item.id,'name')" 
                         @setDefault="set_defaul(item.id, 'name')"/>
                     </div>
                 </div>
-                <BillBasicServices :honorar_object = "item"/>
-                <BillLeistungsstand/>
+                <BillBasicServices :id_bill="actualBill.id" :honorar_object = "item"/>
+                <BillLeistungsstand :id_bill="actualBill.id" :honorar_object = "item" />
                 <BillBesondereLeistungen/>
             </div>
         </div>
@@ -73,6 +73,10 @@ export default{
     .content{
         margin-left: 15px;
         margin-bottom: 15px;
+    }
+
+    .header {
+        margin-right: 12%;
     }
 
     .light-text{

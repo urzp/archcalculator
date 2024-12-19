@@ -61,7 +61,7 @@
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
                 <div class="invoice_number value bold-text">
-                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate
+                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate  alight_edit="center"
                     @submit_event="value=>update_value(value,'invoice_number')" />  
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="number_bill">
                 <div class="title bold-text">
-                    <InputText_Bill :value="number_bill" width="300px" 
+                    <InputText_Bill :value="number_bill" width="300px"
                     @submit_event="value=>update_value(value,'number_bill')" 
                     @setDefault="set_defaul('number_bill')"/>
                 </div>

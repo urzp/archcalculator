@@ -13,11 +13,21 @@
                 <div class="colum colum_5"></div>
                 <div class="colum colum_6"></div>
             </div>
-            <div class="content item_list">
-                <div class="colum colum_1"></div>
-                <div class="colum colum_2"></div>
-                <div class="colum colum_3"></div>
-                <div class="colum colum_4"></div>
+            <div class="content item_list" v-for="item in list" :key="item.id">
+                <div class="colum colum_1">{{ item.name }}</div>
+                <div class="colum colum_2">
+                    <Percent_Bill input_type 
+                    :value = "selectPercent(item)" 
+                    @edit_value = "procent=>setProcent(procent)"/>
+                </div>
+                <div class="colum colum_3">
+                    <div class="colum colum_2">
+                    <Percent_Bill input_type 
+                    :value = "item.done" 
+                    @edit_value = "procent=>setProcent(procent)"/>
+                </div>
+                </div>
+                <div class="colum colum_4">{{ item.factor }}</div>
                 <div class="colum colum_5"></div>
                 <div class="colum colum_6"></div>
             </div>
@@ -36,7 +46,28 @@
 <script>
 export default{
     name: 'BillLeistungsstand',
+    data(){
+        return{
 
+        }
+    },
+    props:{
+        id_bill:[String,Number],
+        honorar_object: Object,
+    },
+    computed:{
+        list(){
+            let result = []
+            if(!!this.honorar_object&&!!this.honorar_object.stages) result = this.honorar_object.stages
+            return result
+        }        
+    },
+    methods:{
+        selectPercent(item){
+            if(item.user_percent!='') return item.user_percent
+            return item.percent
+        }
+    }
 
 }
 </script>
@@ -68,7 +99,19 @@ export default{
     }
 
     .list{
+        margin-top: 20px;
         margin-left: 30px;
+        margin-bottom: 20px;
+    }
+
+    .header{
+        border-bottom: 1px solid #999;
+        margin-bottom: 5px;
+    }
+
+    .total{
+        border-bottom: 1px solid #999;
+        margin-bottom: 5px;
     }
 
     .item_list{
@@ -95,5 +138,13 @@ export default{
     }
     .colum_6{
         width: 12%;
+    }
+
+    .content .colum_1{
+        font-size: 16px;
+    }
+
+    .content .colum_2 {
+        font-size: 16px;
     }
 </style>

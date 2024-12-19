@@ -62,24 +62,24 @@ export async function saveLocalProject(){
 
 export function setUnSavedStatus(){
     Project.project.unsaved = 'true'
-    Project.project.id = 'local'
+    if(Project.project.id=='new') Project.project.id = 'local'
 }
 
 export async function updateProjectObject(id, data=[], sendAPI=true){
     let obj = Project.objects.find(item=>item.id==id)
-    for (let key in data){
-        obj[key] = data[key]
+    for (let key in data){ obj[key] = data[key] }
+    if(Project.project.id=='local'||Project.project.id=='new'){ 
+        await saveLocalProject() 
+        switchToLocal()
+    }else{
+        if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})
     }
-    if(Project.project.id=='local'||Project.project.id=='new'){ await saveLocalProject() }else{
-        if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})}
     
-    switchToLocal()
     EventBus.emit('UpdatedProject')
 
 }
 
 function switchToLocal(){
-    //if(global.login) return false
     if(Project.project.id=='new'){ EventBus.emit('Project:saveAsLocal'); }
 }
 

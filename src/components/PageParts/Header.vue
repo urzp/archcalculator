@@ -49,7 +49,7 @@ import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 export default{
     name: 'Header',
     async mounted(){
-        await this.getData()
+        this.getData()
         if(global.newProject) {global.newProject=false; this.newProject()}
         this.chekLocalUnsaved()
         EventBus.on('Project:openProject',this.chekLocalUnsaved)
@@ -87,6 +87,7 @@ export default{
         },
         newProject(){
             if(this.goToCalcPage()) return false
+            this.hasLocalUnsaved = false
             let localProject = localStorage.getItem('Project') 
             if(!!localProject&&JSON.parse(localProject).project.unsaved ){
                 EventBus.emit('Popap:comfirm',{

@@ -25,7 +25,15 @@ export default{
         return{
             id:null,
             edit:false,
+            
         }
+    },
+    computed:{
+        width_panel(){
+            let result  = '35px'
+            if(this.noUpdate) result = '0'
+            return result
+        } 
     },
     props:{
         value:{
@@ -35,6 +43,10 @@ export default{
         width:{
             type:String,
             default: '150px',
+        },
+        alight_edit:{
+            type:String,
+            default: 'left',            
         },
         noUpdate:{
             type:Boolean,
@@ -69,7 +81,7 @@ export default{
         font-family: inherit;
         font-size: inherit;
         color: inherit;
-
+        text-align: inherit;
     }
     .wrap-edit{
         position: relative;
@@ -86,9 +98,11 @@ export default{
         font-size: inherit;
         font-family: inherit;
         color: inherit;
+        text-align: v-bind(alight_edit);
     }
 
     .panel{
+        width: v-bind(width_panel);
         position: relative;
     }
     .button{

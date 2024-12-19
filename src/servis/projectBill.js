@@ -1,4 +1,5 @@
 import { reactive } from 'vue';
+import { CalcData } from '@/servis/calcData.js'
 import { Project } from '@/servis/projectData.js'
 import { user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
@@ -88,7 +89,43 @@ function setObjects(){
         newItem.name = item.name
         newItem.honorar_zone = item.honorarLevel.number
         newItem.honorar_satz = item.HonorarRate.value
+        newItem.costs = getCosts(item.finance)
+        newItem.total = item.total_object
+        newItem.stages = getStages(item)
         result.push(newItem)
     })
     return result
+}
+
+function getCosts(finance){
+    if(!finance.useDetals) return finance.value
+    let result = 0
+    finance.detals.forEach(item=>{
+        result = result + Number(item)
+    })
+    return result
+}
+
+export function getCosts_ById(id){
+    let project_obj = Project.objects.find(item=>item.id==id)
+    if(!project_obj||!project_obj.finance) return 0
+    return getCosts(project_obj.finance)
+}
+
+function getStages(project_object){
+    let result = []
+    let paragraph_id = project_object.paragraph_id
+    result = CalcData.Stages.filter(item=>item.id_paragraph==paragraph_id)
+    result.forEach( (item, index)=>{
+        item.user_percent = Number(project_object.stages[index])
+        item.done = 0
+        item.factor = 0
+    })
+    return result
+}
+
+export function getStages_ById(id){
+    let project_obj = Project.objects.find(item=>item.id==id)
+    if(!project_obj||!project_obj.finance) return []
+    return getStages(project_obj)
 }

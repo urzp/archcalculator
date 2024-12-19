@@ -107,7 +107,9 @@ import UpButton from './UI/Simples/UpBtn.vue'
 import DownButton from './UI/Simples/DownBtn.vue'
 import PastColumButton from './UI/Simples/PastColumBtn.vue'
 import Price from './UI/Simples/Price.vue'
+import Price_Bill from './UI/Simples/Price_bill.vue'
 import Percent from './UI/Simples/Percent.vue'
+import Percent_Bill from './UI/Simples/Percent_Bill.vue'
 import InputYear from './UI/Simples/InputYear.vue'
 import InputText from './UI/Simples/InputText.vue'
 import InputText_Bill from './UI/Simples/ImputText_Bill.vue'
@@ -228,7 +230,9 @@ export default [
     Button,
     PastColumButton,
     Price,
+    Price_Bill,
     Percent,
+    Percent_Bill,
     InputYear,
     InputText,
     InputText_Bill,
