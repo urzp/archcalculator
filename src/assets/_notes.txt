@@ -22,4 +22,6 @@ problem load  project whel open new paje
 
 proble creeted new bill wihele open bills
 
-afte new bill need open this new  bill
+set all text to text file
+
+нужен принудительные релоад проекта после его первого сохранения 

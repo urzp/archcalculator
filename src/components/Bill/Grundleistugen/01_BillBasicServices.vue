@@ -5,8 +5,8 @@
             <div class="title">Honorarzone und Honorarsatz</div>
         </div>
         <div class="wrap_part">
-            <div class="zone">3</div>
-            <div class="satz">Mittelsatz</div>
+            <div class="zone">{{ honorar_zone }}</div>
+            <div class="satz">{{ honorar_satz }}</div>
         </div>
     </div>
     <div class="honorar item_base_servis light-text">
@@ -28,7 +28,21 @@
 <script>
 export default{
     name: 'BillBasicServices',
-
+    props:{
+        honorar_object: Object,
+    },
+    computed:{
+        honorar_zone(){
+            let result = '-'
+            if(!!this.honorar_object&&!!this.honorar_object.honorar_zone) result = this.honorar_object.honorar_zone
+            return result
+        },
+        honorar_satz(){
+            let result = '-'
+            if(!!this.honorar_object&&this.honorar_object.honorar_satz) result = this.honorar_object.honorar_satz
+            return result
+        }
+    }
 
 }
 </script>

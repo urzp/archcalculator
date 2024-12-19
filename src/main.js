@@ -5,6 +5,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import components from './components'
+import { text } from '@/servis/text.js'
+
+window.text = text
 
 const app = createApp(App)
 

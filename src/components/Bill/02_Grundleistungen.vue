@@ -4,15 +4,19 @@
             <div class="title bold-text">I.<span>Grundleistungen</span></div>
         </div>
         <div class="content">
-            <div class="object">
+            <div class="object" v-for="item, index in list" :key="item.id">
                 <div class="header item_base_servis">
                     <div class="wrap_part">
-                        <div class="number bold-text">A.</div>
+                        <div class="number bold-text">{{ NumToLetters( index + 1 ) }}.</div>
                         <div class="title bold-text">Honorarobjekt</div>
                     </div>
-                    <div class="value bold-text">Parkhaus Neubau</div>
+                    <div class="value bold-text">
+                        <InputText_Bill :value="item.name" width="300px" 
+                        @submit_event="value=>update_value(value, item.id,'name')" 
+                        @setDefault="set_defaul(item.id, 'name')"/>
+                    </div>
                 </div>
-                <BillBasicServices/>
+                <BillBasicServices :honorar_object = "item"/>
                 <BillLeistungsstand/>
                 <BillBesondereLeistungen/>
             </div>
@@ -21,9 +25,42 @@
 </template>
 
 <script>
+import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Project } from '@/servis/projectData.js'
+import { toLetters } from '@/servis/functions'
 export default{
     name: 'Grundleistungen',
-
+    props:{
+        bill_item:[Number, String]
+    },
+    computed:{
+        actualBill(){
+            let result = {}
+            if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
+            return result
+        },
+        list(){
+            let result = []
+            if(!!this.actualBill&&!!this.actualBill.objects) result = this.actualBill.objects
+            return result
+        }
+    },
+    methods:{
+        NumToLetters(value){
+            return toLetters(value).toUpperCase()
+        },
+        update_value(value, id, name_value){
+            let elemet = this.actualBill.objects.find(item=>item.id==id)
+            if(name_value=='name') elemet.name = value
+            saveBill(this.actualBill.id)
+        },
+        set_defaul(id, name_value){
+            let project_elemet = Project.objects.find(item=>item.id==id)
+            let elemet = this.actualBill.objects.find(item=>item.id==id)
+            if(name_value=='name') elemet.name = project_elemet.name
+            saveBill(this.actualBill.id)
+        }
+    }
 
 }
 </script>
@@ -58,6 +95,10 @@ export default{
 
     .title span{
         margin-left: 10px;
+    }
+
+    .object{
+        margin-bottom: 10px;
     }
 
     .object .header{

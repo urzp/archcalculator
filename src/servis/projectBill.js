@@ -41,6 +41,7 @@ export async function newBill(project_id, number){
 
     let payment_date = setPayment_date()
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
+    let objects = setObjects()
 
     let newBill = {
         number,
@@ -56,7 +57,8 @@ export async function newBill(project_id, number){
         invoice_number: 'RE - - - - -',
         created: new Date(),
         number_bill, 
-        greeting_phrase: 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
+        greeting_phrase: window.text.bill.greeting_phrase,
+        objects,
         total:0,
     } 
     let result = await apiData({typeData:'newBill', data:newBill})
@@ -76,4 +78,17 @@ function setPayment_date(){
         payment_date.bis = new Date( lastDate ).addDays(5)
     }
     return payment_date
+}
+
+function setObjects(){
+    let result = []
+    Project.objects.forEach( item=>{
+        let newItem = {}
+        newItem.id = item.id
+        newItem.name = item.name
+        newItem.honorar_zone = item.honorarLevel.number
+        newItem.honorar_satz = item.HonorarRate.value
+        result.push(newItem)
+    })
+    return result
 }

@@ -211,7 +211,7 @@ export default{
             if(name_value=='project_title') this.actualBill.project.name = Project.project.name
             if(name_value=='project_dicription') this.actualBill.project.discription = Project.project.discription
             if(name_value=='number_bill') this.actualBill.number_bill = `${Bills.length}. Abschlagsrechnung`
-            if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:'
+            if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = window.text.bill.greeting_phrase
             saveBill(this.actualBill.id)
         },
         formatDate(date){

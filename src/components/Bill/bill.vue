@@ -10,7 +10,7 @@
             <div class="devide_part"></div>
         </div>
         <BillHeader :bill_item="selectedBill"/>
-        <Grundleistungen/>
+        <Grundleistungen :bill_item="selectedBill"/>
         <AdditionalLeistungen/>
         <Nebenkosten/>
         <Zwischensumme/>
@@ -27,7 +27,6 @@
 import { EventBus } from '@/servis/EventBus'
 import { newBill, Bills, LoadBills, clearBills } from '@/servis/projectBill.js'
 import { saveBill } from '@/servis/projectBill.js'
-import { global } from '@/servis/globalValues.js'
 export default{
     name: 'Bill',
     mounted(){
