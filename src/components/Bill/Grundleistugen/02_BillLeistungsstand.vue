@@ -16,16 +16,15 @@
             <div class="content item_list" v-for="item in list" :key="item.id">
                 <div class="colum colum_1">{{ item.name }}</div>
                 <div class="colum colum_2">
-                    <Percent_Bill input_type 
+                    <Percent_Bill
                     :value = "selectPercent(item)" 
-                    @edit_value = "procent=>setProcent(procent)"/>
+                    @edit_value = "procent=>update_value(procent, 'user_percent', item.id)"
+                    @setDefault="set_default('user_percent', item.id)"/>
                 </div>
                 <div class="colum colum_3">
-                    <div class="colum colum_2">
-                    <Percent_Bill input_type 
+                    <Percent_Bill noUpdate
                     :value = "item.done" 
-                    @edit_value = "procent=>setProcent(procent)"/>
-                </div>
+                    @edit_value = "procent=>update_value(procent, 'done', item.id)"/>
                 </div>
                 <div class="colum colum_4">{{ item.factor }}</div>
                 <div class="colum colum_5"></div>
@@ -44,6 +43,7 @@
 </template>
 
 <script>
+import { Bills, saveBill, getCosts_ById } from '@/servis/projectBill.js'
 export default{
     name: 'BillLeistungsstand',
     data(){
@@ -66,6 +66,17 @@ export default{
         selectPercent(item){
             if(item.user_percent!='') return item.user_percent
             return item.percent
+        },
+        update_value(value, name_value, id){
+            let element = this.honorar_object.stages.find(item=>item.id==id)
+            if(name_value=='user_percent') element.user_percent = value
+            if(name_value=='done') element.done = value
+            saveBill(this.id_bill)
+        },
+        set_default(name_value, id){
+            let element = this.honorar_object.stages.find(item=>item.id==id)
+            if(name_value=='user_percent') element.user_percent = ''
+            saveBill(this.id_bill)
         }
     }
 

@@ -1,8 +1,17 @@
 <template>
-    <div class="percent">
-        <div v-if="!input_type" class="value">{{value}}</div>
-        <input v-else ref="imput_pecent" type="text"  class="value" :value="value.toLocaleString('DE-de')" @change="event => edit_value(event)" @input="event => { validate(event) }"/>
-        <div class="sumbol">%</div>
+    <div class="wrap_element">
+        <div class="percent"   @click.stop :class="{edit}"> 
+            <input  ref="imput_pecent" type="text"  class="value" 
+                @focus="edit=true"
+                :value="value.toLocaleString('DE-de')" 
+                @change="event => edit_value(event)" 
+                @input="event => { validate(event) }"/>
+            <div class="sumbol">%</div>
+        </div>
+        <div class="panel" v-if="!noUpdate" @click.stop>
+            <UpdateBtn v-if="edit" class="button" width="35px" height="28px" @click="$emit('setDefault')" />
+        </div>
+        <div v-if="edit" @click.stop="edit=false" class="bg_for_close"></div> 
     </div>
 </template>
 
@@ -13,11 +22,17 @@ export  default{
     mounted(){
         this.adjast_input_width()
     },  
+    data(){
+        return{
+            edit:false,
+            
+        }
+    },
     props:{
         value: [String,Number],
-        input_type:{ 
-            type: Boolean,
-            default: false,
+        noUpdate:{
+            type:Boolean,
+            default:false,
         },
         search_data:{
             typeof:Object,
@@ -28,7 +43,7 @@ export  default{
             default: '16px',            
         },
     }, 
-    emits:['edit_value'],
+    emits:['edit_value', 'setDefault'],
     methods:{
         validate(event){
             let val = event.target.value
@@ -78,25 +93,48 @@ export  default{
 </script>
 
 <style scoped>
-    .percent{
-        font-family: 'Comfortaa-Regular';
+    .wrap_element{
         display: flex;
+    }
+    .percent{
+        font-family: 'Raleway-Light';
+        display: flex;
+        justify-content: center;
         align-items: baseline;
         gap: 0px;
     }
-    .value{
-        font-size: inherit;
-        font-family:inherit;
-        color: inherit;
-    }
-    .sumbol{
-        font-size: v-bind(font_size_sumbol);
-    }
     input{
-        width: 45px!important;
+        width: 80px!important;
         text-align: right;
         font-family:inherit;
         color: inherit;
         font-size: inherit;
+    }
+
+    .sumbol{
+        font-size: v-bind(font_size_sumbol);
+    }
+
+    .edit{
+        position: relative;
+        border-radius: 5px;
+        background-color: #ebebeb;
+        padding-left: 15px;
+        padding-right: 15px;
+        z-index: 100;
+    }
+
+    .panel{
+        position: relative;
+        z-index: 100;
+    }
+
+    .bg_for_close{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
     }
 </style>
