@@ -97,7 +97,6 @@ export  default{
         display: flex;
     }
     .percent{
-        font-family: 'Raleway-Light';
         display: flex;
         justify-content: center;
         align-items: baseline;

@@ -112,6 +112,8 @@ import Percent from './UI/Simples/Percent.vue'
 import Percent_Bill from './UI/Simples/Percent_Bill.vue'
 import InputYear from './UI/Simples/InputYear.vue'
 import InputText from './UI/Simples/InputText.vue'
+import ImputFactor_Bill from './UI/Simples/ImputFactor_Bill.vue'
+import ImputHours_Bill from './UI/Simples/ImputHours_Bill.vue'
 import InputText_Bill from './UI/Simples/ImputText_Bill.vue'
 import ImputTextMLine from './UI/Simples/ImputTextMLine.vue'
 import ImputTextMLine_Bill from './UI/Simples/ImputTextMLine_Bill.vue'
@@ -236,6 +238,8 @@ export default [
     InputYear,
     InputText,
     InputText_Bill,
+    ImputFactor_Bill,
+    ImputHours_Bill,
     ImputTextMLine,
     ImputTextMLine_Bill,
     InputPrice,

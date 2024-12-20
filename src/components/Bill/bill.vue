@@ -11,7 +11,7 @@
         </div>
         <BillHeader :bill_item="selectedBill"/>
         <Grundleistungen :bill_item="selectedBill"/>
-        <AdditionalLeistungen/>
+        <AdditionalLeistungen :bill_item="selectedBill"/>
         <Nebenkosten/>
         <Zwischensumme/>
         <GesamtRest/>

@@ -8,6 +8,7 @@ import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 export let Project = reactive({})
 
 export async function LoadProjectData(id){
+    EventBus.emit('Project:Loading')
     let result
     if(id=='local'){ 
         result = loadLocal() 
@@ -18,7 +19,7 @@ export async function LoadProjectData(id){
     }
     Object.assign(Project, result) 
     window.project = Project
-    EventBus.emit('Project:Loadeded')
+    EventBus.emit('Project:Loaded')
     return Project
 }
 

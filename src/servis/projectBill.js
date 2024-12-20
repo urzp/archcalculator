@@ -43,6 +43,7 @@ export async function newBill(project_id, number){
     let payment_date = setPayment_date()
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
     let objects = setObjects()
+    let extraServis = initExtraServis(Project.project.AdditionalServices)
 
     let newBill = {
         number,
@@ -60,6 +61,7 @@ export async function newBill(project_id, number){
         number_bill, 
         greeting_phrase: window.text.bill.greeting_phrase,
         objects,
+        extraServis,
         total:0,
     } 
     let result = await apiData({typeData:'newBill', data:newBill})
@@ -83,15 +85,23 @@ function setPayment_date(){
 
 function setObjects(){
     let result = []
-    Project.objects.forEach( item=>{
+    Project.objects.forEach( async item=>{
         let newItem = {}
         newItem.id = item.id
         newItem.name = item.name
         newItem.honorar_zone = item.honorarLevel.number
         newItem.honorar_satz = item.HonorarRate.value
         newItem.costs = getCosts(item.finance)
+        newItem.honorar_total = item.honorar_total
         newItem.total = item.total_object
         newItem.stages = getStages(item)
+        newItem.stages_total = {
+            price: 0,
+            done: 0,
+            percent: 0,
+        },
+        newItem.stagesExtra = calculateServisExstra(item.specialServices, newItem.honorar_total)
+        newItem.stagesExtraTotal = calculatestagesExstraTotal(newItem.stagesExtra)
         result.push(newItem)
     })
     return result
@@ -117,9 +127,11 @@ function getStages(project_object){
     let paragraph_id = project_object.paragraph_id
     result = CalcData.Stages.filter(item=>item.id_paragraph==paragraph_id)
     result.forEach( (item, index)=>{
-        item.user_percent = Number(project_object.stages[index])
+        item.user_percent = Number(!project_object.stages[index]?0:project_object.stages[index])
         item.done = 0
-        item.factor = 0
+        item.factor = 1
+        item.total = 0
+        item.subStages = {}
     })
     return result
 }
@@ -128,4 +140,32 @@ export function getStages_ById(id){
     let project_obj = Project.objects.find(item=>item.id==id)
     if(!project_obj||!project_obj.finance) return []
     return getStages(project_obj)
+}
+
+function calculateServisExstra(stagesExtra, honorar){
+    let result = []
+    stagesExtra.forEach(item=>{
+        let newItem = {...item}
+        newItem.total = honorar * Number(item.percent)/100
+        result.push(newItem)
+    })
+    return result
+}
+
+function calculatestagesExstraTotal(stagesExtra){
+    let result = 0
+    stagesExtra.forEach(item=>{
+        result = result + Number(item.total)
+    })
+    return result
+}
+
+function initExtraServis(extraServis){
+    let result = []
+    if(!extraServis) return result
+    extraServis.forEach(item=>{
+        let newItem = {...item}
+        newItem.total = Number(item.hours) * Number(price_hours)
+        result.push(newItem)
+    })
 }

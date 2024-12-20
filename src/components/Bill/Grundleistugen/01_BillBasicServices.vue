@@ -64,7 +64,7 @@ export default{
         },
         total(){
             let result = 0
-            if(!!this.honorar_object&&this.honorar_object.total) result = this.honorar_object.total
+            if(!!this.honorar_object&&this.honorar_object.honorar_total) result = this.honorar_object.honorar_total
             return result          
         }
     },
@@ -73,7 +73,7 @@ export default{
             if(name_value=='honorar_zone') this.honorar_object.honorar_zone = value
             if(name_value=='honorar_satz') this.honorar_object.honorar_satz = value
             if(name_value=='costs') this.honorar_object.costs = value
-            if(name_value=='total') this.honorar_object.total = value
+            if(name_value=='total') this.honorar_object.honorar_total = value
             saveBill(this.id_bill)
         },
         set_default(name_value){
@@ -81,7 +81,7 @@ export default{
             if(name_value=='honorar_satz') this.honorar_object.honorar_satz = Project.objects.find(item=>item.id=this.honorar_object.id).HonorarRate.value
             if(name_value=='honorar_satz') this.honorar_object.honorar_satz = Project.objects.find(item=>item.id=this.honorar_object.id).HonorarRate.value
             if(name_value=='costs') this.honorar_object.costs = getCosts_ById(this.honorar_object.id)
-            if(name_value=='total') this.honorar_object.total = Project.objects.find(item=>item.id=this.honorar_object.id).total_object
+            if(name_value=='total') this.honorar_object.honorar_total = Project.objects.find(item=>item.id=this.honorar_object.id).honorar_total
             saveBill(this.id_bill)
         },
     }

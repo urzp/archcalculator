@@ -1,4 +1,6 @@
 
+export function intToFloat(num, decPlaces) { return num.toFixed(decPlaces); }
+
 export function lastNumber(list, number='number'){
     if (!list.length||list.length == 0) return 0
     let last = list[list.length-1]

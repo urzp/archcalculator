@@ -4,11 +4,11 @@
             <div class="title bold-text">II.<span>Zusätzliche Leistungen</span></div>
         </div>
         <div class="list">
-            <div class="content item_list light-text">
-                <div class="colum colum_1">Name</div>
-                <div class="colum colum_2">10</div>
-                <div class="colum colum_3">100</div>
-                <div class="colum colum_4">1000</div>
+            <div class="content item_list light-text" v-for="item in list" :key="item.id">
+                <div class="colum colum_1">{{ !item.title?'Leistung eingeben':item.title }}</div>
+                <div class="colum colum_2">{{ item.hours }}h</div>
+                <div class="colum colum_3">{{ item.price_hours }}€</div>
+                <div class="colum colum_4">{{ item.total }}</div>
                 <div class="colum colum_5"></div>
                 <div class="colum colum_6"></div>
             </div>
@@ -17,9 +17,29 @@
 </template>
 
 <script>
+import { Bills, saveBill } from '@/servis/projectBill.js'
 export default{
     name: 'AdditionalLeistungen',
+    data(){
+        return{
 
+        }
+    },
+    props:{
+        bill_item:[Number, String]
+    },
+    computed:{
+        actualBill(){
+            let result = {}
+            if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
+            return result
+        },
+        list(){
+            let result = []
+            if(!!this.actualBill&&!!this.actualBill.extraServis) result=this.actualBill.extraServis
+            return result
+        }
+    }
 
 }
 </script>

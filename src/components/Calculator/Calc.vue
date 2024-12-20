@@ -52,6 +52,7 @@ export default{
         },
         async getProject(){
             this.loaded = false
+            EventBus.emit('Project:Loading')
             let result
             if(!this.project_id) return false
             if(this.project_id == 'new') result = await newPoject() 

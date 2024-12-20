@@ -33,7 +33,7 @@
                 <template v-if="show_bills">
                 <div class="item_subHeader" @click="newBill()">Neues Rechnung</div>
                 </template>
-                <div v-else class="item_subHeader" @click="showBillsBefore()">Rechnung</div>
+                <div v-else-if="!loading" class="item_subHeader" @click="showBillsBefore()">Rechnung</div>
             </div>
         </div>
     </div>
@@ -54,6 +54,8 @@ export default{
         this.chekLocalUnsaved()
         EventBus.on('Project:openProject',this.chekLocalUnsaved)
         EventBus.on('Menu:logOut',()=>{ this.closeBills()})
+        EventBus.on('Project:Loading', ()=>this.loading=true)
+        EventBus.on('Project:Loaded', ()=>this.loading=false)
     },
     data(){
         return {
@@ -63,6 +65,7 @@ export default{
             show_menu:false,
             hasLocalUnsaved:false,
             show_bills:false,
+            loading:false,
         }
     },
     computed:{

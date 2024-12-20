@@ -20,10 +20,13 @@ new Project load effect
 
 problem load  project whel open new paje
 
-proble creeted new bill wihele open bills
 
 set all text to text file
 
 нужен принудительные релоад проекта после его первого сохранения 
 
 Anrechenbare Kosten 400 Bauwerk начинает счтитать после заполнения этого пкукта 
+
+inputPriceBill убрать при редактировании точку
+
+обновление блоков в bill

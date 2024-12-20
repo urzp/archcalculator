@@ -18,7 +18,7 @@
                 </div>
                 <BillBasicServices :id_bill="actualBill.id" :honorar_object = "item"/>
                 <BillLeistungsstand :id_bill="actualBill.id" :honorar_object = "item" />
-                <BillBesondereLeistungen/>
+                <BillBesondereLeistungen  :id_bill="actualBill.id" :honorar_object = "item"/>
             </div>
         </div>
     </div>  
