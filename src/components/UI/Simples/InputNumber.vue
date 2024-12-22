@@ -1,12 +1,12 @@
 <template>
-    <div v-if="!edit" class="value" @click="begin_edit">{{ valueRender }}</div>
+    <div v-if="!edit" class="value" @click="begin_edit">{{ floatRender(value) }}{{ paramSymb }}</div>
     <div class="wrap-edit" v-if="edit" @click.stop>
         <input  
             ref="thisinput" 
             type="text"  
-            :value="valueRender"
-            @change="event => submit_event(event)">
-        <div class="panel">
+            :value="value"
+            @change="event => edit_value(event)">
+        <div class="panel" >
             <UpdateBtn v-if="!noUpdate" class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
@@ -17,7 +17,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { intToFloat } from '@/servis/functions'
 export default{
-    name: 'ImputFactor_Bill',
+    name: 'InputNumber',
     mounted(){
         this.id = this.$.uid
         EventBus.on('fucus:input', value =>{ if(this.id!=value) this.edit = false })
@@ -29,37 +29,40 @@ export default{
             
         }
     },
-    computed:{
-        width_panel(){
-            let result  = '35px'
-            if(this.noUpdate) result = '0'
-            return result
-        }, 
-        valueRender(){
-            return intToFloat(Number(this.value), 2)
-        }
-    },
     props:{
         value:{
-            type:[String, Number],
-            default: 0
+            type:String,
+            default:''
+        },
+        paramSymb:{
+            type: String,
+            default:''
+        },
+        float:{
+            type:[Number,String], 
+            default: ''
         },
         noUpdate:{
             type:Boolean,
             default: false,
         }
     },
-    emits:['submit_event', 'setDefault'],
+    emits:['editValue', 'setDefault'],
     methods:{
+        floatRender(){
+            if(this.float === '') return this.value
+            return intToFloat(Number(this.value), this.float)
+        },
         begin_edit(){
             this.edit = true
             setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
             EventBus.emit('fucus:input', this.id)
         },
-        submit_event(event){
+        edit_value(event){
             this.edit = false
             let val = event.target.value
-            this.$emit('submit_event', val)
+            this.$refs.thisinput.value = ''
+            this.$emit('editValue', val)
         },
         set_default(){
             this.$emit('setDefault')
@@ -81,15 +84,15 @@ export default{
     .wrap-edit{
         position: relative;
         display: flex;
+        justify-content: center;
         column-gap: 10px;
         z-index: 100;
     }
     input{
-        height: 30px;
-        width: 100%;
+        height: 28px;
+        width: 60px;
         border-radius: 5px;
         background-color: #ebebeb;
-        padding-left: 15px;
         font-size: inherit;
         font-family: inherit;
         color: inherit;
@@ -97,7 +100,7 @@ export default{
     }
 
     .panel{
-        width: v-bind(width_panel);
+        width: 0;
         position: relative;
     }
     .button{

@@ -44,6 +44,15 @@ export async function newBill(project_id, number){
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
     let objects = setObjects()
     let extraServis = initExtraServis(Project.project.AdditionalServices)
+    let totalExtraServis = countTotalExtraServis(extraServis)
+    let extraCosts = initExtraCosts(Project.project.ExtraCosts)
+    let totalExtraCosts = countTotalExtraServis(extraCosts)
+    let total_objects = Project.objects.reduce((partialSum, item) => partialSum + item.total_object, 0);
+    let total_net = total_objects + totalExtraCosts + totalExtraServis
+    let tax = Project.project.tax
+    let total_tax = total_net * Number(Project.project.tax)/100
+    let total = total_tax + total_net
+    let paid = initPaid()
 
     let newBill = {
         number,
@@ -62,7 +71,15 @@ export async function newBill(project_id, number){
         greeting_phrase: window.text.bill.greeting_phrase,
         objects,
         extraServis,
-        total:0,
+        totalExtraServis,
+        extraCosts,
+        totalExtraCosts,
+        total_objects,
+        total_net,
+        tax,
+        total_tax,
+        total,
+        paid,
     } 
     let result = await apiData({typeData:'newBill', data:newBill})
     newBill.id = result.data
@@ -93,15 +110,16 @@ function setObjects(){
         newItem.honorar_satz = item.HonorarRate.value
         newItem.costs = getCosts(item.finance)
         newItem.honorar_total = item.honorar_total
-        newItem.total = item.total_object
         newItem.stages = getStages(item)
         newItem.stages_total = {
             price: 0,
             done: 0,
             percent: 0,
         },
+        newItem.stagesTotal = 0
         newItem.stagesExtra = calculateServisExstra(item.specialServices, newItem.honorar_total)
         newItem.stagesExtraTotal = calculatestagesExstraTotal(newItem.stagesExtra)
+        newItem.total = newItem.stagesTotal + newItem.stagesExtraTotal
         result.push(newItem)
     })
     return result
@@ -165,7 +183,47 @@ function initExtraServis(extraServis){
     if(!extraServis) return result
     extraServis.forEach(item=>{
         let newItem = {...item}
-        newItem.total = Number(item.hours) * Number(price_hours)
+        newItem.total = Number(item.hours) * Number(item.price_hours)
         result.push(newItem)
     })
+    return result
+}
+
+function countTotalExtraServis(extraServis){
+    let result = 0
+    extraServis.forEach(item=>{
+        result = result + Number(item.total)
+    })
+    return result
+}
+
+function initExtraCosts(extraCosts){
+    let result = []
+    if(!extraCosts) return result
+    extraCosts.forEach(item=>{
+        let newItem = {...item}
+        newItem.total = Number(item.rate) * Number(item.price_rate)
+        result.push(newItem)
+    })
+    return result
+}
+
+function initPaid(){
+    let result = {
+        invoice_number: 'RE - - - - -',
+        value: 0,
+        date:'',
+        fact_paid:false,
+        previous : [],
+    }
+    Bills.forEach( (item, index)=>{
+        if(!!item.paid){
+            let newitem = {...item.paid}
+            newitem.bill_id = item.id
+            newitem.id = index
+            delete newitem.previous;
+            result.previous.push(newitem)
+        }
+    })
+    return result
 }

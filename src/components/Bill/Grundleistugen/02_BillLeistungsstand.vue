@@ -16,20 +16,20 @@
             <div class="content item_list" v-for="item in list" :key="item.id">
                 <div class="colum colum_1">{{ item.name }}</div>
                 <div class="colum colum_2">
-                    <Percent_Bill
-                    :value = "selectPercent(item)" 
-                    @edit_value = "procent=>update_value(procent, 'user_percent', item.id)"
+                    <InputNumber
+                    :value = "selectPercent(item)" paramSymb=" %" 
+                    @editValue = "procent=>update_value(procent, 'user_percent', item.id)"
                     @setDefault="set_default('user_percent', item.id)"/>
                 </div>
                 <div class="colum colum_3">
-                    <Percent_Bill noUpdate
-                    :value = "item.done" 
-                    @edit_value = "procent=>update_value(procent, 'done', item.id)"/>
+                    <InputNumber noUpdate
+                    :value = "item.done" paramSymb=" %"
+                    @editValue = "procent=>update_value(procent, 'done', item.id)"/>
                 </div>
                 <div class="colum colum_4">
-                    <ImputFactor_Bill noUpdate
-                    :value = "item.factor" 
-                    @submit_event = "value=>update_value(value, 'factor', item.id)"/>
+                    <InputNumber noUpdate
+                    :value = "item.factor" float="2"
+                    @editValue = "value=>update_value(value, 'factor', item.id)"/>
                 </div>
                 <div class="colum colum_5">
                     <Price :value="item.total" 
@@ -131,9 +131,10 @@ export default{
                 let selectPercent = !!item.user_percent?Number(item.user_percent):Number(item.percent)
                 summ_percent = summ_percent + selectPercent
             })
-            this.honorar_object.stages_total.price = summ_price
             this.honorar_object.stages_total.done = summ_done
             this.honorar_object.stages_total.percent = summ_percent
+            this.honorar_object.stages_total.price = summ_price
+            this.honorar_object.stagesTotal = summ_price
         } 
     }
 
@@ -187,7 +188,7 @@ export default{
     }
 
     .colum_1{
-        width: 43%;
+        width: 500px;
     }
     .colum_2{
         width: 11%;
@@ -222,7 +223,6 @@ export default{
     }
 
     .total .colum_2, .total .colum_3{
-        padding-right: 28px;
-        text-align: right;
+        text-align: center;
     }
 </style>

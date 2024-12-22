@@ -2,14 +2,17 @@
     <div class="honorar item_base_servis light-text">
         <div class="titile_item wrap_part">
             <div class="title">2. Abzüge für geleistete Abschlagszahlungen</div>
+            <div v-if="list.length==0" class="none">-</div>
         </div>
         <div class="list">
-            <div class="header item_list">
-                <div class="colum colum_1">RE0001</div>
+            <div class="header item_list" v-for="item in list" :key="item.id">
+                <div class="colum colum_1" @click="openBill(item.bill_id)">
+                    {{ item.invoice_number }}
+                </div>
                 <div class="colum colum_2">Zahlung vom</div>
-                <div class="colum colum_3">14.06.2023</div>
+                <div class="colum colum_3">{{ date }}</div>
                 <div class="colum colum_4"></div>
-                <div class="colum colum_5"> 1 000,00 € </div>
+                <div class="colum colum_5"> {{ value }} € </div>
                 <div class="colum colum_6"></div>
             </div>
         </div>
@@ -17,9 +20,34 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
+import { Bills, saveBill } from '@/servis/projectBill.js'
 export default{
     name: 'AdvancePayments',
-
+    props:{
+        actualBill:Object,
+    },
+    computed:{
+        list(){
+            let result = []
+            if(!!this.actualBill&&this.actualBill.paid&&!!this.actualBill.paid.previous) result = this.actualBill.paid.previous
+            return result
+        }
+    },
+    emits:['selectBill'],
+    methods:{
+        openBill(bill_id){
+            EventBus.emit('Bills:selectBill', bill_id )
+        },
+        async update_value(value, name_value, elemen){
+            //if(name_value=='invoice_number') elemen.invoice_number = value
+            saveBill(this.actualBill.id)
+        },
+        set_defaul(name_value){
+            //if(name_value=='name_user') this.actualBill.name_user = `${user.name} ${!user.address?' - Adresse':user.address}`
+            saveBill(this.actualBill.id)
+        },
+    }
 
 }
 </script>
@@ -48,6 +76,16 @@ export default{
         flex-direction: column;
         column-gap: 15px;
         justify-content: space-between;
+    }
+
+    .titile_item{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .none{
+        width: 11%;
+        text-align: center;
     }
 
     .title{
@@ -82,5 +120,9 @@ export default{
     }
     .colum_6{
         width: 12%;
+    }
+
+    .item_list .colum_1{
+        cursor: pointer;
     }
 </style>

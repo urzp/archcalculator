@@ -197,7 +197,7 @@ export default{
             if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = value
             if(name_value=='project_title') this.actualBill.project.name = value
             if(name_value=='project_dicription') this.actualBill.project.discription = value
-            if(name_value=='invoice_number') this.actualBill.invoice_number = value
+            if(name_value=='invoice_number') this.actualBill.invoice_number = value; this.actualBill.paid.invoice_number = value
             if(name_value=='number_bill') this.actualBill.number_bill = value
             if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = value
             saveBill(this.actualBill.id)

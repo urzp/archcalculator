@@ -1,5 +1,8 @@
 
-export function intToFloat(num, decPlaces) { return num.toFixed(decPlaces); }
+export function intToFloat(num, decPlaces) { 
+    if(!num) num=0
+    return num.toFixed(decPlaces); 
+}
 
 export function lastNumber(list, number='number'){
     if (!list.length||list.length == 0) return 0

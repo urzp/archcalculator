@@ -17,9 +17,9 @@
                 <div class="colum colum_1">{{ !item.title?'Leistung eingeben':item.title }}</div>
                 <div class="colum colum_2"></div>
                 <div class="colum colum_3">
-                    <Percent_Bill
-                    :value = "item.percent" 
-                    @edit_value = "procent=>update_value(procent, 'user_percent', item.id)"
+                    <InputNumber
+                    :value = "item.percent" paramSymb=" %"
+                    @editValue = "procent=>update_value(procent, 'user_percent', item.id)"
                     @setDefault="set_default('user_percent', item.id)"/>
                 </div>
                 <div class="colum colum_4"></div>
@@ -104,7 +104,6 @@ export default{
                 summ_price = summ_price + item.total
             })
             this.honorar_object.stagesExtraTotal = summ_price
-
         }
     }
 

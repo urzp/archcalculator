@@ -76,6 +76,7 @@ import BillBasicServices from './Bill/Grundleistugen/01_BillBasicServices.vue'
 import BillLeistungsstand from './Bill/Grundleistugen/02_BillLeistungsstand.vue'
 import BillBesondereLeistungen from './Bill/Grundleistugen/03_BillBesondereLeistungen.vue'
 import BillAdditionalLeistungen from './Bill/03_AdditionalLeistungen.vue'
+import BillTotalObject from './Bill/Grundleistugen/04_BillTotalObject.vue'
 import Nebenkosten from './Bill/04_Nebenkosten.vue'
 import Zwischensumme from './Bill/05_Zwischensumme.vue'
 import GesamtRest from './Bill/06_GesamtRest.vue'
@@ -109,12 +110,11 @@ import PastColumButton from './UI/Simples/PastColumBtn.vue'
 import Price from './UI/Simples/Price.vue'
 import Price_Bill from './UI/Simples/Price_bill.vue'
 import Percent from './UI/Simples/Percent.vue'
-import Percent_Bill from './UI/Simples/Percent_Bill.vue'
 import InputYear from './UI/Simples/InputYear.vue'
 import InputText from './UI/Simples/InputText.vue'
-import ImputFactor_Bill from './UI/Simples/ImputFactor_Bill.vue'
-import ImputHours_Bill from './UI/Simples/ImputHours_Bill.vue'
-import InputText_Bill from './UI/Simples/ImputText_Bill.vue'
+import InputNumber from './UI/Simples/InputNumber.vue'
+import InputHours_Bill from './UI/Simples/InputHours_Bill.vue'
+import InputText_Bill from './UI/Simples/InputText_Bill.vue'
 import ImputTextMLine from './UI/Simples/ImputTextMLine.vue'
 import ImputTextMLine_Bill from './UI/Simples/ImputTextMLine_Bill.vue'
 import InputPrice from './UI/Simples/InputPrice.vue'
@@ -202,6 +202,7 @@ export default [
     BillLeistungsstand,
     BillBesondereLeistungen,
     BillAdditionalLeistungen,
+    BillTotalObject,
     Nebenkosten,
     Zwischensumme,
     GesamtRest,
@@ -234,12 +235,11 @@ export default [
     Price,
     Price_Bill,
     Percent,
-    Percent_Bill,
     InputYear,
     InputText,
+    InputNumber,
     InputText_Bill,
-    ImputFactor_Bill,
-    ImputHours_Bill,
+    InputHours_Bill,
     ImputTextMLine,
     ImputTextMLine_Bill,
     InputPrice,

@@ -19,7 +19,12 @@
                 <BillBasicServices :id_bill="actualBill.id" :honorar_object = "item"/>
                 <BillLeistungsstand :id_bill="actualBill.id" :honorar_object = "item" />
                 <BillBesondereLeistungen  :id_bill="actualBill.id" :honorar_object = "item"/>
+                <BillTotalObject :id_bill="actualBill.id" :honorar_object = "item"/>
             </div>
+        </div>
+        <div v-show="list.length>1" class="total_objects">
+            <div class="">Summ as alles Honorarobjekt</div>
+            <Price :value="total_objects" font_size_unit="18px" font_family="Raleway-Medium"/>
         </div>
     </div>  
 </template>
@@ -43,7 +48,17 @@ export default{
             let result = []
             if(!!this.actualBill&&!!this.actualBill.objects) result = this.actualBill.objects
             return result
-        }
+        },
+        total_objects(){
+            let result = 0
+            if(!!this.actualBill&&!!this.actualBill.objects){
+                this.actualBill.objects.forEach(item=>{
+                    result = result + item.total
+                });
+                this.actualBill.total_objects = result
+            }
+            return result
+        },
     },
     methods:{
         NumToLetters(value){
@@ -119,5 +134,11 @@ export default{
         display: flex;
         column-gap: 15px;
         justify-content: space-between;
+    }
+
+    .total_objects{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
     }
 </style>

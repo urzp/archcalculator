@@ -2,7 +2,8 @@
     <div v-if="isSelected" class="bills_wrap">
         <!-- <CalcTitle no_full_inf></CalcTitle> -->
         <BillsList :list="list" @selectBill="(value)=>selectedBill=value"></BillsList>
-        <div class="title_bill">
+        <template v-if="list.length>0">
+        <div class="title_bill" ref="begin">
             <div class="name">
                 <div class="title">Rechnung:</div>
                 <InputText :value="bill_name" width="300px" @submit_event="value=>update_title(value)"/>
@@ -12,13 +13,14 @@
         <BillHeader :bill_item="selectedBill"/>
         <Grundleistungen :bill_item="selectedBill"/>
         <AdditionalLeistungen :bill_item="selectedBill"/>
-        <Nebenkosten/>
-        <Zwischensumme/>
-        <GesamtRest/>
+        <Nebenkosten  :bill_item="selectedBill"/>
+        <Zwischensumme :bill_item="selectedBill"/>
+        <GesamtRest  :bill_item="selectedBill"/>
         <Rechnungsbetrag/>
         <BillFooter/>
         <div class="devide_part"></div>
         <div class="bottum_line"></div>
+        </template>
     </div>
 </template>
 
@@ -33,6 +35,7 @@ export default{
         EventBus.on('MenuProjects:showBills', ()=>this.openBills())
         EventBus.on('MenuProjects:new', clearBills) 
         EventBus.on('MenuProjects:newBill', this.newBill)
+        EventBus.on('Bills:selectBill', id=>{this.selectBillById(id)} )
     },
     data(){
         return{
@@ -61,6 +64,11 @@ export default{
         }
     },
     methods:{
+        selectBillById(id){
+            let index = Bills.findIndex(item=>item.id==id)
+            this.selectedBill = index
+            this.$refs.begin.scrollIntoView({behavior: 'smooth'});
+        },
         async getData(){
             await clearBills()
             if(!this.project_id) return false

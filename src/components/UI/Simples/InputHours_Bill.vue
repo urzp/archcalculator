@@ -17,7 +17,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { intToFloat } from '@/servis/functions'
 export default{
-    name: 'ImputHours_Bill',
+    name: 'InputHours_Bill',
     mounted(){
         this.id = this.$.uid
         EventBus.on('fucus:input', value =>{ if(this.id!=value) this.edit = false })

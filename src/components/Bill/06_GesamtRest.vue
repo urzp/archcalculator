@@ -6,21 +6,44 @@
         <div class="list">
             <div class="content item_list light-text">
                 <div class="colum colum_1">1. Rechnerisches Gesamthonorar</div>
-                <div class="colum colum_2"> 22 998,22 € </div>
+                <div class="colum colum_2">
+                    <Price :value="calc_total" font_size_unit="18px" font_family="Raleway-Medium"/>
+                </div>
             </div>
-            <AdvancePayments/>  
+            <AdvancePayments :actualBill="actualBill"/>  
             <div class="content item_list bold-text">
                 <div class="colum colum_1">3. Restlicher Honoraranspruch</div>
-                <div class="colum colum_2"> 16 998,22 € </div>
+                <div class="colum colum_2"></div>
             </div>
         </div>
     </div>  
 </template>
 
 <script>
+import { Project } from '@/servis/projectData.js'
+import { Bills, saveBill } from '@/servis/projectBill.js'
 export default{
     name: 'GesamtRest',
+    data(){
+        return{
 
+        }
+    },
+    props:{
+        bill_item:[Number, String]
+    },
+    computed:{
+        actualBill(){
+            let result = {}
+            if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
+            return result
+        },
+        calc_total(){
+            let result = {}
+            if(!!this.actualBill&&!!this.actualBill.total) result = this.actualBill.total
+            return result           
+        },
+    }
 
 }
 </script>
@@ -70,6 +93,7 @@ export default{
     }
     .colum_2{
         width: 11%;
-        text-align: center;
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
