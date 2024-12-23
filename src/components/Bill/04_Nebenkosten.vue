@@ -26,7 +26,7 @@
                 </div>
                 <div class="colum colum_6"></div>
             </div>
-            <div class="total item_list bold-text">
+            <div class="total item_list bold-text" v-if="list.length>0">
                 <div class="colum colum_1">Summe as {{ list.length }}</div>
                 <div class="colum colum_2"></div>
                 <div class="colum colum_3"></div>

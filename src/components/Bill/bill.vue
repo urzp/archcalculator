@@ -39,7 +39,6 @@ export default{
     },
     data(){
         return{
-            list:Bills,
             selectedBill:'',
         }
     },
@@ -60,6 +59,11 @@ export default{
         bill_name(){
             let result = ''
             if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].name
+            return result
+        },
+        list(){
+            let result = []
+            if(!!Bills) result = Bills
             return result
         }
     },

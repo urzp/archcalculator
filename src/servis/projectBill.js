@@ -33,6 +33,12 @@ export async function deleteBill(id){
     apiData({typeData:'deleteBill', data:id})
 }
 
+export function setPaid(value, name_value ,id){
+    let element = Bills.find(item=>item.id==id)
+    element.paid[name_value] = value
+}
+
+
 export async function newBill(project_id, number){
 
     let custemer = {...Project.project.customer}

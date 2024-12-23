@@ -19,12 +19,23 @@
                         <div class="price">
                             <Price :value="item.total" font_size_unit="14px" noCents font_family="Raleway-Medium"/>
                         </div>
-                        <div class="data">{{ formatDate(item.payment_date.bis) }}</div>
+                        <div class="data"> {{ formatDate(item.payment_date.bis) }} </div>
                     </div>
                 </div>
                 <div class="wrap_right">
-                    <div class="data_paid">{{ !!item.date?item.date:'-' }}</div>
-                    <div class="value">{{ !!item.value?item.value:'-' }}</div>
+                    <div class="data_paid"  @click.stop="showSelectData=true; SelectDataName=item.id" >
+                        {{ formatDate(item.paid.date) }}
+                    </div>
+                    <div v-if="showSelectData&&SelectDataName==item.id" class="selectData" @click.stop="" style="margin-left: -5px;">
+                        <div class="wrap_calendar">
+                            <Calendar popap :openMonth="new Date( )" :selectDay="new Date( )" :projects="[]" @selectDay="day=>update_value(day, 'paid_date', item.id)" @closeCalendar="showSelectData=false"/>
+                        </div>
+                    </div>
+                    <div class="value">
+                        <Price_Bill input_width="80px" noPanel
+                        :value ="item.paid.value" 
+                        @edit_price="newValue=>update_value(newValue, 'paid_value', item.id)"  />
+                    </div>
                     <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div>
                 </div>
             </div>
@@ -35,9 +46,16 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
-import { deleteBill } from '@/servis/projectBill.js'
+import { Bills, deleteBill, setPaid } from '@/servis/projectBill.js'
+
 export default{
     name: 'BillsList',
+    data(){
+        return{
+            showSelectData: false,
+            SelectDataName: '',
+        }
+    },
     props:{
         list:Array,
     },
@@ -68,6 +86,10 @@ export default{
                 
             })
 
+        },
+        async update_value(value, name_value, id){
+            if(name_value=='paid_value') setPaid(value, 'value', id)
+            if(name_value=='paid_date') setPaid(value, 'date',id)
         }
     }
 }
@@ -134,7 +156,7 @@ export default{
     }
 
     .data_price{
-        width: 180px;
+        width: 150px;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -165,9 +187,32 @@ export default{
         visibility: visible;
     }
 
-    .status, .value, .data_paid{
+    .status, .data_paid{
         width: 120px;
         text-align: center;
         font-size: 18px;
+    }
+
+    .data_pai{
+        width: 80px;
+    }
+
+    .selectData{
+        position: relative;
+        width: 0;
+        height: 0;
+    }
+
+    .wrap_calendar{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        right: 5px;
+        top: 30px;
+        width: 350px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px #898989d6;
+        background-color: #fff;
     }
 </style>

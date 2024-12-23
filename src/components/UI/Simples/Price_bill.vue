@@ -15,7 +15,7 @@
             </template>
             <div class="currency-sign">{{ typeCurrancy }}</div>
         </div>
-        <div class="panel">
+        <div class="panel" v-if="!noPanel">
             <UpdateBtn v-if="edit" class="button" width="35px" height="28px" @click="$emit('setDefault')" />
         </div>
     </div>
@@ -42,6 +42,10 @@ export default{
     props:{
         value:[String, Number],
         noCents:{
+            type: Boolean,
+            default:false
+        },
+        noPanel:{
             type: Boolean,
             default:false
         },
@@ -128,6 +132,7 @@ export default{
         display: flex;
         column-gap: 2px;
     }
+
     .edit_wrap{
         position: relative;
         z-index: 100;
