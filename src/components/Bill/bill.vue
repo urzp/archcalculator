@@ -16,7 +16,7 @@
         <Nebenkosten  :bill_item="selectedBill"/>
         <Zwischensumme :bill_item="selectedBill"/>
         <GesamtRest  :bill_item="selectedBill"/>
-        <Rechnungsbetrag/>
+        <Rechnungsbetrag  :bill_item="selectedBill"/>
         <BillFooter/>
         <div class="devide_part"></div>
         <div class="bottum_line"></div>

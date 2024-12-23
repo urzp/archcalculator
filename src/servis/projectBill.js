@@ -36,8 +36,21 @@ export async function deleteBill(id){
 export function setPaid(value, name_value ,id){
     let element = Bills.find(item=>item.id==id)
     element.paid[name_value] = value
+    updatePaids(id)
+    saveBill(id)
 }
 
+function updatePaids(id){
+    let updated_bill = Bills.find(item=>item.id==id)
+    Bills.forEach(bill=>{
+       let bills_previos =  bill.paid.previous.filter(item=>item.bill_id == id)    
+        bills_previos.forEach(item=>{
+            item.value = updated_bill.paid.value
+            item.invoice_number = updated_bill.paid.invoice_number
+            item.date = updated_bill.paid.date
+        })
+    })
+}
 
 export async function newBill(project_id, number){
 
@@ -59,6 +72,7 @@ export async function newBill(project_id, number){
     let total_tax = total_net * Number(Project.project.tax)/100
     let total = total_tax + total_net
     let paid = initPaid()
+    let total_rest = 0
 
     let newBill = {
         number,
@@ -86,6 +100,7 @@ export async function newBill(project_id, number){
         total_tax,
         total,
         paid,
+        total_rest,
     } 
     let result = await apiData({typeData:'newBill', data:newBill})
     newBill.id = result.data

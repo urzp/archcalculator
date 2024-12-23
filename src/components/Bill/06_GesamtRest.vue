@@ -13,7 +13,9 @@
             <AdvancePayments :actualBill="actualBill"/>  
             <div class="content item_list bold-text">
                 <div class="colum colum_1">3. Restlicher Honoraranspruch</div>
-                <div class="colum colum_2"></div>
+                <div class="colum colum_2">
+                    <Price :value="calc_rest_paide" font_size_unit="18px" font_family="Raleway-Medium"/>
+                </div>
             </div>
         </div>
     </div>  
@@ -43,6 +45,17 @@ export default{
             if(!!this.actualBill&&!!this.actualBill.total) result = this.actualBill.total
             return result           
         },
+        calc_rest_paide(){
+            let result = 0
+            if(!!this.actualBill&&!!this.actualBill.paid){
+                result = this.actualBill.total
+                this.actualBill.paid.previous.forEach(item=>{
+                    result = result - item.value
+                })
+                this.actualBill.total_rest = result
+            }
+            return result
+        }
     }
 
 }

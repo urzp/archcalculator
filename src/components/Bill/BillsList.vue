@@ -28,7 +28,11 @@
                     </div>
                     <div v-if="showSelectData&&SelectDataName==item.id" class="selectData" @click.stop="" style="margin-left: -5px;">
                         <div class="wrap_calendar">
-                            <Calendar popap :openMonth="new Date( )" :selectDay="new Date( )" :projects="[]" @selectDay="day=>update_value(day, 'paid_date', item.id)" @closeCalendar="showSelectData=false"/>
+                            <Calendar popap :openMonth="new Date( )" 
+                            :selectDay="new Date( )" 
+                            :projects="[]" 
+                            @selectDay="day=>update_value(day, 'paid_date', item.id)" 
+                            @closeCalendar="showSelectData=false"/>
                         </div>
                     </div>
                     <div class="value">
@@ -36,7 +40,7 @@
                         :value ="item.paid.value" 
                         @edit_price="newValue=>update_value(newValue, 'paid_value', item.id)"  />
                     </div>
-                    <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div>
+                    <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
                 </div>
             </div>
         </div>
@@ -46,7 +50,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
-import { Bills, deleteBill, setPaid } from '@/servis/projectBill.js'
+import { Bills, saveBill, deleteBill, setPaid } from '@/servis/projectBill.js'
 
 export default{
     name: 'BillsList',
@@ -69,6 +73,7 @@ export default{
     },
     methods:{
         formatDate(date){
+            if(!date) return '-'
             date = new Date(date)
            return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
         },
@@ -88,6 +93,7 @@ export default{
 
         },
         async update_value(value, name_value, id){
+            this.showSelectData=false
             if(name_value=='paid_value') setPaid(value, 'value', id)
             if(name_value=='paid_date') setPaid(value, 'date',id)
         }

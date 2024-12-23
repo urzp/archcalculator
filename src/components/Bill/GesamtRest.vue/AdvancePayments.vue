@@ -10,9 +10,9 @@
                     {{ item.invoice_number }}
                 </div>
                 <div class="colum colum_2">Zahlung vom</div>
-                <div class="colum colum_3">{{ date }}</div>
+                <div class="colum colum_3">{{ formatDate(item.date) }}</div>
                 <div class="colum colum_4"></div>
-                <div class="colum colum_5"> {{ value }} € </div>
+                <div class="colum colum_5"> {{ item.value }} € </div>
                 <div class="colum colum_6"></div>
             </div>
         </div>
@@ -36,6 +36,11 @@ export default{
     },
     emits:['selectBill'],
     methods:{
+        formatDate(date){
+            if(!date) return '-'
+            date = new Date(date)
+           return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+        },
         openBill(bill_id){
             EventBus.emit('Bills:selectBill', bill_id )
         },
