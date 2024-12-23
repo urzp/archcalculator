@@ -17,7 +17,7 @@
         <Zwischensumme :bill_item="selectedBill"/>
         <GesamtRest  :bill_item="selectedBill"/>
         <Rechnungsbetrag  :bill_item="selectedBill"/>
-        <BillFooter/>
+        <BillFooter :bill_item="selectedBill"/>
         <div class="devide_part"></div>
         <div class="bottum_line"></div>
         </template>

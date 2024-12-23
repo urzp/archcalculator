@@ -20,9 +20,7 @@
                     @setDefault="set_default('price_hours', item.id)"/>              
                 </div>
                 <div class="colum colum_5">
-                    <Price :value="item.total" 
-                    font_size_unit="18px"
-                    font_family="Raleway-Light"/>
+                    <PriceBill :value="item.total" />
                 </div>
                 <div class="colum colum_6"></div>
             </div>
@@ -32,7 +30,7 @@
                 <div class="colum colum_3"></div>
                 <div class="colum colum_4"></div>
                 <div class="colum colum_5">
-                    <Price :value="total_price" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="total_price" />
                 </div>
                 <div class="colum colum_6"></div>
             </div>

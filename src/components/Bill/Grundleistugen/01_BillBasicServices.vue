@@ -22,8 +22,8 @@
             <div class="number">2.</div>
             <div class="title">Anrechenbaren Kosten</div>
         </div>
-        <div class="value">
-            <Price_Bill :value ="costs" @edit_price="newValue=>update_value(newValue, 'costs')" @setDefault="set_default('costs')" />
+        <div class="value bold-text" >
+            <PriceInputBill :value ="costs" @editPrice="newValue=>update_value(newValue, 'costs')" @setDefault="set_default('costs')"/>
         </div>
     </div>
     <div class="honorar item_base_servis light-text">
@@ -32,7 +32,7 @@
             <div class="title">Rechnerisches Gesamthonorar LPH 1-9</div>
         </div>
         <div class="value bold-text">
-            <Price_Bill :value ="total" @edit_price="newValue=>update_value(newValue, 'total')" @setDefault="set_default('total')" />
+            <PriceInputBill :value ="total" @editPrice="newValue=>update_value(newValue, 'total')" @setDefault="set_default('total')"/>
         </div>
     </div>
 </template>

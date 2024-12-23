@@ -3,7 +3,7 @@
         <div class="header_item">
             <div class="title bold-text">Rechnungsbetrag</div>
             <div class="value">
-                <Price :value="total_rest" font_size_unit="18px" font_family="Raleway-Medium"/>
+                <PriceBill :value="total_rest" />
             </div>
         </div>
     </div>  

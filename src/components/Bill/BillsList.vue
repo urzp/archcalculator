@@ -23,22 +23,9 @@
                     </div>
                 </div>
                 <div class="wrap_right">
-                    <div class="data_paid"  @click.stop="showSelectData=true; SelectDataName=item.id" >
-                        {{ formatDate(item.paid.date) }}
-                    </div>
-                    <div v-if="showSelectData&&SelectDataName==item.id" class="selectData" @click.stop="" style="margin-left: -5px;">
-                        <div class="wrap_calendar">
-                            <Calendar popap :openMonth="new Date( )" 
-                            :selectDay="new Date( )" 
-                            :projects="[]" 
-                            @selectDay="day=>update_value(day, 'paid_date', item.id)" 
-                            @closeCalendar="showSelectData=false"/>
-                        </div>
-                    </div>
+                    <InputDate :value="item.paid.date" @editValue=" date=>update_value(date, 'paid_date', item.id) " />
                     <div class="value">
-                        <Price_Bill input_width="80px" noPanel
-                        :value ="item.paid.value" 
-                        @edit_price="newValue=>update_value(newValue, 'paid_value', item.id)"  />
+                        <PriceInputBill noPanel :value ="item.paid.value" @editPrice="newValue=>update_value(newValue, 'paid_value', item.id)" />
                     </div>
                     <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
                 </div>
@@ -194,8 +181,15 @@ export default{
     }
 
     .status, .data_paid{
-        width: 120px;
+        width: 140px;
         text-align: center;
+        font-size: 18px;
+    }
+
+    .value{
+        width: 140px;
+        font-family: 'Comfortaa-Regular';
+        text-align: right;
         font-size: 18px;
     }
 
@@ -203,22 +197,5 @@ export default{
         width: 80px;
     }
 
-    .selectData{
-        position: relative;
-        width: 0;
-        height: 0;
-    }
-
-    .wrap_calendar{
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        right: 5px;
-        top: 30px;
-        width: 350px;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px #898989d6;
-        background-color: #fff;
-    }
+ 
 </style>

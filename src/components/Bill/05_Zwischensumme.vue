@@ -7,7 +7,7 @@
             <div class="content item_list bold-text">
                 <div class="colum colum_1">1. Zwischensumme Netto-Honorare einschließlich Nebenkosten</div>
                 <div class="colum colum_2">
-                    <Price :value="total_net" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="total_net" />
                 </div>
             </div>
             <div class="content item_list bold-text">
@@ -21,13 +21,13 @@
                     </div> 
                 </div>
                 <div class="colum colum_2">
-                    <Price :value="total_tax" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="total_tax" />
                 </div>
             </div>
             <div class="content item_list bold-text">
                 <div class="colum colum_1">3. Brutto-Honorar einschließlich Nebenkosten</div>
                 <div class="colum colum_2">
-                    <Price :value="total_price" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="total_price" />
                 </div>
             </div>
         </div>

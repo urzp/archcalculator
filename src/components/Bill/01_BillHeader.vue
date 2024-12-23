@@ -45,18 +45,9 @@
             </div> 
             <div class="payment_date light-text">
                 <div class="">Leistungszeitraum vom</div>
-                <div class="payment_date_volume"  @click.stop="showSelectData=true; SelectDataName='vom'">
-                    {{ formatDate(payment_date.vom) }}
-                </div>  
+                <InputDate :value="payment_date.vom" @editValue=" date=>actualBill.payment_date.vom=date " />
                 <div class="">bis</div>  
-                <div class="payment_date_volume"  @click.stop="showSelectData=true; SelectDataName='bis'">
-                    {{ formatDate(payment_date.bis) }}
-                </div>
-                <div v-if="showSelectData" class="selectData" @click.stop="" style="margin-left: -5px;">
-                    <div class="wrap_calendar">
-                        <Calendar popap :openMonth="new Date( selectDay )" :selectDay="new Date( selectDay )" :projects="[]" @selectDay="day=>setNewDate(day)" @closeCalendar="showSelectData=false"/>
-                    </div>
-                </div>
+                <InputDate :value="payment_date.bis" @editValue=" date=>actualBill.payment_date.bis=date " />
             </div>
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
@@ -68,14 +59,7 @@
             <div class="item_title_value">
                 <div class="datum title bold-text">Datum</div>
                 <div class="datum_value bold-text">
-                    <div class="date_created" @click.stop="showSelectData_2=true; SelectDataName='created'">
-                        {{ formatDate(created) }}
-                    </div>
-                    <div v-if="showSelectData_2" class="selectData" @click.stop="">
-                    <div class="wrap_calendar">
-                        <Calendar popap :openMonth="new Date( created )" :selectDay="new Date( created )" :projects="[]" @selectDay="day=>setNewDate(day)" @closeCalendar="showSelectData_2=false"/>
-                    </div>
-                </div>
+                    <InputDate :value="created" @editValue=" date=>actualBill.created=date " />
                 </div>
             </div>
             <div class="number_bill">
@@ -97,7 +81,7 @@
 
 <script>
 import { global, user } from '@/servis/globalValues.js'
-import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Bills, saveBill, setPaid } from '@/servis/projectBill.js'
 import { Project } from '@/servis/projectData.js'
 export default{
     name: 'BillHeader',
@@ -197,7 +181,7 @@ export default{
             if(name_value=='customer_address_2') this.actualBill.custemer.address_2 = value
             if(name_value=='project_title') this.actualBill.project.name = value
             if(name_value=='project_dicription') this.actualBill.project.discription = value
-            if(name_value=='invoice_number') this.actualBill.invoice_number = value; this.actualBill.paid.invoice_number = value
+            if(name_value=='invoice_number') this.actualBill.invoice_number = value; setPaid(value, 'invoice_number', this.actualBill.id ) 
             if(name_value=='number_bill') this.actualBill.number_bill = value
             if(name_value=='greeting_phrase') this.actualBill.greeting_phrase = value
             saveBill(this.actualBill.id)
@@ -296,21 +280,5 @@ export default{
         margin-left: 100px;
     }
 
-    .selectData{
-        position: relative;
-        width: 0;
-        height: 0;
-    }
-    .wrap_calendar{
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        right: 5px;
-        top: 30px;
-        width: 350px;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px #898989d6;
-        background-color: #fff;
-    }
+
 </style>

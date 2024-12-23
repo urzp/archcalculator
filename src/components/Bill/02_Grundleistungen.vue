@@ -24,7 +24,7 @@
         </div>
         <div v-show="list.length>1" class="total_objects">
             <div class="">Summ as alles Honorarobjekt</div>
-            <Price :value="total_objects" font_size_unit="18px" font_family="Raleway-Medium"/>
+            <PriceBill :value="total_objects" />
         </div>
     </div>  
 </template>

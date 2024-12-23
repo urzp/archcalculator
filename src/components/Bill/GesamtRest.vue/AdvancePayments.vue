@@ -6,14 +6,22 @@
         </div>
         <div class="list">
             <div class="header item_list" v-for="item in list" :key="item.id">
-                <div class="colum colum_1" @click="openBill(item.bill_id)">
+                <div class="colum colum_1" >
                     {{ item.invoice_number }}
                 </div>
                 <div class="colum colum_2">Zahlung vom</div>
                 <div class="colum colum_3">{{ formatDate(item.date) }}</div>
                 <div class="colum colum_4"></div>
-                <div class="colum colum_5"> {{ item.value }} € </div>
+                <div class="colum colum_5"> <PriceBill :value="item.value" /> </div>
                 <div class="colum colum_6"></div>
+            </div>
+            <div class="header item_list " v-if="list.length>0">
+                <div class="colum colum_1">Summe</div>
+                <div class="colum colum_2"></div>
+                <div class="colum colum_3"></div>
+                <div class="colum colum_4"></div>
+                <div class="colum colum_5"></div>
+                <div class="colum colum_6"> <PriceBill :value="summe" /> </div>
             </div>
         </div>
     </div>
@@ -32,6 +40,15 @@ export default{
             let result = []
             if(!!this.actualBill&&this.actualBill.paid&&!!this.actualBill.paid.previous) result = this.actualBill.paid.previous
             return result
+        },
+        summe(){
+            let result = 0 
+            if(!!this.list){
+                this.list.forEach(item=>{
+                    result = result + Number(item.value) 
+                })
+            }
+            return result * (-1)
         }
     },
     emits:['selectBill'],
@@ -125,9 +142,7 @@ export default{
     }
     .colum_6{
         width: 12%;
+        text-align: right;
     }
 
-    .item_list .colum_1{
-        cursor: pointer;
-    }
 </style>

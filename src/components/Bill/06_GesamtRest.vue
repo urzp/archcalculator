@@ -7,14 +7,14 @@
             <div class="content item_list light-text">
                 <div class="colum colum_1">1. Rechnerisches Gesamthonorar</div>
                 <div class="colum colum_2">
-                    <Price :value="calc_total" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="calc_total" />
                 </div>
             </div>
             <AdvancePayments :actualBill="actualBill"/>  
             <div class="content item_list bold-text">
                 <div class="colum colum_1">3. Restlicher Honoraranspruch</div>
                 <div class="colum colum_2">
-                    <Price :value="calc_rest_paide" font_size_unit="18px" font_family="Raleway-Medium"/>
+                    <PriceBill :value="calc_rest_paide" />
                 </div>
             </div>
         </div>
