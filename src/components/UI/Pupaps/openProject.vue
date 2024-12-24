@@ -80,6 +80,9 @@ export default{
             await apiData({typeData:'deleteProject', id})
             this.showProject = ''
             this.getData()
+            if(localStorage.getItem('OpendProject') == id){
+                EventBus.emit('MenuProjects:new')
+            }
         },
         goToCalcPage(){
             if( this.$route.path!='/' ){

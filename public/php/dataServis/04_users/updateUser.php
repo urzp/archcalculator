@@ -14,8 +14,12 @@ $forbiden = [
     'level',
 ];
 
+
 if(!(in_array($key, $forbiden))){
     $new_data[$key]=$value;
+    if($key=='data'){
+        $new_data[$key] = json_encode($value);
+    }
     crud_update('users', $new_data, $selector);
     $result = (object) [
         'success' => true,

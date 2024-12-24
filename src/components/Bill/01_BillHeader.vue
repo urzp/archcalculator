@@ -2,9 +2,9 @@
     <div class="bill_header">
         <div class="top_row">
             <div class="name_user light-text">
-                <InputText_Bill :value="name_user" width="300px" 
-                @submit_event="value=>update_value(value,'name_user')" 
-                @setDefault="set_defaul('name_user')"/>
+                <InputText_Bill :value="user_data" width="600px" 
+                @submit_event="value=>update_value(value,'user_data')" 
+                @setDefault="set_defaul('user_data')"/>
             </div>
             <div v-if="useAvatar" class="logo_bill">
                 <div><img :src="url_avatar" alt=""></div>
@@ -119,9 +119,9 @@ export default{
             if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
             return result
         },
-        name_user(){
-            let result = this.def_name_user
-            if(!!this.actualBill) result = this.actualBill.name_user
+        user_data(){
+            let result = ''
+            if(!!this.actualBill&&!!this.actualBill.user_data) result = this.actualBill.user_data
             return result
         },
         customer(){
@@ -174,7 +174,7 @@ export default{
     },
     methods:{
         async update_value(value, name_value){
-            if(name_value=='name_user') this.actualBill.name_user = value
+            if(name_value=='user_data') this.actualBill.user_data = value
             if(name_value=='customer_company') this.actualBill.custemer.company = value
             if(name_value=='customer_name') this.actualBill.custemer.name = value
             if(name_value=='customer_address_1') this.actualBill.custemer.address_1 = value
@@ -187,7 +187,7 @@ export default{
             saveBill(this.actualBill.id)
         },
         set_defaul(name_value){
-            if(name_value=='name_user') this.actualBill.name_user = `${user.name} ${!user.address?' - Adresse':user.address}`
+            if(name_value=='user_data') this.actualBill.user_data = `${user.name} - ${user.address}`
             if(name_value=='customer_company') this.actualBill.custemer.company = Project.project.customer.company
             if(name_value=='customer_name') this.actualBill.custemer.company = Project.project.customer.name
             if(name_value=='customer_address_1') this.actualBill.custemer.address_1 = Project.project.customer.address_1

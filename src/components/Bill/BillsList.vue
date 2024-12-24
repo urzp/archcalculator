@@ -6,7 +6,7 @@
         </div>
         <div class="subheader">
             <div class="title">Name</div> 
-            <div class="title_statis">Zahlungsstatus</div>         
+            <div class="title_statis">Zahlung vom</div>         
         </div>
         <div class="list_bills">
             <div class="item" v-for="item, index in list" :key=item.id>
@@ -22,11 +22,13 @@
                         <div class="data"> {{ formatDate(item.payment_date.bis) }} </div>
                     </div>
                 </div>
-                <div class="wrap_right">
-                    <InputDate :value="item.paid.date" @editValue=" date=>update_value(date, 'paid_date', item.id) " />
+                <div class="wrap_right light-text">
+                    <div class="invoice_number">{{ item.invoice_number }}</div> 
+                    <div class="date"><InputDate :value="item.paid.date" @editValue=" date=>update_value(date, 'paid_date', item.id) " /></div>     
                     <div class="value">
-                        <PriceInputBill noPanel :value ="item.paid.value" @editPrice="newValue=>update_value(newValue, 'paid_value', item.id)" />
+                        <PriceInputBill noPanel :value ="item.paid.value" @editPrice="newValue=>update_value(newValue, 'paid_value', item.id)" />  
                     </div>
+                    
                     <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
                 </div>
             </div>
@@ -89,6 +91,17 @@ export default{
 </script>
 
 <style scoped>
+
+    .light-text{
+        font-family: 'Raleway-Light';
+        color: #464646;
+    }
+
+    .bold-text{
+        font-family: 'Raleway-Medium';
+        color: #2c2c2c;       
+    }
+
     .bill_list_wrap{
         min-height: 300px;
         margin-top: 60px;
@@ -103,7 +116,7 @@ export default{
     }
 
     .header{
-        width: 80%;
+        width: 60%;
         padding-bottom: 10px;
         margin-top: 30px;
         border-bottom: 1px solid #999;
@@ -113,7 +126,7 @@ export default{
     }
 
     .subheader{
-        width: 80%;
+        width: 60%;
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
@@ -123,20 +136,21 @@ export default{
     }
 
     .title_statis{
-        width: 360px;
-        text-align: right;
+        width: 240px;
+        text-align: center;
     }
 
     .list_bills {
         margin-top: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 100px;
     }
 
     .item{
-        width: 80%;
+        width: 60%;
         display: flex;
         font-family: 'Raleway-Medium';
         justify-content: space-between;
+        align-items: baseline;
         font-size: 20px;
         color: #545454;
         column-gap: 10px;
@@ -160,8 +174,23 @@ export default{
 
 
 
+
+
     .wrap_right{
         display: flex;
+        column-gap: 5px;
+        font-size: 18px;
+    }
+
+    .wrap_right .date{
+        width: 140px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .invoice_number{
+        width: 120px;
+        font-family: 'Raleway-Medium';
     }
 
     .hover-panel{
@@ -188,7 +217,6 @@ export default{
 
     .value{
         width: 140px;
-        font-family: 'Comfortaa-Regular';
         text-align: right;
         font-size: 18px;
     }
@@ -196,6 +224,7 @@ export default{
     .data_pai{
         width: 80px;
     }
+
 
  
 </style>

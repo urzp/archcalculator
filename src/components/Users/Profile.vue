@@ -48,6 +48,13 @@
                     </div>    
                 </div>
             </div>
+            <div class="user_data_panel">
+                <EditUserFeeld title="address:" :userKey="'address'" width="600px"/>
+                <EditUserFeeld title="IBAN:" :userKey="'IBAN'" width="600px"/>
+                <EditUserFeeld title="BIC:" :userKey="'BIC'" width="600px"/>
+                <EditUserFeeld title="Institut:" :userKey="'Institut'" width="600px"/>
+                <EditUserFeeld title="USt - Id. - Nr.:" :userKey="'USt'" width="600px"/>
+            </div>
         </template>
         <div v-else class="load">Loading . . . </div>
     </div>
@@ -281,9 +288,12 @@ export default{
     }
 
     .user_data_edit{
-
         padding-left: 50px;
+    }
 
+    .user_data_panel{
+        margin-top: 50px;
+        padding-left: 50px;
     }
 
     .new_password{

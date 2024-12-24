@@ -21,6 +21,7 @@ export default{
         position: absolute;
         left: 0px;
         width: 100%;
+        z-index: 10;
     }
     .line{
         margin-left: 1%;

@@ -27,8 +27,6 @@ set all text to text file
 
 Anrechenbare Kosten 400 Bauwerk начинает счтитать после заполнения этого пкукта 
 
-inputPriceBill убрать при редактировании точку
-
 обновление блоков в bill
 
 разобраться с сохранение счетов

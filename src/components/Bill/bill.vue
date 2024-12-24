@@ -1,12 +1,20 @@
 <template>
     <div v-if="isSelected" class="bills_wrap">
         <!-- <CalcTitle no_full_inf></CalcTitle> -->
-        <BillsList :list="list" @selectBill="(value)=>selectedBill=value"></BillsList>
+        <BillsList :list="list" @selectBill="(value)=>selectBill(value)"></BillsList>
         <template v-if="list.length>0">
+        <template v-if="!loadEffect" >
         <div class="title_bill" ref="begin">
             <div class="name">
-                <div class="title">Rechnung:</div>
-                <InputText :value="bill_name" width="300px" @submit_event="value=>update_title(value)"/>
+                <div class="leftPart">
+                    <div class="title">Rechnung:</div>
+                    <div class="title_value bold-text">
+                        <InputText_Bill noUpdate :value="bill_name" width="300px" @submit_event="value=>update_title(value)"/>
+                    </div>
+                </div>
+                <div class="invoice_number">
+                    <InputText_Bill noUpdate :value="invoice_number" width="300px" @submit_event="value=>update_invoice_number(value)"/>
+                </div>
             </div>
             <div class="devide_part"></div>
         </div>
@@ -20,6 +28,8 @@
         <BillFooter :bill_item="selectedBill"/>
         <div class="devide_part"></div>
         <div class="bottum_line"></div>
+        </template>
+        <div v-else class="load">Loading . . . </div>
         </template>
     </div>
 </template>
@@ -40,6 +50,7 @@ export default{
     data(){
         return{
             selectedBill:'',
+            loadEffect:false,
         }
     },
     props:{
@@ -61,6 +72,11 @@ export default{
             if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].name
             return result
         },
+        invoice_number(){
+            let result = ''
+            if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].invoice_number
+            return result
+        },
         list(){
             let result = []
             if(!!Bills) result = Bills
@@ -68,6 +84,11 @@ export default{
         }
     },
     methods:{
+        selectBill(index){
+            this.selectedBill=index
+            this.loadEffect = true
+            setTimeout(()=>{this.loadEffect = false}, 500)
+        },
         selectBillById(id){
             let index = Bills.findIndex(item=>item.id==id)
             this.selectedBill = index
@@ -93,6 +114,11 @@ export default{
             this.list[this.selectedBill].name = value
             saveBill(id)
         },
+        async update_invoice_number(value){
+            let id = this.list[this.selectedBill].id
+            this.list[this.selectedBill].invoice_number = value
+            saveBill(id)
+        },
     }
 
 }
@@ -114,13 +140,44 @@ export default{
         background-color: #F5F5F5;
     }
 
+    .leftPart{
+        display: flex;
+        column-gap: 10px;
+        align-items: baseline;
+    }
+
     .name{
         display: flex;
         align-items: baseline;
+        justify-content: space-between;
         column-gap: 15px;
     }
 
     .name .title{
         font-size: 18px;
+    }
+
+    .name .title_value{
+        font-size: 20px;
+    }
+
+    .load{
+        min-height: 500px;
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-family: 'Raleway-ExtraLight';
+    }
+
+    .light-text{
+        font-family: 'Raleway-Light';
+        color: #464646;
+    }
+
+    .bold-text{
+        font-family: 'Raleway-Medium';
+        color: #2c2c2c;       
     }
 </style>

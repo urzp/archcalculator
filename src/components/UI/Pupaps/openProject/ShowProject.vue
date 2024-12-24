@@ -44,7 +44,7 @@
             <div class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
         </div>
     </template>
-    <div v-else class="loading">Select Project</div>
+    <div v-else class="loading select_project">Select Project</div>
     </div>
     <div v-else class="loading">Loading . . .</div>
 </template>
@@ -131,6 +131,7 @@ export default{
     margin-left: 40px;
     display: flex;
     flex-direction: column;
+    
 }
 .top_panel{
     display: flex;
@@ -254,16 +255,22 @@ export default{
     cursor: pointer;
 }
 
+
 .loading{
-        display: flex;
-        height: 100%;
-        margin-left: 40px;
-        width: 50%;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
-        font-size: 26px;
-        font-family: 'Raleway-ExtraLight';
-    }
+    display: flex;
+    height: 100%;
+    margin-left: 40px;
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 26px;
+    font-family: 'Raleway-ExtraLight';
+}
+
+.select_project{
+    width: 100%;
+    margin-left: 0;
+}
 
 </style>

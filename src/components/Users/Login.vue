@@ -3,11 +3,12 @@
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div class="form">
+                <form action="" autocomplete="on">
                 <div class="item">Email</div>
-                <input type="text" @change="event=>chekEmail(event.target.value)"/>
+                <input type="text" @change="event=>chekEmail(event.target.value)" autocomplete="email" />
                 <div v-if="err_email" class="err">Keine gültige E-Mail</div>
                 <div class="item" >Password</div>
-                <input type="password" @change="event=>chekPassword(event.target.value)" @keyup.enter="submit()" />
+                <input type="password" @change="event=>chekPassword(event.target.value)" @keyup.enter="submit()" autocomplete="on" />
                 <div v-if="err_password" class="err">Feld ausfüllen</div>
                 <div class="submit">
                     <div v-if="waightResponce"  class="loading">Loading . . .</div>
@@ -19,6 +20,7 @@
                     <div class="gap">|</div>
                     <div class="link" @click="openReset()" >Passwort vergessen</div>
                 </div>
+                </form>
             </div>
             
         </div>

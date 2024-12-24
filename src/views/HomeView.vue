@@ -34,7 +34,7 @@ export default {
   },
   methods:{
     init(){
-      if(!!localStorage.getItem('Project') ) { this.project_id = 'local'; return true }
+      //if(!!localStorage.getItem('Project') ) { this.project_id = 'local'; return true }
       let id = localStorage.getItem('OpendProject') 
       if(!!id&&global.login){ this.project_id = id }else{ this.project_id = 'local' }
     },

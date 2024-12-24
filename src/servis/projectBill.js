@@ -29,6 +29,12 @@ export async function saveBill(id){
     apiData({typeData:'updateBill', data:element})
 }
 
+export async function saveAllBills(){
+    Bills.forEach(async item=>{
+        await apiData({typeData:'updateBill', data:item})
+    })
+}
+
 export async function deleteBill(id){
     apiData({typeData:'deleteBill', data:id})
 }
@@ -37,7 +43,7 @@ export function setPaid(value, name_value ,id){
     let element = Bills.find(item=>item.id==id)
     element.paid[name_value] = value
     updatePaids(id)
-    saveBill(id)
+    saveAllBills()
 }
 
 function updatePaids(id){
@@ -57,7 +63,12 @@ export async function newBill(project_id, number){
     let custemer = {...Project.project.customer}
 
     let user_name = !user.name?'Name':user.name
-    let user_address = !user.address?' - Adresse':user.address
+    let user_address = !user.address?'Adresse':user.address
+    let user_data = `${user_name} - ${user_address}`
+    let user_IBAN = user.IBAN
+    let user_BIC = user.BIC
+    let user_Institut = user.Institut
+    let user_USt = user.USt
 
     let payment_date = setPayment_date()
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
@@ -78,7 +89,14 @@ export async function newBill(project_id, number){
         number,
         name:'Neue Rechnung',
         project_id,
-        name_user: `${user_name} ${user_address}`,
+        user_name,
+        user_address,
+        user_data,
+        user_IBAN,
+        user_BIC,
+        user_Institut,
+        user_USt,
+
         custemer,
         project:{
             name: Project.project.name,

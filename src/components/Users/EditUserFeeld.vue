@@ -28,6 +28,10 @@ export default{
             default:'',
         },
         userKey:String,
+        width:{
+            type:String,
+            default: '400px',
+        }
     },
     methods:{
         getData(){
@@ -84,7 +88,7 @@ export default{
 
 
 input{
-    width: 400px;
+    width: v-bind(width);
     height: 45px;
     padding-left: 10px;
     padding-right: 10px;

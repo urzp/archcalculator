@@ -11,8 +11,8 @@
                 </div>
                 <div class="colum colum_2">Zahlung vom</div>
                 <div class="colum colum_3">{{ formatDate(item.date) }}</div>
-                <div class="colum colum_4"></div>
-                <div class="colum colum_5"> <PriceBill :value="item.value" /> </div>
+                <div class="colum colum_4"> <PriceBill :value="item.value" /> </div>
+                <div class="colum colum_5"></div>
                 <div class="colum colum_6"></div>
             </div>
             <div class="header item_list " v-if="list.length>0">
@@ -128,17 +128,20 @@ export default{
     .colum_2{
         width: 11%;
         text-align: center;
+        font-size: 16px;
     }
     .colum_3{
         width: 11%;
-        text-align: center;
+        text-align: right;
+        
     }
     .colum_4{
         width: 11%;
-        text-align: center;
+        text-align: right;
     }
     .colum_5{
         width: 12%;
+        text-align: right;
     }
     .colum_6{
         width: 12%;

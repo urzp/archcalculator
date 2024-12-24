@@ -2,7 +2,7 @@
     <div class="Grundleistungen">
         <div class="header_item">
             <div class="title bold-text">Rechnungsbetrag</div>
-            <div class="value">
+            <div class="value bold-text">
                 <PriceBill :value="total_rest" />
             </div>
         </div>
@@ -28,7 +28,7 @@ export default{
             return result
         },
         total_rest(){
-            let result = {}
+            let result = 0
             if(!!this.actualBill&&!!this.actualBill.total_rest) result = this.actualBill.total_rest
             return result
         }

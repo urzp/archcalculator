@@ -12,7 +12,9 @@ $object_feelds = "`id`, `name`, `total_object` ";
 $selector = "`project_id` = '$id' AND `user_id`='$user_id'";
 $data['objects'] = crud_read('project_objects',$object_feelds, $selector);
 
-$data['bills'] = [];
+$bills_feelds = "`id`, `name`, `total` ";
+$selector = "`project_id` = '$id' AND `user_id`='$user_id'";
+$data['bills'] = crud_read('project_bills',$bills_feelds, $selector);;
 
 $result = (object) [
     'success' => true,

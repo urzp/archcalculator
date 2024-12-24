@@ -19,7 +19,7 @@
             </div>
             <Menu :show="show_menu" @close="show_menu=false"></Menu>
         </div>
-        <div class="sub-header">
+        <div class="sub-header" v-if="$route.name == 'home'">
             <div class="left_side">
                 <div v-if="show_bills" class="item_subHeader" @click="closeBills()">Projects</div>
                 <template v-else>

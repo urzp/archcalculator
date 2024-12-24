@@ -41,7 +41,7 @@ export default{
             return result
         },
         calc_total(){
-            let result = {}
+            let result = 0
             if(!!this.actualBill&&!!this.actualBill.total) result = this.actualBill.total
             return result           
         },
@@ -51,8 +51,10 @@ export default{
                 result = this.actualBill.total
                 this.actualBill.paid.previous.forEach(item=>{
                     result = result - item.value
+                    if(result<0) result = 0
                 })
                 this.actualBill.total_rest = result
+                saveBill(this.actualBill.id)
             }
             return result
         }

@@ -16,6 +16,7 @@ if($data == null){
     $token = gen_token();
     $data['token'] = $token;
     $new_data['token'] = $token;
+    $data['data'] = json_decode( fixJsonUTF8($item['data']) );
     crud_update('users', $new_data, $selector);
 }
 
