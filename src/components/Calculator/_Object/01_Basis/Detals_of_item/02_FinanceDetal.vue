@@ -86,6 +86,7 @@ export  default{
         kg400(){
             if(!this.has_400_Bauwerk) return 0
             let kg400 =  this.list.find(item=>item.name.includes('400')).value
+            if(!kg400) kg400 = 0
             return Number( kg400 )
         },
         until_25_per(){
