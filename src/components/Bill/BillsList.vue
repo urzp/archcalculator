@@ -40,6 +40,7 @@
                     <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
                 </div>
             </div>
+            <NewButton class="newButton_bottom_list" @click.stop="newBill(list.length)" width="150px" height="30px" width_img="10px"/>
         </div>
     </div>
 </template>
@@ -48,7 +49,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
 import { array_move } from '@/servis/functions.js'
-import { Bills, newBill, saveBill, deleteBill, setPaid } from '@/servis/projectBill.js'
+import { Bills, newBill, saveBill, sequence , deleteBill, setPaid } from '@/servis/projectBill.js'
 
 export default{
     name: 'BillsList',
@@ -80,17 +81,15 @@ export default{
             Bills.splice(index, 0, newBilleLelement)
             this.selectBill(index)
         },
-        moveUpBill(index){
+        async moveUpBill(index){
             if(index<=0||index>this.list.length) return false
-            Bills[index].number = index - 1
-            Bills[index - 1].number = index
-            array_move(Bills,index,index - 1)
+            await array_move(Bills,index,index - 1)
+            sequence()
         },
-        moveDownBill(index){
+        async moveDownBill(index){
             if(index<0||index>=this.list.length) return false
-            Bills[index].number = index + 1
-            Bills[index + 1].number = index
-            array_move(Bills,index,index + 1)
+            await array_move(Bills,index,index + 1)
+            sequence()
         },
         selectBill(index){
             this.$emit('selectBill', index)
@@ -101,7 +100,8 @@ export default{
                 title:'Bestätigen Sie den Löschvorgang',
                 action: async ()=>{
                     this.list.splice(index, 1);
-                    deleteBill(id)
+                    await deleteBill(id)
+                    sequence()
                 },
                 
             })
@@ -186,7 +186,7 @@ export default{
         column-gap: 10px;
     }
 
-    .name{
+    .wrap_left{
         cursor: pointer;
         margin-left: -150px;
         padding-left: 150px;
@@ -257,6 +257,8 @@ export default{
         width: 80px;
     }
 
-
+    .newButton_bottom_list{
+        margin-top: 10px;
+    }
  
 </style>

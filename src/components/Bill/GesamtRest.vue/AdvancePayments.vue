@@ -8,6 +8,8 @@
             <div class="header item_list" v-for="item in list" :key="item.id">
                 <div class="colum colum_1" >
                     {{ item.invoice_number }}
+                    <!-- <InputText_Bill noUpdate :value="item.invoice_number" width="200px" alight_edit="center"
+                    @submit_event="value=>update_value(value, 'invoice_number', item)"/> -->
                 </div>
                 <div class="colum colum_2">Zahlung vom</div>
                 <div class="colum colum_3">{{ formatDate(item.date) }}</div>
@@ -29,7 +31,7 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Bills, saveBill, initPaidPrevious } from '@/servis/projectBill.js'
 export default{
     name: 'AdvancePayments',
     props:{
@@ -62,7 +64,7 @@ export default{
             EventBus.emit('Bills:selectBill', bill_id )
         },
         async update_value(value, name_value, elemen){
-            //if(name_value=='invoice_number') elemen.invoice_number = value
+            if(name_value=='invoice_number') elemen.invoice_number = value ; elemen.invoice_number = value
             saveBill(this.actualBill.id)
         },
         set_defaul(name_value){
@@ -104,6 +106,7 @@ export default{
         display: flex;
         justify-content: space-between;
     }
+
 
     .none{
         width: 11%;

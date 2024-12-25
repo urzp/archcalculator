@@ -1,6 +1,9 @@
 <template>
     <div class="Grundleistungen">
         <div class="header_item">
+            <div class="hover-panel">
+                <UpdateBtn class="button" width="35px" height="28px" @click="set_default_list()"/>
+            </div>
             <div class="title bold-text">V.<span>Gesamt- und Resthonoraranspruch</span></div>
         </div>
         <div class="list">
@@ -23,7 +26,7 @@
 
 <script>
 import { Project } from '@/servis/projectData.js'
-import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Bills, saveBill, initPaidPrevious  } from '@/servis/projectBill.js'
 export default{
     name: 'GesamtRest',
     data(){
@@ -57,6 +60,12 @@ export default{
                 saveBill(this.actualBill.id)
             }
             return result
+        }
+    },
+    methods:{
+        set_default_list(){
+            initPaidPrevious(this.actualBill.id)
+            saveBill(this.actualBill.id)
         }
     }
 
@@ -110,5 +119,26 @@ export default{
         width: 11%;
         display: flex;
         justify-content: flex-end;
+    }
+
+    .hover-panel{
+        position: absolute;
+        transform: translateX(-40px);
+        display: flex;
+        column-gap: 5px;
+        visibility: hidden;
+    }
+
+    .item:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .header_item:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .header_item{
+        margin-left: -40px;
+        padding-left: 40px;
     }
 </style>

@@ -133,9 +133,19 @@ async function setNumbers(number){
         item.number = item.number + 1
         orderData.push( {id:item.id, number: item.number} )
     })
-    console.log(orderData, number)
     await apiData({typeData:'newBillOrders', data:orderData})
     return true
+}
+
+export async function sequence(){
+    if(Bills.length==0) return false
+    let orderData = []
+    Bills.forEach( (item, index)=>{
+        item.number = index
+        orderData.push( {id:item.id, number: item.number} )
+    })
+    await apiData({typeData:'newBillOrders', data:orderData})
+    return true   
 }
 
 
@@ -278,4 +288,18 @@ function initPaid(number){
         }
     })
     return result
+}
+
+export function initPaidPrevious(id){
+   let actualBill =  Bills.find(item=>item.id==id)
+   let number = actualBill.number
+   actualBill.paid.previous = []
+   Bills.filter(item=>item.number<number).forEach( (item, index)=>{
+        let newitem = {...item.paid}
+        newitem.bill_id = item.id
+        newitem.id = index
+        delete newitem.previous;
+        console.log(newitem)
+        actualBill.paid.previous.push(newitem)
+    })
 }

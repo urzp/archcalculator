@@ -61,6 +61,9 @@ export default{
     watch:{
         project_id(){
             this.getData()
+        },
+        listLenght(value){
+            if(!!this.selectedBill&&this.selectedBill + 1 > value) this.selectedBill = value - 1
         }
     },
     computed:{
@@ -82,6 +85,11 @@ export default{
         list(){
             let result = []
             if(!!Bills) result = Bills
+            return result
+        },
+        listLenght(){
+            let result = 0
+            if(!!this.list) result = this.list.length
             return result
         }
     },
