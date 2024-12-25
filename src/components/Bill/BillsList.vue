@@ -81,11 +81,15 @@ export default{
             this.selectBill(index)
         },
         moveUpBill(index){
-            if(index<=0||index>=this.list.length) return false
+            if(index<=0||index>this.list.length) return false
+            Bills[index].number = index - 1
+            Bills[index - 1].number = index
             array_move(Bills,index,index - 1)
         },
         moveDownBill(index){
-            if(index<=0||index>=this.list.length) return false
+            if(index<0||index>=this.list.length) return false
+            Bills[index].number = index + 1
+            Bills[index + 1].number = index
             array_move(Bills,index,index + 1)
         },
         selectBill(index){
