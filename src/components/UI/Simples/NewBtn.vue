@@ -17,6 +17,10 @@ export default{
         height:{
             type:String,
             default: '45px',
+        },
+        width_img:{
+            type:String,
+            default: '15px',
         }
     }
 }
@@ -36,5 +40,9 @@ export default{
         border-radius: 5px;
         cursor: pointer;
         background-color: #fff!important;
+    }
+
+    .new-btn img{
+        width: v-bind(width_img);
     }
 </style>

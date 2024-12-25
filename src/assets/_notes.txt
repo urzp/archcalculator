@@ -15,11 +15,7 @@ discription css position relative
 
 chek all fixJsonUTF8
 
-
 new Project load effect
-
-problem load  project whel open new paje
-
 
 set all text to text file
 
@@ -28,3 +24,7 @@ set all text to text file
 обновление блоков в bill
 
 разобраться с сохранение счетов
+
+проверить проверку версии данных Calc
+
+php предварительный просмотро проекту упорядочить bills по номерам

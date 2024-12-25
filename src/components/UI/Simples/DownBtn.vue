@@ -1,5 +1,5 @@
 <template>
-    <div class="delete-btn">
+    <div class="down-btn">
         <img src="@/assets/icons/btn_down/main.svg" alt="">
     </div>
 </template>
@@ -15,13 +15,17 @@ export default{
         heigth:{
             type:String,
             default: '45px',
-        }
+        },
+        height_img:{
+            type:String,
+            default: '12px',
+        },
     }
 }
 </script>
 
 <style scoped>
-    .delete-btn{
+    .down-btn{
         min-width: v-bind(width);
         min-height: v-bind(heigth);
         padding-left: 15px;
@@ -33,5 +37,9 @@ export default{
         background-color: #fff;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .down-btn img{
+        height: v-bind(height_img);
     }
 </style>

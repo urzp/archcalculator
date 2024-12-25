@@ -33,6 +33,7 @@ export default{
     data(){
         return{
             loaded: false,
+            loaded_clac:false,
             ListObjects:[],
             project:{},
         }
@@ -47,11 +48,12 @@ export default{
     },
     methods:{
         async getCalcData(){
-            this.loaded = false
             await LoadCalcData()
+            this.loaded_clac = true
         },
         async getProject(){
             this.loaded = false
+            if(!this.loaded_clac){  setTimeout(this.getProject, 300); return false} //if calc not loaded yet 
             EventBus.emit('Project:Loading')
             let result
             if(!this.project_id) return false

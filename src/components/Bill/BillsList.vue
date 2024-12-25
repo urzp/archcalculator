@@ -11,7 +11,15 @@
         <div class="list_bills">
             <div class="item" v-for="item, index in list" :key=item.id>
                 <div class="hover-panel">
-                    <DeleteButton @click.stop="deleteBill(item.id)" width="35px" heigth="28px"/>
+                    <div class="left_part">
+                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                    </div>
+                    <div class="right_part">
+                        <NewButton @click.stop="newBill(index)" width="45px" height="23px" width_img="10px"/>
+                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
+                    </div>
+                    
                 </div>
                 <div class="wrap_left">
                     <div class="name" @click="selectBill(index)">{{ item.name }}</div>
@@ -39,7 +47,8 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
-import { Bills, saveBill, deleteBill, setPaid } from '@/servis/projectBill.js'
+import { array_move } from '@/servis/functions.js'
+import { Bills, newBill, saveBill, deleteBill, setPaid } from '@/servis/projectBill.js'
 
 export default{
     name: 'BillsList',
@@ -65,6 +74,19 @@ export default{
             if(!date) return '-'
             date = new Date(date)
            return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+        },
+        async newBill(index){
+            let newBilleLelement = await newBill(Project.project.id, index)
+            Bills.splice(index, 0, newBilleLelement)
+            this.selectBill(index)
+        },
+        moveUpBill(index){
+            if(index<=0||index>=this.list.length) return false
+            array_move(Bills,index,index - 1)
+        },
+        moveDownBill(index){
+            if(index<=0||index>=this.list.length) return false
+            array_move(Bills,index,index + 1)
         },
         selectBill(index){
             this.$emit('selectBill', index)
@@ -125,6 +147,10 @@ export default{
         color: #545454;
     }
 
+    .wrap_left{
+        width: 50%;
+    }
+
     .subheader{
         width: 60%;
         margin-top: 10px;
@@ -158,8 +184,8 @@ export default{
 
     .name{
         cursor: pointer;
-        margin-left: -50px;
-        padding-left: 50px;
+        margin-left: -150px;
+        padding-left: 150px;
     }
 
     .data_price{
@@ -171,10 +197,6 @@ export default{
         color:#999;
         font-size: 14px;
     }
-
-
-
-
 
     .wrap_right{
         display: flex;
@@ -195,10 +217,16 @@ export default{
 
     .hover-panel{
         position: absolute;
-        transform: translateX(-60px);
+        transform: translateX(-110px);
         display: flex;
         column-gap: 5px;
         visibility: hidden;
+    }
+
+    .left_part, .right_part{
+        display: flex;
+        row-gap: 5px;
+        flex-direction: column;     
     }
 
     .item:hover .hover-panel{

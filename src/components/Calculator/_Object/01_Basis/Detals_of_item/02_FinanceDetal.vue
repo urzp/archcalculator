@@ -115,11 +115,6 @@ export  default{
         }
     },
     methods:{
-        getValue(id){
-           let el = this.list.find(item => item.id == id);
-           let result = el.value==''?el.def_value:el.value
-           return result
-        },
         updatePrice(id, value){
             this.$emit('edit_price',{id, value })
         },

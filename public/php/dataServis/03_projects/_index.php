@@ -18,6 +18,7 @@ switch ($typeData) {
     case 'newProjectObject': include '02_Object/newProjectObject.php'; break;
     case 'updateProjectObject': include '02_Object/updateProjectObject.php'; break;
 
+    case 'newBillOrders': include '03_Bills/newBillOrders.php'; break;
     case 'deleteBill': include '03_Bills/deleteBill.php'; break;
     case 'updateBill': include '03_Bills/updateBill.php'; break;
     case 'LoadBills': include '03_Bills/loadBills.php'; break;

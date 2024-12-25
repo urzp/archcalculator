@@ -3,7 +3,7 @@ $mysql = $mysql_calc;
 
 $project_id = $rq_data-> project_id;
 
-$selector = "`project_id`='$project_id' AND `user_id`='$user_id'";
+$selector = "`project_id`='$project_id' AND `user_id`='$user_id'  ORDER BY `number`";
 
 $data = crud_read('project_bills',"*", $selector);
 $return_data = [];

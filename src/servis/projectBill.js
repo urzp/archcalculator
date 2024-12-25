@@ -58,8 +58,8 @@ function updatePaids(id){
     })
 }
 
-export async function newBill(project_id, number){
-
+export async function newBill(project_id, number = Bills.length){
+    await setNumbers(number)
     let custemer = {...Project.project.customer}
 
     let user_name = !user.name?'Name':user.name
@@ -70,7 +70,7 @@ export async function newBill(project_id, number){
     let user_Institut = user.Institut
     let user_USt = user.USt
 
-    let payment_date = setPayment_date()
+    let payment_date = setPayment_date(number)
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
     let objects = setObjects()
     let extraServis = initExtraServis(Project.project.AdditionalServices)
@@ -82,7 +82,7 @@ export async function newBill(project_id, number){
     let tax = Project.project.tax
     let total_tax = total_net * Number(Project.project.tax)/100
     let total = total_tax + total_net
-    let paid = initPaid()
+    let paid = initPaid(number)
     let total_rest = 0
 
     let newBill = {
@@ -125,14 +125,27 @@ export async function newBill(project_id, number){
     return newBill
 }
 
+async function setNumbers(number){
+    if(number == Bills.length) return false
+    let moreNumber = Bills.filter(item=>item.number>=number)
+    let orderData = []
+    moreNumber.forEach(item=>{
+        item.number = item.number + 1
+        orderData.push( {id:item.id, number: item.number} )
+    })
+    console.log(orderData, number)
+    await apiData({typeData:'newBillOrders', data:orderData})
+    return true
+}
 
-function setPayment_date(){
+
+function setPayment_date(number){
     let payment_date = {}
-    if(Bills.length==0){
+    if(number==0){
         payment_date.vom = new Date( Project.project.created )
         payment_date.bis = new Date( Project.project.created ).addDays(5)
     }else{
-        let lastDate =  lastElement(Bills).payment_date.bis
+        let lastDate =  Bills[number-1].payment_date.bis
         payment_date.vom = new Date( lastDate )
         payment_date.bis = new Date( lastDate ).addDays(5)
     }
@@ -223,7 +236,7 @@ function initExtraServis(extraServis){
     extraServis.forEach(item=>{
         let newItem = {...item}
         newItem.total = Number(item.hours) * Number(item.price_hours)
-        result.push(newItem)
+        //result.push(newItem)
     })
     return result
 }
@@ -247,7 +260,7 @@ function initExtraCosts(extraCosts){
     return result
 }
 
-function initPaid(){
+function initPaid(number){
     let result = {
         invoice_number: 'RE - - - - -',
         value: 0,
@@ -255,7 +268,7 @@ function initPaid(){
         fact_paid:false,
         previous : [],
     }
-    Bills.forEach( (item, index)=>{
+    Bills.filter(item=>item.number<number).forEach( (item, index)=>{
         if(!!item.paid){
             let newitem = {...item.paid}
             newitem.bill_id = item.id

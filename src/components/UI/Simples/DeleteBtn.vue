@@ -13,6 +13,10 @@ export default{
             type:String,
             default: '55px',
         },
+        width_img:{
+            type:String,
+            default: '15px',
+        },
         heigth:{
             type:String,
             default: '45px',
@@ -44,5 +48,9 @@ export default{
         border: solid 1px #9A9A9A ;
         background-color: #fff;
         border-radius: 5px;
+    }
+
+    .delete-btn img{
+       width: v-bind(width_img);
     }
 </style>

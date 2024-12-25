@@ -31,7 +31,7 @@ export default{
     },
     props:{
         value:{
-            type:String,
+            type:[String, Number],
             default:''
         },
         paramSymb:{
@@ -55,12 +55,15 @@ export default{
         },
         begin_edit(){
             this.edit = true
-            setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
+            setTimeout( ()=>{
+                this.$refs.thisinput.value = '' 
+                this.$refs.thisinput.focus() 
+            }, 100);
             EventBus.emit('fucus:input', this.id)
         },
         edit_value(event){
             this.edit = false
-            let val = event.target.value
+            let val = Number(event.target.value)
             this.$refs.thisinput.value = ''
             this.$emit('editValue', val)
         },

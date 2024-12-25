@@ -9,11 +9,13 @@
                 <div class="leftPart">
                     <div class="title">Rechnung:</div>
                     <div class="title_value bold-text">
-                        <InputText_Bill noUpdate :value="bill_name" width="300px" @submit_event="value=>update_title(value)"/>
+                        <InputText_Bill noUpdate :value="bill_name" width="300px" 
+                        @submit_event="value=>update_title(value)"/>
                     </div>
                 </div>
                 <div class="invoice_number">
-                    <InputText_Bill noUpdate :value="invoice_number" width="300px" @submit_event="value=>update_invoice_number(value)"/>
+                    <InputText_Bill noUpdate :value="invoice_number" width="200px" alight_edit="center"
+                    @submit_event="value=>update_invoice_number(value)"/>
                 </div>
             </div>
             <div class="devide_part"></div>
@@ -105,7 +107,7 @@ export default{
             
         },
         async newBill(){
-           let bill = await newBill(this.project_id, this.list.length)
+           let bill = await newBill(this.project_id)
            this.list.push(bill)
            this.selectedBill = this.list.length - 1
         },
@@ -117,6 +119,7 @@ export default{
         async update_invoice_number(value){
             let id = this.list[this.selectedBill].id
             this.list[this.selectedBill].invoice_number = value
+            this.list[this.selectedBill].paid.invoice_number = value
             saveBill(id)
         },
     }

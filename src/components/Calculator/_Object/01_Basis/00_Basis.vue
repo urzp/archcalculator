@@ -55,7 +55,6 @@ export default{
             this.paragraph = getSameParagraph( HOAI_v, this.paragraph )
             if(!this.paragraph){
                 this.paragraph = '';
-                console.log('no any pargraph')
             }else{
                 this.updateProjectData()
             }

@@ -96,14 +96,14 @@ export function financeLimits(id_paragraph){
 }
 
 export function getRequirementsPoints(id_paragraph){
-    if(!CalcData.requirementsPoints) return false
+    if(!CalcData.requirementsPoints) return []
     let result = CalcData.requirementsPoints.filter(item=>item.id_paragraph==id_paragraph)
     result.forEach(item=>item.value = item.minPoint)
     return result
 }
 
-export function getStages(id_paragraph){
-    if(!CalcData.requirementsPoints||!id_paragraph) return false
+export async function getStages(id_paragraph){
+    if(!CalcData.requirementsPoints||!id_paragraph) return []
     let result = CalcData.Stages.filter(item=>item.id_paragraph==id_paragraph)
     result.forEach(item=>{
         let subStages = CalcData.subStage.filter(sub_item=>sub_item.id_stage==item.id)

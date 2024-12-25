@@ -74,7 +74,7 @@ export default{
     },
     methods:{
         async getData(){
-           this.list = JSON.parse(JSON.stringify(getStages(this.paragraph))) 
+           this.list = JSON.parse(JSON.stringify( await getStages(this.paragraph))) 
         },
         async getProjectData(){
             this.project = Project.objects.find(item=>item.id==this.object_id)
