@@ -1,10 +1,10 @@
 <template>
     <div class="Grundleistungen">
         <div class="header_item">
+            <div class="title bold-text">V.<span>Gesamt- und Resthonoraranspruch</span></div>
             <div class="hover-panel">
                 <UpdateBtn class="button" width="35px" height="28px" @click="set_default_list()"/>
             </div>
-            <div class="title bold-text">V.<span>Gesamt- und Resthonoraranspruch</span></div>
         </div>
         <div class="list">
             <div class="content item_list light-text">
@@ -92,6 +92,8 @@ export default{
     }
 
     .header_item{
+        display: flex;
+        justify-content: space-between;
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
         padding-top: 10px;
@@ -122,10 +124,6 @@ export default{
     }
 
     .hover-panel{
-        position: absolute;
-        transform: translateX(-40px);
-        display: flex;
-        column-gap: 5px;
         visibility: hidden;
     }
 
@@ -137,8 +135,5 @@ export default{
         visibility: visible;
     }
 
-    .header_item{
-        margin-left: -40px;
-        padding-left: 40px;
-    }
+
 </style>

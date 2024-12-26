@@ -1,5 +1,8 @@
 <template>
     <div class="BillFooter light-text">
+        <div class="hover-panel">
+            <UpdateBtn class="button" width="35px" height="28px" @click="set_all_default()"/>
+        </div>
         <div class="VAT_included"> Im Betrag von <span><PriceBill :value="val_1"/></span> sind <span><PriceBill :value="val_2"/></span> Mehrwertsteuer enthalten.</div>
         <div class="PleasePay">
             Bitte zahlen Sie den Betrag bis zum 
@@ -132,6 +135,14 @@ export default{
             if(name_value=='user_USt') this.actualBill.user_USt = user.USt
             saveBill(this.actualBill.id)
         },
+        set_all_default(){
+            this.actualBill.user_name = user.name
+            this.actualBill.user_IBAN = user.IBAN
+            this.actualBill.user_BIC = user.BIC
+            this.actualBill.user_Institut = user.Institut
+            this.actualBill.user_USt = user.USt
+            saveBill(this.actualBill.id)
+        }
     }
 
 }
@@ -179,6 +190,21 @@ export default{
 
 .value_detal{
     width: 70%;
+}
+
+.hover-panel{
+    height: 0;
+    display: flex;
+    justify-content: flex-end;
+    visibility: hidden;
+}
+
+.hover-panel{
+    visibility: hidden;
+}
+
+.BillFooter:hover .hover-panel{
+    visibility: visible;
 }
 
 </style>

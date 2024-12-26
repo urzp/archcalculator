@@ -2,6 +2,9 @@
     <div class="Grundleistungen">
         <div class="header_item">
             <div class="title bold-text">III.<span>Nebenkosten</span></div>
+            <div class="hover-panel">
+                <UpdateBtn class="button" width="35px" height="28px" @click="set_default_list()"/>
+            </div>
         </div>
         <div class="list">
             <div class="content item_list light-text" v-for="item in list" :key="item.id">
@@ -40,7 +43,7 @@
 
 <script>
 import { Project } from '@/servis/projectData.js'
-import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Bills, saveBill, initExtraCostsById } from '@/servis/projectBill.js'
 export default{
     name: 'Nebenkosten',
     data(){
@@ -91,6 +94,10 @@ export default{
                 summ_price = summ_price + item.total
             })
             this.actualBill.totalExtraCosts = summ_price
+        },
+        async set_default_list(){
+            initExtraCostsById(this.actualBill.id)
+            saveBill(this.actualBill.id)
         }
     }
 
@@ -114,6 +121,8 @@ export default{
     }
 
     .header_item{
+        display: flex;
+        justify-content: space-between;
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
         padding-top: 10px;
@@ -181,6 +190,14 @@ export default{
     .total .colum_2, .total .colum_3{
         padding-right: 28px;
         text-align: right;
+    }
+
+    .hover-panel{
+        visibility: hidden;
+    }
+
+    .header_item:hover .hover-panel{
+        visibility: visible;
     }
 
 </style>

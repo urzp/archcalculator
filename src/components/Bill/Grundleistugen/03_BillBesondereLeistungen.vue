@@ -152,6 +152,7 @@ export default{
 
     .item_list{
         display: flex;
+        align-items: baseline;
     }
 
     .colum_1{

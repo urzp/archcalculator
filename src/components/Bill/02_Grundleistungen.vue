@@ -2,6 +2,9 @@
     <div class="Grundleistungen">
         <div class="header_item">
             <div class="title bold-text">I.<span>Grundleistungen</span></div>
+            <div class="hover-panel">
+                <UpdateBtn class="button" width="35px" height="28px" @click="set_default_list()"/>
+            </div>
         </div>
         <div class="content">
             <div class="object" v-for="item, index in list" :key="item.id">
@@ -30,13 +33,18 @@
 </template>
 
 <script>
-import { Bills, saveBill } from '@/servis/projectBill.js'
+import { Bills, saveBill, setDefaulObjects } from '@/servis/projectBill.js'
 import { Project } from '@/servis/projectData.js'
 import { toLetters } from '@/servis/functions'
 export default{
     name: 'Grundleistungen',
     props:{
         bill_item:[Number, String]
+    },
+    watch:{
+        total_objects(value){
+            this.actualBill.total_objects = value
+        }
     },
     computed:{
         actualBill(){
@@ -55,7 +63,6 @@ export default{
                 this.actualBill.objects.forEach(item=>{
                     result = result + item.total
                 });
-                this.actualBill.total_objects = result
             }
             return result
         },
@@ -74,6 +81,11 @@ export default{
             let elemet = this.actualBill.objects.find(item=>item.id==id)
             if(name_value=='name') elemet.name = project_elemet.name
             saveBill(this.actualBill.id)
+        },
+        async set_default_list(){
+            await setDefaulObjects(this.actualBill.id)
+            saveBill(this.actualBill.id)
+
         }
     }
 
@@ -105,6 +117,8 @@ export default{
     }
 
     .header_item{
+        display: flex;
+        justify-content: space-between;
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
         padding-top: 10px;
@@ -140,5 +154,13 @@ export default{
         display: flex;
         justify-content: space-between;
         margin-bottom: 30px;
+    }
+
+    .hover-panel{
+        visibility: hidden;
+    }
+
+    .header_item:hover .hover-panel{
+        visibility: visible;
     }
 </style>

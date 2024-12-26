@@ -72,7 +72,7 @@ export async function newBill(project_id, number = Bills.length){
 
     let payment_date = setPayment_date(number)
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
-    let objects = setObjects()
+    let objects = setObjects(number)
     let extraServis = initExtraServis(Project.project.AdditionalServices)
     let totalExtraServis = countTotalExtraServis(extraServis)
     let extraCosts = initExtraCosts(Project.project.ExtraCosts)
@@ -162,7 +162,7 @@ function setPayment_date(number){
     return payment_date
 }
 
-function setObjects(){
+function setObjects(number){
     let result = []
     Project.objects.forEach( async item=>{
         let newItem = {}
@@ -172,19 +172,21 @@ function setObjects(){
         newItem.honorar_satz = item.HonorarRate.value
         newItem.costs = getCosts(item.finance)
         newItem.honorar_total = item.honorar_total
-        newItem.stages = getStages(item)
-        newItem.stages_total = {
-            price: 0,
-            done: 0,
-            percent: 0,
-        },
-        newItem.stagesTotal = 0
+        newItem.stages = getStages(item, number)
+        newItem.stages_total = getStagesTotal(newItem.stages)
+        newItem.stagesTotal = newItem.stages_total.price
         newItem.stagesExtra = calculateServisExstra(item.specialServices, newItem.honorar_total)
         newItem.stagesExtraTotal = calculatestagesExstraTotal(newItem.stagesExtra)
         newItem.total = newItem.stagesTotal + newItem.stagesExtraTotal
         result.push(newItem)
     })
     return result
+}
+
+export async function setDefaulObjects(id){
+    let bill =  Bills.find(item=>item.id == id)
+    delete bill.objects
+    bill.objects = setObjects(bill.number)
 }
 
 function getCosts(finance){
@@ -202,7 +204,7 @@ export function getCosts_ById(id){
     return getCosts(project_obj.finance)
 }
 
-function getStages(project_object){
+async function  getStages(project_object, number){
     let result = []
     let paragraph_id = project_object.paragraph_id
     result = CalcData.Stages.filter(item=>item.id_paragraph==paragraph_id)
@@ -212,6 +214,42 @@ function getStages(project_object){
         item.factor = 1
         item.total = 0
         item.subStages = {}
+    })
+    fillStages(result, project_object.id, number)
+    return result
+}
+
+function fillStages(stages, id_object, index){
+    
+    if(index==0) return false
+    let honorar = Project.objects.find(item=>item.id==id_object).honorar_total
+    let priviosBill = Bills[index - 1]
+    let stagesPrivios = priviosBill.objects.find(item=>item.id==id_object)
+
+    console.log('index', index)
+    console.log('window.bills',window.bills)
+    console.log('Bills',Bills)
+    console.log('stagesPrivios', stagesPrivios)
+
+    if(!stagesPrivios||!stagesPrivios.stages) return false
+    stagesPrivios = stagesPrivios.stages
+
+    stages.forEach((item,index)=>{ 
+        item.done = stagesPrivios[index].done
+        item.total = (item.done/100) * Number( honorar )
+    })
+}
+
+function getStagesTotal(stages){
+    let result = {
+        price: 0,
+        done: 0,
+        percent: 0,
+    }
+    stages.forEach(item=>{
+        result.price = result.price + Number(item.total)
+        result.done = result.done + Number(item.done)
+        result.percent = result.percent + Number(item.percent)
     })
     return result
 }
@@ -240,13 +278,20 @@ function calculatestagesExstraTotal(stagesExtra){
     return result
 }
 
+export function initExtraServisById(id){
+    let bill = Bills.find(item=>item.id==id)
+    delete bill.extraServis
+    bill.extraServis = initExtraServis(Project.project.AdditionalServices)
+    bill.totalExtraServis = countTotalExtraServis(bill.extraServis)
+}
+
 function initExtraServis(extraServis){
     let result = []
     if(!extraServis) return result
     extraServis.forEach(item=>{
         let newItem = {...item}
         newItem.total = Number(item.hours) * Number(item.price_hours)
-        //result.push(newItem)
+        result.push(newItem)
     })
     return result
 }
@@ -259,6 +304,13 @@ function countTotalExtraServis(extraServis){
     return result
 }
 
+export function initExtraCostsById(id){
+    let bill = Bills.find(item=>item.id==id)
+    delete bill.extraCosts
+    bill.extraCosts = initExtraCosts(Project.project.ExtraCosts)
+    bill.totalExtraCosts = countTotalExtraCosts(bill.extraCosts)
+}
+
 function initExtraCosts(extraCosts){
     let result = []
     if(!extraCosts) return result
@@ -266,6 +318,14 @@ function initExtraCosts(extraCosts){
         let newItem = {...item}
         newItem.total = Number(item.rate) * Number(item.price_rate)
         result.push(newItem)
+    })
+    return result
+}
+
+function countTotalExtraCosts(extraCosts){
+    let result = 0
+    extraCosts.forEach(item=>{
+        result = result + Number(item.total)
     })
     return result
 }
