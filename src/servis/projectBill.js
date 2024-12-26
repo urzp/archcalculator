@@ -172,7 +172,7 @@ function setObjects(number){
         newItem.honorar_satz = item.HonorarRate.value
         newItem.costs = getCosts(item.finance)
         newItem.honorar_total = item.honorar_total
-        newItem.stages = getStages(item, number)
+        newItem.stages = await getStages(item, number)
         newItem.stages_total = getStagesTotal(newItem.stages)
         newItem.stagesTotal = newItem.stages_total.price
         newItem.stagesExtra = calculateServisExstra(item.specialServices, newItem.honorar_total)
@@ -208,6 +208,8 @@ async function  getStages(project_object, number){
     let result = []
     let paragraph_id = project_object.paragraph_id
     result = CalcData.Stages.filter(item=>item.id_paragraph==paragraph_id)
+    result = result.map(item=>({...item}))
+
     result.forEach( (item, index)=>{
         item.user_percent = Number(!project_object.stages[index]?0:project_object.stages[index])
         item.done = 0
@@ -215,6 +217,7 @@ async function  getStages(project_object, number){
         item.total = 0
         item.subStages = {}
     })
+    
     fillStages(result, project_object.id, number)
     return result
 }
