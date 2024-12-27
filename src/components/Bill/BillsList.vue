@@ -4,7 +4,7 @@
         <div class="header">
                 <div class="title">Bills</div>
         </div>
-        <div class="subheader">
+        <div class="subheader" v-if="list.length > 0">
             <div class="title">Name</div> 
             <div class="title_statis">Zahlung vom</div>         
         </div>

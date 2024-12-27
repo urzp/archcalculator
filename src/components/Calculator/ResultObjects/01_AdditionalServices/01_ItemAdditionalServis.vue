@@ -27,8 +27,8 @@ export  default{
     props:{
         id:[Number,String],
         title:String,
-        hours:Number,
-        price_hours:Number,
+        hours:[Number,String],
+        price_hours:[Number,String],
     },
     emits:['updateItem', 'deleteItem'],
     computed:{

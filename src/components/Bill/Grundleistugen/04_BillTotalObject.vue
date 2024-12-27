@@ -1,8 +1,8 @@
 <template>
     <div class="total_object">
         <div class="title">Summ as Honorarobjekt</div>
-        <div class="summ">
-            <Price :value="total" font_size_unit="18px" font_family="Raleway-Medium"/>
+        <div class="summ bold-text">
+            <PriceBill :value="total" />
             </div>
     </div>
 </template>
@@ -47,6 +47,12 @@ export default{
 </script>
 
 <style scoped>
+
+.bold-text{
+    font-family: 'Raleway-Medium';
+    color: #2c2c2c;       
+}
+
 .total_object{
     display: flex;
     justify-content: space-between;

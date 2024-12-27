@@ -17,6 +17,9 @@ if(empty($data['project'])){
     $data['project']['AdditionalServices']=json_decode(  fixJsonUTF8($data['project']['AdditionalServices']) );
     $data['project']['ExtraCosts']=json_decode( fixJsonUTF8( $data['project']['ExtraCosts']) );
 
+    if(!is_array($data['project']['AdditionalServices'])) $data['project']['AdditionalServices'] = [];
+    if(!is_array($data['project']['ExtraCosts'])) $data['project']['ExtraCosts'] = [];
+
     $selector = "`project_id` = '$id' AND `user_id`='$user_id'";
     $data['objects'] = crud_read('project_objects',"*", $selector);
 

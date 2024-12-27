@@ -13,7 +13,7 @@ $selector = "`project_id` = '$id' AND `user_id`='$user_id'";
 $data['objects'] = crud_read('project_objects',$object_feelds, $selector);
 
 $bills_feelds = "`id`, `name`, `total` ";
-$selector = "`project_id` = '$id' AND `user_id`='$user_id'";
+$selector = "`project_id` = '$id' AND `user_id`='$user_id' ORDER BY `number`";
 $data['bills'] = crud_read('project_bills',$bills_feelds, $selector);;
 
 $result = (object) [

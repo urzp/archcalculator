@@ -25,7 +25,7 @@
                 <BillTotalObject :id_bill="actualBill.id" :honorar_object = "item"/>
             </div>
         </div>
-        <div v-show="list.length>1" class="total_objects">
+        <div v-show="list.length>1" class="total_objects bold-text">
             <div class="">Summ as alles Honorarobjekt</div>
             <PriceBill :value="total_objects" />
         </div>
@@ -85,6 +85,7 @@ export default{
         async set_default_list(){
             await setDefaulObjects(this.actualBill.id)
             saveBill(this.actualBill.id)
+            console.log(this.actualBill)
 
         }
     }

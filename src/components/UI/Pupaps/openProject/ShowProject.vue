@@ -250,7 +250,7 @@ export default{
 
 .export_panel .icon{
     margin-top: 20px;
-    widows: 40px;
+    width: 40px;
     height: 40px;
     cursor: pointer;
 }

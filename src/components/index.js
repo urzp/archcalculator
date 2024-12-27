@@ -83,6 +83,7 @@ import GesamtRest from './Bill/06_GesamtRest.vue'
 import AdvancePayments from './Bill/GesamtRest.vue/AdvancePayments.vue'
 import Rechnungsbetrag from './Bill/07_Rechnungsbetrag.vue'
 import BillFooter from './Bill/08_Footer.vue'
+import ExportPanel from './Bill/09_Export.vue'
 //----------------------------EditCalculator-----------------------------
 import TopFixMenu from './EditCalculator/TopFixMenu.vue'
 import EditCalculator from './EditCalculator/01_EditCalc.vue'
@@ -212,6 +213,7 @@ export default [
     AdvancePayments,
     Rechnungsbetrag,
     BillFooter,
+    ExportPanel,
     
     TopFixMenu,
     EditCalculator,

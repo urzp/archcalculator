@@ -72,12 +72,12 @@ export async function newBill(project_id, number = Bills.length){
 
     let payment_date = setPayment_date(number)
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
-    let objects = setObjects(number)
+    let objects = await setObjects(number)
     let extraServis = initExtraServis(Project.project.AdditionalServices)
     let totalExtraServis = countTotalExtraServis(extraServis)
     let extraCosts = initExtraCosts(Project.project.ExtraCosts)
     let totalExtraCosts = countTotalExtraServis(extraCosts)
-    let total_objects = Project.objects.reduce((partialSum, item) => partialSum + item.total_object, 0);
+    let total_objects = objects.reduce((summ, item) => summ + item.total, 0);
     let total_net = total_objects + totalExtraCosts + totalExtraServis
     let tax = Project.project.tax
     let total_tax = total_net * Number(Project.project.tax)/100
@@ -185,7 +185,7 @@ function setObjects(number){
 
 export async function setDefaulObjects(id){
     let bill =  Bills.find(item=>item.id == id)
-    delete bill.objects
+    //delete bill.objects
     bill.objects = setObjects(bill.number)
 }
 
@@ -228,11 +228,6 @@ function fillStages(stages, id_object, index){
     let honorar = Project.objects.find(item=>item.id==id_object).honorar_total
     let priviosBill = Bills[index - 1]
     let stagesPrivios = priviosBill.objects.find(item=>item.id==id_object)
-
-    console.log('index', index)
-    console.log('window.bills',window.bills)
-    console.log('Bills',Bills)
-    console.log('stagesPrivios', stagesPrivios)
 
     if(!stagesPrivios||!stagesPrivios.stages) return false
     stagesPrivios = stagesPrivios.stages
