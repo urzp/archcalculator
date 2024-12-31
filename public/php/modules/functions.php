@@ -9,6 +9,20 @@ function int2roman($n) {
     return sprintf('%s%s%s%s', $M[$n/1000],$C[($n % 1000)/100],$X[($n % 100)/10],$I[($n % 10)]);
 }
 
+function number_to_leter($str){
+    $alpha = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    $newName = '';
+    do {
+        $str--;
+        $limit = floor($str / 26);
+        $reminder = $str % 26;
+        $newName = $alpha[$reminder].$newName;
+        $str=$limit;
+    } while ($str >0);
+    return $newName;
+}
+
+
 
 function newOrder($newOrderData, $tableName, $selector){
     $newOrderData = crud_read($tableName,"*", $selector);
