@@ -110,7 +110,7 @@ $styleArray = array(
 $_Sheet->getStyle('A15:L15')->applyFromArray($styleArray);
 
 $_Sheet->mergeCells("F17:L17");
-$_Sheet->setCellValue("F17", "Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:");					
+$_Sheet->setCellValue("F17", $billData -> greeting_phrase);					
 $_Sheet->getRowDimension(17)->setRowHeight(50);
 $_Sheet->getStyle('F17')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
@@ -184,7 +184,7 @@ header ("Last-Modified: " . gmdate("D,d M Y H:i:s") . " GMT");
 header ("Cache-Control: no-cache, must-revalidate");
 header ("Pragma: no-cache");
 header ("Content-type: application/vnd.ms-excel");
-header ("Content-Disposition: attachment; filename=myFile.xls");
+header ("Content-Disposition: attachment; filename={$billData -> project -> name}.xls");
 
 $objWriter = new PHPExcel_Writer_Excel5($theXls);
 $objWriter->save("php://output");

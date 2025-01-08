@@ -28,3 +28,7 @@ set all text to text file
 ----------------------------
 
 избавиться от console.Log, window
+
+img logo in bills
+
+названия файлов

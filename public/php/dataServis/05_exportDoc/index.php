@@ -4,10 +4,7 @@ if($isLogin){
     $mysql = $mysql_calc;
 
 switch ($typeData) {
-    case 'excel_bill': include 'getDounloadURL.php'; break;
-
-
-
+    case 'DownloadURL': include 'getDownloadURL.php'; break;
 }
 
 }

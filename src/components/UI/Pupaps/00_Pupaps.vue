@@ -5,6 +5,7 @@
     <Comfirm/>
     <openProject/>
     <message/>
+    <downloadLinks/>
 </template>
 
 

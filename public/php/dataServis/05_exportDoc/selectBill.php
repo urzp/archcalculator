@@ -7,6 +7,7 @@ $bill_id = $rq_data-> id;
 
 $id = $_GET['bill'];
 $downLoad_token = $_GET['downLoad_token'];
+$type = $_GET['type'];
 $id = $mysql->real_escape_string($id);
 $downLoad_token = $mysql->real_escape_string($downLoad_token);
 
@@ -22,7 +23,12 @@ $bill['data'] -> id = $bill['id'];
 $bill['data'] -> updated = $bill['updated'];
 $bill['data'] -> created = $bill['created'];
 
-include "excel/excel.php";
+
+
+switch ($type) {
+    case 'excel': include "excel/excel.php"; break;
+    case 'pdf': include "pdf/pdf.php"; break;
+}
 
 }
 
