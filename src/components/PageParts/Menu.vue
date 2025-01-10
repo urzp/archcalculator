@@ -48,7 +48,9 @@ export default{
         logOut(){
             logOut()
             this.close()
-            this.$router.push({ name: 'home' })
+            this.$router
+            .push({ name: 'home' })
+            .then(() => { this.$router.go(0) })
         }
     },
 }

@@ -39,7 +39,13 @@ $_Sheet->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::V
 $_Sheet->getStyle('A1')->getFont()->setSize(8); 
 
 //Logo
-$imagePath = $_SERVER['DOCUMENT_ROOT']. '/users/user_2/avatar/1733807917_unnamed.jpg';		
+$imagePath = '';	
+if(isset($billData -> user_logo)&&!empty($billData -> user_logo)){
+	$imagePath = $billData -> user_logo;
+	$imagePath = explode("https://honorar.online", $imagePath)[1];
+	$imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath; 
+}
+	
 if (file_exists($imagePath)) {
 	$logo = new PHPExcel_Worksheet_Drawing();
 	$logo->setPath($imagePath);

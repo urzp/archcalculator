@@ -112,6 +112,7 @@ export default{
         },
         url_avatar(){
             let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
+            if(!!Bills&&Bills.user_logo) url = user_logo
             return url
         },
         actualBill(){

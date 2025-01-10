@@ -8,7 +8,10 @@ $dompdf = new DOMPDF();
 
 include 'blocks_pdf.php';
 
-$imagePath = 'https://honorar.online/'. 'users/user_2/avatar/1733807917_unnamed.jpg';
+$imagePath = '';	
+if(isset($billData -> user_logo)&&!empty($billData -> user_logo)){
+	$imagePath = $billData -> user_logo;
+}
 
 $vom = date('d.m.Y',strtotime($billData -> payment_date -> vom));
 $bis = date('d.m.Y',strtotime($billData -> payment_date -> bis));
