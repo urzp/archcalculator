@@ -46,6 +46,7 @@ import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { saveNewProject } from '@/servis/projectData.js'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Header',
     async mounted(){
