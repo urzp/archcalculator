@@ -1,7 +1,7 @@
 import { reactive } from 'vue';
 import { CalcData } from '@/servis/calcData.js'
 import { Project } from '@/servis/projectData.js'
-import { user } from '@/servis/globalValues.js'
+import { user, global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
 import {  lastElement } from '@/servis/functions.js'
 
@@ -69,6 +69,7 @@ export async function newBill(project_id, number = Bills.length){
     let user_BIC = user.BIC
     let user_Institut = user.Institut
     let user_USt = user.USt
+    let user_logo = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
 
     let payment_date = setPayment_date(number)
     let number_bill = `${Bills.length + 1}. Abschlagsrechnung`
@@ -96,6 +97,7 @@ export async function newBill(project_id, number = Bills.length){
         user_BIC,
         user_Institut,
         user_USt,
+        user_logo,
 
         custemer,
         project:{
