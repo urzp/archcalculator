@@ -2,13 +2,13 @@
     <div v-if="show" class="wrap_menu">
         <div class="menu_pupap">
             <div v-if="!global.login" class="list notlogin">
-                <div class="item" @click="selectItem('Login')">Login</div>
-                <div class="item" @click="selectItem('Registration')">Registrierung</div>
+                <div class="item" @click="selectItem('Login')">{{ text.Login }}</div>
+                <div class="item" @click="selectItem('Registration')">{{ text.Registration }}</div>
             </div>
             <div v-if="global.login" class="list login">
-                <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">Calculator</div>
-                <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">Profile</div>
-                <div class="item" @click="logOut()">Logout</div>
+                <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">{{ text.Calculator }}</div>
+                <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">{{ text.Profile }}</div>
+                <div class="item" @click="logOut()">{{ text.Logout }}</div>
             </div>
         </div>
     </div>
@@ -20,6 +20,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { logOut } from '@/components/Users/servis.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Menu',
     async mounted(){
@@ -28,6 +29,13 @@ export default{
     data(){
         return {
             global:{},
+            text:{
+                Login: text.menu.Login,
+                Registration: text.menu.Registration,
+                Logout: text.menu.Logout,
+                Calculator: text.menu.Calculator,
+                Profile: text.menu.Profile,
+            }
         }
     },
     props:{
