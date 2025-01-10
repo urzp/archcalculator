@@ -27,8 +27,8 @@ export  default{
     props:{
         id:[Number,String],
         title:String,
-        rate:Number,
-        price_rate:Number,
+        rate:[Number,String],
+        price_rate:[Number,String],
     },
     emits:['updateItem', 'deleteItem'],
     computed:{
