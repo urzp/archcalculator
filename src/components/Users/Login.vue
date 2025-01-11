@@ -4,21 +4,21 @@
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div class="form">
                 <form action="" autocomplete="on">
-                <div class="item">Email</div>
+                <div class="item">{{ text.Email }}</div>
                 <input type="text" @change="event=>chekEmail(event.target.value)" autocomplete="email" />
-                <div v-if="err_email" class="err">Keine gültige E-Mail</div>
-                <div class="item" >Password</div>
+                <div v-if="err_email" class="err">{{ text.Email_wrong }}</div>
+                <div class="item" >{{ text.Password }}</div>
                 <input type="password" @change="event=>chekPassword(event.target.value)" @keyup.enter="submit()" autocomplete="on" />
-                <div v-if="err_password" class="err">Feld ausfüllen</div>
+                <div v-if="err_password" class="err">{{ text.Fill_feld }}</div>
                 <div class="submit">
-                    <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                    <div v-if="notFind&&!waightResponce"  class="loading not_find">nicht gefunden</div>
-                    <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
+                    <div v-if="waightResponce"  class="loading">{{ text.loading }}</div>
+                    <div v-if="notFind&&!waightResponce"  class="loading not_find">{{ text.Not_found }}</div>
+                    <Button height="35px" width="125px" @click="submit()">{{ text.Submit }}</Button>
                 </div>
                 <div class="links">
-                    <div class="link" @click="openRegistration()">Registrierung</div>
+                    <div class="link" @click="openRegistration()">{{ text.Registration }}</div>
                     <div class="gap">|</div>
-                    <div class="link" @click="openReset()" >Passwort vergessen</div>
+                    <div class="link" @click="openReset()" >{{ text.Forgot_password }}</div>
                 </div>
                 </form>
             </div>
@@ -34,6 +34,7 @@ import { validateEmail } from '@/servis/functions.js'
 import { apiData } from '@/servis/apiData.js'
 import { global } from '@/servis/globalValues.js'
 import { logIn } from '@/components/Users/servis.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Login',
     mounted(){
@@ -48,7 +49,18 @@ export default{
             password:'',
             waightResponce: false,
             notFind:false,
-            nextOpen:()=>{}
+            nextOpen:()=>{},
+            text:{
+                Email: text.UserServis.Email,
+                Email_wrong: text.UserServis.Email_wrong,
+                Password: text.UserServis.Password,
+                Fill_feld: text.UserServis.Fill_feld,
+                loading: text.UserServis.loading,
+                Not_found: text.UserServis.Not_found,
+                Submit: text.UserServis.Submit,
+                Registration: text.UserServis.Registration,
+                Forgot_password: text.UserServis.Forgot_password,
+            }
         }
     },
     methods:{

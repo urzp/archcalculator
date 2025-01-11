@@ -2,8 +2,8 @@
     <div v-if="!loading" class="show_project" @click="showSelectData=false">
     <template v-if="!!id_project">
         <div class="top_panel">
-            <Button width="80px" height="40px" @click="openProject()">Open</Button>
-            <Button width="80px" height="40px" @click="deleteProject()">Delete</Button>
+            <Button width="80px" height="40px" @click="openProject()">{{ text.Open }}</Button>
+            <Button width="80px" height="40px" @click="deleteProject()">{{text.Delete}}</Button>
         </div>
         <div v-if="showSelectData" class="selectData" @click.stop="">
             <div class="wrap_calendar">
@@ -20,7 +20,7 @@
                 <div class="finance">{{ formatPrice(project.total) }}</div>
             </div>
         </div>
-        <div class="part_title">Objects</div>
+        <div class="part_title">{{ text.Objects }}</div>
         <div class="list_objects">
             <div class="item" v-for="item in list_objects" :key="item.id">
                 <!-- <div class="name">{{ item.name }}</div> -->
@@ -28,7 +28,7 @@
                 <div class="finance">{{ formatPrice(item.total_object) }}</div>
             </div>
         </div>
-        <div class="part_title">Bils</div>
+        <div class="part_title">{{ text.Bils }}</div>
         <div class="list_objects">
             <div class="item" v-for="item in list_bils" :key="item.id">
                 <div class="name_data">
@@ -38,20 +38,16 @@
                 <div class="finance">{{ formatPrice(item.total) }}</div>
             </div>
         </div>
-        <div class="export_panel">
-            <div class="icon"><img src="@/assets/icons/exports/xls.png" alt=""></div>
-            <div class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
-            <div class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
-        </div>
     </template>
-    <div v-else class="loading select_project">Select Project</div>
+    <div v-else class="loading select_project">{{ text.Select_Project }}</div>
     </div>
-    <div v-else class="loading">Loading . . .</div>
+    <div v-else class="loading">{{ text.loading }}</div>
 </template>
 
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
+import { text } from '@/servis/text.js'
 export default{
     name:'ShowProject',
     mounted(){
@@ -65,6 +61,14 @@ export default{
             list_objects:[],
             list_bils:[],
             showSelectData:false,
+            text:{
+                Open: text.openProject.Open,
+                Delete: text.openProject.Delete,
+                Objects: text.openProject.Objects,
+                Bils: text.openProject.Bils,
+                loading: text.openProject.loading,
+                Select_Project: text.openProject.Select_Project,
+            }
         }
     },
     watch:{

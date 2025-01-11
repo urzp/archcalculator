@@ -2,17 +2,28 @@
 <div class="footer-wrap">
     <div class="line-wrap"><div class="line"></div></div>
     <div class="list">
-        <div class="item">Copyright © 2024 honorar.online</div>
-        <div class="item">Impressum Datenschutz Cookie Einstellungen</div>
-        <div class="item">mail@honorar.online</div>
+        <div class="item">{{ text.Copyright }}</div>
+        <div class="item">{{ text.Privacy_Policy }}</div>
+        <div class="item">{{ text.mail }}</div>
         <div class="item whatsapp"></div>
     </div>
 </div>
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export default{
     name: 'Footer',
+    data(){
+        return{
+            text:{
+                Copyright: text.footer.Copyright,
+                Privacy_Policy: text.footer.Privacy_Policy,
+                mail:text.footer.mail,
+            },
+        }
+    }
+
 }
 </script>
 

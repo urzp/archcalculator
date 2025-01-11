@@ -73,7 +73,7 @@ export default{
     .menu_pupap{
         position: absolute;
         right: -5px;
-        top: 25px;
+        top: 10px;
         width: 130px;
         min-height: 30px;
         background-color: #fff;
