@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Besondere Leistungen" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Special_servis" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <ItemSpetialServis 
         v-for="item in list"
@@ -20,6 +20,7 @@
 
 <script>
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'SpecialServices',
     async mounted(){
@@ -30,6 +31,9 @@ export default{
             collapse:false,
             list:[],
             project:{},
+            text:{
+                Special_servis: text.Calc.Special_servis,
+            }
         }
     },
     computed:{

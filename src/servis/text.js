@@ -1,3 +1,5 @@
+import Calc from "@/components/Calculator/Calc.vue";
+
 export let text = {
     bill:{
         greeting_phrase:'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
@@ -95,7 +97,57 @@ export let text = {
         Save:'Save',
 
         The_account_will_be_permanently_deleted:'Das Konto wird dauerhaft gelöscht. Möchten Sie es wirklich entfernen?',
-    
-    
+    },
+    Calc:{
+        Honorarobjekt:'Honorarobjekt', //Button
+        Loading:'Loading . . . ',
+        Summe: 'Summe',
+        Customer:'Customer:',
+        Honorar_Base:'Honorargrundlagen',
+        HOAI_Version:'HOAI Version',
+        Paragraph:'Planungsgegenstand',
+        Honorarzone:'Honorarzone',
+        Honorarzone_detals:{
+            points:'points',
+            Summe:'Summe: ',
+            corresponds_to_fee_zone:'corresponds to fee zone: ',
+        },
+        Honorarsatz:'Honorarsatz',
+        Finance:'Anrechenbare Kosten', min: 'min', max: 'max',
+        Finance_detals:{
+            Summe:'100-800 Summe',
+            Low:'Hilfswert',
+            High:'Anrechenbar',
+            of_which_other_eligible_costs:'hiervon sonstige anrechenbare Kosten',
+            costs_that_can_be_charged_as_a_result_of_this:'hiervon bedingt anrechenbare Kosten',
+            hiervon_zu_100_anrechenbar:'hiervon zu 100% anrechenbar (über 25% von',
+            hiervon_zu_50_anrechenbar:'hiervon zu 50% anrechenbar (über 25% von',
+            total_non_allowable_costs:'Summe nicht anrechenbare Kosten',
+            Total_eligible_costs_other:'Summe eligible costs, "other": ',
+        },
+        Fee_according_to_fee_table:'Honorar nach Honorartafel',
+        Honorar_detals:{
+            Name:'Name',
+            Honorar_min:'Honorar von',
+            Honorar_max:'Honorar bis',
+            Table_Value_Top:'Tabellenwert Oben',
+            Interpolation:'Interpolation',
+            Table_Value_Bottom:'Tabellenwert Unten',
+        },
+        Pay_extra:'Zuschlag',
+        Base_servis:'Leistungen',
+        Special_servis:'Besondere Leistungen',
+        Enter_performance:'Leistung eingeben',
+        Additional_services:'Zusätzliche Leistungen',
+        Total_Additional_Services:'Summe Zusätzliche Leistungen',
+        Extra_costs:'Nebenkosten',
+        Total_Extra_costs:'Summe der Nebenkosten',
+        Summary:'Zusammenfassung',
+        Total_net:'Gesamtsumme Netto',
+        Total_tax:'Umsatzsteuer',
+        Total_gross: 'Gesamtsumme Brutto',
+        Sum_summary:'Summe Zusammenfassung',
+        Sum_total_calc:'Summe: ',
     }
+
 }

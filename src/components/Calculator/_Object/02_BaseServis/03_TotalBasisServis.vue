@@ -1,7 +1,7 @@
 <template>
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Summe</div>
+            <div class="title">{{ text.Summe }}</div>
             <div class="value-percent">{{ percent }} %</div>
             <Price :value = 'value'/>
         </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-
+import { text } from '@/servis/text.js'
 export default{
     name: 'TotalBasisServis',
     async mounted(){
@@ -17,6 +17,9 @@ export default{
     },
     data(){
         return{
+            text:{
+                Summe: text.Calc.Summe,
+            }
         }
     },
     props:{

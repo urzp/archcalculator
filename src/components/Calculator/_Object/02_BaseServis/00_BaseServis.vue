@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Leistungen" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Base_servis" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
             <Stage_calc 
                 v-for="item, index in list" 
@@ -22,6 +22,7 @@
 <script>
 import { getStages }  from '@/servis/calcData.js'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'BaseServis',
     async mounted(){
@@ -33,6 +34,9 @@ export default{
             list:[],
             project:{},
             paragraph:'',
+            text:{
+                Base_servis: text.Calc.Base_servis
+            }
         }
     },
     watch:{

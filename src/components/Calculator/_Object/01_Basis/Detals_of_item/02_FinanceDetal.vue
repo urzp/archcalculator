@@ -7,8 +7,8 @@
                     <Price input_type font_size_unit="18px" :value="item.value" @edit_price="val=>updatePrice(item.id, val)" :typeCurrancy="typeCurrancy"/>
                 </div>
             </div>
-            <div v-if="has_400_Bauwerk" class="detal-item">$
-                <div class="title">100-800 Summe</div>
+            <div v-if="has_400_Bauwerk" class="detal-item">
+                <div class="title">{{ text.Summe_100_800 }}</div>
                 <div class="value-wrap">
                     <Price font_size_unit="18px" :value="summ_100_800" />
                 </div>
@@ -16,41 +16,41 @@
             <div v-if="has_400_Bauwerk"  class="kg400_Bauwerk">
                 <div class="row header">
                     <div class="name_item"></div>
-                    <div class="imput_calc">Hilfswert</div>
+                    <div class="imput_calc">{{ text.Low }}</div>
                     <div class="percent"></div>
-                    <div class="output_calc">Anrechenbar</div>
+                    <div class="output_calc">{{ text.High }}</div>
                     <div class="total_calc"></div>
                 </div>
                 <div class="row">
-                    <div class="name_item">hiervon sonstige anrechenbare Kosten</div>
+                    <div class="name_item">{{ text.of_which_other_eligible_costs }}</div>
                     <div class="imput_calc"></div>
                     <div class="percent"></div>
                     <div class="output_calc"><Price font_size_unit="16px" :value="summ_other"/></div>
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row">
-                    <div class="name_item">hiervon bedingt anrechenbare Kosten</div>
+                    <div class="name_item">{{ text.costs_that_can_be_charged_as_a_result_of_this }}</div>
                     <div class="imput_calc"><Price font_size_unit="16px" :value="kg400"/></div>
                     <div class="percent"></div>
                     <div class="output_calc"></div>
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row">
-                    <div class="name_item left_gap">{{ `hiervon zu 100% anrechenbar (25% von ${summ_other}€)` }}</div>
+                    <div class="name_item left_gap">{{ `${text.hiervon_zu_100_anrechenbar} ${summ_other}€)` }}</div>
                     <div class="imput_calc"><Price font_size_unit="16px" :value="until_25_per"/></div>
                     <div class="percent">100%</div>
                     <div class="output_calc"><Price font_size_unit="16px" :value="until_25_per"/></div>
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row">
-                    <div class="name_item left_gap">{{ `hiervon zu 50% anrechenbar (über 25% von ${summ_other}€)` }}</div>
+                    <div class="name_item left_gap">{{ `${text.hiervon_zu_50_anrechenbar} ${summ_other}€)` }}</div>
                     <div class="imput_calc"><Price font_size_unit="16px" :value="after_25_per"/></div>
                     <div class="percent">50%</div>
                     <div class="output_calc"><Price font_size_unit="16px" :value="after_25_per*0.5"/></div>
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row summ_row">
-                    <div class="name_item">Summe nicht anrechenbare Kosten</div>
+                    <div class="name_item">{{ text.total_non_allowable_costs }}</div>
                     <div class="imput_calc"></div>
                     <div class="percent"></div>
                     <div class="output_calc"></div>
@@ -59,7 +59,7 @@
             </div>
             <div class="total">
                 <div class="total_points">
-                    <div class="label">Summe eligible costs, "other": </div>
+                    <div class="label">{{ text.Total_eligible_costs_other }}</div>
                     <div class="value"> <Price  font_size_unit="16px" :value="total"  :typeCurrancy="typeCurrancy"/> </div>
                 </div>
             </div>
@@ -69,12 +69,24 @@
 
 <script>
 import Price from '@/components/UI/Simples/Price.vue'
+import { text } from '@/servis/text.js'
 export  default{
   components: { Price },
     name: 'FinanceDetal',
     data(){
         return{
             collapse:true,
+            text:{
+                Summe_100_800: text.Calc.Finance_detals.Summe,
+                Low: text.Calc.Finance_detals.Low,
+                High: text.Calc.Finance_detals.High,
+                of_which_other_eligible_costs: text.Calc.Finance_detals.of_which_other_eligible_costs,
+                costs_that_can_be_charged_as_a_result_of_this: text.Calc.Finance_detals.costs_that_can_be_charged_as_a_result_of_this,
+                hiervon_zu_100_anrechenbar: text.Calc.Finance_detals.hiervon_zu_100_anrechenbar,
+                hiervon_zu_50_anrechenbar: text.Calc.Finance_detals.hiervon_zu_50_anrechenbar,
+                total_non_allowable_costs: text.Calc.Finance_detals.total_non_allowable_costs,
+                Total_eligible_costs_other: text.Calc.Finance_detals.Total_eligible_costs_other
+            }
         }
     },
     emits:['useDetals', 'edit_UserTitle' ,'edit_price','count_total'],

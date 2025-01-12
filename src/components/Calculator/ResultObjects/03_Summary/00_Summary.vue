@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Zusammenfassung" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Summary" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <TotalNet :value="total_net"/>
         <TotalTax :percent="tax" :finance="total_net" @updateItem="value=>updateTax(value)"/>
@@ -11,6 +11,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project, updateProject } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Summary',
     async mounted(){
@@ -21,6 +22,9 @@ export default{
             collapse:false,
             project:{},
             tax:'0',
+            text:{
+                Summary: text.Calc.Summary,
+            }
         }
     },
     watch:{

@@ -1,6 +1,6 @@
 <template>
     <div v-if="!!paragraph_id" class="main_row">
-        <div class="title">Planungsgegenstand</div>
+        <div class="title">{{ text.Paragraph }}</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -10,6 +10,7 @@
 
 <script>
 import { getParagraph, getParagraphs } from '@/servis/calcData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'Paragraph_calc',
     async mounted(){
@@ -21,6 +22,9 @@ export  default{
                 id:'',
                 value: '',
                 list:[],
+            },
+            text:{
+                Paragraph: text.Calc.Paragraph
             }
         }
     },

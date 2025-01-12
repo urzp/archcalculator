@@ -3,7 +3,7 @@
         <div class="wrap">
             <div class="title-total" :class="{collapse}">{{ nameObject }}</div>
             <div class="data-total">
-                <div class="label">Summe</div>
+                <div class="label">{{ text.Summe }}</div>
                 <!-- <div class="procent">100%</div> -->
                 <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
             </div>
@@ -14,6 +14,7 @@
 <script>
 import { Project, updateProjectObject  } from '@/servis/projectData.js'
 import { EventBus } from '@/servis/EventBus'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Total_Object',
     mounted(){
@@ -23,6 +24,9 @@ export default{
         return{
             font_family:'Comfortaa-Regular',
             project:{},
+            text:{
+                Summe: text.Calc.Summe,
+            }
         }
     },
     props:{

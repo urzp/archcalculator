@@ -1,20 +1,23 @@
 <template>
     <div class="item-Part-obj" >
         <div  class="main_row" >
-            <div class="title">Gesamtsumme Netto</div>
+            <div class="title">{{ text.Total_net }}</div>
             <div class="price" ><Price :value ="value" /></div>
         </div>
     </div>
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'TotalNet',
     async mounted(){
     },
     data(){
         return{
-
+            text:{
+                Total_net: text.Calc.Total_net,
+            }
         }
     },
     props:{

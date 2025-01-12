@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Honorargrundlagen" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Honorar_Base" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <HOAI_version_calc :prop_id="HOAI_version" @selected="data=>{ data.id = data.id; selectParagraph(data.id) }"/>
         <Paragraph_calc :paragraph_id="paragraph" @selected="data=>{ paragraph = data.id; updateProjectData() }"/>
@@ -15,6 +15,7 @@
 <script>
 import { getSameParagraph } from '@/servis/calcData.js'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Basis',
     async mounted(){
@@ -27,6 +28,9 @@ export default{
             paragraph:'',
             data:{},
             project:{},
+            text:{
+                Honorar_Base: text.Calc.Honorar_Base
+            }
         }
     },
     props:{

@@ -2,25 +2,25 @@
     <div class="wrap" >
         <div class="list">
             <div class="detal-item">
-                <div class="title">Name</div>
+                <div class="title">{{ text.Name }}</div>
                 <div class="funding">{{ nameFunding }}</div>
-                <div class="min_fee">Honorar von</div>
-                <div class="max_fee">Honorar bis</div>
+                <div class="min_fee">{{ text.Honorar_min }}</div>
+                <div class="max_fee">{{ text.Honorar_max }}</div>
             </div>
             <div class="detal-item" v-if="!!data.up">
-                <div class="title">Tabellenwert Oben</div>
+                <div class="title">{{ text.Table_Value_Top }}</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.up.funding" :typeCurrancy="typeValue"/></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.up.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.up.max_fee" /></div>
             </div>
             <div class="detal-item" v-if="!!data.current">
-                <div class="title">Interpolation</div>
+                <div class="title">{{ text.Interpolation }}</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.current.funding"  :typeCurrancy="typeValue" /></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.current.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.current.max_fee" /></div>
             </div>
             <div class="detal-item" v-if="!!data.low">
-                <div class="title">Tabellenwert Unten</div>
+                <div class="title">{{ text.Table_Value_Bottom }}</div>
                 <div class="funding"><Price font_size_unit="18px" :value ="data.low.funding"  :typeCurrancy="typeValue" /></div>
                 <div class="min_fee"><Price font_size_unit="18px" :value ="data.low.min_fee" /></div>
                 <div class="max_fee"><Price font_size_unit="18px" :value ="data.low.max_fee" /></div>
@@ -30,8 +30,21 @@
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'HonorarDetal_calc',
+    data(){
+        return{
+            text:{
+                Name: text.Calc.Honorar_detals.Name,
+                Honorar_min: text.Calc.Honorar_detals.Honorar_min,
+                Honorar_max: text.Calc.Honorar_detals.Honorar_max,
+                Table_Value_Top: text.Calc.Honorar_detals.Table_Value_Top,
+                Interpolation: text.Calc.Honorar_detals.Interpolation,
+                Table_Value_Bottom: text.Calc.Honorar_detals.Table_Value_Bottom,
+            }
+        }
+    },
     computed:{
         nameFunding(){
             if(this.typeValue == 'Hektar'){

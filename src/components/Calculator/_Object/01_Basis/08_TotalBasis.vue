@@ -1,7 +1,7 @@
 <template>
     <div v-if="!!paragraph" class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Summe</div>
+            <div class="title">{{ text.Summe }}</div>
             <div class="value-percent">{{ percent }} %</div>
             <Price :value = 'value'/>
         </div>
@@ -11,6 +11,7 @@
 <script>
 
 import { Project } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'TotalBasis',
     async mounted(){
@@ -20,6 +21,9 @@ export default{
         return{
             percent:100,
             project:{},
+            text:{
+                Summe: text.Calc.Summe,
+            }
         }
     },
     props:{

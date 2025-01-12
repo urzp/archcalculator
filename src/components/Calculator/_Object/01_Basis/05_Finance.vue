@@ -4,9 +4,9 @@
             <div class="icon"></div>
         </div>
         <div  class="main_row" >
-            <div class="title">Anrechenbare Kosten</div>
-            <div class="message" v-if="limits.outRange_min"> min <Price :value ="limits.min" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
-            <div class="message" v-if="limits.outRange_max"> max <Price :value ="limits.max" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="title">{{ text.Finance }}</div>
+            <div class="message" v-if="limits.outRange_min"> {{text.min}} <Price :value ="limits.min" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
+            <div class="message" v-if="limits.outRange_max"> {{text.max}} <Price :value ="limits.max" :typeCurrancy="typeCurrancy"  :noCents="true" /></div>
             <div class="price" @click="switchDetal(false)"><Price input_type :value ="value_render" @edit_price="newValue=>editValue(newValue)" :typeCurrancy="typeCurrancy"/></div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
@@ -29,6 +29,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { getAllowableCosts, getTypeValue, financeLimits } from '@/servis/calcData.js'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'Finance_calc',
     async mounted(){
@@ -47,6 +48,11 @@ export  default{
             useDetals:false,
             value_detals:0,
             finance:{},
+            text:{
+                Finance: text.Calc.Finance,
+                min: text.Calc.min,
+                max: text.Calc.max,
+            }
         }
     },
     props:{

@@ -1,20 +1,23 @@
 <template>
     <div class="item-Part-obj" >
         <div  class="main_row" >
-            <div class="title">Gesamtsumme Brutto</div>
+            <div class="title">{{ text.Total_gross }}</div>
             <div class="price" ><Price :value ="value" /></div>
         </div>
     </div>
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'Total',
     async mounted(){
     },
     data(){
         return{
-
+            text:{
+                Total_gross: text.Calc.Total_gross,
+            }
         }
     },
     props:{

@@ -1,6 +1,6 @@
 <template>
     <div class="main_row">
-        <div class="title">HOAI Version</div>
+        <div class="title">{{ text.HOAI_Version }}</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -10,6 +10,7 @@
 
 <script>
 import { CalcData } from '@/servis/calcData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'HOAI_version_calc',
     async mounted(){
@@ -22,6 +23,9 @@ export  default{
                 id:'',
                 value: '',
                 list:[],
+            },
+            text:{
+                HOAI_Version: text.Calc.HOAI_Version 
             }
         }
     },

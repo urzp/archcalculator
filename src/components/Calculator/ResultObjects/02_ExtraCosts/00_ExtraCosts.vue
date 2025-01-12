@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Nebenkosten" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Extra_costs" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <ItemExtraCost
         v-for="item in list"
@@ -20,6 +20,7 @@
 
 <script>
 import { Project, updateProject } from '@/servis/projectData.js'
+import { text } from '@/servis/text';
 export default{
     name: 'ExtraCosts',
     async mounted(){
@@ -30,6 +31,9 @@ export default{
             collapse:false,
             list:[],
             project:{},
+            text:{
+                Extra_costs: text.Calc.Extra_costs,
+            }
         }
     },
     computed:{

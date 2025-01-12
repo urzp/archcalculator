@@ -2,7 +2,7 @@
     <div class="item-Part-obj" >
         <div  class="main_row" >
             <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
-            <input class="title" :placeholder="'Leistung eingeben'" :value="title" @change="event => updateUserTitle(event.target.value)"/>
+            <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
                 <div class="wrap_imputs">
                     <div class="imputHours"><input type="number" min="0" :value = "hours" @change="event => updateHours(event.target.value)" /> <div class="typeSumbol">h</div></div>
@@ -15,13 +15,16 @@
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'ItemAdditionalServis',
     async mounted(){
     },
     data(){
         return{
-
+            text:{
+                Enter_performance: text.Calc.Enter_performance,
+            }
         }
     },
     props:{

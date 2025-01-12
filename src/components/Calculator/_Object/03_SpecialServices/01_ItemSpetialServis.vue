@@ -2,7 +2,7 @@
     <div class="item-Part-obj" >
         <div  class="main_row" >
             <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
-            <input class="title" :placeholder="'Leistung eingeben'" :value="title" @change="event => updateUserTitle(event.target.value)"/>
+            <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
                 <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
                 <div class="price" ><Price :value ="value" /></div>
@@ -12,13 +12,16 @@
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'ItemSpetialServis',
     async mounted(){
     },
     data(){
         return{
-
+            text:{
+                Enter_performance: text.Calc.Enter_performance, 
+            }
         }
     },
     props:{

@@ -1,14 +1,14 @@
 <template>
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Summe Zusammenfassung</div>
+            <div class="title">{{ text.Sum_summary }}</div>
             <Price :value = 'value'/>
         </div>
     </div>
 </template>
 
 <script>
-
+import { text } from '@/servis/text.js'
 export default{
     name: 'TotalSummary',
     async mounted(){
@@ -16,6 +16,9 @@ export default{
     },
     data(){
         return{
+            text:{
+                Sum_summary: text.Calc.Sum_summary,
+            }
         }
     },
     props:{
