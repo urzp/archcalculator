@@ -6,12 +6,12 @@
             <ObjectCalc :object_id="item.id" />
         </div>
         <div class="panel">
-            <NewButton width="200px" @click="newObject()" >Honorarobjekt</NewButton>
+            <NewButton width="200px" @click="newObject()" >{{ text.Honorarobjekt }}</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
         <ResultCalc/>
         </template>
-        <div v-else class="load">Loading . . . </div>
+        <div v-else class="load">{{ text.Loading }}</div>
     </div>
 </template>
 
@@ -20,6 +20,7 @@ import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
 import { newPoject, LoadProjectData, saveAllProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Calculator',
     async mounted(){
@@ -36,6 +37,10 @@ export default{
             loaded_clac:false,
             ListObjects:[],
             project:{},
+            text:{
+                Honorarobjekt: text.Calc.Honorarobjekt,
+                Loading: text.Calc.Loading,
+            }
         }
     },
     props:{

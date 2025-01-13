@@ -5,7 +5,7 @@
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
                 <div class="value-wrap">
                     <div class="value">{{ item.value }}</div>
-                    <div class="value-label">points</div>
+                    <div class="value-label">{{ text.points }}</div>
                     <div class="bar_input">
                         <input class="slider" type="range" :min="item.minPoint" :max="item.maxPoint" :value="item.value" @change="event => updateValue(event.target.value, item.id)"> 
                     </div>
@@ -13,11 +13,11 @@
             </div>
             <div class="total">
                 <div class="total_points">
-                    <div class="label">Summe: </div>
+                    <div class="label">{{ text.Summe }}</div>
                     <div class="value">{{ total }}</div>
                 </div>
                 <div class="equivalent">
-                    <div class="label">corresponds to fee zone: </div>
+                    <div class="label">{{ text.corresponds_to_fee_zone }}</div>
                     <div class="value">{{ equivalent.value }}</div>         
                 </div>
             </div>
@@ -30,6 +30,7 @@ import { EventBus } from '@/servis/EventBus'
 import { getRequirementsPoints } from '@/servis/calcData.js'
 import { Project, updateProjectObject } from '@/servis/projectData.js'
 import { lastElement } from '@/servis/functions.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'HonorarZoneDetal',
     mounted(){
@@ -41,6 +42,11 @@ export  default{
             collapse:true,
             list:[],
             project:{},
+            text:{
+                points: text.Calc.Honorarzone_detals.points,
+                Summe: text.Calc.Honorarzone_detals.Summe,
+                corresponds_to_fee_zone: text.Calc.Honorarzone_detals.corresponds_to_fee_zone
+            }
         }
     },
     emits:['equivalent', 'usePoint'],

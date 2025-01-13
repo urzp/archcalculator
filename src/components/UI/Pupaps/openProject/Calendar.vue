@@ -33,6 +33,7 @@
 
 <script>
 import { isSameDate } from '@/servis/functions'
+import { text } from '@/servis/text.js'
 export default{
     name:'Calendar',
     mounted(){

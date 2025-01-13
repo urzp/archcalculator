@@ -3,11 +3,12 @@
         <div class="title">{{ title }}</div>
         <div class="input"><input type="password"  @change="event=>editValue(event.target.value)" autocomplete="off"></div>
         <div v-if="error_input" class="error">{{ error_msg }}</div>
-        <div v-if="errNewPasswords" class="error">passen nicht zusammen</div>
+        <div v-if="errNewPasswords" class="error">{{ text.Passwords_not_same }}</div>
     </div>
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export default{
     name: 'EditPassword',
     mounted(){
@@ -16,7 +17,10 @@ export default{
     data(){
         return {
             error_input:false,
-            error_msg:'error',
+            error_msg: text.UserServis.error,
+            text:{
+                Passwords_not_same: text.UserServis.Passwords_not_same,
+            }
         }
     },
     emits:['newValue'],
@@ -33,7 +37,7 @@ export default{
             this.error_input = false;
             if(value.length<3){
                 this.error_input = true;
-                this.error_msg = 'mindestens 3 Buchstaben'
+                this.error_msg = text.UserServis.length_min_3
                 return false
             }
             this.setValue(value)

@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!!paragraph_id" class="main_row">
-        <div class="title">Planungsgegenstand</div>
+    <div class="main_row">
+        <div class="title">{{ text.HOAI_Version }}</div>
         <div class="value">{{ data.value }}</div>
         <div  class="select-list" >
             <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -9,11 +9,13 @@
 </template>
 
 <script>
-import { getParagraph, getParagraphs } from '@/servis/calcData.js'
+import { CalcData } from '@/servis/calcData.js'
+import { text } from '@/servis/text.js'
 export  default{
-    name: 'Paragraph_calc',
+    name: 'HOAI_version_calc',
     async mounted(){
-        this.getData()
+        await this.getData()
+        this.dataUpdate()
     },
     data(){
         return{
@@ -21,36 +23,32 @@ export  default{
                 id:'',
                 value: '',
                 list:[],
+            },
+            text:{
+                HOAI_Version: text.Calc.HOAI_Version 
             }
         }
     },
     props:{
-        paragraph_id:[String, Number],
+        prop_id:[String, Number],
     },
     watch:{
-        async paragraph_id(id){
-            if(!id) return false
-            this.getData()
+        async prop_id(){
+           this.dataUpdate()
         },
     },
     emits:['selected'],
     methods:{
         async getData(){
-            let paragraph = getParagraph(this.paragraph_id)
-            if(!paragraph) return false
-            this.data.id = paragraph.id
-            this.data.value = `${paragraph.name} ${paragraph.title}`
-
-            let paragraphs = getParagraphs(paragraph.id_HOAI)
-            paragraphs = paragraphs.map(item=>{item.value=`${item.name} ${item.title}`; return item})
-            this.data.list = paragraphs
+            this.data.list = CalcData.HOAI_versions.filter(item=>item.puplish=='1')
         },
         select(data){
             data.id = data.id_item
             this.dataUpdate(data.id)
             this.$emit('selected', data)
         },
-        dataUpdate(id = this.paragraph_id ){
+        dataUpdate(id = this.prop_id ){
+            if(!this.data.list)return false
             this.data.id = id
             let element = this.data.list.find(item=>item.id==id)
             if(!!element){ this.data.value = element.value }
@@ -58,7 +56,6 @@ export  default{
         
     }
 }
-
 </script>
 
 <style scoped>

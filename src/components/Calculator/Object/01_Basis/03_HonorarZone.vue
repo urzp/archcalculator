@@ -4,7 +4,7 @@
             <div class="icon"></div>
         </div>
         <div class="main_row" @mousedown="usePoints=false">
-            <div class="title">Honorarzone</div>
+            <div class="title">{{ text.Honorarzone }}</div>
             <div class="value">{{ data.value }}</div>
             <div class="select-list" >
                 <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
@@ -27,7 +27,7 @@
 import { getHonorarZones } from '@/servis/calcData.js'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
 import { lastElement } from '@/servis/functions.js'
-
+import { text } from '@/servis/text.js'
 export  default{
     name: 'HonorarZone_calc',
     async mounted(){
@@ -44,6 +44,9 @@ export  default{
             },
             project:{},
             equivalent:'',
+            text:{
+                Honorarzone: text.Calc.Honorarzone
+            }
         }
     },
     props:{

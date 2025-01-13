@@ -1,5 +1,5 @@
 <template>
-    <Title_SubObject name="Zusätzliche Leistungen" @open_close="(val)=>{collapse=!val}"/>
+    <Title_SubObject :name="text.Additional_services" @open_close="(val)=>{collapse=!val}"/>
     <Content_PartObject :collapse = 'collapse'>
         <ItemAdditionalServis 
         v-for="item in list"
@@ -20,6 +20,7 @@
 
 <script>
 import { Project, updateProject } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'AdditionalServices',
     async mounted(){
@@ -30,6 +31,9 @@ export default{
             collapse:false,
             list:[],
             project:{},
+            text:{
+                Additional_services: text.Calc.Additional_services,
+            }
         }
     },
     computed:{

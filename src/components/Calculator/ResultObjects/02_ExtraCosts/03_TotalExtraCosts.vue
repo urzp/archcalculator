@@ -1,14 +1,14 @@
 <template>
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Summe der Nebenkosten</div>
+            <div class="title">{{ text.Total_Extra_costs }}</div>
             <Price :value = 'value'/>
         </div>
     </div>
 </template>
 
 <script>
-
+import { text } from '@/servis/text.js'
 export default{
     name: 'TotalExtraCosts',
     async mounted(){
@@ -16,6 +16,9 @@ export default{
     },
     data(){
         return{
+            text:{
+                Total_Extra_costs: text.Calc.Total_Extra_costs,
+            }
         }
     },
     props:{

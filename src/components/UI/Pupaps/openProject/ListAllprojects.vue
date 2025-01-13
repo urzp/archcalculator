@@ -1,6 +1,6 @@
 <template>
     <div class="list_all_projects">
-        <div class="title">All Projects</div>
+        <div class="title">{{ text.All_Projects }}</div>
         <div class="list">
             <div class="item" v-for="item in listSort" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)" @mouseleave="cancelShowProject()">
                 <div class="name_price">
@@ -14,12 +14,15 @@
 </template>
 
 <script>
-
+import { text } from '@/servis/text.js'
 export default {
     name:'ListAllprojects',
     data(){
         return {
             timerHover:{},
+            text:{
+                All_Projects: text.openProject.All_Projects,
+            }
         }
     },
     props:{

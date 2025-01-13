@@ -1,7 +1,7 @@
 <template>
     <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="main_row" >
-            <div class="title">Zuschlag</div>
+            <div class="title">{{ text.Pay_extra }}</div>
             <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
             <div class="price" ><Price :value ="value" /></div>
         </div>
@@ -10,6 +10,7 @@
 
 <script>
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'PayExtra_calc',
     async mounted(){
@@ -19,6 +20,9 @@ export  default{
         return{
             percent:0,
             project:{},
+            text:{
+                Pay_extra: text.Calc.Pay_extra,
+            }
         }
     },
     props:{

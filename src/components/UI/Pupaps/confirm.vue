@@ -5,8 +5,8 @@
             <div class="form">
                 <div class="title">{{ title }}</div>
                 <div class="panel">
-                    <Button height="35px" @click.stop="comfirm()">Ja</Button>
-                    <Button height="35px" @click.stop="close()">Nein</Button>
+                    <Button height="35px" @click.stop="comfirm()">{{ text.Yes }}</Button>
+                    <Button height="35px" @click.stop="close()">{{ text.No }}</Button>
                 </div>
             </div>
         </div>
@@ -16,6 +16,7 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Comfirm',
     mounted(){
@@ -26,6 +27,10 @@ export default{
             title:'',
             show:false,
             action:()=>{},
+            text:{
+                Yes: text.pupaps.Yes,
+                No: text.pupaps.No,
+            }
         }
     },
     methods:{

@@ -4,26 +4,26 @@
            <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
            <div class="form">
 
-               <div class="item">Email</div>
+               <div class="item">{{ text.Email }}</div>
                <input type="text" @change="event=>chekEmail(event.target.value)"/>
                <div v-if="err_email" class="err">{{ err_email_msg }}</div>
 
-               <div class="item" >Password</div>
+               <div class="item" >{{ text.Password }}</div>
                <input type="password" @change="event=>chekPassword_1(event.target.value)" />
                <div v-if="err_password" class="err">{{err_password_msg}}</div>
 
-               <div class="item" >Passwort bestätigen</div>
+               <div class="item" >{{ text.Password_confom }}</div>
                <input type="password" @change="event=>chekPassword_2(event.target.value)" />
                <div v-if="err_password_2" class="err">{{err_password_2_msg}}</div>
 
                <div class="submit">
-                   <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                   <div v-if="notFind"  class="loading not_find">Kontaktieren Sie den Support</div>
-                   <Button height="35px" width="125px" @click="submit()">Registrieren</Button>
+                   <div v-if="waightResponce"  class="loading">{{ text.Loading }}</div>
+                   <div v-if="notFind"  class="loading not_find">{{ text.Contact_support }}</div>
+                   <Button height="35px" width="125px" @click="submit()">{{ text.Registration }}</Button>
                </div>
 
                <div class="links">
-                    <div class="link" @click="openLogin()">Login</div>
+                    <div class="link" @click="openLogin()">{{ text.Login }}</div>
                 </div>
            </div>
            
@@ -36,6 +36,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { validateEmail } from '@/servis/functions.js'
 import { apiData } from '@/servis/apiData.js'
+import { text } from '@/servis/text.js'
 export default{
    name: 'Registration',
    mounted(){
@@ -55,6 +56,16 @@ export default{
            password_2:'',
            waightResponce: false,
            notFind:false,
+           text:{
+                Email:text.UserServis.Email,
+                Password:text.UserServis.Password,
+                Password_confom: text.UserServis.Password_confom,
+                
+                Loading: text.UserServis.loading,
+                Contact_support: text.UserServis.Contact_support,
+                Registration: text.UserServis.Registration,
+                Login: text.UserServis.Login,
+           }
        }
    },
    methods:{
@@ -62,21 +73,21 @@ export default{
            this.show=false
        },
        async chekEmail(email=this.email){
-           if( !validateEmail(email) ){this.err_email=true; this.err_email_msg = "Keine gültige E-Mail" ;return false} 
+           if( !validateEmail(email) ){this.err_email=true; this.err_email_msg = text.UserServis.Invalid_email_address ;return false} 
            let result = await apiData({typeData:'notHasEmail', email }) 
-           if(!result.success){ this.err_email=true; this.err_email_msg = "E-Mail vergeben" ;return false }
+           if(!result.success){ this.err_email=true; this.err_email_msg = text.UserServis.Assign_email_address ;return false }
            this.err_email=false
            this.email = email
            return true
        },
        chekPassword_1(password=this.password){
-           if(!password||password.length<6){ this.err_password=true; this.err_password_msg = "mindestens 6 Zeichen"; return false }
+           if(!password||password.length<6){ this.err_password=true; this.err_password_msg = text.UserServis.least_6_characters; return false }
            this.err_password=false
            this.password = password
            return true
        },
        chekPassword_2(password_2=this.password_2){
-        if(!password_2||password_2.length<6){this.err_password_2=true; this.err_password_2_msg = "mindestens 6 Zeichen" ;return false}
+        if(!password_2||password_2.length<6){this.err_password_2=true; this.err_password_2_msg = text.UserServis.least_6_characters ;return false}
            this.err_password_2=false
            this.password_2 = password_2
            return true
@@ -85,8 +96,8 @@ export default{
             if(!(this.password===this.password_2)){ 
                 this.err_password = true; 
                 this.err_password_2 =true; 
-                this.err_password_msg = "Passwort weicht ab"
-                this.err_password_2_msg = "Passwort weicht ab"
+                this.err_password_msg = text.UserServis.Passwords_not_same
+                this.err_password_2_msg = text.UserServis.Passwords_not_same
                 return false 
             }
             return true

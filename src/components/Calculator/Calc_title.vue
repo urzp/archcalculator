@@ -10,7 +10,7 @@
             </div>
         </div>
         <div v-if="!no_full_inf" class="customer">
-            <div class="title">Customer:</div>
+            <div class="title">{{ text.Customer }}</div>
             <div class="customer_company">
                 <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
             </div>
@@ -31,11 +31,14 @@
 import { Project } from '@/servis/projectData';
 import {  formatDate } from '@/servis/functions.js'
 import {  updateProject } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'CalcTitle',
     data(){
         return{
-            
+            text:{
+                Customer: text.Calc.Customer,
+            }
         }
     },
     props:{

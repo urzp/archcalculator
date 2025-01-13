@@ -1,7 +1,7 @@
 <template>
     <div class="profile">
         <div class="title-profile">
-            <div class="name" >Profile</div>
+            <div class="name" >{{ text.Profile }}</div>
         </div>
         <template v-if="loaded">
             <div class="main_panel">
@@ -30,33 +30,33 @@
             </div>
             <div class="user_edit_panel">
                 <div class="user_data_edit">
-                    <EditUserFeeld title="name:" :userKey="'name'"/>
-                    <EditUserFeeld title="email:" :userKey="'email'"/>
-                    <EditUserFeeld title="phone:" :userKey="'phone'"/>
+                    <EditUserFeeld :title="text.name" :userKey="'name'"/>
+                    <EditUserFeeld :title="text.email" :userKey="'email'"/>
+                    <EditUserFeeld :title="text.phone" :userKey="'phone'"/>
                 </div>
                 <div class="new_password">
-                    <EditPassword title="old password:" @newValue="value=>setOldPassword(value)"/>
-                    <EditPassword title="new password:" :errNewPasswords="errNewPasswords" @newValue="value=>setNewPassword(value)"/>
-                    <EditPassword title="conform password:" :errNewPasswords="errNewPasswords" @newValue="value=>checkNewPassword(value)"/>
+                    <EditPassword :title="text.old_password" @newValue="value=>setOldPassword(value)"/>
+                    <EditPassword :title="text.new_password" :errNewPasswords="errNewPasswords" @newValue="value=>setNewPassword(value)"/>
+                    <EditPassword :title="text.conform_password" :errNewPasswords="errNewPasswords" @newValue="value=>checkNewPassword(value)"/>
                     <div class="send_panel">
                         <div class="result_panel">
-                            <div v-if="sendingPasswords">Load . . .</div>
-                            <div v-if="success_Passwords">Erfolgreich</div>
-                            <div v-if="fall_Passwords">fallen</div>
+                            <div v-if="sendingPasswords">{{ text.loading }}</div>
+                            <div v-if="success_Passwords">{{ text.Success }}</div>
+                            <div v-if="fall_Passwords">{{ text.fall }}</div>
                         </div>
-                        <Button v-if="enableSend" width="150px" @click="sendPasswords()">Save</Button>
+                        <Button v-if="enableSend" width="150px" @click="sendPasswords()">{{ text.Save }}</Button>
                     </div>    
                 </div>
             </div>
             <div class="user_data_panel">
-                <EditUserFeeld title="address:" :userKey="'address'" width="600px"/>
-                <EditUserFeeld title="IBAN:" :userKey="'IBAN'" width="600px"/>
-                <EditUserFeeld title="BIC:" :userKey="'BIC'" width="600px"/>
-                <EditUserFeeld title="Institut:" :userKey="'Institut'" width="600px"/>
-                <EditUserFeeld title="USt - Id. - Nr.:" :userKey="'USt'" width="600px"/>
+                <EditUserFeeld :title="text.address" :userKey="'address'" width="600px"/>
+                <EditUserFeeld :title="text.IBAN" :userKey="'IBAN'" width="600px"/>
+                <EditUserFeeld :title="text.BIC" :userKey="'BIC'" width="600px"/>
+                <EditUserFeeld :title="text.Institut" :userKey="'Institut'" width="600px"/>
+                <EditUserFeeld :title="text.USt_Id_Nr" :userKey="'USt'" width="600px"/>
             </div>
         </template>
-        <div v-else class="load">Loading . . . </div>
+        <div v-else class="load">{{ text.loading }}</div>
     </div>
 </template>
 
@@ -65,7 +65,7 @@ import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
 import { updatedProfile, logOut } from '@/components/Users/servis'
-
+import { text } from '@/servis/text.js'
 export default{
     name: 'Profile',
     async mounted(){
@@ -82,6 +82,27 @@ export default{
             sendingPasswords:false,
             success_Passwords:false,
             fall_Passwords:false,
+            text:{
+                Profile: text.UserServis.Profile,
+                name: text.UserServis.felds.name,
+                email: text.UserServis.felds.email,
+                phone: text.UserServis.felds.phone,
+
+                old_password: text.UserServis.felds.old_password,
+                new_password: text.UserServis.felds.new_password,
+                conform_password: text.UserServis.felds.conform_password,
+
+                address: text.UserServis.felds.address,
+                IBAN:text.UserServis.felds.IBAN,
+                BIC:text.UserServis.felds.BIC,
+                Institut:text.UserServis.felds.Institut,
+                USt_Id_Nr:text.UserServis.felds.USt_Id_Nr,
+
+                loading: text.UserServis.loading,
+                Success: text.UserServis.Successful,
+                fall: text.UserServis.fall,
+                Save: text.UserServis.Save,
+            }
         }
     },
     computed:{
@@ -118,7 +139,7 @@ export default{
         async deleteUser(){
             let router = this.$router
             EventBus.emit('Popap:comfirm',{
-                title:'Das Konto wird dauerhaft gelöscht. Möchten Sie es wirklich entfernen?',
+                title: text.UserServis.The_account_will_be_permanently_deleted,
                 action: async ()=>{
                         let result = await apiData({typeData:'deleteUser' }) 
                         if(result.success){

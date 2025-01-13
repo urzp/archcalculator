@@ -5,35 +5,35 @@
            <div class="form">
 
                 <template v-if="stepEmail">
-                <div class="item">Email</div>
+                <div class="item">{{ text.Email }}</div>
                 <input type="text" @change="event=>chekEmail(event.target.value)"/>
-                <div v-if="err_email" class="err">Keine gültige E-Mail</div>
-                <div v-if="notfind_email" class="err">nicht gefunden</div>
+                <div v-if="err_email" class="err">{{ text.Invalid_email_address }}</div>
+                <div v-if="notfind_email" class="err">{{ text.Not_found }}</div>
                 </template>
 
                 <template v-if="stepCode">
-                <div class="item" >Code aus Email</div>
+                <div class="item" >{{ Code_at_Email }}</div>
                 <input type="password" @change="event=>chekCode(event.target.value)" />
-                <div v-if="err_code" class="err">Feld ausfüllen</div>
-                <div v-if="wrong_code" class="err">Ungültiger Code</div>
+                <div v-if="err_code" class="err">{{ text.Fill_feld }}</div>
+                <div v-if="wrong_code" class="err">{{ text.Code_wrong }}</div>
                 </template>
 
                 <template v-if="stepPassword">
-                <div class="item" >Neues Passwort</div>
+                <div class="item" >{{ text.New_password }}</div>
                 <input type="password" @change="event=>chekPassword(event.target.value)" />
-                <div v-if="err_password" class="err">Feld ausfüllen</div>
+                <div v-if="err_password" class="err">{{ text.Fill_feld }}</div>
                 </template>
 
                <div class="submit">
-                   <div v-if="waightResponce"  class="loading">Loading . . .</div>
-                   <div v-if="notFind"  class="loading not_find">nicht gefunden</div>
-                   <Button height="35px" width="125px" @click="submit()">Einreichen</Button>
+                   <div v-if="waightResponce"  class="loading">{{ text.loading }}</div>
+                   <div v-if="notFind"  class="loading not_find">{{ text.Not_found }}</div>
+                   <Button height="35px" width="125px" @click="submit()">{{ text.Submit }}</Button>
                </div>
 
                <div class="links">
-                   <div class="link" @click="openRegistration()">Registrierung</div>
+                   <div class="link" @click="openRegistration()">{{ text.Registration }}</div>
                    <div class="gap">|</div>
-                   <div class="link" @click="openLogin()">Login</div>
+                   <div class="link" @click="openLogin()">{{ text.Login }}</div>
                </div>
            </div>
            
@@ -46,6 +46,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { validateEmail } from '@/servis/functions.js'
 import { apiData } from '@/servis/apiData.js'
+import { text } from '@/servis/text.js'
 export default{
    name: 'ResetPassword',
    mounted(){
@@ -67,6 +68,23 @@ export default{
            stepEmail:true,
            stepCode:false,
            stepPassword:false,
+           text:{
+                Email:text.UserServis.Email,
+                Invalid_email_address: text.UserServis.Invalid_email_address,
+                Not_found: text.UserServis.Not_found,
+
+                Code_at_Email: text.UserServis.Code_at_Email,
+                Fill_feld: text.UserServis.Fill_feld,
+                Code_wrong: text.UserServis.Code_wrong,
+
+                New_password: text.UserServis.New_password,
+
+                loading: text.UserServis.loading,
+                Submit: text.UserServis.Submit,
+
+                Registration: text.UserServis.Registration,
+                Login: text.UserServis.Login,
+           }
        }
    },
    methods:{

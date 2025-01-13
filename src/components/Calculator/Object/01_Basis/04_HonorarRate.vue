@@ -1,6 +1,6 @@
 <template>
     <div class="main_row" v-if="!!id_paragraph">
-        <div class="title">Honorarsatz</div>
+        <div class="title">{{ text.Honorarsatz }}</div>
         <div class="value">{{ data.value }}</div>
         <div  v-if="data.id == 6" class="precent">
             <Percent input_type :value = "data.percent" @edit_value = "procent=>setProcent(procent)"/>
@@ -14,6 +14,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'HonorarRate_calc',
     async mounted(){
@@ -35,6 +36,9 @@ export  default{
                 ],
             },
             project:{},
+            text:{
+                Honorarsatz: text.Calc.Honorarsatz,
+            }
         }
     },
     props:{

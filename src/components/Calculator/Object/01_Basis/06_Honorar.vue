@@ -4,7 +4,7 @@
             <div class="icon"></div>
         </div>
         <div  class="main_row" >
-            <div class="title">Honorar nach Honorartafel</div>
+            <div class="title">{{ text.Fee_according_to_fee_table }}</div>
             <div class="price" ><Price :value ="value" /></div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
@@ -18,6 +18,7 @@ import { EventBus } from '@/servis/EventBus'
 import { getFeeTable, getTypeValue } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
 import { Project } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export  default{
     name: 'Honorar_calc',
     async mounted(){
@@ -41,6 +42,9 @@ export  default{
             },
             honorarTable:{},
             project:{},
+            text:{
+                Fee_according_to_fee_table: text.Calc.Fee_according_to_fee_table,
+            }
         }
     },
     props:{

@@ -1,7 +1,7 @@
 <template>
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
-            <div class="title">Summe Zusätzliche Leistungen</div>
+            <div class="title">{{ text.Total_Additional_Services }}</div>
             <div class="value-percent">{{ hours }} h</div>
             <Price :value = 'value'/>
         </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-
+import { text } from '@/servis/text';
 export default{
     name: 'TotalAdditionalServis',
     async mounted(){
@@ -17,6 +17,9 @@ export default{
     },
     data(){
         return{
+            text:{
+                Total_Additional_Services: text.Calc.Total_Additional_Services,
+            }
         }
     },
     props:{

@@ -15,8 +15,8 @@
                 </div>
                 <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)" @softReload="softReload=true"/>
             </div>
-            <div v-else-if="loading" class="loading">Loading . . .</div>
-            <div v-else class="empty_list_projects">Keine Projekte vorhanden</div>
+            <div v-else-if="loading" class="loading">{{ text.loading }}</div>
+            <div v-else class="empty_list_projects">{{ text.No_selected_project }}</div>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
@@ -27,6 +27,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 import { global } from '@/servis/globalValues.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'openProject',
     mounted(){
@@ -45,6 +46,10 @@ export default{
             showProject:'',
             select_day: new Date(),
             softReload: false,
+            text:{
+                loading: text.openProject.loading,
+                No_selected_project: text.openProject.No_selected_project,
+            }
         }
     },
     computed:{

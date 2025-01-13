@@ -10,6 +10,7 @@
 import { user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
 import { validateEmail, validatePhone } from '@/servis/functions'
+import { text } from '@/servis/text.js'
 export default{
     name: 'EditUserFeeld',
     mounted(){
@@ -18,7 +19,7 @@ export default{
     data(){
         return {
             error_input:false,
-            error_msg:'error',
+            error_msg: text.UserServis.error,
             user:{},
         }
     },
@@ -49,14 +50,14 @@ export default{
         async validEmail(value){
             if(!validateEmail(value)){
                 this.error_input = true;
-                this.error_msg = 'error Email'
+                this.error_msg = text.UserServis.error_Email
                 return false;
             }
             if(value!=this.user.email){
                 let result = await apiData({typeData:'notHasEmail', email:value }) 
                 if(!result.success){ 
                     this.error_input = true;
-                    this.error_msg = "Beschäftigt Email" ;
+                    this.error_msg = text.UserServis.Email_used ;
                     return false 
                 }
             }
@@ -65,7 +66,7 @@ export default{
         async validPhone(value){
             if(!validatePhone(value)){
                 if(!!value) this.error_input = true;
-                this.error_msg = 'error phone'
+                this.error_msg = text.UserServis.error_phone
                 return false
             }
             return  true

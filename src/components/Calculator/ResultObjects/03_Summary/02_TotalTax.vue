@@ -1,7 +1,7 @@
 <template>
     <div class="item-Part-obj" >
         <div  class="main_row" >
-            <div class="title">Umsatzsteuer</div>
+            <div class="title">{{ text.Total_tax }}</div>
             <div class="wrap_figures">
                 <div class="wrap_imputs">
                     <Percent input_type :value = "percent" @edit_value="value=>updateItem(value)"/>
@@ -13,13 +13,16 @@
 </template>
 
 <script>
+import { text } from '@/servis/text.js'
 export  default{
     name: 'TotalTax',
     async mounted(){
     },
     data(){
         return{
-
+            text:{
+                Total_tax: text.Calc.Total_tax,
+            } 
         }
     },
     props:{

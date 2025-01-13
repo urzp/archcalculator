@@ -1,6 +1,6 @@
 <template>
     <div class="list_recent_projects">
-        <div class="title">Recent</div>
+        <div class="title">{{ text.Recent }}</div>
         <div class="item" v-for="item in sortRicent.slice(0, 8)" :key="item.id" @click="openProject(item.id)" @mouseover="showProject(item.id)">
             <div class="name">{{ item.name }}</div>
         </div>
@@ -8,12 +8,14 @@
 </template>
 
 <script>
-
+import { text } from '@/servis/text.js'
 export default{
     name:'ListRecentProjects',
     data(){
         return{
-
+            text:{
+                Recent: text.openProject.Recent,
+            }
         }
     },
     props:{

@@ -6,34 +6,34 @@
                 <div v-else-if="!user.avatar" class="userLogo" @click="$router.push({ name: 'profile' })">{{ !user.name?'U':user.name[0] }}</div>
                 <div v-else class="userLogo" @click="$router.push({ name: 'profile' })"><img :src="url_avatar" alt=""></div>
             </div>
-            <div class="menu">
-                <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">Calculator</div>
-                <div class="item_menu">Über honorar.online</div>
-                <div class="item_menu">Anleitung</div>
-                <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">Edit HOAI version</div>
+            <div v-if="!global.login" class="menu">
+                <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">{{text.Calculator}}</div>
+                <div @click="openlogin()" class="item_menu">Login</div>
+                <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">{{text.Edit_HOAI_version}}</div>
             </div>
-            <div class="btn_menu" @click="show_menu=!show_menu">
+            <div v-if="global.login" class="btn_menu" @click="show_menu=!show_menu">
                 <div class="line"></div>
                 <div class="line"></div>
                 <div class="line"></div>
+                <Menu :show="show_menu" @close="show_menu=false"></Menu>
             </div>
-            <Menu :show="show_menu" @close="show_menu=false"></Menu>
+            
         </div>
         <div class="sub-header" v-if="$route.name == 'home'">
             <div class="left_side">
-                <div v-if="show_bills" class="item_subHeader" @click="closeBills()">Projects</div>
+                <div v-if="show_bills" class="item_subHeader" @click="closeBills()">{{ text.Projects }}</div>
                 <template v-else>
-                <div class="item_subHeader" @click="newProject()">Neues Projekt</div>
-                <div v-if="unsaved" class="item_subHeader" @click="saveProject()">Einfamilienhaus</div>
-                <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">Nicht gespeichertes Projekt öffnen</div>
-                <div class="item_subHeader" @click="openProject()">Projekt öffnen</div>
+                <div class="item_subHeader" @click="newProject()">{{ text.Neues_Projekt }}</div>
+                <div v-if="unsaved" class="item_subHeader" @click="saveProject()">{{ text.Save }}</div>
+                <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">{{ text.Open_unsaved_project }}</div>
+                <div class="item_subHeader" @click="openProject()">{{ text.Open_project }}</div>
                 </template>
             </div>
             <div class="right_side">
                 <template v-if="show_bills">
-                <div class="item_subHeader" @click="newBill()">Neues Rechnung</div>
+                <div class="item_subHeader" @click="newBill()">{{ text.New_invoice }}</div>
                 </template>
-                <div v-else-if="!loading" class="item_subHeader" @click="showBillsBefore()">Rechnung</div>
+                <div v-else-if="!loading" class="item_subHeader" @click="showBillsBefore()">{{ text.Invoice }}</div>
             </div>
         </div>
     </div>
@@ -67,6 +67,17 @@ export default{
             hasLocalUnsaved:false,
             show_bills:false,
             loading:false,
+            text:{
+                Calculator: text.header.Calculator,
+                Edit_HOAI_version: text.header.Edit_HOAI_version,
+                Projects: text.header.Projects,
+                Neues_Projekt: text.header.Neues_Projekt,
+                Save: text.header.Save,
+                Open_unsaved_project: text.header.Open_unsaved_project,
+                Open_project:text.header.Open_project,
+                New_invoice:text.header.New_invoice,
+                Invoice:text.header.Invoice,
+            }
         }
     },
     computed:{
@@ -152,6 +163,9 @@ export default{
             if(!localProject) return false
             let id = localProject.project.id
             this.hasLocalUnsaved = (id=='new'||id=='local')&&localProject.project.unsaved
+        },
+        openlogin(){
+            EventBus.emit(`Menu:Login`)
         }
     },
 }
@@ -160,17 +174,18 @@ export default{
 
 <style scoped>
     .header-row{
-        height: 110px;
+        margin-top: 50px;
+        padding-bottom: 15px;
         display: flex;
         align-items: center;
         border-bottom: solid 1px #999999;
+        justify-content: space-between;
     }
     .menu{
         width: 100%;
-        margin-right: 70px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         column-gap: 100px;
     }
     .logo{
