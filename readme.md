@@ -19,6 +19,11 @@ The frontend project is located in the src folder.
 For installation and running on a local server
 Requires Node.js and Git package  
 
+### Installing Visualstudio
+
+This Vue 3 project was developed using Visual Studio, leveraging its comprehensive tooling for web development. Visual Studio provides features like code completion, debugging, and project management, contributing to a smooth and efficient development experience.
+Installer:  https://code.visualstudio.com/download
+
 ### Installing Node.js
 
 Node.js is a JavaScript runtime environment. Node.js can be installed by downloading the installer from the official website, or using a package manager. Version 16 or 18 LTS is required.
@@ -37,7 +42,7 @@ Linux: https://nodejs.org/en/download/package-manager/
 Git is a distributed version control system, a tool without which modern development is difficult to imagine.
 
 Install git
-https://git-scm.com/book/ru/v2/Введение-Установка-Git-Git
+https://git-scm.com/downloads
 
 ### Installation for working with the frontend part in vue
 
