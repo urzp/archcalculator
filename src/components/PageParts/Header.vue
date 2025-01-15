@@ -24,8 +24,6 @@
                 <div v-if="show_bills" class="item_subHeader" @click="closeBills()">{{ text.Projects }}</div>
                 <template v-else>
                 <div class="item_subHeader" @click="newProject()">{{ text.Neues_Projekt }}</div>
-                <div v-if="unsaved" class="item_subHeader" @click="saveProject()">{{ text.Save }}</div>
-                <div v-if="hasLocalUnsaved&&!unsaved&&this.global.login" class="item_subHeader" @click="openLocalProject()">{{ text.Open_unsaved_project }}</div>
                 <div class="item_subHeader" @click="openProject()">{{ text.Open_project }}</div>
                 </template>
             </div>
@@ -102,29 +100,11 @@ export default{
         },
         newProject(){
             if(this.goToCalcPage()) return false
-            this.hasLocalUnsaved = false
-            let localProject = localStorage.getItem('Project') 
-            if(!!localProject&&JSON.parse(localProject).project.unsaved ){
-                EventBus.emit('Popap:comfirm',{
-                    title:'Das aktuelle Projekt wurde nicht gespeichert, dennoch weitermachen?',
-                    action: async ()=>{ EventBus.emit('MenuProjects:new') },
-                })
-                return true
-            }
             EventBus.emit('MenuProjects:new')
         },
         openProject(){
             if(global.login) EventBus.emit('MenuProjects:open')
             if(!global.login) EventBus.emit('Menu:Login', ()=>{EventBus.emit('MenuProjects:open')})
-        },
-        saveProject(){
-            if(!global.login){ EventBus.emit('Menu:Login', saveNewProject); return false }
-            Project.project.unsaved = false
-            saveNewProject()
-            this.hasLocalUnsaved = false
-        },
-        openLocalProject(){
-            EventBus.emit('MenuProjects:openLocal')
         },
         newBill(){
             EventBus.emit('MenuProjects:newBill')

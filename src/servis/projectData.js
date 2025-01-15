@@ -32,7 +32,7 @@ export async function saveNewProject(){
    localStorage.removeItem('Project')
    //saveLocalProject()
    EventBus.emit('Project:newProjectUser', id_project)
-   EventBus.emit('Menu:Message', 'Saved')
+    //EventBus.emit('Menu:Message', 'Saved')
 }
 
 function loadLocal(){
@@ -41,17 +41,21 @@ function loadLocal(){
     return result
 }
 
-export async function newPoject(){
+export async function newPoject(save=false){
     delete Project['objects'];
     delete Project['project'];
     let newProject = JSON.parse( JSON.stringify(newWholeProject) )
     Object.assign(Project, newProject)
     EventBus.emit('Project:Loadeded')
+    if(save) saveNewProject()
     return Project 
 }
 
 export async function updateProject(){
-    if (Project.project.id=='new') setUnSavedStatus()
+    if (Project.project.id=='new'){
+        if(global.login) await saveNewProject()
+        if(!global.login) setUnSavedStatus()
+    }
     if(Project.project.id=='local'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
 }
 

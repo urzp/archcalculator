@@ -131,7 +131,8 @@ export default{
     .copy_right{
         width: 40%;
         text-align: center;
-        margin-top: -45px;
+        margin-top: -43px;
         margin-bottom: 50px;
+        font-size: 14px;
     }
 </style>

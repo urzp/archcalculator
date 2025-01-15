@@ -70,9 +70,7 @@ export default{
         },
         async newProject(){
             this.loaded = false
-            let result
-            result = await newPoject() 
-            this.project = result
+            this.project = await newPoject() 
             this.ListObjects = this.project.objects
             this.loaded = true
         },
