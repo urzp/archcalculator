@@ -2,6 +2,7 @@
 
 ### Installation on the server:
 
+****
 The production files are located in the dist folder.
 All files need to be uploaded to the root folder of the site on the server (public_html)
 
