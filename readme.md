@@ -51,7 +51,7 @@ Requires Node.js and Git package
 
 You can download:
 ```
-git clone https://github.com/urzp/MediaNodes.git
+git clone https://github.com/urzp/archcalculator.git
 ```
 
 Enter the project folder:
