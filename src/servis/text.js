@@ -24,8 +24,15 @@ export let text = {
     },
     footer:{
         Copyright:'Copyright © 2024 honorar.online',
-        Privacy_Policy:'Impressum Datenschutz Cookie Einstellungen',
-        mail:'mail@honorar.online',
+        Impressum:'Impressum',
+        Datenschutz:'Datenschutz',
+        Cookie_Einstellungen:'Cookie Einstellungen',
+        Contact: 'Kontakt',
+        Abaut:'Über honoraronline',
+        Instructions:'Anleitung',
+        HOAI:'HOAI',
+        Calculate_the_fee_correctly:'Honorar richtig berechnen',
+        Blog:'Blog',
     },
     pupaps:{
         Yes:'Ja',
