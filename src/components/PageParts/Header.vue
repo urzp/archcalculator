@@ -7,7 +7,6 @@
                 <div v-else class="userLogo" @click="$router.push({ name: 'profile' })"><img :src="url_avatar" alt=""></div>
             </div>
             <div v-if="!global.login" class="menu">
-                <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">{{text.Calculator}}</div>
                 <div @click="openlogin()" class="item_menu">{{ text.Login }}</div>
             </div>
             <div v-if="global.login" class="btn_menu" @click="show_menu=!show_menu">
@@ -65,7 +64,6 @@ export default{
             show_bills:false,
             loading:false,
             text:{
-                Calculator: text.header.Calculator,
                 Login: text.header.Login,
                 Projects: text.header.Projects,
                 Neues_Projekt: text.header.Neues_Projekt,

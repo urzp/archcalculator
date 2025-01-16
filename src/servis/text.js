@@ -13,7 +13,6 @@ export let text = {
         Profile: 'Profile',
     },
     header:{
-        Calculator: 'Calculator',
         Login: 'Login',
         Projects:'Projects',
         Neues_Projekt: 'Neues Projekt',
