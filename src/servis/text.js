@@ -7,13 +7,14 @@ export let text = {
     menu:{
         Login: 'Login',
         Registration: 'Registrierung',
+        Edit_HOAI_version: 'Edit HOAI',
         Logout: 'Logout',
         Calculator: 'Calculator',
         Profile: 'Profile',
     },
     header:{
         Calculator: 'Calculator',
-        Edit_HOAI_version: 'Edit HOAI version',
+        Login: 'Login',
         Projects:'Projects',
         Neues_Projekt: 'Neues Projekt',
         Save: 'Einfamilienhaus',

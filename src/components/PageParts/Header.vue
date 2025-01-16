@@ -8,8 +8,7 @@
             </div>
             <div v-if="!global.login" class="menu">
                 <div v-if=" this.$route.path!='/'" class="item_menu" @click="$router.push({ name: 'home' })">{{text.Calculator}}</div>
-                <div @click="openlogin()" class="item_menu">Login</div>
-                <div v-if="global.admin" class="item_menu" @click="$router.push({ name: 'law_edit_data' })">{{text.Edit_HOAI_version}}</div>
+                <div @click="openlogin()" class="item_menu">{{ text.Login }}</div>
             </div>
             <div v-if="global.login" class="btn_menu" @click="show_menu=!show_menu">
                 <div class="line"></div>
@@ -19,7 +18,7 @@
             </div>
             
         </div>
-        <div class="sub-header" v-if="$route.name == 'home'">
+        <div class="sub-header" v-if="$route.name == 'home'&&global.login">
             <div class="left_side">
                 <div v-if="show_bills" class="item_subHeader" @click="closeBills()">{{ text.Projects }}</div>
                 <template v-else>
@@ -67,7 +66,7 @@ export default{
             loading:false,
             text:{
                 Calculator: text.header.Calculator,
-                Edit_HOAI_version: text.header.Edit_HOAI_version,
+                Login: text.header.Login,
                 Projects: text.header.Projects,
                 Neues_Projekt: text.header.Neues_Projekt,
                 Save: text.header.Save,

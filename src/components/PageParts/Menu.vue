@@ -8,6 +8,7 @@
             <div v-if="global.login" class="list login">
                 <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">{{ text.Calculator }}</div>
                 <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">{{ text.Profile }}</div>
+                <div v-if="global.admin" class="item" @click="$router.push({ name: 'law_edit_data' })">{{text.Edit_HOAI_version}}</div>
                 <div class="item" @click="logOut()">{{ text.Logout }}</div>
             </div>
         </div>
@@ -32,6 +33,7 @@ export default{
             text:{
                 Login: text.menu.Login,
                 Registration: text.menu.Registration,
+                Edit_HOAI_version: text.menu.Edit_HOAI_version,
                 Logout: text.menu.Logout,
                 Calculator: text.menu.Calculator,
                 Profile: text.menu.Profile,
