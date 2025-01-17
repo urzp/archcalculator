@@ -29,7 +29,7 @@ export default{
 <style scoped>
     .total-calc{
         margin-top: 50px;
-        margin-bottom: 90px;
+        margin-bottom: 30px;
         
     }
 

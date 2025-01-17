@@ -35,6 +35,13 @@ export async function saveNewProject(){
     //EventBus.emit('Menu:Message', 'Saved')
 }
 
+export async function saveUnUserNewProject(){
+    let result = (await apiData({typeData:'newUnUserProject', data: Project})).data
+    Project.project.id_save = result.project
+    Project.project.downLoad_token = result.downLoad_token
+    Project.project.owner_token = result.owner_token
+}
+
 function loadLocal(){
     let  result = localStorage.getItem('Project')
     if(!result){result = newPoject()}else{result = JSON.parse(result)} 
@@ -62,6 +69,7 @@ export async function updateProject(){
 export async function saveLocalProject(){
     let projectJSON = JSON.stringify(Project)
     localStorage.setItem('Project', projectJSON);
+    if(!!Project.project.owner_token) await apiData({typeData:'updateUnUserProject', data: Project.project})
     switchToLocal()
 }
 
@@ -71,9 +79,13 @@ export function setUnSavedStatus(){
 }
 
 export async function updateProjectObject(id, data=[], sendAPI=true){
-    let obj = Project.objects.find(item=>item.id==id)
+    let obj = Project.objects.find(item=>item.id==id) // need to create id for local
     for (let key in data){ obj[key] = data[key] }
     if(Project.project.id=='local'||Project.project.id=='new'){ 
+        // if(!!Project.project.owner_token){
+        //     let project_id = Project.project.id_save
+        //     await apiData({typeData:'updateUnUserProjectObject', data: {obj, project_id} })
+        // } 
         await saveLocalProject() 
         switchToLocal()
     }else{

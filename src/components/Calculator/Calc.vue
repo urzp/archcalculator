@@ -10,6 +10,10 @@
             <CloseButton @click="deleteObject()"/>
         </div>
         <ResultCalc/>
+        <div class="download_panel">
+            <div @click="loadPdf" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
+            <div @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
+        </div>
         </template>
         <div v-else class="load">{{ text.Loading }}</div>
     </div>
@@ -19,8 +23,9 @@
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
-import { newPoject, LoadProjectData, saveAllProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { newPoject, LoadProjectData, saveUnUserNewProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 import { text } from '@/servis/text.js'
+import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'Calculator',
     async mounted(){
@@ -82,6 +87,16 @@ export default{
             if(!lastobject) return false
             deleteProjectObject(lastobject.id)
         },
+        async loadPdf(){
+            //let downLoad_token = (await apiData({typeData:'DownloadURL', id:this.actualBill.id})).downLoad_token
+            //window.location.href = `https://honorar.online/download.php?bill=${this.actualBill.id}&downLoad_token=${downLoad_token}&type=pdf`
+        },
+        async showLinks(){
+            // let id = '270'
+            // let downLoad_token = '57118206950372577014'
+            // let result = (await apiData({typeData:'loadUnUserProject', data: {id, downLoad_token}})).data
+           await saveUnUserNewProject()
+        }
     }
 }
 </script>
@@ -92,8 +107,6 @@ export default{
         margin-bottom: 40px;
         border-bottom: 1px solid #999999;
     }
-
-
 
     .panel{
         margin-top: 30px;
@@ -113,4 +126,16 @@ export default{
         font-size: 26px;
         font-family: 'Raleway-ExtraLight';
     }
+
+    .download_panel{
+        display: flex;
+        justify-content: center;
+        column-gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .icon{
+        cursor: pointer;
+    }
+
 </style>

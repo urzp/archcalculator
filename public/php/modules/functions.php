@@ -43,4 +43,13 @@ function fixJsonUTF8($data){
     return iconv('UTF-8', 'UTF-8//IGNORE', utf8_encode($data) );
 }
 
+function generatePinCode($chars) {
+    $pin = "";
+    while ($chars != 0) {
+        $pin .= rand(0,9);
+        $chars--;
+    }
+    return $pin;
+}
+
 ?>

@@ -30,6 +30,18 @@ switch ($typeData) {
     // case 'updateProjectPoints': include 'updateProjectPoints.php'; break;
 }
 
+}else{
+
+switch ($typeData) {    
+    
+    case 'newUnUserProject': include '01_Project/un_user/newUnUserProject.php'; break;
+    case 'loadUnUserProject': include '01_Project/un_user/loadUnUserProject.php'; break;
+    case 'updateUnUserProject': include '01_Project/un_user/updateUnUserProject.php'; break;
+    case 'updateUnUserProjectObject': include '01_Project/un_user/updateProjectObject.php'; break;
+    
+    
+}
+
 }
 
 ?>
