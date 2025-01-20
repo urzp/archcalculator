@@ -29,6 +29,7 @@ export let newObjectProject = {
     user_id:localStorage.getItem('user_id'),
     project_id: 'new',
     name: 'Honorarobjekt A',
+    number:0,
     HOAI_version_id:2,
     paragraph_id:8,
     honorarLevel: {id:30,number:1,value:"Honorarzone I",usePoints:false},

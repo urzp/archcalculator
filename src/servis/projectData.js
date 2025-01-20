@@ -82,10 +82,10 @@ export async function updateProjectObject(id, data=[], sendAPI=true){
     let obj = Project.objects.find(item=>item.id==id) // need to create id for local
     for (let key in data){ obj[key] = data[key] }
     if(Project.project.id=='local'||Project.project.id=='new'){ 
-        // if(!!Project.project.owner_token){
-        //     let project_id = Project.project.id_save
-        //     await apiData({typeData:'updateUnUserProjectObject', data: {obj, project_id} })
-        // } 
+        if(!!Project.project.owner_token){
+            let project_id = Project.project.id_save
+            await apiData({typeData:'updateUnUserProjectObject', data: {obj, project_id} })
+        } 
         await saveLocalProject() 
         switchToLocal()
     }else{
