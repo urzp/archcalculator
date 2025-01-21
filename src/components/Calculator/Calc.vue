@@ -31,6 +31,7 @@ export default{
     async mounted(){
        await this.getCalcData()
        await this.getProject()
+       await this.getProjectByLink()
        EventBus.on('MenuProjects:new', this.newProject)
        EventBus.on('Project:newObject', this.getProject)
        EventBus.on('Project:deleteObject',  this.getProject)
@@ -96,7 +97,14 @@ export default{
             // let downLoad_token = '57118206950372577014'
             // let result = (await apiData({typeData:'loadUnUserProject', data: {id, downLoad_token}})).data
            await saveUnUserNewProject()
+
+        },
+        async getProjectByLink(){
+            if(!this.$route.query.project){
+                
+            } 
         }
+
     }
 }
 </script>
