@@ -1,5 +1,6 @@
 import { dateToString } from '@/servis/functions.js'
 import { reactive } from 'vue';
+import { text } from '@/servis/text.js'
 
 export let newProjectData = {
     id: 'new',
@@ -8,7 +9,7 @@ export let newProjectData = {
     updated: dateToString(new Date),
     user_id: localStorage.getItem('user_id'),
     name: 'Projekt X',
-    discription: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
+    discription: text.Calc.description,
     customer:{
         company:'Customer Company',
         name:'Customer Name',

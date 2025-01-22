@@ -9,7 +9,7 @@
                 <ImputTextMLine width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)"/>
             </div>
         </div>
-        <div v-if="!no_full_inf" class="customer">
+        <div v-if="login&&!no_full_inf" class="customer">
             <div class="title">{{ text.Customer }}</div>
             <div class="customer_company">
                 <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
@@ -31,6 +31,7 @@
 import { Project } from '@/servis/projectData';
 import {  formatDate } from '@/servis/functions.js'
 import {  updateProject } from '@/servis/projectData.js'
+import { global } from '@/servis/globalValues.js'
 import { text } from '@/servis/text.js'
 export default{
     name: 'CalcTitle',
@@ -38,7 +39,8 @@ export default{
         return{
             text:{
                 Customer: text.Calc.Customer,
-            }
+            },
+            login: global.login,
         }
     },
     props:{

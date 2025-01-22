@@ -106,6 +106,7 @@ export let text = {
         The_account_will_be_permanently_deleted:'Das Konto wird dauerhaft gelöscht. Möchten Sie es wirklich entfernen?',
     },
     Calc:{
+        description: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
         Honorarobjekt:'Honorarobjekt', //Button
         Loading:'Loading . . . ',
         Summe: 'Summe',
