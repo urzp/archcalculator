@@ -10,9 +10,9 @@
             <CloseButton @click="deleteObject()"/>
         </div>
         <ResultCalc/>
-        <div class="download_panel">
+        <div  class="download_panel">
             <div @click="loadPdf" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
-            <div @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
+            <div v-if="!download_token" @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
         </div>
         </template>
         <div v-else class="load">{{ text.Loading }}</div>
