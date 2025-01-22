@@ -33,8 +33,15 @@ export default {
     }
   },
   methods:{
-    init(){
+    async init(){
       //if(!!localStorage.getItem('Project') ) { this.project_id = 'local'; return true }
+      // http://localhost:8080?project=290&download_token=12465868305665629871
+      if(!!this.$route.query.project){
+        let id_download_project = this.$route.query.project
+        let download_token = this.$route.query.download_token
+        let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
+        console.log(result)
+      } 
       let id = localStorage.getItem('OpendProject') 
       if(!!id&&global.login){ this.project_id = id }else{ this.project_id = 'local' }
     },

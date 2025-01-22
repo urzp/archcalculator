@@ -31,7 +31,6 @@ export default{
     async mounted(){
        await this.getCalcData()
        await this.getProject()
-       await this.getProjectByLink()
        EventBus.on('MenuProjects:new', this.newProject)
        EventBus.on('Project:newObject', this.getProject)
        EventBus.on('Project:deleteObject',  this.getProject)
@@ -99,12 +98,6 @@ export default{
            await saveUnUserNewProject()
 
         },
-        async getProjectByLink(){
-            if(!this.$route.query.project){
-                
-            } 
-        }
-
     }
 }
 </script>
