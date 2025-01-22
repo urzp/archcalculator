@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id"></Calculator>
+    <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
     <Bill v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></Bill>
     <Footer></Footer>
   </div>
@@ -30,23 +30,30 @@ export default {
     return {
       project_id: 'local',
       show_bills: false,
+      download_token: '',
     }
   },
   methods:{
     async init(){
-      //if(!!localStorage.getItem('Project') ) { this.project_id = 'local'; return true }
       // http://localhost:8080?project=290&download_token=12465868305665629871
-      if(!!this.$route.query.project){
-        let id_download_project = this.$route.query.project
-        let download_token = this.$route.query.download_token
-        let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
-        console.log(result)
-      } 
-      let id = localStorage.getItem('OpendProject') 
-      if(!!id&&global.login){ this.project_id = id }else{ this.project_id = 'local' }
+      if(await this.use_link_project()){
+        this.project_id = this.$route.query.project
+        this.download_token = this.$route.query.download_token
+      }else{
+        let id = localStorage.getItem('OpendProject') 
+        if(!!id&&global.login){ this.project_id = id }else{ this.project_id = 'local' }
+      }
+    },
+    async use_link_project(){
+      if(!this.$route.query.project) return false
+      let id_download_project = this.$route.query.project
+      let download_token = this.$route.query.download_token
+      let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
+      return result.success
     },
     openProject(id){
       this.project_id = id
+      this.download_token = ''
       localStorage.setItem('OpendProject',id) 
     },
     ErrorLoad(){

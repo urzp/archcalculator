@@ -7,13 +7,17 @@ import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 
 export let Project = reactive({})
 
-export async function LoadProjectData(id){
+export async function LoadProjectData(id, download_token){
     EventBus.emit('Project:Loading')
     let result
     if(id=='local'){ 
         result = loadLocal() 
-    }else{ 
-        result =  await apiData({typeData:'loadWholeProject', id})
+    }else{
+        if(!!download_token){ 
+            result =  await apiData({typeData:'loadWholeProject_by_link', data:{id, download_token}}) //open project by link
+        }else{
+            result =  await apiData({typeData:'loadWholeProject', id}) //open project
+        }
         if(!result.success){EventBus.emit('Project:ErrLoadeded')}
         result = result.data
     }

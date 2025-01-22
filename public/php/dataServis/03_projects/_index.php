@@ -39,9 +39,13 @@ switch ($typeData) {
     case 'updateUnUserProject': include '01_Project/un_user/updateUnUserProject.php'; break;
     case 'updateUnUserProjectObject': include '01_Project/un_user/updateProjectObject.php'; break;
     
-    
 }
 
 }
+
+switch ($typeData) {   
+    case 'loadWholeProject_by_link' : include '01_Project/loadWholeProject_by_link.php'; break;
+}
+
 
 ?>
