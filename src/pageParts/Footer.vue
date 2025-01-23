@@ -14,7 +14,7 @@
         </div>
         <div class="collum collum_2">
             <div class="row_link" @click="selectView('impressum')" >{{ text.Impressum }}</div>
-            <div class="row_link">{{ text.Datenschutz }}</div>
+            <div class="row_link" @click="selectView('datenschutz')" >{{ text.Datenschutz }}</div>
             <div class="row_link">{{ text.Cookie_Einstellungen }}</div>
             <div class="row_link">{{ text.Contact }}</div>
         </div>

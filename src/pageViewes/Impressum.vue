@@ -3,7 +3,7 @@
         <h1>Impressum</h1>
         <h3>Angaben gemäß § 5 TMG</h3>
         <p>HONORAR.online<br>
-            c/o FAAR.studio <br>
+            c/o <a href="http://faar.studio/">FAAR.studio</a><br>
             Viktor Filimonow Dipl. Ing. (FH) Architekt<br>
             Plinganserstraße 150<br>
             81369 München, Deutschland<br>

@@ -15,6 +15,7 @@ import downloadLinks_bill from './UI/Pupaps/downloadLinks_bill.vue'
 import downloadLinks_project from './UI/Pupaps/downloadLinks_project.vue'
 //----------------------------Impressum-----------------------------------
 import Impressum from '@/pageViewes/Impressum.vue'
+import Datenschutz from '@/pageViewes/Datenschutz.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -147,6 +148,7 @@ export default [
     downloadLinks_project,
 
     Impressum,
+    Datenschutz,
 
     Login,
     Registration,

@@ -1,12 +1,14 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
+    <div class="top_to_scroll"  ref="to_scroll"></div>
     <div v-if="showMain" class="main">
       <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
       <Bill v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></Bill>
     </div>
     <div v-else class="veiews">
         <Impressum v-if="selectedView=='impressum'"/>
+        <Datenschutz v-if="selectedView=='datenschutz'" />
     </div>
     <Footer></Footer>
   </div>
@@ -28,7 +30,7 @@ export default {
     EventBus.on('MenuProjects:showBills', ()=>this.show_bills=true)
     EventBus.on('MenuProjects:closeBills', ()=>this.show_bills=false)
     EventBus.on('Project:ErrLoadeded', this.ErrorLoad)
-    EventBus.on('Footer:selectMain', ()=>this.showMain=true)
+    EventBus.on('Footer:selectMain', ()=>{this.showMain=true; this.scrollUp()})
     EventBus.on('Footer:selectView', name=>this.selectView(name) )
     this.confirmEmail()
     
@@ -86,6 +88,10 @@ export default {
     selectView(name){
       this.selectedView=name; 
       this.showMain=false
+      this.scrollUp()
+    },
+    scrollUp(){
+      this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
     }
   }
   
