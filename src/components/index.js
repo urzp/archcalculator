@@ -1,7 +1,7 @@
 //----------------------------Page-----------------------------------
-import Header from './PageParts/Header.vue'
-import Footer from './PageParts/Footer.vue'
-import Menu from './PageParts/Menu.vue'
+import Header from '@/pageParts/Header.vue'
+import Footer from '@/pageParts/Footer.vue'
+import Menu from '@/pageParts/Menu.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'

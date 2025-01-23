@@ -1,8 +1,8 @@
 import { global } from '@/servis/globalValues.js'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LawEditView from '../views/LawEditView.vue'
-import ProfileView from '../views/ProfileView.vue'
+import HomeView from '../pages/HomeView.vue'
+import LawEditView from '../pages/LawEditView.vue'
+import ProfileView from '../pages/ProfileView.vue'
 import { isLogget } from '@/components/Users/servis';
 
 const routes = [
