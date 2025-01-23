@@ -13,6 +13,8 @@ import Calendar from './UI/Pupaps/openProject/Calendar.vue'
 import messagePopap from './UI/Pupaps/message.vue'
 import downloadLinks_bill from './UI/Pupaps/downloadLinks_bill.vue'
 import downloadLinks_project from './UI/Pupaps/downloadLinks_project.vue'
+//----------------------------Impressum-----------------------------------
+import Impressum from '@/pageViewes/Impressum.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -143,6 +145,8 @@ export default [
     messagePopap,
     downloadLinks_bill,
     downloadLinks_project,
+
+    Impressum,
 
     Login,
     Registration,

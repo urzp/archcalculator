@@ -1,8 +1,13 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
-    <Bill v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></Bill>
+    <div v-if="showMain" class="main">
+      <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
+      <Bill v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></Bill>
+    </div>
+    <div v-else class="veiews">
+        <Impressum v-if="selectedView=='impressum'"/>
+    </div>
     <Footer></Footer>
   </div>
 </template>
@@ -23,6 +28,8 @@ export default {
     EventBus.on('MenuProjects:showBills', ()=>this.show_bills=true)
     EventBus.on('MenuProjects:closeBills', ()=>this.show_bills=false)
     EventBus.on('Project:ErrLoadeded', this.ErrorLoad)
+    EventBus.on('Footer:selectMain', ()=>this.showMain=true)
+    EventBus.on('Footer:selectView', name=>this.selectView(name) )
     this.confirmEmail()
     
   },
@@ -31,6 +38,8 @@ export default {
       project_id: 'local',
       show_bills: false,
       download_token: '',
+      showMain: true,
+      selectedView: '',
     }
   },
   methods:{
@@ -73,6 +82,10 @@ export default {
         if(result.data.email_confirmed == '0') EventBus.emit('Menu:Message', 'E-Mail bestätigt') 
         if(result.data.email_confirmed == '1') EventBus.emit('Menu:Message', 'Bereits E-Mail bestätigt') 
       }
+    },
+    selectView(name){
+      this.selectedView=name; 
+      this.showMain=false
     }
   }
   
@@ -85,6 +98,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  .veiews{
+    margin-top: 60px;
+    margin-bottom: 60px;
   }
 </style>
 

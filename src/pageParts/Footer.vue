@@ -3,7 +3,7 @@
     <div class="line-wrap"><div class="line"></div></div>
     <div class="collums">
         <div class="collum collum_1">
-            <div class="logo" @click="$router.push({ name: 'home' })"><img src="@/assets/imgs/logo.svg" alt=""></div>
+            <div class="logo" @click="selectMain()"><img src="@/assets/imgs/logo.svg" alt=""></div>
             <div class="social">
                 <div class="social_item"><img src="@/assets/icons/social_network/instagram/main.svg" alt=""></div>
                 <div class="social_item"><img src="@/assets/icons/social_network/twitter/main.svg" alt=""></div>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="collum collum_2">
-            <div class="row_link">{{ text.Impressum }}</div>
+            <div class="row_link" @click="selectView('impressum')" >{{ text.Impressum }}</div>
             <div class="row_link">{{ text.Datenschutz }}</div>
             <div class="row_link">{{ text.Cookie_Einstellungen }}</div>
             <div class="row_link">{{ text.Contact }}</div>
@@ -32,6 +32,7 @@
 
 <script>
 import { text } from '@/servis/text.js'
+import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Footer',
     data(){
@@ -48,6 +49,14 @@ export default{
                 Calculate_the_fee_correctly: text.footer.Calculate_the_fee_correctly,
                 Blog: text.footer.Blog,
             },
+        }
+    },
+    methods:{
+        selectMain(){
+            EventBus.emit('Footer:selectMain')
+        },
+        selectView(name){
+            EventBus.emit('Footer:selectView', name)
         }
     }
 
