@@ -9,7 +9,7 @@
   <script>
   
   export default {
-    name: 'LawEditView',
+    name: 'LawEditPage',
   }
   </script>
   

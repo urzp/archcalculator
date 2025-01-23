@@ -1,6 +1,6 @@
 import { global } from '@/servis/globalValues.js'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../pages/Home.vue'
+import HomePage from '../pages/Home.vue'
 import LawEditView from '../pages/LawEdit.vue'
 import ProfileView from '../pages/Profile.vue'
 import { isLogget } from '@/components/Users/servis';
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomePage
   },
   {
     path: '/profile',

@@ -13,7 +13,7 @@ import { global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
 
 export default {
-  name: 'HomeView',
+  name: 'HomePage',
   mounted(){
     this.init()
     EventBus.on('Project:saveAsLocal', this.localProject)
