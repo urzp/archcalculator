@@ -35,7 +35,6 @@ export default {
   },
   methods:{
     async init(){
-      // http://localhost:8080?project=290&download_token=12465868305665629871
       if(await this.use_link_project()){
         this.project_id = this.$route.query.project
         this.download_token = this.$route.query.download_token

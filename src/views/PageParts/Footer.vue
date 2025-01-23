@@ -3,7 +3,7 @@
     <div class="line-wrap"><div class="line"></div></div>
     <div class="collums">
         <div class="collum collum_1">
-            <div class="logo"><img src="@/assets/imgs/logo.svg" alt=""></div>
+            <div class="logo" @click="$router.push({ name: 'home' })"><img src="@/assets/imgs/logo.svg" alt=""></div>
             <div class="social">
                 <div class="social_item"><img src="@/assets/icons/social_network/instagram/main.svg" alt=""></div>
                 <div class="social_item"><img src="@/assets/icons/social_network/twitter/main.svg" alt=""></div>
