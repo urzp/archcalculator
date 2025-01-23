@@ -11,7 +11,7 @@
         </div>
         <ResultCalc/>
         <div  class="download_panel">
-            <div @click="loadPdf" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
+            <div @click="showLinks()" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
             <div v-if="!download_token" @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
         </div>
         </template>
@@ -90,15 +90,17 @@ export default{
             deleteProjectObject(lastobject.id)
         },
         async loadPdf(){
-            //let downLoad_token = (await apiData({typeData:'DownloadURL', id:this.actualBill.id})).downLoad_token
+            let downLoad_token = `http://localhost:8080?project=${this.project_id}&download_token=${this.download_token}&type='PDF'`
+            console.log(downLoad_token)
             //window.location.href = `https://honorar.online/download.php?bill=${this.actualBill.id}&downLoad_token=${downLoad_token}&type=pdf`
         },
         async showLinks(){
-            // let id = '270'
-            // let downLoad_token = '57118206950372577014'
-            // let result = (await apiData({typeData:'loadUnUserProject', data: {id, downLoad_token}})).data
-           await saveUnUserNewProject()
-
+            if(!!this.download_token){
+                this.loadPdf()
+                return false
+            }
+           let result = await saveUnUserNewProject()
+            EventBus.emit('Popap:downloadLinks_project', result)
         },
     }
 }

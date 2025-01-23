@@ -15,7 +15,7 @@ $result = false;
 if($data!=null){
 
     if($code==null){
-        $code=GeneratePinCode(5);
+        $code=generatePinCode(5);
         $new_data['resetCode'] = $code;
         crud_update('users', $new_data, $selector);
         sendResetPasswordEmail($email, $code );
@@ -37,14 +37,5 @@ if($data!=null){
 $result = (object) [
     'success' => $result,
 ];
-
-function GeneratePinCode($chars) {
-    $pin = "";
-    while ($chars != 0) {
-        $pin .= rand(0,9);
-        $chars--;
-    }
-    return $pin;
-}
 
 ?>

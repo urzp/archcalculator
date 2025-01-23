@@ -18,13 +18,4 @@ $result = (object) [
     'downLoad_token' => $downLoad_token,
 ];
 
-function GeneratePinCode($chars) {
-    $pin = "";
-    while ($chars != 0) {
-        $pin .= rand(0,9);
-        $chars--;
-    }
-    return $pin;
-}
-
 ?>

@@ -39,7 +39,7 @@ export default {
             window.location.href = `https://honorar.online/download.php?bill=${this.actualBill.id}&downLoad_token=${downLoad_token}&type=pdf`
         },
         async showLinks(){
-            EventBus.emit('Popap:downloadLinks', this.actualBill.id)
+            EventBus.emit('Popap:downloadLinks_bill', this.actualBill.id)
         }
     }
 

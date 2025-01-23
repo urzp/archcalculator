@@ -15,6 +15,7 @@ export async function LoadProjectData(id, download_token){
     }else{
         if(!!download_token){ 
             result =  await apiData({typeData:'loadWholeProject_by_link', data:{id, download_token}}) //open project by link
+            result.data.show_by_link = true
         }else{
             result =  await apiData({typeData:'loadWholeProject', id}) //open project
         }
@@ -28,6 +29,7 @@ export async function LoadProjectData(id, download_token){
 }
 
 export async function saveNewProject(){
+    if(!!Project.show_by_link) return false 
     Project.project.unsaved = false
    let result = (await apiData({typeData:'newProject', data: Project})).data
    let id_project = result.project
@@ -40,10 +42,12 @@ export async function saveNewProject(){
 }
 
 export async function saveUnUserNewProject(){
+    if(!!Project.show_by_link) return false
     let result = (await apiData({typeData:'newUnUserProject', data: Project})).data
     Project.project.id_save = result.project
     Project.project.downLoad_token = result.downLoad_token
     Project.project.owner_token = result.owner_token
+    return { id:result.project, downLoad_token:result.downLoad_token }
 }
 
 function loadLocal(){
@@ -63,6 +67,7 @@ export async function newPoject(save=false){
 }
 
 export async function updateProject(){
+    if(!!Project.show_by_link) return false
     if (Project.project.id=='new'){
         if(global.login) await saveNewProject()
         if(!global.login) setUnSavedStatus()
@@ -83,6 +88,7 @@ export function setUnSavedStatus(){
 }
 
 export async function updateProjectObject(id, data=[], sendAPI=true){
+    if(!!Project.show_by_link) return false
     let obj = Project.objects.find(item=>item.id==id) // need to create id for local
     for (let key in data){ obj[key] = data[key] }
     if(Project.project.id=='local'||Project.project.id=='new'){ 

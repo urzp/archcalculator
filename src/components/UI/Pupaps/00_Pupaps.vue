@@ -5,7 +5,8 @@
     <Comfirm/>
     <openProject/>
     <message/>
-    <downloadLinks/>
+    <downloadLinks_bill/>
+    <downloadLinks_project/>
 </template>
 
 

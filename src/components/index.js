@@ -11,7 +11,8 @@ import ListDayProjects from './UI/Pupaps/openProject/ListDayProjects.vue'
 import ShowProject from './UI/Pupaps/openProject/ShowProject.vue'
 import Calendar from './UI/Pupaps/openProject/Calendar.vue'
 import messagePopap from './UI/Pupaps/message.vue'
-import downloadLinks from './UI/Pupaps/downloadLinks.vue'
+import downloadLinks_bill from './UI/Pupaps/downloadLinks_bill.vue'
+import downloadLinks_project from './UI/Pupaps/downloadLinks_project.vue'
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -140,7 +141,8 @@ export default [
     ShowProject,
     Calendar,
     messagePopap,
-    downloadLinks,
+    downloadLinks_bill,
+    downloadLinks_project,
 
     Login,
     Registration,

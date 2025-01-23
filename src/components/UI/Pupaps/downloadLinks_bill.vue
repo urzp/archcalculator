@@ -27,9 +27,9 @@
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
-    name: 'downloadLinks',
+    name: 'downloadLinks_bill',
     mounted(){
-        EventBus.on('Popap:downloadLinks',(id_bill)=>{this.openPopap(id_bill)})
+        EventBus.on('Popap:downloadLinks_bill',(id_bill)=>{this.openPopap(id_bill)})
     },
     data(){
         return {

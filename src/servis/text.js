@@ -1,34 +1,53 @@
 import Calc from "@/components/Calculator/Calc.vue";
 
 export let text = {
+    added_group:{
+        // from newDataProjects.js
+        description_text_calc: "Honorare online ermitteln, einfach und kostenlos! Mit dem Honorar-Rechner von HONORAR.online. Beschreiben Sie in diesem Feld Ihr Projekt und kalkulieren Sie jetzt die Honorare dafür!",
+        customer_field_company: 'Firma des Kunden',
+        customer_field_firstname: 'Vorname',
+        customer_field_lasttname: 'Nachname',
+        customer_field_street: 'Straße und Hausnummer',
+        customer_field_plz: 'PLZ und',
+        customer_field_city: 'Stadt',
+        // in Profile:
+        firstname:'Firstname:',
+        my_company_name: 'Firmenname',
+        my_company_street: 'Adresszeile 1', // dont print if empty
+        my_company_street2: 'Adresszeile 2', // dont print if empty
+        my_company_plz: 'PLZ',
+        my_company_city: 'Stadt',
+    },
+
+    
     bill:{
         greeting_phrase:'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
     },
     menu:{
-        Login: 'Login',
+        Login: 'Log in',
         Registration: 'Registrierung',
         Edit_HOAI_version: 'Edit HOAI',
         Logout: 'Logout',
-        Calculator: 'Calculator',
-        Profile: 'Profile',
+        Calculator: 'Zum Rechner', // Pop-Up too short
+        Profile: 'Mein Profil',
     },
     header:{
-        Login: 'Login',
-        Projects:'Projects',
+        Login: 'Log in',
+        Projects:'Projekte',
         Neues_Projekt: 'Neues Projekt',
-        Save: 'Einfamilienhaus',
+        Save: 'Projekt speichern',
         Open_unsaved_project: 'Nicht gespeichertes Projekt öffnen',
         Open_project:'Projekt öffnen',
-        New_invoice:'Neues Rechnung',
+        New_invoice:'Neue Rechnung',
         Invoice:'Rechnung',
     },
     footer:{
-        Copyright:'Copyright © 2024 honorar.online',
+        Copyright:'Copyright © 2025 honorar.online',
         Impressum:'Impressum',
         Datenschutz:'Datenschutz',
         Cookie_Einstellungen:'Cookie Einstellungen',
         Contact: 'Kontakt',
-        Abaut:'Über honoraronline',
+        Abaut:'Über HONORAR.online',
         Instructions:'Anleitung',
         HOAI:'HOAI',
         Calculate_the_fee_correctly:'Honorar richtig berechnen',
@@ -40,85 +59,85 @@ export let text = {
     },
     openProject:{
         loading:'Loading . . .',
-        Select_Project: 'Select Project',
+        Select_Project: 'Projekt wählen',
         No_selected_project:'Keine Projekte vorhanden',
-        All_Projects:'All Projects',
-        Recent:'Recent',
-        Open: 'Open',
-        Delete: 'Delete',
-        Objects: 'Objects',
-        Bils: 'Bils',
+        All_Projects:'Alle Projekte',
+        Recent:'Zuletzt geöffnet...',
+        Open: 'Öffnen',
+        Delete: 'Löschen',
+        Objects: 'Objekte',
+        Bils: 'Rechnungen',
     },
     UserServis:{
         // Login
-        Email: 'Email',
+        Email: 'E-Mail',
         Email_wrong: 'Keine gültige E-Mail',
-        Password: 'Password',
-        Fill_feld:'Feld ausfüllen',
+        Password: 'Passwort',
+        Fill_feld:'Feld erforderlich',
         loading: 'Loading . . .',
-        Not_found:'nicht gefunden',
-        Submit:'Einreichen',
+        Not_found:'Nutzer nicht vorhanden',
+        Submit:'Anmelden',
         Registration:'Registrierung',
         Forgot_password:'Passwort vergessen',
 
         // Registration (rest variables of above )
         Password_confom:'Passwort bestätigen',
-        Contact_support:'Kontaktieren Sie den Support',
-        Login: 'Login',
+        Contact_support:'Support kontaktieren',
+        Login: 'Log in',
         Invalid_email_address:'Keine gültige E-Mail',
-        Assign_email_address:"E-Mail vergeben",
+        Assign_email_address:"Diese E-Mail ist bereits registriert",
         least_6_characters:"mindestens 6 Zeichen",
 
         //Reset password (rest variables of above )
         Code_at_Email:'Code aus Email',
-        Code_wrong:'Ungültiger Code',
+        Code_wrong:'Code ungültig',
         New_password:'Neues Passwort',
 
         // Profile Page
-        Profile:'Profile',
+        Profile:'Profil',
         felds:{
-            name:'name:',
-            email:'email:',
-            phone: 'phone:',
+            name:'Nachname:',
+            email:'E-Mail:',
+            phone: 'Telefon:',
 
-            address: 'address:',
+            address: 'Adresse:', // obsolete, look nogroup
             IBAN:'IBAN:',
             BIC: 'BIC:',
-            Institut:'Institut:',
-            USt_Id_Nr:'USt - Id. - Nr.:',
+            Institut:'Bank:',
+            USt_Id_Nr:'USt-ID:',
 
-            old_password:'old password:',
-            new_password:'new password:',
-            conform_password:'conform password:',
+            old_password:'Altes Passwort:',
+            new_password:'Neues Passwort:',
+            conform_password:'Passwort bestätigen:',
         },
 
-        Passwords_not_same:'Passwort weicht ab',
+        Passwords_not_same:'Passwort weicht ab',
         error: 'error',
-        length_min_3:'mindestens 3 Buchstaben',
-        error_Email: 'error Email',
-        Email_used:'Beschäftigt Email',
-        error_phone: 'error phone',
+        length_min_3:'mindestens 3 Zeichen',
+        error_Email: 'Error E-Mail',
+        Email_used:'E-Mail bereits vergeben',
+        error_phone: 'Error Telefonnummer',
 
         Successful: 'Erfolgreich',
         fall:'fallen',
-        Save:'Save',
+        Save:'Speichern',
 
         The_account_will_be_permanently_deleted:'Das Konto wird dauerhaft gelöscht. Möchten Sie es wirklich entfernen?',
     },
     Calc:{
-        description: 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.',
+        description: 'Honorare online ermitteln, einfach und kostenlos! Mit dem Honorar-Rechner von HONORAR.online. Beschreiben Sie in diesem Feld Ihr Projekt und kalkulieren Sie jetzt die Honorare dafür!',
         Honorarobjekt:'Honorarobjekt', //Button
         Loading:'Loading . . . ',
         Summe: 'Summe',
-        Customer:'Customer:',
+        Customer:'Kunde:',
         Honorar_Base:'Honorargrundlagen',
         HOAI_Version:'HOAI Version',
         Paragraph:'Planungsgegenstand',
         Honorarzone:'Honorarzone',
         Honorarzone_detals:{
-            points:'points',
+            points:'Punkte',
             Summe:'Summe: ',
-            corresponds_to_fee_zone:'corresponds to fee zone: ',
+            corresponds_to_fee_zone:'Entspricht Honorarzone: ',
         },
         Honorarsatz:'Honorarsatz',
         Finance:'Anrechenbare Kosten', min: 'min', max: 'max',
@@ -131,7 +150,7 @@ export let text = {
             hiervon_zu_100_anrechenbar:'hiervon zu 100% anrechenbar (über 25% von',
             hiervon_zu_50_anrechenbar:'hiervon zu 50% anrechenbar (über 25% von',
             total_non_allowable_costs:'Summe nicht anrechenbare Kosten',
-            Total_eligible_costs_other:'Summe eligible costs, "other": ',
+            Total_eligible_costs_other:'Summe der "sonstigen" anrechenbaren Kosten: ',
         },
         Fee_according_to_fee_table:'Honorar nach Honorartafel',
         Honorar_detals:{
