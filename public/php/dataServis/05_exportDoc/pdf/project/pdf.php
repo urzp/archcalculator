@@ -5,6 +5,7 @@ $objects = $data['objects'];
 
 $project_name = $project['name'];
 $project_data = date('d.m.Y',strtotime($project['created']));
+$project_description = $project['discription'];
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/php/lib/dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
@@ -27,6 +28,7 @@ $html = "
 $html .="<body>
             <div class='project_name'>$project_name</div>
             <div class='project_data'>$project_data</div>
+            <div class='project_description'>$project_description</div>
 ";
         
 $html .="
