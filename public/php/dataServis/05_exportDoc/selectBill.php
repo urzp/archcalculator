@@ -26,8 +26,8 @@ $bill['data'] -> created = $bill['created'];
 
 
 switch ($type) {
-    case 'excel': include "excel/excel.php"; break;
-    case 'pdf': include "pdf/pdf.php"; break;
+    case 'excel': include "excel/bill/excel.php"; break;
+    case 'pdf': include "pdf/bill/pdf.php"; break;
 }
 
 }

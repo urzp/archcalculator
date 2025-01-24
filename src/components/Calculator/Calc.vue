@@ -90,7 +90,7 @@ export default{
             deleteProjectObject(lastobject.id)
         },
         async loadPdf(){
-            let downLoad_token = `http://localhost:8080?project=${this.project_id}&download_token=${this.download_token}&type='PDF'`
+            let downLoad_token = `http://honorar.online/download.php?project=${this.project_id}&downLoad_token=${this.download_token}&type=pdf`
             console.log(downLoad_token)
             //window.location.href = `https://honorar.online/download.php?bill=${this.actualBill.id}&downLoad_token=${downLoad_token}&type=pdf`
         },
