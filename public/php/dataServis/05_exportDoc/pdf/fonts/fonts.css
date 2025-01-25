@@ -1,0 +1,69 @@
+* {
+    -webkit-font-feature-settings: "lnum";
+    -moz-font-feature-settings: "lnum";
+    font-feature-settings: "lnum";
+}
+
+/* ----------------------------------- Raleway ----------------------------------- */
+
+@font-face {
+    font-family: 'Raleway-ExtraLight';
+    src: local('Raleway-ExtraLight'),
+    url(Raleway/Raleway-ExtraLight.ttf);
+}    
+
+@font-face {
+    font-family: 'Raleway-Light';
+    src: local('Raleway-Light'),
+    url(/Raleway/Raleway-Light.ttf);
+}  
+
+@font-face {
+    font-family: 'Raleway-Regular';
+    src: local('Raleway-Regular'),
+    url(Raleway/Raleway-Regular.ttf);
+} 
+
+@font-face {
+    font-family: 'Raleway-Medium';
+    src: local('Raleway-Medium'),
+    url(Raleway/Raleway-Medium.ttf);
+} 
+
+@font-face {
+    font-family: 'Raleway-Bold';
+    src: local('Raleway-Bold'),
+    url(Raleway/Raleway-Bold.ttf);
+} 
+
+/* ----------------------------------- Comfortaa ----------------------------------------- */
+
+@font-face {
+    font-family: 'Comfortaa-Light';
+    src: local('Comfortaa-Light'),
+    url(Comfortaa/Comfortaa-Light.ttf);
+}    
+
+@font-face {
+    font-family: 'Comfortaa-Regular';
+    src: local('Comfortaa-Regular'),
+    url(Comfortaa/Comfortaa-Regular.ttf);
+}  
+
+@font-face {
+    font-family: 'Comfortaa-Medium';
+    src: local('Comfortaa-Medium'),
+    url(Comfortaa/Comfortaa-Medium.ttf);
+} 
+
+@font-face {
+    font-family: 'Comfortaa-SemiBold';
+    src: local('Comfortaa-SemiBold'),
+    url(Comfortaa/Comfortaa-SemiBold.ttf);
+} 
+
+@font-face {
+    font-family: 'Comfortaa-Bold';
+    src: local('Comfortaa-Bold'),
+    url(Comfortaa/Comfortaa-Bold.ttf);
+} 

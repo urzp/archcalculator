@@ -1,0 +1,138 @@
+.title_0{
+    font-family: 'Rawline';
+    font-weight:lighter;
+    font-size: 26px;
+}
+
+.title_1{
+    font-family: 'Rawline';
+    font-weight:lighter;
+    font-size: 20px;
+    color:#636363;
+}
+
+.title_2{
+    font-family: 'Rawline';
+    font-weight:600;
+    font-size: 18px;
+    color:#636363;
+}
+
+.title_3{
+    margin-left: 20px;
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 16px;
+    color:#636363;
+}
+
+.title_4{
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 14px;
+    color:#636363;
+}
+
+.title_5{
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 12px;
+    color:#636363;
+}
+
+.center-align{
+    text-align: center;
+}
+
+
+.project_description{
+    font-size: 16px;
+    text-align: center;
+    line-height: 1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.summ_wrap{
+    margin-left: 3px;
+    padding-left: 20px;
+    border-left: 0.5px solid #5f5f5f;
+}
+
+.r-marker{
+    width: 8px;
+    height: 8px;
+    background-color: #5f5f5f;
+    border-radius: 4px;
+    .title_0{
+        font-family: 'Rawline';
+        font-weight:lighter;
+        font-size: 26px;
+    }
+    
+    .title_1{
+        font-family: 'Rawline';
+        font-weight:lighter;
+        font-size: 20px;
+        color:#636363;
+    }
+    
+    .title_2{
+        font-family: 'Rawline';
+        font-weight:600;
+        font-size: 18px;
+        color:#636363;
+    }
+    
+    .title_3{
+        margin-left: 20px;
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 16px;
+        color:#636363;
+    }
+    
+    .title_4{
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 14px;
+        color:#636363;
+    }
+    
+    .title_5{
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 12px;
+        color:#636363;
+    }
+    
+    .center-align{
+        text-align: center;
+    }
+    
+    
+    .project_description{
+        font-size: 16px;
+        text-align: center;
+        line-height: 1;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+
+    .r-marker{
+        width: 8px;
+        height: 8px;
+        background-color: #5f5f5f;
+        border-radius: 4px;
+        
+    }
+        
+    .summ_wrap{
+        width: 100px;
+        margin-left: 3px;
+        padding-left: 20px;
+        border-left: 0.5px solid #5f5f5f;
+    }
+}

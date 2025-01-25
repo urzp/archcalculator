@@ -48,8 +48,8 @@ export default{
         },
         async openPopap(data){
             this.show=true
-            this.project_link = `http://localhost:8080?project=${data.id}&download_token=${data.downLoad_token}`;
-            this.pdf_link = `http://localhost:8080?project=${data.id}&download_token=${data.downLoad_token}&type='PDF'`
+            this.project_link = `https://honorar.online?project=${data.id}&download_token=${data.downLoad_token}`;
+            this.pdf_link = `https://honorar.online/download.php?project=${data.id}&download_token=${data.downLoad_token}&type=pdf`
         }, 
         comfirm(){
             this.action()

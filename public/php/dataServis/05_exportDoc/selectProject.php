@@ -3,7 +3,7 @@
 $mysql = $mysql_calc;
 
 $id = $_GET['project'];
-$downLoad_token = $_GET['downLoad_token'];
+$downLoad_token = $_GET['download_token'];
 $type = $_GET['type'];
 
 $id = $mysql->real_escape_string($id);
