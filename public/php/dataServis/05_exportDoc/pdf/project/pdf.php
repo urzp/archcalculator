@@ -1,11 +1,20 @@
 <?php
 
+function toMoney($value){
+    $result = '';
+    $result = number_format($value, 2).' €';
+    $result = str_replace(',', ' ', $result);
+    $result = str_replace('.', ',', $result);
+    return $result;
+}
+
 $project = $data['project'];
 $objects = $data['objects'];
 
 $project_name = $project['name'];
 $project_data = date('d.m.Y',strtotime($project['created']));
 $project_description = $project['discription'];
+$project_summe = toMoney($project['total']);
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/php/lib/dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
@@ -40,9 +49,7 @@ $html .="<body>
 ";
 
 $html .="   
-        <div class='title_1 summe_title'>
-            <img src='' alt='' class='r-marker'>Summe: $project_name
-        </div>
+        <div class='title_1 summe_title'> Summe: $project_name</div>
         <div class='summ_wrap'>
             <div class='title_2'>Zusätzliche Leistungen</div>
             <div class='title_2'>Nebenkosten</div>
@@ -51,6 +58,10 @@ $html .="
                 <div class='title_3'>Gesamtsumme Netto</div>
                 <div class='title_3'>Umsatzsteuer</div>
                 <div class='title_3'>Gesamtsumme Brutto</div>
+                <div class='total_project'>
+                    <div class='title_1'>$project_name</div>
+                    <div class='title_1 total_project_Summe'>Summe: $project_summe </div>
+                </div>
             </div>
         </div>
 ";
