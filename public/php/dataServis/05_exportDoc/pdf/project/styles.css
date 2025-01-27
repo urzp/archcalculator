@@ -130,7 +130,7 @@
         border-left: 0.5px solid #5f5f5f;
     }
 
-    .total_project{
+    .total_project, .total_object{
         margin-top: 20px;
         margin-left: -20px;
         padding-bottom: 20px;
@@ -139,7 +139,7 @@
         background-color: #f5f5f5;
     }
 
-    .total_project > div {
+    .total_project > div,  .total_object > div {
         padding-right: 20px;
         font-size: 18px;
         text-align: right;

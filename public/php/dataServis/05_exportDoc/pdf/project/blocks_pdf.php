@@ -1,5 +1,30 @@
 <?php
 
+//---------------------------------------------- objects --------------------------------------------------
+
+$objects_html='';
+
+foreach($objects as $item){
+    $name = $item['name'];
+    $total_object = toMoney($item['total_object']);
+
+    $objects_html.="
+    <div class='title_1 summe_title'>$name</div>
+    <div class='summ_wrap'>
+        <div class='title_2'>Honorargrundlagen</div>
+        <div class='title_2'>Leistungen</div>
+        <div class='title_2'>Besondere Leistungen</div>
+        <div class='total_object'>
+            <div class='title_1'>$name</div>
+            <div class='title_1 total_project_Summe'>Summe: $total_object </div>
+        </div>
+    </div>
+    ";
+}
+
+
+//---------------------------------------------- summ project --------------------------------------------------
+
 $project_AdditionalServices = $project['AdditionalServices'];
 
 $project_AdditionalServices_html = '';

@@ -60,6 +60,8 @@ $html .="<body>
             <div class='title_1 project_description'>$project_description</div>
 ";
 
+$html .= $objects_html;
+
 $html .="   
         <div class='title_1 summe_title'> Summe: $project_name</div>
         <div class='summ_wrap'>
