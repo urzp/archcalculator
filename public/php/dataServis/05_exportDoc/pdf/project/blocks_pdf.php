@@ -7,13 +7,19 @@ $objects_html='';
 foreach($objects as $item){
     $name = $item['name'];
     $total_object = toMoney($item['total_object']);
+    $honorar_total = toMoney($item['honorar_total']);
+    $servis_total = toMoney($item['servis_total']); 
+    $spetial_servis_total = toMoney($item['spetial_servis_total']);  
 
     $objects_html.="
     <div class='title_1 summe_title'>$name</div>
     <div class='summ_wrap'>
         <div class='title_2'>Honorargrundlagen</div>
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $honorar_total</div>
         <div class='title_2'>Leistungen</div>
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $servis_total</div>
         <div class='title_2'>Besondere Leistungen</div>
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
         <div class='total_object'>
             <div class='title_1'>$name</div>
             <div class='title_1 total_project_Summe'>Summe: $total_object </div>
