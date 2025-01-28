@@ -27,6 +27,8 @@ foreach($objects as $item){
     $payExtra = toMoney($item['payExtra']->value);
     $payExtraPercent = toFormat($item['payExtra']->percent, '%');
 
+    //............................................ stages ....................................................
+
     $stages_html ="";
 
     $id = $item['paragraph_id']; $selector = "`id_paragraph`='$id' ORDER BY  cast(`number` as unsigned)  ASC";
@@ -41,7 +43,7 @@ foreach($objects as $item){
         }else{
             $value = $value_default;
         }
-        $summ_percent_stages+=(int)$value;
+        $summ_percent_stages+=(float)$value;
         $summ_item = $item['honorar_calc'] * $value/100;
 
         $value_default = toFormat($value_default, '%');
@@ -57,7 +59,7 @@ foreach($objects as $item){
             </tr>";
     }
 
-    $summ_percent_stages = toFormat($summ_percent_stages, '%');
+    //........................................... specialServices .................................................
 
     $stages_html ="<table class='row_style' style='width: 680px;'>".$stages_html;
     $stages_html.="</table>";
@@ -108,7 +110,7 @@ foreach($objects as $item){
         <div class='title_2'>Leistungen</div>";
 $objects_html.= $stages_html;
 $objects_html.="  
-        <div class='title_3' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages   $servis_total</div>
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages%   $servis_total</div>
 
         <div class='title_2'>Besondere Leistungen</div>
 
