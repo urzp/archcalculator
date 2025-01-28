@@ -7,7 +7,7 @@ $mysql = $mysql_HOAI;
 $objects_html='';
 
 foreach($objects as $item){
-    $name = $item['name'];
+    $name_obj = $item['name'];
     $total_object = toMoney($item['total_object']);
     $honorar_total = toMoney($item['honorar_total']);
     $servis_total = toMoney($item['servis_total']); 
@@ -61,8 +61,30 @@ foreach($objects as $item){
     $stages_html ="<table class='row_style' style='width: 680px;'>".$stages_html;
     $stages_html.="</table>";
 
+
+    $spetial_servis_html ="";
+
+    $spetial_servis = $item['specialServices'];
+    foreach($spetial_servis as $item_servis){
+        $name = $item_servis->title;
+        $percent = $item_servis->percent;
+        $price = $item['honorar_calc']*$percent/100;
+        $percent = toFormat($percent, '%');
+        $price = toMoney($price);
+        $spetial_servis_html.="
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
+                <td class='title_3' style='width: 25%; text-align: left;'>$percent</td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$price</td>
+            </tr>
+        ";
+    }
+
+    $spetial_servis_html ="<table class='row_style' style='width: 680px;'>".$spetial_servis_html;
+    $spetial_servis_html.="</table>";
+
     $objects_html.="
-    <div class='title_1 summe_title'>$name</div>
+    <div class='title_1 summe_title'>$name_obj</div>
     <div class='summ_wrap'>
         <div class='title_2'>Honorargrundlagen</div>
         <table class='row_style' style='width: 680px;'>
@@ -109,11 +131,12 @@ $objects_html.= $stages_html;
 $objects_html.="  
         <div class='title_3' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages%   $servis_total</div>
 
-        <div class='title_2'>Besondere Leistungen</div>
-
+        <div class='title_2'>Besondere Leistungen</div>";
+$objects_html.= $spetial_servis_html;
+$objects_html.=" 
         <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
         <div class='total_object'>
-            <div class='title_1'>$name</div>
+            <div class='title_1'>$name_obj</div>
             <div class='title_1 total_project_Summe'>Summe: $total_object </div>
         </div>
     </div>
