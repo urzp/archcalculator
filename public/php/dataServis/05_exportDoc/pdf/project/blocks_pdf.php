@@ -2,18 +2,81 @@
 
 //---------------------------------------------- objects --------------------------------------------------
 
+$mysql = $mysql_HOAI;
+
 $objects_html='';
 
 foreach($objects as $item){
     $name = $item['name'];
     $total_object = toMoney($item['total_object']);
+    $honorar_total = toMoney($item['honorar_total']);
+    $servis_total = toMoney($item['servis_total']); 
+    $spetial_servis_total = toMoney($item['spetial_servis_total']);  
+
+    $id = $item['HOAI_version_id']; $selector = "`id`='$id'";
+    $HOAI = crud_read('HOAI_versions',"value", $selector)[0]['value'];
+
+    $id = $item['paragraph_id']; $selector = "`id`='$id'";
+    $paragraph = crud_read('paragraphs',"name, title", $selector)[0];
+    $paragraph = $paragraph['name']." ".$paragraph['title'];
+    
+    $honorarzone = $item['honorarLevel']->value;
+    $honorarRate = $item['HonorarRate']->value;
+    $finance = toMoney($item['finance']->value);
+    $honorar_calc = toMoney($item['honorar_calc']);
+    $payExtra = toMoney($item['payExtra']->value);
+    $payExtraPercent = toFormat($item['payExtra']->percent, '%');
+
 
     $objects_html.="
     <div class='title_1 summe_title'>$name</div>
     <div class='summ_wrap'>
         <div class='title_2'>Honorargrundlagen</div>
+        <table class='row_style' style='width: 680px;'>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>HOAI Version</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$HOAI</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Planungsgegenstand</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$paragraph</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Honorarzone</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$honorarzone</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Honorarsatz</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$honorarRate</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Anrechenbare Kosten</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$finance</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Honorar nach Honorartafel</td>
+                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$honorar_calc</td>
+            </tr>
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Zuschlag</td>
+                <td class='title_3' style='width: 25%; text-align: left;'>$payExtraPercent</td>
+                <td class='title_3' style='width: 25%; text-align: right;'>$payExtra</td>
+            </tr>
+        </table>
+
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $honorar_total</div>
         <div class='title_2'>Leistungen</div>
+
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $servis_total</div>
         <div class='title_2'>Besondere Leistungen</div>
+
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
         <div class='total_object'>
             <div class='title_1'>$name</div>
             <div class='title_1 total_project_Summe'>Summe: $total_object </div>
