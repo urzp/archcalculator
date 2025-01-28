@@ -59,7 +59,7 @@ export default{
             if(!this.list) return 0
             this.list.forEach(item=>{
                 if(!!item.userPercent||item.userPercent===0){
-                    result = result + item.userPercent
+                    result = result + Number(item.userPercent)
                 }else{
                     result = result + Number(item.percent)
                 }

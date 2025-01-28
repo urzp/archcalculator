@@ -27,6 +27,40 @@ foreach($objects as $item){
     $payExtra = toMoney($item['payExtra']->value);
     $payExtraPercent = toFormat($item['payExtra']->percent, '%');
 
+    $stages_html ="";
+
+    $id = $item['paragraph_id']; $selector = "`id_paragraph`='$id' ORDER BY  cast(`number` as unsigned)  ASC";
+    $stages = crud_read('Stages',"*", $selector);
+    $summ_percent_stages = 0;
+
+    foreach($stages as $key=>$item_stage){
+        $name = $item_stage['name'];
+        $value_default = $item_stage['percent'];
+        if(isset($item['stages'])){
+            if($item['stages'][$key]=='') {$value = $value_default;} else {$value = $item['stages'][$key];}
+        }else{
+            $value = $value_default;
+        }
+        $summ_percent_stages+=(int)$value;
+        $summ_item = $item['honorar_calc'] * $value/100;
+
+        $value_default = toFormat($value_default, '%');
+        $value = toFormat($value, '%');
+        $summ_item = toMoney($summ_item);
+
+        $stages_html.="
+            <tr>
+                <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
+                <td class='title_3' style='width: 16.6%; text-align: left;'>$value_default</td>
+                <td class='title_3' style='width: 16.6%; text-align: left;'>$value</td>
+                <td class='title_3' style='width: 16.6%; text-align: right;'>$summ_item</td>
+            </tr>";
+    }
+
+    $summ_percent_stages = toFormat($summ_percent_stages, '%');
+
+    $stages_html ="<table class='row_style' style='width: 680px;'>".$stages_html;
+    $stages_html.="</table>";
 
     $objects_html.="
     <div class='title_1 summe_title'>$name</div>
@@ -71,9 +105,11 @@ foreach($objects as $item){
         </table>
 
         <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $honorar_total</div>
-        <div class='title_2'>Leistungen</div>
+        <div class='title_2'>Leistungen</div>";
+$objects_html.= $stages_html;
+$objects_html.="  
+        <div class='title_3' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages   $servis_total</div>
 
-        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $servis_total</div>
         <div class='title_2'>Besondere Leistungen</div>
 
         <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
