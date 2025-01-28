@@ -1,5 +1,6 @@
 <?php
 
+$mysql_HOAI = $mysql;
 $mysql = $mysql_calc;
 
 $id = $_GET['project'];
