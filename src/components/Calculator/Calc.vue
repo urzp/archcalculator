@@ -11,8 +11,10 @@
         </div>
         <ResultCalc/>
         <div  class="download_panel">
-            <div @click="showLinks()" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
+            <div v-if="!!download_token" class="link_a"><a :href="downLoad_link"><img src="@/assets/icons/exports/pdf.png" alt=""></a></div>
+            <div v-if="!download_token" @click.stop="showLinks()" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
             <div v-if="!download_token" @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
+            
         </div>
         </template>
         <div v-else class="load">{{ text.Loading }}</div>
@@ -58,6 +60,11 @@ export default{
             this.getProject()
         }
     },
+    computed:{
+        downLoad_link(){
+            return `https://honorar.online/download.php?project=${this.project_id}&download_token=${this.download_token}&type=pdf`
+        }
+    },
     methods:{
         async getCalcData(){
             await LoadCalcData()
@@ -89,11 +96,7 @@ export default{
             if(!lastobject) return false
             deleteProjectObject(lastobject.id)
         },
-        async loadPdf(){
-            let downLoad_token = `http://honorar.online/download.php?project=${this.project_id}&downLoad_token=${this.download_token}&type=pdf`
-            console.log(downLoad_token)
-            //window.location.href = `https://honorar.online/download.php?bill=${this.actualBill.id}&downLoad_token=${downLoad_token}&type=pdf`
-        },
+
         async showLinks(){
             if(!!this.download_token){
                 this.loadPdf()
