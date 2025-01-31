@@ -2,6 +2,7 @@
 import Header from '@/pageParts/Header.vue'
 import Footer from '@/pageParts/Footer.vue'
 import Menu from '@/pageParts/Menu.vue'
+import SiteBar from '@/pageParts/SiteBar.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'
@@ -130,11 +131,15 @@ import InputPrice from './UI/Simples/InputPrice.vue'
 import Select_List from './UI/Simples/Select_List.vue'
 import SelectEdit_List from './UI/Simples/SelectEdit_List.vue'
 import ContextMenu from './UI/Simples/ContextMenu.vue'
+import Marker from '@/components/UI/Simples/Marker.vue'
+import ButtonSiteBar from '@/components/UI/SiteBar/ButtonSiteBar.vue'
+import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
 
 export default [
     Header,
     Footer,
     Menu,
+    SiteBar,
     Popaps,
     Comfirm,
     openProject,
@@ -264,4 +269,7 @@ export default [
     Select_List,
     SelectEdit_List,
     ContextMenu,
+    Marker,
+    Item_level_1,
+    ButtonSiteBar,
 ]

@@ -1,6 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
+    <SiteBar></SiteBar>
     <div class="top_to_scroll"  ref="to_scroll"></div>
     <div v-if="showMain" class="main">
       <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>

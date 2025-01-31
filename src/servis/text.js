@@ -31,6 +31,23 @@ export let text = {
         Calculator: 'Zum Rechner', // Pop-Up too short
         Profile: 'Mein Profil',
     },
+    sideBar:{
+        Calc:'Rechner',
+        NewCalc:'Neue Kalkulation',
+        LastCalcs: 'Letzte Kalkulationen',
+        OpenCalcs: 'Kalkulation öffnen',
+        Offer: 'Angebot',
+        NewOffer: 'Angebot aus aktueller Kalkulation',
+        LastOffer: 'Letzte Angebot',
+        OpenOffer: 'Angebot öffnen',
+        Project: 'Projekte',
+        NewProject: 'Neues Projekt',
+        OfferAsProject: 'Projekt aus Angebot',
+        OpenProject: 'Projekt öffnen',
+        from_today: 'vom heute',
+        from_yestoday: 'von gestern',
+        from: 'vom',
+    },
     header:{
         Login: 'Log in',
         Projects:'Projekte',
