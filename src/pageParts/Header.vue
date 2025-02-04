@@ -17,7 +17,7 @@
             </div>
             
         </div>
-        <div class="sub-header" v-if="$route.name == 'home'&&global.login">
+        <div class="sub-header" v-if="$route.name == 'home'&&global.login&&false">
             <div class="left_side">
                 <div v-if="show_bills" class="item_subHeader" @click="closeBills()">{{ text.Projects }}</div>
                 <template v-else>

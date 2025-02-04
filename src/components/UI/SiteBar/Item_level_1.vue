@@ -1,15 +1,21 @@
 <template>
-    <div class="item_level_1" :class="{item_button:button_type}">
-        <Marker v-if="!button_type" :level="1"/>
-        <div v-if="!!title" class="title">{{ title }}</div>
-        <div v-if="!!project_data" class="name_poject">{{ project_data.title }}</div>
-        <div v-if="!!project_data" class="from_date">{{ from_date }}</div>
-    </div>
+        <div class="item_level_1" :class="{item_button:button_type}" @click="click_handling()" >
+            <Marker v-if="!!marker_type" :level="marker_type"/>
+            <div v-if="!!title" class="title">{{ title }}</div>
+            <div v-if="!!project_data" class="name_poject">{{ project_data.name }} </div>
+            <div v-if="!!project_data&&!bills" class="from_date">{{ from_date }}</div>
+        </div>
+        <div v-if="bills&&showBills" class="item_level_1 bills">
+                <div class="contract">{{ text.contract }}</div>
+                <div class="newBill">{{ text.newBill }}</div>
+                <div class="bills_list">{{ text.bills }}</div>
+        </div>
 </template>
 
 <script>
 import {text} from '@/servis/text'
 import {dateToStringNoTime} from '@/servis/functions'
+import { EventBus } from '@/servis/EventBus'
 export default{
     name: 'Item_level_1',
     data(){
@@ -18,13 +24,18 @@ export default{
                 from_today: text.sideBar.from_today,
                 from_yestoday: text.sideBar.from_yestoday,
                 from: text.sideBar.from,
+                contract: text.sideBar.contract,
+                newBill: text.sideBar.newBill,
+                bills: text.sideBar.bills,
             },
+            showBills: false,
         }
     },
+    emits:['click'],
     props:{
-        button_type: {
-            type:Boolean,
-            default:false,
+        marker_type:{
+            type: [String, Number, Boolean],
+            default: false,
         },
         title:{
             type:String,
@@ -33,18 +44,42 @@ export default{
         project_data: {
             type: [Array, Object],
             default: null,
+        },
+        bills:{
+            type: Boolean,
+            default: false,
         }
     },
     computed:{
         from_date(){
             let result = ''
-            if(!this.project_data&&!this.project_data.date) return result
+            if(!this.project_data&&!this.project_data.created) return result
             let today = new Date()
-            let project_created = new Date(this.project_data.date)
+            let project_created = new Date(this.project_data.created )
             if(today.toDateString() == project_created.toDateString()) result = this.text.from_today
             else if(new Date(today.setDate(today.getDate() - 1)).toDateString() == project_created.toDateString()) result = this.text.from_yestoday
             else result = this.text.from + " " + dateToStringNoTime(project_created)
             return result
+        },
+        is_level_2(){
+            let result = false
+            if(!!this.project_data&&!!this.project_data.include_data) result = true
+            return result
+        },
+        level_marker(){
+            let result = 1
+            if(this.is_level_2) result = 0
+            return result
+        }
+    },
+    methods:{
+        click_handling(){
+            if(bills) this.showBills=!this.showBills
+            if(!!this.project_data) this.openProject()
+            this.$emit('click')
+        },
+        openProject(){
+            EventBus.emit('Project:openProject', this.project_data.id)
         }
     }
 }
@@ -56,5 +91,21 @@ export default{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.item_level_1{
+    display: flex;
+    column-gap: 8px;    
+    font-family: 'Raleway-Medium';
+    font-size: 16px;
+    margin-left: 17px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.bills{
+    margin-left: 37px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 </style>

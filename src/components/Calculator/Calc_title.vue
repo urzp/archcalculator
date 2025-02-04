@@ -9,7 +9,7 @@
                 <ImputTextMLine width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)"/>
             </div>
         </div>
-        <div v-if="login&&!no_full_inf" class="customer">
+        <div v-if="login&&!no_full_inf&&status_project!='calc'" class="customer">
             <div class="title">{{ text.Customer }}</div>
             <div class="customer_company">
                 <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
@@ -64,6 +64,11 @@ export default{
             let result = ''
             if(!!this.project&&!!this.project.discription){ result = this.project.discription}
             return result           
+        },
+        status_project(){
+            let result = 'clac'
+            if(!!this.project&&!!this.project.status) result = this.project.status
+            return result
         },
         customer_company(){
             let result = 'Company'

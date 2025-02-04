@@ -56,10 +56,12 @@ function loadLocal(){
     return result
 }
 
-export async function newPoject(save=false){
+export async function newPoject(save=false, status='calc'){
     delete Project['objects'];
     delete Project['project'];
     let newProject = JSON.parse( JSON.stringify(newWholeProject) )
+    newProject.project.status=status
+    console.log(newProject)
     Object.assign(Project, newProject)
     EventBus.emit('Project:Loadeded')
     if(save) saveNewProject()
@@ -137,4 +139,9 @@ async function deleteLocalProjectObject(id){
     let index = objects.findIndex(item=>item.id==id)
     objects.splice(index, 1);
     await saveLocalProject()
+}
+
+export async function newStatus(status){
+    Project.project.status = status
+    updateProject()
 }

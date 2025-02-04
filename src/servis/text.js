@@ -1,4 +1,5 @@
 import Calc from "@/components/Calculator/Calc.vue";
+import { newBill } from "./projectBill";
 
 export let text = {
     added_group:{
@@ -41,12 +42,17 @@ export let text = {
         LastOffer: 'Letzte Angebot',
         OpenOffer: 'Angebot öffnen',
         Project: 'Projekte',
+        Projects: 'Projekte:',
         NewProject: 'Neues Projekt',
         OfferAsProject: 'Projekt aus Angebot',
         OpenProject: 'Projekt öffnen',
         from_today: 'vom heute',
         from_yestoday: 'von gestern',
         from: 'vom',
+        contract: 'Vertrag',
+        newBill: 'Rechnug stellen',
+        bills: 'Rechnungen',
+
     },
     header:{
         Login: 'Log in',

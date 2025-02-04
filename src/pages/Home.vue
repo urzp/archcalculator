@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrap">
     <Header></Header>
-    <SiteBar></SiteBar>
+    <SiteBar v-if="is_login"></SiteBar>
     <div class="top_to_scroll"  ref="to_scroll"></div>
     <div v-if="showMain" class="main">
       <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
@@ -44,6 +44,9 @@ export default {
       showMain: true,
       selectedView: '',
     }
+  },
+  computed:{
+    is_login(){ return  global.login }
   },
   methods:{
     async init(){

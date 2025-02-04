@@ -1,53 +1,61 @@
 <template>
-    <div class="wrap_sitebar" :class="{open}">
-        <ButtonSiteBar :open="open" @click="open=!open"/>
-        <div class="item_level_0 calcs">
-            <div class="title" @click="openTogle.calcs=!openTogle.calcs"><Marker :level="0"/> {{ text.Calc }}</div>
-            <div v-if="openTogle.calcs" class="content">
-                <Item_level_1 button_type :title="text.NewCalc" />
-                <Item_level_1 button_type :title="text.LastCalcs" />
-                <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" />
-                <Item_level_1 button_type :title="text.OpenCalcs" />
+    <div  class="wrap_sitebar" :class="{'open':config.open}">
+        <ButtonSiteBar :open="config.open" @click=" config.open=!config.open "/>
+        <div class="slide_bar">
+            <div class="item_level_0 calcs">
+                <div class="title" @click="config.calcs=!config.calcs"><Marker :level="0"/> {{ text.Calc }}</div>
+                <div v-if="config.calcs" class="content">
+                    <Item_level_1 :title="text.NewCalc" @click="newCalc()" />
+                    <Item_level_1 :title="text.LastCalcs" />
+                    <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" :marker_type="'1'" />
+                    <Item_level_1 :title="text.OpenCalcs" />
+                </div>
             </div>
-        </div>
-        <div class="item_level_0 offers">
-            <div class="title" @click="openTogle.offers=!openTogle.offers"><Marker :level="0"/> {{ text.Offer }}</div>
-            <div v-if="openTogle.offers" class="content">
-                <Item_level_1 button_type :title="text.NewOffer" />
-                <Item_level_1 button_type :title="text.LastOffer" />
-                <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" />
-                <Item_level_1 button_type :title="text.OpenOffer" />
-            </div>            
-        </div>
-        <div class="item_level_0 projects">
-            <div class="title" @click="openTogle.projects=!openTogle.projects"><Marker :level="0"/> {{ text.Project }}</div>
-            <div v-if="openTogle.projects" class="content">
-                <Item_level_1 button_type :title="text.NewProject" />
-                <Item_level_1 button_type :title="text.OfferAsProject" />
-                <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" />
-                <Item_level_1 button_type :title="text.OpenProject" />
-            </div>              
+            <div class="item_level_0 offers">
+                <div class="title" @click="config.offers=!config.offers"><Marker :level="0"/> {{ text.Offer }}</div>
+                <div v-if="config.offers" class="content">
+                    <Item_level_1 v-if="poject_status=='calc'" :title="text.NewOffer" @click="newOffer()" />
+                    <Item_level_1 :title="text.LastOffer" />
+                    <Item_level_1 v-for="item in offers" :key="item.id" :project_data="item"  :marker_type="'1'" />
+                    <Item_level_1 :title="text.OpenOffer" />
+                </div>            
+            </div>
+            <div class="item_level_0 projects">
+                <div class="title" @click="config.projects=!config.projects"><Marker :level="0"/> {{ text.Project }}</div>
+                <div v-if="config.projects" class="content">
+                    <Item_level_1 :title="text.NewProject" @click="newProject()"/>
+                    <Item_level_1 v-if="poject_status=='offer'" :title="text.OfferAsProject" @click="OfferAsProject()"  />
+                    <Item_level_1 :title="text.Projects" />
+                    <Item_level_1 v-for="item in projects" :key="item.id" :project_data="item"  :marker_type="'0'" bills />
+                    <Item_level_1 :title="text.OpenProject" />
+                </div>              
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import {text} from '@/servis/text'
+import { EventBus } from '@/servis/EventBus'
+import { apiData } from '@/servis/apiData.js'
+import { Project, newStatus, updateProject } from '@/servis/projectData.js'
 export default{
     name: 'SiteBar',
+    mounted(){
+        this.initConfig()
+        this.initData()
+    },
     data(){
         return{
-            open: true,
-            openTogle:{
+            config:{
+                open: true,
                 calcs: true,
                 offers: true,
                 projects: true,
             },
-            calcs:[
-                {id:1, title:'Project X', date: '2025-01-31 13:23:44'},
-                {id:2, title:'Project X', date: '2025-01-30 13:23:44'},
-                {id:3, title:'Project X', date: '2025-01-23 13:23:44'},
-            ],
+            calcs:[],
+            offers:[],
+            projects:[],
             text:{
                 Calc: text.sideBar.Calc,
                 NewCalc: text.sideBar.NewCalc,
@@ -62,12 +70,58 @@ export default{
                 Project: text.sideBar.Project,
                 NewProject: text.sideBar.NewProject,
                 OfferAsProject: text.sideBar.OfferAsProject,
-                OpenProject: text.sideBar.OpenProject,                    
+                OpenProject: text.sideBar.OpenProject,     
+                
+                Projects: text.sideBar.Projects,
             }
         }
     },
+    watch:{
+        config:{
+            handler(){
+                localStorage.setItem('sideBarConf', JSON.stringify(this.config))
+            },
+            deep: true,
+        }
+    },
+    computed:{
+        poject_status(){
+            let result = 'calc'
+            if(!!Project&&!!Project.project&&!!Project.project.status) result = Project.project.status
+            return result
+        }
+    },
     methods:{
-
+        initConfig(){
+            let data = JSON.parse(localStorage.getItem('sideBarConf'))
+            console.log('sideBarConf', data)
+            if(!!data) this.config = data
+            if(!data) localStorage.setItem('sideBarConf', JSON.stringify(this.config))
+        },
+        async initData(){
+            let data = await apiData({typeData:'siteBarData'})
+            this.calcs = data.calcs
+            this.offers = data.offers
+            this.projects = data.projects
+        },
+        async newCalc(){
+            await EventBus.emit('MenuProjects:new')
+            await updateProject()
+            this.initData()
+        },
+        async newOffer(){
+            await newStatus('offer')
+            this.initData()
+        },
+        async OfferAsProject(){
+            await newStatus('project')
+            this.initData()            
+        },
+        async newProject(){
+            await EventBus.emit('MenuProjects:new', 'project')
+            await updateProject()
+            this.initData()       
+        }
     }
 }
 </script>
@@ -87,6 +141,11 @@ export default{
     color: #464646;
 }
 
+.slide_bar{
+    overflow-y: auto;
+    height: 100%;
+}
+
 .title{
     display: flex;
     column-gap: 5px;
@@ -103,16 +162,6 @@ export default{
 
 .item_level_0{
     margin-bottom: 15px;
-}
-
-.item_level_1{
-    display: flex;
-    column-gap: 8px;    
-    font-family: 'Raleway-Medium';
-    font-size: 16px;
-    margin-left: 17px;
-    margin-bottom: 5px;
-    cursor: pointer;
 }
 
 

@@ -6,6 +6,7 @@ $objects = $rq_data -> data -> objects;
 
 $data['user_id']=$user_id;
 $data['name'] = $project -> name;
+$data['status'] = $project -> status;
 $data['discription'] = $project -> discription;
 $data['customer'] = json_encode($project -> customer);
 $data['total_AdditionalServices'] = $project -> total_AdditionalServices;

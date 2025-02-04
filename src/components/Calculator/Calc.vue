@@ -82,9 +82,9 @@ export default{
             this.ListObjects = this.project.objects
             this.loaded = true
         },
-        async newProject(){
+        async newProject(status='calc'){
             this.loaded = false
-            this.project = await newPoject() 
+            this.project = await newPoject(false, status) 
             this.ListObjects = this.project.objects
             this.loaded = true
         },
