@@ -8,7 +8,7 @@
                     <Item_level_1 :title="text.NewCalc" @click="newCalc()" />
                     <Item_level_1 :title="text.LastCalcs" />
                     <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" :marker_type="'1'" />
-                    <Item_level_1 :title="text.OpenCalcs" />
+                    <Item_level_1 :title="text.OpenCalcs" @click="openProjects('calcs')" />
                 </div>
             </div>
             <div class="item_level_0 offers">
@@ -17,7 +17,7 @@
                     <Item_level_1 v-if="poject_status=='calc'" :title="text.NewOffer" @click="newOffer()" />
                     <Item_level_1 :title="text.LastOffer" />
                     <Item_level_1 v-for="item in offers" :key="item.id" :project_data="item"  :marker_type="'1'" />
-                    <Item_level_1 :title="text.OpenOffer" />
+                    <Item_level_1 :title="text.OpenOffer" @click="openProjects('offers')"/>
                 </div>            
             </div>
             <div class="item_level_0 projects">
@@ -27,7 +27,7 @@
                     <Item_level_1 v-if="poject_status=='offer'" :title="text.OfferAsProject" @click="OfferAsProject()"  />
                     <Item_level_1 :title="text.Projects" />
                     <Item_level_1 v-for="item in projects" :key="item.id" :project_data="item"  :marker_type="'0'" bills />
-                    <Item_level_1 :title="text.OpenProject" />
+                    <Item_level_1 :title="text.OpenProject" @click="openProjects('projects')"/>
                 </div>              
             </div>
         </div>
@@ -121,6 +121,9 @@ export default{
             await EventBus.emit('MenuProjects:new', 'project')
             await updateProject()
             this.initData()       
+        },
+        openProjects(type){
+            EventBus.emit('MenuProjects:open')
         }
     }
 }

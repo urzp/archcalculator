@@ -50,7 +50,7 @@ export default{
 
 <style scoped>
 .list_recent_projects{
-    width: calc(40% - 20px);
+    width: calc(45% - 20px);
     margin-right: 20px;
 }
 

@@ -2,7 +2,7 @@
         <div class="item_level_1" :class="{item_button:button_type}" @click="click_handling()" >
             <Marker v-if="!!marker_type" :level="marker_type"/>
             <div v-if="!!title" class="title">{{ title }}</div>
-            <div v-if="!!project_data" class="name_poject">{{ project_data.name }} </div>
+            <div v-if="!!project_data" class="name_poject" @click.stop="openProject()">{{ project_data.name }} </div>
             <div v-if="!!project_data&&!bills" class="from_date">{{ from_date }}</div>
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
@@ -74,9 +74,9 @@ export default{
     },
     methods:{
         click_handling(){
-            if(bills) this.showBills=!this.showBills
-            if(!!this.project_data) this.openProject()
             this.$emit('click')
+            if(!!this.project_data&&!this.bills) this.openProject()
+            if(this.bills) this.showBills=!this.showBills
         },
         openProject(){
             EventBus.emit('Project:openProject', this.project_data.id)
