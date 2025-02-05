@@ -24,6 +24,22 @@
                 <InputText :value="customer_address_2" width="200px" @submit_event="value=>newProjectCustemer('address_2', value)"></InputText>
             </div>
         </div>
+        <!-- v-if="login&&status_project!='bill'" -->
+        <div  class="bill_header_data"> 
+            <div class="payment_date light-text">
+                <div class="">Leistungszeitraum vom</div>
+                <InputDate :value="new Date()" @editValue=" date=>console.log(date) " />
+                <div class="">bis</div>  
+                <InputDate :value="new Date()" @editValue=" date=>console.log(date) " />
+            </div>
+            <div class="item_title_value">
+                <div class="invoice_number bold-text">Rechnung Nr.</div>
+                <div class="invoice_number value bold-text">
+                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate  alight_edit="center"
+                    @submit_event="value=>update_value(value,'invoice_number')" />  
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -172,6 +188,31 @@ export default{
     }
     .customer .content{
         font-family: 'Raleway-Light';
+    }
+
+    .payment_date{
+        margin-top: -10px;
+        text-align: right;
+        display: flex;
+        column-gap: 5px;
+        justify-content: flex-end;
+    }
+
+    .light-text{
+        font-size: 18px;
+        font-family: 'Raleway-Light';
+        color: #464646;
+    }
+
+    .item_title_value{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bold-text{
+        font-size: 18px;
+        font-family: 'Raleway-Medium';
+        color: #2c2c2c;       
     }
 
 </style>

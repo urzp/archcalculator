@@ -6,9 +6,9 @@
             <div v-if="!!project_data&&!bills" class="from_date">{{ from_date }}</div>
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
-                <div class="contract">{{ text.contract }}</div>
+                <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
                 <div class="newBill">{{ text.newBill }}</div>
-                <div class="bills_list">{{ text.bills }}</div>
+                <div class="bills_list" @click="openBills()">{{ text.bills }} </div>
         </div>
 </template>
 
@@ -79,7 +79,12 @@ export default{
             if(this.bills) this.showBills=!this.showBills
         },
         openProject(){
+            EventBus.emit('MenuProjects:closeBills')
             EventBus.emit('Project:openProject', this.project_data.id)
+        },
+        async openBills(){
+            await this.openProject()
+            EventBus.emit('MenuProjects:showBills')
         }
     }
 }
