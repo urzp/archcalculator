@@ -58,10 +58,10 @@ export default{
         }
     },
     methods:{
-        async getData(){
+        async getData(type='all'){
             this.loading = true
             if(!global.login) return false
-            let result = (await apiData({typeData:'getProjects'})).data
+            let result = (await apiData({typeData:'getProjects', type})).data
             this.loading = false
             if(!result) return false
             this.list = result
@@ -71,10 +71,10 @@ export default{
             if(this.softReload){ this.softReload = false; EventBus.emit('MenuProjects:reload') }
             this.show=false
         },
-        openPopap(){
+        openPopap(type='all'){
             if(this.goToCalcPage()) return false
             document.documentElement.style.overflow = 'hidden'
-            this.getData()
+            this.getData(type)
             this.show=true
         }, 
         openProject(id){
