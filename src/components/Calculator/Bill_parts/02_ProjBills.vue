@@ -1,36 +1,9 @@
 <template>
     <div v-if="isSelected" class="bills_wrap">
         <!-- <CalcTitle no_full_inf></CalcTitle> -->
-        <BillsList :list="list" @selectBill="(value)=>selectBill(value)"></BillsList>
+        <ProjBillsList :list="list" @selectBill="(value)=>selectBill(value)"></ProjBillsList>
         <template v-if="list.length>0">
         <template v-if="!loadEffect" >
-        <!-- <div class="title_bill" ref="begin">
-            <div class="name">
-                <div class="leftPart">
-                    <div class="title">Rechnung:</div>
-                    <div class="title_value bold-text">
-                        <InputText_Bill noUpdate :value="bill_name" width="300px" 
-                        @submit_event="value=>update_title(value)"/>
-                    </div>
-                </div>
-                <div class="invoice_number">
-                    <InputText_Bill noUpdate :value="invoice_number" width="200px" alight_edit="center"
-                    @submit_event="value=>update_invoice_number(value)"/>
-                </div>
-            </div>
-            <div class="devide_part"></div>
-        </div> -->
-        <!-- <BillHeader :bill_item="selectedBill"/>
-        <Grundleistungen :bill_item="selectedBill"/>
-        <AdditionalLeistungen :bill_item="selectedBill"/>
-        <Nebenkosten  :bill_item="selectedBill"/>
-        <Zwischensumme :bill_item="selectedBill"/>
-        <GesamtRest  :bill_item="selectedBill"/>
-        <Rechnungsbetrag  :bill_item="selectedBill"/>
-        <BillFooter :bill_item="selectedBill"/>
-        <div class="devide_part"></div>
-        <div class="bottum_line"></div>
-        <ExportPanel :bill_item="selectedBill"/> -->
         </template>
         <div v-else class="load">Loading . . . </div>
         </template>
@@ -43,7 +16,7 @@ import { EventBus } from '@/servis/EventBus'
 import { newBill, Bills, LoadBills, clearBills } from '@/servis/projectBill.js'
 import { saveBill } from '@/servis/projectBill.js'
 export default{
-    name: 'Bill',
+    name: 'ProjBills',
     mounted(){
         EventBus.on('MenuProjects:showBills', ()=>this.openBills())
         EventBus.on('MenuProjects:new', clearBills) 

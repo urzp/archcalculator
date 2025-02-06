@@ -36,6 +36,10 @@ Recent не меняется
 Регистрация после согласования.
 
 Цифры моноширый шрифт
-XRehnum типа QR
+XRehnum типа QR https://www.ferd-net.de/fileadmin/user_upload/FeRD/Downloads/ZF232_EN.zip
 Ghat gpty
 Админка
+
+Кружки в треугольники https://htmlbook.ru/blog/treugolniki-cherez-css
+        border: 8px solid transparent;
+        border-top: 8px solid #C0C0C0;

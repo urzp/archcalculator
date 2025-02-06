@@ -64,7 +64,7 @@ export default{
         width: v-bind(width);
         min-width: 50px;
         font-family: 'Raleway-Light';
-        font-size: 18px;
+        font-size: inherit;
 
     }
     .wrap-edit{
@@ -80,7 +80,7 @@ export default{
         padding-left: 15px;
         border: none;
         resize: none;
-        font-size: 18px;
+        font-size: inherit;
         font-family: 'Raleway-Light';
         line-height: 26px;
         color: #464646;

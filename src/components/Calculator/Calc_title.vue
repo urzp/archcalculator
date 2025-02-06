@@ -1,6 +1,7 @@
 <template>
     <div class="title-project">
         <!-- <div class="name" >{{ project_name }}</div> -->
+        <template v-if="!bill_status">
         <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
         <div class="date">{{ created }}</div>
         <div class="discription">
@@ -24,22 +25,8 @@
                 <InputText :value="customer_address_2" width="200px" @submit_event="value=>newProjectCustemer('address_2', value)"></InputText>
             </div>
         </div>
-        <!-- v-if="login&&status_project!='bill'" -->
-        <div  class="bill_header_data"> 
-            <div class="payment_date light-text">
-                <div class="">Leistungszeitraum vom</div>
-                <InputDate :value="new Date()" @editValue=" date=>console.log(date) " />
-                <div class="">bis</div>  
-                <InputDate :value="new Date()" @editValue=" date=>console.log(date) " />
-            </div>
-            <div class="item_title_value">
-                <div class="invoice_number bold-text">Rechnung Nr.</div>
-                <div class="invoice_number value bold-text">
-                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate  alight_edit="center"
-                    @submit_event="value=>update_value(value,'invoice_number')" />  
-                </div>
-            </div>
-        </div>
+        </template>
+        <ProjBillHeader v-else/>
     </div>
 </template>
 
@@ -86,6 +73,12 @@ export default{
             if(!!this.project&&!!this.project.status) result = this.project.status
             return result
         },
+        bill_status(){
+            let result = false
+            if(this.status_project=='bill') result = true
+            result = true // temp
+            return result
+        },
         customer_company(){
             let result = 'Company'
             if(!!this.project&&!!this.project.customer&&!!this.project.customer.company) result = this.project.customer.company
@@ -108,6 +101,17 @@ export default{
         },
         project(){
             return Project.project
+        },
+        useAvatar(){
+            let result = false
+            if(!!global.login) {
+                result = !!user.avatar
+            }
+            return result
+        },
+        url_avatar(){
+            let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
+            return url
         },
     },
     methods:{
@@ -196,23 +200,6 @@ export default{
         display: flex;
         column-gap: 5px;
         justify-content: flex-end;
-    }
-
-    .light-text{
-        font-size: 18px;
-        font-family: 'Raleway-Light';
-        color: #464646;
-    }
-
-    .item_title_value{
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .bold-text{
-        font-size: 18px;
-        font-family: 'Raleway-Medium';
-        color: #2c2c2c;       
     }
 
 </style>

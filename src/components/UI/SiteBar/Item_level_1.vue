@@ -83,7 +83,7 @@ export default{
             EventBus.emit('Project:openProject', this.project_data.id)
         },
         async openBills(){
-            await this.openProject()
+            EventBus.emit('Project:openProject', this.project_data.id)
             EventBus.emit('MenuProjects:showBills')
         }
     }
