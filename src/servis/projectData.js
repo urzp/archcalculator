@@ -143,6 +143,7 @@ async function deleteLocalProjectObject(id){
 }
 
 export async function newStatus(status){
+    Project.project.status = status
     updateProject()
 }
 
