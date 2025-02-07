@@ -1,9 +1,10 @@
 import { reactive } from 'vue';
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
-import { global } from '@/servis/globalValues.js'
+import { user, global } from '@/servis/globalValues.js'
 import {toLetters} from '@/servis/functions.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
+import {text} from '@/servis/text'
 
 export let Project = reactive({})
 
@@ -142,6 +143,44 @@ async function deleteLocalProjectObject(id){
 }
 
 export async function newStatus(status){
-    Project.project.status = status
     updateProject()
+}
+
+export async function projectToBill(){
+    let number_bill = 0
+
+    Project.project.number = number_bill
+    Project.project.status = 'bill'
+    Project.project.id_project_contract = Project.project.id
+    let user_name = !user.name?'Name':user.name
+    let user_address = !user.address?'Adresse':user.address
+    let user_data = `${user_name} - ${user_address}`
+    Project.project.user_data = user_data
+    Project.project.user_IBAN = user.IBAN
+    Project.project.user_BIC = user.BIC
+    Project.project.user_Institut = user.Institut
+    Project.project.user_USt = user.USt
+    Project.project.user_logo = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
+    Project.project.invoice_number = 'RE - - - - -'
+
+    Project.project.number_bill = `${number_bill + 1}. Abschlagsrechnung`
+    Project.project.greeting_phrase = text.bill.greeting_phrase,
+    Project.project.payment_date = setPayment_date(0)
+
+    let result =  await apiData({typeData:'newBill_v2', data:Project})
+    let new_id = result.data
+    
+}
+
+function setPayment_date(number){
+    let payment_date = {}
+    if(number==0){
+        payment_date.vom = new Date( )
+        payment_date.bis = new Date( ).addDays(5)
+    }else{
+        let lastDate =  Bills[number-1].payment_date.bis
+        payment_date.vom = new Date( lastDate )
+        payment_date.bis = new Date( lastDate ).addDays(5)
+    }
+    return payment_date
 }

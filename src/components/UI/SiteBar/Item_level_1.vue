@@ -1,5 +1,5 @@
 <template>
-        <div class="item_level_1" :class="{item_button:button_type}" @click="click_handling()" >
+        <div class="item_level_1" @click="click_handling()" >
             <Marker v-if="!!marker_type" :level="marker_type"/>
             <div v-if="!!title" class="title">{{ title }}</div>
             <div v-if="!!project_data" class="name_poject" @click.stop="openProject()">{{ project_data.name }} </div>
@@ -7,7 +7,7 @@
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
                 <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
-                <div class="newBill">{{ text.newBill }}</div>
+                <div class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
                 <div class="bills_list" @click="openBills()">{{ text.bills }} </div>
         </div>
 </template>
@@ -16,6 +16,7 @@
 import {text} from '@/servis/text'
 import {dateToStringNoTime} from '@/servis/functions'
 import { EventBus } from '@/servis/EventBus'
+import {projectToBill} from '@/servis/projectData'
 export default{
     name: 'Item_level_1',
     data(){
@@ -85,6 +86,9 @@ export default{
         async openBills(){
             EventBus.emit('Project:openProject', this.project_data.id)
             EventBus.emit('MenuProjects:showBills')
+        },
+        async newBill(){
+            projectToBill()
         }
     }
 }

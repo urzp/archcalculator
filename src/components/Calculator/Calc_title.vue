@@ -76,7 +76,7 @@ export default{
         bill_status(){
             let result = false
             if(this.status_project=='bill') result = true
-            result = true // temp
+            //result = true // temp
             return result
         },
         customer_company(){

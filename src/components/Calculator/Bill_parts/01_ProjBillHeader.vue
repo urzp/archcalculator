@@ -43,12 +43,6 @@
                 @submit_event="value=>update_value(value,'project_dicription')"
                 @setDefault="set_defaul('project_dicription')"/>
             </div> 
-            <div class="payment_date light-text">
-                <div class="">Leistungszeitraum vom</div>
-                <InputDate :value="payment_date.vom" @editValue=" date=>actualBill.payment_date.vom=date " />
-                <div class="">bis</div>  
-                <InputDate :value="payment_date.bis" @editValue=" date=>actualBill.payment_date.bis=date " />
-            </div>
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
                 <div class="invoice_number value bold-text">
@@ -61,6 +55,12 @@
                 <div class="datum_value bold-text">
                     <InputDate :value="created" @editValue=" date=>actualBill.created=date " />
                 </div>
+            </div>
+            <div class="payment_date light-text">
+                <div class="">Leistungszeitraum vom</div>
+                <InputDate :value="payment_date.vom" @editValue=" date=>actualBill.payment_date.vom=date " />
+                <div class="">bis</div>  
+                <InputDate :value="payment_date.bis" @editValue=" date=>actualBill.payment_date.bis=date " />
             </div>
             <div class="number_bill">
                 <div class="title bold-text">
@@ -103,6 +103,7 @@ export default{
         bill_item:[Number, String]
     },
     computed:{
+
         useAvatar(){
             let result = false
             if(!!global.login) {
@@ -112,33 +113,33 @@ export default{
         },
         url_avatar(){
             let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
-            if(!!Bills&&Bills.user_logo) url = user_logo
+            if(!!this.actualBill&&!!this.actualBill.user_logo) url = this.actualBill.user_logo
             return url
         },
         actualBill(){
             let result = {}
-            if(!!Bills&&Bills.length>0) result = Bills[this.bill_item]
+            if(!!Project&&!!Project.project) result = Project.project
             return result
         },
         user_data(){
             let result = ''
             if(!!this.actualBill&&!!this.actualBill.user_data) result = this.actualBill.user_data
-            return 'Paul Ermakov - Ryazan Str Münster 80339'
+            return result
         },
         customer(){
             let result = this.def_customer
-            if(!!this.actualBill) result = this.actualBill.custemer
+            if(!!this.actualBill) result = this.actualBill.customer
             return result
         },
         project_title(){
             let result = '-'
-            if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.name
-            return 'Project X'
+            if(!!this.actualBill) result = this.actualBill.name
+            return result
         },
         project_dicription(){
             let result = '-'
-            if(!!this.actualBill&&!!this.actualBill.project) result = this.actualBill.project.discription
-            return 'Wohnprojekt in [Ort] mit [Anzahl] Wohneinheiten. Moderne Architektur, Fokus auf Nachhaltigkeit und Funktionalität. Attraktive Lage mit guter Anbindung.'
+            if(!!this.actualBill) result = this.actualBill.discription
+            return result
         },
         payment_date(){
             let result = {
@@ -155,7 +156,7 @@ export default{
         invoice_number(){
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.invoice_number) result = this.actualBill.invoice_number
-            return 'RE - - - - -'
+            return result
         },
         created(){
             let result = new Date()
@@ -165,12 +166,12 @@ export default{
         number_bill(){
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.number_bill) result = this.actualBill.number_bill
-            return '1. Abschlagsrechnung:'
+            return result
         },
         greeting_phrase(){
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.greeting_phrase) result = this.actualBill.greeting_phrase
-            return 'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:'            
+            return result            
         }
     },
     methods:{
@@ -243,7 +244,7 @@ export default{
     }
 
     .main_data_bill{
-        margin-top: 50px;
+        margin-top: 120px;
     }
     .custemer{
         margin-top: 10px;
@@ -255,16 +256,13 @@ export default{
     }
 
     .main_data_bill .discription{
-        width: 60%;
         margin-bottom: 10px;
     }
 
     .payment_date{
-        margin-top: -10px;
-        text-align: right;
         display: flex;
         column-gap: 5px;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
 
     .payment_date_volume, .date_created{
