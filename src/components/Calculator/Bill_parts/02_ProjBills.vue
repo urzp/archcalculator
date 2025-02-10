@@ -1,160 +1,130 @@
 <template>
-    <div v-if="isSelected" class="bills_wrap">
-        <!-- <CalcTitle no_full_inf></CalcTitle> -->
-        <ProjBillsList :list="list" @selectBill="(value)=>selectBill(value)"></ProjBillsList>
-        <template v-if="list.length>0">
-        <template v-if="!loadEffect" >
-        </template>
-        <div v-else class="load">Loading . . . </div>
-        </template>
+    <div class="bill_list_wrap">
+        <div class="name_project">{{ name_project }}</div>
+        <div class="header">
+                <div class="title">{{ text.Bills }}</div>
+        </div>
+        <div class="subheader" v-if="list.length > 0">
+            <div class="title">{{ text.Name }}</div> 
+            <div class="title_statis">{{ text.Payment_from }}</div>         
+        </div>
+        <div class="list_bills">
+            <div class="item" v-for="item, index in list" :key=item.id>
+                <div class="hover-panel">
+                    <div class="left_part">
+                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                    </div>
+                    <div class="right_part">
+                        <NewButton @click.stop="newBill(index)" width="45px" height="23px" width_img="10px"/>
+                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
+                    </div>
+                    
+                </div>
+                <div class="wrap_left">
+                    <div class="name" @click="selectBill(item.id)">{{ item.name }}</div>
+                    <div class="data_price">
+                        <div class="price">
+                            <Price :value="item.total" font_size_unit="14px" noCents font_family="Raleway-Medium"/>
+                        </div>
+                        <div class="data"> {{ formatDate(item.payment_date) }} </div>
+                    </div>
+                </div>
+                <div class="wrap_right light-text">
+                    <div class="invoice_number">{{ item.invoice_number }}</div> 
+                    <div  class="date"><InputDate :value="item.paid_date" @editValue=" date=>update_value(date, 'paid_date', item.id) " /></div>     
+                    <div  class="value">
+                        <PriceInputBill noPanel :value ="item.paid_value" @editPrice="newValue=>update_value(newValue, 'paid_value', item.id)" />  
+                    </div>
+                    
+                    <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
+                </div>
+            </div>
+            <NewButton class="newButton_bottom_list" @click.stop="newBill(list.length)" width="150px" height="30px" width_img="10px"/>
+        </div>
     </div>
 </template>
 
-
 <script>
 import { EventBus } from '@/servis/EventBus'
-import { newBill, Bills, LoadBills, clearBills } from '@/servis/projectBill.js'
-import { saveBill } from '@/servis/projectBill.js'
+import {text} from '@/servis/text'
+import { Project } from '@/servis/projectData.js'
+import { array_move } from '@/servis/functions.js'
+import { Bills, newBill, saveBill, sequence , deleteBill, setPaid } from '@/servis/projectBill.js'
+
 export default{
     name: 'ProjBills',
-    mounted(){
-        EventBus.on('MenuProjects:showBills', ()=>this.openBills())
-        EventBus.on('MenuProjects:new', clearBills) 
-        EventBus.on('MenuProjects:newBill', this.newBill)
-        EventBus.on('Bills:selectBill', id=>{this.selectBillById(id)} )
-    },
     data(){
         return{
-            selectedBill:'',
-            loadEffect:false,
+            showSelectData: false,
+            SelectDataName: '',
+            text:{
+                Bills: text.billList.Bills,
+                Name: text.billList.Name,
+                Payment_from: text.billList.Payment_from,
+            },
         }
     },
-    props:{
-        project_id:String,
-    },
-    watch:{
-        project_id(){
-            this.getData()
-        },
-        listLenght(value){
-            if(!!this.selectedBill&&this.selectedBill + 1 > value) this.selectedBill = value - 1
-        }
-    },
+    emits:['selectBill'],
     computed:{
-        isSelected(){
-            let result = false
-            if(!!this.project_id&&!!this.selectedBill||this.selectedBill==0) result = true
-            return result
-        },
-        bill_name(){
+        name_project(){
             let result = ''
-            if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].name
-            return result
-        },
-        invoice_number(){
-            let result = ''
-            if(this.isSelected&&!!this.list&&this.list.length>0&&!!this.list[this.selectedBill]) result = this.list[this.selectedBill].invoice_number
+            if(!!Project&&!!Project.project) result = Project.project.name
             return result
         },
         list(){
             let result = []
-            if(!!Bills) result = Bills
+            if(!!Project&&!!Project.bills) result = Project.bills
             return result
         },
-        listLenght(){
-            let result = 0
-            if(!!this.list) result = this.list.length
-            return result
-        }
     },
     methods:{
-        selectBill(index){
-            this.selectedBill=index
-            this.loadEffect = true
-            setTimeout(()=>{this.loadEffect = false}, 500)
+        formatDate(date){
+            if(!date) return '-'
+            date = new Date(date)
+           return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
         },
-        selectBillById(id){
-            let index = Bills.findIndex(item=>item.id==id)
-            this.selectedBill = index
-            this.$refs.begin.scrollIntoView({behavior: 'smooth'});
+        // async newBill(index){
+        //     let newBilleLelement = await newBill(Project.project.id, index)
+        //     Bills.splice(index, 0, newBilleLelement)
+        //     this.selectBill(index)
+        // },
+        async moveUpBill(index){
+            if(index<=0||index>this.list.length) return false
+            await array_move(Bills,index,index - 1)
+            sequence()
         },
-        async getData(){
-            await clearBills()
-            if(!this.project_id) return false
-            await LoadBills(this.project_id)
+        async moveDownBill(index){
+            if(index<0||index>=this.list.length) return false
+            await array_move(Bills,index,index + 1)
+            sequence()
         },
-        async openBills(number='last'){
-            if(this.list.length == 0) await this.newBill()
-            if(number=='last') { this.selectedBill = this.list.length - 1 } else { this.selectedBill = number }
-            
+        selectBill(id){
+            EventBus.emit('Project:openBill', id)
         },
-        async newBill(){
-           let bill = await newBill(this.project_id)
-           this.list.push(bill)
-           this.selectedBill = this.list.length - 1
-        },
-        async update_title(value){
-            let id = this.list[this.selectedBill].id
-            this.list[this.selectedBill].name = value
-            saveBill(id)
-        },
-        async update_invoice_number(value){
-            let id = this.list[this.selectedBill].id
-            this.list[this.selectedBill].invoice_number = value
-            this.list[this.selectedBill].paid.invoice_number = value
-            saveBill(id)
-        },
-    }
+        deleteBill(id){
+            let index = this.list.findIndex(item=>item.id==id);
+            EventBus.emit('Popap:comfirm',{
+                title:'Bestätigen Sie den Löschvorgang',
+                action: async ()=>{
+                    this.list.splice(index, 1);
+                    await deleteBill(id)
+                    sequence()
+                },
+                
+            })
 
+        },
+        async update_value(value, name_value, id){
+            this.showSelectData=false
+            if(name_value=='paid_value') setPaid(value, 'value', id)
+            if(name_value=='paid_date') setPaid(value, 'date',id)
+        }
+    }
 }
 </script>
 
 <style scoped>
-    .title_bill .name, .bottum_line{
-        font-family: 'Raleway-Light';
-        color: #3d3d3d;
-        font-size: 24px;
-        border-bottom: 1px solid #999999;
-    }
-
-    .devide_part{
-        width: 100%;
-        height: 40px;
-        margin-top: 15px;
-        margin-bottom: 10px;
-        background-color: #F5F5F5;
-    }
-
-    .leftPart{
-        display: flex;
-        column-gap: 10px;
-        align-items: baseline;
-    }
-
-    .name{
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        column-gap: 15px;
-    }
-
-    .name .title{
-        font-size: 18px;
-    }
-
-    .name .title_value{
-        font-size: 20px;
-    }
-
-    .load{
-        min-height: 500px;
-        margin-top: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 26px;
-        font-family: 'Raleway-ExtraLight';
-    }
 
     .light-text{
         font-family: 'Raleway-Light';
@@ -165,4 +135,138 @@ export default{
         font-family: 'Raleway-Medium';
         color: #2c2c2c;       
     }
+
+    .bill_list_wrap{
+        min-height: 300px;
+        margin-top: 60px;
+        margin-bottom: 20px;
+    }
+
+    .name_project{
+        font-family: 'Raleway-Light';
+        font-size: 36px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .header{
+        width: 60%;
+        padding-bottom: 10px;
+        margin-top: 30px;
+        border-bottom: 1px solid #999;
+        font-family: 'Raleway-Light';
+        font-size: 20px;
+        color: #545454;
+    }
+
+    .wrap_left{
+        width: 50%;
+    }
+
+    .subheader{
+        width: 60%;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Raleway-Light';
+        font-size: 18px;
+        color: #545454;
+    }
+
+    .title_statis{
+        width: 240px;
+        text-align: center;
+    }
+
+    .list_bills {
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+
+    .item{
+        width: 60%;
+        display: flex;
+        font-family: 'Raleway-Medium';
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 20px;
+        color: #545454;
+        column-gap: 10px;
+    }
+
+    .wrap_left{
+        cursor: pointer;
+        margin-left: -150px;
+        padding-left: 150px;
+    }
+
+    .data_price{
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: 'Raleway-Medium';
+        color:#999;
+        font-size: 14px;
+    }
+
+    .wrap_right{
+        display: flex;
+        column-gap: 5px;
+        font-size: 18px;
+    }
+
+    .wrap_right .date{
+        width: 140px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .invoice_number{
+        width: 120px;
+        font-family: 'Raleway-Medium';
+    }
+
+    .hover-panel{
+        position: absolute;
+        transform: translateX(-110px);
+        display: flex;
+        column-gap: 5px;
+        visibility: hidden;
+    }
+
+    .left_part, .right_part{
+        display: flex;
+        row-gap: 5px;
+        flex-direction: column;     
+    }
+
+    .item:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .name:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .status, .data_paid{
+        width: 140px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .value{
+        width: 140px;
+        text-align: right;
+        font-size: 18px;
+    }
+
+    .data_pai{
+        width: 80px;
+    }
+
+    .newButton_bottom_list{
+        margin-top: 10px;
+    }
+ 
 </style>

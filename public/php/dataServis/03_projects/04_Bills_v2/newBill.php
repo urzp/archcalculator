@@ -10,8 +10,10 @@ $newdata['user_id'] = $user_id;
 $newdata['name'] = $project -> name;
 $newdata['number'] = $project -> number;
 $newdata['total'] = $project -> total;
-$newdata['data'] = json_encode($project);
+$newdata['data'] = json_encode($input_data);
 $newdata['version'] = 'v_2.0';
+$newdata['payment_date'] = $project -> payment_date -> bis;
+$newdata['invoice_number'] = $project -> invoice_number;
 
 crud_create('project_bills', $newdata);
 

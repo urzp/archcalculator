@@ -19,11 +19,6 @@ export let text = {
         my_company_plz: 'PLZ',
         my_company_city: 'Stadt',
     },
-
-    
-    bill:{
-        greeting_phrase:'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
-    },
     menu:{
         Login: 'Log in',
         Registration: 'Registrierung',
@@ -198,6 +193,18 @@ export let text = {
         Total_gross: 'Gesamtsumme Brutto',
         Sum_summary:'Summe Zusammenfassung',
         Sum_total_calc:'Summe: ',
-    }
+    },
+
+    billList: {
+        Bills: 'Rechnungen',
+        Name: 'Name',
+        Published: 'publiziert',
+        Payment_from:'Zahlung vom',
+
+    },
+
+    bill:{
+        greeting_phrase:'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
+    },
 
 }

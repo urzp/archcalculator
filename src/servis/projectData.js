@@ -8,7 +8,7 @@ import {text} from '@/servis/text'
 
 export let Project = reactive({})
 
-export async function LoadProjectData(id, download_token){
+export async function LoadProjectData(id, download_token, statusBill=false){
     EventBus.emit('Project:Loading')
     let result
     if(id=='local'){ 
@@ -18,7 +18,8 @@ export async function LoadProjectData(id, download_token){
             result =  await apiData({typeData:'loadWholeProject_by_link', data:{id, download_token}}) //open project by link
             result.data.show_by_link = true
         }else{
-            result =  await apiData({typeData:'loadWholeProject', id}) //open project
+            if(!statusBill) result =  await apiData({typeData:'loadWholeProject', id}) //open project
+            if(statusBill) result =  await apiData({typeData:'loadBill_v2', id})
         }
         if(!result.success){EventBus.emit('Project:ErrLoadeded')}
         result = result.data
@@ -75,7 +76,11 @@ export async function updateProject(){
         if(global.login) await saveNewProject()
         if(!global.login) setUnSavedStatus()
     }
-    if(Project.project.id=='local'){ saveLocalProject() }else{ await apiData({typeData:'updateProject', data: Project.project}) }
+    if(Project.project.id=='local'){ 
+        saveLocalProject() 
+    }else{ 
+        if(Project.project.status!='bill') await apiData({typeData:'updateProject', data: Project.project}) 
+    }
 }
 
 export async function saveLocalProject(){
@@ -102,7 +107,9 @@ export async function updateProjectObject(id, data=[], sendAPI=true){
         await saveLocalProject() 
         switchToLocal()
     }else{
-        if(sendAPI) await apiData({typeData:'updateProjectObject', data: obj})
+        if(sendAPI){
+            if(Project.project.status!='bill') await apiData({typeData:'updateProjectObject', data: obj})
+        } 
     }
     
     EventBus.emit('UpdatedProject')
@@ -148,6 +155,7 @@ export async function newStatus(status){
 }
 
 export async function projectToBill(){
+    
     let number_bill = 0
 
     Project.project.number = number_bill
@@ -170,6 +178,9 @@ export async function projectToBill(){
 
     let result =  await apiData({typeData:'newBill_v2', data:Project})
     let new_id = result.data
+    Project.bills.push({id:new_id})
+    //result =  await apiData({typeData:'loadBill_v2', id:'269'})
+    
     
 }
 

@@ -28,7 +28,6 @@ import EditPassword from './Users/EditPassword.vue'
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
 import ProjBills from '@/components/Calculator/Bill_parts/02_ProjBills.vue'
-import ProjBillsList from '@/components/Calculator/Bill_parts/03_ProjBillsList.vue'
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/Object/ObjectCalc.vue'
 import ResultCalc from './Calculator/ResultObjects/2_ResultCalc.vue'
@@ -168,7 +167,6 @@ export default [
     CalcTitle,
     ProjBillHeader,
     ProjBills,
-    ProjBillsList,
     Calculator,
     ObjectCalc,
     ResultCalc,

@@ -4,7 +4,7 @@
     <SiteBar v-if="is_login"></SiteBar>
     <div class="top_to_scroll"  ref="to_scroll"></div>
     <div v-if="showMain" class="main">
-      <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :download_token="download_token"></Calculator>
+      <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :statusBill="statusBill" :download_token="download_token"></Calculator>
       <ProjBills v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></ProjBills>
     </div>
     <div v-else class="veiews">
@@ -27,6 +27,7 @@ export default {
     EventBus.on('Project:saveAsLocal', this.localProject)
     EventBus.on('Project:newProjectUser', id => this.project_id = id)
     EventBus.on('Project:openProject', id => this.openProject(id))
+    EventBus.on('Project:openBill', id => this.openBill(id))
     EventBus.on('MenuProjects:openLocal', ()=>this.project_id = 'local')
     EventBus.on('MenuProjects:showBills', ()=>this.show_bills=true)
     EventBus.on('MenuProjects:closeBills', ()=>this.show_bills=false)
@@ -39,6 +40,7 @@ export default {
   data(){
     return {
       project_id: 'local',
+      statusBill: false,
       show_bills: false,
       download_token: '',
       showMain: true,
@@ -67,8 +69,15 @@ export default {
     },
     openProject(id){
       this.project_id = id
+      this.statusBill = false
       this.download_token = ''
       localStorage.setItem('OpendProject',id) 
+    },
+    openBill(id){
+      this.project_id = id
+      this.statusBill = true
+      this.show_bills=false
+      this.download_token = ''
     },
     ErrorLoad(){
       EventBus.emit('Menu:Message', 'Das Projekt wurde nicht gefunden')

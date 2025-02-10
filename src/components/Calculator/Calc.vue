@@ -53,6 +53,7 @@ export default{
     props:{
         project_id:String,
         download_token:String,
+        statusBill: Boolean,
 
     },
     watch:{
@@ -77,7 +78,7 @@ export default{
             let result
             if(!this.project_id) return false
             if(this.project_id == 'new') result = await newPoject() 
-            if(this.project_id != 'new') result = await LoadProjectData(this.project_id, this.download_token) 
+            if(this.project_id != 'new') result = await LoadProjectData(this.project_id, this.download_token, this.statusBill) 
             this.project = result
             this.ListObjects = this.project.objects
             this.loaded = true
