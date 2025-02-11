@@ -74,6 +74,7 @@ export let text = {
     pupaps:{
         Yes:'Ja',
         No:'Nein',
+        Confirm_the_deletion:'Bestätigen Sie den Löschvorgang',
     },
     openProject:{
         loading:'Loading . . .',

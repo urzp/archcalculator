@@ -88,7 +88,8 @@ export default{
             EventBus.emit('MenuProjects:showBills')
         },
         async newBill(){
-            projectToBill()
+           await projectToBill(this.project_data.id)
+           EventBus.emit('MenuProjects:showBills')
         }
     }
 }

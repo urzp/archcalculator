@@ -27,6 +27,8 @@ switch ($typeData) {
 
     case 'newBill_v2':include '04_Bills_v2/newBill.php'; break;
     case 'loadBill_v2':include '04_Bills_v2/loadBill.php'; break;
+    case 'updateProjectBill':include '04_Bills_v2/updateBill.php'; break;
+    case 'deleteBill_v2':include '04_Bills_v2/deleteBill_v2.php'; break;
 
     // case 'getProject': include 'getProject.php'; break;
     // case 'getProjectObject': include 'getProjectObject.php'; break;

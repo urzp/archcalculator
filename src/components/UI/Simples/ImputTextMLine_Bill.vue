@@ -8,7 +8,7 @@
             :value="value"
             @change="event => submit_event(event)"></textarea>
         <div class="panel">
-            <UpdateBtn class="button" width="35px" height="28px" @click="set_default()"/>
+            <UpdateBtn v-if="!noUpdate"  class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
     <div v-if="edit" @click.stop="edit=false" class="bg_for_close"></div>   
@@ -36,6 +36,10 @@ export default{
         width:{
             type:String,
             default: '150px',
+        },
+        noUpdate:{
+            type:Boolean,
+            default: false,
         }
     },
     emits:['submit_event', 'setDefault'],

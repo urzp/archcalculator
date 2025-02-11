@@ -31,8 +31,18 @@ if(empty($data['project'])){
     }
 
     $selector = "`project_id`='$id' AND `user_id`='$user_id' AND `version`='v_2.0' ORDER BY `number`";
-    $data['bills'] = crud_read('project_bills',"id, name, total, number, payment_date, paid_date, paid_value, invoice_number", $selector);
+    $data['bills'] = crud_read('project_bills',"id, number", $selector);
 
+    foreach($data['bills'] as $key => $item){
+        $newNumber['number']=$key;
+        $id_bill = $item["id"];
+        $selector = "`project_id`='$id'";
+        crud_update('project_bills', $newNumber, $selector);
+    }
+
+    $selector = "`project_id`='$id' AND `user_id`='$user_id' AND `version`='v_2.0' ORDER BY `number`";
+    $data['bills'] = crud_read('project_bills',"id, name, total, number, payment_date, paid_date, paid_value, invoice_number", $selector);
+    
     $result = (object) [
         'success' => true,
         'data' => $data,

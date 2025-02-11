@@ -10,17 +10,6 @@
         </div>
         <div class="list_bills">
             <div class="item" v-for="item, index in list" :key=item.id>
-                <div class="hover-panel">
-                    <div class="left_part">
-                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
-                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
-                    </div>
-                    <div class="right_part">
-                        <NewButton @click.stop="newBill(index)" width="45px" height="23px" width_img="10px"/>
-                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
-                    </div>
-                    
-                </div>
                 <div class="wrap_left">
                     <div class="name" @click="selectBill(item.id)">{{ item.name }}</div>
                     <div class="data_price">
@@ -39,8 +28,18 @@
                     
                     <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
                 </div>
+                <div class="hover-panel">
+                    <div class="left_part">
+                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                    </div>
+                    <div class="right_part">
+                        <NewButton @click.stop="newBill(index)" width="45px" height="23px" width_img="10px"/>
+                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
+                    </div>
+                </div>
             </div>
-            <NewButton class="newButton_bottom_list" @click.stop="newBill(list.length)" width="150px" height="30px" width_img="10px"/>
+            <NewButton class="newButton_bottom_list" @click.stop="newBill()" width="150px" height="30px" width_img="10px"/>
         </div>
     </div>
 </template>
@@ -48,9 +47,8 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import {text} from '@/servis/text'
-import { Project } from '@/servis/projectData.js'
+import { Project, projectToBill, deleteBill } from '@/servis/projectData.js'
 import { array_move } from '@/servis/functions.js'
-import { Bills, newBill, saveBill, sequence , deleteBill, setPaid } from '@/servis/projectBill.js'
 
 export default{
     name: 'ProjBills',
@@ -62,6 +60,7 @@ export default{
                 Bills: text.billList.Bills,
                 Name: text.billList.Name,
                 Payment_from: text.billList.Payment_from,
+                Confirm_the_deletion: text.pupaps.Confirm_the_deletion,
             },
         }
     },
@@ -102,14 +101,17 @@ export default{
         selectBill(id){
             EventBus.emit('Project:openBill', id)
         },
+        async newBill(){
+           await projectToBill()
+        },
         deleteBill(id){
-            let index = this.list.findIndex(item=>item.id==id);
             EventBus.emit('Popap:comfirm',{
-                title:'Bestätigen Sie den Löschvorgang',
+                title: this.text.Confirm_the_deletion,
                 action: async ()=>{
-                    this.list.splice(index, 1);
+                    //this.list.splice(index, 1);
                     await deleteBill(id)
-                    sequence()
+
+                    //sequence()
                 },
                 
             })
@@ -150,7 +152,7 @@ export default{
     }
 
     .header{
-        width: 60%;
+        width: 80%;
         padding-bottom: 10px;
         margin-top: 30px;
         border-bottom: 1px solid #999;
@@ -164,7 +166,7 @@ export default{
     }
 
     .subheader{
-        width: 60%;
+        width: 80%;
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
@@ -184,7 +186,7 @@ export default{
     }
 
     .item{
-        width: 60%;
+        width: 80%;
         display: flex;
         font-family: 'Raleway-Medium';
         justify-content: space-between;
@@ -192,12 +194,13 @@ export default{
         font-size: 20px;
         color: #545454;
         column-gap: 10px;
+        align-items: stretch;
     }
 
-    .wrap_left{
+    .wrap_right{
         cursor: pointer;
-        margin-left: -150px;
-        padding-left: 150px;
+        margin-right: -150px;
+        padding-right: 150px;
     }
 
     .data_price{
@@ -228,8 +231,9 @@ export default{
     }
 
     .hover-panel{
-        position: absolute;
-        transform: translateX(-110px);
+        position: relative;
+        width: 0px;
+        /* transform: translateX(-110px); */
         display: flex;
         column-gap: 5px;
         visibility: hidden;
@@ -245,7 +249,11 @@ export default{
         visibility: visible;
     }
 
-    .name:hover .hover-panel{
+    .wrap_right:hover .hover-panel{
+        visibility: visible;
+    }
+
+    .hover-panel:hover{
         visibility: visible;
     }
 

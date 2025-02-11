@@ -24,7 +24,7 @@ export async function LoadProjectData(id, download_token, statusBill=false){
         if(!result.success){EventBus.emit('Project:ErrLoadeded')}
         result = result.data
     }
-    Object.assign(Project, result) 
+    await Object.assign(Project, result) 
     window.project = Project
     EventBus.emit('Project:Loaded')
     return Project
@@ -80,6 +80,7 @@ export async function updateProject(){
         saveLocalProject() 
     }else{ 
         if(Project.project.status!='bill') await apiData({typeData:'updateProject', data: Project.project}) 
+        if(Project.project.status=='bill') await apiData({typeData:'updateProjectBill', data: Project}) 
     }
 }
 
@@ -108,7 +109,8 @@ export async function updateProjectObject(id, data=[], sendAPI=true){
         switchToLocal()
     }else{
         if(sendAPI){
-            if(Project.project.status!='bill') await apiData({typeData:'updateProjectObject', data: obj})
+           if(Project.project.status!='bill') await apiData({typeData:'updateProjectObject', data: obj})
+            if(Project.project.status=='bill')  updateProject()
         } 
     }
     
@@ -154,9 +156,8 @@ export async function newStatus(status){
     updateProject()
 }
 
-export async function projectToBill(){
-    
-    let number_bill = 0
+export async function projectToBill(id=Project.project.id, number_bill = billNextNuber()){
+    await LoadProjectData(id)
 
     Project.project.number = number_bill
     Project.project.status = 'bill'
@@ -178,10 +179,14 @@ export async function projectToBill(){
 
     let result =  await apiData({typeData:'newBill_v2', data:Project})
     let new_id = result.data
-    Project.bills.push({id:new_id})
-    //result =  await apiData({typeData:'loadBill_v2', id:'269'})
-    
-    
+    Project.project.id = new_id
+    await updateProject()
+    LoadProjectData(id)
+}
+
+export async function deleteBill(id){
+    apiData({typeData:'deleteBill_v2', data:id})
+    LoadProjectData(Project.project.id)
 }
 
 function setPayment_date(number){
@@ -195,4 +200,12 @@ function setPayment_date(number){
         payment_date.bis = new Date( lastDate ).addDays(5)
     }
     return payment_date
+}
+
+function billNextNuber(){
+   let numbers = Project.bills.map(item=>Number(item.number)) 
+   let result = 0
+   if(!numbers) return result
+   result = Math.max(...numbers) + 1
+   return result
 }
