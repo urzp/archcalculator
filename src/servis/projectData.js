@@ -209,3 +209,9 @@ function billNextNuber(){
    result = Math.max(...numbers) + 1
    return result
 }
+
+
+export async function newBillSequence(seqiuence){
+    await apiData({typeData:'newBillSequence', data: seqiuence})
+    LoadProjectData(Project.project.id)
+}

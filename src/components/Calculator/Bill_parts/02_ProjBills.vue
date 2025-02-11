@@ -34,7 +34,7 @@
                         <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
                     </div>
                     <div class="right_part">
-                        <NewButton @click.stop="newBill(index)" width="45px" height="23px" width_img="10px"/>
+                        <NewButton @click.stop="insertNewBill(index)" width="45px" height="23px" width_img="10px"/>
                         <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
                     </div>
                 </div>
@@ -47,7 +47,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import {text} from '@/servis/text'
-import { Project, projectToBill, deleteBill } from '@/servis/projectData.js'
+import { Project, projectToBill, deleteBill, newBillSequence } from '@/servis/projectData.js'
 import { array_move } from '@/servis/functions.js'
 
 export default{
@@ -83,26 +83,27 @@ export default{
             date = new Date(date)
            return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
         },
-        // async newBill(index){
-        //     let newBilleLelement = await newBill(Project.project.id, index)
-        //     Bills.splice(index, 0, newBilleLelement)
-        //     this.selectBill(index)
-        // },
         async moveUpBill(index){
             if(index<=0||index>this.list.length) return false
-            await array_move(Bills,index,index - 1)
-            sequence()
+            let bills_sequence = this.list.map(item=>{return {'id':item.id, 'number':item.number}})
+            await array_move(bills_sequence, index, index - 1)
+            newBillSequence(bills_sequence)
         },
         async moveDownBill(index){
-            if(index<0||index>=this.list.length) return false
-            await array_move(Bills,index,index + 1)
-            sequence()
+            if(index<0||index+1>=this.list.length) return false
+            let bills_sequence = this.list.map(item=>{return {'id':item.id, 'number':item.number}})
+            await array_move(bills_sequence, index, index + 1)
+            newBillSequence(bills_sequence)
         },
         selectBill(id){
             EventBus.emit('Project:openBill', id)
         },
         async newBill(){
            await projectToBill()
+        },
+        async insertNewBill(index){
+            index++;
+            await projectToBill(undefined, index)
         },
         deleteBill(id){
             EventBus.emit('Popap:comfirm',{

@@ -4,6 +4,21 @@ $mysql = $mysql_calc;
 $input_data = $rq_data -> data;
 $project = $input_data -> project;
 $project_id = $project -> id; 
+$project_number = $project -> number;
+
+$selector = "`project_id`='$project_id' AND `user_id`='$user_id' AND `version`='v_2.0' ORDER BY `number`";
+$data_['bills'] = crud_read('project_bills',"id, number", $selector);
+
+$i=0;
+foreach($input_data as $key => $item){
+    $i++;
+    if($i==$project_number) $i++;
+    $id = $item -> id;
+    $id = $mysql->real_escape_string($id);
+    $newdata['number'] = $i;
+    $selector = "`id` = '$id' AND `user_id`='$user_id'";
+    crud_update('project_bills', $newdata, $selector);
+}
 
 unset($input_data->bills);
 
