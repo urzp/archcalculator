@@ -29,7 +29,8 @@ $newdata['number'] = $project -> number;
 $newdata['total'] = $project -> total;
 $newdata['data'] = json_encode($input_data);
 $newdata['version'] = 'v_2.0';
-$newdata['payment_date'] = $project -> payment_date -> bis;
+$newdata['payment_date_vom'] = $project -> payment_date -> vom;
+$newdata['payment_date_bis'] = $project -> payment_date -> bis;
 $newdata['invoice_number'] = $project -> invoice_number;
 
 crud_create('project_bills', $newdata);

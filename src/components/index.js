@@ -75,6 +75,10 @@ import TotalNet from './Calculator/ResultObjects/03_Summary/01_TotalNet.vue'
 import TotalTax from './Calculator/ResultObjects/03_Summary/02_TotalTax.vue'
 import Total from './Calculator/ResultObjects/03_Summary/03_Total.vue'
 import TotalSummary from './Calculator/ResultObjects/03_Summary/04_TotalSummary.vue'
+import RestHonorar from './Calculator/ResultObjects/04_RestHonorar/00_RestHonorar.vue'
+import RestTotalHonorar from './Calculator/ResultObjects/04_RestHonorar/01_RestTotalHonorar.vue'
+import BillsPayments from './Calculator/ResultObjects/04_RestHonorar/02_BillsPayments.vue'
+import CalcRestHonorar from './Calculator/ResultObjects/04_RestHonorar/03_CalcRestHonorar.vue'
 //----------------------------Bills--------------------------------------
 import Bill from './Bill/bill.vue'
 import BillsList from './Bill/BillsList.vue'
@@ -136,6 +140,7 @@ import ContextMenu from './UI/Simples/ContextMenu.vue'
 import Marker from '@/components/UI/Simples/Marker.vue'
 import ButtonSiteBar from '@/components/UI/SiteBar/ButtonSiteBar.vue'
 import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
+import CheckBox from '@/components/UI/Simples/CheckBox.vue'
 
 export default [
     Header,
@@ -216,6 +221,10 @@ export default [
     TotalTax,
     Total,
     TotalSummary,
+    RestHonorar,
+    RestTotalHonorar,
+    BillsPayments,
+    CalcRestHonorar,
 
     Bill,
     BillsList,
@@ -276,4 +285,5 @@ export default [
     Marker,
     Item_level_1,
     ButtonSiteBar,
+    CheckBox,
 ]

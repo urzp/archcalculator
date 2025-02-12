@@ -2,7 +2,7 @@ import { reactive } from 'vue';
 import { apiData } from '@/servis/apiData.js'
 import { EventBus } from '@/servis/EventBus'
 import { user, global } from '@/servis/globalValues.js'
-import {toLetters} from '@/servis/functions.js'
+import {toLetters, dateToStringNoTime} from '@/servis/functions.js'
 import { newWholeProject, newObjectProject } from '@/servis/newDataProjects.js'
 import {text} from '@/servis/text'
 
@@ -159,6 +159,7 @@ export async function newStatus(status){
 export async function projectToBill(id=Project.project.id, number_bill = billNextNuber()){
     await LoadProjectData(id)
 
+    Project.project.locked = '0'
     Project.project.number = number_bill
     Project.project.status = 'bill'
     Project.project.id_project_contract = Project.project.id
@@ -173,9 +174,10 @@ export async function projectToBill(id=Project.project.id, number_bill = billNex
     Project.project.user_logo = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
     Project.project.invoice_number = 'RE - - - - -'
 
-    Project.project.number_bill = `${number_bill + 1}. Abschlagsrechnung`
+    Project.project.number_bill = `${number_bill}. Abschlagsrechnung`
     Project.project.greeting_phrase = text.bill.greeting_phrase,
-    Project.project.payment_date = setPayment_date(0)
+    Project.project.payment_date = setPayment_date(number_bill)
+    Project.project.created = new Date()
 
     let result =  await apiData({typeData:'newBill_v2', data:Project})
     let new_id = result.data
@@ -191,11 +193,11 @@ export async function deleteBill(id){
 
 function setPayment_date(number){
     let payment_date = {}
-    if(number==0){
+    if(number==Number(1)){
         payment_date.vom = new Date( )
         payment_date.bis = new Date( ).addDays(5)
     }else{
-        let lastDate =  Bills[number-1].payment_date.bis
+        let lastDate =  Project.bills[number-1-1].payment_date_bis
         payment_date.vom = new Date( lastDate )
         payment_date.bis = new Date( lastDate ).addDays(5)
     }
@@ -204,8 +206,8 @@ function setPayment_date(number){
 
 function billNextNuber(){
    let numbers = Project.bills.map(item=>Number(item.number)) 
-   let result = 0
-   if(!numbers) return result
+   let result = 1
+   if(numbers.length==0) return result
    result = Math.max(...numbers) + 1
    return result
 }
@@ -213,5 +215,10 @@ function billNextNuber(){
 
 export async function newBillSequence(seqiuence){
     await apiData({typeData:'newBillSequence', data: seqiuence})
+    LoadProjectData(Project.project.id)
+}
+
+export async function setPaidBill(value, type, id){
+    await apiData({typeData:'setPaidBill', data: {id, type, value}})
     LoadProjectData(Project.project.id)
 }

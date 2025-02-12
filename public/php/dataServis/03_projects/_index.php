@@ -30,6 +30,7 @@ switch ($typeData) {
     case 'updateProjectBill':include '04_Bills_v2/updateBill.php'; break;
     case 'deleteBill_v2':include '04_Bills_v2/deleteBill_v2.php'; break;
     case 'newBillSequence':include '04_Bills_v2/newBillSequence.php'; break;
+    case 'setPaidBill':include '04_Bills_v2/setPaidBill.php'; break;
 
     // case 'getProject': include 'getProject.php'; break;
     // case 'getProjectObject': include 'getProjectObject.php'; break;

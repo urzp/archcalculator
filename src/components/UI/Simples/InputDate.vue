@@ -47,6 +47,10 @@ export default{
 </script>
 
 <style scoped>
+    .date{
+        min-width: 20px;
+        text-align: center;
+    }
     .selectData{
         position: relative;
         width: 0;

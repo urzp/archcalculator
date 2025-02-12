@@ -94,7 +94,6 @@ export default{
     methods:{
         initConfig(){
             let data = JSON.parse(localStorage.getItem('sideBarConf'))
-            console.log('sideBarConf', data)
             if(!!data) this.config = data
             if(!data) localStorage.setItem('sideBarConf', JSON.stringify(this.config))
         },

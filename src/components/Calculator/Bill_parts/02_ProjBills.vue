@@ -1,14 +1,15 @@
 <template>
-    <div class="bill_list_wrap">
+    <div v-if="loaded" class="bill_list_wrap">
         <div class="name_project">{{ name_project }}</div>
         <div class="header">
                 <div class="title">{{ text.Bills }}</div>
         </div>
         <div class="subheader" v-if="list.length > 0">
-            <div class="title">{{ text.Name }}</div> 
+            <div class="title title_name">{{ text.Name }}</div> 
+            <div class="title">{{ text.Lock }}</div> 
             <div class="title_statis">{{ text.Payment_from }}</div>         
         </div>
-        <div class="list_bills">
+        <div v-if="updated" class="list_bills">
             <div class="item" v-for="item, index in list" :key=item.id>
                 <div class="wrap_left">
                     <div class="name" @click="selectBill(item.id)">{{ item.name }}</div>
@@ -16,44 +17,47 @@
                         <div class="price">
                             <Price :value="item.total" font_size_unit="14px" noCents font_family="Raleway-Medium"/>
                         </div>
-                        <div class="data"> {{ formatDate(item.payment_date) }} </div>
+                        <div class="data"> {{ formatDate(item.payment_date_bis) }} </div>
                     </div>
                 </div>
                 <div class="wrap_right light-text">
-                    <div class="invoice_number">{{ item.invoice_number }}</div> 
-                    <div  class="date"><InputDate :value="item.paid_date" @editValue=" date=>update_value(date, 'paid_date', item.id) " /></div>     
-                    <div  class="value">
-                        <PriceInputBill noPanel :value ="item.paid_value" @editPrice="newValue=>update_value(newValue, 'paid_value', item.id)" />  
+                    <div class="invoice_number" @click="selectBill(item.id)">{{ item.invoice_number }}</div> 
+                    <div class="lock_value">
+                        <CheckBox :checked="item.locked" @switch="(value)=>update_value(Number(value), 'locked', item) "/>
                     </div>
-                    
-                    <!-- <div class="status">{{ item.fact_paid?'bezahlt':'nicht bezahlt' }}</div> -->
+                    <div  class="date"><InputDate :value="item.paid_date" @editValue=" date=>update_value(date, 'paid_date', item) " /></div>     
+                    <div  class="value"><PriceInputBill noPanel :value ="item.paid_value" @editPrice="newValue=>update_value(newValue, 'paid_value', item)" />  </div>    
                 </div>
                 <div class="hover-panel">
                     <div class="left_part">
-                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
-                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                        <NewButton @click.stop="insertNewBill(index)" width="45px" height="23px" width_img="10px"/>
+                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>   
                     </div>
                     <div class="right_part">
-                        <NewButton @click.stop="insertNewBill(index)" width="45px" height="23px" width_img="10px"/>
-                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>                       
+                        <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
+                        <DownButton @click.stop="moveDownBill(index)" width="45px" heigth="23px" height_img="10px"/>                    
                     </div>
                 </div>
             </div>
             <NewButton class="newButton_bottom_list" @click.stop="newBill()" width="150px" height="30px" width_img="10px"/>
         </div>
+        <div v-else class="load update">{{ text.Loading }}</div>
     </div>
+    <div v-else class="load">{{ text.Loading }}</div>
 </template>
 
 <script>
 import { EventBus } from '@/servis/EventBus'
 import {text} from '@/servis/text'
-import { Project, projectToBill, deleteBill, newBillSequence } from '@/servis/projectData.js'
+import { Project, projectToBill, deleteBill, newBillSequence, setPaidBill } from '@/servis/projectData.js'
 import { array_move } from '@/servis/functions.js'
 
 export default{
     name: 'ProjBills',
     data(){
         return{
+            loaded: false,
+            updated: true,
             showSelectData: false,
             SelectDataName: '',
             text:{
@@ -61,6 +65,8 @@ export default{
                 Name: text.billList.Name,
                 Payment_from: text.billList.Payment_from,
                 Confirm_the_deletion: text.pupaps.Confirm_the_deletion,
+                Loading: text.Calc.Loading,
+                Lock: text.billList.Lock,
             },
         }
     },
@@ -76,6 +82,11 @@ export default{
             if(!!Project&&!!Project.bills) result = Project.bills
             return result
         },
+        loaded(){
+            let result = false
+            if(!!this.list) result = true
+            return result
+        }
     },
     methods:{
         formatDate(date){
@@ -85,43 +96,54 @@ export default{
         },
         async moveUpBill(index){
             if(index<=0||index>this.list.length) return false
+            this.updated = false
             let bills_sequence = this.list.map(item=>{return {'id':item.id, 'number':item.number}})
             await array_move(bills_sequence, index, index - 1)
-            newBillSequence(bills_sequence)
+            await newBillSequence(bills_sequence)
+            this.updated = true
         },
         async moveDownBill(index){
             if(index<0||index+1>=this.list.length) return false
+            this.updated = false
             let bills_sequence = this.list.map(item=>{return {'id':item.id, 'number':item.number}})
             await array_move(bills_sequence, index, index + 1)
-            newBillSequence(bills_sequence)
+            await newBillSequence(bills_sequence)
+            this.updated = true
         },
         selectBill(id){
             EventBus.emit('Project:openBill', id)
         },
         async newBill(){
-           await projectToBill()
+            this.updated = false
+            await projectToBill()
+            this.updated = true
         },
         async insertNewBill(index){
+            this.updated = false
             index++;
             await projectToBill(undefined, index)
+            this.updated = true
         },
         deleteBill(id){
             EventBus.emit('Popap:comfirm',{
                 title: this.text.Confirm_the_deletion,
                 action: async ()=>{
-                    //this.list.splice(index, 1);
+                    this.updated = false
                     await deleteBill(id)
-
-                    //sequence()
+                    this.updated = true
                 },
                 
             })
 
         },
-        async update_value(value, name_value, id){
+        async update_value(value, name_value, item){
+            if( name_value!='locked'&&item.locked!="0"){
+                return false
+            }
+            this.updated = false
             this.showSelectData=false
-            if(name_value=='paid_value') setPaid(value, 'value', id)
-            if(name_value=='paid_date') setPaid(value, 'date',id)
+            setPaidBill(value, name_value, item.id)
+            this.updated = true
         }
     }
 }
@@ -162,8 +184,13 @@ export default{
         color: #545454;
     }
 
+    .title_name{
+        width: 60%;
+    }
+
     .wrap_left{
         width: 50%;
+        cursor: pointer;
     }
 
     .subheader{
@@ -186,9 +213,14 @@ export default{
         margin-bottom: 100px;
     }
 
+    .list_bills>div:nth-child(even){
+        background-color: #F5F5F5;
+    }
+
     .item{
         width: 80%;
         display: flex;
+        padding: 5px 10px;
         font-family: 'Raleway-Medium';
         justify-content: space-between;
         align-items: baseline;
@@ -202,6 +234,10 @@ export default{
         cursor: pointer;
         margin-right: -150px;
         padding-right: 150px;
+    }
+
+    .lock_value{
+        width: 50px;
     }
 
     .data_price{
@@ -221,7 +257,7 @@ export default{
     }
 
     .wrap_right .date{
-        width: 140px;
+        width: 110px;
         display: flex;
         justify-content: flex-end;
     }
@@ -234,7 +270,7 @@ export default{
     .hover-panel{
         position: relative;
         width: 0px;
-        /* transform: translateX(-110px); */
+        transform: translateX(30px);
         display: flex;
         column-gap: 5px;
         visibility: hidden;
@@ -276,6 +312,29 @@ export default{
 
     .newButton_bottom_list{
         margin-top: 10px;
+    }
+
+    .load{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-family: 'Raleway-ExtraLight';
+    }
+
+    .update{
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 200px;
+    }
+
+    .checkbox{
+        display: flex;
+        justify-content: center;
+    }
+
+    .checkbox img{
+        width: 25px;
     }
  
 </style>

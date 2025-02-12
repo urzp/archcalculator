@@ -12,7 +12,8 @@ $newdata['name'] = $project -> name;
 $newdata['number'] = $project -> number;
 $newdata['total'] = $project -> total;
 $newdata['data'] = json_encode($input_data);
-$newdata['payment_date'] = $project -> payment_date -> bis;
+$newdata['payment_date_vom'] = $project -> payment_date -> vom;
+$newdata['payment_date_bis'] = $project -> payment_date -> bis;
 $newdata['invoice_number'] = $project -> invoice_number;
 
 unset($newdata['id']);

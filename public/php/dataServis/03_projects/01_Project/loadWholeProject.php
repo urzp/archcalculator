@@ -43,7 +43,7 @@ if(empty($data['project'])){
     }
 
     $selector = "`project_id`='$id' AND `user_id`='$user_id' AND `version`='v_2.0' ORDER BY `number`";
-    $data['bills'] = crud_read('project_bills',"id, name, total, number, payment_date, paid_date, paid_value, invoice_number", $selector);
+    $data['bills'] = crud_read('project_bills',"id, name, total, number,  payment_date_bis , payment_date_vom, paid_date, paid_value, invoice_number, locked", $selector);
     
     $result = (object) [
         'success' => true,
