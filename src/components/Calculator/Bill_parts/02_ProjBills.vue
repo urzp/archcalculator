@@ -21,7 +21,8 @@
                     </div>
                 </div>
                 <div class="wrap_right light-text">
-                    <div class="invoice_number" @click="selectBill(item.id)">{{ item.invoice_number }}</div> 
+                    <div class="invoice_number" ><InputText_Bill :value="item.invoice_number" width="130px"  noUpdate  alight_edit="left"
+                        @submit_event="value=>update_value(value,'invoice_number', item)" />  </div> 
                     <div class="lock_value">
                         <CheckBox :checked="item.locked" @switch="(value)=>update_value(Number(value), 'locked', item) "/>
                     </div>
