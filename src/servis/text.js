@@ -198,6 +198,7 @@ export let text = {
         Rest_total_honorar:'Rechnerisches Gesamthonorar',
         Bills_payments:'Abzüge für geleistete Abschlagszahlungen',
         Remaining_claim:'Restlicher Honoraranspruch',
+        previos_data:'Zahlung vom ',
     },
 
     billList: {
@@ -206,11 +207,22 @@ export let text = {
         Published: 'publiziert',
         Payment_from:'Zahlung vom',
         Lock:'Publiziert',
-
+        
     },
 
     bill:{
         greeting_phrase:'Sehr geehrte Damen und Herren, für die Leistungen am o. g. Projekt darf ich als Abschlag wie folgt in Rechnung stellen:',
+        Im_Betrag_von: 'Im Betrag von',
+        sind:'sind',
+        Mehrwertsteuer_enthalten:'Mehrwertsteuer enthalten.',
+        Bitte_zahlen_Sie_den_Betrag_bis_zum :'Bitte zahlen Sie den Betrag bis zum ',
+        an_die_unten_genannte_Bankverbindung :'an die unten genannte Bankverbindung.',
+        Kontoinhaber:'Kontoinhaber',
+        IBAN:'IBAN:',
+        BIC:'BIC:',
+        Institut:'Institut:',
+        USt_Id_Nr:'USt-Id.-Nr.:',
+        Gem_Umsatzsteuergesetz: 'Gem. § 14b Abs. 1 S.4 Umsatzsteuergesetz muss diese Rechnung und ein Zahlungsbeleg für zwei Jahre aufbewahrt werden. Die Aufbewahrungsfrist beginnt mit dem Ende des Kalenderjahres, in dem die Rechnung ausgestellt wurde.  Ein Verstoß kann nach § 26a Abs. 2 UStG mit bis zu 500 EUR Geldbuße geahndet werden.',
     },
 
 }

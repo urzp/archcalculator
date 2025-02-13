@@ -31,6 +31,7 @@ import ProjBills from '@/components/Calculator/Bill_parts/02_ProjBills.vue'
 import Calculator from './Calculator/Calc.vue'
 import ObjectCalc from './Calculator/Object/ObjectCalc.vue'
 import ResultCalc from './Calculator/ResultObjects/2_ResultCalc.vue'
+import PojBillsFooter from './Calculator/Bill_parts/03_PojBillsFooter.vue'
 //----------------------------Object--------------------------------
 import Titile_Object from './Calculator/Object/Titile_Object.vue'
 import Total_Object from './Calculator/Object/Total_Object.vue'
@@ -175,6 +176,7 @@ export default [
     Calculator,
     ObjectCalc,
     ResultCalc,
+    PojBillsFooter,
 
     Titile_Object,
     Total_Object,

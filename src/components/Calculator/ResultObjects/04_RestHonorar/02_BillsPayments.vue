@@ -2,13 +2,15 @@
     <div class="item-Part-obj" >
         <div  class="main_row" >
             <div class="title">{{ text.Bills_payments }}</div>
-            <div class="price" ><Price :value ="value" /></div>
+            <div class="price" ><Price :value ="total*(-1)" /></div>
         </div>
         <div class="payments">
-            <div class="invice_number">R0001</div>
-            <div class="title_payment_date">Zahlung vom </div>
-            <div class="date_payment">12.02.2025</div>
-            <div class="payment_value">5 000.00 €</div>
+            <div class="payment" v-for="item in list" :key="item.id">
+                <div class="invice_number">{{ item.invoice_number }}</div>
+                <div class="title_payment_date">{{ text.previos_data }}</div>
+                <div class="date_payment">{{ formatDate(item.paid_date) }}</div>
+                <div class="payment_value"><Price :value ="item.paid_value"/></div>
+            </div>
         </div>
     </div>
 </template>
@@ -23,12 +25,22 @@ export  default{
         return{
             text:{
                 Bills_payments: text.Calc.Bills_payments,
+                previos_data: text.Calc.previos_data
             }
         }
     },
     props:{
-        value:Number,
+        total:[Number, String],
+        list:Array,
     },
+    methods:{
+        formatDate(date){
+           date = new Date(date)
+           date = date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+           if(date=='Invalid Date') return '-'
+           return date
+        },
+    }
 }
 
 </script>
@@ -105,9 +117,13 @@ export  default{
     }
 
     .payments{
+        margin-bottom: 15px;
+    }
+
+    .payment{
         display: flex;
+        align-items: center;
         margin-left: 55px;
-        margin-bottom: 5px;
         font-family: 'Raleway-Light';
         font-size: 16px;
         color: #888;

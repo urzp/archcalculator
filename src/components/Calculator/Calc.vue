@@ -10,11 +10,11 @@
             <CloseButton @click="deleteObject()"/>
         </div>
         <ResultCalc/>
+        <PojBillsFooter  />
         <div  class="download_panel">
             <div v-if="!!download_token" class="link_a"><a :href="downLoad_link"><img src="@/assets/icons/exports/pdf.png" alt=""></a></div>
             <div v-if="!download_token" @click.stop="showLinks()" class="icon"><img src="@/assets/icons/exports/pdf.png" alt=""></div>
             <div v-if="!download_token" @click="showLinks()" class="icon"><img src="@/assets/icons/exports/link.svg" alt=""></div>
-            
         </div>
         </template>
         <div v-else class="load">{{ text.Loading }}</div>
@@ -114,7 +114,6 @@ export default{
     .calculator{
         min-height: 75vh;
         margin-bottom: 40px;
-        border-bottom: 1px solid #999999;
     }
 
     .panel{
@@ -141,6 +140,8 @@ export default{
         justify-content: center;
         column-gap: 20px;
         margin-bottom: 30px;
+        padding-top: 50px;
+        border-top: 1px solid #999999;
     }
 
     .icon{

@@ -157,6 +157,7 @@ export async function newStatus(status){
 }
 
 export async function projectToBill(id=Project.project.id, number_bill = billNextNuber()){
+    console.log(number_bill)
     await LoadProjectData(id)
 
     Project.project.locked = '0'
@@ -166,6 +167,7 @@ export async function projectToBill(id=Project.project.id, number_bill = billNex
     let user_name = !user.name?'Name':user.name
     let user_address = !user.address?'Adresse':user.address
     let user_data = `${user_name} - ${user_address}`
+    Project.project.user_name = user_name
     Project.project.user_data = user_data
     Project.project.user_IBAN = user.IBAN
     Project.project.user_BIC = user.BIC
@@ -178,6 +180,10 @@ export async function projectToBill(id=Project.project.id, number_bill = billNex
     Project.project.greeting_phrase = text.bill.greeting_phrase,
     Project.project.payment_date = setPayment_date(number_bill)
     Project.project.created = new Date()
+
+    Project.project.previos_payments = setPreviousPayments(number_bill)
+    Project.project.previos_payments_total = setTotalPreviousPayments()
+    Project.project.payment_total = setTotalPayments()
 
     let result =  await apiData({typeData:'newBill_v2', data:Project})
     let new_id = result.data
@@ -204,12 +210,33 @@ function setPayment_date(number){
     return payment_date
 }
 
+function setPreviousPayments(number){
+    let result = []
+    let prev_bills = Project.bills.filter(item=>Number(number)>Number(item.number))
+    result = prev_bills.map(item=>item)
+    return result
+}
+
+function setTotalPreviousPayments(){
+   let result = 0
+   Project.project.previos_payments.forEach(item=>{
+        result=result+Number(item.paid_value)
+   })
+   return result
+}
+
 function billNextNuber(){
    let numbers = Project.bills.map(item=>Number(item.number)) 
    let result = 1
    if(numbers.length==0) return result
    result = Math.max(...numbers) + 1
    return result
+}
+
+function setTotalPayments(){
+    let result = Number(Project.project.total)
+    result = result - Number(Project.project.previos_payments_total)
+    return result
 }
 
 
