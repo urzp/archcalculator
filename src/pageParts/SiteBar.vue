@@ -44,6 +44,7 @@ export default{
     mounted(){
         this.initConfig()
         this.initData()
+        EventBus.on('SiteBar:Update', this.initData)
     },
     data(){
         return{

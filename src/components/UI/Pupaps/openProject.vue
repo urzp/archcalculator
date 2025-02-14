@@ -13,7 +13,7 @@
                         <Calendar :selectDay="select_day" :projects="list" @selectDay="day=>select_day=day"/>
                     </div>
                 </div>
-                <ShowProject :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)" @softReload="softReload=true"/>
+                <ShowProject :typeProjects="typeProjects" :id_project="showProject"  @openProject="id=>openProject(id)" @deleteProject="id=>deleteProject(id)" @softReload="softReload=true"/>
             </div>
             <div v-else-if="loading" class="loading">{{ text.loading }}</div>
             <div v-else class="empty_list_projects">{{ text.No_selected_project }}</div>
@@ -46,6 +46,7 @@ export default{
             showProject:'',
             select_day: new Date(),
             softReload: false,
+            typeProjects: '',
             text:{
                 loading: text.openProject.loading,
                 No_selected_project: text.openProject.No_selected_project,
@@ -59,6 +60,7 @@ export default{
     },
     methods:{
         async getData(type='all'){
+            this.typeProjects = type
             this.loading = true
             if(!global.login) return false
             let result = (await apiData({typeData:'getProjects', type})).data
@@ -67,6 +69,7 @@ export default{
             this.list = result
         },
         close(){
+            this.showProject= ''
             document.documentElement.style.overflow = 'auto'
             if(this.softReload){ this.softReload = false; EventBus.emit('MenuProjects:reload') }
             this.show=false

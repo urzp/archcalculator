@@ -28,8 +28,8 @@
                 <div class="finance">{{ formatPrice(item.total_object) }}</div>
             </div>
         </div>
-        <div class="part_title">{{ text.Bils }}</div>
-        <div class="list_objects">
+        <div v-if="typeProjects=='project'" class="part_title">{{ text.Bils }}</div>
+        <div v-if="typeProjects=='project'" class="list_objects">
             <div class="item" v-for="item in list_bils" :key="item.id">
                 <div class="name_data">
                     <div class="name">{{ item.name }}</div>
@@ -84,7 +84,8 @@ export default{
         id_project:{
             type:String,
             default:'',
-        }
+        },
+        typeProjects: String,
     },
     methods:{
         async getData(){

@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData';
 import {  formatDate } from '@/servis/functions.js'
 import {  updateProject } from '@/servis/projectData.js'
@@ -115,9 +116,10 @@ export default{
         },
     },
     methods:{
-        newProjectName(value){
+        async newProjectName(value){
             this.project.name = value
-            updateProject()
+            await updateProject()
+            EventBus.emit('SiteBar:Update')
         },
         newProjectDiscription(value){
             this.project.discription = value
