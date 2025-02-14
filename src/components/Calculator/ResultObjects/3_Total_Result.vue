@@ -3,7 +3,8 @@
         <div class="wrap">
             <div class="title-total" :class="{collapse}">{{ nameObject }}</div>
             <div class="data-total">
-                <div class="label">Summe</div>
+                <div v-if="!billMode" class="label">{{ text.Summary }}</div>
+                <div v-else class="label">{{ text.Summ_rest_payment_bill }}</div>
                 <!-- <div class="procent">100%</div> -->
                 <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
             </div>
@@ -14,6 +15,7 @@
 <script>
 import { EventBus } from '@/servis/EventBus'
 import { Project } from '@/servis/projectData.js'
+import { text } from '@/servis/text.js'
 export default{
     name: 'Total_Result',
     mounted(){
@@ -23,6 +25,10 @@ export default{
         return{
             font_family:'Comfortaa-Regular',
             project:{},
+            text:{
+                Summary: text.Calc.Sum_total_calc,
+                Summ_rest_payment_bill: text.Calc.Summ_rest_payment_bill,
+            }
         }
     },
     props:{
@@ -35,7 +41,12 @@ export default{
         },
     }, 
     computed:{
+        billMode(){
+            if(!this.project||!this.project.status||this.project.status!='bill') return false
+            return true 
+        },
         value(){
+            if(this.billMode) return this.project.payment_total
             return this.project.total
         },
         nameObject(){

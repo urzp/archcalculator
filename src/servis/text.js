@@ -194,11 +194,13 @@ export let text = {
         Total_gross: 'Gesamtsumme Brutto',
         Sum_summary:'Summe Zusammenfassung',
         Sum_total_calc:'Summe: ',
+        Summ_rest_payment_bill: 'Restlicher Honoraranspruch',
         RestHonorar: 'Gesamt- und Resthonoraranspruch',
         Rest_total_honorar:'Rechnerisches Gesamthonorar',
         Bills_payments:'Abzüge für geleistete Abschlagszahlungen',
         Remaining_claim:'Restlicher Honoraranspruch',
         previos_data:'Zahlung vom ',
+
     },
 
     billList: {

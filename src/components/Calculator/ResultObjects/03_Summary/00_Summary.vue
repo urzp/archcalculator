@@ -5,7 +5,7 @@
         <TotalTax :percent="tax" :finance="total_net" @updateItem="value=>updateTax(value)"/>
         <Total :value="total" />
     </Content_PartObject>
-    <TotalSummary  :value="total" :collapse = 'collapse' />    
+    <TotalSummary  :value="total" :collapse = 'collapse' :billMode="billMode" />    
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default{
             if(!this.project||!this.project.objects) return result
             result = this.total_net + this.total_net * Number(this.tax)/100
             return result
-        }
+        },
     },
     methods:{
         getProject(){
