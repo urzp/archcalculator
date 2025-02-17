@@ -74,7 +74,7 @@ export default{
     .price{
         color: inherit;
         font-size: inherit;
-        font-family: inherit;
+        font-family: 'DroidSans';
         text-align: inherit;
     }
 
@@ -104,7 +104,7 @@ export default{
         width: 100%;
         color: inherit;
         font-size: inherit;
-        font-family: inherit;
+        font-family: 'DroidSans';
         text-align: inherit;
     }
 

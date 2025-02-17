@@ -1,8 +1,6 @@
 <template>
     <div class="item-Part-obj" v-if="!!id_paragraph">
-        <div  class="detals" @click="collapse_detals=!collapse_detals">
-            <div class="icon"></div>
-        </div>
+        <DetalMarker @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
         <div  class="main_row" >
             <div class="title">{{ text.Fee_according_to_fee_table }}</div>
             <div class="price" ><Price :value ="value" /></div>

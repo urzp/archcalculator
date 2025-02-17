@@ -79,7 +79,7 @@ export default{
         height: 30px;
         /* width: v-bind(width); */
         min-width: 50px;
-        font-family: inherit;
+        font-family: 'DroidSans';
         font-size: inherit;
         color: inherit;
         text-align: inherit;
@@ -97,7 +97,7 @@ export default{
         border-radius: 5px;
         background-color: #ebebeb;
         font-size: inherit;
-        font-family: inherit;
+        font-family: 'DroidSans';
         color: inherit;
         text-align: center;
     }

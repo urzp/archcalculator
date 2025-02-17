@@ -1,8 +1,6 @@
 <template>
     <div class="item-Part-obj" v-if="!!id_paragraph">
-        <div  class="detals" @click="collapse_detals=!collapse_detals">
-            <div class="icon"></div>
-        </div>
+        <DetalMarker @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
         <div class="main_row" @mousedown="usePoints=false">
             <div class="title">{{ text.Honorarzone }}</div>
             <div class="value">{{ data.value }}</div>
@@ -127,22 +125,6 @@ export  default{
     .select-list{
         margin-left: 20px;
         margin-right: 10px;
-    }
-
-    .detals{
-        position: relative;
-    }
-    .detals .icon{
-        display: block;
-        position: absolute;
-        border-radius: 50%;
-        height: 8px;
-        width: 8px;
-        background-color: #C0C0C0;
-        content: " ";
-        left: 25px;
-        top: 13px;
-        cursor: pointer;
     }
 
     .detal-list {

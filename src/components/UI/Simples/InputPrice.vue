@@ -54,7 +54,7 @@ export default{
 <style scoped>
     .value{
         font-size: 18px;
-        font-family: 'Raleway-Light';
+        font-family: 'DroidSans';
         color: #464646;
     }
     input{
@@ -64,7 +64,7 @@ export default{
         background-color: #ebebeb;
         padding-left: 15px;
         font-size: 18px;
-        font-family: 'Raleway-Light';
+        font-family: 'DroidSans';
         color: #464646;
     }
 </style>

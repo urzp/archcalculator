@@ -83,7 +83,7 @@ export  default{
 
 <style scoped>
     .percent{
-        font-family: 'Comfortaa-Regular';
+        font-family: 'DroidSans';
         display: flex;
         align-items: baseline;
         gap: 0px;
@@ -97,7 +97,7 @@ export  default{
     input{
         width: 45px!important;
         text-align: right;
-        font-family:inherit;
+        font-family:'DroidSans';
         color: inherit;
     }
 </style>

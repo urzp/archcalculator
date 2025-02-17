@@ -57,7 +57,7 @@ export default{
         },
         font_family:{
             type:String,
-            default: 'Comfortaa-Regular',         
+            default: 'DroidSans',         
         },
         name_value:{
             type:String,

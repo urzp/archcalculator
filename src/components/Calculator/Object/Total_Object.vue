@@ -5,7 +5,7 @@
             <div class="data-total">
                 <div class="label">{{ text.Summe }}</div>
                 <!-- <div class="procent">100%</div> -->
-                <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px" :font_family="font_family"/>
+                <Price class="price" :value = "value" font_size_unit="24px" font_size_cent="18px"/>
             </div>
         </div>
     </div>  
@@ -22,7 +22,6 @@ export default{
     },
     data(){
         return{
-            font_family:'Comfortaa-Regular',
             project:{},
             text:{
                 Summe: text.Calc.Summe,

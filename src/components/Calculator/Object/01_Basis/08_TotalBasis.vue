@@ -80,7 +80,9 @@ export default{
 .wrap.line{
     border-top: solid 1px var(--color-akcent);
 }
-
+.value-percent{
+    font-family: 'DroidSans';
+}
 .total-part-obj.collapse{
     margin-top: 0px;
 }

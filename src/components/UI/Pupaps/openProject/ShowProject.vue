@@ -189,7 +189,7 @@ export default{
     color:#464646;
 }
 .finance{
-    font-family: 'Raleway-Light';
+    font-family: 'DroidSans';
     font-size: 20px;
     text-align: center;
     color:#9A9A9A;

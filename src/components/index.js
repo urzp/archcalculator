@@ -142,6 +142,7 @@ import Marker from '@/components/UI/Simples/Marker.vue'
 import ButtonSiteBar from '@/components/UI/SiteBar/ButtonSiteBar.vue'
 import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
 import CheckBox from '@/components/UI/Simples/CheckBox.vue'
+import DetalMarker from '@/components/UI/Simples/detalMarker.vue'
 
 export default [
     Header,
@@ -288,4 +289,5 @@ export default [
     Item_level_1,
     ButtonSiteBar,
     CheckBox,
+    DetalMarker,
 ]

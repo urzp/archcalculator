@@ -52,6 +52,9 @@ export default{
     font-size: 20px;
     color: var(--color-akcent);
 }
+.value-percent{
+    font-family: 'DroidSans';
+}
 .wrap.line{
     border-top: solid 1px var(--color-akcent);
 }
