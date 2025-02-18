@@ -53,9 +53,9 @@ foreach($objects as $item){
         $stages_html.="
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
-                <td class='title_3' style='width: 16.6%; text-align: left;'>$value_default</td>
-                <td class='title_3' style='width: 16.6%; text-align: left;'>$value</td>
-                <td class='title_3' style='width: 16.6%; text-align: right;'>$summ_item</td>
+                <td class='title_3 number' style='width: 16.6%; text-align: left;'>$value_default</td>
+                <td class='title_3 number' style='width: 16.6%; text-align: left;'>$value</td>
+                <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ_item</td>
             </tr>";
     }
 
@@ -77,8 +77,8 @@ foreach($objects as $item){
         $spetial_servis_html.="
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
-                <td class='title_3' style='width: 25%; text-align: left;'>$percent</td>
-                <td class='title_3' style='width: 25%; text-align: right;'>$price</td>
+                <td class='title_3 number' style='width: 25%; text-align: left;'>$percent</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$price</td>
             </tr>
         ";
     }
@@ -114,33 +114,33 @@ foreach($objects as $item){
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Anrechenbare Kosten</td>
                 <td class='title_3' style='width: 25%; text-align: left;'></td>
-                <td class='title_3' style='width: 25%; text-align: right;'>$finance</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$finance</td>
             </tr>
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Honorar nach Honorartafel</td>
                 <td class='title_3' style='width: 25%; text-align: left;'></td>
-                <td class='title_3' style='width: 25%; text-align: right;'>$honorar_calc</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$honorar_calc</td>
             </tr>
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Zuschlag</td>
-                <td class='title_3' style='width: 25%; text-align: left;'>$payExtraPercent</td>
-                <td class='title_3' style='width: 25%; text-align: right;'>$payExtra</td>
+                <td class='title_3 number' style='width: 25%; text-align: left;'>$payExtraPercent</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$payExtra</td>
             </tr>
         </table>
 
-        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $honorar_total</div>
+        <div class='title_3 number' style='width: 640px; text-align: right;'>Summe:  $honorar_total</div>
         <div class='title_2'>Leistungen</div>";
 $objects_html.= $stages_html;
 $objects_html.="  
-        <div class='title_3' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages%   $servis_total</div>
+        <div class='title_3 number' style='width: 640px; text-align: right;'>Summe: $summ_percent_stages%   $servis_total</div>
 
         <div class='title_2'>Besondere Leistungen</div>";
 $objects_html.= $spetial_servis_html;
 $objects_html.=" 
-        <div class='title_3' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
+        <div class='title_3 number' style='width: 640px; text-align: right;'>Summe:  $spetial_servis_total</div>
         <div class='total_object'>
             <div class='title_1'>$name_obj</div>
-            <div class='title_1 total_project_Summe'>Summe: $total_object </div>
+            <div class='title_1 number-bold total_project_Summe'>Summe: $total_object </div>
         </div>
     </div>
     ";
@@ -163,9 +163,9 @@ foreach($project_AdditionalServices as $item){
     $project_AdditionalServices_html .= "
     <tr>
         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$title</td>
-        <td class='title_3' style='width: 16.6%; text-align: left;'>$hours</td>
-        <td class='title_3' style='width: 16.6%; text-align: right;'>$price_hours</td>
-        <td class='title_3' style='width: 16.6%; text-align: right;'>$summ</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: left;'>$hours</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$price_hours</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ</td>
     </tr>    
     ";
 }
@@ -175,7 +175,7 @@ if(count($project_AdditionalServices)>0){
     $project_AdditionalServices_html.= "</table>";
 }
 $project_total_AdditionalServices=toMoney($project['total_AdditionalServices']);   
-$project_AdditionalServices_html.="<div class='title_3' style='width: 640px; text-align: right;'>Summe Zusätzliche Leistungen:  $project_total_AdditionalServices</div>";
+$project_AdditionalServices_html.="<div class='title_3 number' style='width: 640px; text-align: right;'>Summe Zusätzliche Leistungen:  $project_total_AdditionalServices</div>";
 
 
 $project_ExtraCosts = $project['ExtraCosts'];
@@ -192,9 +192,9 @@ foreach($project_ExtraCosts as $item){
     $project_ExtraCosts_html .= "
     <tr>
         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$title</td>
-        <td class='title_3' style='width: 16.6%; text-align: left;'>$rate</td>
-        <td class='title_3' style='width: 16.6%; text-align: right;'>$price_rate</td>
-        <td class='title_3' style='width: 16.6%; text-align: right;'>$summ</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: left;'>$rate</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$price_rate</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ</td>
     </tr>    
     ";
 }
@@ -204,7 +204,7 @@ if(count($project_ExtraCosts)>0){
     $project_ExtraCosts_html.= "</table>";
 }
 $project_total_ExtraCosts=toMoney($project['total_ExtraCosts']);   
-$project_ExtraCosts_html.="<div class='title_3' style='width: 640px; text-align: right;'>Summe der Nebenkosten:  $project_total_ExtraCosts</div>";
+$project_ExtraCosts_html.="<div class='title_3 number' style='width: 640px; text-align: right;'>Summe der Nebenkosten:  $project_total_ExtraCosts</div>";
 
 
 

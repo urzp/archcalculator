@@ -166,4 +166,13 @@
         margin-bottom: 20px;
     }
 
+    .number{
+        font-family: 'DroidSans';
+    }
+
+    .number-bold{
+        font-family: 'DroidSans';
+        font-weight: bold;
+    }
+
 }

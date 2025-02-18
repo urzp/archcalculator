@@ -35,6 +35,18 @@
     src: local('Raleway-Bold'),
     url(Raleway/Raleway-Bold.ttf);
 } 
+/* ----------------------------------- DroidSans ----------------------------------------- */
+@font-face {
+    font-family: 'DroidSans-Regular';
+    src: local('DroidSans-Regular'),
+    url(DroidSans/DroidSans.ttf);
+}  
+
+@font-face {
+    font-family: 'DroidSans-Bold';
+    src: local('DroidSans-Bold'),
+    url(DroidSans/DroidSans-Bold.ttf);
+}  
 
 /* ----------------------------------- Comfortaa ----------------------------------------- */
 

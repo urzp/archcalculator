@@ -40,6 +40,7 @@ $root = $_SERVER['DOCUMENT_ROOT'];
 
 include $root.'/php/dataServis/05_exportDoc/pdf/fonts/Rawline/css_font_Rawline.php';
 include $root.'/php/dataServis/05_exportDoc/pdf/fonts/Comfortaa/css_font_Comfortaa.php';
+include $root.'/php/dataServis/05_exportDoc/pdf/fonts/DroidSans/css_font_DroidSans.php';
 
 $css = file_get_contents($root.'/php/dataServis/05_exportDoc/pdf/project/styles.css');
 
@@ -50,6 +51,7 @@ $html = "
     <style type='text/css'>";
     $html .= $css_font_Rawline;
     $html .= $css_font_Comfortaa;
+    $html .= $css_font_DroidSans;
     $html .= $css;
     $html .="</style>
     </head>";
@@ -80,22 +82,22 @@ $html.="   <div class='title_2'>Zusammenfassung</div>
                     <tr>
                         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Gesamtsumme Netto</td>
                         <td class='title_3' style='width: 25%; text-align: left;'></td>
-                        <td class='title_3' style='width: 25%; text-align: right;'>$project_summe_net</td>
+                        <td class='title_3 number' style='width: 25%; text-align: right; '>$project_summe_net</td>
                     </tr>
                     <tr>
                         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Umsatzsteuer</td>
-                        <td class='title_3' style='width: 25%; text-align: left;'>$project_tax</td>
-                        <td class='title_3' style='width: 25%; text-align: right;'>$project_summe_tax</td>
+                        <td class='title_3 number' style='width: 25%; text-align: left;'>$project_tax</td>
+                        <td class='title_3 number' style='width: 25%; text-align: right;'>$project_summe_tax</td>
                     </tr>
                     <tr>
                         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Gesamtsumme Brutto</td>
                         <td class='title_3' style='width: 25%; text-align: left;'></td>
-                        <td class='title_3' style='width: 25%; text-align: right;'>$project_summe</td>
+                        <td class='title_3 number' style='width: 25%; text-align: right;'>$project_summe</td>
                     </tr>
                 </table>
                 <div class='total_project'>
                     <div class='title_1'>$project_name</div>
-                    <div class='title_1 total_project_Summe'>Summe: $project_summe </div>
+                    <div class='title_1 number-bold total_project_Summe'>Summe: $project_summe </div>
                 </div>
             </div>
         </div>
