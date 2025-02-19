@@ -225,6 +225,7 @@ export let text = {
         Institut:'Institut:',
         USt_Id_Nr:'USt-Id.-Nr.:',
         Gem_Umsatzsteuergesetz: 'Gem. § 14b Abs. 1 S.4 Umsatzsteuergesetz muss diese Rechnung und ein Zahlungsbeleg für zwei Jahre aufbewahrt werden. Die Aufbewahrungsfrist beginnt mit dem Ende des Kalenderjahres, in dem die Rechnung ausgestellt wurde.  Ein Verstoß kann nach § 26a Abs. 2 UStG mit bis zu 500 EUR Geldbuße geahndet werden.',
+        is_locked: 'Das Rechnung geschlossen',
     },
 
 }

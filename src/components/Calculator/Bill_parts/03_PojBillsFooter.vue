@@ -1,6 +1,6 @@
 <template>
     <div v-if="isBill" class="BillFooter light-text">
-        <div class="hover-panel">
+        <div v-if="!isLocked" class="hover-panel">
             <UpdateBtn class="button" width="35px" height="28px" @click="set_all_default()"/>
         </div>
         <div class="VAT_included"> {{ text.Im_Betrag_von }} <span><PriceBill :value="val_1"/></span> {{ text.sind }} <span><PriceBill :value="val_2"/></span> {{ text.Mehrwertsteuer_enthalten }}</div>
@@ -85,6 +85,10 @@ export default{
         bill_item:[Number, String]
     },
     computed:{
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
+        },
         actualBill(){
             let result = {}
             if(!!Project&&!!Project.project) result = Project.project

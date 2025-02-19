@@ -5,7 +5,7 @@
         <div  class="objects-calculator" v-for="item in ListObjects" :key="item.id">
             <ObjectCalc :object_id="item.id" />
         </div>
-        <div class="panel">
+        <div class="panel" v-if="!isLocked">
             <NewButton width="200px" @click="newObject()" >{{ text.Honorarobjekt }}</NewButton>
             <CloseButton @click="deleteObject()"/>
         </div>
@@ -25,7 +25,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
-import { newPoject, LoadProjectData, saveUnUserNewProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { newPoject, Project, LoadProjectData, saveUnUserNewProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 import { text } from '@/servis/text.js'
 import { apiData } from '@/servis/apiData.js'
 export default{
@@ -64,6 +64,10 @@ export default{
     computed:{
         downLoad_link(){
             return `https://honorar.online/download.php?project=${this.project_id}&download_token=${this.download_token}&type=pdf`
+        },
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
         }
     },
     methods:{

@@ -1,6 +1,6 @@
 <template>
-    <div class="percent">
-        <div v-if="!input_type" class="value">{{value}}</div>
+    <div class="percent"  @click="checkLock()">
+        <div v-if="!input_type||isLocked" class="value">{{value}}</div>
         <input v-else ref="imput_pecent" type="text"  class="value" :value="value.toLocaleString('DE-de')" @change="event => edit_value(event)" @input="event => { validate(event) }"/>
         <div class="sumbol">%</div>
     </div>
@@ -8,11 +8,18 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { checkLock, Project } from '@/servis/projectData';
 export  default{
     name: 'Percent',
     mounted(){
         this.adjast_input_width()
     },  
+    computed:{
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
+        }
+    },
     props:{
         value: [String,Number],
         input_type:{ 
@@ -76,6 +83,9 @@ export  default{
             this.$emit('edit_value', val)
             EventBus.emit('edit:input',{ parent_item:this.search_data.id_parent , id_item: this.search_data.id , value:val})
             this.adjast_input_width()
+        },
+        checkLock(){
+            checkLock()
         }
     }
 }

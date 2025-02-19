@@ -37,6 +37,7 @@ Recent не меняется
 
 
 XRehnum типа QR https://www.ferd-net.de/fileadmin/user_upload/FeRD/Downloads/ZF232_EN.zip
+factur-x 
 Ghat gpty
 Админка
 

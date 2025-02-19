@@ -1,5 +1,5 @@
 <template>
-    <div class="date" @click.stop="showCalendar=true">
+    <div class="date" @click.stop="begin_edit()">
         {{ formatDate(value) }}
     </div>
     <div v-if="showCalendar" class="selectData" @click.stop="">
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { checkLock } from '@/servis/projectData';
 export default{
     name:'InputDate',
     data(){
@@ -40,6 +41,10 @@ export default{
             this.$emit('editValue', date)
             this.showCalendar=false
             
+        },
+        begin_edit(){
+            if(checkLock()) return false
+            this.showCalendar=true
         }
     }
 }

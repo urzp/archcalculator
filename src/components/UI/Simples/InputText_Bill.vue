@@ -15,6 +15,7 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { checkLock } from '@/servis/projectData';
 export default{
     name: 'InputText_Bill',
     mounted(){
@@ -56,6 +57,7 @@ export default{
     emits:['submit_event', 'setDefault'],
     methods:{
         begin_edit(){
+            if(checkLock()) return false
             this.edit = true
             setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
             EventBus.emit('fucus:input', this.id)

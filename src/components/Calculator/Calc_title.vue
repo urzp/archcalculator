@@ -1,5 +1,5 @@
 <template>
-    <div class="title-project">
+    <div class="title-project" >
         <!-- <div class="name" >{{ project_name }}</div> -->
         <template v-if="!bill_status">
         <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
@@ -129,7 +129,7 @@ export default{
             if(!this.project.customer) this.project.customer = {}
             this.project.customer[name_feeld] = value
             updateProject()
-        }
+        },
     }
 
 }

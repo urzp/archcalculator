@@ -12,14 +12,14 @@
         @updateItem = "data=>updateItem(data)"
         />
         <div class="buttton_wrap">
-            <NewButton   @click="newItem()"/>
+            <NewButton v-if="!isLocked"  @click="newItem()"/>
         </div>
     </Content_PartObject>
     <TotalBasisServis :percent="total_percent" :value="total_value" :collapse = 'collapse' />    
 </template>
 
 <script>
-import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { Project, checkLock, setUnSavedStatus } from '@/servis/projectData.js'
 import { text } from '@/servis/text.js'
 export default{
     name: 'SpecialServices',
@@ -50,6 +50,10 @@ export default{
             result = this.honorar * this.total_percent/100
             this.project.spetial_servis_total = result
             return result
+        },
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
         }
     },
     props:{

@@ -1,13 +1,13 @@
 <template>
-    <div class="price">
-        <template v-if="!input_type">
+    <div class="price" @click="checkLock()">
+        <template v-if="!input_type||isLocked">
             <div class="unit-price">{{ price.unit }}</div>
             <template v-if="!noCents&&typeCurrancy!='Hektar'">
                 <div class="comma">,</div>
                 <div class="cents">{{ price.cent }}</div>
             </template>
         </template>
-        <template v-if="input_type">
+        <template v-else >
             <input  type="text" class="unit-price" :value="price.unit" @change="event => edit_price( event.target.value, price.cent )" @input="event => { validate(event) }" @focus="event => { validate(event) }"/>
             <template v-if="!noCents&&typeCurrancy!='Hektar'">
             <div class="comma">,</div>
@@ -20,6 +20,7 @@
 
 <script>
 import { EventBus } from '@/servis/EventBus'
+import { checkLock, Project } from '@/servis/projectData';
 export default{
     name: 'Price',
     mounted(){
@@ -31,6 +32,12 @@ export default{
                 unit:'0',
                 cent:'00'
             }
+        }
+    },
+    computed:{
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
         }
     },
     props:{
@@ -115,6 +122,9 @@ export default{
                 unit,
                 cent
             }
+        },
+        checkLock(){
+            checkLock()
         }
     }
 }

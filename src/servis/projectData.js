@@ -249,3 +249,8 @@ export async function setPaidBill(value, type, id){
     await apiData({typeData:'setPaidBill', data: {id, type, value}})
     LoadProjectData(Project.project.id)
 }
+
+export function checkLock(){
+    if(Project.project.locked=='1') { EventBus.emit('Menu:Message', text.bill.is_locked); return true }
+    return false
+}

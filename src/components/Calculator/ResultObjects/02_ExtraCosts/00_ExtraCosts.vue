@@ -12,7 +12,7 @@
         @updateItem = "data=>updateItem(data)"
         />
         <div class="buttton_wrap">
-            <NewButton   @click="newItem()"/>
+            <NewButton v-if="!isLocked"  @click="newItem()"/>
         </div>
     </Content_PartObject>
     <TotalExtraCosts :value="total_value" :collapse = 'collapse' />    
@@ -49,6 +49,10 @@ export default{
             this.list.forEach(item=>result+= item.rate*item.price_rate)
             this.project.total_ExtraCosts = result
             return result
+        },
+        isLocked(){
+            if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
+            return false
         }
     },
     methods:{
