@@ -75,6 +75,10 @@ export let text = {
         Yes:'Ja',
         No:'Nein',
         Confirm_the_deletion:'Bestätigen Sie den Löschvorgang',
+        Project_not_find:'Das Projekt wurde nicht gefunden',
+        Wrong_confirmation_email:'Falscher Bestätigungs-Email-Link',
+        Email_confirmed:'E-Mail bestätigt',
+        Email_already_confirmed:'Bereits E-Mail bestätigt',
     },
     openProject:{
         loading:'Loading . . .',

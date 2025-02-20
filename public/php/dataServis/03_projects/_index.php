@@ -53,6 +53,7 @@ switch ($typeData) {
 
 switch ($typeData) {   
     case 'loadWholeProject_by_link' : include '01_Project/loadWholeProject_by_link.php'; break;
+    case 'loadWholeBill_by_link' : include '04_Bills_v2/loadWholeBill_by_link.php'; break;
 }
 
 

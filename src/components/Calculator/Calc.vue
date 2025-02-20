@@ -25,7 +25,7 @@
 import { EventBus } from '@/servis/EventBus'
 import { LoadCalcData } from '@/servis/calcData.js'
 import { lastElement } from '@/servis/functions.js'
-import { newPoject, Project, LoadProjectData, saveUnUserNewProject, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
+import { newPoject, Project, LoadProjectData, setDownloadLink, newProjectObject, deleteProjectObject} from '@/servis/projectData.js'
 import { text } from '@/servis/text.js'
 import { apiData } from '@/servis/apiData.js'
 export default{
@@ -103,11 +103,12 @@ export default{
         },
 
         async showLinks(){
+            console.log(this.download_token)
             if(!!this.download_token){
                 this.loadPdf()
                 return false
             }
-           let result = await saveUnUserNewProject()
+           let result = await setDownloadLink()
             EventBus.emit('Popap:downloadLinks_project', result)
         },
     }

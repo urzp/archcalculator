@@ -48,8 +48,10 @@ export default{
         },
         async openPopap(data){
             this.show=true
-            this.project_link = `https://honorar.online?project=${data.id}&download_token=${data.downLoad_token}`;
-            this.pdf_link = `https://honorar.online/download.php?project=${data.id}&download_token=${data.downLoad_token}&type=pdf`
+            let type_doc = 'project'
+            if(data.status=='bill') type_doc = 'bill'
+            this.project_link = `https://honorar.online?${type_doc}=${data.id}&download_token=${data.downLoad_token}`;
+            this.pdf_link = `https://honorar.online/download.php?${type_doc}=${data.id}&download_token=${data.downLoad_token}&type=pdf`
         }, 
         comfirm(){
             this.action()

@@ -19,7 +19,6 @@
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
-
 export default {
   name: 'HomePage',
   mounted(){
@@ -45,6 +44,12 @@ export default {
       download_token: '',
       showMain: true,
       selectedView: '',
+      text:{
+        Project_not_find: text.pupaps.Project_not_find,
+        Wrong_confirmation_email: text.pupaps.Wrong_confirmation_email,
+        Email_confirmed: text.pupaps.Email_confirmed,
+        Email_already_confirmed: text.pupaps.Email_already_confirmed,
+      }
     }
   },
   computed:{
@@ -53,7 +58,8 @@ export default {
   methods:{
     async init(){
       if(await this.use_link_project()){
-        this.project_id = this.$route.query.project
+        if(!!this.$route.query.project) this.project_id = this.$route.query.project; this.statusBill=false
+        if(!!this.$route.query.bill) this.project_id = this.$route.query.bill; this.statusBill=true
         this.download_token = this.$route.query.download_token
       }else{
         let id = localStorage.getItem('OpendProject') 
@@ -61,11 +67,11 @@ export default {
       }
     },
     async use_link_project(){
-      if(!this.$route.query.project) return false
+      if(!this.$route.query.download_token) return false
       let id_download_project = this.$route.query.project
       let download_token = this.$route.query.download_token
       let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
-      return result.success
+      return true// result.success
     },
     openProject(id){
       this.project_id = id
@@ -80,7 +86,7 @@ export default {
       this.download_token = ''
     },
     ErrorLoad(){
-      EventBus.emit('Menu:Message', 'Das Projekt wurde nicht gefunden')
+      EventBus.emit('Menu:Message', this.text.Project_not_find)
       localStorage.removeItem('OpendProject') 
       this.project_id = 'local'
     },
@@ -91,11 +97,11 @@ export default {
       if(!this.$route.query||!this.$route.query.email||!this.$route.query.code) return false
       let email = this.$route.query.email
       let code = this.$route.query.code
-      let result = await apiData({typeData:'comfirmEmail',data:{email, code}})
-      if(!result.success){ EventBus.emit('Menu:Message', 'Falscher Bestätigungs-Email-Link') }
+      let result = await apiData({typeData:'comfirmEmail', data:{email, code}})
+      if(!result.success){ EventBus.emit('Menu:Message', this.text.Wrong_confirmation_email) }
       if(result.success){ 
-        if(result.data.email_confirmed == '0') EventBus.emit('Menu:Message', 'E-Mail bestätigt') 
-        if(result.data.email_confirmed == '1') EventBus.emit('Menu:Message', 'Bereits E-Mail bestätigt') 
+        if(result.data.email_confirmed == '0') EventBus.emit('Menu:Message', this.text.Email_confirmed) 
+        if(result.data.email_confirmed == '1') EventBus.emit('Menu:Message', this.text.Email_already_confirmed) 
       }
     },
     selectView(name){

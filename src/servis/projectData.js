@@ -15,7 +15,9 @@ export async function LoadProjectData(id, download_token, statusBill=false){
         result = loadLocal() 
     }else{
         if(!!download_token){ 
-            result =  await apiData({typeData:'loadWholeProject_by_link', data:{id, download_token}}) //open project by link
+            if(!statusBill) result =  await apiData({typeData:'loadWholeProject_by_link', data:{id, download_token}}) //open project by link
+            if(statusBill) result =  await apiData({typeData:'loadWholeBill_by_link', data:{id, download_token}})
+            result.data.project.locked = '1'   //block project, temp 
             result.data.show_by_link = true
         }else{
             if(!statusBill) result =  await apiData({typeData:'loadWholeProject', id}) //open project
@@ -43,13 +45,24 @@ export async function saveNewProject(){
     //EventBus.emit('Menu:Message', 'Saved')
 }
 
+export async function setDownloadLink(){
+    if(!global.login) return saveUnUserNewProject()
+    let downLoad_token = Project.project.downLoad_token
+    if(!downLoad_token){ 
+        downLoad_token = Math.floor(1000000000 + Math.random() * 9000000000)  
+        Project.project.downLoad_token = downLoad_token
+        updateProject()
+    }
+    return { id:Project.project.id, status:Project.project.status , downLoad_token }
+}
+
 export async function saveUnUserNewProject(){
     if(!!Project.show_by_link) return false
     let result = (await apiData({typeData:'newUnUserProject', data: Project})).data
     Project.project.id_save = result.project
     Project.project.downLoad_token = result.downLoad_token
     Project.project.owner_token = result.owner_token
-    return { id:result.project, downLoad_token:result.downLoad_token }
+    return { id:result.project, status:'calc', downLoad_token:result.downLoad_token }
 }
 
 function loadLocal(){
