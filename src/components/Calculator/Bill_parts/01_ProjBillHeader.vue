@@ -5,7 +5,7 @@
                 <InputText_Bill :value="user_data" width="600px" noUpdate
                 @submit_event="value=>update_value(value,'user_data')" />
             </div>
-            <div v-if="useAvatar" class="logo_bill">
+            <div class="logo_bill">
                 <div><img :src="url_avatar" alt=""></div>
             </div>
         </div>
@@ -94,14 +94,6 @@ export default{
         bill_item:[Number, String]
     },
     computed:{
-
-        useAvatar(){
-            let result = false
-            if(!!global.login) {
-                result = !!user.avatar
-            }
-            return result
-        },
         url_avatar(){
             let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
             if(!!this.actualBill&&!!this.actualBill.user_logo) url = this.actualBill.user_logo
