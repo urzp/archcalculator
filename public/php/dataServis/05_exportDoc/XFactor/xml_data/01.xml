@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<rsm:Crosslndustrylnvoice>
+    <rsm:ExchangedDocumentContext>
+		<ram:BusinessProcessSpecifiedDocumentContextParameter>
+			<ram:ID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</ram:ID>
+		</ram:BusinessProcessSpecifiedDocumentContextParameter>
+		<ram:GuidelineSpecifiedDocumentContextParameter>
+            <ram:ID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</ram:ID>
+        </ram:GuidelineSpecifiedDocumentContextParameter>
+    </rsm:ExchangedDocumentContext>
+</rsm:Crosslndustrylnvoice>
+
+<!--
+Этот блок XML представляет собой фрагмент документа,
+который соответствует стандартам обмена электронными
+счетами в рамках различных бизнес-процессов.
+Рассмотрим его более подробно.
+-->
+
+<rsm:Crosslndustrylnvoice>
+    <!-- Корневой элемент:
+         Это основной элемент документа,
+         который обозначает, что он является межотраслевым счетом (invoice).
+         Префикс rsm указывает на пространственную область имен для этого типа документа.
+    -->
+    
+    <rsm:ExchangedDocumentContext>
+        <!-- Контекст обмена документа:
+             Этот элемент служит для определения контекста,
+             в котором документ был создан и отправлен.
+        -->
+        
+        <ram:BusinessProcessSpecifiedDocumentContextParameter>
+            <!-- Параметры контекста бизнес-процесса:
+                 Этот элемент определяет бизнес-процесс,
+                 связанный с документом.
+            -->
+            
+            <ram:ID>
+                <!-- Уникальный идентификатор:
+                     Ссылается на конкретный стандарт или контекст использования.
+                     В данном случае это urn:fdc:peppol.eu:2017:poacc:billing:01:1.0,
+                     что указывает на стандарт для обмена счетами.
+                -->
+            </ram:ID>
+        </ram:BusinessProcessSpecifiedDocumentContextParameter>
+        
+        <ram:GuidelineSpecifiedDocumentContextParameter>
+            <!-- Параметры контекста спецификации руководства:
+                 Этот элемент указывает на спецификации или руководства,
+                 которым должен соответствовать документ.
+            -->
+            
+            <ram:ID>
+                <!-- Уникальный идентификатор:
+                     Указывает на конкретное руководство или стандарт.
+                     Здесь это urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0,
+                     что подтверждает соответствие документа определенному стандарту
+                     (например, EN 16931 для электронных счетов).
+                -->
+            </ram:ID>
+        </ram:GuidelineSpecifiedDocumentContextParameter>
+    </rsm:ExchangedDocumentContext>
+</rsm:Crosslndustrylnvoice>
+
+<!--
+В целом, данный XML-блок описывает,
+что счет-фактура соответствует определенным стандартам и правилам,
+что может быть важным для автоматизации обмена документами
+между различными компаниями и организациями.
+-->
