@@ -1,0 +1,38 @@
+    <rsm:ExchangedDocument>
+        <ram:ID>RE 600</ram:ID>
+        <ram:TypeCode>386</ram:TypeCode>
+        <ram:IssueDateTime>
+            <udt:DateTimeString format="102">20250228</udt:DateTimeString>
+        </ram:IssueDateTime>
+        <ram:IncludedNote>
+            <ram:Content>Gem. § 14b Abs. 1 S.4 Umsatzsteuergesetz muss diese Rechnung und ein Zahlungsbeleg für zwei Jahre aufbewahrt werden. Die Aufbewahrungsfrist beginnt mit dem Ende des Kalenderjahres, in dem die Rechnung ausgestellt wurde. Ein Verstoß kann nach § 26a Abs. 2 UStG mit bis zu 500 EUR Geldbuße geahndet werden.</ram:Content>
+        </ram:IncludedNote>
+    </rsm:ExchangedDocument>
+
+
+    <rsm:ExchangedDocument>
+    <!-- Основной элемент документа, содержащий информацию об обмене документами -->
+    
+    <ram:ID>RE 600</ram:ID>
+    <!-- Идентификатор документа (например, номер счета). В данном случае это "RE 600". -->
+    
+    <ram:TypeCode>386</ram:TypeCode>
+    <!-- Код типа документа. Код "386" может обозначать конкретный тип документа (например, счет-фактуру) в соответствии с классификацией, принятой в системе. -->
+    
+    <ram:IssueDateTime>
+        <!-- Элемент, содержащий дату и время выпуска документа -->
+        
+        <udt:DateTimeString format="102">20250228</udt:DateTimeString>
+        <!-- Форматированный строковый элемент с датой выпуска документа. Формат "102" указывает на формат даты (например, ГГГГММДД). В данном случае дата заполнена как 28 февраля 2025 года. -->
+    </ram:IssueDateTime>
+    
+    <ram:IncludedNote>
+        <!-- Элемент для включения дополнительных примечаний или обязательной информации к документу -->
+        
+        <ram:Content>
+            <!-- Содержимое примечания. В данном случае это юридическая информация о сроках хранения документа. -->
+            Gem. § 14b Abs. 1 S.4 Umsatzsteuergesetz muss diese Rechnung und ein Zahlungsbeleg für zwei Jahre aufbewahrt werden. Die Aufbewahrungsfrist beginnt mit dem Ende des Kalenderjahres, in dem die Rechnung ausgestellt wurde. Ein Verstoß kann nach § 26a Abs. 2 UStG mit bis zu 500 EUR Geldbuße geahndet werden.
+            <!-- Текст объясняет, что согласно немецкому законодательству (UStG) документ и подтверждение оплаты должны храниться в течение двух лет с момента выпуска. Нарушение этого обязательства может повлечь за собой штраф до 500 евро. -->
+        </ram:Content>
+    </ram:IncludedNote>
+</rsm:ExchangedDocument>

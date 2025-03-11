@@ -1,0 +1,77 @@
+<rsm:SupplyChainTradeTransaction><!-- я не стал все Leistungsphase делать, думаю и так понятно -->
+    <!-- Main-Position -> first Honorarobjekt -->
+    <ram:IncludedSupplyChainTradeLineItem>
+        <ram:AssociatedDocumentLineDocument>
+            <ram:LineID>1</ram:LineID>
+        </ram:AssociatedDocumentLineDocument>
+        <ram:SpecifiedTradeProduct>
+            <ram:Name>Honorarobjekt A</ram:Name>
+        </ram:SpecifiedTradeProduct>
+        <ram:IncludedNote>
+            <ram:Content>
+                Honorargrundlagen
+                HOAI Version 2021
+                Planungsgegenstand § 34 Gebäude
+                Honorarzone III
+                Honorarsatz Mittelsatz
+                Anrechenbare Kosten 8.234.134,66 €
+                Honorar nach Honorartafel 837.989,51 €
+                Zuschlag 0%
+            </ram:Content>
+        </ram:IncludedNote>
+    </ram:IncludedSupplyChainTradeLineItem>
+
+<!-- Sub-Position -->
+    <ram:IncludedSupplyChainTradeLineItem>
+        <ram:AssociatedDocumentLineDocument>
+            <ram:LineID>1.1</ram:LineID>
+        </ram:AssociatedDocumentLineDocument>
+        <ram:SpecifiedTradeProduct>
+            <ram:Name>Grundlagenermittlung</ram:Name>
+        </ram:SpecifiedTradeProduct>
+        <ram:SpecifiedLineTradeDelivery>
+            <ram:BilledQuantity unitCode="C62">0</ram:BilledQuantity> <!-- 0 % -->
+        </ram:SpecifiedLineTradeDelivery>
+        <ram:SpecifiedLineTradeAgreement>
+            <ram:GrossPriceProductTradePrice>
+                <ram:ChargeAmount currencyID="EUR">837989.51</ram:ChargeAmount> <!-- HOAI-Tabellenwert -->
+            </ram:GrossPriceProductTradePrice>
+        </ram:SpecifiedLineTradeAgreement>
+        <ram:SpecifiedTradeSettlementLineMonetarySummation>
+            <ram:LineTotalAmount currencyID="EUR">0</ram:LineTotalAmount> <!-- 0% von Tabellenwert -->
+        </ram:SpecifiedTradeSettlementLineMonetarySummation>
+    </ram:IncludedSupplyChainTradeLineItem>
+    
+<!-- Sub-Position -->
+    <ram:IncludedSupplyChainTradeLineItem>
+        <ram:AssociatedDocumentLineDocument>
+            <ram:LineID>1.2</ram:LineID>
+        </ram:AssociatedDocumentLineDocument>
+        <ram:SpecifiedTradeProduct>
+            <ram:Name>Vorplanung</ram:Name>
+        </ram:SpecifiedTradeProduct>
+        <ram:SpecifiedLineTradeDelivery>
+            <ram:BilledQuantity unitCode="C62">12</ram:BilledQuantity> <!-- 12 % -->
+        </ram:SpecifiedLineTradeDelivery>
+        <ram:SpecifiedLineTradeAgreement>
+            <ram:GrossPriceProductTradePrice>
+                <ram:ChargeAmount currencyID="EUR">837989.51</ram:ChargeAmount> <!-- HOAI-Tabellenwert -->
+            </ram:GrossPriceProductTradePrice>
+        </ram:SpecifiedLineTradeAgreement>
+        <ram:SpecifiedTradeSettlementLineMonetarySummation>
+            <ram:LineTotalAmount currencyID="EUR">100558.74</ram:LineTotalAmount> <!-- 12% von Tabellenwert -->
+        </ram:SpecifiedTradeSettlementLineMonetarySummation>
+    </ram:IncludedSupplyChainTradeLineItem>
+    <!-- Sub-Position LP3-9 -->
+    <!-- Sub-Position Besondere Leistungen -->
+<!-- Main-Position -> next Honorarobjekt -->
+    <!-- Sub-Position LP1-9 -->
+    <!-- Sub-Position Besondere Leistungen -->
+<!-- Main-Position -> Zusätzliche Leistungen -->
+    <!-- Sub-Position -->
+    <!-- Sub-Position -->
+<!-- Main-Position -> Nebenkosten -->
+    <!-- Sub-Position -->
+    <!-- Sub-Position -->
+
+</rsm:SupplyChainTradeTransaction>
