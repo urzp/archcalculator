@@ -1,5 +1,5 @@
 <?php
-
+//https://honorar.online/php/dataServis/05_exportDoc/XFactor/xml_data/00_base.php
 // Создаем новый объект XMLWriter
 $xml = new XMLWriter();
 $xml->openMemory();
@@ -17,7 +17,7 @@ $xml->writeAttribute('xmlns:xs', 'http://www.w3.org/2001/XMLSchema');
 $xml->writeAttribute('xmlns:udt', 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100');
 
 
-
+include '01_ExchangedDocumentContext/index.php';
 
 
 $xml->endElement(); // Закрываем основной элемент <rsm:Crosslndustrylnvoice>
