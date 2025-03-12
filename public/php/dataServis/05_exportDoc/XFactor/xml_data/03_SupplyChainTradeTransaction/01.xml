@@ -1,0 +1,56 @@
+    <ram:IncludedSupplyChainTradeLineItem>
+        <ram:AssociatedDocumentLineDocument>
+            <ram:LineID>1</ram:LineID>
+        </ram:AssociatedDocumentLineDocument>
+        <ram:SpecifiedTradeProduct>
+            <ram:Name>Honorarobjekt A</ram:Name>
+        </ram:SpecifiedTradeProduct>
+        <ram:IncludedNote>
+            <ram:Content>
+Honorargrundlagen
+HOAI Version 2021
+Planungsgegenstand § 34 Gebäude
+Honorarzone III
+Honorarsatz Mittelsatz
+Anrechenbare Kosten 8.234.134,66 €
+Honorar nach Honorartafel 837.989,51 €
+Zuschlag 0%
+            </ram:Content>
+        </ram:IncludedNote>
+    </ram:IncludedSupplyChainTradeLineItem>
+
+<!-- 
+В данном фрагменте XML представлена структура данных, относящаяся к элементу 
+ram:IncludedSupplyChainTradeLineItem, который описывает отдельную позицию в 
+супплай цепи.
+
+1. ram:IncludedSupplyChainTradeLineItem - основной элемент, содержащий детали 
+   о товаре или услуге, включенной в поставку.
+   
+2. ram:AssociatedDocumentLineDocument - этот элемент указывает, что связанный 
+   документ содержит информацию о позиции, например, спецификацию или счет-фактуру.
+
+3. ram:LineID - уникальный идентификатор линии товара или услуги, который 
+   помогает однозначно идентифицировать позицию в документации.
+   
+4. ram:SpecifiedTradeProduct - секция, описывающая конкретный товар или услугу. 
+   Внутри нее:
+   - ram:Name - название продукта, в данном случае "Honorarobjekt A".
+
+5. ram:IncludedNote - данный элемент содержит примечания или полезную информацию
+   о позиции, включая детали расчета и условия.
+   - ram:Content - внутренний элемент, представляющий текстовые данные, такие как 
+     информация о стоимости, расчетах и условиях. В примере указаны:
+     - Honorargrundlagen: основы расчета гонорара.
+     - HOAI Version 2021: версия стандартов расчета гонораров.
+     - Planungsgegenstand § 34 Gebäude: предмет планирования согласно 
+       § 34 о зданиях.
+     - Honorarzone III: зона гонорара.
+     - Honorarsatz Mittelsatz: рассчитанный уровень гонорара.
+     - Anrechenbare Kosten: подлежащие учету расходы.
+     - Honorar nach Honorartafel: итоговая сумма гонорара по таблице.
+     - Zuschlag: процентный надбавка, в данном случае 0%.
+
+Эта часть XML служит для передачи информации о товарной позиции в контексте 
+финансовых и юридических данных в процессе ведения учета поставок и расчетов. 
+-->

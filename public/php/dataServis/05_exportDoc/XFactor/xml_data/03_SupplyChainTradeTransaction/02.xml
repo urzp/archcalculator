@@ -1,0 +1,44 @@
+    <ram:IncludedSupplyChainTradeLineItem>
+        <ram:AssociatedDocumentLineDocument>
+            <ram:LineID>1.1</ram:LineID>
+        </ram:AssociatedDocumentLineDocument>
+        <ram:SpecifiedTradeProduct>
+            <ram:Name>Grundlagenermittlung</ram:Name>
+        </ram:SpecifiedTradeProduct>
+        <ram:SpecifiedLineTradeDelivery>
+            <ram:BilledQuantity unitCode="C62">0</ram:BilledQuantity> <!-- 0 % -->
+        </ram:SpecifiedLineTradeDelivery>
+        <ram:SpecifiedLineTradeAgreement>
+            <ram:GrossPriceProductTradePrice>
+                <ram:ChargeAmount currencyID="EUR">837989.51</ram:ChargeAmount> <!-- HOAI-Tabellenwert -->
+            </ram:GrossPriceProductTradePrice>
+        </ram:SpecifiedLineTradeAgreement>
+        <ram:SpecifiedTradeSettlementLineMonetarySummation>
+            <ram:LineTotalAmount currencyID="EUR">0</ram:LineTotalAmount> <!-- 0% von Tabellenwert -->
+        </ram:SpecifiedTradeSettlementLineMonetarySummation>
+    </ram:IncludedSupplyChainTradeLineItem>
+
+
+<!--
+Данная часть XML файла описывает элемент, относящийся к системе X-Factor, который представляет собой включённый элемент торговой линии в цепочке поставок. 
+
+1. **ram:IncludedSupplyChainTradeLineItem** - корневой элемент, который обозначает отдельный товар или услугу в рамках поставки.
+  
+2. **ram:AssociatedDocumentLineDocument** - элемент, связывающий этот элемент с соответствующей документированной строкой. 
+   - **ram:LineID** - идентификатор линии, который используется для однозначной идентификации этого элемента в документе. В данном случае значение не указано.
+
+3. **ram:SpecifiedTradeProduct** - элемент, который предоставляет информацию о конкретной торговой продукции.
+   - **ram:Name** - имя или описание товара. В данном случае указано "Grundlagenermittlung" (что может переводиться как "основное определение", вероятно, это термин, применяемый в конкретной области).
+
+4. **ram:SpecifiedLineTradeDelivery** - элемент, отвечающий за характеристики поставки, относящейся к этой линии.
+   - **ram:BilledQuantity** - количество, выставленное к оплате. Указано как 0 с единицей измерения "C62" (которая может указывать на особый тип измерения или единицу, используемую в данной системе).
+
+5. **ram:SpecifiedLineTradeAgreement** - элемент, представляющий соглашение по торговле для данной линии.
+   - **ram:GrossPriceProductTradePrice** - элемент, содержащий информацию о стоимости продукта.
+     - **ram:ChargeAmount** - общая сумма, подлежащая оплате, указана как 837989.51 евро.
+
+6. **ram:SpecifiedTradeSettlementLineMonetarySummation** - элемент, который описывает обобщённые денежные итоги по данной линии.
+   - **ram:LineTotalAmount** - общая сумма по линии, указана как 0 евро, что может свидетельствовать о неоплаченном счёте или об отсутствии дополнительных расходов на данный товар.
+
+Эти элементы собираются вместе для предоставления полноценной информации о товаре, его стоимости и процессе поставки в рамках бизнес-транзакции.
+-->

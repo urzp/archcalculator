@@ -4,7 +4,7 @@
 $xml->startElementNS('rsm', 'ExchangedDocument', null);
 
     $xml->startElementNS('ram', 'ID', null); 
-        $xml->text('RE 600'); 
+        $xml->text($bill->invoice_number); 
     $xml->endElement(); 
 
     $xml->startElementNS('ram', 'TypeCode', null); 
@@ -14,7 +14,7 @@ $xml->startElementNS('rsm', 'ExchangedDocument', null);
     $xml->startElementNS('ram', 'IssueDateTime', null); 
         $xml->startElementNS('udt', 'DateTimeString', null);
             $xml->writeAttribute('format', '102');
-            $xml->text('20250228');
+            $xml->text( (new DateTime($bill -> created))->format('Ymd')  );
         $xml->endElement();
     $xml->endElement();
 

@@ -1,5 +1,8 @@
 <?php
 //https://honorar.online/php/dataServis/05_exportDoc/XFactor/xml_data/00_base.php
+
+include 'getData.php';
+
 // Создаем новый объект XMLWriter
 $xml = new XMLWriter();
 $xml->openMemory();
