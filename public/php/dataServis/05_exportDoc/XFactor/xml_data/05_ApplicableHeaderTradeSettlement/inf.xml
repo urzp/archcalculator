@@ -1,0 +1,56 @@
+<ram:ApplicableHeaderTradeSettlement>
+    <ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+
+    <ram:SpecifiedTradeSettlementPaymentMeans>
+        <ram:TypeCode>58</ram:TypeCode>
+        <ram:PayeePartyCreditorFinancialAccount>
+            <ram:IBANID>DE91100000000123456789</ram:IBANID>
+            <ram:AccountName>Viktor Filimonow</ram:AccountName>
+            <ram:FinancialInstitutionBranchID>BICBICBIC</ram:FinancialInstitutionBranchID>
+        </ram:PayeePartyCreditorFinancialAccount>
+        <ram:PaymentReference>RE 600</ram:PaymentReference>
+    </ram:SpecifiedTradeSettlementPaymentMeans>
+
+    <ram:BillingSpecifiedPeriod>
+        <ram:StartDateTime><udt:DateTimeString format="102">20240201</udt:DateTimeString></ram:StartDateTime>
+        <ram:EndDateTime><udt:DateTimeString format="102">20250305</udt:DateTimeString></ram:EndDateTime>
+    </ram:BillingSpecifiedPeriod>
+
+    <ram:SpecifiedTradeAllowanceCharge>
+        <ram:ChargeIndicator>false</ram:ChargeIndicator>
+        <ram:Reason>Zahlung vom 22.02.2023</ram:Reason>
+        <ram:ActualAmount>12000.20</ram:ActualAmount>
+    </ram:SpecifiedTradeAllowanceCharge>
+
+    <ram:SpecifiedTradeAllowanceCharge>
+        <ram:ChargeIndicator>false</ram:ChargeIndicator>
+        <ram:Reason>Zahlung vom 22.10.2024</ram:Reason>
+        <ram:ActualAmount>13000.20</ram:ActualAmount>
+    </ram:SpecifiedTradeAllowanceCharge>
+
+    <ram:ApplicableTradeTax>
+        <ram:CalculatedAmount>25219.50</ram:CalculatedAmount>
+        <ram:TypeCode>VAT</ram:TypeCode>
+        <ram:BasisAmount>132734.19</ram:BasisAmount><!-- not displayed in PDF -->
+        <ram:CategoryCode>S</ram:CategoryCode>
+        <ram:RateApplicablePercent>19</ram:RateApplicablePercent>
+    </ram:ApplicableTradeTax>
+
+    <ram:SpecifiedTradePaymentTerms>
+        <ram:Description>Bitte zahlen Sie den Betrag bis zum 5.3.2025 an die unten genannte Bankverbindung.</ram:Description>
+        <ram:DueDateDateTime>
+            <udt:DateTimeString format="102">20250305</udt:DateTimeString>
+        </ram:DueDateDateTime>
+    </ram:SpecifiedTradePaymentTerms>
+
+    <ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+        <ram:LineTotalAmount>153742.93</ram:LineTotalAmount>
+        <ram:ChargeTotalAmount>0</ram:ChargeTotalAmount>
+        <ram:AllowanceTotalAmount>0</ram:AllowanceTotalAmount>
+        <ram:TotalPrepaidAmount>25000.40</ram:TotalPrepaidAmount>
+        <ram:TaxBasisTotalAmount>132734.19</ram:TaxBasisTotalAmount>
+        <ram:TaxTotalAmount>25219.50</ram:TaxTotalAmount>
+        <ram:GrandTotalAmount>182954.19</ram:GrandTotalAmount>
+        <ram:DuePayableAmount>157953.69</ram:DuePayableAmount>
+    </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+</ram:ApplicableHeaderTradeSettlement>

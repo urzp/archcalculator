@@ -24,6 +24,7 @@ include '01_ExchangedDocumentContext/index.php';
 include '02_ExchangedDocument/index.php';
 include '03_SupplyChainTradeTransaction/index.php';
 include '04_ApplicableHeaderTradeAgreemen/index.php';
+include '05_ApplicableHeaderTradeSettlement/index.php';
 
 
 $xml->endElement(); // Закрываем основной элемент <rsm:Crosslndustrylnvoice>
