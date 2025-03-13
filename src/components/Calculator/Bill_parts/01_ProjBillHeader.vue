@@ -10,21 +10,33 @@
             </div>
         </div>
         <div v-if="!!customer" class="custemer">
-            <div class="company bold-text">
-                <InputText_Bill :value="customer.company" width="300px" 
-                @submit_event="value=>update_value(value,'customer_company')" />
-            </div>
             <div class="name bold-text">
                 <InputText_Bill :value="customer.name" width="300px" 
-                @submit_event="value=>update_value(value,'customer_name')" />                
+                @submit_event="value=>update_customer(value,'name')" />                
+            </div>
+            <div class="company bold-text">
+                <InputText_Bill :value="customer.company" width="300px" 
+                @submit_event="value=>update_customer(value,'company')" />
+            </div>
+            <div class="company bold-text">
+                <InputText_Bill :value="customer.email" width="300px" 
+                @submit_event="value=>update_customer(value,'email')" />
             </div>
             <div class="adresse_1 bold-text">
-                <InputText_Bill :value="customer.address_1" width="300px" 
-                @submit_event="value=>update_value(value,'customer_address_1')" />                     
+                <InputText_Bill :value="customer.postcode" width="300px" 
+                @submit_event="value=>update_customer(value,'postcode')" />                     
             </div>
             <div class="adresse_2 bold-text">
-                <InputText_Bill :value="customer.address_2" width="300px" 
-                @submit_event="value=>update_value(value,'customer_address_2')" />      
+                <InputText_Bill :value="customer.address" width="300px" 
+                @submit_event="value=>update_customer(value,'address')" />      
+            </div>
+            <div class="adresse_2 bold-text">
+            <InputText_Bill :value="customer.cityName" width="300px" 
+                @submit_event="value=>update_customer(value,'cityName')" />      
+            </div>
+            <div class="adresse_2 bold-text">
+            <InputText_Bill :value="customer.CountryID" width="300px" 
+                @submit_event="value=>update_customer(value,'CountryID')" />      
             </div>
         </div>
         <div class="main_data_bill">
@@ -165,6 +177,10 @@ export default{
             if(name_value=='invoice_number') Project.project.invoice_number = value; //setPaid(value, 'invoice_number', this.actualBill.id ) 
             if(name_value=='number_bill') Project.project.number_bill = value
             if(name_value=='greeting_phrase') Project.project.greeting_phrase = value
+            updateProject()
+        },
+        async update_customer(value, name){
+            Project.project.customer[name] = value
             updateProject()
         },
         formatDate(date){

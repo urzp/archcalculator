@@ -179,7 +179,7 @@ export async function projectToBill(id=Project.project.id, number_bill = billNex
     Project.project.id_project_contract = Project.project.id
     let user_name = !user.name?'Name':user.name
     let user_address = !user.address?'Adresse':user.address
-    let user_data = `${user_name} - ${user_address}`
+    let user_data = `${user.name} - ${user.address} - ${user.postcode} - ${user.cityName}`
     Project.project.user_name = user_name
     Project.project.user_data = user_data
     Project.project.user_IBAN = user.IBAN

@@ -12,17 +12,26 @@
         </div>
         <div v-if="login&&!no_full_inf&&status_project!='calc'" class="customer">
             <div class="title">{{ text.Customer }}</div>
-            <div class="customer_company">
-                <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
-            </div>
-            <div class="customer_name">
+            <div class="customer">
                 <InputText :value="customer_name" width="200px" @submit_event="value=>newProjectCustemer('name', value)"></InputText>
             </div>
-            <div class="customer_name">
-                <InputText :value="customer_address_1" width="200px" @submit_event="value=>newProjectCustemer('address_1', value)"></InputText>
+            <div class="customer">
+                <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
             </div>
-            <div class="customer_name">
-                <InputText :value="customer_address_2" width="200px" @submit_event="value=>newProjectCustemer('address_2', value)"></InputText>
+            <div class="customer">
+                <InputText :value="customer_email" width="200px" @submit_event="value=>newProjectCustemer('email', value)"></InputText>
+            </div>
+            <div class="customer">
+                <InputText :value="customer_postcode" width="200px" @submit_event="value=>newProjectCustemer('postcode', value)"></InputText>
+            </div>
+            <div class="customer">
+                <InputText :value="customer_address" width="200px" @submit_event="value=>newProjectCustemer('address', value)"></InputText>
+            </div>
+            <div class="customer">
+                <InputText :value="customer_cityName" width="200px" @submit_event="value=>newProjectCustemer('cityName', value)"></InputText>
+            </div>
+            <div class="customer">
+                <InputText :value="customer_CountryID" width="200px" @submit_event="value=>newProjectCustemer('CountryID', value)"></InputText>
             </div>
         </div>
         </template>
@@ -80,24 +89,39 @@ export default{
             //result = true // temp
             return result
         },
-        customer_company(){
-            let result = 'Company'
-            if(!!this.project&&!!this.project.customer&&!!this.project.customer.company) result = this.project.customer.company
-            return result
-        },
         customer_name(){
             let result = 'Name'
             if(!!this.project&&!!this.project.customer&&!!this.project.customer.name) result = this.project.customer.name
             return result
         },
-        customer_address_1(){
-            let result = 'address'
-            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address_1) result = this.project.customer.address_1
+        customer_company(){
+            let result = 'Company'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.company) result = this.project.customer.company
             return result
         },
-        customer_address_2(){
+        customer_email(){
+            let result = 'Email'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.email) result = this.project.customer.email
+            return result
+        },
+        customer_postcode(){
+            let result = 'Postcode'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.postcode) result = this.project.customer.postcode
+            return result
+        },
+        customer_address(){
             let result = 'address'
-            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address_2) result = this.project.customer.address_2
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.address) result = this.project.customer.address
+            return result
+        },
+        customer_cityName(){
+            let result = 'City Name'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.cityName) result = this.project.customer.cityName
+            return result
+        },
+        customer_CountryID(){
+            let result = 'Country ID'
+            if(!!this.project&&!!this.project.customer&&!!this.project.customer.CountryID) result = this.project.customer.CountryID
             return result
         },
         project(){

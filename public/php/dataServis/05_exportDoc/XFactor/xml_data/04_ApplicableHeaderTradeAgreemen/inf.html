@@ -1,0 +1,57 @@
+<ram:ApplicableHeaderTradeAgreement> 
+    <ram:BuyerReference>04011000-12345-34</ram:BuyerReference>		
+    <ram:SellerTradeParty><!-- соответствует полям в профиле, если поля нет, можно добавить -->
+        <ram:GlobalID schemeID="0002">DE222364550066</ram:GlobalID>
+        <ram:Name>Viktor Filimonow Architekt</ram:Name>
+        <ram:Description>Geschäftsführer Viktor Filimonow</ram:Description>
+        <ram:DefinedTradeContact>
+            <ram:PersonName>Viktor Filimonow</ram:PersonName>
+            <ram:DepartmentName>Muster-Einkauf</ram:DepartmentName>
+            <ram:TelephoneUniversalCommunication>
+                <ram:CompleteNumber>+49891234567</ram:CompleteNumber>
+            </ram:TelephoneUniversalCommunication>
+            <ram:EmailURIUniversalCommunication>
+                <ram:URIID>viktor@filimonoff.de</ram:URIID>
+            </ram:EmailURIUniversalCommunication>
+        </ram:DefinedTradeContact>
+        <ram:PostalTradeAddress>
+            <ram:PostcodeCode>81379</ram:PostcodeCode>
+            <ram:LineOne>Schaidlerstraße 19</ram:LineOne>
+            <ram:CityName>München</ram:CityName>
+            <ram:CountryID>DE</ram:CountryID>
+        </ram:PostalTradeAddress>
+        <ram:URIUniversalCommunication>
+            <ram:URIID schemeID="EM">info@filimonoff.de</ram:URIID>
+        </ram:URIUniversalCommunication>
+        <ram:SpecifiedTaxRegistration>
+            <ram:ID schemeID="FC">201/113/40209</ram:ID>
+        </ram:SpecifiedTaxRegistration>
+        <ram:SpecifiedTaxRegistration>
+            <ram:ID schemeID="VA">DE123456789</ram:ID>
+        </ram:SpecifiedTaxRegistration>
+    </ram:SellerTradeParty>
+    <ram:BuyerTradeParty><!-- соответствует полям клиент, если поля нет, можно добавить -->
+        <ram:ID>16259</ram:ID><!-- номер клиента мы пока не ведем, естъ внутренний ID? -->
+        <ram:Name>DiBaDaBaDu Archis Architekten und Stadtplaner GmbH</ram:Name>
+        <ram:PostalTradeAddress>
+            <ram:PostcodeCode>85630</ram:PostcodeCode>
+            <ram:LineOne>Auswärtsstraße 200</ram:LineOne>
+            <ram:CityName>Grafenwöhr a. d. Pegriss</ram:CityName>
+            <ram:CountryID>DE</ram:CountryID>
+        </ram:PostalTradeAddress>
+        <ram:URIUniversalCommunication>
+            <ram:URIID schemeID="EM">info@kunde.de</ram:URIID>
+        </ram:URIUniversalCommunication>
+    </ram:BuyerTradeParty>
+    <ram:SellerOrderReferencedDocument>
+        <ram:IssuerAssignedID>Vertrag vom XXXXX</ram:IssuerAssignedID><!-- ссылка на контракт, дату или есть ID??? -->
+    </ram:SellerOrderReferencedDocument>
+    <ram:SpecifiedProcuringProject>
+        <ram:ID>265</ram:ID><!-- номер проекта мы пока не ведем, есть внутренний ID? -->
+        <ram:Name>GCS-PH</ram:Name>
+        <ram:IncludedNote>
+            <ram:Content>Planungsleistungen für den Neubau eines Parkhauses
+            </ram:Content>
+        </ram:IncludedNote>
+    </ram:SpecifiedProcuringProject>
+</ram:ApplicableHeaderTradeAgreement>

@@ -49,7 +49,14 @@
                 </div>
             </div>
             <div class="user_data_panel">
+                <EditUserFeeld :title="text.GlobalID" :userKey="'GlobalID'" width="600px"/>
+                <EditUserFeeld :title="text.departmentName" :userKey="'departmentName'" width="600px"/>
+                <EditUserFeeld :title="text.postcode" :userKey="'postcode'" width="600px"/>
                 <EditUserFeeld :title="text.address" :userKey="'address'" width="600px"/>
+                <EditUserFeeld :title="text.сityName" :userKey="'cityName'" width="600px"/>
+                <EditUserFeeld :title="text.countryID" :userKey="'countryID'" width="600px"/>
+            </div>
+            <div class="user_data_panel">
                 <EditUserFeeld :title="text.IBAN" :userKey="'IBAN'" width="600px"/>
                 <EditUserFeeld :title="text.BIC" :userKey="'BIC'" width="600px"/>
                 <EditUserFeeld :title="text.Institut" :userKey="'Institut'" width="600px"/>
@@ -92,7 +99,12 @@ export default{
                 new_password: text.UserServis.felds.new_password,
                 conform_password: text.UserServis.felds.conform_password,
 
+                GlobalID: text.UserServis.felds.GlobalID,
+                departmentName: text.UserServis.felds.departmentName,
+                postcode: text.UserServis.felds.postcode,
                 address: text.UserServis.felds.address,
+                сityName: text.UserServis.felds.сityName,
+                countryID: text.UserServis.felds.countryID,
                 IBAN:text.UserServis.felds.IBAN,
                 BIC:text.UserServis.felds.BIC,
                 Institut:text.UserServis.felds.Institut,

@@ -17,5 +17,8 @@ $data = json_decode( fixJsonUTF8($data['data']) );
 $bill = $data -> project;
 $objects = $data -> objects;
 
+$user_id = $data -> project -> user_id;
+$selector = "`id` = '$user_id'";
+$user = crud_read('users',"*", $selector)[0];
 
 ?>

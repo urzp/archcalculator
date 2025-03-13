@@ -123,7 +123,13 @@ export let text = {
             email:'E-Mail:',
             phone: 'Telefon:',
 
+            GlobalID: 'GlobalID:',
+            departmentName: 'Department Name:',
+            postcode: 'Postcode:',
             address: 'Adresse:', // obsolete, look nogroup
+            сityName: 'City:',
+            countryID: 'Country ID:',
+
             IBAN:'IBAN:',
             BIC: 'BIC:',
             Institut:'Bank:',

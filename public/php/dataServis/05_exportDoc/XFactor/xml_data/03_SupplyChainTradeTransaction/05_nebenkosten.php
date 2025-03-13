@@ -1,18 +1,18 @@
 <?php
 
-$additionalServices = $bill -> AdditionalServices;
+$additionalServices = $bill -> ExtraCosts;
 $number = 0;
-$number_main = $num_obj+1;
+$number_main = $num_obj+2;
 foreach($additionalServices as $item){
 
     $number++;
 
     $name = $item->title;
-    $hours = $item ->  hours;
-    $price_hours = $item -> price_hours;
-    $price_hours = number_format($price_hours, 2, '.', '');
+    $rate = $item ->  rate;
+    $price_rate = $item -> price_rate;
+    $price_rate = number_format($price_rate, 2, '.', '');
 
-    $sum = (float)$hours*(float)$price_hours;
+    $sum = (float)$rate*(float)$price_rate;
     $sum = number_format($sum, 2, '.', '');
 
     $xml->startElementNS('ram', 'IncludedSupplyChainTradeLineItem', null);
@@ -32,15 +32,15 @@ foreach($additionalServices as $item){
         $xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
             $xml->startElementNS('ram', 'BilledQuantity', null);
                 $xml->writeAttribute('unitCode', 'C62');
-                $xml->text($hours);
+                $xml->text($rate);
             $xml->endElement(); 
         $xml->endElement(); 
 
         $xml->startElementNS('ram', 'SpecifiedLineTradeAgreement', null);
             $xml->startElementNS('ram', 'BilledQuantity', null);
                 $xml->startElementNS('ram', 'ChargeAmount', null);
-                    $xml->writeAttribute('unitCode', 'NAR');
-                    $xml->text($price_hours);
+                    $xml->writeAttribute('unitCode', 'EUR');
+                    $xml->text($price_rate);
                 $xml->endElement(); 
             $xml->endElement(); 
         $xml->endElement(); 

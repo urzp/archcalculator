@@ -11,10 +11,6 @@ export let newProjectData = {
     name: 'Projekt X',
     discription: text.Calc.description,
     customer:{
-        company:'Customer Company',
-        name:'Customer Name',
-        address_1:'Street',
-        address_2:'Post und Stadt',
     },
     AdditionalServices:[],
     ExtraCosts:[],

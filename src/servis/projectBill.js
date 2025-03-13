@@ -62,9 +62,7 @@ export async function newBill(project_id, number = Bills.length){
     await setNumbers(number)
     let custemer = {...Project.project.customer}
 
-    let user_name = !user.name?'Name':user.name
-    let user_address = !user.address?'Adresse':user.address
-    let user_data = `${user_name} - ${user_address}`
+    let user_data = `${user.name} - ${user.address} - ${user.postcode} - ${user.cityName}`
     let user_IBAN = user.IBAN
     let user_BIC = user.BIC
     let user_Institut = user.Institut
