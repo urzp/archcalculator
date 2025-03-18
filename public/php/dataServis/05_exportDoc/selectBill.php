@@ -12,6 +12,7 @@ $id = $mysql->real_escape_string($id);
 $downLoad_token = $mysql->real_escape_string($downLoad_token);
 
 if($downLoad_token!=''){
+    
 
 $selector = "`id`='$id' AND `downLoad_token`='$downLoad_token'";
 
