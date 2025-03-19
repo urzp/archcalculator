@@ -1,5 +1,7 @@
 <?php
+
 //https://honorar.online/php/dataServis/05_exportDoc/XFactor/index.php
+
 include_once 'vendor/autoload.php';
 $resultHeaderClass = 'warning';
 $resultHeaderHtml = '';
