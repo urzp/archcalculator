@@ -25,23 +25,23 @@ if (isset($_FILES['pdf_facturx_extract']) && !empty($_FILES['pdf_facturx_extract
     }
 }
 
-if (isset($_FILES['xml_facturx_check']) && !empty($_FILES['xml_facturx_check'])) {
-    $validator = new \Atgp\FacturX\XsdValidator();
-    $resultHeaderHtml = 'Check XML Factur-X result';
-    $resultBodyHtml = "<h4 class='text-primary'>File ".$_FILES['xml_facturx_check']['name'].' : </h4>';
-    $content = file_get_contents($_FILES['xml_facturx_check']['tmp_name']);
+// if (isset($_FILES['xml_facturx_check']) && !empty($_FILES['xml_facturx_check'])) {
+//     $validator = new \Atgp\FacturX\XsdValidator();
+//     $resultHeaderHtml = 'Check XML Factur-X result';
+//     $resultBodyHtml = "<h4 class='text-primary'>File ".$_FILES['xml_facturx_check']['name'].' : </h4>';
+//     $content = file_get_contents($_FILES['xml_facturx_check']['tmp_name']);
 
-    try {
-        if (!$validator->validate($content)) {
-            $resultBodyHtml .= '<div class="alert alert-warning">'.implode('<br />', $validator->getErrors()).'</div>';
-        } else {
-            $resultHeaderClass = 'success';
-            $resultBodyHtml .= '<div class="alert alert-success">XML Factur-X valid.</div>';
-        }
-    } catch (Exception $e) {
-        $resultBodyHtml .= '<pre>Error while checking the XML :'.$e.'</pre>';
-    }
-}
+//     try {
+//         if (!$validator->validate($content)) {
+//             $resultBodyHtml .= '<div class="alert alert-warning">'.implode('<br />', $validator->getErrors()).'</div>';
+//         } else {
+//             $resultHeaderClass = 'success';
+//             $resultBodyHtml .= '<div class="alert alert-success">XML Factur-X valid.</div>';
+//         }
+//     } catch (Exception $e) {
+//         $resultBodyHtml .= '<pre>Error while checking the XML :'.$e.'</pre>';
+//     }
+// }
 
 if (isset($_FILES['pdf_classic']) && !empty($_FILES['pdf_classic'])) {
     $writer = new \Atgp\FacturX\Writer();
