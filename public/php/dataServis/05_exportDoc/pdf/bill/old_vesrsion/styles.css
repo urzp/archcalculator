@@ -1,0 +1,89 @@
+
+div, th, td{
+    font-weight:normal;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.row_gap{
+    height: 20px;
+}
+
+.user_name{
+    height:  50px;
+}
+
+.logo {
+    position: absolute;right: 20px;top: -15px;
+}
+
+.logo img{
+    height:  50px;
+}
+
+.project_name{
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.pay_data{
+    padding-top: 10px;
+    text-align: right;
+}
+
+.content_left_right div{
+    display: inline-block;
+    width: 100%;
+    margin-right: -100%;
+    vertical-align: bottom;
+}
+
+.right{
+    text-align: right;
+}
+
+.number_bill{
+    border-bottom: 1px solid #999;
+}
+
+.greeting_phrase_content{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+.item_title{
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.object_title, .extra_servis, .total_project{
+    margin-left: 20px;
+}
+
+.object_base_servis{
+    margin-left: 40px;
+}
+
+
+table.base_servis{
+    margin-left: 60px;
+}
+
+.table_header{
+    border-bottom: 1px solid #999;
+}
+
+.summ td{
+    font-weight: bold;
+}
+
+.line{
+    border-bottom: 1px solid #999;
+}
+

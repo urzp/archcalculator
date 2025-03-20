@@ -1,89 +1,178 @@
-
-div, th, td{
-    font-weight:normal;
+.title_0{
+    font-family: 'Rawline';
+    font-weight:lighter;
+    font-size: 26px;
 }
 
-.bold{
-    font-weight: bold;
-}
-
-.row_gap{
-    height: 20px;
-}
-
-.user_name{
-    height:  50px;
-}
-
-.logo {
-    position: absolute;right: 20px;top: -15px;
-}
-
-.logo img{
-    height:  50px;
-}
-
-.project_name{
-    padding-bottom: 10px;
+.title_1{
+    font-family: 'Rawline';
+    font-weight:lighter;
     font-size: 20px;
+    color:#636363;
 }
 
-.pay_data{
-    padding-top: 10px;
-    text-align: right;
+.title_2{
+    font-family: 'Rawline';
+    font-weight:600;
+    font-size: 18px;
+    color:#636363;
 }
 
-.content_left_right div{
-    display: inline-block;
-    width: 100%;
-    margin-right: -100%;
-    vertical-align: bottom;
-}
-
-.right{
-    text-align: right;
-}
-
-.number_bill{
-    border-bottom: 1px solid #999;
-}
-
-.greeting_phrase_content{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 50px;
-}
-
-.item_title{
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-}
-
-.object_title, .extra_servis, .total_project{
+.title_3{
     margin-left: 20px;
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 16px;
+    color:#636363;
 }
 
-.object_base_servis{
-    margin-left: 40px;
+.title_4{
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 14px;
+    color:#636363;
+}
+
+.title_5{
+    font-family: 'Rawline';
+    font-weight:normal;
+    font-size: 12px;
+    color:#636363;
+}
+
+.center-align{
+    text-align: center;
 }
 
 
-table.base_servis{
-    margin-left: 60px;
+.project_description{
+    font-size: 16px;
+    text-align: center;
+    line-height: 1;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.table_header{
-    border-bottom: 1px solid #999;
+
+.summ_wrap{
+    margin-left: 3px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    border-left: 0.5px solid #5f5f5f;
 }
 
-.summ td{
-    font-weight: bold;
-}
+.r-marker{
+    width: 8px;
+    height: 8px;
+    background-color: #5f5f5f;
+    border-radius: 4px;
+    .title_0{
+        font-family: 'Rawline';
+        font-weight:lighter;
+        font-size: 26px;
+    }
+    
+    .title_1{
+        font-family: 'Rawline';
+        font-weight:lighter;
+        font-size: 20px;
+        color:#636363;
+    }
+    
+    .title_2{
+        font-family: 'Rawline';
+        font-weight:600;
+        font-size: 18px;
+        color:#636363;
+    }
+    
+    .title_3{
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 16px;
+        color:#636363;
+    }
 
-.line{
-    border-bottom: 1px solid #999;
-}
+    .title_3 split{
+        text-align: right;
+    }
+    
+    .title_4{
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 14px;
+        color:#636363;
+    }
+    
+    .title_5{
+        font-family: 'Rawline';
+        font-weight:normal;
+        font-size: 12px;
+        color:#636363;
+    }
+    
+    .center-align{
+        text-align: center;
+    }
+    
+    
+    .project_description{
+        font-size: 16px;
+        text-align: center;
+        line-height: 1;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .summ_wrap{
+        margin-left: 3px;
+        margin-bottom: 40px;
+        padding-top: 20px;
+        padding-left: 20px;
+        border-left: 0.5px solid #5f5f5f;
+    }
 
+    .total_project, .total_object{
+        margin-top: 20px;
+        margin-left: -20px;
+        padding-bottom: 20px;
+        padding-top:10px;
+        padding-bottom:10px;
+        background-color: #f5f5f5;
+    }
+
+    .total_project > div,  .total_object > div {
+        padding-right: 20px;
+        font-size: 18px;
+        text-align: right;
+        line-height: 1;
+    }
+
+    .row_style tr:nth-child(odd){
+        background-color: #f5f5f5;
+    }
+
+    .total_line{
+        margin-right: 10px;
+        margin-left: auto;
+        border-top: 1px solid #5f5f5f;
+        width: 200px;
+    }
+
+    table{
+        margin-bottom: 20px;
+    }
+
+    .number{
+        font-family: 'DroidSans';
+    }
+
+    .number-bold{
+        font-family: 'DroidSans';
+        font-weight: bold;
+    }
+
+}

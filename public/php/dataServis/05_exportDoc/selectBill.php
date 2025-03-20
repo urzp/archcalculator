@@ -1,5 +1,5 @@
 <?php
-
+$mysql_HOAI = $mysql;
 $mysql = $mysql_calc;
 
 $bill_id = $rq_data-> id;
@@ -18,14 +18,12 @@ if($downLoad_token!=''){
     $bill = $bill[0];
 
     $bill['data'] = json_decode( fixJsonUTF8( $bill['data']) );
-    $bill['data'] -> id = $bill['id'];
-    $bill['data'] -> updated = $bill['updated'];
-    $bill['data'] -> created = $bill['created'];
+    $bill= $bill['data'];
 
     switch ($type) {
         case 'excel': include "excel/bill/excel.php"; break;
-        case 'pdf': include "pdf/bill/pdf.php"; break;
-        //case 'pdf': include "XFactor/xml_data/00_base.php"; break;
+        case 'pdf_': include "pdf/bill/pdf.php"; break;
+        case 'pdf': include "XFactor/xml_data/00_base.php"; break;
     }
 
 }
