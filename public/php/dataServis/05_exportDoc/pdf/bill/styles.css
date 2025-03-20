@@ -1,3 +1,11 @@
+.logo {
+    position: absolute;right: 20px;top: -15px;
+}
+
+.logo img{
+    height:  50px;
+}
+
 .title_0{
     font-family: 'Rawline';
     font-weight:lighter;
@@ -44,13 +52,8 @@
     text-align: center;
 }
 
-
-.project_description{
-    font-size: 16px;
-    text-align: center;
-    line-height: 1;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.justify-align{
+    text-align:justify;
 }
 
 
@@ -118,13 +121,29 @@
         text-align: center;
     }
     
+    .project_user_name{
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .project_customer{
+        margin-bottom: -5px;
+    }
+    
+    .project_name{
+        margin-top:60px;
+    }
     
     .project_description{
         font-size: 16px;
-        text-align: center;
         line-height: 1;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+    }
+
+    .number_bill{
+        width: 700px;
+        padding-bottom: 10px;
+        border-bottom: 0.5px solid #5f5f5f;    
     }
     
     .summ_wrap{
@@ -173,6 +192,11 @@
     .number-bold{
         font-family: 'DroidSans';
         font-weight: bold;
+    }
+
+    .bold{
+        font-weight: 600;
+        color: #000;
     }
 
 }

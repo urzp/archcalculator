@@ -19,26 +19,29 @@ function toFormat($value, $sumbol=""){
 $project = $bill->project;
 $objects = $bill->objects;
 
+$imagePath = '';	
+if(isset($project -> user_logo)&&!empty($project -> user_logo)){
+	$imagePath = $project -> user_logo;
+    //$imagePath = str_replace('https://honorar.online', '', $imagePath);
+    //$imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath;
+}
 
 $project_name = $project->name;
 $project_data = date('d.m.Y',strtotime($project->created));
+$payment_date_vom = date('d.m.Y',strtotime($project->payment_date->vom));
+$payment_date_bis = date('d.m.Y',strtotime($project->payment_date->bis));
 $project_description = $project->discription;
+
+$customer = $project -> customer;
 
 $project_summe_net = toMoney($project->total_net);
 $project_tax = toFormat($project->tax, '%');
 $project_summe_tax = toMoney($project->total_tax);
 $project_summe = toMoney($project->total);
 
-// echo var_dump($project); echo '<br>';
-// echo var_dump($objects); echo '<br>';
-// echo '<br>';
-// echo var_dump($project_name); echo '<br>';
-// echo var_dump($project_data); echo '<br>';
-// echo var_dump($project_description); echo '<br>';
-// echo var_dump($project_summe_net); echo '<br>';
-// echo var_dump($project_tax); echo '<br>';
-// echo var_dump($project_summe); echo '<br>';
-// exit();
+$invoice_number = $project->invoice_number;
+$greeting_phrase = $project->greeting_phrase;
+
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/php/lib/dompdf/autoload.inc.php');
 use Dompdf\Dompdf;
@@ -54,7 +57,7 @@ include $root.'/php/dataServis/05_exportDoc/pdf/fonts/Rawline/css_font_Rawline.p
 include $root.'/php/dataServis/05_exportDoc/pdf/fonts/Comfortaa/css_font_Comfortaa.php';
 include $root.'/php/dataServis/05_exportDoc/pdf/fonts/DroidSans/css_font_DroidSans.php';
 
-$css = file_get_contents($root.'/php/dataServis/05_exportDoc/pdf/project/styles.css');
+$css = file_get_contents($root.'/php/dataServis/05_exportDoc/pdf/bill/styles.css');
 
 $html = "
 <html>
@@ -69,10 +72,33 @@ $html = "
     </head>";
     
 $html .="<body>
-            <div class='title_0 project_name center-align'>$project_name</div>
-            <div class='title_5 project_data center-align'>$project_data</div>
-            <div class='title_1 project_description'>$project_description</div>
-";
+            <div class='title_2 project_user_name'>$project->user_data</div><div class='logo'> <img src='$imagePath' alt=''> </div>
+
+            <div class='title_2 project_customer bold'>$customer->company</div>
+            <div class='title_2 project_customer bold'>$customer->name</div>
+            <div class='title_2 project_customer bold'>$customer->address_1</div>
+            <div class='title_2 project_customer bold'>$customer->address_2</div>
+
+            <div class='title_2 project_name bold'>$project_name</div>
+            <div class='title_2 project_description'>$project_description</div>
+
+            <table>
+                <tr>
+                    <td class='title_2 bold' style='width: 350px;  text-align: left;'>Rechnung Nr.</td>
+                    <td class='title_2 bold' style='width: 345px;  text-align: right;'>$invoice_number</td>
+                </tr>
+                <tr>
+                    <td class='title_2 bold' style='width: 350px;  text-align: left;'>Datum</td>
+                    <td class='title_2 bold' style='width: 345px;  text-align: right;'>$project_data</td>
+                </tr>
+            </table>
+
+            <div class='title_2' style='margin-top: -20px; margin-bottom: 20px;'>Leistungszeitraum vom $payment_date_vom bis $payment_date_bis</div>
+
+            <div class='title_2 number_bill'>$project->number_bill</div>
+            <div class='title_2 greeting_phrase'>$greeting_phrase</div>
+
+            ";
 
 $html .= $objects_html;
 
