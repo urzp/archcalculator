@@ -22,6 +22,8 @@ $objects = $bill->objects;
 $imagePath = '';	
 if(isset($project -> user_logo)&&!empty($project -> user_logo)){
 	$imagePath = $project -> user_logo;
+    //$imagePath = 'https://static.tildacdn.com/tild3137-3636-4931-b732-313966393164/Group_89_1.svg';
+    $imagePath = 'https://honorar.online/users/user_2/avatar/1733807917_unnamed.jpg';
     //$imagePath = str_replace('https://honorar.online', '', $imagePath);
     //$imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath;
 }
@@ -74,7 +76,7 @@ $html = "
     </head>";
     
 $html .="<body>
-            <div class='title_2 project_user_name'>$project->user_data</div><div class='logo'> <img src='$imagePath' alt='$imagePath'> </div>
+            <div class='title_2 project_user_name'>$project->user_data</div><div class='logo'> <img src='$imagePath' alt=''> </div>
 
             <div class='title_2 project_customer bold'>$customer->company</div>
             <div class='title_2 project_customer bold'>$customer->name</div>
