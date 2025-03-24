@@ -74,7 +74,7 @@ $html = "
     </head>";
     
 $html .="<body>
-            <div class='title_2 project_user_name'>$project->user_data</div><div class='logo'> <img src='$imagePath' alt=''> </div>
+            <div class='title_2 project_user_name'>$project->user_data</div><div class='logo'> <img src='$imagePath' alt='$imagePath'> </div>
 
             <div class='title_2 project_customer bold'>$customer->company</div>
             <div class='title_2 project_customer bold'>$customer->name</div>
@@ -227,7 +227,7 @@ $dompdf->load_html($html);
 $dompdf->set_option('isRemoteEnabled', TRUE);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("{$project_name}.pdf");
-//$pdfContent = $dompdf->output();
+//$dompdf->stream("{$project_name}.pdf");
+$pdfContent = $dompdf->output();
 
 ?>

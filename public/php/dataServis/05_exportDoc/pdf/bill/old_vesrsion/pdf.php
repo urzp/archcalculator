@@ -33,7 +33,7 @@ $html = "
     </head>
     <body>
 
-    <div class='user_name'> {$billData -> user_data}</div> <div class='logo'> <img src='$imagePath' alt=''> </div>
+    <div class='user_name'> {$billData -> user_data}</div> <div class='logo'> <img src='$imagePath' alt='$imagePath'> </div>
     <div class='bold'>{$billData -> custemer -> company}</div>
     <div class='bold'>{$billData -> custemer -> name}</div>
     <div class='bold'>{$billData -> custemer -> address_1}</div>

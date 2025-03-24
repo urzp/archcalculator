@@ -37,8 +37,21 @@ $xmlContent = $xml->outputMemory(true);
 // header('Content-Type: application/xml');
 // header('Content-Disposition: attachment; filename="invoice.xml"');
 // header('Content-Length: ' . strlen($xmlContent));
-
 // echo $xmlContent;
+
+include_once $_SERVER['DOCUMENT_ROOT']."/php/dataServis/05_exportDoc/XFactor/vendor/autoload.php";
+$writer = new \Atgp\FacturX\Writer();
+
+try {
+    $result = $writer->generate($pdfContent, $xmlContent, null, true, [], true, 'Data');
+    header('Content-disposition: attachment; filename="facturx.pdf"');
+    header('Content-Type: application/pdf');
+    header('Content-Length: '.strlen($result));
+    echo $result;
+}
+catch (Exception $e) {
+    echo'Error while generating the Factur-X :<pre>'.$e.'</pre>';
+}
 
 ?>
 

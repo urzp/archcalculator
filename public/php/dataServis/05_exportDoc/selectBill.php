@@ -22,26 +22,9 @@ if($downLoad_token!=''){
 
     switch ($type) {
         case 'excel': include "excel/bill/excel.php"; break;
-        case 'pdf': include "pdf/bill/pdf.php"; break;
-        case 'pdf_': include "XFactor/xml_data/00_base.php"; break;
+        case 'pdf': include "pdf/bill/pdf.php"; include "XFactor/xml_data/00_base.php"; break;
+        //case 'pdf_': include "XFactor/xml_data/00_base.php"; break;
     }
-
-    // include "XFactor/xml_data/00_base.php"; //$xmlContent
-
-    // include_once $_SERVER['DOCUMENT_ROOT']."/php/dataServis/05_exportDoc/XFactor/vendor/autoload.php";
-
-    // $writer = new \Atgp\FacturX\Writer();
-
-    // try {
-    //     $result = $writer->generate($pdfContent, $xmlContent, null, true, [], true, '');
-    //     header('Content-disposition: attachment; filename="facturx.pdf"');
-    //     header('Content-Type: application/pdf');
-    //     header('Content-Length: '.strlen($result));
-    //     echo $result;
-    // }
-    // catch (Exception $e) {
-    //     echo'Error while generating the Factur-X :<pre>'.$e.'</pre>';
-    // }
 
 }
 

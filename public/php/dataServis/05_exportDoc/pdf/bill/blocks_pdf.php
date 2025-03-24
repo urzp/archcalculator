@@ -1,7 +1,6 @@
 <?php
 
 //---------------------------------------------- objects --------------------------------------------------
-$mysql = $mysql_HOAI;
 
 $objects_html='';
 
@@ -12,11 +11,12 @@ foreach($objects as $item){
     $servis_total = toMoney($item->servis_total); 
     $spetial_servis_total = toMoney($item->spetial_servis_total);  
 
-    $id = $item->HOAI_version_id; $selector = "`id`='$id'";
-    $HOAI = crud_read('HOAI_versions',"value", $selector)[0]['value'];
+    $id = $item->HOAI_version_id; 
+    $selector_HOAI = "`id`='$id'";
+    $HOAI = crud_read('HOAI_versions',"value", $selector_HOAI)[0]['value'];
 
-    $id = $item->paragraph_id; $selector = "`id`='$id'";
-    $paragraph = crud_read('paragraphs',"name, title", $selector)[0];
+    $id = $item->paragraph_id; $selector_paragraph = "`id`='$id'";
+    $paragraph = crud_read('paragraphs',"name, title", $selector_paragraph)[0];
     $paragraph = $paragraph['name']." ".$paragraph['title'];
     $honorarzone = $item->honorarLevel->value;
 
@@ -26,12 +26,12 @@ foreach($objects as $item){
     $payExtra = toMoney($item->payExtra->value);
     $payExtraPercent = toFormat($item->payExtra->percent, '%');
 
-    //............................................ stages ....................................................
+    // //............................................ stages ....................................................
 
     $stages_html ="";
 
-    $id = $item->paragraph_id; $selector = "`id_paragraph`='$id' ORDER BY  cast(`number` as unsigned)  ASC";
-    $stages = crud_read('Stages',"*", $selector);
+    $id = $item->paragraph_id; $selector_stages = "`id_paragraph`='$id' ORDER BY  cast(`number` as unsigned)  ASC";
+    $stages = crud_read('Stages',"*", $selector_stages);
     $summ_percent_stages = 0;
 
     foreach($stages as $key=>$item_stage){
