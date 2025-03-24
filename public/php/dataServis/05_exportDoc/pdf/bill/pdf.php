@@ -228,5 +228,6 @@ $dompdf->set_option('isRemoteEnabled', TRUE);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $dompdf->stream("{$project_name}.pdf");
+//$pdfContent = $dompdf->output();
 
 ?>

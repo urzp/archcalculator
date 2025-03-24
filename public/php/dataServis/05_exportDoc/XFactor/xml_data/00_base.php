@@ -3,7 +3,6 @@
 
 include 'getData.php';
 
-// Создаем новый объект XMLWriter
 $xml = new XMLWriter();
 $xml->openMemory();
 $xml->setIndent(true);
@@ -31,18 +30,16 @@ $xml->endElement();
 
 $xml->endDocument();
 
-// Получаем сгенерированный XML
 $xmlContent = $xml->outputMemory(true);
 
-// Записываем XML в файл
 //file_put_contents('invoice.xml', $xmlContent); //echo "XML файл успешно сгенерирован и сохранен как 'invoice.xml'.\n";
 
-// Устанавливаем заголовки, чтобы заставить браузер показать диалог загрузки файла
-header('Content-Type: application/xml');
-header('Content-Disposition: attachment; filename="invoice.xml"');
-header('Content-Length: ' . strlen($xmlContent));
+// header('Content-Type: application/xml');
+// header('Content-Disposition: attachment; filename="invoice.xml"');
+// header('Content-Length: ' . strlen($xmlContent));
 
-// Отправляем содержимое XML
-echo $xmlContent;
+// echo $xmlContent;
+
+?>
 
 
