@@ -1,6 +1,5 @@
 <?php
 
-// Начинаем элемент <rsm:ExchangedDocument>
 $xml->startElementNS('rsm', 'ExchangedDocument', null);
 
     $xml->startElementNS('ram', 'ID', null); 
@@ -24,7 +23,7 @@ $xml->startElementNS('rsm', 'ExchangedDocument', null);
         $xml->endElement();
     $xml->endElement();
 
-$xml->endElement(); // Закрываем rsm:ExchangedDocument>
+$xml->endElement(); 
 
 
 ?>

@@ -1,8 +1,14 @@
 <?php
+$xml->startElementNS('ram', 'ApplicableHeaderTradeDelivery', null);
+$xml->endElement();
 
 $xml->startElementNS('ram', 'ApplicableHeaderTradeSettlement', null);
 
-    $xml->startElementNS('ram', 'ApplicableHeaderTradeSettlement', null);
+    $xml->startElementNS('ram', 'PaymentReference', null);
+        $xml->text($bill->invoice_number);
+    $xml->endElement(); 
+
+    $xml->startElementNS('ram', 'InvoiceCurrencyCode', null);
         $xml->text('EUR'); 
     $xml->endElement(); 
 
@@ -17,29 +23,26 @@ $xml->startElementNS('ram', 'ApplicableHeaderTradeSettlement', null);
             $xml->startElementNS('ram', 'AccountName', null);
                 $xml->text($bill->user_name); 
             $xml->endElement(); 
-            $xml->startElementNS('ram', 'FinancialInstitutionBranchID', null);
-                $xml->text($bill->user_BIC); 
+            $xml->startElementNS('ram', 'ProprietaryID', null);
+                $xml->text('Client 265'); 
             $xml->endElement();
-        $xml->endElement(); 
-        $xml->startElementNS('ram', 'PaymentReference', null);
-            $xml->text($bill->invoice_number);
         $xml->endElement(); 
     $xml->endElement(); 
 
-    $xml->startElementNS('ram', 'BillingSpecifiedPeriod', null);
-        $xml->startElementNS('ram', 'StartDateTime', null);
-            $xml->startElementNS('udt', 'DateTimeString', null);
-                $xml->writeAttribute('format', '102');
-                $xml->text((new DateTime($bill -> payment_date -> vom ))->format('Ymd')  );
-            $xml->endElement();
-        $xml->endElement();
-        $xml->startElementNS('ram', 'EndDateTime', null);
-            $xml->startElementNS('udt', 'DateTimeString', null);
-                $xml->writeAttribute('format', '102');
-                $xml->text((new DateTime($bill -> payment_date -> bis ))->format('Ymd')  );
-            $xml->endElement();
-        $xml->endElement();
-    $xml->endElement();
+    // $xml->startElementNS('ram', 'BillingSpecifiedPeriod', null);
+    //     $xml->startElementNS('ram', 'StartDateTime', null);
+    //         $xml->startElementNS('udt', 'DateTimeString', null);
+    //             $xml->writeAttribute('format', '102');
+    //             $xml->text((new DateTime($bill -> payment_date -> vom ))->format('Ymd')  );
+    //         $xml->endElement();
+    //     $xml->endElement();
+    //     $xml->startElementNS('ram', 'EndDateTime', null);
+    //         $xml->startElementNS('udt', 'DateTimeString', null);
+    //             $xml->writeAttribute('format', '102');
+    //             $xml->text((new DateTime($bill -> payment_date -> bis ))->format('Ymd')  );
+    //         $xml->endElement();
+    //     $xml->endElement();
+    // $xml->endElement();
 
 foreach($bill -> previos_payments as $item){
 

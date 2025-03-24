@@ -50,3 +50,8 @@ Ghat gpty
 Данные клиента в контракте.
 
 переделать формирование строки Paul Ermakov - Ryazan Str. 10 - 80339 Münster 
+
+-----------------------------------------------------------------------------------
+
+01_Seller.php дополнительные поля
+05_ApplicableHeaderTradeSettlement/index.php стр 27 Client 265

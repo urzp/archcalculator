@@ -7,28 +7,28 @@ include 'getData.php';
 $xml = new XMLWriter();
 $xml->openMemory();
 $xml->setIndent(true);
-$xml->setIndentString('    '); // Указываем отступ для читаемости
+$xml->setIndentString('    '); 
 
-// Начинаем запись XML документа
 $xml->startDocument('1.0', 'UTF-8');
 
-// Начинаем основной элемент <rsm:Crosslndustrylnvoice>
-$xml->startElementNS('rsm', 'CrossIndustryInvoice', 'urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100');
+$xml->startElementNS('rsm', 'CrossIndustryInvoice', null);
 $xml->writeAttribute('xmlns:qdt', 'urn:un:unece:uncefact:data:standard:QualifiedDataType:100');
 $xml->writeAttribute('xmlns:ram', 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100');
 $xml->writeAttribute('xmlns:xs', 'http://www.w3.org/2001/XMLSchema');
 $xml->writeAttribute('xmlns:udt', 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100');
+$xml->writeAttribute('xmlns:rsm', 'urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100' );
 
 include '01_ExchangedDocumentContext/index.php';
 include '02_ExchangedDocument/index.php';
+
+$xml->startElementNS('rsm', 'SupplyChainTradeTransaction', null);
 include '03_SupplyChainTradeTransaction/index.php';
 include '04_ApplicableHeaderTradeAgreemen/index.php';
 include '05_ApplicableHeaderTradeSettlement/index.php';
+$xml->endElement();
 
+$xml->endElement(); 
 
-$xml->endElement(); // Закрываем основной элемент <rsm:Crosslndustrylnvoice>
-
-// Завершаем документ
 $xml->endDocument();
 
 // Получаем сгенерированный XML

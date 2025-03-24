@@ -26,15 +26,8 @@ foreach($specialServices as $item){
             $xml->endElement(); 
         $xml->endElement(); 
 
-        $xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
-            $xml->startElementNS('ram', 'BilledQuantity', null);
-                $xml->writeAttribute('unitCode', 'C62');
-                $xml->text($percent);
-            $xml->endElement(); 
-        $xml->endElement(); 
-
         $xml->startElementNS('ram', 'SpecifiedLineTradeAgreement', null);
-            $xml->startElementNS('ram', 'GrossPriceProductTradePrice', null);
+            $xml->startElementNS('ram', 'NetPriceProductTradePrice', null);
                 $xml->startElementNS('ram', 'ChargeAmount', null);
                     $xml->writeAttribute('currencyID', 'EUR');
                     $xml->text($honorar);
@@ -42,12 +35,34 @@ foreach($specialServices as $item){
             $xml->endElement(); 
         $xml->endElement(); 
 
-        $xml->startElementNS('ram', 'SpecifiedTradeSettlementLineMonetarySummation', null);
-            $xml->startElementNS('ram', 'LineTotalAmount', null);
-                $xml->writeAttribute('currencyID', 'EUR');
-                $xml->text($honorar_stage);    
-            $xml->endElement();
+        $xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
+            $xml->startElementNS('ram', 'BilledQuantity', null);
+                $xml->writeAttribute('unitCode', 'C62');
+                $xml->text($percent);
+            $xml->endElement(); 
         $xml->endElement(); 
+
+        $xml->startElementNS('ram', 'SpecifiedLineTradeSettlement', null);
+            $xml->startElementNS('ram', 'ApplicableTradeTax', null);
+                $xml->startElementNS('ram', 'TypeCode', null);
+                    $xml->text('VAT');
+                $xml->endElement();
+                $xml->startElementNS('ram', 'CategoryCode', null);
+                    $xml->text('S');
+                $xml->endElement();
+                $xml->startElementNS('ram', 'RateApplicablePercent', null);
+                    $xml->text($Tax);
+                $xml->endElement();
+            $xml->endElement();
+
+            $xml->startElementNS('ram', 'SpecifiedTradeSettlementLineMonetarySummation', null);
+                $xml->startElementNS('ram', 'LineTotalAmount', null);
+                    $xml->writeAttribute('currencyID', 'EUR');
+                    $xml->text($honorar_stage);    
+                $xml->endElement();
+            $xml->endElement(); 
+
+        $xml->endElement();
 
     $xml->endElement(); // Закрываем <ram:IncludedSupplyChainTradeLineItem>
 

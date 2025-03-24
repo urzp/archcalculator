@@ -29,30 +29,42 @@ foreach($additionalServices as $item){
             $xml->endElement(); 
         $xml->endElement(); 
 
-        $xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
-            $xml->startElementNS('ram', 'BilledQuantity', null);
-                $xml->writeAttribute('unitCode', 'C62');
-                $xml->text($hours);
-            $xml->endElement(); 
-        $xml->endElement(); 
-
         $xml->startElementNS('ram', 'SpecifiedLineTradeAgreement', null);
-            $xml->startElementNS('ram', 'BilledQuantity', null);
+            $xml->startElementNS('ram', 'NetPriceProductTradePrice', null);
                 $xml->startElementNS('ram', 'ChargeAmount', null);
-                    $xml->writeAttribute('unitCode', 'NAR');
                     $xml->text($price_hours);
                 $xml->endElement(); 
             $xml->endElement(); 
         $xml->endElement(); 
 
-        $xml->startElementNS('ram', 'SpecifiedTradeSettlementLineMonetarySummation', null);
-            $xml->startElementNS('ram', 'LineTotalAmount', null);
-                $xml->writeAttribute('currencyID', 'EUR');
-                $xml->text($sum);    
-            $xml->endElement();
+        $xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
+            $xml->startElementNS('ram', 'BilledQuantity', null);
+                $xml->writeAttribute('unitCode', 'HUR');
+                $xml->text($hours);
+            $xml->endElement(); 
         $xml->endElement(); 
 
-    $xml->endElement(); // Закрываем <ram:IncludedSupplyChainTradeLineItem>
+        $xml->startElementNS('ram', 'SpecifiedLineTradeSettlement', null);
+            $xml->startElementNS('ram', 'ApplicableTradeTax', null);
+                $xml->startElementNS('ram', 'TypeCode', null);
+                    $xml->text('VAT');
+                $xml->endElement();
+                $xml->startElementNS('ram', 'CategoryCode', null);
+                    $xml->text('S');
+                $xml->endElement();
+                $xml->startElementNS('ram', 'RateApplicablePercent', null);
+                    $xml->text($Tax);
+                $xml->endElement();
+            $xml->endElement();
+            $xml->startElementNS('ram', 'SpecifiedTradeSettlementLineMonetarySummation', null);
+                $xml->startElementNS('ram', 'LineTotalAmount', null);
+                    $xml->writeAttribute('currencyID', 'EUR');
+                    $xml->text($sum);    
+                $xml->endElement();    
+            $xml->endElement();
+        $xml->endElement();
+
+    $xml->endElement(); 
 
 }
 

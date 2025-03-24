@@ -2,7 +2,7 @@
 
 $customer = $bill-> customer;
 
-$xml->startElementNS('ram', 'SellerTradeParty', null); 
+$xml->startElementNS('ram', 'BuyerTradeParty', null); 
 
     $xml->startElementNS('ram', 'ID', null);
         $xml->text('ID_Client'); 
@@ -26,13 +26,6 @@ $xml->startElementNS('ram', 'SellerTradeParty', null);
             $xml->text($customer->CountryID); 
         $xml->endElement();
     $xml->endElement();
-
-    $xml->startElementNS('ram', 'URIUniversalCommunication', null);
-    $xml->startElementNS('ram', 'URIID', null);
-        $xml->writeAttribute('schemeID', 'EM');
-        $xml->text($customer->email); 
-    $xml->endElement(); 
-$xml->endElement(); 
 
 $xml->endElement(); 
 

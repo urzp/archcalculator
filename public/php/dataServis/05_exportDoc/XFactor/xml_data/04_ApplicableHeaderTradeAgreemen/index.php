@@ -22,11 +22,6 @@ $xml->startElementNS('ram', 'ApplicableHeaderTradeAgreement', null);
         $xml->startElementNS('ram', 'Name', null); 
             $xml->text($bill->name); 
         $xml->endElement(); 
-        $xml->startElementNS('ram', 'IncludedNote', null); 
-            $xml->startElementNS('ram', 'Content', null); 
-                $xml->text($bill->discription); 
-            $xml->endElement(); 
-        $xml->endElement(); 
     $xml->endElement(); 
 
 

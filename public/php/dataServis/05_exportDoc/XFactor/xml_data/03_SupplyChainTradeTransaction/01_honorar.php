@@ -35,30 +35,69 @@ $honorarnach_honorartafel = "Honorarnach Honorartafel $honorarnach_honorartafel 
 $zuschlag = $bill_object -> payExtra -> percent;
 $zuschlag = "Zuschlag $zuschlag%";
 
+$honorar = (float)($bill_object -> honorar_total);
+$honorar = number_format($honorar, 2, '.', '');
+
+$Tax = $bill->tax;
+
 $xml->startElementNS('ram', 'IncludedSupplyChainTradeLineItem', null);
 
-// Элемент <ram:AssociatedDocumentLineDocument>
+
 $xml->startElementNS('ram', 'AssociatedDocumentLineDocument', null);
     $xml->startElementNS('ram', 'LineID', null);
         $xml->text($num_obj);
-    $xml->endElement(); // Закрываем <ram:LineID>
-$xml->endElement(); // Закрываем <ram:AssociatedDocumentLineDocument>
+    $xml->endElement(); 
+    $xml->startElementNS('ram', 'IncludedNote', null);
+        $xml->startElementNS('ram', 'Content', null);
+            $xml->text("Honorargrundlagen\n$HOAI_Version\n$paragraph\n$honorarLevel\n$honorarRate\n$anrechenbare_kosten\n$honorarnach_honorartafel\n$zuschlag");
+        $xml->endElement(); 
+    $xml->endElement(); 
+$xml->endElement(); 
 
-// Элемент <ram:SpecifiedTradeProduct>
+
 $xml->startElementNS('ram', 'SpecifiedTradeProduct', null);
     $xml->startElementNS('ram', 'Name', null);
         $xml->text( $bill_object -> name );
-    $xml->endElement(); // Закрываем <ram:Name>
-$xml->endElement(); // Закрываем <ram:SpecifiedTradeProduct>
+    $xml->endElement(); 
+$xml->endElement(); 
 
-// Элемент <ram:IncludedNote>
-$xml->startElementNS('ram', 'IncludedNote', null);
-    $xml->startElementNS('ram', 'Content', null);
-        $xml->text("Honorargrundlagen\n$HOAI_Version\n$paragraph\n$honorarLevel\n$honorarRate\n$anrechenbare_kosten\n$honorarnach_honorartafel\n$zuschlag");
-    $xml->endElement(); // Закрываем <ram:Content>
-$xml->endElement(); // Закрываем <ram:IncludedNote>
+$xml->startElementNS('ram', 'SpecifiedLineTradeAgreement', null);
+    $xml->startElementNS('ram', 'NetPriceProductTradePrice', null);
+        $xml->startElementNS('ram', 'ChargeAmount', null);
+            $xml->writeAttribute('currencyID', 'EUR');
+            $xml->text($honorar);
+        $xml->endElement(); 
+    $xml->endElement(); 
+$xml->endElement(); 
 
-$xml->endElement(); // Закрываем <ram:IncludedSupplyChainTradeLineItem>
+$xml->startElementNS('ram', 'SpecifiedLineTradeDelivery', null);
+    $xml->startElementNS('ram', 'BilledQuantity', null);
+        $xml->writeAttribute('unitCode', 'C62');
+        $xml->text('0');
+    $xml->endElement(); 
+$xml->endElement(); 
+
+$xml->startElementNS('ram', 'SpecifiedLineTradeSettlement', null);
+    $xml->startElementNS('ram', 'ApplicableTradeTax', null);
+        $xml->startElementNS('ram', 'TypeCode', null);
+            $xml->text('VAT');
+        $xml->endElement();
+        $xml->startElementNS('ram', 'CategoryCode', null);
+            $xml->text('S');
+        $xml->endElement();
+        $xml->startElementNS('ram', 'RateApplicablePercent', null);
+            $xml->text($Tax);
+        $xml->endElement();
+    $xml->endElement();
+    $xml->startElementNS('ram', 'SpecifiedTradeSettlementLineMonetarySummation', null);
+        $xml->startElementNS('ram', 'LineTotalAmount', null);
+            $xml->text('0');
+        $xml->endElement();        
+    $xml->endElement();
+$xml->endElement(); 
+
+
+$xml->endElement(); 
 
 
 ?>

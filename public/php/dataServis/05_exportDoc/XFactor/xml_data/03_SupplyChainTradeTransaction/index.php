@@ -1,8 +1,5 @@
 <?php
 
-$xml->startElementNS('rsm', 'SupplyChainTradeTransaction', null);
-
-// Object of Project
 
 foreach($objects as $key => $item){
     $num_obj = $key+1;
@@ -15,9 +12,6 @@ foreach($objects as $key => $item){
 
 include '04_zusatzlicheLeistungen.php';
 include '05_nebenkosten.php';
-
-
-$xml->endElement(); // Закрываем <rsm:SupplyChainTradeTransaction>
 
 
 ?>
