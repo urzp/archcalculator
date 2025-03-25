@@ -7,7 +7,7 @@
                 <div v-if="config.calcs" class="content">
                     <Item_level_1 :title="text.NewCalc" @click="newCalc()" />
                     <Item_level_1 :title="text.LastCalcs" />
-                    <Item_level_1 v-for="item in calcs" :key="item.id" :project_data="item" :marker_type="'1'" />
+                    <Item_level_1 v-for="item in calcs" :key="item.id" :active="id_current_project==item.id" :project_data="item" :marker_type="'1'" />
                     <Item_level_1 :title="text.OpenCalcs" @click="openProjects('calc')" />
                 </div>
             </div>
@@ -16,7 +16,7 @@
                 <div v-if="config.offers" class="content">
                     <Item_level_1 v-if="poject_status=='calc'" :title="text.NewOffer" @click="newOffer()" />
                     <Item_level_1 :title="text.LastOffer" />
-                    <Item_level_1 v-for="item in offers" :key="item.id" :project_data="item"  :marker_type="'1'" />
+                    <Item_level_1 v-for="item in offers" :key="item.id" :active="id_current_project==item.id" :project_data="item"  :marker_type="'1'" />
                     <Item_level_1 :title="text.OpenOffer" @click="openProjects('offer')"/>
                 </div>            
             </div>
@@ -26,7 +26,7 @@
                     <Item_level_1 :title="text.NewProject" @click="newProject()"/>
                     <Item_level_1 v-if="poject_status=='offer'" :title="text.OfferAsProject" @click="OfferAsProject()"  />
                     <Item_level_1 :title="text.Projects" />
-                    <Item_level_1 v-for="item in projects" :key="item.id" :project_data="item"  :marker_type="'0'" bills />
+                    <Item_level_1 v-for="item in projects" :active="id_current_project==item.id" :key="item.id" :project_data="item"  :marker_type="'0'" bills />
                     <Item_level_1 :title="text.OpenProject" @click="openProjects('project')"/>
                 </div>              
             </div>
@@ -90,7 +90,15 @@ export default{
             let result = 'calc'
             if(!!Project&&!!Project.project&&!!Project.project.status) result = Project.project.status
             return result
-        }
+        },
+        id_current_project(){
+            let result = ''
+            if(!!Project&&!!Project.project&&!!Project.project.id){
+                result = Project.project.id
+                if(Project.project.status=="bill") result = Project.project.id_project_contract
+            } 
+            return result
+        },
     },
     methods:{
         initConfig(){

@@ -1,9 +1,9 @@
 <template>
         <div class="item_level_1" @click="click_handling()" >
-            <Marker v-if="!!marker_type" :level="marker_type"/>
-            <div v-if="!!title" class="title">{{ title }}</div>
-            <div v-if="!!project_data" class="name_poject" @click.stop="openProject()">{{ project_data.name }} </div>
-            <div v-if="!!project_data&&!bills" class="from_date">{{ from_date }}</div>
+            <Marker v-if="!!marker_type" :active="active" :level="marker_type"/>
+            <div v-if="!!title" class="title" :class="{active}">{{ title }}</div>
+            <div v-if="!!project_data" class="name_poject" :class="{active}" @click.stop="openProject()">{{ project_data.name }} </div>
+            <div v-if="!!project_data&&!bills" class="from_date" :class="{active}">{{ from_date }}</div>
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
                 <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
@@ -47,6 +47,10 @@ export default{
             default: null,
         },
         bills:{
+            type: Boolean,
+            default: false,
+        },
+        active:{
             type: Boolean,
             default: false,
         }
@@ -117,5 +121,8 @@ export default{
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+}
+.title.active, .name_poject.active, .from_date.active{
+    color: #ed994a;
 }
 </style>
