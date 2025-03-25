@@ -34,7 +34,7 @@ $xml->endElement();
 $xml->startElementNS('ram', 'SpecifiedTaxRegistration', null);
     $xml->startElementNS('ram', 'ID', null);
         $xml->writeAttribute('schemeID', 'VA');
-        $xml->text('DE123456789'); 
+        $xml->text($user["USt"]); 
     $xml->endElement(); 
 $xml->endElement();  
 
