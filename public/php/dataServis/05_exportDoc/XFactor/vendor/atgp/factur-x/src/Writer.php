@@ -91,7 +91,7 @@ class Writer
 
             // add Factur-X logo only on the first page
             if ($addLogo && 1 == $i) {
-                $pdfWriter->Image(__DIR__.'/../img/'.static::LOGOS[$this->profile], 197, 2.5, 7);
+                $pdfWriter->Image(__DIR__.'/../img/'.static::LOGOS[$this->profile], 197, 12, 7);
             }
         }
         if (!in_array($relationship, ['Data', 'Source', 'Alternative'])) {
