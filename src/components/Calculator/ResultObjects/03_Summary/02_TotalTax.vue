@@ -3,10 +3,14 @@
         <div  class="main_row" >
             <div class="title">{{ text.Total_tax }}</div>
             <div class="wrap_figures">
-                <div class="wrap_imputs">
+                <div class="wrap_colum wrap_colum_1">
+                </div>
+                <div class="wrap_colum wrap_colum_2">
                     <Percent input_type :value = "percent" @edit_value="value=>updateItem(value)"/>
                 </div>
-                <div class="price" ><Price :value ="value" /></div>
+                <div class="wrap_colum wrap_colum_3">
+                    <div class="price" ><Price :value ="value" /></div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,19 +57,30 @@ export  default{
     }   
     .title{
         margin-left: 55px;
-        width: 700px;
+        width: 60%;
         font-family: 'Raleway-Light';
         font-size: 20px;
     }
     .wrap_figures{
-        width: 300px;
+        width: 40%;
         display: flex;
         align-items: baseline;
         justify-content: space-between;
     }
-    .wrap_imputs{
+    .wrap_colum{
         display: flex;
         align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum_1{
+        width: 25%;
+    }
+    .wrap_colum_2{
+        width: 35%;
+        padding-right: 15px;
+    }
+    .wrap_colum_3{
+        width: 40%;
     }
     .imputrate{
         display: flex;

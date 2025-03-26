@@ -91,11 +91,13 @@ export default{
         color: #464646;
         font-family: 'Raleway-Light';
         font-size: 16px;
+        width: max-content;
     }
 
     .item{
         cursor: pointer;
         padding: 0 14px;
+        
     }
 
     .item:hover{

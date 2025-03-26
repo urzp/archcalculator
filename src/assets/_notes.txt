@@ -53,7 +53,7 @@ Ghat gpty
 
 -----------------------------------------------------------------------------------
 
-01_Seller.php дополнительные поля
+01_Seller.php дополнительные поля 37 DE123456789
 05_ApplicableHeaderTradeSettlement/index.php стр 27 Client 265
 
 остовлять user Avatars

@@ -92,8 +92,10 @@ export default{
             EventBus.emit('MenuProjects:showBills')
         },
         async newBill(){
-           await projectToBill(this.project_data.id)
-           EventBus.emit('MenuProjects:showBills')
+           let new_id_bill = await projectToBill(this.project_data.id)
+           console.log('id_new bill', new_id_bill)
+           //EventBus.emit('MenuProjects:showBills')
+           EventBus.emit('Project:openBill', new_id_bill)
         }
     }
 }

@@ -4,11 +4,15 @@
             <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
             <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
-                <div class="wrap_imputs">
-                    <div class="imputrate"><input type="number" min="0" :value = "rate" @change="event => updateRate(event.target.value)" /></div>
-                    <Price input_type :value ="price_rate" @edit_price="newValue=>updatePriceRate(newValue)" input_width="60px" font_size_unit="18px" />
+                <div class="wrap_colum wrap_colum_1">
+                    <Inputrate :value = "rate" @submit="value=>updateRate(value)" width="100%"></Inputrate>
                 </div>
-                <div class="price" ><Price :value ="value" /></div>
+                <div class="wrap_colum wrap_colum_2">
+                    <Price input_type :value ="price_rate" @edit_price="newValue=>updatePriceRate(newValue)" input_width="100%" font_size_unit="18px" />
+                </div>
+                <div class="wrap_colum wrap_colum_3">
+                    <div class="price" ><Price :value ="value" /></div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,19 +71,29 @@ export  default{
     }   
     .title{
         margin-left: 55px;
-        width: 700px;
+        width: 60%;
         font-family: 'Raleway-Light';
         font-size: 20px;
     }
     .wrap_figures{
-        width: 300px;
+        width: 40%;
         display: flex;
         align-items: baseline;
         justify-content: space-between;
     }
-    .wrap_imputs{
+    .wrap_colum{
         display: flex;
         align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum_1{
+        width: 25%;
+    }
+    .wrap_colum_2{
+        width: 35%;
+    }
+    .wrap_colum_3{
+        width: 40%;
     }
     .imputrate{
         display: flex;

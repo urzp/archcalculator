@@ -37,6 +37,10 @@ export default{
             type: String,
             default: '€',
         },
+        bg_input_color:{
+            type:String,
+            default:'#ebebeb',
+        }
     },    
     computed:{
         price_unit(){
@@ -95,7 +99,7 @@ export default{
         display: flex;
         align-items: baseline;
         border-radius: 5px;
-        background-color: #ebebeb;
+        background-color: v-bind(bg_input_color);
         padding-left: 10px;
         padding-right: 10px;
     }

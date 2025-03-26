@@ -1,7 +1,11 @@
 <template>
     <div class="checkbox" @click="check()">
-        <img v-if="!!Number(checked)" src="@/assets/icons/checkbox/true.svg" alt="">
-        <img v-else src="@/assets/icons/checkbox/false.svg" alt="">
+        <img  v-if="!!Number(checked)" src="@/assets/icons/checkbox/true.svg" alt="">
+        <img  v-else src="@/assets/icons/checkbox/false.svg" alt="">
+    </div>
+    <div class="checkbox_hover" @click="check()">
+        <img  v-if="!!Number(checked)" src="@/assets/icons/checkbox/true_white.svg" alt="">
+        <img  v-else src="@/assets/icons/checkbox/false_white.svg" alt="">
     </div>
 </template>
 
@@ -33,6 +37,16 @@ export default {
 }
 
 .checkbox img{
+    width: 25px;
+}
+
+
+.checkbox_hover{
+    display: none;
+    justify-content: center;
+}
+
+.checkbox_hover img{
     width: 25px;
 }
 

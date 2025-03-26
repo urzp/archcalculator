@@ -170,7 +170,7 @@ export async function newStatus(status){
 }
 
 export async function projectToBill(id=Project.project.id, number_bill = billNextNuber()){
-    console.log(number_bill)
+
     await LoadProjectData(id)
 
     Project.project.locked = '0'
@@ -202,7 +202,8 @@ export async function projectToBill(id=Project.project.id, number_bill = billNex
     let new_id = result.data
     Project.project.id = new_id
     await updateProject()
-    LoadProjectData(id)
+    await LoadProjectData(id)
+    return new_id
 }
 
 export async function deleteBill(id){

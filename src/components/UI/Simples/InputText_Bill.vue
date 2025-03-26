@@ -52,6 +52,10 @@ export default{
         noUpdate:{
             type:Boolean,
             default: false,
+        },
+        bg_input_color:{
+            type:String,
+            default:'#ebebeb',
         }
     },
     emits:['submit_event', 'setDefault'],
@@ -95,7 +99,7 @@ export default{
         height: 28px;
         width: v-bind(width);
         border-radius: 5px;
-        background-color: #ebebeb;
+        background-color: v-bind(bg_input_color);
         padding-left: 15px;
         font-size: inherit;
         font-family: inherit;

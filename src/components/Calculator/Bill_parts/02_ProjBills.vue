@@ -21,13 +21,13 @@
                     </div>
                 </div>
                 <div class="wrap_right light-text">
-                    <div class="invoice_number" ><InputText_Bill :value="item.invoice_number" width="130px"  noUpdate  alight_edit="left"
+                    <div class="invoice_number" ><InputText_Bill :value="item.invoice_number" width="130px"  noUpdate  alight_edit="left" :bg_input_color="'#ebaa6c'"
                         @submit_event="value=>update_value(value,'invoice_number', item)" />  </div> 
                     <div class="lock_value">
-                        <CheckBox :checked="item.locked" @switch="(value)=>update_value(Number(value), 'locked', item) "/>
+                        <CheckBox  :checked="item.locked" @switch="(value)=>update_value(Number(value), 'locked', item) "/>
                     </div>
                     <div  class="date"><InputDate :value="item.paid_date" @editValue=" date=>update_value(date, 'paid_date', item) " /></div>     
-                    <div  class="value"><PriceInputBill noPanel :value ="item.paid_value" @editPrice="newValue=>update_value(newValue, 'paid_value', item)" />  </div>    
+                    <div  class="value"><PriceInputBill noPanel :value ="item.paid_value" @editPrice="newValue=>update_value(newValue, 'paid_value', item)" :bg_input_color="'#ebaa6c'" />  </div>    
                 </div>
                 <div class="hover-panel">
                     <div class="left_part">
@@ -229,6 +229,34 @@ export default{
         color: #545454;
         column-gap: 10px;
         align-items: stretch;
+    }
+    .item:hover{
+        background-color: #ebaa6c!important;
+        color: #fff;
+    }
+
+    .item:hover .data_price{
+        color: #e5e5e5;
+    }
+
+    .item:hover .invoice_number{
+        color: #fff;
+    }
+
+    .item:hover .date{
+        color: #fff;
+    }
+
+    .item:hover .value{
+        color: #fff;
+    }
+
+    .item:hover .lock_value :deep(.checkbox){
+        display: none!important;
+    }
+
+    .item:hover .lock_value :deep(.checkbox_hover){
+        display: flex!important;
     }
 
     .wrap_right{

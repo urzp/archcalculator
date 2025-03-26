@@ -135,6 +135,7 @@ import InputText_Bill from './UI/Simples/InputText_Bill.vue'
 import ImputTextMLine from './UI/Simples/ImputTextMLine.vue'
 import ImputTextMLine_Bill from './UI/Simples/ImputTextMLine_Bill.vue'
 import InputPrice from './UI/Simples/InputPrice.vue'
+import Inputrate from './UI/Simples/Inputrate.vue'
 import Select_List from './UI/Simples/Select_List.vue'
 import SelectEdit_List from './UI/Simples/SelectEdit_List.vue'
 import ContextMenu from './UI/Simples/ContextMenu.vue'
@@ -282,6 +283,7 @@ export default [
     ImputTextMLine,
     ImputTextMLine_Bill,
     InputPrice,
+    Inputrate,
     Select_List,
     SelectEdit_List,
     ContextMenu,
