@@ -5,7 +5,7 @@
             <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
                 <div class="wrap_colum wrap_colum_1">
-                    <Inputrate :value = "rate" @submit="value=>updateRate(value)" width="100%"></Inputrate>
+                    <Inputrate :value = "rate" :type="type_rate" @submit="value=>updateRate(value)" @select_type="value=>updateType(value)" width="150px"></Inputrate>
                 </div>
                 <div class="wrap_colum wrap_colum_2">
                     <Price input_type :value ="price_rate" @edit_price="newValue=>updatePriceRate(newValue)" input_width="100%" font_size_unit="18px" />
@@ -35,9 +35,10 @@ export  default{
         id:[Number,String],
         title:String,
         rate:[Number,String],
+        type_rate:String,
         price_rate:[Number,String],
     },
-    emits:['updateItem', 'deleteItem'],
+    emits:['updateItem'],
     computed:{
         value(){
             return Number(this.rate) * Number(this.price_rate)
@@ -55,7 +56,11 @@ export  default{
         },   
         deleteItem(){
             this.$emit('deleteItem',this.id)
-        }
+        },
+        updateType(value){
+            value = {id:this.id, name:'type_rate', value}
+            this.$emit('updateItem',value)
+        }   
         
     }
 }
@@ -100,7 +105,6 @@ export  default{
         align-items: baseline;
     }
     .imputrate input{
-        width: 45px!important;
         text-align: right;
         font-family: 'Comfortaa-Regular';
         font-size: 18px;

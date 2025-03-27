@@ -1,6 +1,6 @@
 <template>
         <div class="item-Part-obj" :class="{gap_left:list.length>0}">
-            <DetalMarker @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
+            <DetalMarker v-if="!!list&&list.length>0" @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
             <div  class="main_row" >
                 <div class="title">{{ title }}</div>
                 <div class="wrap-numbers">
@@ -190,6 +190,7 @@ export  default{
     }
     .detals{
         position: relative;
+        margin-left: 10px;
     }
     .detals .icon{
         display: block;

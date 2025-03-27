@@ -4,8 +4,12 @@
             <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
             <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
-                <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
-                <div class="price" ><Price :value ="value" /></div>
+                <div class="wrap_colum wrap_colum_1">
+                    <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
+                </div>
+                <div class="wrap_colum wrap_colum_2">
+                    <div class="price" ><Price :value ="value" /></div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,21 +59,32 @@ export  default{
 <style scoped>
     .main_row{
         display: flex;
-        height: 35px;
+        height: 60%;
         align-items: center;
         justify-content: space-between;
     }   
     .title{
         margin-left: 55px;
-        width: 700px;
+        width: 60%;
         font-family: 'Raleway-Light';
         font-size: 20px;
     }
     .wrap_figures{
-        width: 300px;
+        width: 40%;
         display: flex;
         align-items: baseline;
-        justify-content: space-between;
+        justify-content: flex-end;
+    }
+    .wrap_colum{
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum_1{
+        width: 60%;
+    }
+    .wrap_colum_2{
+        width: 40%;
     }
     .value{
         font-family: 'Raleway-Light';

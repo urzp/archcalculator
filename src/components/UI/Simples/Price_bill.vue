@@ -149,7 +149,7 @@ export default{
     }
     .cents{
         font-size: v-bind(font_size_cent);
-        text-align: right;
+        text-align: center;
         width: 23px;
     }
     .currency-sign{

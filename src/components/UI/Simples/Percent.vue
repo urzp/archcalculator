@@ -93,15 +93,19 @@ export  default{
 
 <style scoped>
     .percent{
+        width: 100%;
         font-family: 'DroidSans';
         display: flex;
         align-items: baseline;
+        justify-content: flex-end;
         gap: 0px;
     }
     .value{
         font-size: v-bind(font_size_value);
     }
     .sumbol{
+        width: 30px;
+        margin-left: 5px;
         font-size: v-bind(font_size_sumbol);
     }
     input{

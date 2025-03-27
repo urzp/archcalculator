@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
-    <div class="wrap-edit" v-if="edit">
+    <div v-show="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
+    <div class="wrap-edit" v-show="edit">
         <input  
             ref="thisinput" 
             type="text"  
@@ -69,11 +69,12 @@ export default{
         column-gap: 10px;
     }
     input{
-        height: 28px;
+        height: 30px;
         width: v-bind(width);
         border-radius: 5px;
         background-color: #ebebeb;
         padding-left: 15px;
+        margin-left: -15px;
         font-size: 18px;
         font-family: 'Raleway-Light';
         color: #464646;

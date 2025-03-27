@@ -2,8 +2,15 @@
     <div class="item-Part-obj" v-if="!!id_paragraph">
         <div  class="main_row" >
             <div class="title">{{ text.Pay_extra }}</div>
-            <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
-            <div class="price" ><Price :value ="value" /></div>
+            <div class="wrap_figures">
+                <div class="wrap_colum wrap_colum_1">
+                    <Percent input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
+                </div>
+                <div class="wrap_colum wrap_colum_2">
+                    <div class="price" ><Price :value ="value" /></div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -77,9 +84,27 @@ export  default{
         justify-content: space-between;
     }   
     .title{
+        width: 60%;
         margin-left: 55px;
         font-family: 'Raleway-Light';
         font-size: 20px;
+    }
+    .wrap_figures{
+        width: 40%;
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum{
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum_1{
+        width: 60%;
+    }
+    .wrap_colum_2{
+        width: 40%;
     }
     .value{
         font-family: 'Raleway-Light';

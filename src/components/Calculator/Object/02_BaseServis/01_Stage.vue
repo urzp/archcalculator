@@ -5,11 +5,15 @@
         <div  class="main_row" >
             <div class="title">{{ title }}</div>
             <div class="wrap-numbers">
-                <div class="wrap-percents">
+                <div class="wrap_colum wrap_colum_1">
                     <Percent :class="'default_percent'" :value = "percent_def" />
+                </div>  
+                <div class="wrap_colum wrap_colum_2">
                     <Percent :class="'input_percent'" input_type :value = "percent" @edit_value="value=>updatePercent(value)"/>
-                </div>    
-                <div class="price" ><Price :value ="value" /></div>
+                </div>
+                <div class="wrap_colum wrap_colum_3"> 
+                    <div class="price" ><Price :value ="value" /></div>
+                </div> 
             </div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
@@ -143,16 +147,32 @@ export  default{
         justify-content: space-between;
     }   
     .title{
+        width: 60%;
         margin-left: 55px;
         font-family: 'Raleway-Light';
         font-size: 20px;
     }
 
     .wrap-numbers{
-        width: 300px;
+        width: 40%;
         display: flex;
         align-items: baseline;
         justify-content: space-between;
+    }
+
+    .wrap_colum{
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+    }
+    .wrap_colum_1{
+        width: 25%;
+    }
+    .wrap_colum_2{
+        width: 35%;
+    }
+    .wrap_colum_3{
+        width: 40%;
     }
     .wrap-percents{
         display: flex;

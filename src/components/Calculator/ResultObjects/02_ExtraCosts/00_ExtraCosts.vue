@@ -7,6 +7,7 @@
         :id="item.id"
         :title="item.title"
         :rate="item.rate"
+        :type_rate="item.type_rate"
         :price_rate="item.price_rate"
         @deleteItem="id=>deleteItem(id)"
         @updateItem = "data=>updateItem(data)"
@@ -64,7 +65,7 @@ export default{
         },
         newItem(){
             let id = this.list.length + 1
-            let item = {id, title:'', rate:0, price_rate:0}
+            let item = {id, title:'', rate:0, type_rate:'%', price_rate:0}
             this.list.push(item)
             this.updateProject()
         },

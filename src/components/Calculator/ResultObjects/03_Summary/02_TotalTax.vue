@@ -77,7 +77,6 @@ export  default{
     }
     .wrap_colum_2{
         width: 35%;
-        padding-right: 15px;
     }
     .wrap_colum_3{
         width: 40%;

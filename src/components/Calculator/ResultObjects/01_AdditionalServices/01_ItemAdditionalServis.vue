@@ -109,7 +109,9 @@ export  default{
     .typeSumbol{
         font-family: 'Comfortaa-Regular';
         font-size: 18px;
-        color:#464646;     
+        color:#464646;   
+        width: 30px;
+        margin-left: 5px;  
     }
 
     .price{

@@ -1,5 +1,5 @@
 <template>
-    <ToggleListButton v-if="list.length > 0" :close="!open" @switch_tg="(val)=>{open=val}"/>
+    <ToggleListButton v-if="list.length > 0&&!no_toggle" :close="!open" @switch_tg="(val)=>{open=val}"/>
     <div v-if="open" class="wrap">
     <div class="select-list" :class="{align_right:right}">
         <ul>
@@ -33,6 +33,14 @@ export default{
         right:{
             type:Boolean,
             default: false
+        },
+        no_toggle:{
+            type:Boolean,
+            default:false,
+        },
+        prop_open:{
+            type:Boolean,
+            default:false,           
         }
     },
     watch:{
@@ -41,6 +49,9 @@ export default{
             this.updateData()
         },
         deep: true
+        },
+        prop_open:{
+            handler(n_v, o_v){ if(!n_v&&!!o_v) this.open = true}
         }
     },
     emits:['selected'],
