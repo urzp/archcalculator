@@ -13,25 +13,25 @@
         <div v-if="login&&!no_full_inf&&status_project!='calc'" class="customer">
             <div class="title">{{ text.Customer }}</div>
             <div class="customer">
-                <InputText :value="customer_name" width="200px" @submit_event="value=>newProjectCustemer('name', value)"></InputText>
+                <InputText :value="customer_name" width="200px" @submit_event="value=>newProjectCustemer('name', value)" @presstab="tabSwitch=1"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)"></InputText>
+                <InputText :value="customer_company" width="200px" @submit_event="value=>newProjectCustemer('company', value)" :focus="tabSwitch==1" @presstab="tabSwitch=2"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_email" width="200px" @submit_event="value=>newProjectCustemer('email', value)"></InputText>
+                <InputText :value="customer_email" width="200px" @submit_event="value=>newProjectCustemer('email', value)" :focus="tabSwitch==2" @presstab="tabSwitch=3"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_postcode" width="200px" @submit_event="value=>newProjectCustemer('postcode', value)"></InputText>
+                <InputText :value="customer_postcode" width="200px" @submit_event="value=>newProjectCustemer('postcode', value)" :focus="tabSwitch==3" @presstab="tabSwitch=4"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_address" width="200px" @submit_event="value=>newProjectCustemer('address', value)"></InputText>
+                <InputText :value="customer_address" width="200px" @submit_event="value=>newProjectCustemer('address', value)" :focus="tabSwitch==4" @presstab="tabSwitch=5"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_cityName" width="200px" @submit_event="value=>newProjectCustemer('cityName', value)"></InputText>
+                <InputText :value="customer_cityName" width="200px" @submit_event="value=>newProjectCustemer('cityName', value)" :focus="tabSwitch==5" @presstab="tabSwitch=6"></InputText>
             </div>
             <div class="customer">
-                <InputText :value="customer_CountryID" width="200px" @submit_event="value=>newProjectCustemer('CountryID', value)"></InputText>
+                <InputText :value="customer_CountryID" width="200px" @submit_event="value=>newProjectCustemer('CountryID', value)" :focus="tabSwitch==6" ></InputText>
             </div>
         </div>
         </template>
@@ -50,6 +50,7 @@ export default{
     name: 'CalcTitle',
     data(){
         return{
+            tabSwitch:0,
             text:{
                 Customer: text.Calc.Customer,
             },

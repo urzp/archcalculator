@@ -5,7 +5,10 @@
             ref="thisinput" 
             type="text"  
             :value="value"
-            @change="event => submit_event(event)">
+            @change="event => submit_event(event)"
+            @blur="edit = false"
+            @keydown="handleKeydown"
+            >
         <div class="panel">
             <CloseButton class="button" width="35px" height="28px" @click="edit=false"/>
         </div>
@@ -35,9 +38,18 @@ export default{
             type:String,
             default: '150px',
         },
+        focus:{
+            type:Boolean,
+            default: false,
+        },
         
     },
-    emits:['submit_event'],
+    watch:{
+        focus:{
+            handler(n_v, o_v){ if(n_v&&!o_v) this.begin_edit() }
+        }
+    },
+    emits:['submit_event', 'presstab'],
     methods:{
         begin_edit(){
             this.edit = true
@@ -49,7 +61,12 @@ export default{
             let val = event.target.value
             this.$refs.thisinput.value = ''
             this.$emit('submit_event', val)
-            
+        },
+        handleKeydown(event) {
+            if (event.key === 'Tab') {
+                event.preventDefault(); 
+                this.$emit('presstab');
+            }
         }
     }
 }
