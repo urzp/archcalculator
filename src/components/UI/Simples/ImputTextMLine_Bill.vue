@@ -9,7 +9,7 @@
             @focus="edit=true"
             @blur="edit=false"
             ></textarea>
-        <div class="panel">
+        <div v-if="edit" class="panel">
             <UpdateBtn v-if="!noUpdate"  class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
