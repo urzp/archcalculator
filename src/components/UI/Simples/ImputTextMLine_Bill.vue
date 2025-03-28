@@ -76,10 +76,8 @@ export default{
 
     }
     .wrap-edit{
-        position: relative;
         display: flex;
         column-gap: 10px;
-        z-index: 100;
     }
     textarea{
         width: v-bind(width);

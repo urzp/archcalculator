@@ -83,10 +83,8 @@ export default{
         text-align: inherit;
     }
     .wrap-edit{
-        position: relative;
         display: flex;
         column-gap: 10px;
-        z-index: 100;
     }
     input{
         height: 30px;
