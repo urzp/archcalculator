@@ -120,6 +120,7 @@ import CloseButton from './UI/Simples/CloseBtn.vue'
 import DeleteButton from './UI/Simples/DeleteBtn.vue'
 import UpButton from './UI/Simples/UpBtn.vue'
 import DownButton from './UI/Simples/DownBtn.vue'
+import CalendatBtn from './UI/Simples/CalendatBtn.vue'
 import PastColumButton from './UI/Simples/PastColumBtn.vue'
 import Price from './UI/Simples/Price.vue'
 import PriceBill from './UI/Simples/PriceBill.vue'
@@ -267,6 +268,7 @@ export default [
     DeleteButton,
     UpButton,
     DownButton,
+    CalendatBtn,
     Button,
     PastColumButton,
     Price,

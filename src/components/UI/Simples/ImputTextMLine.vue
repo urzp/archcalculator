@@ -1,15 +1,17 @@
 <template>
-    <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
-    <div class="wrap-edit" v-if="edit">
+    <div class="wrap-edit" >
         <textarea  
             ref="thisinput" 
             rows="3"
             type="text"  
-            :value="value"
-            @change="event => submit_event(event)"></textarea>
-        <div class="panel">
+            :value="!value?'-':value"
+            @change="event => submit_event(event)"
+            @focus="edit=true"
+            @blur="edit=false"
+            ></textarea>
+        <!-- <div v-if="edit" class="panel">
             <CloseButton class="button" width="35px" height="28px" @click="edit=false"/>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -69,8 +71,7 @@ export default{
     }
     textarea{
         width: v-bind(width);
-        border-radius: 5px;
-        background-color: #ebebeb;
+        border-radius: 5px;    
         padding-left: 15px;
         border: none;
         resize: none;
@@ -78,6 +79,11 @@ export default{
         font-family: 'Raleway-Light';
         line-height: 26px;
         color: #464646;
+        text-align: inherit;
+    }
+
+    textarea:focus{
+        background-color: #ebebeb;
     }
 
     .panel{

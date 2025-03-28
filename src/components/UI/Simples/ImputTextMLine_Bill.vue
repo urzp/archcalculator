@@ -1,12 +1,14 @@
 <template>
-    <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
-    <div class="wrap-edit" v-if="edit" @click.stop>
+    <div class="wrap-edit" @click.stop>
         <textarea  
             ref="thisinput" 
             rows="3"
             type="text"  
             :value="value"
-            @change="event => submit_event(event)"></textarea>
+            @change="event => submit_event(event)"
+            @focus="edit=true"
+            @blur="edit=false"
+            ></textarea>
         <div class="panel">
             <UpdateBtn v-if="!noUpdate"  class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
@@ -82,14 +84,18 @@ export default{
     textarea{
         width: v-bind(width);
         border-radius: 5px;
-        background-color: #ebebeb;
         padding-left: 15px;
+        margin-left: -15px;
         border: none;
         resize: none;
         font-size: inherit;
         font-family: 'Raleway-Light';
         line-height: 26px;
         color: #464646;
+    }
+
+    textarea:focus{
+        background-color: #ebebeb;
     }
 
     .panel{

@@ -1,17 +1,16 @@
 <template>
-    <div class="wrap-edit" @click.stop>
+    <div v-if="!edit" class="value" @click="begin_edit">{{ !value?'-':value }}</div>
+    <div class="wrap-edit" v-if="edit" @click.stop>
         <input  
             ref="thisinput" 
             type="text"  
-            :value="!value?'-':value"
-            @change="event => submit_event(event)"
-            @focus="edit=true"
-            @blur="edit=false"
-        >
-        <div v-if="edit" class="panel">
+            :value="value"
+            @change="event => submit_event(event)">
+        <div class="panel">
             <UpdateBtn v-if="!noUpdate" class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
+    <div v-if="edit" @click.stop="edit=false" class="bg_for_close"></div>   
 </template>
 
 <script>
@@ -19,10 +18,15 @@ import { EventBus } from '@/servis/EventBus'
 import { checkLock } from '@/servis/projectData';
 export default{
     name: 'InputText_Bill',
+    mounted(){
+        this.id = this.$.uid
+        EventBus.on('fucus:input', value =>{ if(this.id!=value) this.edit = false })
+    },
     data(){
         return{
             id:null,
             edit:false,
+            
         }
     },
     computed:{
@@ -60,7 +64,14 @@ export default{
     },
     emits:['submit_event', 'setDefault'],
     methods:{
+        begin_edit(){
+            if(checkLock()) return false
+            this.edit = true
+            setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
+            EventBus.emit('fucus:input', this.id)
+        },
         submit_event(event){
+            this.edit = false
             let val = event.target.value
             this.$refs.thisinput.value = ''
             this.$emit('submit_event', val)
@@ -89,26 +100,24 @@ export default{
         z-index: 100;
     }
     input{
-        height: 30px;
+        height: 29px;
         width: v-bind(width);
-        border-radius: 5px;
+        border-radius: -2px;
+        background-color: v-bind(bg_input_color);
         padding-left: 15px;
         margin-left: -15px;
+        margin-bottom: 1px;
+        padding-top: v-bind(ajast_top);
         font-size: inherit;
         font-family: inherit;
         color: inherit;
         text-align: v-bind(alight_edit);
     }
 
-    input:focus{
-        background-color: v-bind(bg_input_color);
-    }
-
     .panel{
         width: v-bind(width_panel);
         position: relative;
     }
-
     .button{
         position: absolute;
     }

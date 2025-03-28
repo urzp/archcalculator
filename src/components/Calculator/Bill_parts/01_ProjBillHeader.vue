@@ -2,7 +2,7 @@
     <div class="bill_header">
         <div class="top_row">
             <div class="name_user light-text">
-                <InputText_Bill :value="user_data" width="600px" noUpdate
+                <InputText_Bill :value="user_data" width="600px" noUpdate ajast_top='5px'
                 @submit_event="value=>update_value(value,'user_data')" />
             </div>
             <div class="logo_bill">
@@ -11,31 +11,31 @@
         </div>
         <div v-if="!!customer" class="custemer">
             <div class="name bold-text">
-                <InputText_Bill :value="customer.name" width="300px" 
+                <InputText_Bill :value="customer.name" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'name')" />                
             </div>
             <div class="company bold-text">
-                <InputText_Bill :value="customer.company" width="300px" 
+                <InputText_Bill :value="customer.company" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'company')" />
             </div>
             <div class="company bold-text">
-                <InputText_Bill :value="customer.email" width="300px" 
+                <InputText_Bill :value="customer.email" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'email')" />
             </div>
             <div class="adresse_1 bold-text">
-                <InputText_Bill :value="customer.postcode" width="300px" 
+                <InputText_Bill :value="customer.postcode" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'postcode')" />                     
             </div>
             <div class="adresse_2 bold-text">
-                <InputText_Bill :value="customer.address" width="300px" 
+                <InputText_Bill :value="customer.address" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'address')" />      
             </div>
             <div class="adresse_2 bold-text">
-            <InputText_Bill :value="customer.cityName" width="300px" 
+            <InputText_Bill :value="customer.cityName" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'cityName')" />      
             </div>
             <div class="adresse_2 bold-text">
-            <InputText_Bill :value="customer.CountryID" width="300px" 
+            <InputText_Bill :value="customer.CountryID" width="300px" ajast_top="4px"
                 @submit_event="value=>update_customer(value,'CountryID')" />      
             </div>
         </div>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="payment_date light-text">
-                <div class="">Leistungszeitraum vom</div>
+                <div class="">Leistungszeitraum von</div>
                 <InputDate :value="payment_date.vom" @editValue=" date=>setNewDate(date, 'vom') " />
                 <div class="">bis</div>  
                 <InputDate :value="payment_date.bis" @editValue=" date=>setNewDate(date, 'bis') " />
