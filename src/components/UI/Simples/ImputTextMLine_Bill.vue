@@ -5,6 +5,7 @@
             rows="3"
             type="text"  
             :value="value"
+            @input="event => autosize(event)"
             @change="event => submit_event(event)"
             @focus="edit=true"
             @blur="edit=false"
@@ -62,6 +63,11 @@ export default{
         },
         set_default(){
             this.$emit('setDefault')
+        },
+        autosize(event){
+            let textarea = event.target
+            textarea.style.height = '1px';
+            textarea.style.height = textarea.scrollHeight + 'px'
         }
     }
 }

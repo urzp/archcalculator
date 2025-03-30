@@ -15,7 +15,7 @@ export default{
         },
         width_img:{
             type:String,
-            default: '15px',
+            default: '18px',
         },
         heigth:{
             type:String,

@@ -5,6 +5,7 @@
             rows="3"
             type="text"  
             :value="!value?'-':value"
+            @input="event => autosize(event)"
             @change="event => submit_event(event)"
             @focus="edit=true"
             @blur="edit=false"
@@ -52,6 +53,11 @@ export default{
             this.$refs.thisinput.value = ''
             this.$emit('submit_event', val)
             
+        },
+        autosize(event){
+            let textarea = event.target
+            textarea.style.height = '1px';
+            textarea.style.height = textarea.scrollHeight + 'px'
         }
     }
 }

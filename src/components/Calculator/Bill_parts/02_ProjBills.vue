@@ -32,7 +32,7 @@
                 <div class="hover-panel">
                     <div class="left_part">
                         <NewButton @click.stop="insertNewBill(index)" width="45px" height="23px" width_img="10px"/>
-                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="10px"/>   
+                        <DeleteButton @click.stop="deleteBill(item.id)" width="45px" heigth="23px" width_img="15px"/>   
                     </div>
                     <div class="right_part">
                         <UpButton @click.stop="moveUpBill(index)" width="45px" heigth="23px" height_img="10px"/>
