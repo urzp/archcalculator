@@ -8,7 +8,7 @@
             @focus="edit=true"
             @blur="edit=false"
         >
-        <div v-if="edit" class="panel">
+        <div v-if="edit&&!noUpdate" class="panel">
             <UpdateBtn v-if="!noUpdate" class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
@@ -92,6 +92,8 @@ export default{
         border-radius: 5px;
         padding-left: 15px;
         margin-left: -15px;
+        padding-right: 15px;
+        margin-right: -15px;
         font-size: inherit;
         font-family: inherit;
         color: inherit;
@@ -105,6 +107,7 @@ export default{
     .panel{
         width: v-bind(width_panel);
         position: relative;
+        left: 10px;
     }
 
     .button{

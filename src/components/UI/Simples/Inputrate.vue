@@ -27,15 +27,6 @@ export default {
             id:null,
             edit:false,
             open_list:false,
-            data_list:{
-                list:[
-                    {id:1, value:'%'}, 
-                    {id:2, value:'€/h'},
-                    {id:3, value:'km'}, 
-                    {id:4, value:'m2'}, 
-                    {id:5, value:'Stk'}, 
-                ],
-            }
         }
     },
     props:{
@@ -50,6 +41,18 @@ export default {
         width:{
             type:String,
             default: '150px',
+        },
+        data_list:{
+            type:Object,
+            default:{
+                list:[
+                    {id:1, value:'%'}, 
+                    {id:2, value:'h'},
+                    {id:3, value:'km'}, 
+                    {id:4, value:'m2'}, 
+                    {id:5, value:'Stk'}, 
+                ],
+            }
         }
     },
     emits:['submit', 'select_type'],
@@ -80,6 +83,10 @@ export default {
 
 
 <style scoped>
+    .imputrate{
+        display: flex;
+        align-items: baseline;
+    }
     .value, .type{
         font-size: 18px;
         font-family: 'DroidSans';
@@ -87,7 +94,7 @@ export default {
     }
     .type{
         cursor: pointer;
-        width: 30px;
+        width: 20px;
         margin-left: 5px;
     }
     input{

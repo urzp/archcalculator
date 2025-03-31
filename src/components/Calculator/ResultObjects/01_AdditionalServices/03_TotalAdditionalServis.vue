@@ -2,7 +2,6 @@
     <div class="total-part-obj" :class="{collapse:collapse}">
         <div class="wrap" :class="{line:!collapse}">
             <div class="title">{{ text.Total_Additional_Services }}</div>
-            <div class="value-percent">{{ hours }} h</div>
             <Price :value = 'value'/>
         </div>
     </div>
@@ -23,7 +22,6 @@ export default{
         }
     },
     props:{
-        hours:Number,
         value:Number,
         collapse:Boolean,
     },

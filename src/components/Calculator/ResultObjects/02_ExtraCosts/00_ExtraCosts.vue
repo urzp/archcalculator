@@ -32,6 +32,7 @@ export default{
             collapse:false,
             list:[],
             project:{},
+            objects:[],
             text:{
                 Extra_costs: text.Calc.Extra_costs,
             }
@@ -47,13 +48,26 @@ export default{
         total_value(){
             let result = 0 
             if(!this.list||!Array.isArray(this.list)) return result
-            this.list.forEach(item=>result+= item.rate*item.price_rate)
+            this.list.forEach(item=>{
+                if(item.type_rate=='%'){
+                    result+= (item.rate/100)*item.price_rate
+                }else{
+                    result+= item.rate*item.price_rate
+                }
+            })
             this.project.total_ExtraCosts = result
             return result
         },
         isLocked(){
             if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
             return false
+        },
+        total_objects(){
+            let result = 0
+            this.objects.forEach(item=>{
+                result = result + item.total_object
+            })
+            return result
         }
     },
     methods:{
@@ -62,10 +76,11 @@ export default{
             if(!Project.project.ExtraCosts) return Project.project.ExtraCosts = []
             this.list = Project.project.ExtraCosts
             this.project = Project.project
+            this.objects = Project.objects
         },
         newItem(){
             let id = this.list.length + 1
-            let item = {id, title:'', rate:0, type_rate:'%', price_rate:0}
+            let item = {id, title:'', rate:0, price_rate:this.total_objects, type_rate:'%'}
             this.list.push(item)
             this.updateProject()
         },

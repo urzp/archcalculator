@@ -8,7 +8,7 @@
                     <Inputrate :value = "rate" :type="type_rate" @submit="value=>updateRate(value)" @select_type="value=>updateType(value)" width="150px"></Inputrate>
                 </div>
                 <div class="wrap_colum wrap_colum_2">
-                    <Price input_type :value ="price_rate" @edit_price="newValue=>updatePriceRate(newValue)" input_width="100%" font_size_unit="18px" />
+                    <Price input_type :value ="price_rate" @edit_price="newValue=>updatePriceRate(newValue)" input_width="100%" font_size_unit="18px" :typeCurrancy="currency_type_rate"/>
                 </div>
                 <div class="wrap_colum wrap_colum_3">
                     <div class="price" ><Price :value ="value" /></div>
@@ -41,8 +41,13 @@ export  default{
     emits:['updateItem'],
     computed:{
         value(){
+            if(this.type_rate=='%') return (Number(this.rate)/100) * Number(this.price_rate)
             return Number(this.rate) * Number(this.price_rate)
         },
+        currency_type_rate(){
+            if(this.type_rate=="%") return'€ '
+            return '€/'+this.type_rate
+        }
     },
     methods:{
         updateUserTitle(value){
@@ -99,10 +104,6 @@ export  default{
     }
     .wrap_colum_3{
         width: 40%;
-    }
-    .imputrate{
-        display: flex;
-        align-items: baseline;
     }
     .imputrate input{
         text-align: right;

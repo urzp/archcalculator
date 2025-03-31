@@ -41,17 +41,17 @@
         </div>
         <div class="main_data_bill">
             <div class="title_project_bill bold-text">
-                <InputText_Bill :value="project_title" width="300px" noUpdate
+                <InputText_Bill :value="project_title" width="calc(100% + 30px)" noUpdate
                 @submit_event="value=>update_value(value,'project_title')" />  
             </div>
             <div class="discription light-text">
-                <ImputTextMLine_Bill :value="project_dicription" width="100%" noUpdate
+                <ImputTextMLine_Bill :value="project_dicription" width="calc(100% + 30px)" noUpdate
                 @submit_event="value=>update_value(value,'project_dicription')"/>
             </div> 
             <div class="item_title_value">
                 <div class="invoice_number title bold-text">Rechnung Nr.</div>
                 <div class="invoice_number value bold-text">
-                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate  alight_edit="center"
+                    <InputText_Bill :value="invoice_number" width="150px"  noUpdate  alight_edit="right"
                     @submit_event="value=>update_value(value,'invoice_number')" />  
                 </div>
             </div>

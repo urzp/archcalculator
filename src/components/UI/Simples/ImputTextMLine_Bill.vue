@@ -88,8 +88,12 @@ export default{
     textarea{
         width: v-bind(width);
         border-radius: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         padding-left: 15px;
         margin-left: -15px;
+        margin-right: -15px;
+        padding-right: 15px;
         border: none;
         resize: none;
         font-size: inherit;

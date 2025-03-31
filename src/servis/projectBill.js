@@ -153,12 +153,15 @@ function setPayment_date(number){
     let payment_date = {}
     if(number==0){
         payment_date.vom = new Date( Project.project.created )
-        payment_date.bis = new Date( Project.project.created ).addDays(5)
+        // payment_date.bis = new Date( Project.project.created ).addDays(5)
+        payment_date.bis = new Date()
     }else{
         let lastDate =  Bills[number-1].payment_date.bis
         payment_date.vom = new Date( lastDate )
-        payment_date.bis = new Date( lastDate ).addDays(5)
+        // payment_date.bis = new Date( lastDate ).addDays(5)
+        payment_date.bis = new Date()
     }
+    console.log(payment_date)
     return payment_date
 }
 

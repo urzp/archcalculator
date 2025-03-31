@@ -6,8 +6,9 @@
         :key="item.id"
         :id="item.id"
         :title="item.title"
-        :hours="item.hours"
-        :price_hours="item.price_hours"
+        :rate="item.rate"
+        :price_rate="item.price_rate"
+        :type_rate="item.type_rate"
         @deleteItem="id=>deleteItem(id)"
         @updateItem = "data=>updateItem(data)"
         />
@@ -15,7 +16,7 @@
             <NewButton v-if="!isLocked"   @click="newItem()"/>
         </div>
     </Content_PartObject>
-    <TotalAdditionalServis :hours="total_hours" :value="total_value" :collapse = 'collapse' />    
+    <TotalAdditionalServis  :value="total_value" :collapse = 'collapse' />    
 </template>
 
 <script>
@@ -37,24 +38,30 @@ export default{
         }
     },
     computed:{
-        total_hours(){
-            let result = 0 
-            if(!this.list||!Array.isArray(this.list)) return result
-            this.list.forEach(item=>result+= Number(item.hours))
-            return result
-        },
         total_value(){
             let result = 0 
             if(!this.list||!Array.isArray(this.list)) return result
-            this.list.forEach(item=>result+= item.hours*item.price_hours)
+            this.list.forEach(item=>{
+                if(item.type_rate=='%'){
+                    result+= (item.rate/100)*item.price_rate
+                }else{
+                    result+= item.rate*item.price_rate
+                }
+            })
             this.project.total_AdditionalServices = result
             return result
         },
         isLocked(){
             if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
             return false
+        },
+        total_objects(){
+            let result = 0
+            Project.objects.forEach(item=>{
+                result = result + item.total_object
+            })
+            return result
         }
-        
     },
     methods:{
         getProject(){
@@ -64,7 +71,7 @@ export default{
         },
         newItem(){
             let id = this.list.length + 1
-            let item = {id, title:'', hours:0, price_hours:0}
+            let item = {id, title:'', rate:0, price_rate:0, type_rate:'h'}
             this.list.push(item)
             this.updateProject()
         },

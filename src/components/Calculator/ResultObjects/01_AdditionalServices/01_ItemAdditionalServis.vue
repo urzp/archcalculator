@@ -5,10 +5,11 @@
             <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>
             <div class="wrap_figures">
                 <div class="wrap_colum wrap_colum_1">
-                    <div class="imputHours"><input type="number" min="0" :value = "hours" @change="event => updateHours(event.target.value)" /> <div class="typeSumbol">h</div></div>
+                    <!-- <div class="imputrate"><input type="number" min="0" :value = "rate" @change="event => updaterate(event.target.value)" /> <div class="typeSumbol">h</div></div> -->
+                    <Inputrate :value = "rate" :type="type_rate" @submit="value=>updateRate(value)" @select_type="value=>updateType(value)" width="150px"></Inputrate>
                 </div>
                 <div class="wrap_colum wrap_colum_2">
-                    <Price input_type :value ="price_hours" @edit_price="newValue=>updatePriceHours(newValue)" input_width="60px" font_size_unit="18px" :typeCurrancy="'€/h'"/>
+                    <Price input_type :value ="price_rate" @edit_price="newValue=>updatePricerate(newValue)" input_width="60px" font_size_unit="18px" :typeCurrancy="currency_type_rate"/>
                 </div>
                 <div class="wrap_colum wrap_colum_3">
                     <div class="price" ><Price :value ="value" /></div>
@@ -34,28 +35,41 @@ export  default{
     props:{
         id:[Number,String],
         title:String,
-        hours:[Number,String],
-        price_hours:[Number,String],
+        rate:[Number,String],
+        price_rate:[Number,String],
+        type_rate:{
+            type:String,
+            default:'h',
+        }
     },
     emits:['updateItem', 'deleteItem'],
     computed:{
         value(){
-            return Number(this.hours) * Number(this.price_hours)
+            if(this.type_rate=='%') return (Number(this.rate)/100) * Number(this.price_rate)
+            return Number(this.rate) * Number(this.price_rate)
         },
+        currency_type_rate(){
+            if(this.type_rate=="%") return'€ '
+            return '€/'+this.type_rate
+        }
     },
     methods:{
         updateUserTitle(value){
             this.$emit('updateItem', {value, id:this.id, name:'title'})
         },
-        updateHours(value){
-            this.$emit('updateItem', {value, id:this.id, name:'hours'})
+        updateRate(value){
+            this.$emit('updateItem', {value, id:this.id, name:'rate'})
         },   
-        updatePriceHours(value){
-            this.$emit('updateItem', {value, id:this.id, name:'price_hours'})
+        updatePricerate(value){
+            this.$emit('updateItem', {value, id:this.id, name:'price_rate'})
         },   
         deleteItem(){
             this.$emit('deleteItem',this.id)
-        }
+        },
+        updateType(value){
+            value = {id:this.id, name:'type_rate', value}
+            this.$emit('updateItem',value)
+        },
         
     }
 }
@@ -95,11 +109,11 @@ export  default{
     .wrap_colum_3{
         width: 40%;
     }
-    .imputHours{
+    .imputrate{
         display: flex;
         align-items: baseline;
     }
-    .imputHours input{
+    .imputrate input{
         width: 45px!important;
         text-align: right;
         font-family: 'Comfortaa-Regular';

@@ -9,7 +9,7 @@
             <div class="title">{{ text.Lock }}</div> 
             <div class="title_statis">{{ text.Payment_from }}</div>         
         </div>
-        <div v-if="updated" class="list_bills">
+        <div class="list_bills">
             <div class="item" v-for="item, index in list" :key=item.id>
                 <div class="wrap_left">
                     <div class="name" @click="selectBill(item.id)">{{ item.name }}</div>
@@ -40,9 +40,9 @@
                     </div>
                 </div>
             </div>
+            <div v-if="!updated" class="load update">{{ text.Loading }}</div>
             <NewButton class="newButton_bottom_list" @click.stop="newBill()" width="150px" height="30px" width_img="10px"/>
         </div>
-        <div v-else class="load update">{{ text.Loading }}</div>
     </div>
     <div v-else class="load">{{ text.Loading }}</div>
 </template>
@@ -354,7 +354,9 @@ export default{
     .update{
         align-items: center;
         justify-content: flex-start;
-        min-height: 200px;
+        min-height: 70px;
+        padding-left: 10px;
+        background-color: #fff!important;
     }
 
     .checkbox{

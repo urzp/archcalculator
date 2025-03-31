@@ -14,7 +14,7 @@
             <input  type="number" max="99" min="0" class="cents" :value="price.cent"  @change="event => edit_price( price.unit, event.target.value )"  @input="event => { validate(event, true) }"/>      
             </template>
         </template>
-        <div class="currency-sign">{{ typeCurrancy }}</div>
+        <div class="currency-sign" :class="{wide_sing:typeCurrancy!='€'}">{{ typeCurrancy }}</div>
     </div>
 </template>
 
@@ -148,6 +148,9 @@ export default{
     .currency-sign{
         margin-left: 5px;
         margin-right: 10px;
+    }
+    .wide_sing{
+        min-width: 20px;
     }
     input{
         width: v-bind(input_width);
