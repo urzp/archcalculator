@@ -1,16 +1,21 @@
 <?php
 
-function toMoney($value){
+function toMoney($value, $sumbol='€'){
     $result = '';
-    $result = number_format($value, 2).' €';
+    $result = number_format($value, 2)." ".$sumbol;
     $result = str_replace(',', ' ', $result);
     $result = str_replace('.', ',', $result);
     return $result;
 }
 
 function toFormat($value, $sumbol=""){
+    if($value - floor($value) != 0) {
+        $point = 2;
+    } else {
+        $point = 0;
+    }
     $result = '';
-    $result = number_format($value, 2).$sumbol;
+    $result = number_format($value, $point).$sumbol;
     $result = str_replace(',', ' ', $result);
     $result = str_replace('.', ',', $result);
     return $result;
@@ -86,7 +91,7 @@ $html.="   <div class='title_2'>Zusammenfassung</div>
                     </tr>
                     <tr>
                         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Umsatzsteuer</td>
-                        <td class='title_3 number' style='width: 25%; text-align: left;'>$project_tax</td>
+                        <td class='title_3 number' style='width: 25%; text-align: right;'>$project_tax</td>
                         <td class='title_3 number' style='width: 25%; text-align: right;'>$project_summe_tax</td>
                     </tr>
                     <tr>

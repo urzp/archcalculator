@@ -1,20 +1,20 @@
 .title_0{
     font-family: 'Rawline';
     font-weight:lighter;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .title_1{
     font-family: 'Rawline';
     font-weight:lighter;
-    font-size: 20px;
+    font-size: 16px;
     color:#636363;
 }
 
 .title_2{
     font-family: 'Rawline';
     font-weight:600;
-    font-size: 18px;
+    font-size: 14px;
     color:#636363;
 }
 
@@ -22,21 +22,21 @@
     margin-left: 20px;
     font-family: 'Rawline';
     font-weight:normal;
-    font-size: 16px;
+    font-size: 12px;
     color:#636363;
 }
 
 .title_4{
     font-family: 'Rawline';
     font-weight:normal;
-    font-size: 14px;
+    font-size: 12px;
     color:#636363;
 }
 
 .title_5{
     font-family: 'Rawline';
     font-weight:normal;
-    font-size: 12px;
+    font-size: 10px;
     color:#636363;
 }
 
@@ -69,20 +69,20 @@
     .title_0{
         font-family: 'Rawline';
         font-weight:lighter;
-        font-size: 26px;
+        font-size: 24px;
     }
     
     .title_1{
         font-family: 'Rawline';
         font-weight:lighter;
-        font-size: 20px;
+        font-size: 18px;
         color:#636363;
     }
     
     .title_2{
         font-family: 'Rawline';
         font-weight:600;
-        font-size: 18px;
+        font-size: 16px;
         color:#636363;
     }
     
@@ -92,7 +92,7 @@
         padding-bottom: 5px;
         font-family: 'Rawline';
         font-weight:normal;
-        font-size: 16px;
+        font-size: 14px;
         color:#636363;
     }
 
@@ -103,14 +103,14 @@
     .title_4{
         font-family: 'Rawline';
         font-weight:normal;
-        font-size: 14px;
+        font-size: 12px;
         color:#636363;
     }
     
     .title_5{
         font-family: 'Rawline';
         font-weight:normal;
-        font-size: 12px;
+        font-size: 10px;
         color:#636363;
     }
     

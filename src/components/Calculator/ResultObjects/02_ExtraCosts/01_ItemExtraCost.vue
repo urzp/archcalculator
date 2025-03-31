@@ -41,8 +41,10 @@ export  default{
     emits:['updateItem'],
     computed:{
         value(){
-            if(this.type_rate=='%') return (Number(this.rate)/100) * Number(this.price_rate)
-            return Number(this.rate) * Number(this.price_rate)
+            let value = 0
+            if(this.type_rate=='%') { value = (Number(this.rate)/100) * Number(this.price_rate) } else { value = Number(this.rate) * Number(this.price_rate) }
+            this.$emit('updateItem', {value, id:this.id, name:'summ'}) 
+            return value
         },
         currency_type_rate(){
             if(this.type_rate=="%") return'€ '

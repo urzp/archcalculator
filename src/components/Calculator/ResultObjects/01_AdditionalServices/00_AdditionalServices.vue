@@ -41,13 +41,7 @@ export default{
         total_value(){
             let result = 0 
             if(!this.list||!Array.isArray(this.list)) return result
-            this.list.forEach(item=>{
-                if(item.type_rate=='%'){
-                    result+= (item.rate/100)*item.price_rate
-                }else{
-                    result+= item.rate*item.price_rate
-                }
-            })
+            this.list.forEach(item=>result=result+Number(item.summ))
             this.project.total_AdditionalServices = result
             return result
         },

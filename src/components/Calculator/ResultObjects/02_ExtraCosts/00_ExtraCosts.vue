@@ -42,7 +42,7 @@ export default{
         total_rate(){
             let result = 0 
             if(!this.list||!Array.isArray(this.list)) return result
-            this.list.forEach(item=>result+= Number(item.rate))
+            this.list.forEach(item=>result+= Number(item.summ))
             return result
         },
         total_value(){

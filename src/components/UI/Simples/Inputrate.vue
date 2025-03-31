@@ -65,7 +65,6 @@ export default {
         update(value){
             this.edit = false
             value = parseFloat(value)
-            console.log(value)
             this.$emit('submit', value)
         },
         openinglist(){
