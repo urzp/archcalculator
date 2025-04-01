@@ -8,11 +8,12 @@ foreach($additionalServices as $item){
     $number++;
 
     $name = $item->title;
-    $hours = $item ->  hours;
-    $price_hours = $item -> price_hours;
-    $price_hours = number_format($price_hours, 2, '.', '');
+    $hours = $item->rate;
+    $hours = number_format($hours, 2, '.', '');
+    $price_rate = $item -> price_rate;
+    $price_rate = number_format($price_rate, 2, '.', '');
 
-    $sum = (float)$hours*(float)$price_hours;
+    $sum = $item->summ;
     $sum = number_format($sum, 2, '.', '');
 
     $xml->startElementNS('ram', 'IncludedSupplyChainTradeLineItem', null);
@@ -32,7 +33,7 @@ foreach($additionalServices as $item){
         $xml->startElementNS('ram', 'SpecifiedLineTradeAgreement', null);
             $xml->startElementNS('ram', 'NetPriceProductTradePrice', null);
                 $xml->startElementNS('ram', 'ChargeAmount', null);
-                    $xml->text($price_hours);
+                    $xml->text($price_rate);
                 $xml->endElement(); 
             $xml->endElement(); 
         $xml->endElement(); 
