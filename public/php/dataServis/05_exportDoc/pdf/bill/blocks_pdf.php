@@ -11,8 +11,11 @@ foreach($objects as $item){
     $servis_total = toMoney($item->servis_total); 
     $spetial_servis_total = toMoney($item->spetial_servis_total);  
 
+    
+
     $id = $item->HOAI_version_id; 
     $selector_HOAI = "`id`='$id'";
+    $mysql = $mysql_HOAI;
     $HOAI = crud_read('HOAI_versions',"value", $selector_HOAI)[0]['value'];
 
     $id = $item->paragraph_id; $selector_paragraph = "`id`='$id'";
@@ -26,6 +29,7 @@ foreach($objects as $item){
     $payExtra = toMoney($item->payExtra->value);
     $payExtraPercent = toFormat($item->payExtra->percent, '%');
 
+
     // //............................................ stages ....................................................
 
     $stages_html ="";
@@ -33,6 +37,8 @@ foreach($objects as $item){
     $id = $item->paragraph_id; $selector_stages = "`id_paragraph`='$id' ORDER BY  cast(`number` as unsigned)  ASC";
     $stages = crud_read('Stages',"*", $selector_stages);
     $summ_percent_stages = 0;
+
+    $mysql = $mysql_calc;
 
     foreach($stages as $key=>$item_stage){
         $name = $item_stage['name'];
@@ -52,9 +58,9 @@ foreach($objects as $item){
         $stages_html.="
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
-                <td class='title_3 number' style='width: 16.6%; text-align: left;'>$value_default</td>
-                <td class='title_3 number' style='width: 16.6%; text-align: left;'>$value</td>
-                <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ_item</td>
+                <td class='title_3 number' style='width: 11%; text-align: right;'>$value_default</td>
+                <td class='title_3 number' style='width: 11%; text-align: right;'>$value</td>
+                <td class='title_3 number' style='width: 18%; text-align: right;'>$summ_item</td>
             </tr>";
     }
 
@@ -76,7 +82,7 @@ foreach($objects as $item){
         $spetial_servis_html.="
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$name</td>
-                <td class='title_3 number' style='width: 25%; text-align: left;'>$percent</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$percent</td>
                 <td class='title_3 number' style='width: 25%; text-align: right;'>$price</td>
             </tr>
         ";
@@ -93,7 +99,7 @@ foreach($objects as $item){
         <table class='row_style' style='width: 680px;'>
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>HOAI Version</td>
-                <td class='title_3' style='width: 25%; text-align: left;'></td>
+                <td class='title_3' style='width: 25%; text-align: right;'></td>
                 <td class='title_3' style='width: 25%; text-align: right;'>$HOAI</td>
             </tr>
             <tr>
@@ -123,7 +129,7 @@ foreach($objects as $item){
             </tr>
             <tr>
                 <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>Zuschlag</td>
-                <td class='title_3 number' style='width: 25%; text-align: left;'>$payExtraPercent</td>
+                <td class='title_3 number' style='width: 25%; text-align: right;'>$payExtraPercent</td>
                 <td class='title_3 number' style='width: 25%; text-align: right;'>$payExtra</td>
             </tr>
         </table>
@@ -155,16 +161,18 @@ $project_AdditionalServices_html = '';
 
 foreach($project_AdditionalServices as $item){
     $title = $item->title;
-    $hours = toFormat($item->hours, 'h');
-    $price_hours = toFormat($item->price_hours, '€/h');
-    $summ = $item->hours * $item->price_hours;
+    $type_rate = $item->type_rate;
+    $price_type_rate = $type_rate=='%'?'€':'€/'.$type_rate;
+    $rate = toFormat($item->rate, $type_rate);
+    $price_rate = toMoney($item->price_rate, $price_type_rate);
+    $summ = $item->summ;
     $summ = toMoney($summ);
     
     $project_AdditionalServices_html .= "
     <tr>
         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$title</td>
-        <td class='title_3 number' style='width: 16.6%; text-align: left;'>$hours</td>
-        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$price_hours</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$rate</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$price_rate</td>
         <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ</td>
     </tr>    
     ";
@@ -184,15 +192,17 @@ $project_ExtraCosts_html = '';
 
 foreach($project_ExtraCosts as $item){
     $title = $item->title;
-    $rate = toFormat($item->rate, '');
-    $price_rate = toFormat($item->price_rate, '');
-    $summ = $item->rate * $item->price_rate;
+    $type_rate = $item->type_rate;
+    $price_type_rate = $type_rate=='%'?'€':'€/'.$type_rate;
+    $rate = toFormat($item->rate, $type_rate);
+    $price_rate = toMoney($item->price_rate, $price_type_rate);
+    $summ = $item->summ;
     $summ = toMoney($summ);
     
     $project_ExtraCosts_html .= "
     <tr>
         <td class='title_3' style='width: 50%; padding-left: 20px; text-align: left;'>$title</td>
-        <td class='title_3 number' style='width: 16.6%; text-align: left;'>$rate</td>
+        <td class='title_3 number' style='width: 16.6%; text-align: right;'>$rate</td>
         <td class='title_3 number' style='width: 16.6%; text-align: right;'>$price_rate</td>
         <td class='title_3 number' style='width: 16.6%; text-align: right;'>$summ</td>
     </tr>    

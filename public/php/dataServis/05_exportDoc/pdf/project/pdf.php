@@ -1,25 +1,5 @@
 <?php
 
-function toMoney($value, $sumbol='€'){
-    $result = '';
-    $result = number_format($value, 2)." ".$sumbol;
-    $result = str_replace(',', ' ', $result);
-    $result = str_replace('.', ',', $result);
-    return $result;
-}
-
-function toFormat($value, $sumbol=""){
-    if($value - floor($value) != 0) {
-        $point = 2;
-    } else {
-        $point = 0;
-    }
-    $result = '';
-    $result = number_format($value, $point).$sumbol;
-    $result = str_replace(',', ' ', $result);
-    $result = str_replace('.', ',', $result);
-    return $result;
-}
 
 $project = $data['project'];
 $objects = $data['objects'];
