@@ -283,6 +283,7 @@ export default{
         display: flex;
         column-gap: 5px;
         font-size: 18px;
+        align-items: center;
     }
 
     .wrap_right .date{

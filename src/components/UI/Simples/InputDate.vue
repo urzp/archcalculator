@@ -1,8 +1,10 @@
 <template>
     <div class="wrap_elements">
-        <div class="date" >
+        <!-- <div class="date" >
             {{ formatDate(value) }}
-        </div>
+        </div> -->
+        <input v-if="!!value" type="date" :value="formatDate(value)" @blur="event=>setNewDate(new Date( event.target.value ) )">
+        <div v-else class="date">-</div>
         <div class="wrap_button">
             <CalendatBtn :height="'25px'" :width="'15px'" :width_img="'19px'" @click.stop="begin_edit()"/>
         </div>
@@ -40,17 +42,19 @@ export default{
         formatDate(date){
             if(!date) return '-'
             date = new Date(date)
-           return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+            //date = date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
+            date = date.getFullYear() + '-' +  ('0'+(date.getMonth()+1)).slice(-2) + '-' + ('0'+date.getDate()).slice(-2)
+            return date
         },
         setNewDate(date){
+            console.log(date)
             this.$emit('editValue', date)
             this.showCalendar=false
-            
         },
         begin_edit(){
             if(checkLock()) return false
             this.showCalendar=true
-        }
+        },
     }
 }
 
@@ -60,12 +64,12 @@ export default{
     .wrap_elements{
         display: flex;
         align-items: center;
+        margin-right: -30px;
+        padding-right: 30px;
     }
     .date{
         min-width: 20px;
         text-align: center;
-        margin-right: -30px;
-        padding-right: 30px;
     }
     .wrap_button{
         display: none;
@@ -93,5 +97,18 @@ export default{
         box-shadow: 0px 0px 15px #898989d6;
         background-color: #fff;
         z-index: 100;
+    }
+
+    [type="date"]::-webkit-inner-spin-button {
+        display: none;
+    }
+    [type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    input{
+        font-family: inherit;
+        font-size: inherit;
+        text-align: right;
+        color: inherit;
     }
 </style>
