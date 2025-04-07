@@ -28,6 +28,7 @@ include '02_calc/_index.php';
 include '03_projects/_index.php';
 include '04_users/index.php';
 include '05_exportDoc/index.php';
+include '06_admin/index.php';
 
 echo json_encode($result);
 

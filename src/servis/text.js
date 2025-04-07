@@ -28,6 +28,12 @@ export let text = {
         Calculator: 'Zum Rechner', // Pop-Up too short
         Profile: 'Mein Profil',
     },
+    adminSideBar:{
+        HOAI_versions:'HOAI versions',
+        Users:'Users',
+        Projects:'Projects',
+        Setings:'Setings',
+    },
     sideBar:{
         Calc:'Rechner',
         NewCalc:'Neue Kalkulation',

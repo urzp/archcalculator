@@ -64,6 +64,13 @@ function crud_delete($table, $selector=""){
     return $sql;
 }
 
+function crud_count($table, $selector=""){
+    global $mysql;
+    $sql = "SELECT COUNT(*) as total FROM `$table`";
+    $sql_result = $mysql -> query($sql);
+    return var_dump( $sql_result);
+}
+
 //$users = crud_read('users');
 //echo json_encode($users);
 

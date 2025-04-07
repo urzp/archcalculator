@@ -1,23 +1,43 @@
 <template>
     <div  class="wrap_sitebar" :class="{'open':config.open}">
         <ButtonSiteBar :open="config.open" @click=" config.open=!config.open "/>
+        <div class="slide_bar">
+            <div class="item_level_0 main_groupe">
+                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.HOAI_versions + ':' + HOAI_versions }}</div>
+                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Users + ':' + Users }}</div>
+                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Projects + ':' + Projects }}</div>
+                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Setings }}</div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import {text} from '@/servis/text'
+import { EventBus } from '@/servis/EventBus'
+import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'AdminSiteBar',
     mounted(){
         this.initConfig()
+        this.initData()
+        EventBus.on('AdminSiteBar:Update', this.initData)
     },
     data(){
         return{
             config:{
                 open: true,
-                calcs: true,
-                offers: true,
-                projects: true,
-            },            
+                main_groupe: true,
+            }, 
+            HOAI_versions:'',
+            Users:'',
+            Projects:'',
+            text:{
+                HOAI_versions: text.adminSideBar.HOAI_versions,
+                Users: text.adminSideBar.Users,
+                Projects: text.adminSideBar.Projects,
+                Setings: text.adminSideBar.Setings,
+            }           
         }
     },
     watch:{
@@ -33,6 +53,12 @@ export default{
             let data = JSON.parse(localStorage.getItem('AdminSideBarConf'))
             if(!!data) this.config = data
             if(!data) localStorage.setItem('AdminSideBarConf', JSON.stringify(this.config))
+        },
+        async initData(){
+            let data = await apiData({typeData:'adminSiteBarData'})
+            this.HOAI_versions = data.HOAI_versions
+            this.Users = data.Users
+            this.Projects = data.Projects
         },
     }
 }
