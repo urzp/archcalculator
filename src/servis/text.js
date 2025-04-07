@@ -23,6 +23,7 @@ export let text = {
         Login: 'Log in',
         Registration: 'Registrierung',
         Edit_HOAI_version: 'Edit HOAI',
+        Admin_Panel: 'Admin Panel',
         Logout: 'Logout',
         Calculator: 'Zum Rechner', // Pop-Up too short
         Profile: 'Mein Profil',

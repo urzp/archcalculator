@@ -2,6 +2,7 @@
 import Header from '@/pageParts/Header.vue'
 import Footer from '@/pageParts/Footer.vue'
 import Menu from '@/pageParts/Menu.vue'
+import AdminSiteBar from '@/components/Admin/00_SiteBarAdmin.vue'
 import SiteBar from '@/pageParts/SiteBar.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
@@ -150,6 +151,7 @@ export default [
     Header,
     Footer,
     Menu,
+    AdminSiteBar,
     SiteBar,
     Popaps,
     Comfirm,

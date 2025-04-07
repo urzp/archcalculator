@@ -12,6 +12,7 @@ $forbiden = [
     'token',
     'resetCode',
     'level',
+    'subscription',
 ];
 
 

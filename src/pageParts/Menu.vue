@@ -9,6 +9,7 @@
                 <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">{{ text.Calculator }}</div>
                 <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">{{ text.Profile }}</div>
                 <div v-if="global.admin" class="item" @click="$router.push({ name: 'law_edit_data' })">{{text.Edit_HOAI_version}}</div>
+                <div v-if="global.admin" class="item" @click="$router.push({ name: 'admin' })">{{text.Admin_Panel}}</div>
                 <div class="item" @click="logOut()">{{ text.Logout }}</div>
             </div>
         </div>
@@ -34,6 +35,7 @@ export default{
                 Login: text.menu.Login,
                 Registration: text.menu.Registration,
                 Edit_HOAI_version: text.menu.Edit_HOAI_version,
+                Admin_Panel: text.menu.Admin_Panel,
                 Logout: text.menu.Logout,
                 Calculator: text.menu.Calculator,
                 Profile: text.menu.Profile,

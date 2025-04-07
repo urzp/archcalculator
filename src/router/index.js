@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/Home.vue'
 import LawEditView from '../pages/LawEdit.vue'
 import ProfileView from '../pages/Profile.vue'
+import AdminPage from '../pages/Admin.vue'
 import { isLogget } from '@/components/Users/servis';
 
 const routes = [
@@ -23,6 +24,14 @@ const routes = [
     path: '/law-edit-data',
     name: 'law_edit_data',
     component: LawEditView,
+    meta: {
+      requireAdmin: true,
+    },
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminPage,
     meta: {
       requireAdmin: true,
     },
