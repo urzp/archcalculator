@@ -61,14 +61,16 @@ function crud_delete($table, $selector=""){
     $sql = "DELETE FROM `$table` WHERE $selector";
     //echo $sql.'<br/>';
     $mysql -> query($sql);
-    return $sql;
+    return $mysql;
 }
 
 function crud_count($table, $selector=""){
     global $mysql;
     $sql = "SELECT COUNT(*) as total FROM `$table`";
     $sql_result = $mysql -> query($sql);
-    return var_dump( $sql_result);
+    $data = [];
+    foreach($sql_result as $item){ array_push($data, $item ); }
+    return $data[0]['total'];
 }
 
 //$users = crud_read('users');

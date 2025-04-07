@@ -25,6 +25,8 @@ import ResetPassword from './Users/ResetPassword.vue'
 import Profile from './Users/Profile.vue'
 import EditUserFeeld from './Users/EditUserFeeld.vue'
 import EditPassword from './Users/EditPassword.vue'
+//----------------------------AdminPanel-----------------------------
+import AdminUsers from './Admin/01_Users.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -174,6 +176,8 @@ export default [
     Profile,
     EditUserFeeld,
     EditPassword,
+
+    AdminUsers,
 
     CalcTitle,
     ProjBillHeader,

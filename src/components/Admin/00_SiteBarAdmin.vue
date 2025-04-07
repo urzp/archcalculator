@@ -3,10 +3,10 @@
         <ButtonSiteBar :open="config.open" @click=" config.open=!config.open "/>
         <div class="slide_bar">
             <div class="item_level_0 main_groupe">
-                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.HOAI_versions + ':' + HOAI_versions }}</div>
-                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Users + ':' + Users }}</div>
-                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Projects + ':' + Projects }}</div>
-                <div class="title" @click="console.log('click')"><Marker :level="1"/> {{ text.Setings }}</div>
+                <div class="title" @click="selection('HOAI')"><Marker :level="1"/> {{ text.HOAI_versions + ': '}} <div class="count"> {{ HOAI_versions }} </div></div>
+                <div class="title" @click="selection('Users')"><Marker :level="1"/> {{ text.Users + ': '}}<div class="count"> {{ Users }} </div></div>
+                <div class="title" @click="selection('Projects')"><Marker :level="1"/> {{ text.Projects + ': '}}<div class="count"> {{ Projects }} </div></div>
+                <div class="title" @click="selection('Setings')"><Marker :level="1"/> {{ text.Setings }}</div>
             </div>
         </div>
     </div>
@@ -40,6 +40,7 @@ export default{
             }           
         }
     },
+    emits:['selected_item'],
     watch:{
         config:{
             handler(){
@@ -57,9 +58,12 @@ export default{
         async initData(){
             let data = await apiData({typeData:'adminSiteBarData'})
             this.HOAI_versions = data.HOAI_versions
-            this.Users = data.Users
-            this.Projects = data.Projects
+            this.Users = data.users
+            this.Projects = data.projects
         },
+        selection(value){
+            this.$emit('selected_item', value)
+        }
     }
 }
 </script>
@@ -102,5 +106,8 @@ export default{
     margin-bottom: 15px;
 }
 
+.count{
+    font-family: 'Raleway-Regular';
+}
 
 </style>
