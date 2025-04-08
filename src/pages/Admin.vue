@@ -17,7 +17,7 @@ export default {
     name: 'AdminPage',
     data(){
         return {
-          AdminSiteBar: 'HOAI',
+          AdminSiteBar: 'Users',
         }
     },
 

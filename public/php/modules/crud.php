@@ -66,7 +66,8 @@ function crud_delete($table, $selector=""){
 
 function crud_count($table, $selector=""){
     global $mysql;
-    $sql = "SELECT COUNT(*) as total FROM `$table`";
+    if ($selector!='') $selector = "WHERE ".$selector;
+    $sql = "SELECT COUNT(*) as total FROM `$table` ".$selector;
     $sql_result = $mysql -> query($sql);
     $data = [];
     foreach($sql_result as $item){ array_push($data, $item ); }
