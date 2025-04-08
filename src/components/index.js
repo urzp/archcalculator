@@ -148,6 +148,7 @@ import ButtonSiteBar from '@/components/UI/SiteBar/ButtonSiteBar.vue'
 import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
 import CheckBox from '@/components/UI/Simples/CheckBox.vue'
 import DetalMarker from '@/components/UI/Simples/detalMarker.vue'
+import FilterData from '@/components/UI/Simples/filter.vue'
 
 export default [
     Header,
@@ -300,4 +301,5 @@ export default [
     ButtonSiteBar,
     CheckBox,
     DetalMarker,
+    FilterData,
 ]

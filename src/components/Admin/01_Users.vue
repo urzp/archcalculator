@@ -4,7 +4,7 @@
             <div class="title">Users</div>
             <div class="table">
                 <div class="header">
-                    <div class="collum collum_1">ID</div>
+                    <div class="collum collum_1">ID<FilterData/></div>
                     <div class="collum collum_2">Registration</div>
                     <div class="collum collum_3">
                         <div class="left">Email</div>
