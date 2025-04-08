@@ -1,13 +1,15 @@
 <template>
-    <div class="wrap_filter">
-        <div class="buttons">
-            <UpButton :width="'20px'" :heigth="'25px'"/>
-            <DownButton :width="'20px'" :heigth="'25px'"/>
-        </div>
-        <div class="v_line"></div>
-        <img src="@/assets/icons/filter/main.svg" alt="">
-        <div class="input">
-            <InputText :width="'300px'"/>
+    <div class="hover_effect">
+        <div class="wrap_filter" >
+            <div class="buttons">
+                <UpButton :width="'20px'" :heigth="'25px'"/>
+                <DownButton :width="'20px'" :heigth="'25px'"/>
+            </div>
+            <div class="v_line"></div>
+            <img src="@/assets/icons/filter/main.svg" alt="">
+            <div class="input">
+                <InputText :width="'300px'"/>
+            </div>
         </div>
     </div>
 </template>
@@ -17,22 +19,36 @@ export default{
     name:'FilterData',
     data(){
         return{
-
+            
         }
-    }
+    },
+    props:{
+
+    },
+
 }
 </script>
 
 <style scoped>
-    .wrap_filter{
+    .hover_effect{
         position: absolute;
         transform: translateY(-70px);
+        padding-bottom: 20px;
+        visibility: hidden;
+    }
+
+    .hover_effect:hover{
+        visibility: visible;
+    }
+
+    .wrap_filter{
         padding: 4px;
         display: flex;
         column-gap: 5px;
         border-radius: 3px;
         border: 1px solid #929292;
     }
+
     .buttons{
         display: flex;
         column-gap: 5px;
