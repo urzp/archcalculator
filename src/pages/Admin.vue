@@ -6,6 +6,7 @@
       <div  class="main">
         <EditCalculator v-if="AdminSiteBar=='HOAI'"></EditCalculator>
         <AdminUsers v-if="AdminSiteBar=='Users'"></AdminUsers>
+        <AdminProjects v-if="AdminSiteBar=='Projects'"></AdminProjects>
       </div>
       <Footer></Footer>
     </div>
@@ -17,7 +18,7 @@ export default {
     name: 'AdminPage',
     data(){
         return {
-          AdminSiteBar: 'Users',
+          AdminSiteBar: 'Projects',
         }
     },
 

@@ -8,7 +8,7 @@
             <div class="v_line"></div>
             <img src="@/assets/icons/filter/main.svg" alt="">
             <div class="input">
-                <InputText :value="filterWord" @input_event="value=>filter(value)" :width="'300px'"/>
+                <InputText :value="filterWord" @submit_event="value=>filterWord=value" @input_event="value=>filter(value)" :width="'300px'"/>
             </div>
         </div>
     </div>
@@ -82,7 +82,11 @@ export default{
             this.$emit('updated', this.outList)
         },
         ajastPanel(){
-            console.log('test',this.$refs.panel)
+            let element = this.$refs.panel
+            let w = element.offsetWidth
+            let w_p = element.parentElement.offsetWidth
+            let x=w-w_p
+            element.style.transform = `translate(-${x}px,-70px)`
         }
     }
 

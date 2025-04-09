@@ -27,6 +27,7 @@ import EditUserFeeld from './Users/EditUserFeeld.vue'
 import EditPassword from './Users/EditPassword.vue'
 //----------------------------AdminPanel-----------------------------
 import AdminUsers from './Admin/01_Users.vue'
+import AdminProjects from './Admin/02_Projects.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -179,6 +180,7 @@ export default [
     EditPassword,
 
     AdminUsers,
+    AdminProjects,
 
     CalcTitle,
     ProjBillHeader,
