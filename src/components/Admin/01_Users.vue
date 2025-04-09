@@ -4,19 +4,36 @@
             <div class="title">Users</div>
             <div class="table">
                 <div class="header">
-                    <div class="collum collum_1">ID<FilterData/></div>
-                    <div class="collum collum_2">Registration<FilterData/></div>
-                    <div class="collum collum_3">
-                        <div class="left">Email</div>
-                        <div class="right">Confirmed</div>
+                    <div class="collum collum_1">ID
+                        <FilterData sortName="id" sortype="number" :list="list" @updated="value=>filter(value)"/>
                     </div>
-                    <div class="collum collum_4">Name</div>
-                    <div class="collum collum_5">Subscription</div>
-                    <div class="collum collum_6">Projects</div>
-                    <div class="collum collum_7">Contracts</div>
-                    <div class="collum collum_8">Bills</div>
+                    <div class="collum collum_2">Registration
+                        <FilterData sortName="dateCreate"  sortype="date" :list="list" @updated="value=>filter(value)"/>
+                    </div>
+                    <div class="collum collum_3">
+                        <div class="left">Email
+                            <FilterData sortName="email" :list="list" @updated="value=>filter(value)"/>
+                        </div>
+                        <div class="right">Confirmed
+                        </div>
+                    </div>
+                    <div class="collum collum_4">Name
+                        <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
+                    </div>
+                    <div class="collum collum_5">Subscription
+                        <FilterData sortName="subscription"  sortype="date"  :list="list" @updated="value=>filter(value)"/>
+                    </div>
+                    <div class="collum collum_6">Projects
+                        <FilterData sortName="projects"  sortype="number"  :list="list" @updated="value=>filter(value)"/>
+                    </div>
+                    <div class="collum collum_7">Contracts
+                        <FilterData sortName="contracts"  sortype="number"  :list="list" @updated="value=>filter(value)"/>
+                    </div>
+                    <div class="collum collum_8">Bills
+                        <FilterData sortName="bills"  sortype="number" :right="true" :list="list" @updated="value=>filter(value)"/>
+                    </div>
                 </div>
-                <div class="data" v-for="item in list" :key="item.id">
+                <div class="data" v-for="item in filtredList" :key="item.id">
                     <div class="collum collum_1">{{ item.id }}</div>
                     <div class="collum collum_2">{{ item.dateCreate }}</div>
                     <div class="collum collum_3">
@@ -46,14 +63,20 @@ export default{
     },
     data(){
         return{
-            list:{},
+            list:[],
+            filtredList:[],
         }
     },
     methods:{
         async initData(){
             let data = await apiData({typeData:'adminUserData'})
             this.list = data.users
+            this.filtredList = data.users
         },
+        filter(list){
+            JSON.parse( JSON.stringify(list) )
+            this.filtredList = list
+        }
     }
 }
 </script>
@@ -140,6 +163,11 @@ export default{
         padding-left: 5px;
         padding-right: 30px;
         justify-content: space-between;;
+    }
+
+    .header .collum:hover{
+        color: #fff;
+        background-color: #ebaa6c;
     }
 
     .header .collum:hover :deep(.hover_effect){

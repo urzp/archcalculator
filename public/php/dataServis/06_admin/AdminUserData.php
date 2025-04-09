@@ -15,7 +15,7 @@ foreach($users as $key => $item){
     if($item['subscription']=='0000-00-00 00:00:00'){
         $users[$key]['subscription'] = '-';
     }else{
-        $users[$key]['subscription'] = date("d-m-Y", strtotime($item['subscription']));
+        $users[$key]['subscription'] = date("Y-m-d", strtotime($item['subscription']));
     }
     
 }

@@ -1,14 +1,14 @@
 <template>
-    <div class="hover_effect">
+    <div class="hover_effect" ref="panel">
         <div class="wrap_filter" >
             <div class="buttons">
-                <UpButton :width="'20px'" :heigth="'25px'"/>
-                <DownButton :width="'20px'" :heigth="'25px'"/>
+                <UpButton @click="sortUp()" :width="'20px'" :heigth="'25px'"/>
+                <DownButton @click="sortDown()" :width="'20px'" :heigth="'25px'"/>
             </div>
             <div class="v_line"></div>
             <img src="@/assets/icons/filter/main.svg" alt="">
             <div class="input">
-                <InputText :width="'300px'"/>
+                <InputText :value="filterWord" @input_event="value=>filter(value)" :width="'300px'"/>
             </div>
         </div>
     </div>
@@ -17,14 +17,74 @@
 <script>
 export default{
     name:'FilterData',
+    mounted(){
+        if(this.right) this.ajastPanel()
+    },
     data(){
         return{
-            
+            outList:[],
+            sortVector: '',
+            filterWord:'',
         }
     },
     props:{
-
+        sortName: String,
+        sortype: {
+            type:String,
+            default: 'string'
+        },
+        list:{
+            type:Array,
+            default:[],
+        },
+        right:{
+            type:Boolean,
+            default:false,
+        }
     },
+    emits:['updated'],
+    methods:{
+        sortUp(){
+            this.sortVector = 'up'
+            this.outList = JSON.parse( JSON.stringify(this.list) )
+            this.outList.sort(this.compare)
+            this.$emit('updated', this.outList)
+        },
+        sortDown(){
+            this.sortVector = 'down'
+            this.outList = JSON.parse( JSON.stringify(this.list) )
+            this.outList.sort(this.compare)
+            this.$emit('updated', this.outList)
+        },
+        compare(a, b){
+            a = a[this.sortName]
+            b = b[this.sortName]
+            if(this.sortype=='number'){
+                a = Number(a)
+                b = Number(b)
+            }
+            if(this.sortype=='date'){
+                if(a=='-') a=0; 
+                if(b=='-') b=0;
+                a = new Date(a)
+                b = new Date(b)
+            }
+            let result
+            if (a > b) result = 1;
+            if (a == b) result = 0;
+            if (a < b) result = -1;
+            if(this.sortVector=='down') result=result*(-1)
+            return result
+        },
+        filter(value){
+            this.outList = JSON.parse( JSON.stringify(this.list) )
+            this.outList = this.outList.filter(item=>item[this.sortName].includes(value)) 
+            this.$emit('updated', this.outList)
+        },
+        ajastPanel(){
+            console.log('test',this.$refs.panel)
+        }
+    }
 
 }
 </script>
@@ -33,7 +93,7 @@ export default{
     .hover_effect{
         position: absolute;
         transform: translateY(-70px);
-        padding-bottom: 20px;
+        padding-bottom: 5px;
         visibility: hidden;
     }
 
