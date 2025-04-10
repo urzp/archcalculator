@@ -1,5 +1,5 @@
 <template>
-    <div class="profile">
+    <div class="profile" v-if="!show_user_projects">
         <div class="title-profile">
             <LeftButton @click="$emit('close')"/>
             <div class="name" >{{ text.Profile }}</div>
@@ -16,7 +16,7 @@
                         <div class="email-user">{{ user.email }}</div>
                         <div class="email-user">{{ user.phone }}</div>
                     </div>
-                    <div class="user-data">
+                    <div class="user-data" @click="show_user_projects=true">
                         <UserFeeld :title="'Projects:'" :value="user.projects" />
                         <UserFeeld :title="'Contracts:'" :value="user.contracts" />
                         <UserFeeld :title="'Bills:'" :value="user.bills" />
@@ -40,6 +40,7 @@
         </template>
         <div v-else class="load">{{ text.loading }}</div>
     </div>
+    <AdminUserProjects :user_id="user_id" :user_name="user.name" v-if="show_user_projects"  @close="show_user_projects=false"/>
 </template>
 
 <script>
@@ -55,6 +56,7 @@ export default{
     data(){
         return{
             loaded: true,
+            show_user_projects:false,
             user: {},
             oldPassword:'',
             newPassword:'',
@@ -207,7 +209,7 @@ export default{
 
     .user-data{
         margin-left: 50px;
-
+        cursor: pointer;
     }
 
     .user-data .name-user{
