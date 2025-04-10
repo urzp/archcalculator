@@ -5,6 +5,7 @@
             <div class="item_level_0 main_groupe">
                 <div class="title" @click="selection('Users')"><Marker :level="1"/> {{ text.Users + ': '}}<div class="count"> {{ Users }} </div></div>
                 <div class="title" @click="selection('Projects')"><Marker :level="1"/> {{ text.Projects + ': '}}<div class="count"> {{ Projects }} </div></div>
+                <div class="title" @click="selection('Bills')"><Marker :level="1"/> {{ text.Bills + ': '}}<div class="count"> {{ Bills }} </div></div>
                 <div class="title" @click="selection('HOAI')"><Marker :level="1"/> {{ text.HOAI_versions + ': '}} <div class="count"> {{ HOAI_versions }} </div></div>
                 <div class="title" @click="selection('Setings')"><Marker :level="1"/> {{ text.Setings }}</div>
             </div>
@@ -32,10 +33,12 @@ export default{
             HOAI_versions:'',
             Users:'',
             Projects:'',
+            Bills:'',
             text:{
                 HOAI_versions: text.adminSideBar.HOAI_versions,
                 Users: text.adminSideBar.Users,
                 Projects: text.adminSideBar.Projects,
+                Bills: text.adminSideBar.Bills,
                 Setings: text.adminSideBar.Setings,
             }           
         }
@@ -60,6 +63,7 @@ export default{
             this.HOAI_versions = data.HOAI_versions
             this.Users = data.users
             this.Projects = data.projects
+            this.Bills = data.bills
         },
         selection(value){
             this.$emit('selected_item', value)

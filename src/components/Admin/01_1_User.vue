@@ -1,6 +1,7 @@
 <template>
     <div class="profile">
         <div class="title-profile">
+            <LeftButton @click="$emit('close')"/>
             <div class="name" >{{ text.Profile }}</div>
         </div>
         <template v-if="loaded">
@@ -9,58 +10,32 @@
                     <div class="icon_hover_wrap">
                     <div v-if="!user.avatar" class="main_icon">{{ !user.name?'U':user.name[0] }}</div>
                     <div v-else  class="main_icon"><img :src="url_avatar" alt=""></div>
-                    <div class="wrap_icon_panel">
-                        <div class="icon_panel">
-                            <NewButton @click="selectAvatar()" :width="'45px'" :height="'35px'"/>
-                            <CloseButton @click="deleteAvatar()" width="45px" height="35px"/>
-                        </div>
-                    </div>
                     </div>
                     <div class="user-data">
                         <div class="name-user">{{ user.name }}</div>
                         <div class="email-user">{{ user.email }}</div>
-                        <form class="avatar_form" ref="avatar">
-                            <input ref="avatar_file" type="file" name="avatar" @change="sendAvatar()" accept=".pdf,.jpg,.svg">
-                        </form>
+                        <div class="email-user">{{ user.phone }}</div>
+                    </div>
+                    <div class="user-data">
+                        <UserFeeld :title="'Projects:'" :value="user.projects" />
+                        <UserFeeld :title="'Contracts:'" :value="user.contracts" />
+                        <UserFeeld :title="'Bills:'" :value="user.bills" />
                     </div>
                 </div>
-                <div class="button_part">
-                    <CloseButton @click="deleteUser()" width="95px" height="70px"/>
-                </div>
-            </div>
-            <div class="user_edit_panel">
-                <div class="user_data_edit">
-                    <EditUserFeeld :title="text.name" :userKey="'name'"/>
-                    <EditUserFeeld :title="text.email" :userKey="'email'"/>
-                    <EditUserFeeld :title="text.phone" :userKey="'phone'"/>
-                </div>
-                <div class="new_password">
-                    <EditPassword :title="text.old_password" @newValue="value=>setOldPassword(value)"/>
-                    <EditPassword :title="text.new_password" :errNewPasswords="errNewPasswords" @newValue="value=>setNewPassword(value)"/>
-                    <EditPassword :title="text.conform_password" :errNewPasswords="errNewPasswords" @newValue="value=>checkNewPassword(value)"/>
-                    <div class="send_panel">
-                        <div class="result_panel">
-                            <div v-if="sendingPasswords">{{ text.loading }}</div>
-                            <div v-if="success_Passwords">{{ text.Success }}</div>
-                            <div v-if="fall_Passwords">{{ text.fall }}</div>
-                        </div>
-                        <Button v-if="enableSend" width="150px" @click="sendPasswords()">{{ text.Save }}</Button>
-                    </div>    
-                </div>
             </div>
             <div class="user_data_panel">
-                <EditUserFeeld :title="text.GlobalID" :userKey="'GlobalID'" width="600px"/>
-                <EditUserFeeld :title="text.departmentName" :userKey="'departmentName'" width="600px"/>
-                <EditUserFeeld :title="text.postcode" :userKey="'postcode'" width="600px"/>
-                <EditUserFeeld :title="text.address" :userKey="'address'" width="600px"/>
-                <EditUserFeeld :title="text.сityName" :userKey="'cityName'" width="600px"/>
-                <EditUserFeeld :title="text.countryID" :userKey="'countryID'" width="600px"/>
+                <UserFeeld :title="text.GlobalID" :value="user.GlobalID" width="600px"/> 
+                <UserFeeld :title="text.departmentName" :value="user.departmentName" width="600px"/>
+                <UserFeeld :title="text.postcode" :value="user.postcode" width="600px"/>
+                <UserFeeld :title="text.address" :value="user.address" width="600px"/>
+                <UserFeeld :title="text.сityName" :value="user.cityName" width="600px"/>
+                <UserFeeld :title="text.countryID" :value="user.countryID" width="600px"/>
             </div>
             <div class="user_data_panel">
-                <EditUserFeeld :title="text.IBAN" :userKey="'IBAN'" width="600px"/>
-                <EditUserFeeld :title="text.BIC" :userKey="'BIC'" width="600px"/>
-                <EditUserFeeld :title="text.Institut" :userKey="'Institut'" width="600px"/>
-                <EditUserFeeld :title="text.USt_Id_Nr" :userKey="'USt'" width="600px"/>
+                <UserFeeld :title="text.IBAN" :value="user.IBAN" width="600px"/>
+                <UserFeeld :title="text.BIC" :value="user.BIC" width="600px"/>
+                <UserFeeld :title="text.Institut" :value="user.Institut" width="600px"/>
+                <UserFeeld :title="text.USt_Id_Nr" :value="user.USt" width="600px"/>
             </div>
         </template>
         <div v-else class="load">{{ text.loading }}</div>
@@ -71,10 +46,9 @@
 import { EventBus } from '@/servis/EventBus'
 import { global, user } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
-import { updatedProfile, logOut } from '@/components/Users/servis'
 import { text } from '@/servis/text.js'
 export default{
-    name: 'Profile',
+    name: 'AdminProfileUser',
     async mounted(){
         this.getData()
     },
@@ -119,87 +93,25 @@ export default{
     },
     computed:{
         url_avatar(){
-            let url = `${global.base_url}/users/user_${this.user.id}/avatar/${this.user.avatar}`
+            let url = this.user.avatar
             return url
         },
         enableSend(){
             return !!this.oldPassword&&!!this.newPassword&&!!this.checkPassword&&this.newPassword==this.checkPassword
+        },
+    },
+    props:{
+        user_id:{
+            type:[String, Number],
+            default: ''
         }
     },
+    emits:['close'],
     methods:{
         async getData(){
-            this.user = user
-        },
-        selectAvatar(){
-            this.$refs.avatar_file.click()
-        },
-        async sendAvatar(){
-            let data = new FormData(this.$refs.avatar)
-            let result = await apiData({typeData:'avatar', data }) 
-            this.$refs.avatar_file.value = ''
-            updatedProfile()
-        },
-        async deleteAvatar(){
-            this.$refs.avatar_file.value = ''
-            let data = new FormData(this.$refs.avatar)
-            let result = await apiData({typeData:'avatar', data }) 
-            updatedProfile()
-        },
-        async deleteUser(){
-            let router = this.$router
-            EventBus.emit('Popap:comfirm',{
-                title: text.UserServis.The_account_will_be_permanently_deleted,
-                action: async ()=>{
-                        let result = await apiData({typeData:'deleteUser' }) 
-                        if(result.success){
-                            logOut()
-                            router.push({ name: 'home' })
-                        }
-                    }
-                }
-            )
-        },
-        setOldPassword(value){
-            this.oldPassword = value
-            this.comfernPasswords()
-        },
-        setNewPassword(value){
-            this.newPassword = value
-            this.comfernPasswords()
-        },
-        checkNewPassword(value){
-            this.checkPassword = value
-            this.comfernPasswords()
-        },
-        comfernPasswords(){
-            this.errNewPasswords = false
-            if(!this.oldPassword||!this.newPassword||!this.checkPassword)  return false
-            if(this.newPassword!=this.checkPassword){
-                this.errNewPasswords = true
-                return false
-            }
-            return true
-        },
-        async sendPasswords(){
-            if(!this.enableSend) return false
-            this.sendingPasswords = true
-            this.success_Passwords = false
-            this.fall_Passwords = false
-            let data = {
-                oldPassword: this.oldPassword,
-                newPassword: this.newPassword,
-            }
-            let result = await apiData({typeData:'newPassword', data }) 
-            this.sendingPasswords = false
-            if(result.success){
-                this.success_Passwords = true
-            }else{
-                this.fall_Passwords = true
-            }
-            setTimeout(()=>{
-                this.success_Passwords = false
-                this.fall_Passwords = false
-            }, 10000)
+            let data =  await apiData({typeData:'adminProfilUserData',  id:this.user_id })
+            this.user = data.user
+            console.log(this.user.avatar)
         }
     }
 }
@@ -213,6 +125,7 @@ export default{
 
     .title-profile{
         margin-top: 60px;
+        display: flex;
         text-align: center;
         margin-bottom: 100px;
     }
@@ -227,15 +140,15 @@ export default{
         width: 100%;
         height: 130px;
         display: flex;
-
+        justify-content: center;
     }
 
     .prof_part{
-        width: 50%;
-        border-right: 1px solid #C0C0C0;
+        width: 65%;
         display: flex;
-        align-items: center;
+        justify-content: space-between;
         font-family: 'Raleway-Light';
+        align-items: center;
     }
 
     .prof_part .main_icon{

@@ -32,6 +32,7 @@ export let text = {
         HOAI_versions:'HOAI versions',
         Users:'Users',
         Projects:'Projects',
+        Bills:'Bills',
         Setings:'Setings',
     },
     sideBar:{

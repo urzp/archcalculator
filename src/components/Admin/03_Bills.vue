@@ -1,52 +1,40 @@
 <template>
-    <div class="wrap_admin_user" v-if="!show_user">
+    <div class="wrap_admin_user"  v-if="!show_user">
         <div class="main-title">
-            <div class="title">Users</div>
+            <div class="title">Bills</div>
         </div>
         <div class="table">
             <div class="header">
                 <div class="collum collum_1">ID
                     <FilterData sortName="id" sortype="number" :list="list" @updated="value=>filter(value)"/>
                 </div>
-                <div class="collum collum_2">Registration
-                    <FilterData sortName="dateCreate"  sortype="date" :list="list" @updated="value=>filter(value)"/>
+                <div class="collum collum_2">Date
+                    <FilterData sortName="created"  sortype="date" :list="list" @updated="value=>filter(value)"/>
                 </div>
-                <div class="collum collum_3">
-                    <div class="left">Email
-                        <FilterData sortName="email" :list="list" @updated="value=>filter(value)"/>
-                    </div>
-                    <div class="right">Confirmed
-                    </div>
+                <div class="collum collum_3">User Email
+                    <FilterData sortName="user" :list="list" @updated="value=>filter(value)"/>
                 </div>
                 <div class="collum collum_4">Name
                     <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
                 </div>
-                <div class="collum collum_5">Subscription
-                    <FilterData sortName="subscription"  sortype="date" right :list="list" @updated="value=>filter(value)"/>
+                <div class="collum collum_5">Name Project
+                    <FilterData sortName=""  right :list="list" @updated="value=>filter(value)"/>
                 </div>
-                <div class="collum collum_6">Projects
-                    <FilterData sortName="projects"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_7">Contracts
-                    <FilterData sortName="contracts"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_8">Bills
-                    <FilterData sortName="bills"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
+                <div class="collum collum_6">Link
+                    <FilterData sortName="downLoad_token"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
                 </div>
             </div>
             <div class="wrap_data" v-if="loaded">
-                <div class="data" v-for="item in filtredList" :key="item.id" @click="openUser(item.id)">
+                <div class="data" v-for="item in filtredList" :key="item.id">
                     <div class="collum collum_1">{{ item.id }}</div>
-                    <div class="collum collum_2">{{ item.dateCreate }}</div>
-                    <div class="collum collum_3">
-                        <div class="left">{{ item.email }}</div>
-                        <div class="right">{{ item.email_confirmed=='1'?'Y':' - ' }}</div>
-                    </div>
+                    <div class="collum collum_2">{{ item.created }}</div>
+                    <div class="collum collum_3" @click="openUser(item.user_id)" :class="{'no_pointer':item.user_id=='-1'}">{{ item.user }}</div>
                     <div class="collum collum_4">{{ item.name }}</div>
-                    <div class="collum collum_5">{{ item.subscription }}</div>
-                    <div class="collum collum_6">{{ item.projects }}</div>
-                    <div class="collum collum_7">{{ item.contracts }}</div>
-                    <div class="collum collum_8">{{ item.bills }}</div>
+                    <div class="collum collum_5">{{ item.name_project }}</div>
+                    <div class="collum collum_6">
+                        <a :href="setLink(item.id, item.downLoad_token)" v-if="!!item.downLoad_token" target="_blank">open</a>
+                        <div v-else>-</div>  
+                    </div>
                 </div>
             </div>
             <div v-else class="load">{{ text.Loading }}</div>
@@ -60,18 +48,18 @@ import { text } from '@/servis/text'
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
-    name:'AdminUsers',
+    name:'AdminBills',
     mounted(){
         this.initData()
         EventBus.on('AdminUsers:Update', this.initData)
     },
     data(){
         return{
-            show_user:false,
-            user_id:'',
             list:[],
             filtredList:[],
             loaded:false,
+            user_id:'',
+            show_user: false,
             text:{
                 Loading: text.Calc.Loading,
             }
@@ -80,9 +68,9 @@ export default{
     methods:{
         async initData(){
             this.loaded = false
-            let data = await apiData({typeData:'adminUserData'})
-            this.list = data.users
-            this.filtredList = data.users
+            let data = await apiData({typeData:'adminBillsData'})
+            this.list = data.projects
+            this.filtredList = data.projects
             this.loaded = true
         },
         filter(list){
@@ -90,8 +78,13 @@ export default{
             this.filtredList = list
         },
         openUser(id){
+            if(id=="-1") return false
             this.user_id = id
             this.show_user = true
+        }, 
+        setLink(id,token){
+            let url=`https://honorar.online?project=${id}&download_token=${token}`
+            return url
         }
     }
 }
@@ -141,28 +134,19 @@ export default{
         padding-left: 5px;
         padding-right: 5px;
         min-width: 300px;
-        display: flex;
-        justify-content: space-between;
     }
 
     .collum_4{
-        width: 240px;
+        width: 278px;
     }
 
     .collum_5{
         width: 200px;
+        text-align: left!important;
     }
 
     .collum_6{
-        min-width: 75px;
-    }
-
-    .collum_7{
-        min-width: 75px;
-    }
-
-    .collum_8{
-        min-width: 75px;
+        min-width: 130px;
     }
 
     .data .collum{
@@ -171,15 +155,29 @@ export default{
         cursor: pointer;
     }
 
-    .data .collum_4{
-        padding-left: 5px;
-        text-align: left;
-    }
-
     .data .collum_3{
         padding-left: 5px;
         padding-right: 30px;
-        justify-content: space-between;;
+        text-align: left;
+    }
+
+    .data .collum_1{
+        cursor: default!important;
+    }
+
+    .data .collum_2{
+        cursor: default!important;
+    }
+
+
+    .data .collum_4{
+        padding-left: 5px;
+        text-align: left;
+        cursor: default!important;
+    }
+
+    .data .collum_5{
+        cursor: default!important;
     }
 
     .header .collum:hover{
@@ -199,5 +197,7 @@ export default{
         font-size: 20px;
         font-family: 'Raleway-ExtraLight';
     }
-
+    .no_pointer{
+        cursor: default!important;
+    }
 </style>

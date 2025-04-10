@@ -27,7 +27,10 @@ import EditUserFeeld from './Users/EditUserFeeld.vue'
 import EditPassword from './Users/EditPassword.vue'
 //----------------------------AdminPanel-----------------------------
 import AdminUsers from './Admin/01_Users.vue'
+import AdminProfileUser from './Admin/01_1_User.vue'
+import UserFeeld from './Admin/01_2_UserFeeld.vue'
 import AdminProjects from './Admin/02_Projects.vue'
+import AdminBills from './Admin/03_Bills.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -122,6 +125,7 @@ import NewButton from './UI/Simples/NewBtn.vue'
 import UpdateBtn from './UI/Simples/UpdateBtn.vue'
 import CloseButton from './UI/Simples/CloseBtn.vue'
 import DeleteButton from './UI/Simples/DeleteBtn.vue'
+import LeftButton from './UI/Simples/LeftBtn.vue'
 import UpButton from './UI/Simples/UpBtn.vue'
 import DownButton from './UI/Simples/DownBtn.vue'
 import CalendatBtn from './UI/Simples/CalendatBtn.vue'
@@ -181,6 +185,10 @@ export default [
 
     AdminUsers,
     AdminProjects,
+    AdminBills,
+    
+    AdminProfileUser,
+    UserFeeld,
 
     CalcTitle,
     ProjBillHeader,
@@ -277,6 +285,7 @@ export default [
     DeleteButton,
     UpButton,
     DownButton,
+    LeftButton,
     CalendatBtn,
     Button,
     PastColumButton,
