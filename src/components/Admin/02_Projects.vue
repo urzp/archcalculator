@@ -8,19 +8,19 @@
                         <FilterData sortName="id" sortype="number" :list="list" @updated="value=>filter(value)"/>
                     </div>
                     <div class="collum collum_2">Date
-                        <FilterData sortName="dateCreate"  sortype="date" :list="list" @updated="value=>filter(value)"/>
+                        <FilterData sortName="created"  sortype="date" :list="list" @updated="value=>filter(value)"/>
                     </div>
                     <div class="collum collum_3">User Email
-                        <FilterData sortName="email" :list="list" @updated="value=>filter(value)"/>
+                        <FilterData sortName="user" :list="list" @updated="value=>filter(value)"/>
                     </div>
                     <div class="collum collum_4">Name Project
                         <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
                     </div>
                     <div class="collum collum_5">Status
-                        <FilterData sortName="subscription"  sortype="date" right :list="list" @updated="value=>filter(value)"/>
+                        <FilterData sortName="status"  sortype="date" right :list="list" @updated="value=>filter(value)"/>
                     </div>
                     <div class="collum collum_6">Link
-                        <FilterData sortName="projects"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
+                        <FilterData sortName="downLoad_token"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
                     </div>
                 </div>
                 <div class="wrap_data" v-if="loaded">

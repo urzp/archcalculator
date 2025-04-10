@@ -106,6 +106,7 @@ export default{
     }
 
     .wrap_filter{
+        width: 434px;
         padding: 4px;
         display: flex;
         column-gap: 5px;
