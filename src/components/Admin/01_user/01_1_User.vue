@@ -40,7 +40,7 @@
         </template>
         <div v-else class="load">{{ text.loading }}</div>
     </div>
-    <AdminUserProjects :user_id="user_id" :user_name="user.name" v-if="show_user_projects"  @close="show_user_projects=false"/>
+    <AdminUserProjects :user_id="2" :user_name="user.name" v-if="show_user_projects"  @close="show_user_projects=false"/>
 </template>
 
 <script>

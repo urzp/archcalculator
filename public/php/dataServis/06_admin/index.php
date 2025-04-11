@@ -8,6 +8,7 @@ if($isAdmin){
         case 'adminProjectData': include 'AdminProjectData.php'; break;
         case 'adminProfilUserData': include 'AdminProfilUserData.php'; break;
         case 'adminBillsData': include 'AdminBillsData.php'; break;
+        case 'adminUserProjects': include 'AdminUserProjects.php'; break;
     }
 
 }
