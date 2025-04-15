@@ -1,51 +1,91 @@
 <template>
-    <div class="wrap_admin_user"  v-if="!show_user">
-        <div class="main-title">
-            <LeftButton @click="$emit('close')"/>
-            <div class="title">Projects of {{ user_name }}</div>
+
+    <div class="main-title">
+        <LeftButton @click="$emit('close')"/>
+        <div class="title">Projects of {{ user_name }}</div>
+    </div>
+    <div class="table">
+        <div class="header">
+            <div class="collum collum_1">ID
+                <FilterData sortName="id" sortype="number" :list="list" @updated="value=>filter(value)"/>
+            </div>
+            <div class="collum collum_2">Date
+                <FilterData sortName="created"  sortype="date" :list="list" @updated="value=>filter(value)"/>
+            </div>
+            <div class="collum collum_3">Name Project
+                <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
+            </div>
+            <div class="collum collum_4">Status
+                <FilterData sortName="status" :list="list" @updated="value=>filter(value)"/>
+            </div>
+            <div class="collum collum_5">Bills
+                <FilterData sortName="bills_count"  right :list="list" @updated="value=>filter(value)"/>
+            </div>
+            <div class="collum collum_6">Link
+                <FilterData sortName="downLoad_token"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
+            </div>
         </div>
-        <div class="table">
-            <div class="header">
-                <div class="collum collum_1">ID
-                    <FilterData sortName="id" sortype="number" :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_2">Date
-                    <FilterData sortName="created"  sortype="date" :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_3">Name Project
-                    <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_4">Status
-                    <FilterData sortName="name" :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_5">Bills
-                    <FilterData sortName="status"  right :list="list" @updated="value=>filter(value)"/>
-                </div>
-                <div class="collum collum_6">Link
-                    <FilterData sortName="downLoad_token"  sortype="number" right :list="list" @updated="value=>filter(value)"/>
+        <div class="wrap_data" v-if="loaded">
+            <div class="data" v-for="item in filtredList" :key="item.id" @click="selected_project=item; filtredList_2=item.bills">
+                <div class="collum collum_1">{{ item.id }}</div>
+                <div class="collum collum_2">{{ item.created }}</div>
+                <div class="collum collum_3">{{ item.name }}</div>
+                <div class="collum collum_4">{{ item.status }}</div>
+                <div class="collum collum_5">{{ item.bills_count }}</div>
+                <div class="collum collum_6">
+                    <a :href="setLink(item.id, item.downLoad_token)" v-if="!!item.downLoad_token" target="_blank">open</a>
+                    <div v-else>-</div>  
                 </div>
             </div>
-            <div class="wrap_data" v-if="loaded">
-                <div class="data" v-for="item in filtredList" :key="item.id">
-                    <div class="collum collum_1">{{ item.id }}</div>
-                    <div class="collum collum_2">{{ item.created }}</div>
-                    <div class="collum collum_3">{{ item.name }}</div>
-                    <div class="collum collum_4">{{ item.status }}</div>
-                    <div class="collum collum_5">{{ item.bills }}</div>
-                    <div class="collum collum_6">
-                        <a :href="setLink(item.id, item.downLoad_token)" v-if="!!item.downLoad_token" target="_blank">open</a>
-                        <div v-else>-</div>  
-                    </div>
+        </div>
+        <div v-else class="load">{{ text.Loading }}</div>
+    </div>
+
+    <!-- ---------------------------------------bills----------------------------------------  -->
+
+    <div v-if="selected_project.bills_count>0" class="main-title">
+        <div class="title">Bills of {{ selected_project.name }}</div>
+    </div>
+    <div v-if="selected_project.bills_count>0" class="table">
+        <div class="header">
+            <div class="collum collum_1">ID
+                <FilterData sortName="id" sortype="number" :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+            <div class="collum collum_2">Date
+                <FilterData sortName="created"  sortype="date" :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+            <div class="collum collum_3">Name
+                <FilterData sortName="name" :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+            <div class="collum collum_4">Status
+                <FilterData sortName="locked" :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+            <div class="collum collum_5">Paid
+                <FilterData sortName="paid_date" sortype="date"  right :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+            <div class="collum collum_6">Link
+                <FilterData sortName="downLoad_token"  sortype="number" right :list="selected_project.bills" @updated="value=>filter_2(value)"/>
+            </div>
+        </div>
+        <div class="wrap_data" v-if="loaded">
+            <div class="data" v-for="item in filtredList_2" :key="item.id" >
+                <div class="collum collum_1">{{ item.id }}</div>
+                <div class="collum collum_2">{{ item.created }}</div>
+                <div class="collum collum_3">{{ item.name }}</div>
+                <div class="collum collum_4">{{ item.locked=="1"?'locked':'open' }}</div>
+                <div class="collum collum_5">{{ formatDate(item.paid_date) }}</div>
+                <div class="collum collum_6">
+                    <a :href="setLink(item.id, item.downLoad_token)" v-if="!!item.downLoad_token" target="_blank">open</a>
+                    <div v-else>-</div>  
                 </div>
             </div>
-            <div v-else class="load">{{ text.Loading }}</div>
         </div>
     </div>
-    <AdminProfileUser v-else :user_id="user_id" @close="show_user=false"></AdminProfileUser>
 </template>
 
 <script>
 import { text } from '@/servis/text'
+import { formatDate } from '@/servis/functions'
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
@@ -58,8 +98,9 @@ export default{
         return{
             list:[],
             filtredList:[],
+            filtredList_2:[],
             loaded:false,
-            show_user: false,
+            selected_project:'',
             text:{
                 Loading: text.Calc.Loading,
             }
@@ -82,6 +123,10 @@ export default{
             JSON.parse( JSON.stringify(list) )
             this.filtredList = list
         },
+        filter_2(list){
+            JSON.parse( JSON.stringify(list) )
+            this.filtredList_2 = list
+        },
         openUser(id){
             if(id=="-1") return false
             this.user_id = id
@@ -90,6 +135,9 @@ export default{
         setLink(id,token){
             let url=`https://honorar.online?project=${id}&download_token=${token}`
             return url
+        },
+        formatDate(value){
+           return formatDate(value)
         }
     }
 }
