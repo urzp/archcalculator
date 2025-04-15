@@ -58,8 +58,8 @@ export default {
   methods:{
     async init(){
       if(await this.use_link_project()){
-        if(!!this.$route.query.project) this.project_id = this.$route.query.project; this.statusBill=false
-        if(!!this.$route.query.bill) this.project_id = this.$route.query.bill; this.statusBill=true
+        if(!!this.$route.query.project) {this.project_id = this.$route.query.project; this.statusBill=false}
+        if(!!this.$route.query.bill) {this.project_id = this.$route.query.bill; this.statusBill=true}
         this.download_token = this.$route.query.download_token
       }else{
         let id = localStorage.getItem('OpendProject') 
@@ -71,7 +71,7 @@ export default {
       let id_download_project = this.$route.query.project
       let download_token = this.$route.query.download_token
       let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
-      return true// result.success
+      return result.success
     },
     openProject(id){
       this.project_id = id
