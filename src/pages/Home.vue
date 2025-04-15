@@ -68,9 +68,12 @@ export default {
     },
     async use_link_project(){
       if(!this.$route.query.download_token) return false
-      let id_download_project = this.$route.query.project
+      let type
+      let id_download_project
+      if(!!this.$route.query.project) {type='project'; id_download_project = this.$route.query.project}
+      if(!!this.$route.query.bill) {type='bill'; id_download_project = this.$route.query.bill }
       let download_token = this.$route.query.download_token
-      let result = await apiData({typeData:'isAvailableDownload',  data:{ id_download_project, download_token } })
+      let result = await apiData({typeData:'isAvailableDownload',  data:{type, id_download_project, download_token } })
       return result.success
     },
     openProject(id){

@@ -63,7 +63,9 @@ export default{
     },
     computed:{
         downLoad_link(){
-            return `https://honorar.online/download.php?project=${this.project_id}&download_token=${this.download_token}&type=pdf`
+            let type = 'project'
+            if(this.statusBill) type = 'bill'
+            return `https://honorar.online/download.php?${type}=${this.project_id}&download_token=${this.download_token}&type=pdf`
         },
         isLocked(){
             if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
