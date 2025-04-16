@@ -214,6 +214,7 @@ export default{
     .logo_bill img{
         width: 63px;
         height: 63px;
+        border-radius: 50%;
     }
 
     .light-text{

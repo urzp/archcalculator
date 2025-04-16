@@ -5,7 +5,7 @@
         <TotalTax :percent="tax" :finance="total_net" @updateItem="value=>updateTax(value)"/>
         <Total :value="total" />
     </Content_PartObject>
-    <TotalSummary  :value="total" :collapse = 'collapse' :billMode="billMode" />    
+    <TotalSummary  :value="total" :collapse = 'collapse' />    
 </template>
 
 <script>

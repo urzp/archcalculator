@@ -50,7 +50,8 @@ try {
     echo $result;
 }
 catch (Exception $e) {
-    echo'Error while generating the Factur-X :<pre>'.$e.'</pre>';
+    $dompdf->stream("{$project_name}.pdf");
+    //echo'Error while generating the Factur-X :<pre>'.$e.'</pre>';
 }
 
 ?>

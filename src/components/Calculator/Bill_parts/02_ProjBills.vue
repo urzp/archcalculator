@@ -57,7 +57,6 @@ export default{
     name: 'ProjBills',
     data(){
         return{
-            loaded: false,
             updated: true,
             showSelectData: false,
             SelectDataName: '',

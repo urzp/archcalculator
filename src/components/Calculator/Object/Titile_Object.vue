@@ -3,7 +3,7 @@
         <ToggleButton @switch_tg="(val)=>{this.$emit('switch_tg', val) }"/>
         <div v-if="isLocked" class="name" @click="checkLock()">{{ nameObject }}</div>
         <input v-else  class="title" :value="nameObject" @change="event => updateName(event.target.value)"/>
-        <CloseButton v-if="!isLocked" class="align-left" @click="deleteObject()"/>
+        <CloseButton v-if="!isLocked&&countObject>1" class="align-left" @click="deleteObject()"/>
     </div>   
 </template>
 
@@ -29,6 +29,11 @@ export default{
         isLocked(){
             if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
             return false
+        },
+        countObject(){
+            let result = 0
+            if(!!Project&&!!Project.objects) result = Project.objects.length
+            return result
         }
     },
     emits: ['switch_tg'],
