@@ -87,27 +87,18 @@ export default{
     emits:['edit_price'],
     methods:{
         validate(event, cent_section=false){
-            let position = event.target.selectionStart
             let val = event.target.value
-            let len = val.length
-            val = val.replaceAll('.','')
-            
-            
-            // if(/[^0-9]/g.test(val)){
-            //     event.target.value = val.toString().replace(/[^0-9]/g, '');
-            //     event.target.setSelectionRange(position, position)
-            // }
-            // if(cent_section){
-            //     let cent = event.target.value
-            //     if( cent.length > 2 ) {
-            //         event.target.value = cent.slice(0,-1)
-            //     }
-            // }
-            event.target.value = Number(val).toLocaleString('de-DE')
-            let dif_len = len - event.target.value.length
-            position = position - dif_len
-            console.log(position, dif_len)
-            event.target.setSelectionRange(position, position)
+            let position = event.target.selectionStart - 1
+            if(/[^0-9]/g.test(val)){
+                event.target.value = val.toString().replace(/[^0-9]/g, '');
+                event.target.setSelectionRange(position, position)
+            }
+            if(cent_section){
+                let cent = event.target.value
+                if( cent.length > 2 ) {
+                    event.target.value = cent.slice(0,-1)
+                }
+            }
         },
         edit_price(unit, cent){
             unit = unit.toString().replace(/[^0-9]/g, '');
