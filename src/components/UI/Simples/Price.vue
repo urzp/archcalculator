@@ -8,10 +8,19 @@
             </template>
         </template>
         <template v-else >
-            <input  type="text" class="unit-price" :value="price.unit" @change="event => edit_price( event.target.value, price.cent )" @input="event => { validate(event) }" @focus="event => { validate(event) }"/>
+            <input ref="input_unit" type="text" class="unit-price" 
+            :value="price.unit" 
+            @change="event => edit_price( event.target.value, price.cent )" 
+            @input="event => { validateUnit(event) }" 
+            @focus="event => { validateUnit(event) }"
+            @keydown="event=>{ focus_cent(event) }"/>
             <template v-if="!noCents&&typeCurrancy!='Hektar'">
             <div class="comma">,</div>
-            <input  type="number" max="99" min="0" class="cents" :value="price.cent"  @change="event => edit_price( price.unit, event.target.value )"  @input="event => { validate(event, true) }"/>      
+            <input ref="input_cent"   type="text" class="cents" 
+            :value="price.cent"  
+            @change="event => edit_price( price.unit, event.target.value )"  
+            @input="event => { validateCent(event) }"
+            @keydown="event=>{ focus_unit(event) }"/>      
             </template>
         </template>
         <div class="currency-sign" :class="{wide_sing:typeCurrancy!='€'}">{{ typeCurrancy }}</div>
@@ -86,28 +95,39 @@ export default{
     },
     emits:['edit_price'],
     methods:{
-        validate(event, cent_section=false){
+        validateUnit(event){
             let position = event.target.selectionStart
             let val = event.target.value
             let len = val.length
             val = val.replaceAll('.','')
-            
-            
-            // if(/[^0-9]/g.test(val)){
-            //     event.target.value = val.toString().replace(/[^0-9]/g, '');
-            //     event.target.setSelectionRange(position, position)
-            // }
-            // if(cent_section){
-            //     let cent = event.target.value
-            //     if( cent.length > 2 ) {
-            //         event.target.value = cent.slice(0,-1)
-            //     }
-            // }
+
+            if(/[^0-9]/g.test(val)){
+                val = val.toString().replace(/[^0-9]/g, '');
+                event.target.value = val
+                event.target.setSelectionRange(position-1, position-1)
+            }
             event.target.value = Number(val).toLocaleString('de-DE')
             let dif_len = len - event.target.value.length
             position = position - dif_len
-            console.log(position, dif_len)
             event.target.setSelectionRange(position, position)
+        },
+        validateCent(event){
+            let position = event.target.selectionStart
+            let val = event.target.value
+            let len = val.length
+            if(/[^0-9]/g.test(val)){
+                val = val.toString().replace(/[^0-9]/g, '');
+                event.target.value = val
+                event.target.setSelectionRange(position-1, position-1)
+                len--;
+            }
+            if( len > 2 ) { 
+                let val_arr = val.split('')
+                if(position==3) val = val_arr[0] + val_arr[2]
+                if(position==2) val = val_arr[1] + val_arr[2]
+                if(position==1) val = val_arr[0] + val_arr[2]
+                event.target.value = val
+            }                       
         },
         edit_price(unit, cent){
             unit = unit.toString().replace(/[^0-9]/g, '');
@@ -134,6 +154,24 @@ export default{
         },
         checkLock(){
             checkLock()
+        },
+        focus_cent(event){
+            let position = event.target.selectionStart
+            let len =  event.target.value.length
+            let  key = event.key
+            if(key==','||key=='.'){
+                this.$refs.input_cent.focus()
+            }
+            if(key=='ArrowRight'&&len==position){
+                this.$refs.input_cent.focus()
+            }
+        },
+        focus_unit(event){
+            let position = event.target.selectionStart
+            let  key = event.key
+            if(key=='ArrowLeft'&&position==0){
+                this.$refs.input_unit.focus()
+            }
         }
     }
 }
