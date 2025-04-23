@@ -17,6 +17,12 @@
 
 export default {
     name: 'AdminPage',
+    mounted(){
+      document.body.classList.add('admin_page')
+    },
+    unmounted(){
+      document.body.classList.remove('admin_page')
+    },
     data(){
         return {
           AdminSiteBar: 'Users',
@@ -25,6 +31,12 @@ export default {
 
 }
 </script>
+
+<style>
+  .admin_page{
+    background-color: #fffbeb;
+  }
+</style>
 
 <style scoped>
   .page-wrap{

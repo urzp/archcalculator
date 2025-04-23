@@ -81,7 +81,7 @@ export default{
     position: fixed;
     left: -355px;
     z-index: 100;
-    background-color: #D9D9D9;
+    background-color: #e0d6ad;
     box-shadow: 8px 0 8px rgba(0, 0, 0, 0.25);
     transition: transform 0.5s;
     color: #464646;

@@ -118,7 +118,7 @@ export default{
 
     .header .collum{
         text-align: center;
-        background-color: #f8f8f8;
+        background-color: #f0e9d0;
         border-radius: 2px;
     }
 
