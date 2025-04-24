@@ -3,13 +3,14 @@
         <!-- <div class="date" >
             {{ formatDate(value) }}
         </div> -->
-        <input v-if="!!value" type="date" :value="formatDate(value)" @blur="event=>setNewDate(new Date( event.target.value ) )">
-        <div v-else class="date">-</div>
-        <div class="wrap_button">
+        <input v-if="!!value&&!isShowProject" type="date" :value="formatDate(value)" @blur="event=>setNewDate(new Date( event.target.value ) )">
+        <div v-if="!!value&&isShowProject">{{ formatDate(value) }}</div>
+        <div v-if="!value" class="date">-</div>
+        <div v-if="!isShowProject" class="wrap_button">
             <CalendatBtn :height="'25px'" :width="'15px'" :width_img="'19px'" @click.stop="begin_edit()"/>
         </div>
     </div>
-    <div v-if="showCalendar" class="selectData" @click.stop="">
+    <div v-if="showCalendar&&!isShowProject" class="selectData" @click.stop="">
         <div class="wrap_calendar">
             <Calendar 
                 popap :openMonth="openDate" :selectDay="openDate" 
@@ -36,7 +37,12 @@ export default{
         openDate(){
             if(!this.value) return new Date()
             return new Date(this.value)
-        }   
+        },     
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            return result
+        },
     },
     methods:{
         formatDate(date){

@@ -49,6 +49,7 @@ export  default{
         isShowProject(){
             let result = false
             if(!!this.$route.query&&!!this.$route.query.project) result = true
+            if(!!this.$route.query&&!!this.$route.query.bill) result = true
             return result
         }
     },

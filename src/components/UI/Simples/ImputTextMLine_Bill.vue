@@ -1,6 +1,6 @@
 <template>
     <div class="wrap-edit" @click.stop>
-        <textarea  
+        <textarea  v-if="!isShowProject"
             ref="thisinput" 
             rows="3"
             type="text"  
@@ -10,7 +10,8 @@
             @focus="edit=true"
             @blur="edit=false"
             ></textarea>
-        <div v-if="edit" class="panel">
+        <div v-else>{{ value }}</div>
+        <div v-if="edit&&!isShowProject" class="panel">
             <UpdateBtn v-if="!noUpdate"  class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
@@ -31,6 +32,13 @@ export default{
             id:null,
             edit:false,
         }
+    },
+    computed:{
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            return result
+        },
     },
     props:{
         value:{

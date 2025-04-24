@@ -1,6 +1,6 @@
 <template>
     <div class="wrap-edit" @click.stop>
-        <input  
+        <input  v-if="!isShowProject"
             ref="thisinput" 
             type="text"  
             :value="!value?'-':value"
@@ -8,7 +8,8 @@
             @focus="edit=true"
             @blur="edit=false"
         >
-        <div v-if="edit&&!noUpdate" class="panel">
+        <div v-else>{{ !value?'-':value }}</div>
+        <div v-if="edit&&!noUpdate&&!isShowProject" class="panel">
             <UpdateBtn v-if="!noUpdate" class="button" width="35px" height="28px" @click="set_default()"/>
         </div>
     </div>
@@ -30,7 +31,12 @@ export default{
             let result  = '35px'
             if(this.noUpdate) result = '0'
             return result
-        } 
+        },        
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            return result
+        },
     },
     props:{
         value:{
