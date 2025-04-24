@@ -6,7 +6,7 @@
             <Percent input_type :value = "data.percent" @edit_value = "procent=>setProcent(procent)"/>
         </div>
         <div  class="select-list" >
-            <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
+            <Select_List v-if="!isShowProject" :data="data" stopEventBus @selected="(data)=>select(data)"/>
         </div>
     </div>
 </template>
@@ -44,6 +44,13 @@ export  default{
     props:{
         id_paragraph:[String, Number],
         object_id:[String,Number],
+    },
+    computed:{
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.project) result = true
+            return result
+        }
     },
     emits:['selected'],
     methods:{

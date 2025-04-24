@@ -5,7 +5,7 @@
             <div class="title">{{ text.Honorarzone }}</div>
             <div class="value">{{ data.value }}</div>
             <div class="select-list" >
-                <Select_List :data="data" stopEventBus @selected="(data)=>select(data)"/>
+                <Select_List v-if="!isShowProject" :data="data" stopEventBus @selected="(data)=>select(data)"/>
             </div>
         </div>
         <div v-show="!collapse_detals" class="detal-list">
@@ -59,6 +59,13 @@ export  default{
         usePoints(newValue, oldValue){
             if(oldValue==='') return false
             this.updateProjectParagraphData()
+        }
+    },
+    computed:{
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.project) result = true
+            return result
         }
     },
     emits:['selected'],

@@ -2,12 +2,14 @@
     <div class="title-project" >
         <!-- <div class="name" >{{ project_name }}</div> -->
         <template v-if="!bill_status">
-        <input type="text"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)"/>
+        <input  type="text" v-if="!isShowProject"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)" @click="checkLock()"/>
+        <div  v-else  class="name">{{ project_name }}</div>
         <div class="date">{{ created }}</div>
         <div class="discription">
             <!-- <div class="title_discription">Description:</div> -->
             <div class="content_discription">
-                <ImputTextMLine width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)"/>
+                <ImputTextMLine v-if="!isShowProject"  width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)" @click="checkLock()"/>
+                <div v-else>{{ discription  }}</div>
             </div>
         </div>
         <div v-if="login&&!no_full_inf&&status_project!='calc'" class="customer">
@@ -45,6 +47,7 @@ import { Project } from '@/servis/projectData';
 import {  formatDate } from '@/servis/functions.js'
 import {  updateProject } from '@/servis/projectData.js'
 import { global } from '@/servis/globalValues.js'
+import { checkLock } from '@/servis/projectData';
 import { text } from '@/servis/text.js'
 export default{
     name: 'CalcTitle',
@@ -64,6 +67,11 @@ export default{
         }
     },
     computed:{
+        isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.project) result = true
+            return result
+        },
         project_name(){
             let result = ''
             if(!!this.project&&!!this.project.name){ result = this.project.name }
@@ -154,6 +162,9 @@ export default{
             if(!this.project.customer) this.project.customer = {}
             this.project.customer[name_feeld] = value
             updateProject()
+        },
+        checkLock(){
+            checkLock()
         },
     }
 
