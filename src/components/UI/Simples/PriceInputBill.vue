@@ -3,7 +3,7 @@
         <div v-if="!edit" class="price" @click="editStart()">{{ price_unit }}, <span>{{ price_cent }} {{ typeCurrancy }}</span></div>
         <div v-else class="edit_block">
             <div class="wrap_imput">
-                <input  type="text" class="unit-price"  ref="thisinput" :value="value" @change="event => edit_price( event )" />                  
+                <input  type="text" class="unit-price"  ref="thisinput" :value="price_unit" @change="event => edit_price( event )" />                  
                 <div class="currancy">{{ typeCurrancy }}</div>
             </div>
             <div class="panel" v-if="!noPanel">
@@ -40,6 +40,10 @@ export default{
         bg_input_color:{
             type:String,
             default:'#ebebeb',
+        },
+        lock:{
+            type:[Boolean, String],
+            default: false,
         }
     },    
     computed:{
@@ -66,8 +70,13 @@ export default{
             setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
         },
         edit_price(event){
-            let value = event.target.value
-            this.$emit('editPrice', value)
+            let position = event.target.selectionStart
+            let val = event.target.value
+            let len = val.length
+            val = val.replaceAll('.','')
+
+            console.log(val)
+            this.$emit('editPrice', val)
         }
     },
 }

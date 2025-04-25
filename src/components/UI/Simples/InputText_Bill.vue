@@ -35,6 +35,8 @@ export default{
         isShowProject(){
             let result = false
             if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            if(this.lock==true) result = true
+            if(this.lock=='1') result = true
             return result
         },
     },
@@ -62,6 +64,10 @@ export default{
         ajast_top:{
             type:String,
             default:'0px',
+        },
+        lock:{
+            type:[Boolean, String],
+            default: false,
         }
     },
     emits:['submit_event', 'setDefault'],

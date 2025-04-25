@@ -20,6 +20,10 @@ export default{
             type: String,
             default: '€',
         },
+        lock:{
+            type:[Boolean, String],
+            default: false,
+        }
     },    
     computed:{
         price_unit(){

@@ -30,7 +30,11 @@ export default{
         }
     },
     props:{
-        value:[String, Date]
+        value:[String, Date],
+        lock:{
+            type:[Boolean, String],
+            default: false,
+        }
     },
     emits:['editValue'],
     computed:{
@@ -41,6 +45,8 @@ export default{
         isShowProject(){
             let result = false
             if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            if(this.lock==true) result = true
+            if(this.lock=='1') result = true
             return result
         },
     },
