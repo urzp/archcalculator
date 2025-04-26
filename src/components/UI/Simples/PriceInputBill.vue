@@ -3,7 +3,15 @@
         <div v-if="!edit" class="price" @click="editStart()">{{ price_unit }}, <span>{{ price_cent }} {{ typeCurrancy }}</span></div>
         <div v-else class="edit_block">
             <div class="wrap_imput">
-                <input  type="text" class="unit-price"  ref="thisinput" :value="price_unit" @change="event => edit_price( event )" />                  
+                <input  type="text" class="unit-price"  ref="input_unit" 
+                :value="price_unit" 
+                @input="event => edit_price( event )" 
+                @keydown="event=>{ focus_cent(event) }"/>
+                <div class="comma">,</div>
+                <input ref="input_cent"   type="text" class="cents" 
+                    :value="price_cent"  
+                    @input="event => { validateCent(event) }"
+                    @keydown="event=>{ focus_unit(event) }"/>                      
                 <div class="currancy">{{ typeCurrancy }}</div>
             </div>
             <div class="panel" v-if="!noPanel">
@@ -67,7 +75,7 @@ export default{
     methods:{
         editStart(){
             this.edit = true
-            setTimeout( ()=>{ this.$refs.thisinput.focus() }, 300);
+            setTimeout( ()=>{ this.$refs.input_unit.focus() }, 300);
         },
         edit_price(event){
             let position = event.target.selectionStart
@@ -75,8 +83,52 @@ export default{
             let len = val.length
             val = val.replaceAll('.','')
 
-            console.log(val)
+            if(/[^0-9]/g.test(val)){
+                val = val.toString().replace(/[^0-9]/g, '');
+                event.target.value = val
+                event.target.setSelectionRange(position-1, position-1)
+            }
+            event.target.value = Number(val).toLocaleString('de-DE')
+            let dif_len = len - event.target.value.length
+            position = position - dif_len
+            event.target.setSelectionRange(position, position)
             this.$emit('editPrice', val)
+        },
+        validateCent(event){
+            let position = event.target.selectionStart
+            let val = event.target.value
+            let len = val.length
+            if(/[^0-9]/g.test(val)){
+                val = val.toString().replace(/[^0-9]/g, '');
+                event.target.value = val
+                event.target.setSelectionRange(position-1, position-1)
+                len--;
+            }
+            if( len > 2 ) { 
+                let val_arr = val.split('')
+                if(position==3) val = val_arr[0] + val_arr[2]
+                if(position==2) val = val_arr[1] + val_arr[2]
+                if(position==1) val = val_arr[0] + val_arr[2]
+                event.target.value = val
+            }                       
+        },
+        focus_cent(event){
+            let position = event.target.selectionStart
+            let len =  event.target.value.length
+            let  key = event.key
+            if(key==','||key=='.'){
+                this.$refs.input_cent.focus()
+            }
+            if(key=='ArrowRight'&&len==position){
+                this.$refs.input_cent.focus()
+            }
+        },
+        focus_unit(event){
+            let position = event.target.selectionStart
+            let  key = event.key
+            if(key=='ArrowLeft'&&position==0){
+                this.$refs.input_unit.focus()
+            }
         }
     },
 }
@@ -95,6 +147,12 @@ export default{
         font-size: medium;
     }
 
+    .cents{
+        font-size: medium;
+        text-align: center;
+        width: 23px;
+    }
+
     .edit_wrap{
         position: relative;
         z-index: 100;
@@ -102,6 +160,7 @@ export default{
 
     .edit_block{
         display: flex;
+        width: 153px;
     }
 
     .wrap_imput{
@@ -131,6 +190,13 @@ export default{
     .edit_wrap{
         position: relative;
         z-index: 100;
+    }
+
+    .currancy{
+        color: inherit;
+        font-size: inherit;
+        font-family: 'DroidSans';
+        text-align: inherit;      
     }
 
     .bg_for_close{
