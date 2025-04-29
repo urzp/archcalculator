@@ -32,6 +32,7 @@
             </div>
         </div>
     </div>
+    <div v-if="config.open" class="close_panel" @click=" config.open=false "></div>
 </template>
 
 <script>
@@ -175,5 +176,11 @@ export default{
     margin-bottom: 15px;
 }
 
-
+.close_panel{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
 </style>

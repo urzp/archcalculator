@@ -7,7 +7,8 @@
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
                 <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
-                <div class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
+                <div v-if="false" class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
+                <div class="lastBill"  @click.stop="openLastBill()">{{ text.lastBill }}</div>
                 <div class="bills_list" @click="openBills()">{{ text.bills }} </div>
         </div>
 </template>
@@ -17,6 +18,7 @@ import {text} from '@/servis/text'
 import {dateToStringNoTime} from '@/servis/functions'
 import { EventBus } from '@/servis/EventBus'
 import {projectToBill} from '@/servis/projectData'
+import { Project } from '@/servis/projectData.js'
 export default{
     name: 'Item_level_1',
     data(){
@@ -27,6 +29,7 @@ export default{
                 from: text.sideBar.from,
                 contract: text.sideBar.contract,
                 newBill: text.sideBar.newBill,
+                lastBill: text.sideBar.lastBill,
                 bills: text.sideBar.bills,
             },
             showBills: false,
@@ -90,6 +93,12 @@ export default{
         async openBills(){
             EventBus.emit('Project:openProject', this.project_data.id)
             EventBus.emit('MenuProjects:showBills')
+        },
+        async openLastBill(){
+            let id 
+            if(!!Project.bills&&!!Project.bills.length&&Project.bills.length>0) id = Project.bills[Project.bills.length-1].id
+            if(!!id) EventBus.emit('Project:openBill', id)
+            
         },
         async newBill(){
            let new_id_bill = await projectToBill(this.project_data.id)

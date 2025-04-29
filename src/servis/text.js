@@ -53,7 +53,8 @@ export let text = {
         from_yestoday: 'von gestern',
         from: 'vom',
         contract: 'Vertrag',
-        newBill: 'Rechnug stellen',
+        newBill: 'Neue Rechnug',
+        lastBill: 'Rechnug stellen',
         bills: 'Rechnungen',
 
     },
