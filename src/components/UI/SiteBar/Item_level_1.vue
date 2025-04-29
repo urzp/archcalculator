@@ -7,8 +7,8 @@
         </div>
         <div v-if="bills&&showBills" class="item_level_1 bills">
                 <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
-                <div v-if="false" class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
-                <div class="lastBill"  @click.stop="openLastBill()">{{ text.lastBill }}</div>
+                <div v-if="!lastBilData" class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
+                <div v-if="!!lastBilData" class="lastBill"  @click.stop="openLastBill()">{{ text.lastBill }}</div>
                 <div class="bills_list" @click="openBills()">{{ text.bills }} </div>
         </div>
 </template>
@@ -78,6 +78,18 @@ export default{
             let result = 1
             if(this.is_level_2) result = 0
             return result
+        },
+        lastBilData(){
+            let result = false
+            if(!!Project.bills&&!!Project.bills.length&&Project.bills.length>0) result = Project.bills[Project.bills.length-1]
+            return result
+        },
+        permission_new_bill(){
+            let result = false
+            if(!!this.lastBilData){
+                if(this.lastBilData.locked = '1') result = true
+            }
+            return result
         }
     },
     methods:{
@@ -95,15 +107,12 @@ export default{
             EventBus.emit('MenuProjects:showBills')
         },
         async openLastBill(){
-            let id 
-            if(!!Project.bills&&!!Project.bills.length&&Project.bills.length>0) id = Project.bills[Project.bills.length-1].id
-            if(!!id) EventBus.emit('Project:openBill', id)
-            
+            if(!!this.lastBilData){
+                EventBus.emit('Project:openBill', this.lastBilData.id)
+            }
         },
         async newBill(){
            let new_id_bill = await projectToBill(this.project_data.id)
-           console.log('id_new bill', new_id_bill)
-           //EventBus.emit('MenuProjects:showBills')
            EventBus.emit('Project:openBill', new_id_bill)
         }
     }

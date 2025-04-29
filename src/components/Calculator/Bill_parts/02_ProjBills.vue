@@ -41,7 +41,8 @@
                 </div>
             </div>
             <div v-if="!updated" class="load update">{{ text.Loading }}</div>
-            <NewButton class="newButton_bottom_list" @click.stop="newBill()" width="150px" height="30px" width_img="10px"/>
+            <NewButton v-if="permission_new_bill" class="newButton_bottom_list" @click.stop="newBill()" width="150px" height="30px" width_img="10px"/>
+            <NewButton v-else class="newButton_bottom_list not_available" width="150px" height="30px" width_img="10px"/>
         </div>
     </div>
     <div v-else class="load">{{ text.Loading }}</div>
@@ -85,6 +86,17 @@ export default{
         loaded(){
             let result = false
             if(!!this.list) result = true
+            return result
+        },
+        lastBilData(){
+            let result = false
+            if(!!Project.bills&&!!Project.bills.length&&Project.bills.length>0) result = Project.bills[Project.bills.length-1]
+            return result
+        },
+        permission_new_bill(){
+            let result = false
+            if(!!this.lastBilData&&this.lastBilData.locked == '1') result = true 
+            if(!this.lastBilData) result = true 
             return result
         }
     },
@@ -367,6 +379,11 @@ export default{
 
     .checkbox img{
         width: 25px;
+    }
+
+    .not_available{
+        opacity: 0.3;
+        cursor:not-allowed!important;
     }
  
 </style>

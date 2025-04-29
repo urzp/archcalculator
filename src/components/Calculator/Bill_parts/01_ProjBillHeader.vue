@@ -1,4 +1,5 @@
 <template>
+    <div v-if="false&&!isShowProject" class="back"><LeftButton @click="showBills()"/></div>
     <div class="bill_header">
         <div class="top_row">
             <div class="name_user light-text">
@@ -84,6 +85,7 @@
 
 <script>
 import { global, user } from '@/servis/globalValues.js'
+import { EventBus } from '@/servis/EventBus'
 import { Bills, saveBill, setPaid } from '@/servis/projectBill.js'
 import { Project, updateProject } from '@/servis/projectData.js'
 export default{
@@ -163,7 +165,14 @@ export default{
             let result = '-'
             if(!!this.actualBill&&!!this.actualBill.greeting_phrase) result = this.actualBill.greeting_phrase
             return result            
-        }
+        },       
+         isShowProject(){
+            let result = false
+            if(!!this.$route.query&&!!this.$route.query.bill) result = true
+            if(this.lock==true) result = true
+            if(this.lock=='1') result = true
+            return result
+        },
     },
     methods:{
         async update_value(value, name_value){
@@ -194,6 +203,9 @@ export default{
             if(selector=='bis') Project.project.payment_date.bis = date
             if(selector=='created') Project.project.created = date
             updateProject()
+        },
+        showBills(){
+            EventBus.emit('MenuProjects:showBills')
         }
     }
 }
@@ -201,6 +213,9 @@ export default{
 </script>
 
 <style scoped>
+    .back{
+        width: 55px;
+    }
     .bill_header{
         font-size: 20px;
         text-align: left;
