@@ -37,6 +37,7 @@ export  default{
         rate:[Number,String],
         type_rate:String,
         price_rate:[Number,String],
+        total_objects: Number,
     },
     emits:['updateItem'],
     computed:{
@@ -65,6 +66,7 @@ export  default{
             this.$emit('deleteItem',this.id)
         },
         updateType(value){
+            if(value=="%"){ this.updatePriceRate(this.total_objects) }
             value = {id:this.id, name:'type_rate', value}
             this.$emit('updateItem',value)
         }   

@@ -9,6 +9,7 @@
         :rate="item.rate"
         :price_rate="item.price_rate"
         :type_rate="item.type_rate"
+        :total_objects="total_objects"
         @deleteItem="id=>deleteItem(id)"
         @updateItem = "data=>updateItem(data)"
         />
