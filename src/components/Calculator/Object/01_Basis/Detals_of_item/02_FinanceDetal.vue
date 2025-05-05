@@ -36,14 +36,14 @@
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row">
-                    <div class="name_item left_gap">{{ `${text.hiervon_zu_100_anrechenbar} ${summ_other}€)` }}</div>
+                    <div class="name_item left_gap">{{ `${text.hiervon_zu_100_anrechenbar} ${summ_other.toLocaleString('de-DE')}€)` }}</div>
                     <div class="imput_calc"><Price font_size_unit="16px" :value="until_25_per"/></div>
                     <div class="percent">100%</div>
                     <div class="output_calc"><Price font_size_unit="16px" :value="until_25_per"/></div>
                     <div class="total_calc"></div>             
                 </div>
                 <div class="row">
-                    <div class="name_item left_gap">{{ `${text.hiervon_zu_50_anrechenbar} ${summ_other}€)` }}</div>
+                    <div class="name_item left_gap">{{ `${text.hiervon_zu_50_anrechenbar} ${summ_other.toLocaleString('de-DE')}€)` }}</div>
                     <div class="imput_calc"><Price font_size_unit="16px" :value="after_25_per"/></div>
                     <div class="percent">50%</div>
                     <div class="output_calc"><Price font_size_unit="16px" :value="after_25_per*0.5"/></div>

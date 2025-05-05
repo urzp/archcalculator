@@ -186,7 +186,7 @@ export let text = {
             of_which_other_eligible_costs:'hiervon sonstige anrechenbare Kosten',
             costs_that_can_be_charged_as_a_result_of_this:'hiervon bedingt anrechenbare Kosten',
             hiervon_zu_100_anrechenbar:'hiervon zu 100% anrechenbar (über 25% von',
-            hiervon_zu_50_anrechenbar:'hiervon zu 50% anrechenbar (über 25% von',
+            hiervon_zu_50_anrechenbar:'hiervon zu 50% anrechenbar (bis 25% von',
             total_non_allowable_costs:'Summe nicht anrechenbare Kosten',
             Total_eligible_costs_other:'Summe der "sonstigen" anrechenbaren Kosten: ',
         },
