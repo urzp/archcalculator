@@ -4,12 +4,12 @@
         <h3>Angaben gemäß § 5 TMG</h3>
         <p>HONORAR.online<br>
             c/o <a href="http://faar.studio/">FAAR.studio</a><br>
-            Viktor Filimonow Dipl. Ing. (FH) Architekt<br>
+            Viktor Peters Dipl. Ing. (FH) Architekt<br>
             Plinganserstraße 150<br>
             81369 München, Deutschland<br>
         </p>
         <h3>Vertreten durch:</h3>
-        <p>Viktor Filimonow</p>
+        <p>Viktor Peters</p>
         <h3>Kontakt:</h3>
         <p>Telefon: 0049 176 10505505<br>
             E-Mail: mail @ honorar.online<br>
