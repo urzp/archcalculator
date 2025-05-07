@@ -39,29 +39,6 @@ export default{
         color: #2c3e50;
     }
 
-    .content{
-        margin-top: 40px;
-        font-size: 16px;
-        font-family: 'Raleway-Light';
-        color: #2c3e50;
-    }
-  
-    h1{
-        text-align: center;
-        font-family: 'Raleway-Light';
-        font-size: 36px;
-        margin-bottom: 30px;
-    }
-    h3{
-        font-size: 20px;
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
 
-    p, li {
-        padding-left: 30px;
-        font-size: 18px;
-        color: #636363;
-    }
 
 </style>
