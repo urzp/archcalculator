@@ -7,6 +7,15 @@
                 <div class="title" @click="selection('Projects')"><Marker :level="1"/> {{ text.Projects + ': '}}<div class="count"> {{ Projects }} </div></div>
                 <div class="title" @click="selection('Bills')"><Marker :level="1"/> {{ text.Bills + ': '}}<div class="count"> {{ Bills }} </div></div>
                 <div class="title" @click="selection('HOAI')"><Marker :level="1"/> {{ text.HOAI_versions + ': '}} <div class="count"> {{ HOAI_versions }} </div></div>
+                
+                <div class="title" @click="config.pages=!config.pages"><Marker :level="0"/>Pages</div>
+                <div v-if="config.pages" class="content">
+                    <Item_level_1 :title="'Impressum'" @click="selection('Page_Impressum')" />
+                    <Item_level_1 :title="'Datenschutz'"  />
+                    <Item_level_1 :title="'Cookie Einstellungen'"  />
+                    <Item_level_1 :title="'Kontakt'"  />
+                </div>
+                
                 <div class="title" @click="selection('Setings')"><Marker :level="1"/> {{ text.Setings }}</div>
             </div>
         </div>
@@ -29,6 +38,7 @@ export default{
             config:{
                 open: true,
                 main_groupe: true,
+                pages:false,
             }, 
             HOAI_versions:'',
             Users:'',
@@ -66,6 +76,7 @@ export default{
             this.Bills = data.bills
         },
         selection(value){
+            EventBus.emit('Footer:selectMain')
             this.$emit('selected_item', value)
         }
     }
