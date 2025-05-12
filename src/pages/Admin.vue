@@ -44,7 +44,7 @@ export default {
         this.scrollUp()
       },
       scrollUp(){
-        this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
+        if(this.$refs.to_scroll) this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
       }
     }
 

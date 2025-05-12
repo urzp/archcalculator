@@ -35,21 +35,12 @@
 </template>
 
 <script>
-import { apiData } from '@/servis/apiData.js'
 export default {
     name: 'Impressum',
-    mounted(){
-        this.init()
-    },
     data(){
         return{
-            content:'',
+
         }
-    },
-    methods:{
-        async init(){
-            let data = await apiData({typeData:'PagesInfRead', name:'impressum'})
-        },
     }
 }
 
