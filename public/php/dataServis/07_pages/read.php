@@ -3,7 +3,7 @@
 $mysql = $mysql_calc;
 
 $name = $rq_data ->  name;
-//$name = real_escape_string($name);
+$name = $mysql->real_escape_string($name);
 $selector = "`name` = '$name'";
 
 $data = crud_read('pages_inf', "*", $selector);
