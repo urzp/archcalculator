@@ -7,9 +7,8 @@
       <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :statusBill="statusBill" :download_token="download_token"></Calculator>
       <ProjBills v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></ProjBills>
     </div>
-    <div v-else class="veiews">
-        <Impressum v-if="selectedView=='impressum'"/>
-        <Datenschutz v-if="selectedView=='datenschutz'" />
+    <div v-show="!showMain" class="veiews">
+        <PageInf :namePage="selectedView"/>
     </div>
     <Footer></Footer>
   </div>

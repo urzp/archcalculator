@@ -10,10 +10,12 @@
                 
                 <div class="title" @click="config.pages=!config.pages"><Marker :level="0"/>Pages</div>
                 <div v-if="config.pages" class="content">
-                    <Item_level_1 :title="'Impressum'" @click="selection('Page_Impressum')" />
-                    <Item_level_1 :title="'Datenschutz'"  />
-                    <Item_level_1 :title="'Cookie Einstellungen'"  />
-                    <Item_level_1 :title="'Kontakt'"  />
+                    <Item_level_1 :title="'Impressum'" @click="selection('impressum')" />
+                    <Item_level_1 :title="'Datenschutz'" @click="selection('datenschutz')"  />
+                    <Item_level_1 :title="'Cookie Einstellungen'" @click="selection('cookie')"  />
+                    <Item_level_1 :title="'Kontakt'" @click="selection('contacts')" />
+                    <Item_level_1 :title="'Über HONORAR.online'" @click="selection('about')" />
+                    <Item_level_1 :title="'Instructions'" @click="selection('instructions')" />
                 </div>
                 
                 <div class="title" @click="selection('Setings')"><Marker :level="1"/> {{ text.Setings }}</div>

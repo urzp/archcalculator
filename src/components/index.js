@@ -16,8 +16,8 @@ import messagePopap from './UI/Pupaps/message.vue'
 import downloadLinks_bill from './UI/Pupaps/downloadLinks_bill.vue'
 import downloadLinks_project from './UI/Pupaps/downloadLinks_project.vue'
 //----------------------------Impressum-----------------------------------
-import Impressum from '@/pageViewes/Impressum.vue'
-import Datenschutz from '@/pageViewes/Datenschutz.vue'
+import PageInf from '@/pageViewes/PageInf.vue'
+
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -32,7 +32,7 @@ import UserFeeld from './Admin/01_user/01_2_UserFeeld.vue'
 import AdminUserProjects from './Admin/01_user/01_3_UserProjects.vue'
 import AdminProjects from './Admin/02_Projects.vue'
 import AdminBills from './Admin/03_Bills.vue'
-import EditPagesImpressum from './Admin/02_Pages/01_Impressum.vue'
+import EditPage from './Admin/04_EditPage.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -175,8 +175,7 @@ export default [
     downloadLinks_bill,
     downloadLinks_project,
 
-    Impressum,
-    Datenschutz,
+    PageInf,
 
     Login,
     Registration,
@@ -192,7 +191,7 @@ export default [
     AdminProfileUser,
     UserFeeld,
     AdminUserProjects,
-    EditPagesImpressum,
+    EditPage,
 
     CalcTitle,
     ProjBillHeader,

@@ -15,12 +15,12 @@
         <div class="collum collum_2">
             <div class="row_link" @click="selectView('impressum')" >{{ text.Impressum }}</div>
             <div class="row_link" @click="selectView('datenschutz')" >{{ text.Datenschutz }}</div>
-            <div class="row_link">{{ text.Cookie_Einstellungen }}</div>
-            <div class="row_link">{{ text.Contact }}</div>
+            <div class="row_link" @click="selectView('cookie')">{{ text.Cookie_Einstellungen }}</div>
+            <div class="row_link" @click="selectView('contacts')">{{ text.Contact }}</div>
         </div>
         <div class="collum collum_3">
-            <div class="row_link">{{ text.Abaut }}</div>
-            <div class="row_link">{{ text.Instructions }}</div>
+            <div class="row_link" @click="selectView('about')">{{ text.Abaut }}</div>
+            <div class="row_link" @click="selectView('instructions')">{{ text.Instructions }}</div>
             <div class="row_link">{{ text.HOAI }}</div>
             <div class="row_link">{{ text.Calculate_the_fee_correctly }}</div>
             <div class="row_link">{{ text.Blog }}</div>

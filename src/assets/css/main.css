@@ -1,5 +1,6 @@
 @import './base.css';
 @import './fonts.css';
+@import './vue-quill.css';
 
 body{
     width: 1156px;

@@ -8,11 +8,10 @@
         <AdminUsers v-if="AdminSiteBar=='Users'"></AdminUsers>
         <AdminProjects v-if="AdminSiteBar=='Projects'"></AdminProjects>
         <AdminBills v-if="AdminSiteBar=='Bills'"></AdminBills>
-        <EditPagesImpressum v-if="AdminSiteBar=='Page_Impressum'"></EditPagesImpressum>
+        <EditPage v-if="hideEditPage" :namePage="AdminSiteBar"></EditPage>
       </div>
-      <div v-else class="veiews">
-        <Impressum v-if="selectedView=='impressum'"/>
-        <Datenschutz v-if="selectedView=='datenschutz'" />
+      <div v-show="!showMain" class="veiews">
+        <PageInf :namePage="selectedView"/>
       </div>
       <Footer></Footer>
     </div>
@@ -45,6 +44,16 @@ export default {
       },
       scrollUp(){
         if(this.$refs.to_scroll) this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    computed:{
+      hideEditPage(){
+        let result = true
+        if(this.AdminSiteBar=='HOAI') result=false
+        if(this.AdminSiteBar=='Users') result=false
+        if(this.AdminSiteBar=='Projects') result=false
+        if(this.AdminSiteBar=='Bills') result=false
+        return result
       }
     }
 

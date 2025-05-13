@@ -8,7 +8,7 @@ import components from './components'
 import { text } from '@/servis/text.js'
 
 import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+//import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 window.text = text
 

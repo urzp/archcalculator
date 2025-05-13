@@ -1,15 +1,16 @@
 <template>
     <div class="wrap">
-        <div v-html="content" ></div>
+        <div class="ql-editor" v-html="content" ></div>
     </div> 
 </template>
 
 <script>
 import { apiData } from '@/servis/apiData.js'
+
 export default {
-    name: 'Impressum',
+    name: 'PageInf',
     mounted(){
-        this.init()
+        //this.init('impressum')
     },
     data(){
         return{
@@ -17,10 +18,18 @@ export default {
         }
     },
     methods:{
-        async init(){
-            let data = await apiData({typeData:'PagesInfRead', name:'impressum'})
+        async init(name){
+            let data = await apiData({typeData:'PagesInfRead', name})
             this.content = data.data.content
         },
+    },
+    props:{
+        namePage:String,
+    },
+    watch:{
+        namePage(){
+            this.init(this.namePage)
+        }
     }
 }
 
