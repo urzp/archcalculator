@@ -1,0 +1,7 @@
+
+Information for developing adaptive process for diffrent wide screens.
+
+
+Wide Sizes Points:
+1400px;
+ 

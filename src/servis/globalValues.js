@@ -1,11 +1,13 @@
 import { reactive } from 'vue';
 
-export let global= reactive({
+export let global = reactive({
    login:false,
    admin:false,
    openPopapProjects:false,
    newProject:false,
    base_url:'https://honorar.online',
+   wideBody: document.querySelector('body').offsetWidth, 
+
 })
 
 export let user = reactive({
@@ -18,6 +20,9 @@ export let user = reactive({
 
 window.global = global
 window.user =  user
+window.addEventListener('resize', () => {
+    global.wideBody = document.querySelector('body').offsetWidth
+})
 
 export function getGlobal(){
     return global
@@ -26,3 +31,4 @@ export function getGlobal(){
 export function setGlobalValue(name, value){
     global[name]=value
 }
+

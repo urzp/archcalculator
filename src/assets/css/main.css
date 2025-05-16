@@ -1,8 +1,12 @@
-@import './base.css';
-@import './fonts.css';
-@import './vue-quill.css';
+@import './01_base.css';
+@import './02_fonts.css';
+@import './03_vue-quill.css';
+
 
 body{
     width: 1156px;
     margin: 0 auto;
 }
+
+
+@import './04_adaptiveScreen.css';
