@@ -1,5 +1,5 @@
 <template>
-        <div class="item-Part-obj" :class="{gap_left:list.length>0}">
+        <div class="item-Part-obj stage_l_0" :class="{gap_left:list.length>0}">
             <DetalMarker v-if="!!list&&list.length>0" @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
             <div  class="main_row" >
                 <div class="title">{{ title }}</div>
@@ -147,7 +147,6 @@ export  default{
         justify-content: space-between;
     }   
     .title{
-        max-width: 760px;
         margin-left: 55px;
         margin-top: 5px;
         margin-bottom: 5px;

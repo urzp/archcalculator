@@ -130,7 +130,7 @@ export  default{
 <style scoped>
     .main_row{
         display: flex;
-        height: 35px;
+        /* height: 35px; */
         align-items: center;
         justify-content: space-between;
     }   
@@ -144,6 +144,7 @@ export  default{
         display: flex;
         column-gap: 15px;
         color: #464646;
+        align-items: center;
     }
 
     .value{

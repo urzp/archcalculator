@@ -7,7 +7,6 @@ export let global = reactive({
    newProject:false,
    base_url:'https://honorar.online',
    wideBody: document.querySelector('body').offsetWidth, 
-
 })
 
 export let user = reactive({

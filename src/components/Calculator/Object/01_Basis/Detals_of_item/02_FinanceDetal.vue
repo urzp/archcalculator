@@ -208,7 +208,6 @@ export  default{
     margin-left:40px;
     color: #8E8E8E;
     font-family: 'Raleway-Light';
-    font-size: 16px;
 }
 
 .kg400_Bauwerk .row{

@@ -1,5 +1,5 @@
 <template>
-        <div class="item-Part-obj" >
+        <div class="item-Part-obj stage_l_1" >
             <div  class="main_row" >
                 <div class="title">{{ title }}</div>
                 <div class="wrap-numbers">
@@ -76,7 +76,6 @@ export  default{
         justify-content: space-between;
     }   
     .title{
-        max-width: 730px;
         margin-left: 55px;
         margin-top: 5px;
         margin-bottom: 5px;
