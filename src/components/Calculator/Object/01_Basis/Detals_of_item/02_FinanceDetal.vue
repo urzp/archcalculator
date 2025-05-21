@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" :class="{active:useDetals}" @click="this.$emit('useDetals')">
+    <div class="wrap finance_detals" :class="{active:useDetals}" @click="this.$emit('useDetals')">
         <div class="list">
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.userTitle" @change="event => updateUserTitle(item.id, event.target.value)"/>

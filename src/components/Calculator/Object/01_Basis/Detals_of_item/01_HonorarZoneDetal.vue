@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" :class="{active:usePoints}" @mousedown="this.$emit('usePoint')">
+    <div class="wrap honorar_zone_detals" :class="{active:usePoints}" @mousedown="this.$emit('usePoint')">
         <div class="list" v-if="!!list.length">
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>

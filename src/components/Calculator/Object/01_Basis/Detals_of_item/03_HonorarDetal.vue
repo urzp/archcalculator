@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" >
+    <div class="wrap honorar_detals" >
         <div class="list">
             <div class="detal-item">
                 <div class="title">{{ text.Name }}</div>
@@ -90,6 +90,7 @@ export  default{
     color: #8E8E8E;
     font-family:'Raleway-Light';
     font-size: 18px;
+    align-items: baseline;
 }
 .title{
     width: 250px;
