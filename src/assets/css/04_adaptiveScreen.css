@@ -137,4 +137,24 @@
         justify-content: flex-end!important;
     }
 
+    .Stage_calc .wrap-numbers{
+        width: 70%!important;
+    }
+
+    .inf_links{
+        font-size: 14px!important;
+    }
+
+    .header-row{
+        margin-top: 15px!important;
+    }
+
+    .header-row .logo{
+        position: absolute!important;
+        left: 105px;
+    }
+
+    .header-row{
+        justify-content: flex-end!important;
+    }
 }

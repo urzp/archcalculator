@@ -1,6 +1,6 @@
 <template>
 
-    <div class="item-Part-obj">
+    <div class="item-Part-obj Stage_calc">
         <DetalMarker @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
         <div  class="main_row" >
             <div class="title">{{ title }}</div>
@@ -40,6 +40,7 @@
 
 <script>
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { global } from '@/servis/globalValues'
 export  default{
     name: 'Stage_calc',
     async mounted(){
@@ -66,6 +67,11 @@ export  default{
     computed:{
         value(){
             return this.honorar * this.percent/100
+        },
+        price_next_row(){
+            let result = false
+            if(global.wideBody <= 600) result = true
+            return result
         }
     },
     methods:{ 
