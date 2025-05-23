@@ -1,5 +1,5 @@
 <template>
-    <div class="total" :class="{collapse}">
+    <div class="total Total_Object" :class="{collapse}">
         <div class="wrap">
             <div class="title-total" :class="{collapse}">{{ nameObject }}</div>
             <div class="data-total">
@@ -63,7 +63,7 @@ export default{
         justify-content: flex-end;
         background-color: #F5F5F5;
         border-left: solid 1px #C0C0C0;
-        font-size: 24px;
+        font-size: inherit;
         color: var(--color-akcent);
     }
     .total .wrap{

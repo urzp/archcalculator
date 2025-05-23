@@ -1,5 +1,5 @@
 <template>
-    <div class="total" :class="{collapse}">
+    <div class="total Total_Result" :class="{collapse}">
         <div class="wrap">
             <div class="title-total" :class="{collapse}">{{ nameObject }}</div>
             <div class="data-total">

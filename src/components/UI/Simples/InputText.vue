@@ -74,7 +74,7 @@ export default{
         border-radius: 5px;
         padding-left: 15px;
         margin-left: -15px;
-        font-size: 18px;
+        font-size: inherit;
         font-family: 'Raleway-Light';
         color: #464646;
     }

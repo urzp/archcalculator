@@ -1,3 +1,7 @@
+.CalcTitle .content_discription{
+    font-size: 18px!important;
+}
+
 .kg400_Bauwerk{
     font-size: 16px!important;
 }
@@ -11,6 +15,10 @@
 
  .stage_l_0 .title, .stage_l_1 .title{
     max-width: 760px;
+ }
+
+ .Total_Object, .Total_Result{
+    font-size: 24px!important;
  }
 
 @media (max-width: 1400px){
@@ -61,12 +69,46 @@
     .icon.close{
         top: 10px!important;
     }
+
+    .Total_Object, .Total_Result{
+        font-size: 20px!important;
+    }
+
+    .calculator .panel{
+        font-size: 18px!important;
+    }
+
 }
 
 @media (max-width: 900px){
     body{
         width: 600px!important;
     }
+
+    .CalcTitle .name{
+        font-size: 30px!important;
+    }
+
+    .CalcTitle  .date{
+        font-size: 14px!important;
+    }
+
+    .CalcTitle .content_discription{
+        font-size: 16px!important;
+    }
+
+    .customer .title{
+        font-size: 16px!important;
+    }
+
+    .customer .customer{
+        font-size: 16px!important;
+    }
+
+    .total-calc .name{
+        font-size: 20px!important;
+    }
+
     .title{
         font-size: 16px!important;
     }
@@ -81,6 +123,14 @@
         font-size: 16px!important;
     }
     .cents{
+        font-size: 14px!important;
+    }
+
+    .item-Part-obj{
+        font-size: 14px!important;
+    }
+
+    .total-part-obj .wrap{
         font-size: 14px!important;
     }
 
@@ -149,9 +199,40 @@
         margin-top: 15px!important;
     }
 
+    .Total_Object, .Total_Result{
+        font-size: 16px!important;
+    }
+
+    .calculator .panel{
+        font-size: 16px!important;
+    }
+
+    .calculator .panel .new-btn{
+        width: 160px!important;
+        height: 35px!important;
+    }
+
+    .calculator .close-btn, .calculator .new-btn{
+        width: 45px!important;
+        height: 35px!important;
+    }
+
+    .calculator .new-btn img, .calculator .close-btn img{
+        width: 12px!important;
+    }
+
+    .wrap_sitebar .text-btn{
+        width: 45px!important;
+        height: 35px!important;  
+        top: 30px!important;      
+    }
+
+}
+
+@media (max-width: 775px){
     .header-row .logo{
         position: absolute!important;
-        left: 105px;
+        left: 90px;
     }
 
     .header-row{

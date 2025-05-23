@@ -1,5 +1,5 @@
 <template>
-    <div class="title-project" >
+    <div class="title-project CalcTitle" >
         <!-- <div class="name" >{{ project_name }}</div> -->
         <template v-if="!bill_status">
         <input  type="text" v-if="!isShowProject"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)" @click="checkLock()"/>
