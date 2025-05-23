@@ -1,0 +1,214 @@
+@media (max-width: 640px){
+    body{
+        width: 460px!important;
+    }
+
+    .header .userLogo{
+        width: 55px!important;
+        height: 55px!important;
+    }
+
+    .CalcTitle{
+        margin-top: 30px!important;
+        margin-bottom: 30px!important;
+    }
+
+    .CalcTitle .discription{
+        margin-top: 10px!important;
+        margin-bottom: 10px!important;
+    }
+
+    .CalcTitle .name{
+        font-size: 26px!important;
+    }
+
+    .CalcTitle  .date{
+        font-size: 12px!important;
+    }
+
+    .CalcTitle .content_discription{
+        font-size: 14px!important;
+    }
+
+    .customer .title{
+        font-size: 14px!important;
+    }
+
+    .customer .customer{
+        font-size: 14px!important;
+    }
+
+    .total-calc .name{
+        font-size: 18px!important;
+    }
+
+    .title{
+        font-size: 14px!important;
+    }
+    .value-percent{
+        font-size: 14px!important;
+    }
+    .value{
+        font-size: 14px!important;
+    }
+
+    .unit-price{
+        font-size: 14px!important;
+    }
+    .cents{
+        font-size: 12px!important;
+    }
+
+    .item-Part-obj{
+        font-size: 12px!important;
+    }
+
+    .total-part-obj .wrap{
+        font-size: 12px!important;
+    }
+
+/* ------------------------ */
+
+     .honorar_zone_detals .detal-item{
+        flex-direction: column;
+        margin-bottom: 18px;
+        
+    }
+
+    .title-object{
+       margin-left: 10px!important; 
+    }
+
+    .toggle:before{
+        height: 7px!important; 
+        width: 7px!important; 
+        left: -4px!important; 
+        top: -12px!important; 
+    }
+
+    .wrap-slot{
+        margin-left: 10px!important;
+    }
+
+    .object-calc .main_row .title{
+        margin-left: 35px!important;
+    }
+
+    .object-calc .item-Part-obj .icon.close{
+        left: 12px!important;
+        top: 8px!important;
+    }
+
+    /* .honorar_zone_detals .value-wrap{
+        column-gap: 10px!important;
+        justify-content: flex-end;
+        align-items: center
+    }
+
+    .honorar_zone_detals .slider{
+        width: 155px!important;
+    } */
+
+    .total_points .value, .equivalent  .value{
+        font-size: 14px!important;
+    }
+
+    .total_points .label, .equivalent  .label{
+        font-size: 14px!important;
+    }
+
+    /* .finance_detals .kg400_Bauwerk :not(.summ_row) .total_calc{
+        display: none;
+    } */
+
+    /* .finance_detals .kg400_Bauwerk .row{
+        justify-content: space-between!important;
+    } */
+
+    .kg400_Bauwerk {
+        font-size: 10px !important;
+    }
+
+    .detal-list .title, 
+    .detal-item,  
+    .detal-list .value, 
+    .detal-list .value-label, 
+    .detal-list .label
+    .kg400_Bauwerk .name_item{
+        font-size: 10px!important;
+    }
+
+    /* .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{
+        text-align: right!important;
+    } */
+
+    /* .honorar_detals .detal-item .price{
+        justify-content: flex-end!important;
+    } */
+
+    /* .Stage_calc .wrap-numbers{
+        width: 70%!important;
+    } */
+
+    .inf_links{
+        font-size: 12px!important;
+    }
+
+    /* .header-row{
+        margin-top: 15px!important;
+    } */
+
+    .Total_Object, .Total_Result{
+        font-size: 14px!important;
+        height: 80px!important;
+    }
+
+    .calculator .panel{
+        font-size: 14px!important;
+    }
+
+    /* .calculator .panel .new-btn{
+        width: 160px!important;
+        height: 35px!important;
+    }
+
+    .calculator .close-btn, .calculator .new-btn{
+        width: 45px!important;
+        height: 35px!important;
+    }
+
+    .calculator .new-btn img, .calculator .close-btn img{
+        width: 12px!important;
+    }
+
+    .wrap_sitebar .text-btn{
+        width: 45px!important;
+        height: 35px!important;  
+        top: 30px!important;      
+    } */
+
+    .download_panel img{
+        width: 36px!important;
+    }
+
+    .footer-wrap{
+        margin-top: 10px!important;
+    }
+
+    .footer-wrap .collums{
+        margin-top: 50px!important;
+        flex-wrap: wrap!important;
+        justify-content: space-around!important;
+    }
+
+    .footer-wrap .collum_1{
+        width: 100%!important;
+    }
+
+    .copy_right{
+        margin-top: 0px!important;
+        width: 100%!important;
+    }
+
+
+}

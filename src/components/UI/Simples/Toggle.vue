@@ -30,7 +30,7 @@ export default{
         background-color: #C0C0C0;
         content: " ";
         left: -6px;
-        top: -28px;
+        top: -20px;
     }
 
     .wrap-slot{

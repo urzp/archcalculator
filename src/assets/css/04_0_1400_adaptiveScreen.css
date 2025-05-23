@@ -1,0 +1,82 @@
+.CalcTitle .content_discription{
+    font-size: 18px!important;
+}
+
+.kg400_Bauwerk{
+    font-size: 16px!important;
+}
+
+ .unit-price{
+    font-size: 20px!important;
+ }
+ .cents{
+    font-size: 18px!important;
+ }
+
+ .stage_l_0 .title, .stage_l_1 .title{
+    max-width: 760px;
+ }
+
+ .Total_Object, .Total_Result{
+    font-size: 24px!important;
+ }
+
+@media (max-width: 1400px){
+    body{
+        width: 800px!important;
+    }
+
+    .detal-list{
+        padding-top: 10px;
+    }
+
+    .detal-list .title, 
+    .detal-item,  
+    .detal-list .value, 
+    .detal-list .value-label, 
+    .detal-list .label
+    .kg400_Bauwerk .name_item{
+        font-size: 14px!important;
+    }
+
+    .total_points .value, .equivalent  .value{
+        font-size: 18px!important;
+    }
+
+    .PartObjectList .message{
+        font-size: 16px!important;
+    }
+
+    .detal-item   .unit-price, .kg400_Bauwerk .unit-price{
+        font-size: 16px!important;
+    }
+    .detal-item .cents, .kg400_Bauwerk .cents{
+        font-size: 14px!important;
+    }
+
+    .kg400_Bauwerk{
+        font-size: 14px!important;
+    }
+
+    .name_item.left_gap{
+        padding-left: 20px!important;
+    }
+
+    .stage_l_0 .title, .stage_l_1 .title{
+        max-width: 380px;
+    }
+
+    .icon.close{
+        top: 10px!important;
+    }
+
+    .Total_Object, .Total_Result{
+        font-size: 20px!important;
+    }
+
+    .calculator .panel{
+        font-size: 18px!important;
+    }
+
+}
+

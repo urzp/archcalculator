@@ -102,6 +102,7 @@ ul{
 li{
     padding: 0 20px;
     cursor: pointer;
+    white-space: nowrap;
     width: 100%;
     text-align: left;
     font-family: 'Raleway-Light';
