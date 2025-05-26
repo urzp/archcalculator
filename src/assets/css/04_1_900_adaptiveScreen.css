@@ -69,11 +69,11 @@
     }
 
     .total_points .value, .equivalent  .value{
-        font-size: 16px!important;
+        font-size: 14px!important;
     }
 
     .total_points .label, .equivalent  .label{
-        font-size: 16px!important;
+        font-size: 14px!important;
     }
 
     .finance_detals .kg400_Bauwerk :not(.summ_row) .total_calc{
@@ -95,6 +95,10 @@
     .detal-list .label
     .kg400_Bauwerk .name_item{
         font-size: 12px!important;
+    }
+
+    .total .value{
+        font-size: 14px!important;
     }
 
     .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{

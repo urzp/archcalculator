@@ -146,6 +146,11 @@
         font-size: 12px!important;
     }
 
+    .total .value{
+        font-size: 14px!important;
+    }
+
+
     /* .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{
         text-align: right!important;
     } */
