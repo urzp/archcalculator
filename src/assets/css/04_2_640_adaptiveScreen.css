@@ -94,9 +94,17 @@
         margin-left: 35px!important;
     }
 
-    .object-calc .item-Part-obj .icon.close{
+    .object-calc .item-Part-obj .icon{
         left: 12px!important;
         top: 8px!important;
+    }
+
+    .wrap:before {
+        left: -39px!important;
+    }
+
+    .detal-list:before{
+        left: 15px!important;
     }
 
     /* .honorar_zone_detals .value-wrap{
@@ -135,7 +143,7 @@
     .detal-list .value-label, 
     .detal-list .label
     .kg400_Bauwerk .name_item{
-        font-size: 10px!important;
+        font-size: 12px!important;
     }
 
     /* .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{
