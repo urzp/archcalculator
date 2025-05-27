@@ -147,6 +147,7 @@ export  default{
     display: flex;
     column-gap: 30px;
     font-size: 18px;
+    align-items: baseline;
 }
 
 .title{
@@ -177,6 +178,18 @@ export  default{
     cursor: pointer; 
     box-shadow: -215px 0 0 215px #7E7E7E;
 }
+
+@media (max-width: 640px){
+    .slider {
+        height: 7px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        width: 5px; 
+        height: 7px; 
+    }
+}
+
 
 .total{
     display: flex;
