@@ -9,6 +9,8 @@
 
 <script>
 import { text } from '@/servis/text.js'
+import { useHover } from '@/servis/functions.js'
+
 export default{
     name:'ListRecentProjects',
     data(){
@@ -37,7 +39,11 @@ export default{
     },
     methods:{
         openProject(id){
-            this.$emit('openProject', id)
+            if(useHover()){
+                this.$emit('openProject', id)
+            }else{
+                this.$emit('showProject', id)
+            }  
         },
         showProject(id){
             this.$emit('showProject', id)

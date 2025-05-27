@@ -106,14 +106,12 @@ export default{
         },
         async setNewDate(date){
             this.showSelectData = false
-            console.log(date)
             date = date.toLocaleString('de-De', {year:'numeric', month: 'numeric',day:'numeric'})
-            console.log(date)
             await apiData({typeData:'setNewDateProject', data:{id:this.id_project, date}})
             EventBus.emit('MenuProjects:reload')          
         },
         formatPrice(price){
-            return `€ ${Math.fround(price).toLocaleString("de-DE")}`
+            return `€ ${(Math.round(price*100)/100).toLocaleString("de-DE")}`
         },
         formatDate(date){
             date = new Date(date)

@@ -132,6 +132,7 @@ export default{
             this.initData()       
         },
         openProjects(type){
+            this.config.open=false
             EventBus.emit('MenuProjects:open', type)
         }
     }

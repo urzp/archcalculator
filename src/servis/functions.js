@@ -149,3 +149,11 @@ export function array_move(arr, old_index, new_index) {
     return arr; // for testing
 };
 
+export function useHover(){
+   if (window.matchMedia("(pointer: coarse)").matches) {  
+        return false
+    } else {  
+        return true
+    } 
+}
+

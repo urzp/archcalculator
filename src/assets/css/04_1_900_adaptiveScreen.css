@@ -145,6 +145,12 @@
         top: 30px!important;      
     }
 
+    /* open projexts pupap */
+
+    .openProject .pupap{
+        width: 680px!important; 
+    }
+
 }
 
 @media (max-width: 775px){

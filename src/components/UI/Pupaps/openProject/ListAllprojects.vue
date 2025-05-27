@@ -15,6 +15,7 @@
 
 <script>
 import { text } from '@/servis/text.js'
+import { useHover } from '@/servis/functions.js'
 export default {
     name:'ListAllprojects',
     data(){
@@ -44,16 +45,21 @@ export default {
     emits:['openProject', 'showProject'],
     methods:{
         formatPrice(price){
-            return `€ ${Math.fround(price).toLocaleString("de-DE")}`
+            return `€ ${(Math.round(price*100)/100).toLocaleString("de-DE")}`
         },
         formatDate(date){
             date = new Date(date)
            return date.toLocaleString("de-DE", {day:'numeric',month:'numeric', year:'numeric'})
         },
         openProject(id){
-            this.$emit('openProject', id)
+            if(useHover()){
+                this.$emit('openProject', id)
+            }else{
+                this.$emit('showProject', id)
+            }  
         },
         showProject(id){
+            if(!useHover()){return false}
             clearTimeout(this.timerHover)
             this.timerHover = setTimeout(()=>{
                 this.$emit('showProject', id)

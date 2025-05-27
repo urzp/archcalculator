@@ -78,5 +78,37 @@
         font-size: 18px!important;
     }
 
+        /* open projexts pupap */
+
+    .openProject .pupap{
+        width: 860px!important; 
+        left: calc(100% / 2 - 860px / 2)!important; 
+        top: calc(100vh / 2 - 750px / 2); 
+    }
+
+    .show_project{
+        width: 49%!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 14px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+
 }
 
