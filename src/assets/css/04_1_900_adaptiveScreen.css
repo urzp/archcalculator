@@ -204,6 +204,10 @@
         font-size: 30px!important; 
     }
 
+    .bill_list_wrap .title_statis{
+        font-size: 16px!important; 
+    }
+
     .bill_list_wrap .list_bills .name{
         font-size: 18px!important; 
     }
@@ -213,7 +217,13 @@
     }
 
     .bill_list_wrap .list_bills  .item{
-        width: 105%; 
+        width: 100%; 
+    }
+
+    .hover-panel .left_part{
+        position: relative!important;
+        left: -82px;
+        top: 63px;
     }
 
 }

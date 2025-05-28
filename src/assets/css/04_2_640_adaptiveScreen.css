@@ -285,4 +285,10 @@
         min-height: 250px!important;
     }
 
+        /* bill list */
+
+    .bill_list_wrap .item{
+        flex-direction: column!important;
+    }
+
 }

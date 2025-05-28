@@ -160,7 +160,7 @@ export default{
 
     .edit_block{
         display: flex;
-        width: 153px;
+        width: inherit;
     }
 
     .wrap_imput{
