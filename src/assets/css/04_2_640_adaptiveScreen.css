@@ -137,6 +137,18 @@
         font-size: 10px !important;
     }
 
+    .kg400_Bauwerk .unit-price, .honorar_detals .unit-price{
+        font-size: 12px !important;
+    }
+
+    .kg400_Bauwerk .comma, .honorar_detals .comma{
+        font-size: 12px !important;
+    }
+
+    .kg400_Bauwerk .cents, .honorar_detals .cents{
+        font-size: 10px !important;
+    }
+
     .detal-list .title, 
     .detal-item,  
     .detal-list .value, 
@@ -223,5 +235,54 @@
         width: 100%!important;
     }
 
+     /* open projexts pupap */
+
+    .openProject .pupap{
+        width: 460px!important; 
+        height: 560px!important;
+        min-height: 680px!important;
+        left: calc(100% / 2 - 460px / 2)!important; 
+        top: calc(100vh / 2 - 680px / 2); 
+    }
+
+    .openProject.scrollable .pupap{
+        position: absolute!important; 
+    }
+
+    .show_project{
+        display: none!important; 
+    }
+
+    .projects_calendar{
+        width: 100%!important; 
+        border:none!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 12px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+    .wrap_content{
+        height: 580px!important;
+    }
+
+    .projects{
+        min-height: 250px!important;
+    }
 
 }

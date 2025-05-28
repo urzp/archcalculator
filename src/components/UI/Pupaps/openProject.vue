@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="wrap_pupap openProject">
+    <div v-if="show" class="wrap_pupap openProject" :class="{'scrollable':scrollable}">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div v-if="!loading&&!empty_list" class="wrap_content">
@@ -39,6 +39,7 @@ export default{
     data(){
         return {
             show:false,
+            scrollable: false,
             width:'1100px',
             height: '750px',
             list:[],
@@ -76,7 +77,13 @@ export default{
         },
         openPopap(type='all'){
             if(this.goToCalcPage()) return false
-            if(window.screen.height > 750) document.documentElement.style.overflow = 'hidden'
+            if(window.screen.height > 750) {
+                document.documentElement.style.overflow = 'hidden'
+                this.scrollable = false
+            }else{
+                this.scrollable = true
+            }
+
             this.getData(type)
             this.show=true
         }, 

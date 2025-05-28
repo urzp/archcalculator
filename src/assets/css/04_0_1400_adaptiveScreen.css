@@ -58,6 +58,10 @@
         font-size: 14px!important;
     }
 
+    .kg400_Bauwerk .row{
+        align-items: baseline;
+    }
+
     .name_item.left_gap{
         padding-left: 20px!important;
     }
@@ -107,6 +111,19 @@
 
     .openProject  .created_date{
         font-size: 12px!important; 
+    }
+
+    .show_project .top_panel .text-btn{
+        height: 35px!important;
+        font-size: 16px!important; 
+    }
+
+    .show_project .project_part .finance{
+        font-size: 16px!important; 
+    }
+
+    .show_project .list_objects .finance{
+        font-size: 14px!important;
     }
 
 

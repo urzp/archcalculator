@@ -151,6 +151,7 @@ export function array_move(arr, old_index, new_index) {
 
 export function useHover(){
    if (window.matchMedia("(pointer: coarse)").matches) {  
+        if(window.screen.width < 900) return true
         return false
     } else {  
         return true

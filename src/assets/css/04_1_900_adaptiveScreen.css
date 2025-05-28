@@ -149,10 +149,71 @@
         top: 30px!important;      
     }
 
+    .PayExtra_calc .wrap_colum_2{
+        width: 60%!important;
+    }
+
+
     /* open projexts pupap */
 
     .openProject .pupap{
-        width: 680px!important; 
+        width: 620px!important; 
+        left: calc(100% / 2 - 620px / 2)!important; 
+        top: calc(100vh / 2 - 750px / 2); 
+    }
+
+    .openProject.scrollable .pupap{
+        position: absolute!important; 
+    }
+
+    .show_project{
+        display: none!important; 
+    }
+
+    .projects_calendar{
+        width: 100%!important; 
+        border:none!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 12px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+    .projects{
+        min-height: 355px!important;
+    }
+
+        /* bill list */
+
+    .bill_list_wrap .name_project{
+        font-size: 30px!important; 
+    }
+
+    .bill_list_wrap .list_bills .name{
+        font-size: 18px!important; 
+    }
+
+    .bill_list_wrap .list_bills .invoice_number input{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills  .item{
+        width: 105%; 
     }
 
 }
