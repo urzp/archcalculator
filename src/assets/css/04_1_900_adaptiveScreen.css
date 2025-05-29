@@ -226,6 +226,71 @@
         top: 63px;
     }
 
+
+            /* bill */
+
+    .bill_header .top_row{
+        font-size: 16px!important;
+    }
+
+    .bill_header .top_row .wrap-edit{
+        width: 540px!important;
+    }
+
+    .bill_header .logo_bill img{
+        width: 53px!important;
+        height: 53px!important;
+    }
+
+    .bill_header .custemer input{
+        font-size: 16px!important;
+    }
+
+    .bill_header .discription{
+        font-size: 14px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 16px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 16px!important;
+    }
+
+    .bill_header .payment_date{
+        font-size: 16px!important
+    }
+    
+    .bill_header .payment_date input{
+        text-align: left;
+    }
+
+    .bill_header .payment_date .new-btn{
+        width: 35px !important;
+        height: 25px !important;
+    }
+
+    .bill_header .greeting_phrase{
+        font-size: 14px!important
+    }
+
+    .BillFooter{
+        font-size: 14px!important
+    }
+
+    .BillFooter span{
+        font-size: 14px!important
+    }
+
+    .BillFooter .item_detail{
+        align-items: baseline!important;
+    }
+
+    .BillFooter .name_detal{
+        min-width: 100px!important;
+    }
+
 }
 
 @media (max-width: 775px){

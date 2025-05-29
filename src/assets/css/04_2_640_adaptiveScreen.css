@@ -1,6 +1,6 @@
 @media (max-width: 640px){
     body{
-        width: 460px!important;
+        width: 450px!important;
     }
 
     .header .userLogo{
@@ -238,10 +238,12 @@
      /* open projexts pupap */
 
     .openProject .pupap{
-        width: 460px!important; 
+        width: 440px!important; 
         height: 560px!important;
+        margin-left: 10px!important;
+        margin-right: 10px!important;
         min-height: 680px!important;
-        left: calc(100% / 2 - 460px / 2)!important; 
+        left: calc(100% / 2 - 440px / 2 - 10px)!important; 
         top: calc(100vh / 2 - 680px / 2); 
     }
 
@@ -289,6 +291,122 @@
 
     .bill_list_wrap .item{
         flex-direction: column!important;
+    }
+
+
+    .bill_list_wrap .name_project{
+        font-size: 30px!important; 
+    }
+
+    .bill_list_wrap .title_statis{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills .name{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills .invoice_number input{
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .date {
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .price, .bill_list_wrap .price span{
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .list_bills  .item{
+        width: 100%; 
+    }
+
+    .bill_list_wrap .wrap_right{
+        width: 100%!important;
+    }
+
+    .bill_list_wrap .hover-panel{
+        height: 0px!important;
+    }
+
+    .hover-panel .left_part{
+        position: relative!important;
+        left: -30px;
+        top: -55px;
+    }
+
+    .bill_list_wrap .hover-panel{
+        width: 100% !important;
+        justify-content: flex-end!important;
+    }
+   
+         /* bill */
+
+    .bill_header .top_row{
+        font-size: 14px!important;
+    }
+
+    .bill_header .top_row .wrap-edit{
+        width: 340px!important;
+    }
+
+    .bill_header .logo_bill img{
+        width: 43px!important;
+        height: 43px!important;
+    }
+
+    .bill_header .custemer input{
+        font-size: 18px!important;
+    }
+
+    .bill_header .discription{
+        font-size: 12px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 14px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 14px!important;
+    }
+
+    .bill_header .payment_date{
+        font-size: 14px!important
+    }
+    
+    .bill_header .payment_date input{
+        text-align: left;
+    }
+
+    .bill_header .payment_date .new-btn{
+        width: 35px !important;
+        height: 25px !important;
+    }
+
+    .bill_header .greeting_phrase{
+        font-size: 12px!important
+    }
+
+    .BillFooter{
+        font-size: 12px!important
+    }
+
+    .BillFooter span{
+        font-size: 12px!important
+    }
+
+    .BillFooter .item_detail{
+        align-items: baseline!important;
+    }
+
+    .BillFooter .name_detal{
+        min-width: 100px!important;
+    }
+
+    .BillFooter .PleasePay{
+        flex-wrap: wrap;
     }
 
 }
