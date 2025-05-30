@@ -409,4 +409,11 @@
         flex-wrap: wrap;
     }
 
+    /* popaps */
+
+    .Comfirm .pupap, .wrap_pupap.message .pupap{
+        width: 320px!important;
+    }
+
+
 }

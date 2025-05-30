@@ -303,7 +303,7 @@ export default{
 
     .hover-panel{
         position: relative;
-        width: 0px;
+        width: 100px;
         transform: translateX(30px);
         display: flex;
         column-gap: 5px;
