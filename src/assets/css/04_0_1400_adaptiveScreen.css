@@ -126,6 +126,20 @@
         font-size: 14px!important;
     }
 
+    /* profile page */
+
+    .user_edit_panel{
+        flex-wrap: wrap;
+    }
+
+    .user_data_edit{
+        padding-left: 0px!important;
+        margin-bottom: 50px!important;
+    }
+
+    .user_data_panel{
+        padding-left: 0px!important;
+    }
 
 }
 

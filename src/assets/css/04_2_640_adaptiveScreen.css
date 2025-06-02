@@ -415,5 +415,56 @@
         width: 320px!important;
     }
 
+    /* profile page */
+
+    .profile .main_icon{
+        width: 100px!important;
+        height: 100px!important;
+    }
+
+    .screen_less_640{
+        display: flex!important;
+    }
+
+    .screen_more_640{
+        display: none!important;
+    }
+
+    .profile .name-user{
+        font-size: 30px!important;
+    }
+
+    .profile .email-user{
+        font-size: 20px!important;
+    }
+
+
+    .title-profile{
+        display: flex!important;
+        justify-content: space-between!important;
+        align-items: center!important;
+        margin-bottom: 60px!important;
+    }
+
+    .title-profile .name{
+        width: unset!important;
+    }
+
+    .button_part{
+        margin: unset!important;
+    }
+
+    .profile .user_data_panel input{
+        width: 100%!important;
+    }
+
+    .user_data_edit{
+        width: 100%!important;
+    }
+
+    .profile .user_edit_panel input{
+        width: 100%!important;
+    }
+
 
 }

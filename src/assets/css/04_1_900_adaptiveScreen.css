@@ -291,6 +291,17 @@
         min-width: 100px!important;
     }
 
+    /* profile page */
+
+    .prof_part{
+        border-right:none!important;
+    }
+
+    .profile .close-btn{
+        width: 60px!important;
+        height: 40px!important;
+    }
+
 }
 
 @media (max-width: 775px){

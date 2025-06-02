@@ -4,6 +4,17 @@
         margin-right: 5px!important;
     }
 
+    .profile{
+        margin-left: 5px!important;
+        margin-right: 5px!important;       
+    }
 
+    .profile .title-profile{
+        justify-content: space-around!important;
+    }
+
+    .profile .name-user{
+        font-size: 26px!important;
+    }
 
 }
