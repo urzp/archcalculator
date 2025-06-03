@@ -5,7 +5,7 @@
             <div v-if="!!project_data" class="name_poject" :class="{active}" @click.stop="openProject()">{{ project_data.name }} </div>
             <div v-if="!!project_data&&!bills" class="from_date" :class="{active}">{{ from_date }}</div>
         </div>
-        <div v-if="bills&&showBills" class="item_level_1 bills">
+        <div v-if="bills&&showBills" class="bills">
                 <div class="contract" @click.stop="openProject()">{{ text.contract }}</div>
                 <div v-if="!lastBilData" class="newBill"  @click.stop="newBill()">{{ text.newBill }}</div>
                 <div v-if="!!lastBilData" class="lastBill"  @click.stop="openLastBill()">{{ text.lastBill }}</div>
@@ -127,21 +127,30 @@ export default{
     white-space: nowrap;
 }
 
-.item_level_1{
+.item_level_1, .bills{
     display: flex;
     column-gap: 8px;    
     font-family: 'Raleway-Medium';
     font-size: 16px;
     margin-left: 17px;
     margin-bottom: 5px;
+}
+
+.item_level_1{
     cursor: pointer;
 }
+
 .bills{
     margin-left: 37px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
 }
+
+.bills > div {
+    cursor: pointer;
+}
+
 .title.active, .name_poject.active, .from_date.active{
     color: #ed994a;
 }

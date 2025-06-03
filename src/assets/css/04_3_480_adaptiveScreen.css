@@ -1,7 +1,7 @@
 @media (max-width: 480px){
     body{
         margin-left: 5px!important;
-        margin-right: 5px!important;
+        padding-right: 10px!important;
     }
 
     .profile{

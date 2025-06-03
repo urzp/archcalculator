@@ -142,7 +142,7 @@ export default{
 <style scoped>
 .wrap_sitebar{
     width: 350px;
-    height: 100vh;
+    height: 100%;
     padding-top: 65px;
     padding-left: 25px;
     position: fixed;
