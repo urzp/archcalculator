@@ -93,10 +93,13 @@ export default{
         font-family: 'Comfortaa-Regular';
         font-size: 16px;
         color: #464646;
-        cursor: pointer;
         transition: var(--transition-hover);
         flex-direction: column;
         display: flex;
+    }
+
+    .social_item, .row_link, .copy_right{
+        cursor: pointer;
     }
 
     .collum_1{

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="wrap_pupap">
+    <div v-if="show" class="wrap_pupap downloadLinks_bill">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div class="form">

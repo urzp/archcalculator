@@ -18,6 +18,8 @@
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
+import { autoZoom } from '@/servis/functions.js'
+
 export default {
   name: 'HomePage',
   mounted(){
@@ -56,6 +58,7 @@ export default {
   },
   methods:{
     async init(){
+      autoZoom()
       if(await this.use_link_project()){
         if(!!this.$route.query.project) {this.project_id = this.$route.query.project; this.statusBill=false}
         if(!!this.$route.query.bill) {this.project_id = this.$route.query.bill; this.statusBill=true}

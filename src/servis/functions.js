@@ -179,3 +179,13 @@ export function detectBrowser() {
         return 'Unknown';  
     }  
 }  
+
+export function autoZoom() { 
+    if(screen.width < 480){
+        let width_start = 480
+        let k = 0.177
+        let zoom = 100 - (width_start - screen.width)*k
+        //console.log(zoom)
+        document.body.style.zoom = zoom + '%'
+    }
+}

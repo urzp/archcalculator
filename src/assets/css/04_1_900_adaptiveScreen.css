@@ -154,9 +154,10 @@
     }
 
 
+
     /* open projexts pupap */
 
-    .openProject .pupap{
+    .openProject .pupap, .downloadLinks_bill .pupap, .downloadLinks_project .pupap{
         width: 620px!important; 
         left: calc(100% / 2 - 620px / 2)!important; 
         top: calc(100vh / 2 - 750px / 2); 
