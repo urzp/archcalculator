@@ -81,6 +81,7 @@ export default{
                 document.documentElement.style.overflow = 'hidden'
                 this.scrollable = false
             }else{
+                window.scrollTo(0, 50);
                 this.scrollable = true
             }
 

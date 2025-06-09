@@ -1,5 +1,5 @@
 <template>
-    <div class="item-Part-obj" >
+    <div class="item-Part-obj ExtraCost" >
         <div  class="main_row" >
             <div class="delete"><DeleteButton icon_cross no_border :heigth="'32px'" @click="deleteItem()"/></div>
             <input class="title" :placeholder="text.Enter_performance" :value="title" @change="event => updateUserTitle(event.target.value)"/>

@@ -33,7 +33,7 @@
     .value-percent{
         font-size: 16px!important;
     }
-    .value{
+    .value, .type{
         font-size: 16px!important;
     }
 
@@ -110,7 +110,7 @@
     }
 
     .Stage_calc .wrap-numbers{
-        width: 70%!important;
+        width: 90%!important;
     }
 
     .inf_links{

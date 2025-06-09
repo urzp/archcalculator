@@ -48,7 +48,7 @@
     .value-percent{
         font-size: 14px!important;
     }
-    .value{
+    .value, .type{
         font-size: 14px!important;
     }
 
@@ -66,6 +66,27 @@
     .total-part-obj .wrap{
         font-size: 12px!important;
     }
+
+    .PartObjectList .delete-btn{
+        min-width:32px!important;
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+
+    .PartObjectList input.title{
+        width: 30%!important;
+        margin-left: 30px!important;
+    }
+
+    .AdditionalServis .main_row .wrap_figures, .ExtraCost .main_row .wrap_figures{
+        width: 70%!important;
+    }
+
+    .AdditionalServis .wide_sing, .ExtraCost .wide_sing{
+        min-width: 10px!important;
+    }
+
+
 
 /* ------------------------ */
 

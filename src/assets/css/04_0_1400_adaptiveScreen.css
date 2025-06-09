@@ -141,5 +141,9 @@
         padding-left: 0px!important;
     }
 
+    .AdditionalServis .main_row .wrap_figures, .ExtraCost .main_row .wrap_figures{
+        width: 70%!important;
+    }
+
 }
 
