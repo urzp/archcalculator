@@ -6,10 +6,10 @@ push_log('test', basename(__FILE__), 'stipe_log');
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/lib/stripe-php-master/init.php';
 
-$stripeSecretKey = '';
+
 
 \Stripe\Stripe::setApiKey($stripeSecretKey);
-$endpoint_secret = '';
+
 
 $payload = @file_get_contents('php://input');
 $event = null;
