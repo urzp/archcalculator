@@ -7,8 +7,8 @@ push_log('test', basename(__FILE__), 'stipe_log');
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/lib/stripe-php-master/init.php';
 
 
-\Stripe\Stripe::setApiKey('sk_test_51RahmuPtu9HDKCGxVqgDG1i8Wquf4q2bdcSLWxUr8jM1wdrylAq7VJWFPg9CgUHaToladMxr29iVQZmbIzup2BeW00Hz7tZG1x');
-$endpoint_secret = 'whsec_nSlykMG31kD7YwvOd8tC0asdXrIoxJBE';
+\Stripe\Stripe::setApiKey('');
+$endpoint_secret = '';
 
 $payload = @file_get_contents('php://input');
 $event = null;
