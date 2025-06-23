@@ -1,14 +1,15 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'].'/php/logs/log.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/logs/log.php';
+push_log('------------------begin test-----------------------', basename(__FILE__), 'stipe_log');
 //push_log(json_encode($_POST), basename(__FILE__), 'stipe_log');
-push_log('test', basename(__FILE__), 'stipe_log');
+
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/lib/stripe-php-master/init.php';
 
 
 \Stripe\Stripe::setApiKey('sk_test_51RahmuPtu9HDKCGxVqgDG1i8Wquf4q2bdcSLWxUr8jM1wdrylAq7VJWFPg9CgUHaToladMxr29iVQZmbIzup2BeW00Hz7tZG1x');
-$endpoint_secret = 'whsec_nSlykMG31kD7YwvOd8tC0asdXrIoxJBE';
+$endpoint_secret = 'whsec_6ywYqQ9NCE1edBaIfHkKMLTLdmubjxix';//'whsec_nSlykMG31kD7YwvOd8tC0asdXrIoxJBE';
 
 $payload = @file_get_contents('php://input');
 $event = null;
@@ -19,10 +20,14 @@ try {
   );
 } catch(\UnexpectedValueException $e) {
   // Invalid payload
-  echo '⚠️  Webhook error while parsing basic request.';
+  push_log('Webhook error while parsing basic request.', basename(__FILE__), 'stipe_log');
+  //echo '⚠️  Webhook error while parsing basic request.';
   http_response_code(400);
-  exit();
+  exit_script();
 }
+
+//push_log( $event, basename(__FILE__), 'stipe_log');
+
 if ($endpoint_secret) {
   // Only verify the event if there is an endpoint secret defined
   // Otherwise use the basic decoded event
@@ -33,9 +38,10 @@ if ($endpoint_secret) {
     );
   } catch(\Stripe\Exception\SignatureVerificationException $e) {
     // Invalid signature
+    push_log('Webhook error while validating signature.', basename(__FILE__), 'stipe_log');
     echo '⚠️  Webhook error while validating signature.';
     http_response_code(400);
-    exit();
+    exit_script();
   }
 }
 
@@ -45,17 +51,39 @@ switch ($event->type) {
     $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
     // Then define and call a method to handle the successful payment intent.
     // handlePaymentIntentSucceeded($paymentIntent);
+    push_log( $event, basename(__FILE__), 'stipe_log');
     break;
   case 'payment_method.attached':
     $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
     // Then define and call a method to handle the successful attachment of a PaymentMethod.
     // handlePaymentMethodAttached($paymentMethod);
+    push_log( $event, basename(__FILE__), 'stipe_log');
+    break;
+  case 'invoice.paid':
+    $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
+    // Then define and call a method to handle the successful attachment of a PaymentMethod.
+    // handlePaymentMethodAttached($paymentMethod);
+    //push_log( $event, basename(__FILE__), 'stipe_log');
+    break;
+  case 'checkout.session.completed':
+    $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
+    // Then define and call a method to handle the successful attachment of a PaymentMethod.
+    // handlePaymentMethodAttached($paymentMethod);
+    push_log( $event, basename(__FILE__), 'stipe_log');
     break;
   default:
     // Unexpected event type
     error_log('Received unknown event type');
+    push_log('Received unknown event type: '.$event->type, basename(__FILE__), 'stipe_log');
 }
 
 http_response_code(200);
+exit_script();
+
+
+function exit_script(){
+  push_log('------------------end test-------------------------', basename(__FILE__), 'stipe_log');
+  exit();
+}
 
 ?>
