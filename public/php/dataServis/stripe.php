@@ -1,7 +1,8 @@
 <?php
-
+include $_SERVER['DOCUMENT_ROOT'].'/php/config.php';
+include $_SERVER['DOCUMENT_ROOT'].'/php/modules/crud.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/logs/log.php';
-push_log('------------------begin test-----------------------', basename(__FILE__), 'stipe_log');
+//push_log('------------------begin webhook-----------------------', basename(__FILE__), 'stipe_log');
 //push_log(json_encode($_POST), basename(__FILE__), 'stipe_log');
 
 
@@ -51,13 +52,13 @@ switch ($event->type) {
     $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
     // Then define and call a method to handle the successful payment intent.
     // handlePaymentIntentSucceeded($paymentIntent);
-    push_log( $event, basename(__FILE__), 'stipe_log');
+    
     break;
   case 'payment_method.attached':
     $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
     // Then define and call a method to handle the successful attachment of a PaymentMethod.
     // handlePaymentMethodAttached($paymentMethod);
-    push_log( $event, basename(__FILE__), 'stipe_log');
+    
     break;
   case 'invoice.paid':
     $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
@@ -66,10 +67,8 @@ switch ($event->type) {
     //push_log( $event, basename(__FILE__), 'stipe_log');
     break;
   case 'checkout.session.completed':
-    $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
-    // Then define and call a method to handle the successful attachment of a PaymentMethod.
-    // handlePaymentMethodAttached($paymentMethod);
-    push_log( $event, basename(__FILE__), 'stipe_log');
+    $paymentMethod = $event->data->object; 
+    include '08_stripe/01_session_complited.php';
     break;
   default:
     // Unexpected event type
@@ -82,7 +81,7 @@ exit_script();
 
 
 function exit_script(){
-  push_log('------------------end test-------------------------', basename(__FILE__), 'stipe_log');
+  //push_log('------------------begin webhook-------------------------', basename(__FILE__), 'stipe_log');
   exit();
 }
 
