@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/php/config.php';
+include $_SERVER['DOCUMENT_ROOT'].'/php/config.php'; $mysql = $mysql_calc;
 include $_SERVER['DOCUMENT_ROOT'].'/php/modules/crud.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/logs/log.php';
 //push_log('------------------begin webhook-----------------------', basename(__FILE__), 'stipe_log');
@@ -52,9 +52,13 @@ switch ($event->type) {
     $paymentMethod = $event->data->object; 
     include '08_stripe/01_session_complited.php';
     break;
-  case 'payment_intent.succeeded':
+  case 'invoice.payment_succeeded':
     $paymentIntent = $event->data->object; 
     include '08_stripe/02_payment_succeeded.php';
+    break;
+  case 'invoice.payment_failed':
+    $paymentIntent = $event->data->object; 
+    include '08_stripe/03_payment_failed.php';
     break;
   default:
     // Unexpected event type
