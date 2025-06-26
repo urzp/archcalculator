@@ -48,27 +48,13 @@ if ($endpoint_secret) {
 
 // Handle the event
 switch ($event->type) {
-  case 'payment_intent.succeeded':
-    $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-    // Then define and call a method to handle the successful payment intent.
-    // handlePaymentIntentSucceeded($paymentIntent);
-    
-    break;
-  case 'payment_method.attached':
-    $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
-    // Then define and call a method to handle the successful attachment of a PaymentMethod.
-    // handlePaymentMethodAttached($paymentMethod);
-    
-    break;
-  case 'invoice.paid':
-    $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
-    // Then define and call a method to handle the successful attachment of a PaymentMethod.
-    // handlePaymentMethodAttached($paymentMethod);
-    //push_log( $event, basename(__FILE__), 'stipe_log');
-    break;
   case 'checkout.session.completed':
     $paymentMethod = $event->data->object; 
     include '08_stripe/01_session_complited.php';
+    break;
+  case 'payment_intent.succeeded':
+    $paymentIntent = $event->data->object; 
+    include '08_stripe/02_payment_succeeded.php';
     break;
   default:
     // Unexpected event type
