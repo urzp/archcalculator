@@ -64,6 +64,10 @@ switch ($event->type) {
     $paymentIntent = $event->data->object; 
     include '08_stripe/04_subscription_updated.php';
     break;
+  case 'customer.subscription.deleted':
+    $paymentIntent = $event->data->object; 
+    include '08_stripe/05_subscription_deleted.php';
+    break;
   default:
     // Unexpected event type
     error_log('Received unknown event type');
