@@ -1,6 +1,6 @@
 <template>
     <div class="percent"  @click="checkLock()">
-        <div v-if="!input_type||isLocked" class="value">{{value}}</div>
+        <div v-if="!input_type||isLocked" class="value">{{value.toLocaleString('DE-de')}}</div>
         <input v-else ref="imput_pecent" type="text"  class="value" :value="value.toLocaleString('DE-de')" @change="event => edit_value(event)" @input="event => { validate(event) }"/>
         <div class="sumbol">%</div>
     </div>
@@ -79,7 +79,6 @@ export  default{
             let val = event.target.value
             val = Number(val.replace(',','.'))
             if(!val) val = '0'
-            event.target.value = val.toLocaleString('DE-de')
             this.$emit('edit_value', val)
             EventBus.emit('edit:input',{ parent_item:this.search_data.id_parent , id_item: this.search_data.id , value:val})
             this.adjast_input_width()
