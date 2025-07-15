@@ -43,6 +43,7 @@ export  default{
     methods:{
         validate(event){
             let val = event.target.value
+            // console.log('@input',val)
             let position = event.target.selectionStart - 1
             
             if(val[0] == '0' &&val.length > 0){
@@ -69,6 +70,7 @@ export  default{
             if(val_num > 100) event.target.value = '100'
             if(val_num < 0||val=='') event.target.value = '0'
             this.adjast_input_width()
+            this.edit_value(event)
         },
         adjast_input_width(){
             let input = this.$refs.imput_pecent
@@ -77,8 +79,9 @@ export  default{
         },
         edit_value(event){
             let val = event.target.value
+            // console.log('@change',val)
             val = Number(val.replace(',','.'))
-            if(!val) val = '0'
+            if(!val) val = 0
             this.$emit('edit_value', val)
             EventBus.emit('edit:input',{ parent_item:this.search_data.id_parent , id_item: this.search_data.id , value:val})
             this.adjast_input_width()

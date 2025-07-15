@@ -64,6 +64,11 @@ export  default{
         list:Array,
     },
     emits:['updatePercent'],
+    // watch:{
+    //     percent(new_v, old_v){
+    //         console.log('watch', new_v)
+    //     }
+    // },
     computed:{
         value(){
             return this.honorar * this.percent/100
