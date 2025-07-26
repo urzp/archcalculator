@@ -18,3 +18,7 @@ invoice.payment_succeeded:
 
 invoice.payment_failed:
 Предупреждает, если платеж не удался. Это поможет вам отслеживать и уведомлять пользователей о проблемах с платежами.
+
+
+
+https://buy.stripe.com/test_7sY3cx0l0fMLf2qc7Gd7q00
