@@ -7,6 +7,7 @@ import SiteBar from '@/pageParts/SiteBar.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'
+import tarificPlans from './UI/Pupaps/tarificPlans.vue'
 import ListAllprojects from './UI/Pupaps/openProject/ListAllprojects.vue'
 import ListRecentProjects from './UI/Pupaps/openProject/ListRecentProjects.vue'
 import ListDayProjects from './UI/Pupaps/openProject/ListDayProjects.vue'
@@ -156,6 +157,7 @@ import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
 import CheckBox from '@/components/UI/Simples/CheckBox.vue'
 import DetalMarker from '@/components/UI/Simples/detalMarker.vue'
 import FilterData from '@/components/UI/Simples/filter.vue'
+import TarifCard from '@/components/UI/Pupaps/tarif/tarifCard.vue'
 
 export default [
     Header,
@@ -166,6 +168,7 @@ export default [
     Popaps,
     Comfirm,
     openProject,
+    tarificPlans,
     ListRecentProjects,
     ListAllprojects,
     ListDayProjects,
@@ -316,4 +319,5 @@ export default [
     CheckBox,
     DetalMarker,
     FilterData,
+    TarifCard,
 ]

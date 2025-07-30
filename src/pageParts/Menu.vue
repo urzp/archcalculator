@@ -8,6 +8,7 @@
             <div v-if="global.login" class="list login">
                 <div v-if=" this.$route.path!='/'" class="item" @click="$router.push({ name: 'home' })">{{ text.Calculator }}</div>
                 <div v-if=" this.$route.path!='/profile'" class="item" @click="$router.push({ name: 'profile' })">{{ text.Profile }}</div>
+                <div  class="item" @click="openTarif()">{{ text.Tarif }}</div>
                 <div v-if="global.admin" class="item" @click="$router.push({ name: 'law_edit_data' })">{{text.Edit_HOAI_version}}</div>
                 <div v-if="global.admin" class="item" @click="$router.push({ name: 'admin' })">{{text.Admin_Panel}}</div>
                 <div class="item" @click="logOut()">{{ text.Logout }}</div>
@@ -39,6 +40,7 @@ export default{
                 Logout: text.menu.Logout,
                 Calculator: text.menu.Calculator,
                 Profile: text.menu.Profile,
+                Tarif: text.menu.Tarif,
             }
         }
     },
@@ -56,6 +58,9 @@ export default{
         selectItem(name){
             this.close()
             EventBus.emit(`Menu:${name}`)
+        },
+        openTarif(){
+            EventBus.emit('MenuTarif:open')
         },
         logOut(){
             logOut()
