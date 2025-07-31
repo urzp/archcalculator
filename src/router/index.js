@@ -57,8 +57,10 @@ router.beforeEach(async (to, from) => {
 })
 
 router.open = function(routeDetails) {
+ 
   const routeData = this.resolve(routeDetails);
-  window.open(routeData.href, '_blank');
+  window.open(routeDetails, '_blank').focus();
+  //window.open(routeData.href, '_blank');
 };
 
 export default router

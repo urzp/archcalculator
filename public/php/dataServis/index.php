@@ -30,6 +30,7 @@ include '04_users/index.php';
 include '05_exportDoc/index.php';
 include '06_admin/index.php';
 include '07_pages/index.php';
+include '08_stripe/index.php';
 
 echo json_encode($result);
 

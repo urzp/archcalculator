@@ -7,6 +7,7 @@
                 <div class="title" @click="selection('Projects')"><Marker :level="1"/> {{ text.Projects + ': '}}<div class="count"> {{ Projects }} </div></div>
                 <div class="title" @click="selection('Bills')"><Marker :level="1"/> {{ text.Bills + ': '}}<div class="count"> {{ Bills }} </div></div>
                 <div class="title" @click="selection('HOAI')"><Marker :level="1"/> {{ text.HOAI_versions + ': '}} <div class="count"> {{ HOAI_versions }} </div></div>
+                <div class="title" @click="selection('Tariffs')"><Marker :level="1"/> {{ text.Tariffs + ': '}} <div class="count"> {{ Tariffs }} </div></div>
                 
                 <div class="title" @click="config.pages=!config.pages"><Marker :level="0"/>Pages</div>
                 <div v-if="config.pages" class="content">
@@ -46,12 +47,14 @@ export default{
             Users:'',
             Projects:'',
             Bills:'',
+            Tariffs:'',
             text:{
                 HOAI_versions: text.adminSideBar.HOAI_versions,
                 Users: text.adminSideBar.Users,
                 Projects: text.adminSideBar.Projects,
                 Bills: text.adminSideBar.Bills,
                 Setings: text.adminSideBar.Setings,
+                Tariffs: text.adminSideBar.Tariffs
             }           
         }
     },
@@ -76,6 +79,7 @@ export default{
             this.Users = data.users
             this.Projects = data.projects
             this.Bills = data.bills
+            this.Tariffs = data.tariffs
         },
         selection(value){
             EventBus.emit('Footer:selectMain')

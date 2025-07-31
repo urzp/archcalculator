@@ -8,6 +8,7 @@
         <AdminUsers v-if="AdminSiteBar=='Users'"></AdminUsers>
         <AdminProjects v-if="AdminSiteBar=='Projects'"></AdminProjects>
         <AdminBills v-if="AdminSiteBar=='Bills'"></AdminBills>
+        <AdminTariffs v-if="AdminSiteBar=='Tariffs'"></AdminTariffs>
         <EditPage v-if="hideEditPage" :namePage="AdminSiteBar"></EditPage>
       </div>
       <div v-show="!showMain" class="veiews">
@@ -53,6 +54,7 @@ export default {
         if(this.AdminSiteBar=='Users') result=false
         if(this.AdminSiteBar=='Projects') result=false
         if(this.AdminSiteBar=='Bills') result=false
+        if(this.AdminSiteBar=='Tariffs') result=false
         return result
       }
     }

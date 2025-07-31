@@ -33,6 +33,7 @@ import UserFeeld from './Admin/01_user/01_2_UserFeeld.vue'
 import AdminUserProjects from './Admin/01_user/01_3_UserProjects.vue'
 import AdminProjects from './Admin/02_Projects.vue'
 import AdminBills from './Admin/03_Bills.vue'
+import AdminTariffs from './Admin/05_Tariffs.vue'
 import EditPage from './Admin/04_EditPage.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
@@ -190,6 +191,7 @@ export default [
     AdminUsers,
     AdminProjects,
     AdminBills,
+    AdminTariffs,
     
     AdminProfileUser,
     UserFeeld,

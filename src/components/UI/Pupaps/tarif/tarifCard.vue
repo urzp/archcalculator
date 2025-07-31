@@ -1,24 +1,26 @@
 <template>
     <div v-if="!!cardData" class="wrap_card">
-        <div class="title">{{ title }}</div>
+        <div class="title_card">{{ title }}</div>
         <div class="content">
             <div class="price_data">
                 <div class="price">
-                    <div class="price_value">{{ price_value }}</div><div class="curency">{{ curency }}</div>
+                    <div class="price_value">{{ price_value }}</div><div class="curency">€</div>
                 </div>
                 <div class="price_period">{{ price_period }}</div>
             </div>
             <div class="list_servis">
-                <div v-for="item in list_sevices" :key="item.id" class="item_servis" :class="item.text_align">{{ item.text }}</div>
+                <div v-for="item in list_sevices" :key="item.id" class="item_servis" :class="item.text_align"><div class="symbol_item">●</div> {{ item.text }}</div>
             </div>
         </div>
-        <div v-if="show_button" class="button" @click="$router.open(link)">
+        <div v-if="show_button" class="button" @click="$router.open(link + '?client_reference_id=' + userId )">
             <div class="text">{{ cardData.button.label }}</div>
         </div>
+        <div v-if="show_button" class="ust">*zzgl. USt., Berechnung beim Abschluss des Kaufs</div>
     </div>
 </template>
 
 <script>
+import { user } from '@/servis/globalValues.js'
 export default{
     name: 'TarifCard',
     props:{
@@ -28,6 +30,9 @@ export default{
         }
     },
     computed:{
+        userId(){
+            return user.id
+        },
         title(){
             let result = '-';
             if(!!this.cardData.price&&!!this.cardData.title){ result = this.cardData.title }
@@ -69,8 +74,8 @@ export default{
 
 <style scoped>
     .wrap_card{
-        width: 300px;
-        height: 450px;
+        width: 450px;
+        height: 600px;
         padding: 30px;
         display: flex;
         flex-direction: column;
@@ -78,7 +83,7 @@ export default{
         box-shadow: 0px 0px 15px #00000052;
 
     }
-    .title{
+    .title_card{
         text-align: center;
         font-family: 'Raleway-Light';
         font-size: 32px;
@@ -107,16 +112,23 @@ export default{
        text-align: center; 
     }
     .list_servis{
-        font-family: 'Comfortaa-Light';
-        font-size: 18px;
-        color: #5C5C5C;
+        font-family: 'Comfortaa-Regular';
+        font-size: 14px;
+        color: #828282;
+    }
+    .symbol_item{
+        margin-right: 10px;
+        color: #aeaeae;
     }
     .item_servis.center{
         text-align: center;
     }
+
     .item_servis{
-        line-height: 1.2;
+        display: flex;
+        margin-bottom: 10px;
     }
+
     .button{
         height: 40px;
         width: 100%;
@@ -130,4 +142,18 @@ export default{
         align-items: center;
         cursor: pointer;
     }
+    .ust{
+        margin-top: 20px;
+        font-size: 12px;
+        color: #828282;
+    }
+
+    @media (max-width: 680px){
+        .wrap_card{
+            width: 400px;
+        }
+        
+    }
+
+
 </style>

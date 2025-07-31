@@ -35,6 +35,7 @@ export let text = {
         Projects:'Projects',
         Bills:'Bills',
         Setings:'Setings',
+        Tariffs: 'Tariffs',
     },
     sideBar:{
         Calc:'Rechner',
