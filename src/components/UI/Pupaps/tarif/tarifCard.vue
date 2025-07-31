@@ -12,7 +12,7 @@
                 <div v-for="item in list_sevices" :key="item.id" class="item_servis" :class="item.text_align"><div class="symbol_item">●</div> {{ item.text }}</div>
             </div>
         </div>
-        <div v-if="show_button" class="button" @click="$router.open(link + '?client_reference_id=' + userId )">
+        <div v-if="show_button" class="button" @click="gotoStirpe()">
             <div class="text">{{ cardData.button.label }}</div>
         </div>
         <div v-if="show_button" class="ust">*zzgl. USt., Berechnung beim Abschluss des Kaufs</div>
@@ -30,9 +30,6 @@ export default{
         }
     },
     computed:{
-        userId(){
-            return user.id
-        },
         title(){
             let result = '-';
             if(!!this.cardData.price&&!!this.cardData.title){ result = this.cardData.title }
@@ -67,6 +64,14 @@ export default{
             let result = "#"
             if(!!this.cardData.button&&!!this.cardData.button.link) result = this.cardData.button.link
             return result
+        }
+    },
+    methods:{
+        async gotoStirpe(){
+            let user_data = '?client_reference_id=' + user.id
+            let code = (await apiData({typeData:'begin_subscribe'})).data
+            user_data = user_data + "_" + code
+            this.$router.open(this.link + user_data)
         }
     }
 }
