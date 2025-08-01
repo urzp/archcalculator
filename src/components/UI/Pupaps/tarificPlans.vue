@@ -15,11 +15,13 @@
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 import { global } from '@/servis/globalValues.js'
+import { user } from '@/servis/globalValues.js'
 import { text } from '@/servis/text.js'                    
 export default{
     name: 'tarificPlans',
     mounted(){
         this.getData()
+        console.log(user)
         EventBus.on('MenuTarif:open',this.openPopap)
     },
     data(){
@@ -34,42 +36,42 @@ export default{
                 title: text.tarificPlans.title,
             },
             list:[
-                {   
-                    id:0,
-                    title:'Frei',
-                    price:{
-                        value: 0,
-                        curency: '€',
-                    },
-                    price_period: 'Pro Monat',
-                    list_sevices:[
-                        {   id:1,text:'Honorarrechner zur freien Verwendung'},
-                        {   id:2,text:'Honorarberechnung als PDF exportieren'},
-                        {   id:3,text:'Honorarberechnung per Link teilen'},
-                    ]
-                },
-                {   
-                    id:1,
-                    title:'Premium',
-                    price:{
-                        value: 25,
-                        curency: '€',
-                    },
-                    price_period: 'Pro Monat',
-                    list_sevices:[
-                        {   id:1,text:'Honorarrechner'},
-                        {   id:2,text:'Mehrere Honorarobjekte je Berechnung'},
-                        {   id:3,text:'Projekte sichern und öffnen'},
-                        {   id:4,text:'Angebote erstellen'},
-                        {   id:5,text:'Rechnungen erstellen'},
-                        {   id:6,text:'Abschlags- und Schlussrechnungen'},
-                        {   id:7,text:'Elektronische Rechnung im XRechnung Format (PDF mit integrierten Daten der elektronischen Rechnung'},
-                    ],
-                    button:{
-                        label:'Buchen',
-                        link:'https://billing.stripe.com/p/login/cNi5kEdjI5vxeF9aXN4ow00',
-                    }
-                },
+                // {   
+                //     id:0,
+                //     title:'Frei',
+                //     price:{
+                //         value: 0,
+                //         curency: '€',
+                //     },
+                //     price_period: 'Pro Monat',
+                //     list_sevices:[
+                //         {   id:1,text:'Honorarrechner zur freien Verwendung'},
+                //         {   id:2,text:'Honorarberechnung als PDF exportieren'},
+                //         {   id:3,text:'Honorarberechnung per Link teilen'},
+                //     ]
+                // },
+                // {   
+                //     id:1,
+                //     title:'Premium',
+                //     price:{
+                //         value: 25,
+                //         curency: '€',
+                //     },
+                //     price_period: 'Pro Monat',
+                //     list_sevices:[
+                //         {   id:1,text:'Honorarrechner'},
+                //         {   id:2,text:'Mehrere Honorarobjekte je Berechnung'},
+                //         {   id:3,text:'Projekte sichern und öffnen'},
+                //         {   id:4,text:'Angebote erstellen'},
+                //         {   id:5,text:'Rechnungen erstellen'},
+                //         {   id:6,text:'Abschlags- und Schlussrechnungen'},
+                //         {   id:7,text:'Elektronische Rechnung im XRechnung Format (PDF mit integrierten Daten der elektronischen Rechnung'},
+                //     ],
+                //     button:{
+                //         label:'Buchen',
+                //         link:'https://billing.stripe.com/p/login/cNi5kEdjI5vxeF9aXN4ow00',
+                //     }
+                // },
             ]
         }
     },
