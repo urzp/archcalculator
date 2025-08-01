@@ -21,6 +21,7 @@
 
 <script>
 import { user } from '@/servis/globalValues.js'
+import { apiData } from '@/servis/apiData.js'
 export default{
     name: 'TarifCard',
     props:{
@@ -69,7 +70,7 @@ export default{
     methods:{
         async gotoStirpe(){
             let user_data = '?client_reference_id=' + user.id
-            let code = (await apiData({typeData:'begin_subscribe'})).data
+            let code = (await apiData({typeData:'beginSubscription'})).data
             user_data = user_data + "_" + code
             this.$router.open(this.link + user_data)
         }
