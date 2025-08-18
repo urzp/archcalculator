@@ -20,6 +20,12 @@
                 <div class="collum collum_5">Servis
                     <FilterData sortName="title" :list="list" @updated="value=>filter(value)"/>
                 </div>
+                <div class="collum collum_6">Button Label
+                    <FilterData sortName="title" :list="list" @updated="value=>filter(value)"/>
+                </div>
+                <div class="collum collum_7">Button Link
+                    <FilterData sortName="title" :list="list" @updated="value=>filter(value)"/>
+                </div>
                 <!-- <div class="collum collum_2">Date
                     <FilterData sortName="created"  sortype="date" :list="list" @updated="value=>filter(value)"/>
                 </div>
@@ -43,8 +49,10 @@
                     <div class="collum collum_3">{{ item.price.value }}</div>
                     <div class="collum collum_4">{{ item.price_period }}</div>
                     <div class="collum collum_5">
-                        <div v-for="item_serv in item.list_sevices" :key="item_serv.id">{{ item_serv.text }}</div>
+                        <div class="small_font" v-for="item_serv in item.list_sevices" :key="item_serv.id">{{ item_serv.text }}</div>
                     </div>
+                    <div class="collum collum_6">{{ ButtonLabel(item, 'label') }}</div><div class="edition">edit</div>
+                    <div class="collum collum_7">{{ ButtonLabel(item, 'link') }}</div>
                     <!-- <div class="collum collum_2">{{ item.created }}</div>
                     <div class="collum collum_3" @click="openUser(item.user_id)" :class="{'no_pointer':item.user_id=='-1'}">{{ item.user }}</div>
                     <div class="collum collum_4">{{ item.name }}</div>
@@ -103,7 +111,12 @@ export default{
         setLink(id,token){
             let url=`https://honorar.online?project=${id}&download_token=${token}`
             return url
-        }
+        },
+        ButtonLabel(item, subItem){
+            let result = "-"
+            if(!!item.button&&!!item.button[subItem]) result = item.button[subItem]
+            return result
+        },
     }
 }
 </script>
@@ -151,20 +164,36 @@ export default{
     .collum_3{
         padding-left: 5px;
         padding-right: 5px;
-        min-width: 300px;
+        min-width: 100px;
     }
 
     .collum_4{
-        width: 278px;
+        width: 200px;
     }
 
     .collum_5{
-        width: 200px;
+        width: 300px;
         text-align: left!important;
+    }
+
+    .small_font{
+        font-size: 14px;
     }
 
     .collum_6{
         min-width: 130px;
+    }
+
+    .collum_7{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 200px;
+    }
+
+    .edition{
+        position: relative;
+        width: 0;
     }
 
     .data .collum{
