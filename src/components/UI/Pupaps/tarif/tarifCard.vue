@@ -58,7 +58,7 @@ export default{
         },
         show_button(){
             let result = false
-            if(!!this.cardData.button&&!!this.cardData.button.label) result = true
+            if(!!this.cardData.button&&!!this.cardData.button.label&&this.cardData.button.label!='-') result = true
             return result
         },
         link(){

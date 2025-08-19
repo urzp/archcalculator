@@ -11,5 +11,11 @@
         }
     }
 
+    if($isAdmin){
+        switch ($typeData) {
+            case 'tariffsUpdate': include '08_tariffsUpdate.php'; break;
+        }
+    }
+
 
 ?>

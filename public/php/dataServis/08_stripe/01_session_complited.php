@@ -39,4 +39,5 @@
     push_log('client_reference_id: '.$client_reference_id, basename(__FILE__), 'stipe_log');
     push_log('client_secret: '.$client_secret, basename(__FILE__), 'stipe_log');
     push_log('subscription_id: '.$subscription_id, basename(__FILE__), 'stipe_log');
+    push_log('$currentPeriodEndDate: '.$currentPeriodEndDate, basename(__FILE__), 'stipe_log');
 ?>

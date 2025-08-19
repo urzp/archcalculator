@@ -37,14 +37,17 @@ export default{
             type:Boolean,
             default: false,
         },
-        
+        autuClear:{
+            type:Boolean,
+            default: true,
+        }
     },
     emits:['input_event', 'submit_event', 'presstab'],
     methods:{
         submit_event(event){
             this.edit = false
             let val = event.target.value
-            this.$refs.thisinput.value = ''
+            if(this.autuClear) this.$refs.thisinput.value = ''
             this.$emit('submit_event', val)
         },
         input_event(event){
