@@ -43,7 +43,14 @@ export async function updatedProfile(){
 export async function isLogget(){
     let result = await apiData({typeData:'isLogin' })
     global.login = result.success
-    if(result.success) { global.admin = result.isAdmin }else{global.admin = false}
+    if(result.success) { 
+        global.admin = result.isAdmin; 
+        global.isTariffActive=result.isTariffActive 
+    }else{
+        global.admin = false; 
+        global.isTariffActive = false
+    }
+    // global.isTariffActive = false
     if(result.success) updatedProfile()
     return result.success
 }
