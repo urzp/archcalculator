@@ -14,8 +14,8 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/php/lib/stripe-php-master/init.php';
 
 
 
-$setApiKey = crud_read('settings', 'value', "`name`='setApiKey'");
-$signingSecret = crud_read('settings', 'value', "`name`='signingSecret'");
+$setApiKey = crud_read('settings', 'value', "`name`='setApiKey'")[0]["value"];
+$signingSecret = crud_read('settings', 'value', "`name`='signingSecret'")[0]["value"];
 
 \Stripe\Stripe::setApiKey($setApiKey);
 $endpoint_secret = $signingSecret;
