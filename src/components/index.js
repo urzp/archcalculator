@@ -35,6 +35,7 @@ import AdminProjects from './Admin/02_Projects.vue'
 import AdminBills from './Admin/03_Bills.vue'
 import AdminTariffs from './Admin/05_Tariffs.vue'
 import EditPage from './Admin/04_EditPage.vue'
+import AdminSetings from './Admin/06_Setings.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -192,6 +193,7 @@ export default [
     AdminProjects,
     AdminBills,
     AdminTariffs,
+    AdminSetings,
     
     AdminProfileUser,
     UserFeeld,

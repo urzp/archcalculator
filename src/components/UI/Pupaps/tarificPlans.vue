@@ -21,7 +21,6 @@ export default{
     name: 'tarificPlans',
     mounted(){
         this.getData()
-        console.log(user)
         EventBus.on('MenuTarif:open',this.openPopap)
     },
     data(){

@@ -1,29 +1,21 @@
 <template>
     <div class="wrap_admin_user"  v-if="!show_user">
         <div class="main-title">
-            <div class="title">Tariffs</div>
+            <div class="title">Setings</div>
         </div>
         <div class="table">
             <div class="header">
                 <div class="collum collum_1">ID</div>
-                <div class="collum collum_2">Title</div>
-                <div class="collum collum_3">Amount Eur</div>
-                <div class="collum collum_4">Time</div>
-                <div class="collum collum_5">Servis</div>
-                <div class="collum collum_6">Button Label</div>
-                <div class="collum collum_7">Button Link</div>
+                <div class="collum collum_2">Name</div>
+                <div class="collum collum_3">Value</div>
+                <div class="collum collum_4">Discription</div>
             </div>
             <div class="wrap_data" v-if="loaded">
                 <div class="data" v-for="item in filtredList" :key="item.id">
                     <div class="collum collum_1">{{ item.id }}</div>
-                    <div class="collum collum_2"><InputText :value="item.title" :width="'180px'" @submit_event="value=>{update(item.id,'title', value)}" :autuClear="false"/></div>
-                    <div class="collum collum_3"><InputText :value="item.price.value" :width="'100px'" @submit_event="value=>{update(item.id,'price_value', value)}" :autuClear="false"/></div>
-                    <div class="collum collum_4"><InputText :value="item.price_period" :width="'200px'" @submit_event="value=>{update(item.id,'price_period', value)}" :autuClear="false"/></div>
-                    <div class="collum collum_5">
-                        <div class="small_font" v-for="item_serv in item.list_sevices" :key="item_serv.id"><InputText :value="item_serv.text" :width="'300px'" @submit_event="value=>{updateServis(item.id, item_serv.id, value)}" :autuClear="false"/></div>
-                    </div>
-                    <div class="collum collum_6"><InputText :value="ButtonLabel(item, 'label')" :width="'130px'" @submit_event="value=>{update(item.id,'label_button', value)}" :autuClear="false"/></div>
-                    <div class="collum collum_7"><InputText :value="ButtonLabel(item, 'link')" :width="'200px'" @submit_event="value=>{update(item.id,'link_button', value)}" :autuClear="false"/></div>
+                    <div class="collum collum_2"><InputText :value="item.name" :width="'250px'" @submit_event="value=>{update(item.id,'name', value)}" :autuClear="false"/></div>
+                    <div class="collum collum_3"><InputText :value="item.value" :width="'400px'" @submit_event="value=>{update(item.id,'value', value)}" :autuClear="false"/></div>
+                    <div class="collum collum_4"><InputText :value="item.description" :width="'400px'" @submit_event="value=>{update(item.id,'description', value)}" :autuClear="false"/></div>
                 </div>
             </div>
             <div v-else class="load">{{ text.Loading }}</div>
@@ -37,7 +29,7 @@ import { text } from '@/servis/text'
 import { EventBus } from '@/servis/EventBus'
 import { apiData } from '@/servis/apiData.js'
 export default{
-    name:'AdminTariffs',
+    name:'AdminSetings',
     mounted(){
         this.initData()
         EventBus.on('AdminUsers:Update', this.initData)
@@ -57,7 +49,7 @@ export default{
     methods:{
         async initData(){
             this.loaded = false
-            let result = (await apiData({typeData:'tariffs'})).data
+            let result = (await apiData({typeData:'AdminGetSettings'})).data
             this.list = result
             this.filtredList = result
             this.loaded = true
@@ -81,28 +73,7 @@ export default{
             return result
         },
         update(id, key ,value){
-            if(key=='title') apiData({typeData:'tariffsUpdate', data:{id, key:'name', value}})
-            if(key=='price_value') apiData({typeData:'tariffsUpdate', data:{id, key:'amount', value}})
-            let data = this.list.find(item=>item.id==id)
-            if(key=='price_value'){
-                data.price.value = value
-                data.price.curency = '€'
-            }else if(key=='label_button'){
-                if(data['button']===undefined) data.button = {}
-                data.button.label = value
-            }else if(key=='link_button'){
-                if(data['button']===undefined) data.button = {} 
-                data.button.link = value
-            }else{
-                data[key] = value
-            }
-            apiData({typeData:'tariffsUpdate', data:{id, key:'data', value: data}})
-        },
-        updateServis(id, id_servis ,value){
-            let data = this.list.find(item=>item.id==id)
-            let data_servis = data.list_sevices.find(item=>item.id==id_servis )
-            data_servis.text = value
-            apiData({typeData:'tariffsUpdate', data:{id, key:'data', value: data}})
+            apiData({typeData:'AdminUpdateSettings', data:{id, key, value}})
         }
     }
 }
@@ -146,44 +117,27 @@ export default{
     }
 
     .collum_2{
-        width: 180px;
+        width: 250px;
         padding-left: 15px;
     }
 
     .collum_3{
         padding-left: 5px;
         padding-right: 5px;
-        width: 100px;
+        width: 400px;
     }
 
     .collum_4{
         padding-left: 5px;
-        width: 200px;
+        width: 400px;
     }
 
-    .collum_5{
-        width: 300px;
-        text-align: left!important;
-    }
 
-    .header .collum_5{
-        text-align: center!important;
-    }
 
     .small_font{
         font-size: 14px;
     }
 
-    .collum_6{
-        width: 130px;
-    }
-
-    .collum_7{
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 200px;
-    }
 
     .edition{
         cursor: url('@/assets/icons/pen_icon/main.svg'), auto!important;
@@ -199,25 +153,18 @@ export default{
         cursor: pointer;
     }
 
+    .data .collum_2{
+        padding-left: 15px;
+    }
+
     .data .collum_3{
-        padding-left: 10px;
+        padding-left: 15px;
     }
 
     .data .collum_4{
-        padding-left: 5px;
+        padding-left: 15px;
     }
 
-    .data .collum_5{
-        padding-left: 5px;
-    }
-
-    .data .collum_6{
-        padding-left: 10px;
-    }
-
-    .data .collum_7{
-        padding-left: 10px;
-    }
 
     .header .collum:hover{
         color: #fff;
