@@ -12,8 +12,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/php/lib/stripe-php-master/init.php';
 // \Stripe\Stripe::setApiKey('sk_test_51RahmuPtu9HDKCGxVqgDG1i8Wquf4q2bdcSLWxUr8jM1wdrylAq7VJWFPg9CgUHaToladMxr29iVQZmbIzup2BeW00Hz7tZG1x');
 // $endpoint_secret = 'whsec_6ywYqQ9NCE1edBaIfHkKMLTLdmubjxix';//'whsec_nSlykMG31kD7YwvOd8tC0asdXrIoxJBE'; 
 
-$setApiKey = '';
-$signingSecret = '';
+
+
+$setApiKey = crud_read('settings', 'value', "`name`='setApiKey'");
+$signingSecret = crud_read('settings', 'value', "`name`='signingSecret'");
 
 \Stripe\Stripe::setApiKey($setApiKey);
 $endpoint_secret = $signingSecret;
