@@ -25,7 +25,7 @@ export default{
 <style scoped>
     .text-btn{
         position: absolute;
-        top:10px;
+        top:20px;
         right: -75px;
         width: v-bind(width);
         height: v-bind(height);

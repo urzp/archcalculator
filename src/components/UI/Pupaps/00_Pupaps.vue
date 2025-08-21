@@ -4,6 +4,7 @@
     <ResetPassword/>
     <Comfirm/>
     <openProject/>
+    <tarificPlans/>
     <message/>
     <downloadLinks_bill/>
     <downloadLinks_project/>

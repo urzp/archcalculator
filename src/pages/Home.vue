@@ -7,9 +7,8 @@
       <Calculator v-show="!show_bills" :class="{hide_block:show_bills}" :project_id="project_id" :statusBill="statusBill" :download_token="download_token"></Calculator>
       <ProjBills v-show="show_bills" :class="{hide_block:!show_bills}" :project_id="project_id"></ProjBills>
     </div>
-    <div v-else class="veiews">
-        <Impressum v-if="selectedView=='impressum'"/>
-        <Datenschutz v-if="selectedView=='datenschutz'" />
+    <div v-show="!showMain" class="veiews">
+        <PageInf :namePage="selectedView"/>
     </div>
     <Footer></Footer>
   </div>
@@ -19,6 +18,8 @@
 import { EventBus } from '@/servis/EventBus'
 import { global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
+import { autoZoom } from '@/servis/functions.js'
+
 export default {
   name: 'HomePage',
   mounted(){
@@ -57,6 +58,7 @@ export default {
   },
   methods:{
     async init(){
+      autoZoom()
       if(await this.use_link_project()){
         if(!!this.$route.query.project) {this.project_id = this.$route.query.project; this.statusBill=false}
         if(!!this.$route.query.bill) {this.project_id = this.$route.query.bill; this.statusBill=true}
@@ -113,7 +115,7 @@ export default {
       this.scrollUp()
     },
     scrollUp(){
-      this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
+      if(!!this.$refs.to_scroll) this.$refs.to_scroll.scrollIntoView({ behavior: "smooth" });
     }
   }
   

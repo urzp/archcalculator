@@ -7,6 +7,18 @@
                 <div class="title" @click="selection('Projects')"><Marker :level="1"/> {{ text.Projects + ': '}}<div class="count"> {{ Projects }} </div></div>
                 <div class="title" @click="selection('Bills')"><Marker :level="1"/> {{ text.Bills + ': '}}<div class="count"> {{ Bills }} </div></div>
                 <div class="title" @click="selection('HOAI')"><Marker :level="1"/> {{ text.HOAI_versions + ': '}} <div class="count"> {{ HOAI_versions }} </div></div>
+                <div class="title" @click="selection('Tariffs')"><Marker :level="1"/> {{ text.Tariffs + ': '}} <div class="count"> {{ Tariffs }} </div></div>
+                
+                <div class="title" @click="config.pages=!config.pages"><Marker :level="0"/>Pages</div>
+                <div v-if="config.pages" class="content">
+                    <Item_level_1 :title="'Impressum'" @click="selection('impressum')" />
+                    <Item_level_1 :title="'Datenschutz'" @click="selection('datenschutz')"  />
+                    <Item_level_1 :title="'Cookie Einstellungen'" @click="selection('cookie')"  />
+                    <Item_level_1 :title="'Kontakt'" @click="selection('contacts')" />
+                    <Item_level_1 :title="'Über HONORAR.online'" @click="selection('about')" />
+                    <Item_level_1 :title="'Instructions'" @click="selection('instructions')" />
+                </div>
+                
                 <div class="title" @click="selection('Setings')"><Marker :level="1"/> {{ text.Setings }}</div>
             </div>
         </div>
@@ -29,17 +41,20 @@ export default{
             config:{
                 open: true,
                 main_groupe: true,
+                pages:false,
             }, 
             HOAI_versions:'',
             Users:'',
             Projects:'',
             Bills:'',
+            Tariffs:'',
             text:{
                 HOAI_versions: text.adminSideBar.HOAI_versions,
                 Users: text.adminSideBar.Users,
                 Projects: text.adminSideBar.Projects,
                 Bills: text.adminSideBar.Bills,
                 Setings: text.adminSideBar.Setings,
+                Tariffs: text.adminSideBar.Tariffs
             }           
         }
     },
@@ -64,8 +79,10 @@ export default{
             this.Users = data.users
             this.Projects = data.projects
             this.Bills = data.bills
+            this.Tariffs = data.tariffs
         },
         selection(value){
+            EventBus.emit('Footer:selectMain')
             this.$emit('selected_item', value)
         }
     }

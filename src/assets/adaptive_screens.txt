@@ -1,0 +1,12 @@
+
+Information for developing adaptive process for diffrent wide screens.
+
+
+Wide Sizes Points:
+1400px;
+body 800px
+item font-size:20px
+-----------------------
+900px;
+body 600px
+item font-size:16px 

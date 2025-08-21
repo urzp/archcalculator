@@ -1,0 +1,18 @@
+payments
+id_user
+id_client_strap
+email
+datetime
+transaction
+amount
+product
+
+
+event: checkout.session.completed
+transaction: id
+id_user:client_reference_id,
+id_client_strap: data.object.customer
+email: data.object.customer_details.email
+datetime: (php)
+amount: data.object.amount_total
+product

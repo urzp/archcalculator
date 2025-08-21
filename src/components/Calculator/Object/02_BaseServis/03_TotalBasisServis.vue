@@ -51,6 +51,7 @@ export default{
     font-family: 'Raleway-Regular';
     font-size: 20px;
     color: var(--color-akcent);
+    align-items: baseline;
 }
 .value-percent{
     font-family: 'DroidSans';

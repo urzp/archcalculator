@@ -1,5 +1,5 @@
 <template>
-        <div class="item-Part-obj" :class="{gap_left:list.length>0}">
+        <div class="item-Part-obj stage_l_0" :class="{gap_left:list.length>0}">
             <DetalMarker v-if="!!list&&list.length>0" @click="collapse_detals=!collapse_detals" :collapse="collapse_detals"/>
             <div  class="main_row" >
                 <div class="title">{{ title }}</div>
@@ -31,6 +31,7 @@
 
 <script>
 import { Project, setUnSavedStatus } from '@/servis/projectData.js'
+import { global } from '@/servis/globalValues'
 export  default{
     name: 'Stage_calc_L0',
     async mounted(){
@@ -61,6 +62,11 @@ export  default{
     computed:{
         value(){
             return this.honorar * this.percent/100
+        },
+        price_next_row(){
+            let result = false
+            if(global.wideBody <= 600) result = true
+            return result
         }
     },
     methods:{  
@@ -147,7 +153,7 @@ export  default{
         justify-content: space-between;
     }   
     .title{
-        max-width: 760px;
+        width: 70%;
         margin-left: 55px;
         margin-top: 5px;
         margin-bottom: 5px;

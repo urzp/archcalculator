@@ -7,6 +7,7 @@ import SiteBar from '@/pageParts/SiteBar.vue'
 import Popaps from './UI/Pupaps/00_Pupaps.vue'
 import Comfirm from './UI/Pupaps/confirm.vue'
 import openProject from './UI/Pupaps/openProject.vue'
+import tarificPlans from './UI/Pupaps/tarificPlans.vue'
 import ListAllprojects from './UI/Pupaps/openProject/ListAllprojects.vue'
 import ListRecentProjects from './UI/Pupaps/openProject/ListRecentProjects.vue'
 import ListDayProjects from './UI/Pupaps/openProject/ListDayProjects.vue'
@@ -16,8 +17,8 @@ import messagePopap from './UI/Pupaps/message.vue'
 import downloadLinks_bill from './UI/Pupaps/downloadLinks_bill.vue'
 import downloadLinks_project from './UI/Pupaps/downloadLinks_project.vue'
 //----------------------------Impressum-----------------------------------
-import Impressum from '@/pageViewes/Impressum.vue'
-import Datenschutz from '@/pageViewes/Datenschutz.vue'
+import PageInf from '@/pageViewes/PageInf.vue'
+
 //----------------------------User-----------------------------------
 import Login from './Users/Login.vue'
 import Registration from './Users/Registration.vue'
@@ -32,6 +33,9 @@ import UserFeeld from './Admin/01_user/01_2_UserFeeld.vue'
 import AdminUserProjects from './Admin/01_user/01_3_UserProjects.vue'
 import AdminProjects from './Admin/02_Projects.vue'
 import AdminBills from './Admin/03_Bills.vue'
+import AdminTariffs from './Admin/05_Tariffs.vue'
+import EditPage from './Admin/04_EditPage.vue'
+import AdminSetings from './Admin/06_Setings.vue'
 //----------------------------Calculator-----------------------------
 import CalcTitle from './Calculator/Calc_title.vue'
 import ProjBillHeader from '@/components/Calculator/Bill_parts/01_ProjBillHeader.vue'
@@ -155,6 +159,7 @@ import Item_level_1 from '@/components/UI/SiteBar/Item_level_1'
 import CheckBox from '@/components/UI/Simples/CheckBox.vue'
 import DetalMarker from '@/components/UI/Simples/detalMarker.vue'
 import FilterData from '@/components/UI/Simples/filter.vue'
+import TarifCard from '@/components/UI/Pupaps/tarif/tarifCard.vue'
 
 export default [
     Header,
@@ -165,6 +170,7 @@ export default [
     Popaps,
     Comfirm,
     openProject,
+    tarificPlans,
     ListRecentProjects,
     ListAllprojects,
     ListDayProjects,
@@ -174,8 +180,7 @@ export default [
     downloadLinks_bill,
     downloadLinks_project,
 
-    Impressum,
-    Datenschutz,
+    PageInf,
 
     Login,
     Registration,
@@ -187,10 +192,13 @@ export default [
     AdminUsers,
     AdminProjects,
     AdminBills,
+    AdminTariffs,
+    AdminSetings,
     
     AdminProfileUser,
     UserFeeld,
     AdminUserProjects,
+    EditPage,
 
     CalcTitle,
     ProjBillHeader,
@@ -315,4 +323,5 @@ export default [
     CheckBox,
     DetalMarker,
     FilterData,
+    TarifCard,
 ]

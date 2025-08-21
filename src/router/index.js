@@ -56,4 +56,11 @@ router.beforeEach(async (to, from) => {
   if( to.meta.requireAuth&&!logget) return {path: '/'}
 })
 
+router.open = function(routeDetails) {
+ 
+  const routeData = this.resolve(routeDetails);
+  window.open(routeDetails, '_blank').focus();
+  //window.open(routeData.href, '_blank');
+};
+
 export default router

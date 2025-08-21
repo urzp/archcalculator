@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap" :class="{active:usePoints}" @mousedown="this.$emit('usePoint')">
+    <div class="wrap honorar_zone_detals" :class="{active:usePoints}" @mousedown="this.$emit('usePoint')">
         <div class="list" v-if="!!list.length">
             <div class="detal-item" v-for="item in list" :key="item.id">
                 <input class="title" :placeholder="item.name" :value="item.user_title" @change="event => updateUserTitle(event.target.value, item.id)"/>
@@ -147,6 +147,7 @@ export  default{
     display: flex;
     column-gap: 30px;
     font-size: 18px;
+    align-items: baseline;
 }
 
 .title{
@@ -177,6 +178,18 @@ export  default{
     cursor: pointer; 
     box-shadow: -215px 0 0 215px #7E7E7E;
 }
+
+@media (max-width: 640px){
+    .slider {
+        height: 7px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        width: 5px; 
+        height: 7px; 
+    }
+}
+
 
 .total{
     display: flex;

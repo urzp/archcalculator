@@ -1,0 +1,317 @@
+@media (max-width: 900px){
+    body{
+        width: 600px!important;
+    }
+
+    .CalcTitle .name{
+        font-size: 30px!important;
+    }
+
+    .CalcTitle  .date{
+        font-size: 14px!important;
+    }
+
+    .CalcTitle .content_discription{
+        font-size: 16px!important;
+    }
+
+    .customer .title{
+        font-size: 16px!important;
+    }
+
+    .customer .customer{
+        font-size: 16px!important;
+    }
+
+    .total-calc .name{
+        font-size: 20px!important;
+    }
+
+    .title{
+        font-size: 16px!important;
+    }
+    .value-percent{
+        font-size: 16px!important;
+    }
+    .value, .type{
+        font-size: 16px!important;
+    }
+
+    .unit-price{
+        font-size: 16px!important;
+    }
+    .cents{
+        font-size: 14px!important;
+    }
+
+    .item-Part-obj{
+        font-size: 14px!important;
+    }
+
+    .total-part-obj .wrap{
+        font-size: 14px!important;
+    }
+
+    .honorar_zone_detals .detal-item{
+        flex-direction: column;
+        margin-bottom: 20px;
+        
+    }
+
+    .honorar_zone_detals .value-wrap{
+        column-gap: 10px!important;
+        justify-content: flex-end;
+        align-items: center
+    }
+
+    .honorar_zone_detals .slider{
+        width: 155px!important;
+    }
+
+    .total_points .value, .equivalent  .value{
+        font-size: 14px!important;
+    }
+
+    .total_points .label, .equivalent  .label{
+        font-size: 14px!important;
+    }
+
+    .finance_detals .kg400_Bauwerk :not(.summ_row) .total_calc{
+        display: none;
+    }
+
+    .finance_detals .kg400_Bauwerk .row{
+        justify-content: space-between!important;
+    }
+
+    .kg400_Bauwerk {
+        font-size: 12px !important;
+    }
+
+    .detal-list .title, 
+    .detal-item,  
+    .detal-list .value, 
+    .detal-list .value-label, 
+    .detal-list .label
+    .kg400_Bauwerk .name_item{
+        font-size: 12px!important;
+    }
+
+    .total .value{
+        font-size: 14px!important;
+    }
+
+    .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{
+        text-align: right!important;
+    }
+
+    .honorar_detals .detal-item .price{
+        justify-content: flex-end!important;
+    }
+
+    .Stage_calc .wrap-numbers{
+        width: 90%!important;
+    }
+
+    .inf_links{
+        font-size: 14px!important;
+    }
+
+    .header-row{
+        margin-top: 15px!important;
+    }
+
+    .Total_Object, .Total_Result{
+        font-size: 16px!important;
+    }
+
+    .calculator .panel{
+        font-size: 16px!important;
+    }
+
+    .calculator .panel .new-btn{
+        width: 160px!important;
+        height: 35px!important;
+    }
+
+    .calculator .close-btn, .calculator .new-btn{
+        width: 45px!important;
+        height: 35px!important;
+    }
+
+    .calculator .new-btn img, .calculator .close-btn img{
+        width: 12px!important;
+    }
+
+    .wrap_sitebar .text-btn{
+        width: 45px!important;
+        height: 35px!important;  
+        top: 30px!important;      
+    }
+
+    .PayExtra_calc .wrap_colum_2{
+        width: 60%!important;
+    }
+
+
+
+    /* open projexts pupap */
+
+    .openProject .pupap, .downloadLinks_bill .pupap, .downloadLinks_project .pupap{
+        width: 620px!important; 
+        left: calc(100% / 2 - 620px / 2)!important; 
+        top: calc(100vh / 2 - 750px / 2); 
+    }
+
+    .openProject.scrollable .pupap{
+        position: absolute!important; 
+    }
+
+    .show_project{
+        display: none!important; 
+    }
+
+    .projects_calendar{
+        width: 100%!important; 
+        border:none!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 12px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+    .projects{
+        min-height: 355px!important;
+    }
+
+        /* bill list */
+
+    .bill_list_wrap .name_project{
+        font-size: 30px!important; 
+    }
+
+    .bill_list_wrap .title_statis{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills .name{
+        font-size: 18px!important; 
+    }
+
+    .bill_list_wrap .list_bills .invoice_number input{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills  .item{
+        width: 100%; 
+    }
+
+    /* .hover-panel .left_part{
+        position: relative!important;
+        left: -82px;
+        top: 63px;
+    } */
+
+
+            /* bill */
+
+    .bill_header .top_row{
+        font-size: 16px!important;
+    }
+
+    .bill_header .top_row .wrap-edit{
+        width: 540px!important;
+    }
+
+    .bill_header .logo_bill img{
+        width: 53px!important;
+        height: 53px!important;
+    }
+
+    .bill_header .custemer input{
+        font-size: 16px!important;
+    }
+
+    .bill_header .discription{
+        font-size: 14px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 16px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 16px!important;
+    }
+
+    .bill_header .payment_date{
+        font-size: 16px!important
+    }
+    
+    .bill_header .payment_date input{
+        text-align: left;
+    }
+
+    .bill_header .payment_date .new-btn{
+        width: 35px !important;
+        height: 25px !important;
+    }
+
+    .bill_header .greeting_phrase{
+        font-size: 14px!important
+    }
+
+    .BillFooter{
+        font-size: 14px!important
+    }
+
+    .BillFooter span{
+        font-size: 14px!important
+    }
+
+    .BillFooter .item_detail{
+        align-items: baseline!important;
+    }
+
+    .BillFooter .name_detal{
+        min-width: 100px!important;
+    }
+
+    /* profile page */
+
+    .prof_part{
+        border-right:none!important;
+    }
+
+    .profile .close-btn{
+        width: 60px!important;
+        height: 40px!important;
+    }
+
+}
+
+@media (max-width: 775px){
+    .header-row .logo{
+        position: absolute!important;
+        left: 90px;
+    }
+
+    .header-row{
+        justify-content: flex-end!important;
+    }
+}

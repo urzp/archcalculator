@@ -9,6 +9,7 @@
   "dependencies": {
     "@gahing/vcontextmenu": "^1.0.0",
     "@imengyu/vue3-context-menu": "^1.4.2",
+    "@vueup/vue-quill": "^1.2.0",
     "core-js": "^3.8.3",
     "mitt": "^3.0.1",
     "vue": "^3.2.13",

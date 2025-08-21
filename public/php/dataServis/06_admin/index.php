@@ -9,6 +9,11 @@ if($isAdmin){
         case 'adminProfilUserData': include 'AdminProfilUserData.php'; break;
         case 'adminBillsData': include 'AdminBillsData.php'; break;
         case 'adminUserProjects': include 'AdminUserProjects.php'; break;
+
+        case 'adminPagesInfRead': include 'pages_inf/read.php'; break;
+        case 'adminPagesInfUpdate': include 'pages_inf/update.php'; break;
+        case 'AdminGetSettings': include 'setings/01_read.php'; break;
+        case 'AdminUpdateSettings': include 'setings/02_update.php'; break;
     }
 
 }

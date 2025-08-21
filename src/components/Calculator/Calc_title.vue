@@ -1,5 +1,5 @@
 <template>
-    <div class="title-project" >
+    <div class="title-project CalcTitle" >
         <!-- <div class="name" >{{ project_name }}</div> -->
         <template v-if="!bill_status">
         <input  type="text" v-if="!isShowProject"  class="name" :value="project_name" @change="event=>newProjectName(event.target.value)" @click="checkLock()"/>
@@ -8,7 +8,7 @@
         <div class="discription">
             <!-- <div class="title_discription">Description:</div> -->
             <div class="content_discription">
-                <ImputTextMLine v-if="!isShowProject"  width="1000px" :value="discription" @submit_event="value=>newProjectDiscription(value)" @click="checkLock()"/>
+                <ImputTextMLine v-if="!isShowProject"  :width="wideBody+'px'" :value="discription" @submit_event="value=>newProjectDiscription(value)" @click="checkLock()"/>
                 <div v-else>{{ discription  }}</div>
             </div>
         </div>
@@ -147,6 +147,9 @@ export default{
             let url = `${global.base_url}/users/user_${user.id}/avatar/${user.avatar}`
             return url
         },
+        wideBody(){
+           return global.wideBody
+        }
     },
     methods:{
         async newProjectName(value){
@@ -203,7 +206,6 @@ export default{
         font-family: 'Raleway-Light';
         font-size: 20px;
         text-align: center;
-        max-width: 1000px;
         color: #636363;
     }
 

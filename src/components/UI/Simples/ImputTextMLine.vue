@@ -81,7 +81,7 @@ export default{
         padding-left: 15px;
         border: none;
         resize: none;
-        font-size: 18px;
+        font-size: inherit;
         font-family: 'Raleway-Light';
         line-height: 26px;
         color: #464646;

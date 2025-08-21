@@ -2,6 +2,9 @@
     <div class="profile">
         <div class="title-profile">
             <div class="name" >{{ text.Profile }}</div>
+            <div class="button_part screen_less_640">
+                <CloseButton @click="deleteUser()" width="95px" height="70px"/>
+            </div>
         </div>
         <template v-if="loaded">
             <div class="main_panel">
@@ -24,7 +27,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="button_part">
+                <div class="button_part screen_more_640">
                     <CloseButton @click="deleteUser()" width="95px" height="70px"/>
                 </div>
             </div>
@@ -211,6 +214,10 @@ export default{
         margin-bottom: 100px;
     }
 
+    .screen_less_640{
+        display: none;
+    }
+
     .title-profile{
         margin-top: 60px;
         text-align: center;
@@ -231,7 +238,7 @@ export default{
     }
 
     .prof_part{
-        width: 50%;
+        padding-right: 50px;
         border-right: 1px solid #C0C0C0;
         display: flex;
         align-items: center;

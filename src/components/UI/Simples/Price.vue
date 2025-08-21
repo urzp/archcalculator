@@ -40,14 +40,14 @@ export default{
             price:{
                 unit:'0',
                 cent:'00'
-            }
+            },
         }
     },
     computed:{
         isLocked(){
             if(!!Project&&!!Project.project&&Project.project.locked=='1') return true
             return false
-        }
+        },
     },
     props:{
         value:[String, Number],
@@ -62,14 +62,6 @@ export default{
         input_type:{ 
             type: Boolean,
             default: false,
-        },
-        font_size_unit:{
-            type:String,
-            default: '20px',            
-        },
-        font_size_cent:{
-            type:String,
-            default: '16px',            
         },
         font_family:{
             type:String,
@@ -185,10 +177,8 @@ export default{
     }
     .unit-price{
         text-align: right;
-        font-size: v-bind(font_size_unit);
     }
     .cents{
-        font-size: v-bind(font_size_cent);
         text-align: center;
         width: 23px;
     }

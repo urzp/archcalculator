@@ -3,7 +3,7 @@
             <div class="calendar_header">
                 <div class="month_panel">
                     <div class="down" @click="setMonth(-1)"><img src="@/assets/icons/btn_down/tick.svg" alt=""></div>
-                    <div class="month">{{ settedData.toLocaleString("de-DE", {month:'long'}) }}</div>
+                    <div class="month">{{ settedData().toLocaleString("de-DE", {month:'long'}) }}</div>
                     <div class="up" @click="setMonth(1)"><img src="@/assets/icons/btn_up/tick.svg" alt=""></div>
                 </div>
                 <div>|</div>
@@ -61,12 +61,9 @@ export default{
         }
     },
     computed:{
-        settedData(){
-            return new Date(`${this.year}.${this.month}.1`);
-        },
         days_month(){
             let result = []
-            let firstSu = this.settedData;
+            let firstSu = this.settedData();
             firstSu.setDate(firstSu.getDate() - (firstSu.getDay() + 7) % 7);
             for(let i=0; i<=34; i++){
                 let i_day = firstSu.addDays(i)
@@ -101,6 +98,9 @@ export default{
         },
         select_Day(day){
             this.$emit('selectDay',day)
+        },
+        settedData(){
+            return new Date(`${this.year}.${this.month}.1`)
         }
     }
 }

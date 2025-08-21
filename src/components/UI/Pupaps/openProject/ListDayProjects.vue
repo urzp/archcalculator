@@ -11,6 +11,7 @@
 
 <script>
 import { isSameDate } from '@/servis/functions'
+import { useHover } from '@/servis/functions.js'
 export default{
     name:'ListDayProjects',
     data(){
@@ -35,7 +36,11 @@ export default{
     },
     methods:{
         openProject(id){
-            this.$emit('openProject', id)
+            if(useHover()){
+                this.$emit('openProject', id)
+            }else{
+                this.$emit('showProject', id)
+            }  
         },
         showProject(id){
             this.$emit('showProject', id)

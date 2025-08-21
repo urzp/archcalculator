@@ -1,5 +1,5 @@
 <template>
-    <div class="item-Part-obj" v-if="!!id_paragraph">
+    <div class="item-Part-obj PayExtra_calc" v-if="!!id_paragraph">
         <div  class="main_row" >
             <div class="title">{{ text.Pay_extra }}</div>
             <div class="wrap_figures">
@@ -79,7 +79,7 @@ export  default{
 <style scoped>
     .main_row{
         display: flex;
-        height: 35px;
+        /* height: 35px; */
         align-items: center;
         justify-content: space-between;
     }   

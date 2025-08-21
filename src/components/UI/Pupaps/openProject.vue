@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="wrap_pupap">
+    <div v-if="show" class="wrap_pupap openProject" :class="{'scrollable':scrollable}">
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div v-if="!loading&&!empty_list" class="wrap_content">
@@ -39,6 +39,7 @@ export default{
     data(){
         return {
             show:false,
+            scrollable: false,
             width:'1100px',
             height: '750px',
             list:[],
@@ -76,7 +77,14 @@ export default{
         },
         openPopap(type='all'){
             if(this.goToCalcPage()) return false
-            document.documentElement.style.overflow = 'hidden'
+            if(window.screen.height > 750) {
+                document.documentElement.style.overflow = 'hidden'
+                this.scrollable = false
+            }else{
+                window.scrollTo(0, 50);
+                this.scrollable = true
+            }
+
             this.getData(type)
             this.show=true
         }, 
@@ -112,10 +120,10 @@ export default{
     }
     .pupap{
         position: fixed;
-        left: calc(100% / 2 - v-bind(width) / 2);
-        top: calc(100vh / 2 - v-bind(height) / 2);
-        width: v-bind(width);
-        min-height: v-bind(height);
+        left: calc(100% / 2 - 1100px / 2);
+        top: calc(100vh / 2 - 750px / 2); 
+        width: 1100px;
+        min-height: 750px;
         background-color: #fff;
         border: 2px solid #e2e2e2;
         border-radius: 10px;
@@ -147,7 +155,7 @@ export default{
 
     .wrap_content{
         display: flex;
-        height: calc( v-bind(height) - 80px );
+        height: calc( v-bind(height) - 90px );
     }
 
     .wrap_name_date{

@@ -5,10 +5,10 @@
         </div> -->
         <input v-if="!!value&&!isShowProject" type="date" :value="formatDate(value)" @blur="event=>setNewDate(new Date( event.target.value ) )">
         <div v-if="!!value&&isShowProject">{{ formatDate(value) }}</div>
-        <div v-if="!value" class="date">-</div>
-        <div v-if="!isShowProject" class="wrap_button">
+        <div v-if="!value" class="date" @click="setNewDate(new Date( ) )">-</div>
+        <!-- <div v-if="!isShowProject&&!offCalendsrButton" class="wrap_button">
             <CalendatBtn :height="'25px'" :width="'15px'" :width_img="'19px'" @click.stop="begin_edit()"/>
-        </div>
+        </div> -->
     </div>
     <div v-if="showCalendar&&!isShowProject" class="selectData" @click.stop="">
         <div class="wrap_calendar">
@@ -22,11 +22,16 @@
 
 <script>
 import { checkLock } from '@/servis/projectData';
+import { detectBrowser } from '@/servis/functions.js'
 export default{
+    mounted(){
+        this.init()
+    },
     name:'InputDate',
     data(){
         return{
             showCalendar:false,
+            offCalendsrButton: true,
         }
     },
     props:{
@@ -51,6 +56,9 @@ export default{
         },
     },
     methods:{
+        init(){
+            if(detectBrowser()=='Safari') this.offCalendsrButton = true
+        },
         formatDate(date){
             if(!date) return '-'
             date = new Date(date)
@@ -111,12 +119,12 @@ export default{
         z-index: 100;
     }
 
-    [type="date"]::-webkit-inner-spin-button {
+    /* [type="date"]::-webkit-inner-spin-button {
         display: none;
     }
     [type="date"]::-webkit-calendar-picker-indicator {
         display: none;
-    }
+    } */
     input{
         font-family: inherit;
         font-size: inherit;

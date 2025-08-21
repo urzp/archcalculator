@@ -1,0 +1,149 @@
+.CalcTitle .content_discription{
+    font-size: 18px!important;
+}
+
+.kg400_Bauwerk{
+    font-size: 16px!important;
+}
+
+ .unit-price{
+    font-size: 20px!important;
+ }
+ .cents{
+    font-size: 18px!important;
+ }
+
+ .stage_l_0 .title, .stage_l_1 .title{
+    max-width: 760px;
+ }
+
+ .Total_Object, .Total_Result{
+    font-size: 24px!important;
+ }
+
+@media (max-width: 1400px){
+    body{
+        width: 800px!important;
+    }
+
+    .detal-list{
+        padding-top: 10px;
+    }
+
+    .detal-list .title, 
+    .detal-item,  
+    .detal-list .value, 
+    .detal-list .value-label, 
+    .detal-list .label
+    .kg400_Bauwerk .name_item{
+        font-size: 14px!important;
+    }
+
+    .total_points .value, .equivalent  .value{
+        font-size: 18px!important;
+    }
+
+    .PartObjectList .message{
+        font-size: 16px!important;
+    }
+
+    .detal-item   .unit-price, .kg400_Bauwerk .unit-price{
+        font-size: 16px!important;
+    }
+    .detal-item .cents, .kg400_Bauwerk .cents{
+        font-size: 14px!important;
+    }
+
+    .kg400_Bauwerk{
+        font-size: 14px!important;
+    }
+
+    .kg400_Bauwerk .row{
+        align-items: baseline;
+    }
+
+    .name_item.left_gap{
+        padding-left: 20px!important;
+    }
+
+    .stage_l_0 .title, .stage_l_1 .title{
+        max-width: 380px;
+    }
+
+    .icon.close{
+        top: 10px!important;
+    }
+
+    .Total_Object, .Total_Result{
+        font-size: 20px!important;
+    }
+
+    .calculator .panel{
+        font-size: 18px!important;
+    }
+
+        /* open projexts pupap */
+
+    .openProject .pupap{
+        width: 860px!important; 
+        left: calc(100% / 2 - 860px / 2)!important; 
+        top: calc(100vh / 2 - 750px / 2); 
+    }
+
+    .show_project{
+        width: 49%!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 14px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+    .show_project .top_panel .text-btn{
+        height: 35px!important;
+        font-size: 16px!important; 
+    }
+
+    .show_project .project_part .finance{
+        font-size: 16px!important; 
+    }
+
+    .show_project .list_objects .finance{
+        font-size: 14px!important;
+    }
+
+    /* profile page */
+
+    .user_edit_panel{
+        flex-wrap: wrap;
+    }
+
+    .user_data_edit{
+        padding-left: 0px!important;
+        margin-bottom: 50px!important;
+    }
+
+    .user_data_panel{
+        padding-left: 0px!important;
+    }
+
+    .AdditionalServis .main_row .wrap_figures, .ExtraCost .main_row .wrap_figures{
+        width: 70%!important;
+    }
+
+}
+

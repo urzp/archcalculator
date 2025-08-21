@@ -1,0 +1,500 @@
+@media (max-width: 640px){
+    body{
+        width: 450px!important;
+    }
+
+    .header .userLogo{
+        width: 55px!important;
+        height: 55px!important;
+    }
+
+    .CalcTitle{
+        margin-top: 30px!important;
+        margin-bottom: 30px!important;
+    }
+
+    .CalcTitle .discription{
+        margin-top: 10px!important;
+        margin-bottom: 10px!important;
+    }
+
+    .CalcTitle .name{
+        font-size: 26px!important;
+    }
+
+    .CalcTitle  .date{
+        font-size: 12px!important;
+    }
+
+    .CalcTitle .content_discription{
+        font-size: 14px!important;
+    }
+
+    .customer .title{
+        font-size: 14px!important;
+    }
+
+    .customer .customer{
+        font-size: 14px!important;
+    }
+
+    .total-calc .name{
+        font-size: 18px!important;
+    }
+
+    .title{
+        font-size: 14px!important;
+    }
+    .value-percent{
+        font-size: 14px!important;
+    }
+    .value, .type{
+        font-size: 14px!important;
+    }
+
+    .unit-price{
+        font-size: 14px!important;
+    }
+    .cents{
+        font-size: 12px!important;
+    }
+
+    .item-Part-obj{
+        font-size: 12px!important;
+    }
+
+    .total-part-obj .wrap{
+        font-size: 12px!important;
+    }
+
+    .PartObjectList .delete-btn{
+        min-width:32px!important;
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+
+    .PartObjectList input.title{
+        width: 30%!important;
+        margin-left: 30px!important;
+    }
+
+    .AdditionalServis .main_row .wrap_figures, .ExtraCost .main_row .wrap_figures{
+        width: 70%!important;
+    }
+
+    .AdditionalServis .wide_sing, .ExtraCost .wide_sing{
+        min-width: 10px!important;
+    }
+
+
+
+/* ------------------------ */
+
+     .honorar_zone_detals .detal-item{
+        flex-direction: column;
+        margin-bottom: 18px;
+        
+    }
+
+    .title-object{
+       margin-left: 10px!important; 
+    }
+
+    .toggle:before{
+        height: 7px!important; 
+        width: 7px!important; 
+        left: -4px!important; 
+        top: -12px!important; 
+    }
+
+    .wrap-slot{
+        margin-left: 10px!important;
+    }
+
+    .object-calc .main_row .title{
+        margin-left: 35px!important;
+    }
+
+    .object-calc .item-Part-obj .icon{
+        left: 12px!important;
+        top: 8px!important;
+    }
+
+    .wrap:before {
+        left: -39px!important;
+    }
+
+    .detal-list:before{
+        left: 15px!important;
+    }
+
+    /* .honorar_zone_detals .value-wrap{
+        column-gap: 10px!important;
+        justify-content: flex-end;
+        align-items: center
+    }
+
+    .honorar_zone_detals .slider{
+        width: 155px!important;
+    } */
+
+    .total_points .value, .equivalent  .value{
+        font-size: 14px!important;
+    }
+
+    .total_points .label, .equivalent  .label{
+        font-size: 14px!important;
+    }
+
+    /* .finance_detals .kg400_Bauwerk :not(.summ_row) .total_calc{
+        display: none;
+    } */
+
+    /* .finance_detals .kg400_Bauwerk .row{
+        justify-content: space-between!important;
+    } */
+
+    .kg400_Bauwerk {
+        font-size: 10px !important;
+    }
+
+    .kg400_Bauwerk .unit-price, .honorar_detals .unit-price{
+        font-size: 12px !important;
+    }
+
+    .kg400_Bauwerk .comma, .honorar_detals .comma{
+        font-size: 12px !important;
+    }
+
+    .kg400_Bauwerk .cents, .honorar_detals .cents{
+        font-size: 10px !important;
+    }
+
+    .detal-list .title, 
+    .detal-item,  
+    .detal-list .value, 
+    .detal-list .value-label, 
+    .detal-list .label
+    .kg400_Bauwerk .name_item{
+        font-size: 12px!important;
+    }
+
+    .total .value{
+        font-size: 14px!important;
+    }
+
+
+    /* .honorar_detals .funding, .honorar_detals .min_fee, .honorar_detals .max_fee{
+        text-align: right!important;
+    } */
+
+    /* .honorar_detals .detal-item .price{
+        justify-content: flex-end!important;
+    } */
+
+    /* .Stage_calc .wrap-numbers{
+        width: 70%!important;
+    } */
+
+    .inf_links{
+        font-size: 12px!important;
+    }
+
+    /* .header-row{
+        margin-top: 15px!important;
+    } */
+
+    .Total_Object, .Total_Result{
+        font-size: 14px!important;
+        height: 80px!important;
+    }
+
+    .calculator .panel{
+        font-size: 14px!important;
+    }
+
+    /* .calculator .panel .new-btn{
+        width: 160px!important;
+        height: 35px!important;
+    }
+
+    .calculator .close-btn, .calculator .new-btn{
+        width: 45px!important;
+        height: 35px!important;
+    }
+
+    .calculator .new-btn img, .calculator .close-btn img{
+        width: 12px!important;
+    }
+
+    .wrap_sitebar .text-btn{
+        width: 45px!important;
+        height: 35px!important;  
+        top: 30px!important;      
+    } */
+
+    .download_panel img{
+        width: 36px!important;
+    }
+
+    .footer-wrap{
+        margin-top: 10px!important;
+    }
+
+    .footer-wrap .collums{
+        margin-top: 50px!important;
+        flex-wrap: wrap!important;
+        justify-content: space-around!important;
+    }
+
+    .footer-wrap .collum_1{
+        width: 100%!important;
+    }
+
+    .copy_right{
+        margin-top: 0px!important;
+        width: 100%!important;
+    }
+
+     /* open projexts pupap */
+
+    .openProject .pupap{
+        width: 440px!important; 
+        height: 560px!important;
+        margin-left: 10px!important;
+        margin-right: 10px!important;
+        min-height: 680px!important;
+        left: calc(100% / 2 - 440px / 2 - 10px)!important; 
+        top: calc(100vh / 2 - 680px / 2); 
+    }
+
+     .downloadLinks_bill .pupap, .downloadLinks_project .pupap{
+        width: 440px!important; 
+        margin-left: 10px!important;
+        margin-right: 10px!important;
+        left: calc(100% / 2 - 440px / 2 - 10px)!important; 
+        top: calc(100vh / 2 - 680px / 2);        
+     }
+
+    .openProject.scrollable .pupap{
+        position: absolute!important; 
+    }
+
+    .show_project{
+        display: none!important; 
+    }
+
+    .projects_calendar{
+        width: 100%!important; 
+        border:none!important; 
+    }
+
+    .openProject .list_recent_projects .title,
+    .openProject .list_all_projects .title,
+    .openProject .list_all_projects .title{
+        font-size: 12px!important; 
+        width: 105%!important; 
+    }
+
+    .project_part .title{
+        font-size: 20px!important; 
+    }
+
+    .openProject .name{
+        font-size: 14px!important; 
+    }
+
+    .openProject  .created_date{
+        font-size: 12px!important; 
+    }
+
+    .wrap_content{
+        height: 580px!important;
+    }
+
+    .projects{
+        min-height: 250px!important;
+    }
+
+        /* bill list */
+
+    .bill_list_wrap .item{
+        flex-direction: column!important;
+    }
+
+
+    .bill_list_wrap .name_project{
+        font-size: 30px!important; 
+    }
+
+    .bill_list_wrap .title_statis{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills .name{
+        font-size: 16px!important; 
+    }
+
+    .bill_list_wrap .list_bills .invoice_number input{
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .date {
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .price, .bill_list_wrap .price span{
+        font-size: 14px!important; 
+    }
+
+    .bill_list_wrap .list_bills  .item{
+        width: 100%; 
+    }
+
+    .bill_list_wrap .wrap_right{
+        width: 100%!important;
+    }
+
+    .bill_list_wrap .hover-panel{
+        height: 0px!important;
+    }
+
+    .hover-panel .left_part{
+        position: relative!important;
+        left: -30px;
+        top: -55px;
+    }
+
+    .bill_list_wrap .hover-panel{
+        width: 100% !important;
+        justify-content: flex-end!important;
+    }
+   
+         /* bill */
+
+    .bill_header .top_row{
+        font-size: 14px!important;
+    }
+
+    .bill_header .top_row .wrap-edit{
+        width: 340px!important;
+    }
+
+    .bill_header .logo_bill img{
+        width: 43px!important;
+        height: 43px!important;
+    }
+
+    .bill_header .custemer input{
+        font-size: 18px!important;
+    }
+
+    .bill_header .discription{
+        font-size: 12px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 14px!important;
+    }
+
+    .bill_header .item_title_value{
+        font-size: 14px!important;
+    }
+
+    .bill_header .payment_date{
+        font-size: 14px!important
+    }
+    
+    .bill_header .payment_date input{
+        text-align: left;
+    }
+
+    .bill_header .payment_date .new-btn{
+        width: 35px !important;
+        height: 25px !important;
+    }
+
+    .bill_header .greeting_phrase{
+        font-size: 12px!important
+    }
+
+    .BillFooter{
+        font-size: 12px!important
+    }
+
+    .BillFooter span{
+        font-size: 12px!important
+    }
+
+    .BillFooter .item_detail{
+        align-items: baseline!important;
+    }
+
+    .BillFooter .name_detal{
+        min-width: 100px!important;
+    }
+
+    .BillFooter .PleasePay{
+        flex-wrap: wrap;
+    }
+
+    /* popaps */
+
+    .Comfirm .pupap, .wrap_pupap.message .pupap{
+        width: 320px!important;
+    }
+
+
+    /* profile page */
+
+    .profile .main_icon{
+        width: 100px!important;
+        height: 100px!important;
+    }
+
+    .screen_less_640{
+        display: flex!important;
+    }
+
+    .screen_more_640{
+        display: none!important;
+    }
+
+    .profile .name-user{
+        font-size: 30px!important;
+    }
+
+    .profile .email-user{
+        font-size: 20px!important;
+    }
+
+
+    .title-profile{
+        display: flex!important;
+        justify-content: space-between!important;
+        align-items: center!important;
+        margin-bottom: 60px!important;
+    }
+
+    .title-profile .name{
+        width: unset!important;
+    }
+
+    .button_part{
+        margin: unset!important;
+    }
+
+    .profile .user_data_panel input{
+        width: 100%!important;
+    }
+
+    .user_data_edit{
+        width: 100%!important;
+    }
+
+    .profile .user_edit_panel input{
+        width: 100%!important;
+    }
+
+
+}

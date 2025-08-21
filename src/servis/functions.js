@@ -149,3 +149,43 @@ export function array_move(arr, old_index, new_index) {
     return arr; // for testing
 };
 
+export function useHover(){
+   if (window.matchMedia("(pointer: coarse)").matches) {  
+        if(window.screen.width < 900) return true
+        return false
+    } else {  
+        return true
+    } 
+}
+
+export function detectBrowser() {  
+    const userAgent = navigator.userAgent.toLowerCase();  
+    if (userAgent.indexOf('firefox') > -1) {  
+        return 'Firefox';  
+    }  
+    else if (userAgent.indexOf('chrome') > -1) {  
+        return 'Chrome';  
+    }  
+    else if (userAgent.indexOf('safari') > -1) {  
+        return 'Safari';  
+    }  
+    else if (userAgent.indexOf('opera') > -1 || userAgent.indexOf('opr') > -1) {  
+        return 'Opera';  
+    }  
+    else if (userAgent.indexOf('msie') > -1 || userAgent.indexOf('trident') > -1) {  
+        return 'Internet Explorer';  
+    }  
+    else {  
+        return 'Unknown';  
+    }  
+}  
+
+export function autoZoom() { 
+    if(screen.width < 480){
+        let width_start = 480
+        let k = 0.177
+        let zoom = 100 - (width_start - screen.width)*k
+        //console.log(zoom)
+        document.body.style.zoom = zoom + '%'
+    }
+}

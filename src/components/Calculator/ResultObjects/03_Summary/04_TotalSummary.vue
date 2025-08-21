@@ -49,6 +49,7 @@ export default{
     font-family: 'Raleway-Regular';
     font-size: 20px;
     color: var(--color-akcent);
+    align-items: baseline;
 }
 .wrap.line{
     border-top: solid 1px var(--color-akcent);

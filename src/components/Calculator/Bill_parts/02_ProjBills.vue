@@ -201,7 +201,7 @@ export default{
     }
 
     .wrap_left{
-        width: 50%;
+        width: 30%;
         cursor: pointer;
     }
 
@@ -272,13 +272,11 @@ export default{
 
     .wrap_right{
         cursor: pointer;
-        margin-right: -150px;
-        padding-right: 150px;
+        /* margin-right: -150px;
+        padding-right: 150px; */
     }
 
-    .lock_value{
-        width: 50px;
-    }
+
 
     .data_price{
         width: 150px;
@@ -292,25 +290,20 @@ export default{
 
     .wrap_right{
         display: flex;
+        width: 70%;
         column-gap: 5px;
         font-size: 18px;
         align-items: center;
     }
 
     .wrap_right .date{
-        width: 110px;
         display: flex;
         justify-content: flex-end;
     }
 
-    .invoice_number{
-        width: 120px;
-        font-family: 'Raleway-Medium';
-    }
-
     .hover-panel{
         position: relative;
-        width: 0px;
+        width: 100px;
         transform: translateX(30px);
         display: flex;
         column-gap: 5px;
@@ -336,17 +329,30 @@ export default{
         visibility: visible;
     }
 
+    .invoice_number{
+        width: 30%;
+        font-family: 'Raleway-Medium';
+    }
+
+    .lock_value{
+        width: 10%;
+    }
+
+    .date{
+        width: 30%;
+    }
+
+    .value{
+        width: 30%;
+        text-align: right;
+        font-size: 18px;
+    }
+
     .status, .data_paid{
-        width: 140px;
         text-align: center;
         font-size: 18px;
     }
 
-    .value{
-        width: 140px;
-        text-align: right;
-        font-size: 18px;
-    }
 
     .data_pai{
         width: 80px;

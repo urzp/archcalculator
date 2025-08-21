@@ -62,7 +62,7 @@ export  default{
         font-size: 20px;
     }
     .wrap_figures{
-        width: 40%;
+        width: 100%;
         display: flex;
         align-items: baseline;
         justify-content: space-between;

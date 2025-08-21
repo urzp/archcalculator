@@ -153,6 +153,7 @@ export default{
     .header-row{
         margin-top: 50px;
         padding-bottom: 15px;
+        height: 80px;
         display: flex;
         align-items: center;
         border-bottom: solid 1px #999999;

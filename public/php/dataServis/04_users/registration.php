@@ -1,29 +1,36 @@
 <?php
-include 'sendEmails.php';
 
 $input_data = $rq_data -> data;
 $email = $input_data -> email;
-$password = md5( $input_data->password );
-$emailComfirmecode = GeneratePinCode(5);
 
-$data['email']=$email;
-$data['password']=$password;
-$data['codeConfirm']=$emailComfirmecode;
-crud_create('users', $data);
+$selector = " `email` = '$email'";
+$checkEmail = crud_read('users',"*", $selector)[0];
 
-sendRegistrationEmail($email, $input_data->password, $emailComfirmecode);
+if($checkEmail == null && isValidEmail($email)){ 
 
-$result = (object) [
-    'success' => true,
-];
+    include 'sendEmails.php';
 
-function GeneratePinCode($chars) {
-    $pin = "";
-    while ($chars != 0) {
-        $pin .= rand(0,9);
-        $chars--;
-    }
-    return $pin;
+    $password = md5( $input_data->password );
+    $emailComfirmecode = GeneratePinCode(5);
+
+    $data['email']=$email;
+    $data['password']=$password;
+    $data['codeConfirm']=$emailComfirmecode;
+
+    crud_create('users', $data);
+    sendRegistrationEmail($email, $input_data->password, $emailComfirmecode);
+    $result = (object) [
+        'success' => true,
+    ];
+
+}else{
+    $result = (object) [
+        'success' => false,
+    ];
+}
+
+function isValidEmail($email){
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
 ?>

@@ -12,15 +12,15 @@
                 <div class="social_item"><img src="@/assets/icons/social_network/youtube/main.svg" alt=""></div>
             </div>
         </div>
-        <div class="collum collum_2">
+        <div class="collum collum_2 inf_links">
             <div class="row_link" @click="selectView('impressum')" >{{ text.Impressum }}</div>
             <div class="row_link" @click="selectView('datenschutz')" >{{ text.Datenschutz }}</div>
-            <div class="row_link">{{ text.Cookie_Einstellungen }}</div>
-            <div class="row_link">{{ text.Contact }}</div>
+            <div class="row_link" @click="selectView('cookie')">{{ text.Cookie_Einstellungen }}</div>
+            <div class="row_link" @click="selectView('contacts')">{{ text.Contact }}</div>
         </div>
-        <div class="collum collum_3">
-            <div class="row_link">{{ text.Abaut }}</div>
-            <div class="row_link">{{ text.Instructions }}</div>
+        <div class="collum collum_3 inf_links">
+            <div class="row_link" @click="selectView('about')">{{ text.Abaut }}</div>
+            <div class="row_link" @click="selectView('instructions')">{{ text.Instructions }}</div>
             <div class="row_link">{{ text.HOAI }}</div>
             <div class="row_link">{{ text.Calculate_the_fee_correctly }}</div>
             <div class="row_link">{{ text.Blog }}</div>
@@ -86,17 +86,20 @@ export default{
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-
+        column-gap: 12px;
     }
 
     .collum, .copy_right{
         font-family: 'Comfortaa-Regular';
         font-size: 16px;
         color: #464646;
-        cursor: pointer;
         transition: var(--transition-hover);
         flex-direction: column;
         display: flex;
+    }
+
+    .social_item, .row_link, .copy_right{
+        cursor: pointer;
     }
 
     .collum_1{

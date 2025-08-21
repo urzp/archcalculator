@@ -27,6 +27,7 @@ export let text = {
         Logout: 'Logout',
         Calculator: 'Zum Rechner', // Pop-Up too short
         Profile: 'Mein Profil',
+        Tarif:'Tarifpläne',
     },
     adminSideBar:{
         HOAI_versions:'HOAI versions',
@@ -34,6 +35,7 @@ export let text = {
         Projects:'Projects',
         Bills:'Bills',
         Setings:'Setings',
+        Tariffs: 'Tariffs',
     },
     sideBar:{
         Calc:'Rechner',
@@ -99,6 +101,9 @@ export let text = {
         Delete: 'Löschen',
         Objects: 'Objekte',
         Bils: 'Rechnungen',
+    },
+    tarificPlans:{
+        title:'Tarifpläne'
     },
     UserServis:{
         // Login
