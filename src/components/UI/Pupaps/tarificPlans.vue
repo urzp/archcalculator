@@ -3,9 +3,10 @@
         <div class="pupap">
             <div class="closeBtn" @click="close()"><img src="@/assets/icons/btn_close/main.svg" alt=""></div>
             <div class="title_tariff">{{ text.title }}</div>
-            <div class="cards">
+            <div v-if="!isTariffActive" class="cards">
                 <TarifCard v-for="item in list" :key="item.id" :cardData="item"/>
             </div>
+            <ActiveTarifPlane v-else/>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
@@ -96,6 +97,13 @@ export default{
         close(){
             document.documentElement.style.overflow = 'auto'
             this.show=false
+        },
+    },
+    computed:{
+        isTariffActive(){
+            let result = false
+            if(global.isTariffActive) result = true
+            return result
         },
     }
 }

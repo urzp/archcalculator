@@ -160,6 +160,7 @@ import CheckBox from '@/components/UI/Simples/CheckBox.vue'
 import DetalMarker from '@/components/UI/Simples/detalMarker.vue'
 import FilterData from '@/components/UI/Simples/filter.vue'
 import TarifCard from '@/components/UI/Pupaps/tarif/tarifCard.vue'
+import ActiveTarifPlane from '@/components/UI/Pupaps/tarif/activeTariff.vue'
 
 export default [
     Header,
@@ -324,4 +325,5 @@ export default [
     DetalMarker,
     FilterData,
     TarifCard,
+    ActiveTarifPlane,
 ]

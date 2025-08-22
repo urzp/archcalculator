@@ -104,6 +104,12 @@ export let text = {
     },
     tarificPlans:{
         title:'Tarifpläne'
+        
+    },
+    activeTarifPlane:{
+        ActiveTariff:'Aktiver Tarif',
+        EndOfSubscription: 'Ende des Abonnements',
+        Unsubscribe: 'Abbestellen',
     },
     UserServis:{
         // Login
