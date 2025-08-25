@@ -6,7 +6,7 @@
             <div v-if="!isTariffActive" class="cards">
                 <TarifCard v-for="item in list" :key="item.id" :cardData="item"/>
             </div>
-            <ActiveTarifPlane v-else/>
+            <ActiveTarifPlane :tariffs="list" v-else/>
         </div>
     </div>
     <div v-if="show" @click.stop="close()" class="bg_for_close"></div>   
