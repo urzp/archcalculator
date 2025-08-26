@@ -3,14 +3,14 @@
         <div class="name_tariff">{{ text.ActiveTariff }}: Prmeum</div>
         <div class="price">{{ price }} € {{ price_period }}</div>
         <div class="time_end">{{ text.EndOfSubscription }}: {{ subscription_period_end }}</div>
-        <Button :width="'100px'">{{ text.Unsubscribe }}</Button>
+        <Button :width="'100px'" @click="deleteSubscription">{{ text.Unsubscribe }}</Button>
     </div>
 </template>
 
 <script>
 import { text } from '@/servis/text'
 import { apiData } from '@/servis/apiData.js'
-import { user } from '@/servis/globalValues'
+import { user, global } from '@/servis/globalValues'
 export default{
     name: 'ActiveTarifPlane',
     data(){
@@ -52,10 +52,17 @@ export default{
             if(!!tariff&&!!tariff.price_period) result = tariff.price_period
             return result
         },
-
-
+    },
+    methods:{
+        deleteSubscription(){
+            //cus_StcOMsThVMxrt6
+            //sub_1RxpAGL724uNY9UupHFHDmJx
+            //2025-08-26 15:00:59
+            let subscriptionId = user.stripe_subscription_id
+            apiData({typeData:'deleteSubscription', subscriptionId})
+            global.isTariffActive = false
+        }
     }
-
 }
 </script>
 

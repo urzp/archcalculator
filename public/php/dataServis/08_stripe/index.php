@@ -8,6 +8,7 @@
     if($isLogin){
         switch($typeData){
           case 'beginSubscription' :include '07_beginSubscription.php'; break;  
+          case 'deleteSubscription' :include '05_1_subscription_delete_by_user.php'; break;  
         }
     }
 
