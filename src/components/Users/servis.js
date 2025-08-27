@@ -29,6 +29,7 @@ function setNewDataProfile(data){
         user[key] = data[key];
       }
     global.login = true
+    isLogget()
     if(data.level == 'admin' ) { global.admin = true }else{ global.admin = false }
 }
 

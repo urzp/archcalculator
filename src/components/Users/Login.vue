@@ -16,7 +16,7 @@
                     <Button height="35px" width="125px" @click="submit()">{{ text.Submit }}</Button>
                 </div>
                 <div class="links">
-                    <div v-if="true" class="link" @click="openRegistration()">{{ text.Registration }}</div>
+                    <div v-if="false" class="link" @click="openRegistration()">{{ text.Registration }}</div>
                     <div v-if="true" class="gap">|</div>
                     <div class="link" @click="openReset()" >{{ text.Forgot_password }}</div>
                 </div>
