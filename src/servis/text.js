@@ -110,6 +110,7 @@ export let text = {
         ActiveTariff:'Aktiver Tarif',
         EndOfSubscription: 'Ende des Abonnements',
         Unsubscribe: 'Abbestellen',
+        statusSubscription: 'Status',
     },
     UserServis:{
         // Login

@@ -3,6 +3,7 @@
         <div class="name_tariff">{{ text.ActiveTariff }}: Prmeum</div>
         <div class="price">{{ price }} € {{ price_period }}</div>
         <div class="time_end">{{ text.EndOfSubscription }}: {{ subscription_period_end }}</div>
+        <div class="status">{{ text.statusSubscription }}: {{ status_subscription }}</div>
         <Button :width="'100px'" @click="deleteSubscription">{{ text.Unsubscribe }}</Button>
     </div>
 </template>
@@ -19,6 +20,7 @@ export default{
                 ActiveTariff: text.activeTarifPlane.ActiveTariff,
                 EndOfSubscription: text.activeTarifPlane.EndOfSubscription,
                 Unsubscribe: text.activeTarifPlane.Unsubscribe,
+                statusSubscription: text.activeTarifPlane.statusSubscription,
             }
         }
     },
@@ -52,6 +54,11 @@ export default{
             if(!!tariff&&!!tariff.price_period) result = tariff.price_period
             return result
         },
+        status_subscription(){
+            let result = ''
+            if(!!user&&!!user.stripe_status){ result = user.stripe_status }
+            return result
+        }
     },
     methods:{
         deleteSubscription(){
@@ -81,7 +88,7 @@ export default{
 .price{
     margin-top: 20px;
 }
-.time_end{
+.status{
     margin-bottom: 20px;
 }
 </style>

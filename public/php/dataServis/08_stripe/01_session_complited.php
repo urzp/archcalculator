@@ -6,7 +6,7 @@
     $client_reference_id = $get_client_reference_id[0];
     $client_secret = $get_client_reference_id[1];
     $subscription_id = $data_object->subscription;
-    
+    $stripe_status  = $data_object->status;
 
     $mysql = $mysql_calc;
     $selector = "id=$client_reference_id";
@@ -24,6 +24,7 @@
 
             $update_data['stripe_custemer_id']=$stripe_custemer_id;
             $update_data['stripe_subscription_id']=$subscription_id;
+            $update_data['stripe_status']=$stripe_status;
             $update_data['subscription_period_end']=$currentPeriodEndDate;
         }else{
             push_log( 'secret key is not valid', basename(__FILE__), 'stipe_log');

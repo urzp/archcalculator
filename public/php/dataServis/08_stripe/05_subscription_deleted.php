@@ -18,6 +18,7 @@
         $update_data['stripe_custemer_id']='';
         $update_data['stripe_subscription_id']='';
         $update_data['subscription_period_end']='';
+        $update_data['stripe_status']='';
         $update_data['stripe_client_secret']='';
         crud_update('users', $update_data, $selector);
     }

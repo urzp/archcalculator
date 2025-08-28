@@ -14,6 +14,7 @@ if($data == null){
         'success' => true,
         'isAdmin' => $admin,
         'isTariffActive' => $isTariffActive,
+        'tariffStatus' => $data['stripe_status']
     ];
 }
 

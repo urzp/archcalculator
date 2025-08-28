@@ -8,8 +8,8 @@ $subscriptionId = $rq_data -> subscriptionId;
 $endpoint_secret = SIGNIHN_SECRET;
 
 try {
-    // $subscription = \Stripe\Subscription::retrieve($subscriptionId);
-    // $subscription->delete();
+    $subscription = \Stripe\Subscription::retrieve($subscriptionId);
+    $subscription->delete();
     $success = true;
     $result = (object) [
         'success' => true,
@@ -28,8 +28,9 @@ if($success){
     $update = [];
     $update['stripe_custemer_id']='';
     $update['stripe_subscription_id']='';
+    $update_data['stripe_status']='';
     $update['subscription_period_end']='';
-    crud_update('users', $new_data, $selector);
+    crud_update('users', $update, $selector);
 }
 
 ?>
