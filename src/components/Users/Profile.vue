@@ -21,6 +21,7 @@
                     </div>
                     <div class="user-data">
                         <div class="name-user">{{ user.name }}</div>
+                        <div class="tariff_plan" @click="openTarif()">{{ text.ActiveTariff }}: {{ activeTariff }}</div>
                         <div class="email-user">{{ user.email }}</div>
                         <form class="avatar_form" ref="avatar">
                             <input ref="avatar_file" type="file" name="avatar" @change="sendAvatar()" accept=".pdf,.jpg,.svg">
@@ -92,6 +93,7 @@ export default{
             sendingPasswords:false,
             success_Passwords:false,
             fall_Passwords:false,
+            tariffs:[],
             text:{
                 Profile: text.UserServis.Profile,
                 name: text.UserServis.felds.name,
@@ -117,6 +119,7 @@ export default{
                 Success: text.UserServis.Successful,
                 fall: text.UserServis.fall,
                 Save: text.UserServis.Save,
+                ActiveTariff: text.activeTarifPlane.ActiveTariff,
             }
         }
     },
@@ -127,11 +130,21 @@ export default{
         },
         enableSend(){
             return !!this.oldPassword&&!!this.newPassword&&!!this.checkPassword&&this.newPassword==this.checkPassword
+        },
+        activeTariff(){
+            let result = ''
+            if(!global.isTariffActive&&this.tariffs.length>0) result = this.tariffs[0].title
+            if(global.isTariffActive&&this.tariffs.length>0) result = this.tariffs[1].title
+            return result
         }
     },
     methods:{
         async getData(){
             this.user = user
+            this.loading = true
+            let result = (await apiData({typeData:'tariffs'})).data
+            this.tariffs = result
+            this.loading = false
         },
         selectAvatar(){
             this.$refs.avatar_file.click()
@@ -148,11 +161,15 @@ export default{
             let result = await apiData({typeData:'avatar', data }) 
             updatedProfile()
         },
+        openTarif(){
+            EventBus.emit('MenuTarif:open')
+        },
         async deleteUser(){
             let router = this.$router
             EventBus.emit('Popap:comfirm',{
                 title: text.UserServis.The_account_will_be_permanently_deleted,
                 action: async ()=>{
+                        await deleteSubscription()
                         let result = await apiData({typeData:'deleteUser' }) 
                         if(result.success){
                             logOut()
@@ -161,6 +178,10 @@ export default{
                     }
                 }
             )
+        },
+        async deleteSubscription(){
+            let subscriptionId = user.stripe_subscription_id
+            apiData({typeData:'deleteSubscription', subscriptionId})
         },
         setOldPassword(value){
             this.oldPassword = value
@@ -309,10 +330,15 @@ export default{
         color:#5A5A5A;
     }
 
-    .user-data .email-user{  
+    .user-data .email-user,.user-data .tariff_plan{  
         margin-top: -10px; 
         font-size: 24px;
         color: #929292;
+    }
+
+    .user-data .tariff_plan{
+        font-size: 18px;
+        cursor: pointer;
     }
 
     .button_part{

@@ -20,8 +20,9 @@
 </template>
 
 <script>
-import { user } from '@/servis/globalValues.js'
+import { user, global } from '@/servis/globalValues.js'
 import { apiData } from '@/servis/apiData.js'
+
 export default{
     name: 'TarifCard',
     props:{
@@ -72,6 +73,7 @@ export default{
             let user_data = '?client_reference_id=' + user.id
             let code = (await apiData({typeData:'beginSubscription'})).data
             user_data = user_data + "_" + code
+            global.uploadPageFlag = true
             this.$router.open(this.link + user_data)
         }
     }

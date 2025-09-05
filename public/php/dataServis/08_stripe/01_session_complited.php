@@ -2,6 +2,7 @@
     push_log('checkout.session.completed', basename(__FILE__), 'stipe_log');
     $data_object = $event->data->object;
     $stripe_custemer_id = $data_object->customer;
+    $currentPeriodEnd = $data_object->expires_at;
     $get_client_reference_id = explode('_', $data_object->client_reference_id);
     $client_reference_id = $get_client_reference_id[0];
     $client_secret = $get_client_reference_id[1];
@@ -15,11 +16,15 @@
 
     if($check_client_secret!=''){
         push_log(  'secret key is not null', basename(__FILE__), 'stipe_log');
-        push_log(  '$check_client_secret'.$check_client_secret, basename(__FILE__), 'stipe_log');
+        push_log(  '$client_reference_id: '.$client_reference_id, basename(__FILE__), 'stipe_log');
+        push_log(  '$client_secret: '.$client_secret, basename(__FILE__), 'stipe_log');
+        push_log(  '$check_client_secret(server): '.$check_client_secret, basename(__FILE__), 'stipe_log');
         if($check_client_secret==$client_secret){
-            $subscription = \Stripe\Subscription::retrieve($subscription_id);
-            $lastItemIndex = count($subscription['items']['data']) - 1; 
-            $currentPeriodEnd = $subscription['items']['data'][$lastItemIndex]['current_period_end'];
+            // push_log(  'break 22', basename(__FILE__), 'stipe_log');
+            // $subscription = \Stripe\Subscription::retrieve($subscription_id);
+            // push_log(  'break 24', basename(__FILE__), 'stipe_log');
+            // $lastItemIndex = count($subscription['items']['data']) - 1; 
+            // $currentPeriodEnd = $subscription['items']['data'][$lastItemIndex]['current_period_end'];
             $currentPeriodEndDate = date('Y-m-d H:i:s', $currentPeriodEnd);
 
             $update_data['stripe_custemer_id']=$stripe_custemer_id;

@@ -1,9 +1,11 @@
 import { reactive } from 'vue';
+import { isLogget } from '@/components/Users/servis'
 
 export let global = reactive({
    login:false,
    admin:false,
    isTariffActive: false,
+   uploadPageFlag: false,
    openPopapProjects:false,
    newProject:false,
    base_url:'https://honorar.online',
@@ -20,6 +22,8 @@ export let user = reactive({
 
 window.global = global
 window.user =  user
+uploadPage()
+
 window.addEventListener('resize', () => {
     global.wideBody = document.querySelector('body').offsetWidth
 })
@@ -32,3 +36,11 @@ export function setGlobalValue(name, value){
     global[name]=value
 }
 
+export function uploadPage(){
+    window.addEventListener('focus', () => { 
+        if(global.uploadPageFlag) {
+            global.uploadPageFlag = false
+            isLogget()
+        }
+    });
+}
